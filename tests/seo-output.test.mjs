@@ -338,7 +338,15 @@ describe("static SEO output", () => {
     assert.ok(hasJsonLdType(objects, "Organization"), "category page should include Organization JSON-LD");
     assert.ok(hasJsonLdType(objects, "WebSite"), "category page should include WebSite JSON-LD");
     assert.ok(hasJsonLdType(objects, "WebPage"), "category page should include WebPage JSON-LD");
+    assert.ok(hasJsonLdType(objects, "ItemList"), "category page should include ItemList JSON-LD");
     assert.ok(hasJsonLdType(objects, "BreadcrumbList"), "category page should include BreadcrumbList JSON-LD");
+
+    const itemList = objects.find((object) => object["@type"] === "ItemList");
+    assert.equal(itemList.numberOfItems, 2, "English mobile category ItemList should match visible article count");
+    assert.ok(
+      itemList.itemListElement.some((item) => item.url === "https://tachi-suke.example.com/en/articles/choose-mobile-plan-japan-foreigner"),
+      "category ItemList should include article canonical URLs"
+    );
   });
 
   it("renders same-locale related article links on article detail pages", () => {

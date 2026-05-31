@@ -808,6 +808,28 @@ Rules:
 - When adding a new recurring category, add localized title and description copy in the same change.
 - Do not redesign category taxonomy, filters, icons, or pagination until article volume justifies it.
 
+## Phase 1AJ: Article Category ItemList JSON-LD
+
+Status: implemented.
+
+Goal:
+
+Make article category landing pages easier for crawlers to interpret as curated article collections.
+
+Implemented:
+
+- Added `ItemList` JSON-LD to `ArticleCategoryPage.astro`.
+- Built `ItemList` entries from the same filtered article list used by the visible page.
+- Included article canonical URLs, titles, descriptions, and positions.
+- Added source-level tests for ItemList construction.
+- Added build-output SEO checks for ItemList presence, count, and article canonical URLs.
+
+Rules:
+
+- Keep category structured data conservative.
+- Do not include drafts, other locales, ratings, reviews, or unsupported author/date claims.
+- If category pages later add pagination, revisit `ItemList` semantics before shipping.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.
