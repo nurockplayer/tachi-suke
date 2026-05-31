@@ -82,9 +82,9 @@ All public pages should:
 
 ## `/feed.xml`
 
-**Purpose:** RSS feed for public article discovery.
+**Purpose:** Global RSS feed for public article discovery across all supported locales.
 
-**User goal:** Let readers, feed readers, search tools, and external automation discover recently updated public TachiSuke articles.
+**User goal:** Let readers, feed readers, search tools, and external automation discover recently updated public TachiSuke articles without choosing a language-specific feed.
 
 **Data source:** `articles` content collection filtered to `draft = false`, sorted by `updatedAt` descending.
 
@@ -92,9 +92,25 @@ All public pages should:
 
 **SEO requirements:** Generate valid RSS 2.0 XML with absolute article URLs, titles, descriptions, categories/tags, publish dates, and per-item language metadata. Public pages should include an RSS alternate link to `/feed.xml`.
 
-**Current status:** Implemented as a global multilingual feed in Phase 1J.
+**Current status:** Implemented as a global multilingual feed in Phase 1J. Shared feed rendering now lives in `src/lib/content/rss.ts` so locale feeds can reuse the same XML behavior.
 
-**Future notes:** Add locale-specific feeds only after there is clear demand or enough content volume to justify more feed routes.
+**Future notes:** Add category-specific or topic-specific feeds only after content volume justifies more feed routes.
+
+## `/[locale]/feed.xml`
+
+**Purpose:** Locale-specific RSS feed for public article discovery in one language.
+
+**User goal:** Subscribe to only `zh-tw`, `en`, `ja`, or `ko` articles instead of the global multilingual feed.
+
+**Data source:** `articles` content collection filtered to matching `locale` and `draft = false`, sorted by `updatedAt` descending.
+
+**Rendering mode:** Static Astro endpoints through one route file per supported locale.
+
+**SEO requirements:** Generate valid RSS 2.0 XML with locale-specific channel title, channel link, `atom:link`, feed language, absolute same-locale article URLs, categories/tags, publish dates, and per-item `dc:language`. Public pages should include both the global RSS alternate link and the current locale RSS alternate link.
+
+**Current status:** Implemented for all four locales in Phase 1R and included in `sitemap.xml`.
+
+**Future notes:** Keep feeds static and lightweight. Do not add per-category feeds, pagination, or runtime feed generation until content volume requires it.
 
 ## `/404.html`
 

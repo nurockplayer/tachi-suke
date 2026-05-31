@@ -10,7 +10,7 @@ Repo name: `tachi-suke`
 
 The product helps foreign residents make practical daily-life decisions in Japan. It focuses on topics such as mobile plans, renting, transportation, food, shopping, administrative procedures, practical Japanese, work, and resident-friendly places.
 
-The current MVP is an Astro static site with locale-prefixed routing, content collections, article detail pages, place detail pages, mobile plan detail pages, area detail pages, static tool detail pages, placeholder account pages, placeholder favorite UI, a submit-place form, and a contact/corrections form. Both forms can post to provider-agnostic external endpoints when configured.
+The current MVP is an Astro static site with locale-prefixed routing, content collections, article detail pages, place detail pages, mobile plan detail pages, area detail pages, static tool detail pages, global and locale-specific RSS feeds, placeholder account pages, placeholder favorite UI, a submit-place form, and a contact/corrections form. Both forms can post to provider-agnostic external endpoints when configured.
 
 ## 2. Brand Concept
 
@@ -159,6 +159,7 @@ The MVP includes:
 - SEO-oriented `BaseLayout`
 - Generated `sitemap.xml`, `robots.txt`, and `site.webmanifest`
 - Generated global `feed.xml` for public articles
+- Generated locale RSS feeds at `/[locale]/feed.xml` for same-locale public articles
 - Custom static `404.html` recovery page with `noindex, nofollow`
 - Default Open Graph image and Twitter summary metadata
 - JSON-LD structured data for `Organization`, `WebSite`, `Article`, `LocalBusiness`, `Service`, `WebPage`, `ItemList`, and `BreadcrumbList`
@@ -220,6 +221,7 @@ Content and section pages:
 - `/[locale]/about`
 - `/[locale]/privacy`
 - `/[locale]/editorial-policy`
+- `/[locale]/feed.xml`
 
 Account placeholder pages:
 
@@ -341,6 +343,7 @@ Engineering metrics:
 - `robots.txt` references the sitemap and disallows placeholder account routes.
 - `404.html` is generated, marked `noindex, nofollow`, and excluded from `sitemap.xml`.
 - `feed.xml` includes non-draft public article detail pages across supported locales.
+- `/[locale]/feed.xml` includes only same-locale non-draft public article detail pages.
 - Built representative pages include parseable JSON-LD for site identity, article detail pages, place detail pages, mobile plan detail pages, area detail pages, tool detail pages, and breadcrumbs.
 - Structured data must not claim unavailable ratings, review counts, opening hours, coordinates, offers, or exact addresses.
 - Detail-page language switcher links avoid missing generated pages.

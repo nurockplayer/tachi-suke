@@ -43,6 +43,7 @@ describe("static SEO output", () => {
     const manifest = JSON.parse(readDist("site.webmanifest"));
     const headers = readDist("_headers");
     const feed = readDist("feed.xml");
+    const englishFeed = readDist("en/feed.xml");
 
     assert.match(sitemap, /<urlset/);
     assert.match(robots, /Sitemap:\s*https:\/\/tachi-suke\.example\.com\/sitemap\.xml/);
@@ -53,6 +54,8 @@ describe("static SEO output", () => {
     assert.match(headers, /X-Content-Type-Options:\s*nosniff/);
     assert.match(feed, /<rss[^>]+version="2\.0"/, "feed.xml should be an RSS 2.0 feed");
     assert.match(feed, /<title>TachiSuke - Japan Life Assistant<\/title>/);
+    assert.match(englishFeed, /<rss[^>]+version="2\.0"/, "locale feed should be an RSS 2.0 feed");
+    assert.match(englishFeed, /<atom:link href="https:\/\/tachi-suke\.example\.com\/en\/feed\.xml" rel="self" type="application\/rss\+xml" \/>/);
   });
 
   it("includes public multilingual content and excludes account placeholders in sitemap", () => {
@@ -78,6 +81,10 @@ describe("static SEO output", () => {
       "/zh-tw/submit-place/thanks",
       "/en/contact",
       "/ja/contact/thanks",
+      "/zh-tw/feed.xml",
+      "/en/feed.xml",
+      "/ja/feed.xml",
+      "/ko/feed.xml",
       "/en/privacy",
       "/zh-tw/editorial-policy"
     ]) {
@@ -144,6 +151,22 @@ describe("static SEO output", () => {
     assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/zh-tw\/articles\/taiwanese-newcomer-mobile-plan-japan<\/link>/);
     assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/en\/articles\/choose-mobile-plan-japan-foreigner<\/link>/);
     assert.doesNotMatch(feed, /draft/i, "feed should not expose draft article data");
+  });
+
+  it("generates locale-specific RSS feeds for same-locale public articles", () => {
+    const englishFeed = readDist("en/feed.xml");
+    assert.match(englishFeed, /<title>TachiSuke English Articles<\/title>/);
+    assert.match(englishFeed, /<dc:language>en<\/dc:language>/);
+    assert.match(englishFeed, /<link>https:\/\/tachi-suke\.example\.com\/en\/articles\/choose-mobile-plan-japan-foreigner<\/link>/);
+    assert.doesNotMatch(englishFeed, /\/zh-tw\/articles\//, "English feed should not include zh-tw article URLs");
+    assert.doesNotMatch(englishFeed, /\/ja\/articles\//, "English feed should not include ja article URLs");
+    assert.doesNotMatch(englishFeed, /draft/i, "English feed should not expose draft article data");
+
+    const zhTwFeed = readDist("zh-tw/feed.xml");
+    assert.match(zhTwFeed, /<title>TachiSuke 繁體中文文章<\/title>/);
+    assert.match(zhTwFeed, /<dc:language>zh-Hant-TW<\/dc:language>/);
+    assert.match(zhTwFeed, /<link>https:\/\/tachi-suke\.example\.com\/zh-tw\/articles\/taiwanese-newcomer-mobile-plan-japan<\/link>/);
+    assert.doesNotMatch(zhTwFeed, /\/en\/articles\//, "zh-tw feed should not include English article URLs");
   });
 
   it("renders article and breadcrumb JSON-LD on article detail pages", () => {

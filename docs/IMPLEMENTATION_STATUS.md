@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1Q custom 404 work. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
+This document records the current MVP state after Phase 1R locale RSS feed work. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
 
 ## Completed
 
@@ -59,6 +59,7 @@ This document records the current MVP state after Phase 1Q custom 404 work. It s
 - Generated `robots.txt` with sitemap reference and account placeholder disallow rules.
 - Generated `site.webmanifest`.
 - Generated global `feed.xml` for non-draft public articles.
+- Generated locale RSS feeds at `/zh-tw/feed.xml`, `/en/feed.xml`, `/ja/feed.xml`, and `/ko/feed.xml` for same-locale non-draft public articles.
 - Cloudflare Pages `_headers` with conservative security and cache defaults.
 - Cloudflare Pages `wrangler.toml` with project name, compatibility date, and `dist` output directory.
 - Deployment guide at `docs/DEPLOYMENT.md`.
@@ -123,7 +124,7 @@ These are intentionally present but not functional:
 - `hreflang` is conservative, but full translation coverage is not complete.
 - `pnpm test` scans Markdown article links and generated/static source routes.
 - `pnpm check:links` scans built static HTML root-relative links in `dist/`, but it does not validate external links, anchors, JavaScript behavior, form submission behavior, or visual rendering.
-- `/feed.xml` is currently global across all locales. Locale-specific article feeds are not implemented yet.
+- RSS feeds are static and article-only. They do not include category feeds, pagination, places, tools, mobile plans, or area guides.
 - `/404.html` is static and noindex. It does not perform language detection or redirects.
 - Related article links are static and rule-based. They are not personalized and do not use analytics.
 - Correction prompts are static links to `/[locale]/contact`; they do not prefill form fields, track reports, or guarantee individual replies.

@@ -270,9 +270,9 @@ Implemented:
 
 Rules:
 
-- The Phase 1 feed is global across all locales.
+- The Phase 1J feed is global across all locales.
 - Draft articles must not appear in the feed.
-- Locale-specific feeds can wait until content volume and reader demand justify them.
+- Locale-specific feeds are handled by Phase 1R.
 
 ## Phase 1K: Cloudflare Deploy Readiness
 
@@ -426,6 +426,30 @@ Rules:
 
 - Keep the 404 page static.
 - Do not add language-detection redirects, Cloudflare Workers, analytics, or error tracking in Phase 1.
+
+## Phase 1R: Locale RSS Feeds
+
+Status: implemented.
+
+Goal:
+
+Let readers and feed tooling subscribe to one TachiSuke language without removing the global multilingual feed.
+
+Implemented:
+
+- Shared RSS rendering helper in `src/lib/content/rss.ts`.
+- Existing global `/feed.xml` preserved.
+- Four locale RSS endpoints: `/zh-tw/feed.xml`, `/en/feed.xml`, `/ja/feed.xml`, and `/ko/feed.xml`.
+- Locale feeds include only same-locale, non-draft articles.
+- `BaseLayout` advertises both global and current-locale RSS alternate links.
+- `sitemap.xml` includes locale feed paths.
+- Source-level and build-output SEO tests verify route files, alternate links, sitemap entries, and representative feed contents.
+
+Rules:
+
+- Keep RSS generation static.
+- Do not include draft articles.
+- Do not add per-category feeds, pagination, or runtime feed generation until article volume makes it useful.
 
 ## Phase 2: Auth and Favorites
 
