@@ -102,6 +102,8 @@ describe("static SEO output", () => {
       "/en/tools/japan-rent-initial-cost-checklist",
       "/en/tools/ward-office-moving-in-checklist",
       "/zh-tw/tools/ward-office-moving-in-checklist",
+      "/en/tools/commuter-pass-ic-card-checklist",
+      "/zh-tw/tools/commuter-pass-ic-card-checklist",
       "/zh-tw/submit-place/thanks",
       "/en/contact",
       "/ja/contact/thanks",
@@ -370,5 +372,11 @@ describe("static SEO output", () => {
     assert.match(wardOfficeTool, /Digital Agency/, "ward office tool should show official source labels");
     assert.match(wardOfficeTool, /digital\.go\.jp/, "ward office tool should link the Digital Agency source");
     assert.match(wardOfficeTool, /moj\.go\.jp/, "ward office tool should link the Immigration Services Agency source");
+
+    const commuterTool = readHtml("en/tools/commuter-pass-ic-card-checklist/index.html");
+    assert.match(commuterTool, /Commuter Pass and IC Card Checklist/, "commuter pass tool should build a detail page");
+    assert.match(commuterTool, /Tokyo Metro/, "commuter pass tool should show official source labels");
+    assert.match(commuterTool, /tokyometro\.jp/, "commuter pass tool should link the Tokyo Metro source");
+    assert.match(commuterTool, /pasmo\.co\.jp/, "commuter pass tool should link the PASMO source");
   });
 });
