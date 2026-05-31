@@ -70,7 +70,7 @@ Implemented:
 - JSON-LD structured data for site identity, articles, places, mobile plan details, area details, tool details, and breadcrumbs
 - Visible breadcrumbs on nested public article, category, place, mobile plan, area, and tool pages
 - Generated article table of contents for long-form article pages
-- Cloudflare Pages `_headers` for conservative security and cache defaults
+- Cloudflare Pages `_headers` for conservative security and discovery cache defaults
 - Cloudflare Pages `_redirects` for locale-less section fallbacks to English
 - Cloudflare Pages `wrangler.toml` deployment metadata
 - Conservative locale switcher behavior for detail pages with missing translations
@@ -299,6 +299,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - `/[locale]/feed.xml` is a locale-specific RSS feed for same-locale non-draft articles.
 - `/404.html` is a static noindex recovery page for missing routes on Cloudflare Pages or other static hosts.
 - Cloudflare Pages `_redirects` sends common locale-less paths such as `/articles`, `/mobile/povo2`, and `/contact` to English `302` fallbacks. Canonical routes remain locale-prefixed.
+- Cloudflare Pages `_headers` caches sitemap, robots, manifest, RSS feeds, `llms.txt`, and search indexes conservatively for one hour while keeping HTML revalidated.
 
 ## Documentation Map
 

@@ -170,7 +170,7 @@ The MVP includes:
 - JSON-LD structured data for `Organization`, `WebSite`, `Article`, `LocalBusiness`, `Service`, `WebPage`, `ItemList`, and `BreadcrumbList`
 - Visible breadcrumbs for nested public article, category, place, mobile plan, area, and tool pages
 - Static article table of contents generated from Markdown/MDX headings
-- Cloudflare Pages `_headers` for conservative security and cache defaults
+- Cloudflare Pages `_headers` for conservative security and discovery cache defaults
 - Cloudflare Pages `_redirects` for temporary English fallbacks from common locale-less public paths
 - Cloudflare Pages `wrangler.toml` metadata for `dist` static output
 - `SITE_URL` environment variable with example-domain fallback

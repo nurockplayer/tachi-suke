@@ -281,12 +281,19 @@ Phase 1K adds Cloudflare Pages deploy readiness:
 - Do not commit Cloudflare account IDs, API tokens, secrets, or production-only environment values.
 - Deployment details live in `docs/DEPLOYMENT.md`.
 - Keep Phase 1 deployment static-first; do not add Workers/Functions runtime code unless explicitly scoped.
+- `_headers` should keep HTML revalidated and use conservative one-hour cache rules for sitemap, robots, manifest, RSS feeds, `llms.txt`, and search indexes.
 
 Phase 1AC adds Cloudflare Pages redirects:
 
 - `public/_redirects` may provide temporary English fallbacks for common locale-less public paths.
 - Keep canonical URLs and in-app navigation locale-prefixed.
 - Do not add account placeholder redirects, language-detection redirects, Cloudflare Workers, or auth-aware routing in Phase 1AC.
+
+Phase 1AD adds discovery cache headers:
+
+- Keep HTML revalidated.
+- Use one-hour cache headers for RSS feeds, `llms.txt`, and search index JSON.
+- Do not add CDN purge automation, Workers, or runtime cache logic in Phase 1AD.
 
 Phase 1L adds baseline accessibility polish:
 
