@@ -70,9 +70,8 @@ Phase 1B adds a public-preview content baseline:
 
 - `zh-tw`: mobile plan basics, mobile brand comparison, renting initial costs, family restaurant comparison, and first-week setup
 - `en` / `ja` / `ko`: now include mobile basics, first-week setup, commuter pass / IC card, residence administration, and renting initial-cost decision content
-- `en`: mobile plan basics, mobile brand comparison, and first-week setup
-- `ja`: mobile plan basics and first-week setup
-- `ko`: mobile plan basics and first-week setup
+
+Translations should continue to use explicit `locale` and `translationKey` metadata. Missing translations should follow the documented fallback rules: English, then Traditional Chinese, or a clear missing-content state instead of silently showing the wrong locale.
 
 All Phase 1B articles should remain decision-oriented and include internal links to relevant locale sections or related articles.
 
