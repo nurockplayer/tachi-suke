@@ -96,6 +96,22 @@ All public pages should:
 
 **Future notes:** Add locale-specific feeds only after there is clear demand or enough content volume to justify more feed routes.
 
+## `/404.html`
+
+**Purpose:** Static missing-page recovery page for Cloudflare Pages and other static hosts.
+
+**User goal:** Recover from an outdated, moved, or mistyped URL by choosing a locale homepage or a useful section.
+
+**Data source:** Static localized copy and locale configuration from `src/lib/i18n/`.
+
+**Rendering mode:** Static Astro page.
+
+**SEO requirements:** Must use `noindex, nofollow`, include a clear title and description, provide internal recovery links, and stay excluded from `sitemap.xml`.
+
+**Current status:** Implemented in Phase 1Q as a branded multilingual recovery page.
+
+**Future notes:** Do not add client-side language detection or server redirects until SEO and hosting behavior are explicitly scoped.
+
 ## `/zh-tw/`, `/en/`, `/ja/`, `/ko/`
 
 **Purpose:** Locale homepage.

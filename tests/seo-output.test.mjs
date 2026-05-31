@@ -101,6 +101,18 @@ describe("static SEO output", () => {
     }
   });
 
+  it("renders a custom noindex 404 recovery page outside the sitemap", () => {
+    const html = readHtml("404.html");
+    assert.match(html, /Page not found \| TachiSuke/, "404 page should have a branded SEO title");
+    assert.match(html, /name="robots" content="noindex, nofollow"/, "404 page should be noindex");
+    assert.match(html, /href="\/zh-tw\/"/, "404 page should link to zh-tw home");
+    assert.match(html, /href="\/en\/"/, "404 page should link to English home");
+
+    const paths = new Set(sitemapPaths(readDist("sitemap.xml")));
+    assert.equal(paths.has("/404"), false, "sitemap should not include /404");
+    assert.equal(paths.has("/404.html"), false, "sitemap should not include /404.html");
+  });
+
   it("renders site-wide JSON-LD on the root page", () => {
     const html = readHtml("index.html");
     const objects = jsonLdObjects(html);

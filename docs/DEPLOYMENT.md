@@ -69,10 +69,12 @@ After production deploy:
 - Check `/sitemap.xml`.
 - Check `/robots.txt`.
 - Check `/feed.xml`.
+- Check `/404.html`.
 - Check a representative article detail page.
 - Check a representative mobile, area, place, and tool detail page.
 - Confirm canonical URLs and Open Graph URLs use the production `SITE_URL`.
 - Confirm account placeholder routes remain `noindex, nofollow`.
+- Confirm `/404.html` renders the branded recovery page and remains `noindex, nofollow`.
 - Confirm submit-place behavior matches whether `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` is set.
 - Confirm contact/corrections behavior matches whether `PUBLIC_CONTACT_FORM_ENDPOINT` is set.
 

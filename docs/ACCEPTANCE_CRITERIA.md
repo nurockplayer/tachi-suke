@@ -215,6 +215,8 @@ This document defines the acceptance criteria for the current static-first MVP.
 - `robots.txt` must reference the sitemap and disallow `/[locale]/account/`.
 - `feed.xml` must be generated as an RSS 2.0 feed for non-draft public article detail pages.
 - Public pages should include an RSS alternate link to `/feed.xml`.
+- `404.html` must be generated as a branded static recovery page.
+- `404.html` must use `noindex, nofollow` and must not appear in `sitemap.xml`.
 - Account placeholder pages must use `noindex, nofollow`.
 - Built pages should include parseable JSON-LD for site identity.
 - Article detail pages should include `Article` and `BreadcrumbList` JSON-LD.

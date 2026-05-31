@@ -49,6 +49,7 @@ Implemented:
 - Four locale about pages
 - Four locale privacy pages
 - Four locale editorial policy pages
+- Custom static `404.html` recovery page for static hosting
 - Four locale account placeholder pages
 - Favorite placeholder button
 - Content collections for articles, areas, places, mobile plans, and tools
@@ -124,6 +125,7 @@ Locale routes:
 - `/robots.txt`
 - `/site.webmanifest`
 - `/feed.xml`
+- `/404.html`
 
 Article detail pages are generated only for non-draft articles. Place detail pages are generated only for places where `status = published`.
 Area, mobile plan, and published tool detail pages are generated from the current static content collections.
@@ -269,6 +271,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - Structured data must be backed by current static content. Do not invent ratings, review counts, opening hours, or exact addresses.
 - Mobile plan structured data must stay conservative. Do not add `Offer` price markup until pricing and campaign review workflows are mature.
 - `/feed.xml` is a global RSS feed for non-draft articles across all locales. Locale-specific feeds are not implemented yet.
+- `/404.html` is a static noindex recovery page for missing routes on Cloudflare Pages or other static hosts.
 
 ## Documentation Map
 

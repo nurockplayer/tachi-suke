@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1P detail-page correction prompt work. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
+This document records the current MVP state after Phase 1Q custom 404 work. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
 
 ## Completed
 
@@ -32,6 +32,7 @@ This document records the current MVP state after Phase 1P detail-page correctio
 - Four locale about pages.
 - Four locale privacy pages.
 - Four locale editorial policy pages.
+- Custom static `404.html` recovery page with multilingual links and `noindex, nofollow`.
 - Four locale account login placeholder pages.
 - Four locale account favorites placeholder pages.
 - Four locale account submissions placeholder pages.
@@ -123,6 +124,7 @@ These are intentionally present but not functional:
 - `pnpm test` scans Markdown article links and generated/static source routes.
 - `pnpm check:links` scans built static HTML root-relative links in `dist/`, but it does not validate external links, anchors, JavaScript behavior, form submission behavior, or visual rendering.
 - `/feed.xml` is currently global across all locales. Locale-specific article feeds are not implemented yet.
+- `/404.html` is static and noindex. It does not perform language detection or redirects.
 - Related article links are static and rule-based. They are not personalized and do not use analytics.
 - Correction prompts are static links to `/[locale]/contact`; they do not prefill form fields, track reports, or guarantee individual replies.
 - Account pages are static placeholders and do not protect user data because no user data exists yet.

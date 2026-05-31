@@ -13,15 +13,18 @@ const switcherPaths = alternatePaths ?? Object.fromEntries(locales.map((targetLo
   targetLocale,
   localizePath(targetLocale, pathWithoutLocale)
 ])) as Partial<Record<Locale, string>>;
+const availableLocales = locales.filter((targetLocale) => switcherPaths[targetLocale]);
 ---
 
-<nav class="locale-switcher" aria-label="Language">
-  {locales.map((targetLocale) => switcherPaths[targetLocale] && (
+{availableLocales.length > 0 && (
+  <nav class="locale-switcher" aria-label="Language">
+    {availableLocales.map((targetLocale) => (
     <a
       href={switcherPaths[targetLocale]}
       aria-current={targetLocale === locale ? "true" : undefined}
     >
       {localeNames[targetLocale]}
     </a>
-  ))}
-</nav>
+    ))}
+  </nav>
+)}
