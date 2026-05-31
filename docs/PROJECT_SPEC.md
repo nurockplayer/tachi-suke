@@ -156,6 +156,7 @@ The MVP includes:
 - TypeScript model files for future auth, favorites, users, and submissions
 - SEO-oriented `BaseLayout`
 - Generated `sitemap.xml`, `robots.txt`, and `site.webmanifest`
+- Generated global `feed.xml` for public articles
 - Default Open Graph image and Twitter summary metadata
 - JSON-LD structured data for `Organization`, `WebSite`, `Article`, `LocalBusiness`, `Service`, `WebPage`, `ItemList`, and `BreadcrumbList`
 - Cloudflare Pages `_headers` for conservative security and cache defaults
@@ -222,6 +223,7 @@ SEO and discovery routes:
 - `/sitemap.xml`
 - `/robots.txt`
 - `/site.webmanifest`
+- `/feed.xml`
 
 Article detail pages are generated only for non-draft articles matching the locale route. Place detail pages are generated only for places where `status = published`. Area, mobile, and published tool detail pages are generated from their static content collections.
 
@@ -314,6 +316,7 @@ Engineering metrics:
 - SEO metadata includes title, description, canonical URL, Open Graph URL, Open Graph site name, Open Graph image, Twitter card metadata, locale-aware `html lang`, manifest link, and conservative `hreflang`.
 - `sitemap.xml` includes public content and excludes account placeholders.
 - `robots.txt` references the sitemap and disallows placeholder account routes.
+- `feed.xml` includes non-draft public article detail pages across supported locales.
 - Built representative pages include parseable JSON-LD for site identity, article detail pages, place detail pages, mobile plan detail pages, area detail pages, tool detail pages, and breadcrumbs.
 - Structured data must not claim unavailable ratings, review counts, opening hours, coordinates, offers, or exact addresses.
 - Detail-page language switcher links avoid missing generated pages.

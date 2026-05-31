@@ -163,6 +163,8 @@ This document defines the acceptance criteria for the current static-first MVP.
 - `sitemap.xml` must include public locale roots, section pages, non-draft article details, published place details, area details, mobile plan details, published tool details, and submit-place thanks pages.
 - `sitemap.xml` must exclude account placeholder routes, draft articles, non-published places, and non-published tools.
 - `robots.txt` must reference the sitemap and disallow `/[locale]/account/`.
+- `feed.xml` must be generated as an RSS 2.0 feed for non-draft public article detail pages.
+- Public pages should include an RSS alternate link to `/feed.xml`.
 - Account placeholder pages must use `noindex, nofollow`.
 - Built pages should include parseable JSON-LD for site identity.
 - Article detail pages should include `Article` and `BreadcrumbList` JSON-LD.

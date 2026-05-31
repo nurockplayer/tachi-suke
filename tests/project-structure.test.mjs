@@ -73,6 +73,7 @@ const requiredFiles = [
   "src/pages/sitemap.xml.ts",
   "src/pages/robots.txt.ts",
   "src/pages/site.webmanifest.ts",
+  "src/pages/feed.xml.ts",
   "src/content.config.ts",
   "src/components/layout/BaseLayout.astro",
   "src/components/layout/Header.astro",

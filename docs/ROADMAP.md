@@ -252,6 +252,28 @@ Rules:
 - Do not invent ratings, reviews, coordinates, opening hours, or exact addresses.
 - Keep JSON-LD backed by current static content fields.
 
+## Phase 1J: RSS Feed
+
+Status: implemented.
+
+Goal:
+
+Make public articles easier to discover through feed readers, crawlers, and external automation.
+
+Implemented:
+
+- Static `/feed.xml` endpoint generated from non-draft articles.
+- RSS 2.0 channel metadata for TachiSuke.
+- RSS items with absolute article URLs, descriptions, categories, publish dates, and per-item language metadata.
+- RSS alternate link in `BaseLayout`.
+- Build-output SEO tests for feed generation and discovery link.
+
+Rules:
+
+- The Phase 1 feed is global across all locales.
+- Draft articles must not appear in the feed.
+- Locale-specific feeds can wait until content volume and reader demand justify them.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.
