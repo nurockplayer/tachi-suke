@@ -124,4 +124,29 @@ describe("static SEO output", () => {
     assert.ok(hasJsonLdType(objects, "LocalBusiness"), "place page should include LocalBusiness JSON-LD");
     assert.ok(hasJsonLdType(objects, "BreadcrumbList"), "place page should include BreadcrumbList JSON-LD");
   });
+
+  it("renders conservative structured data on mobile plan detail pages", () => {
+    const objects = jsonLdObjects(readHtml("en/mobile/povo2/index.html"));
+    assert.ok(hasJsonLdType(objects, "Organization"), "mobile plan page should include Organization JSON-LD");
+    assert.ok(hasJsonLdType(objects, "WebSite"), "mobile plan page should include WebSite JSON-LD");
+    assert.ok(hasJsonLdType(objects, "Service"), "mobile plan page should include Service JSON-LD");
+    assert.ok(hasJsonLdType(objects, "BreadcrumbList"), "mobile plan page should include BreadcrumbList JSON-LD");
+  });
+
+  it("renders conservative structured data on area detail pages", () => {
+    const objects = jsonLdObjects(readHtml("en/areas/ikebukuro/index.html"));
+    assert.ok(hasJsonLdType(objects, "Organization"), "area page should include Organization JSON-LD");
+    assert.ok(hasJsonLdType(objects, "WebSite"), "area page should include WebSite JSON-LD");
+    assert.ok(hasJsonLdType(objects, "WebPage"), "area page should include WebPage JSON-LD");
+    assert.ok(hasJsonLdType(objects, "BreadcrumbList"), "area page should include BreadcrumbList JSON-LD");
+  });
+
+  it("renders conservative structured data on tool detail pages", () => {
+    const objects = jsonLdObjects(readHtml("en/tools/moving-to-japan-checklist/index.html"));
+    assert.ok(hasJsonLdType(objects, "Organization"), "tool page should include Organization JSON-LD");
+    assert.ok(hasJsonLdType(objects, "WebSite"), "tool page should include WebSite JSON-LD");
+    assert.ok(hasJsonLdType(objects, "WebPage"), "tool page should include WebPage JSON-LD");
+    assert.ok(hasJsonLdType(objects, "ItemList"), "tool page should include ItemList JSON-LD");
+    assert.ok(hasJsonLdType(objects, "BreadcrumbList"), "tool page should include BreadcrumbList JSON-LD");
+  });
 });

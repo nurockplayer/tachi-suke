@@ -3,7 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import CategoryCard from "@/components/content/CategoryCard.astro";
 import { formatDate } from "@/lib/content";
-import { locales, localizePath, type Locale } from "@/lib/i18n";
+import { htmlLangByLocale, locales, localizePath, type Locale } from "@/lib/i18n";
 
 interface Props {
   locale: Locale;
@@ -14,6 +14,10 @@ const { locale, tool } = Astro.props;
 const data = tool.data;
 const title = data.title[locale];
 const description = data.description[locale];
+const site = Astro.site ?? new URL(Astro.url.origin);
+const canonicalUrl = new URL(Astro.url.pathname, site).href;
+const localeHomeUrl = new URL(localizePath(locale), site).href;
+const toolsUrl = new URL(localizePath(locale, "/tools"), site).href;
 const alternatePaths = Object.fromEntries(
   locales.map((alternateLocale) => [alternateLocale, localizePath(alternateLocale, `/tools/${data.slug}`)])
 ) as Partial<Record<Locale, string>>;
@@ -69,9 +73,77 @@ const relatedDescriptions = {
     areas: "월세감, 통근, 생활 편의성을 기준으로 지역을 비교합니다."
   }
 }[locale];
+const toolsLabel = {
+  "zh-tw": "工具",
+  en: "Tools",
+  ja: "ツール",
+  ko: "도구"
+}[locale];
+const checklistItems = data.sections.flatMap((section) =>
+  section.items.map((item) => ({
+    "@type": "ListItem",
+    name: item[locale],
+    item: {
+      "@type": "Thing",
+      name: item[locale],
+      description: section.title[locale]
+    }
+  }))
+);
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${canonicalUrl}#webpage`,
+    name: title,
+    description,
+    url: canonicalUrl,
+    inLanguage: htmlLangByLocale[locale],
+    dateModified: data.lastCheckedAt.toISOString(),
+    isPartOf: { "@id": new URL("/#website", site).href },
+    publisher: { "@id": new URL("/#organization", site).href }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${canonicalUrl}#checklist`,
+    name: title,
+    description,
+    numberOfItems: checklistItems.length,
+    itemListElement: checklistItems.map((item, index) => ({
+      ...item,
+      position: index + 1
+    }))
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": `${canonicalUrl}#breadcrumb`,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "TachiSuke",
+        item: localeHomeUrl
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: toolsLabel,
+        item: toolsUrl
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: title,
+        item: canonicalUrl
+      }
+    ]
+  }
+];
 ---
 
-<BaseLayout locale={locale} title={title} description={description} alternatePaths={alternatePaths}>
+<BaseLayout locale={locale} title={title} description={description} alternatePaths={alternatePaths} jsonLd={jsonLd}>
   <section class="page-hero">
     <div class="container">
       <p class="article-meta">{labels.lastChecked} {formatDate(data.lastCheckedAt, locale)}</p>

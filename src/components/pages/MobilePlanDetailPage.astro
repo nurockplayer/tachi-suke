@@ -12,6 +12,10 @@ interface Props {
 const { locale, plan } = Astro.props;
 const data = plan.data;
 const description = `${data.provider} ${data.planName}: ${data.dataAmount}, ${data.monthlyPrice}. ${data.recommendedFor.slice(0, 2).join(", ")}.`;
+const site = Astro.site ?? new URL(Astro.url.origin);
+const canonicalUrl = new URL(Astro.url.pathname, site).href;
+const localeHomeUrl = new URL(localizePath(locale), site).href;
+const mobileUrl = new URL(localizePath(locale, "/mobile"), site).href;
 const alternatePaths = Object.fromEntries(
   locales.map((alternateLocale) => [alternateLocale, localizePath(alternateLocale, `/mobile/${data.slug}`)])
 ) as Partial<Record<Locale, string>>;
@@ -106,9 +110,60 @@ const facts = [
   [labels.creditCard, data.creditCardRequired ? labels.yes : labels.no],
   [labels.lastCheckedAt, formatDate(data.lastCheckedAt, locale)]
 ].filter(([, value]) => Boolean(value));
+const mobileLabel = {
+  "zh-tw": "手機方案",
+  en: "Mobile plans",
+  ja: "携帯プラン",
+  ko: "휴대폰 요금제"
+}[locale];
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${canonicalUrl}#service`,
+    name: `${data.provider} ${data.planName}`,
+    description,
+    url: canonicalUrl,
+    sameAs: data.officialUrl,
+    serviceType: "Mobile phone plan",
+    areaServed: {
+      "@type": "Country",
+      name: "Japan"
+    },
+    provider: {
+      "@type": "Organization",
+      name: data.provider
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": `${canonicalUrl}#breadcrumb`,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "TachiSuke",
+        item: localeHomeUrl
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: mobileLabel,
+        item: mobileUrl
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: `${data.provider} ${data.planName}`,
+        item: canonicalUrl
+      }
+    ]
+  }
+];
 ---
 
-<BaseLayout locale={locale} title={`${data.provider} ${data.planName}`} description={description} alternatePaths={alternatePaths}>
+<BaseLayout locale={locale} title={`${data.provider} ${data.planName}`} description={description} alternatePaths={alternatePaths} jsonLd={jsonLd}>
   <section class="page-hero">
     <div class="container">
       <p class="article-meta">{labels.lastCheckedAt} {formatDate(data.lastCheckedAt, locale)}</p>

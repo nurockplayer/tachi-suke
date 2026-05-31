@@ -2,7 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import { formatDate } from "@/lib/content";
-import { locales, localizePath, type Locale } from "@/lib/i18n";
+import { htmlLangByLocale, locales, localizePath, type Locale } from "@/lib/i18n";
 
 interface Props {
   locale: Locale;
@@ -11,6 +11,10 @@ interface Props {
 
 const { locale, area } = Astro.props;
 const data = area.data;
+const site = Astro.site ?? new URL(Astro.url.origin);
+const canonicalUrl = new URL(Astro.url.pathname, site).href;
+const localeHomeUrl = new URL(localizePath(locale), site).href;
+const areasUrl = new URL(localizePath(locale, "/areas"), site).href;
 const alternatePaths = Object.fromEntries(
   locales.map((alternateLocale) => [alternateLocale, localizePath(alternateLocale, `/areas/${data.slug}`)])
 ) as Partial<Record<Locale, string>>;
@@ -91,9 +95,64 @@ const facts = [
   [labels.quietness, data.quietness],
   [labels.lastCheckedAt, formatDate(data.lastCheckedAt, locale)]
 ].filter(([, value]) => Boolean(value));
+const areasLabel = {
+  "zh-tw": "地區",
+  en: "Area guides",
+  ja: "エリアガイド",
+  ko: "지역 가이드"
+}[locale];
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${canonicalUrl}#webpage`,
+    name: data.title,
+    description: data.summary,
+    url: canonicalUrl,
+    inLanguage: htmlLangByLocale[locale],
+    dateModified: data.lastCheckedAt.toISOString(),
+    isPartOf: { "@id": new URL("/#website", site).href },
+    publisher: { "@id": new URL("/#organization", site).href },
+    about: {
+      "@type": "Place",
+      name: data.title,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: data.city,
+        addressRegion: data.prefecture,
+        addressCountry: "JP"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": `${canonicalUrl}#breadcrumb`,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "TachiSuke",
+        item: localeHomeUrl
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: areasLabel,
+        item: areasUrl
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: data.title,
+        item: canonicalUrl
+      }
+    ]
+  }
+];
 ---
 
-<BaseLayout locale={locale} title={data.title} description={data.summary} alternatePaths={alternatePaths}>
+<BaseLayout locale={locale} title={data.title} description={data.summary} alternatePaths={alternatePaths} jsonLd={jsonLd}>
   <section class="page-hero">
     <div class="container">
       <p class="article-meta">{labels.lastCheckedAt} {formatDate(data.lastCheckedAt, locale)}</p>

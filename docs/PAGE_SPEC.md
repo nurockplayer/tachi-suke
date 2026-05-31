@@ -153,7 +153,7 @@ All public pages should:
 
 **Rendering mode:** Static generated dynamic route. Each locale has its own route file and uses `getStaticPaths`.
 
-**SEO requirements:** Use area `title` and `summary`, canonical URL, Open Graph metadata, locale-aware `html lang`, and locale alternates only for generated area detail routes.
+**SEO requirements:** Use area `title` and `summary`, canonical URL, Open Graph metadata, locale-aware `html lang`, conservative `WebPage` JSON-LD, `BreadcrumbList` JSON-LD, and locale alternates only for generated area detail routes.
 
 **Current status:** Implemented for all four locales in Phase 1B.5. UI labels are localized while current area data remains locale-neutral sample content.
 
@@ -217,7 +217,7 @@ All public pages should:
 
 **Rendering mode:** Static generated dynamic route. Each locale has its own route file and uses `getStaticPaths`.
 
-**SEO requirements:** Use provider + plan name as title. Generate description from data amount, monthly price, and recommended user fit. Include canonical URL, Open Graph metadata, locale-aware `html lang`, and locale alternates only for generated mobile detail routes.
+**SEO requirements:** Use provider + plan name as title. Generate description from data amount, monthly price, and recommended user fit. Include canonical URL, Open Graph metadata, locale-aware `html lang`, conservative `Service` JSON-LD, `BreadcrumbList` JSON-LD, and locale alternates only for generated mobile detail routes.
 
 **Current status:** Implemented for all four locales in Phase 1B.5. Detail pages clearly state that prices, conditions, campaigns, identity checks, and support status can change.
 
@@ -249,7 +249,7 @@ All public pages should:
 
 **Rendering mode:** Static generated dynamic route. Each locale has its own route file and uses `getStaticPaths`.
 
-**SEO requirements:** Use localized tool `title` and `description`, canonical URL, Open Graph metadata, locale-aware `html lang`, and locale alternates only for generated tool detail routes. Published tool detail routes should appear in `sitemap.xml`.
+**SEO requirements:** Use localized tool `title` and `description`, canonical URL, Open Graph metadata, locale-aware `html lang`, conservative `WebPage` JSON-LD, `ItemList` JSON-LD for checklist items, `BreadcrumbList` JSON-LD, and locale alternates only for generated tool detail routes. Published tool detail routes should appear in `sitemap.xml`.
 
 **Current status:** Implemented for all four locales in Phase 1H. The first published tool is `moving-to-japan-checklist`, a static moving-to-Japan checklist with localized sections, notes, source note, and last checked date.
 

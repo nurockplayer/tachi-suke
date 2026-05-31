@@ -231,6 +231,27 @@ Rules:
 - Do not add database-backed tool state until auth and persistence are explicitly scoped.
 - Keep tool content practical, date-aware, and decision-oriented.
 
+## Phase 1I: Detail Page Structured Data
+
+Status: implemented.
+
+Goal:
+
+Improve crawl clarity for static detail pages that are not articles or places.
+
+Implemented:
+
+- Mobile plan detail pages emit conservative `Service` and `BreadcrumbList` JSON-LD.
+- Area detail pages emit conservative `WebPage` and `BreadcrumbList` JSON-LD.
+- Tool detail pages emit conservative `WebPage`, `ItemList`, and `BreadcrumbList` JSON-LD.
+- Build-output SEO tests parse representative generated pages.
+
+Rules:
+
+- Do not add `Offer` price markup for mobile plans until pricing review workflows are mature.
+- Do not invent ratings, reviews, coordinates, opening hours, or exact addresses.
+- Keep JSON-LD backed by current static content fields.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.
