@@ -374,3 +374,39 @@ Current published tools:
 - Phase 1C includes a visually hidden `website` honeypot field for basic spam reduction. It is not a complete anti-spam system.
 - Authenticated submissions in Phase 3 should let users view only their own submission history.
 - Admin moderation requires a separate admin role model and RLS policies.
+
+## ContactCorrectionMessage
+
+**Purpose:** Future raw correction, outdated-information, broken-link, or general feedback messages from readers.
+
+**Current storage:** No content collection, no TypeScript runtime model, and no database storage in Phase 1. Phase 1O can post the contact/corrections form to an external endpoint configured by `PUBLIC_CONTACT_FORM_ENDPOINT`, but the repo does not create records, send email, or store messages locally.
+
+**Current form fields:**
+
+- `contactLanguage`
+- `topic`
+- `relatedUrl`
+- `name`
+- `email`
+- `message`
+
+**Hidden metadata:**
+
+- `formName = contact-corrections`
+- `source = tachi-suke`
+- `locale`
+- `redirectUrl`
+- `publicResponse = false`
+
+**Public visibility rules:**
+
+- Contact messages must not publish directly.
+- Email must never appear on public pages.
+- Reports may inform future public content corrections after editorial review.
+
+**Future database mapping notes:**
+
+- Add a real model only if TachiSuke needs a first-party support or corrections queue.
+- Keep email optional and private.
+- Add retention, access-control, and privacy-review rules before storing messages in PostgreSQL.
+- If a database-backed queue is built later, protect it with admin-only access and avoid storing unnecessary sensitive data.

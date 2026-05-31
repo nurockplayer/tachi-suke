@@ -359,6 +359,32 @@ Rules:
 - Do not present common fee categories as universal rules or fixed prices.
 - Do not save checklist state in Phase 1.
 
+## Phase 1O: Contact and Corrections Workflow
+
+Status: implemented.
+
+Goal:
+
+Add a public static channel for readers to report outdated information, broken links, unclear content, and general feedback without adding a backend.
+
+Implemented:
+
+- Four locale contact pages at `/[locale]/contact`.
+- Four locale contact thanks pages at `/[locale]/contact/thanks`.
+- `PUBLIC_CONTACT_FORM_ENDPOINT` controls form activation.
+- Endpoint unset keeps the form in preview mode with disabled submit.
+- Endpoint set posts the form to the configured external endpoint with `method="POST"`.
+- Provider-agnostic hidden fields and a visually hidden honeypot field.
+- Footer and sitemap links for contact/corrections pages.
+- Source-level and SEO-output tests for contact routes and build output.
+
+Rules:
+
+- Do not hard-code a specific form provider.
+- Do not store contact messages in the repo.
+- Do not imply a support backend, CRM, or guaranteed individual replies in Phase 1.
+- Keep email optional/private and avoid sensitive personal data.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.

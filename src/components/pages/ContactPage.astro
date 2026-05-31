@@ -1,0 +1,210 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import { localeNames, locales, localizePath, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const formEndpoint = import.meta.env.PUBLIC_CONTACT_FORM_ENDPOINT?.trim() ?? "";
+const thanksUrl = new URL(localizePath(locale, "/contact/thanks"), Astro.site ?? new URL(Astro.url.origin)).href;
+
+const copy = {
+  "zh-tw": {
+    title: "聯絡與錯誤回報",
+    description: "回報過期資訊、錯字、壞掉的連結，或提供能讓 TachiSuke 更實用的建議。",
+    intro: formEndpoint
+      ? "你可以回報內容錯誤、資料過期或一般建議。訊息會送到站長設定的外部表單 endpoint。"
+      : "這個聯絡表單目前是 preview mode。站長設定外部表單 endpoint 後才會開放送出。",
+    noticeTitle: "送出前請確認",
+    notice:
+      "請不要填寫敏感個資、證件號碼、帳號密碼或他人的個人資訊。Email 選填且不會公開，只會在需要追問時使用。TachiSuke 可能會根據你的回報修正公開內容，但不保證逐一回覆。",
+    preview: "聯絡功能準備中：目前尚未設定外部表單 endpoint，所以表單不會送出。",
+    submit: "送出回報",
+    language: "聯絡語言",
+    topic: "主題",
+    relatedUrl: "相關頁面 URL（選填）",
+    name: "姓名或暱稱（選填）",
+    email: "Email（選填）",
+    message: "訊息內容",
+    urlHelp: "如果是內容錯誤或資料過期，請貼上相關頁面網址。",
+    emailHelp: "Email 不會公開，只有需要確認時才會使用。",
+    messageHelp: "請盡量說明哪裡需要修正、你看到的來源，或希望我們補充什麼。"
+  },
+  en: {
+    title: "Contact and Corrections",
+    description: "Report outdated information, typos, broken links, or suggestions that can make TachiSuke more useful.",
+    intro: formEndpoint
+      ? "Use this form to report content issues, outdated information, or general feedback. It posts to the external form endpoint configured by the site owner."
+      : "This contact form is in preview mode. Submissions open after the site owner configures an external form endpoint.",
+    noticeTitle: "Before sending",
+    notice:
+      "Do not include sensitive personal information, ID numbers, passwords, account details, or other people's personal information. Email is optional and private, used only for follow-up if needed. TachiSuke may update public content based on reports, but individual replies are not guaranteed.",
+    preview: "Contact is not active yet: no external form endpoint is configured, so this form will not send.",
+    submit: "Send report",
+    language: "Contact language",
+    topic: "Topic",
+    relatedUrl: "Related page URL (optional)",
+    name: "Name or nickname (optional)",
+    email: "Email (optional)",
+    message: "Message",
+    urlHelp: "For corrections or outdated information, paste the related page URL if possible.",
+    emailHelp: "Email is private and only used for follow-up if needed.",
+    messageHelp: "Please describe what should be corrected, what source you saw, or what we should add."
+  },
+  ja: {
+    title: "お問い合わせ・修正依頼",
+    description: "古い情報、誤字、リンク切れ、TachiSuke をより実用的にする提案を送れます。",
+    intro: formEndpoint
+      ? "内容の誤り、古い情報、一般的なフィードバックを送信できます。メッセージは管理者が設定した外部フォーム endpoint に送られます。"
+      : "このお問い合わせフォームは preview mode です。外部フォーム endpoint が設定されるまで送信できません。",
+    noticeTitle: "送信前の確認",
+    notice:
+      "機微な個人情報、証明書番号、パスワード、アカウント情報、他人の個人情報は書かないでください。メールは任意で公開されず、必要な確認連絡にのみ使います。TachiSuke は報告をもとに公開内容を修正する場合がありますが、個別返信は保証されません。",
+    preview: "お問い合わせ機能は準備中です。外部フォーム endpoint が未設定のため、このフォームは送信されません。",
+    submit: "送信する",
+    language: "連絡言語",
+    topic: "トピック",
+    relatedUrl: "関連ページ URL（任意）",
+    name: "名前またはニックネーム（任意）",
+    email: "メール（任意）",
+    message: "メッセージ",
+    urlHelp: "修正依頼や古い情報の報告の場合、関連ページの URL があると助かります。",
+    emailHelp: "メールは公開されず、必要な確認連絡にのみ使います。",
+    messageHelp: "修正が必要な箇所、見た情報源、追加してほしい内容を具体的に書いてください。"
+  },
+  ko: {
+    title: "문의 및 수정 제보",
+    description: "오래된 정보, 오타, 깨진 링크, TachiSuke를 더 유용하게 만드는 제안을 보낼 수 있습니다.",
+    intro: formEndpoint
+      ? "콘텐츠 오류, 오래된 정보, 일반 피드백을 보낼 수 있습니다. 메시지는 운영자가 설정한 외부 폼 endpoint로 전송됩니다."
+      : "이 문의 폼은 preview mode입니다. 외부 폼 endpoint가 설정된 뒤에만 제출할 수 있습니다.",
+    noticeTitle: "보내기 전 확인",
+    notice:
+      "민감한 개인정보, 신분증 번호, 비밀번호, 계정 정보, 타인의 개인정보를 입력하지 마세요. 이메일은 선택 사항이며 공개되지 않고 필요한 확인 연락에만 사용합니다. TachiSuke는 제보를 바탕으로 공개 콘텐츠를 수정할 수 있지만 개별 답장을 보장하지는 않습니다.",
+    preview: "문의 기능은 준비 중입니다. 외부 폼 endpoint가 설정되지 않아 이 폼은 전송되지 않습니다.",
+    submit: "제보 보내기",
+    language: "문의 언어",
+    topic: "주제",
+    relatedUrl: "관련 페이지 URL (선택)",
+    name: "이름 또는 닉네임 (선택)",
+    email: "이메일 (선택)",
+    message: "메시지",
+    urlHelp: "수정 요청이나 오래된 정보 제보라면 관련 페이지 URL을 함께 보내 주세요.",
+    emailHelp: "이메일은 공개되지 않으며 필요한 확인 연락에만 사용합니다.",
+    messageHelp: "수정이 필요한 부분, 확인한 출처, 추가되면 좋은 내용을 구체적으로 적어 주세요."
+  }
+}[locale];
+
+const topicOptions = {
+  "zh-tw": [
+    ["correction", "內容錯誤"],
+    ["outdated_info", "資料過期"],
+    ["broken_link", "連結壞掉"],
+    ["suggestion", "內容建議"],
+    ["partnership", "合作或媒體"],
+    ["other", "其他"]
+  ],
+  en: [
+    ["correction", "Content correction"],
+    ["outdated_info", "Outdated information"],
+    ["broken_link", "Broken link"],
+    ["suggestion", "Content suggestion"],
+    ["partnership", "Partnership or media"],
+    ["other", "Other"]
+  ],
+  ja: [
+    ["correction", "内容の誤り"],
+    ["outdated_info", "古い情報"],
+    ["broken_link", "リンク切れ"],
+    ["suggestion", "内容の提案"],
+    ["partnership", "提携・メディア"],
+    ["other", "その他"]
+  ],
+  ko: [
+    ["correction", "콘텐츠 오류"],
+    ["outdated_info", "오래된 정보"],
+    ["broken_link", "깨진 링크"],
+    ["suggestion", "콘텐츠 제안"],
+    ["partnership", "제휴 또는 미디어"],
+    ["other", "기타"]
+  ]
+}[locale];
+---
+
+<BaseLayout locale={locale} title={copy.title} description={copy.description}>
+  <section class="page-hero">
+    <div class="container">
+      <h1>{copy.title}</h1>
+      <p>{copy.intro}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2">
+      <aside class="notice">
+        <h2>{copy.noticeTitle}</h2>
+        <p>{copy.notice}</p>
+        {!formEndpoint && <p class="help-text">{copy.preview}</p>}
+      </aside>
+
+      <form class="form-panel" aria-label={copy.title} method="POST" action={formEndpoint}>
+        <input type="hidden" name="formName" value="contact-corrections" />
+        <input type="hidden" name="source" value="tachi-suke" />
+        <input type="hidden" name="locale" value={locale} />
+        <input type="hidden" name="redirectUrl" value={thanksUrl} />
+        <input type="hidden" name="publicResponse" value="false" />
+        <div class="honeypot-field" aria-hidden="true">
+          <label for="company">Company</label>
+          <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="contact-language">{copy.language}</label>
+            <select id="contact-language" name="contactLanguage" required>
+              {locales.map((optionLocale) => (
+                <option value={optionLocale} selected={optionLocale === locale}>{localeNames[optionLocale]}</option>
+              ))}
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="topic">{copy.topic}</label>
+            <select id="topic" name="topic" required>
+              {topicOptions.map(([value, label]) => <option value={value}>{label}</option>)}
+            </select>
+          </div>
+
+          <div class="field field-full">
+            <label for="related-url">{copy.relatedUrl}</label>
+            <input id="related-url" name="relatedUrl" type="url" aria-describedby="related-url-help" />
+            <span class="help-text" id="related-url-help">{copy.urlHelp}</span>
+          </div>
+
+          <div class="field">
+            <label for="contact-name">{copy.name}</label>
+            <input id="contact-name" name="name" type="text" />
+          </div>
+
+          <div class="field">
+            <label for="contact-email">{copy.email}</label>
+            <input id="contact-email" name="email" type="email" aria-describedby="contact-email-help" />
+            <span class="help-text" id="contact-email-help">{copy.emailHelp}</span>
+          </div>
+
+          <div class="field field-full">
+            <label for="message">{copy.message}</label>
+            <textarea id="message" name="message" required aria-describedby="message-help"></textarea>
+            <span class="help-text" id="message-help">{copy.messageHelp}</span>
+          </div>
+        </div>
+
+        <div class="inline-actions">
+          <button class={`button-link ${formEndpoint ? "" : "submit-disabled"}`} type="submit" disabled={!formEndpoint}>{copy.submit}</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</BaseLayout>

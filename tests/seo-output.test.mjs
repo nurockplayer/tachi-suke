@@ -76,6 +76,8 @@ describe("static SEO output", () => {
       "/zh-tw/tools/moving-to-japan-checklist",
       "/en/tools/japan-rent-initial-cost-checklist",
       "/zh-tw/submit-place/thanks",
+      "/en/contact",
+      "/ja/contact/thanks",
       "/en/privacy",
       "/zh-tw/editorial-policy"
     ]) {
@@ -115,6 +117,14 @@ describe("static SEO output", () => {
     const editorialPolicy = readHtml("zh-tw/editorial-policy/index.html");
     assert.match(editorialPolicy, /編輯政策 \| TachiSuke/, "editorial policy page should have an SEO title");
     assert.match(editorialPolicy, /不會直接公開/, "editorial policy should explain moderation");
+
+    const contact = readHtml("en/contact/index.html");
+    assert.match(contact, /Contact and Corrections \| TachiSuke/, "contact page should have an SEO title");
+    assert.match(contact, /PUBLIC_CONTACT_FORM_ENDPOINT|preview mode|external form endpoint/i, "contact page should explain static endpoint behavior");
+
+    const thanks = readHtml("zh-tw/contact/thanks/index.html");
+    assert.match(thanks, /謝謝你的回報 \| TachiSuke/, "contact thanks page should have an SEO title");
+    assert.match(thanks, /不會公開你的 Email/, "contact thanks page should explain private email handling");
   });
 
   it("generates an RSS feed for public article detail pages", () => {

@@ -19,8 +19,10 @@ Set these in Cloudflare Pages project settings:
 
 - `SITE_URL`: production URL, for example `https://your-domain.example`
 - `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT`: optional external submit-place form endpoint
+- `PUBLIC_CONTACT_FORM_ENDPOINT`: optional external contact/corrections form endpoint
 
 If `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` is empty, submit-place stays in preview mode and the submit button remains disabled.
+If `PUBLIC_CONTACT_FORM_ENDPOINT` is empty, contact/corrections stays in preview mode and the submit button remains disabled.
 
 Do not commit Cloudflare API tokens, account IDs, form-provider secrets, or production-only values to the repo.
 
@@ -31,7 +33,8 @@ Do not commit Cloudflare API tokens, account IDs, form-provider secrets, or prod
 3. Set build output directory to `dist`.
 4. Add `SITE_URL` with the final production domain.
 5. Optionally add `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT`.
-6. Deploy from `main`.
+6. Optionally add `PUBLIC_CONTACT_FORM_ENDPOINT`.
+7. Deploy from `main`.
 
 ## Optional Wrangler Deployment
 
@@ -71,6 +74,7 @@ After production deploy:
 - Confirm canonical URLs and Open Graph URLs use the production `SITE_URL`.
 - Confirm account placeholder routes remain `noindex, nofollow`.
 - Confirm submit-place behavior matches whether `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` is set.
+- Confirm contact/corrections behavior matches whether `PUBLIC_CONTACT_FORM_ENDPOINT` is set.
 
 ## Rollback
 
