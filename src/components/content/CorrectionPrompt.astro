@@ -1,0 +1,39 @@
+---
+import { localizePath, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = {
+  "zh-tw": {
+    title: "看到需要修正的地方？",
+    description: "如果這頁資訊過期、連結壞掉，或有不清楚的地方，請告訴我們，方便後續整理與更新。",
+    cta: "回報內容問題"
+  },
+  en: {
+    title: "Spot something that needs updating?",
+    description: "If this page has outdated details, a broken link, or unclear information, let us know so it can be reviewed.",
+    cta: "Report a content issue"
+  },
+  ja: {
+    title: "修正が必要な内容がありますか？",
+    description: "古い情報、リンク切れ、分かりにくい説明があれば、今後の確認と更新のためにお知らせください。",
+    cta: "内容を報告する"
+  },
+  ko: {
+    title: "수정이 필요한 내용이 있나요?",
+    description: "오래된 정보, 깨진 링크, 이해하기 어려운 설명이 있다면 검토와 업데이트를 위해 알려 주세요.",
+    cta: "콘텐츠 문제 제보"
+  }
+}[locale];
+---
+
+<aside class="correction-prompt" aria-labelledby="correction-prompt-title">
+  <div>
+    <h2 id="correction-prompt-title">{copy.title}</h2>
+    <p>{copy.description}</p>
+  </div>
+  <a class="button-secondary" href={localizePath(locale, "/contact")}>{copy.cta}</a>
+</aside>

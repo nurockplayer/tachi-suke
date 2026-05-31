@@ -14,6 +14,7 @@ All public pages should:
 - Include a manifest link, default Open Graph image, and Twitter summary metadata.
 - Keep `hreflang` conservative. Detail pages should only link to alternates that exist.
 - Avoid requiring login for public content.
+- Public detail pages should include a concise correction prompt that links to the locale-specific contact/corrections page.
 
 ## `/`
 
@@ -141,7 +142,7 @@ All public pages should:
 
 **Current status:** Implemented for all four locales. Draft articles are not generated.
 
-**Future notes:** Add related articles, table-of-contents support, and structured data after content patterns stabilize.
+**Future notes:** Add table-of-contents support after content patterns stabilize. Correction prompts currently link to contact/corrections but do not prefill the form.
 
 ## `/[locale]/areas`
 
@@ -205,7 +206,7 @@ All public pages should:
 
 **Current status:** Implemented for all four locales. Only `status = published` places are generated. UI labels are localized while place body data remains locale-neutral. Phase 1B adds generated guidance sections for who the place fits, use cases, watchouts, smoking notes, and payment notes.
 
-**Future notes:** Add localized place notes, structured data, maps, and related nearby content later. If generated guidance becomes too generic, add explicit notes fields to the Place model.
+**Future notes:** Add localized place notes, maps, and related nearby content later. If generated guidance becomes too generic, add explicit notes fields to the Place model.
 
 ## `/[locale]/mobile`
 

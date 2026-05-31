@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import CorrectionPrompt from "@/components/content/CorrectionPrompt.astro";
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import { formatDate } from "@/lib/content";
 import { htmlLangByLocale, locales, localizePath, type Locale } from "@/lib/i18n";
@@ -201,6 +202,12 @@ const jsonLd = [
           {data.notes.map((item) => <li>{item}</li>)}
         </ul>
       </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <CorrectionPrompt locale={locale} />
     </div>
   </section>
 </BaseLayout>

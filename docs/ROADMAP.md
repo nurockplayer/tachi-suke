@@ -385,6 +385,28 @@ Rules:
 - Do not imply a support backend, CRM, or guaranteed individual replies in Phase 1.
 - Keep email optional/private and avoid sensitive personal data.
 
+## Phase 1P: Detail Page Correction Prompts
+
+Status: implemented.
+
+Goal:
+
+Make the contact/corrections workflow discoverable from the content that is most likely to become stale.
+
+Implemented:
+
+- Reusable `CorrectionPrompt` component.
+- Localized correction prompt copy for `zh-tw`, `en`, `ja`, and `ko`.
+- Prompt appears on article, place, mobile plan, area, and tool detail pages.
+- Prompt links to `/[locale]/contact`.
+- Source-level tests verify detail pages render the prompt.
+
+Rules:
+
+- Keep prompts static and lightweight.
+- Do not add analytics, account-based reporting, database-backed queues, or provider-specific behavior in Phase 1.
+- Do not imply that individual replies or real-time content updates are guaranteed.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.

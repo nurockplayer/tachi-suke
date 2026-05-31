@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1O static contact/corrections workflow work. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
+This document records the current MVP state after Phase 1P detail-page correction prompt work. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
 
 ## Completed
 
@@ -14,6 +14,7 @@ This document records the current MVP state after Phase 1O static contact/correc
 - Four locale article index pages.
 - Four locale article detail routes at `/[locale]/articles/[slug]`.
 - Build-time related article links on article detail pages, limited to non-draft same-locale articles.
+- Public detail-page correction prompts that link article, place, mobile plan, area, and tool details to contact/corrections.
 - Twelve public article pages across `zh-tw`, `en`, `ja`, and `ko`, including Phase 1B decision-oriented content.
 - Four locale area index pages showing area guide cards.
 - Four locale area detail routes at `/[locale]/areas/[slug]`.
@@ -71,6 +72,7 @@ This document records the current MVP state after Phase 1O static contact/correc
 - Submit-place includes provider-agnostic hidden fields and a visually hidden `website` honeypot field for basic spam reduction.
 - Contact/corrections form uses `PUBLIC_CONTACT_FORM_ENDPOINT`: unset means preview mode/disabled submit; set means a static `POST` to the external endpoint.
 - Contact/corrections includes provider-agnostic hidden fields and a visually hidden `company` honeypot field for basic spam reduction.
+- Correction prompt component with localized copy for reporting outdated details, broken links, or unclear information from detail pages.
 - Tool detail pages are generated only for `status = published` tools and include localized notes, checklist sections, source note, and last checked date.
 - Footer navigation links to contact, privacy, and editorial policy pages for all locales.
 
@@ -122,6 +124,7 @@ These are intentionally present but not functional:
 - `pnpm check:links` scans built static HTML root-relative links in `dist/`, but it does not validate external links, anchors, JavaScript behavior, form submission behavior, or visual rendering.
 - `/feed.xml` is currently global across all locales. Locale-specific article feeds are not implemented yet.
 - Related article links are static and rule-based. They are not personalized and do not use analytics.
+- Correction prompts are static links to `/[locale]/contact`; they do not prefill form fields, track reports, or guarantee individual replies.
 - Account pages are static placeholders and do not protect user data because no user data exists yet.
 - Account placeholder pages are marked `noindex, nofollow` and excluded from the sitemap.
 - Structured data is intentionally conservative and does not claim ratings, reviews, opening hours, coordinates, offers, or exact street addresses.
