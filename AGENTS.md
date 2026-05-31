@@ -150,7 +150,7 @@ Current MVP includes static pages, article publishing, place detail pages, mobil
 
 Phase 1B adds public-preview content depth:
 
-- At least twelve public articles across supported locales.
+- At least fourteen public articles across supported locales, including transportation commuter pass decision content.
 - Mobile plan data for povo, LINEMO, Rakuten Mobile, ahamo, and UQ mobile.
 - Area guide samples for Ikebukuro, Itabashi, Akabane, and Kagurazaka / Edogawabashi.
 - Internal links between articles and main locale sections.

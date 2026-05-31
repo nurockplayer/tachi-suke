@@ -33,7 +33,7 @@ Implemented:
 - Four locale article category landing page routes
 - Build-time related article links on article detail pages
 - Detail-page correction prompts linking public content to contact/corrections with related page URL prefill
-- Twelve public article pages across four locales
+- Fourteen public article pages across four locales, including zh-tw/en commuter pass decision articles
 - Four locale area index pages with Tokyo area guide cards
 - Four locale area detail routes
 - Four locale place index pages
