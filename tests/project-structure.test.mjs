@@ -249,6 +249,31 @@ describe("TachiSuke project scaffold", () => {
     assert.match(placeDetailPage, /jsonLd=\{jsonLd\}/, "PlaceDetailPage should pass JSON-LD into BaseLayout");
   });
 
+  it("includes baseline keyboard accessibility hooks", () => {
+    const baseLayout = readFileSync(join(root, "src/components/layout/BaseLayout.astro"), "utf8");
+    assert.match(baseLayout, /class="skip-link"\s+href="#main-content"/, "BaseLayout should render a skip link");
+    assert.match(baseLayout, /<main\s+id="main-content"\s+class="site-main"/, "main landmark should have a stable skip target");
+    assert.match(baseLayout, /getUiCopy\(locale,\s*"layout\.skipMain"\)/, "skip link copy should come from the shared i18n helper");
+
+    const header = readFileSync(join(root, "src/components/layout/Header.astro"), "utf8");
+    assert.match(header, /aria-current=\{[^}]*isActive/, "Header nav should mark the active section");
+    assert.match(header, /localizePath\(locale,\s*item\.href\)/, "Header nav should keep locale-aware hrefs");
+
+    const i18n = readFileSync(join(root, "src/lib/i18n/index.ts"), "utf8");
+    assert.match(i18n, /export function getUiCopy/, "i18n helper should expose fallback-aware UI copy lookup");
+    assert.match(i18n, /"layout\.skipMain"/, "skip link translation key should live in i18n copy");
+
+    const css = readFileSync(join(root, "src/styles/global.css"), "utf8");
+    assert.match(css, /\.skip-link/, "global CSS should style the skip link");
+    assert.match(css, /:focus-visible/, "global CSS should define visible focus styles");
+
+    const accessibilityPlan = readFileSync(
+      join(root, "docs/superpowers/plans/2026-06-01-phase-1l-accessibility-polish.md"),
+      "utf8"
+    );
+    assert.doesNotMatch(accessibilityPlan, /^### Task/m, "accessibility plan should not skip heading levels");
+  });
+
   it("configures submit-place as a provider-agnostic static form", () => {
     const envExample = readFileSync(join(root, ".env.example"), "utf8");
     assert.match(envExample, /PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT=/);

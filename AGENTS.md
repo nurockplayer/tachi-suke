@@ -229,6 +229,14 @@ Phase 1K adds Cloudflare Pages deploy readiness:
 - Deployment details live in `docs/DEPLOYMENT.md`.
 - Keep Phase 1 deployment static-first; do not add Workers/Functions runtime code unless explicitly scoped.
 
+Phase 1L adds baseline accessibility polish:
+
+- Keep the skip link to `#main-content`.
+- Keep the main landmark target stable.
+- Mark active primary navigation with `aria-current`.
+- Preserve visible `:focus-visible` styles for keyboard users.
+- Treat this as baseline work, not a complete accessibility audit.
+
 Mobile plan prices, campaigns, payment methods, and identity requirements can change. Always phrase mobile data as editorial guidance and remind users to confirm official carrier pages before applying.
 Area rent feel, quietness, and commute convenience can also become stale. Keep area pages date-aware and practical rather than sightseeing-oriented.
 

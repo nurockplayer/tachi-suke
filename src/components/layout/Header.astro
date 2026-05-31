@@ -15,6 +15,14 @@ const accountLabel = {
   ja: "アカウント",
   ko: "계정"
 }[locale];
+const normalizedCurrentPath = currentPath.length > 1 ? currentPath.replace(/\/$/, "") : currentPath;
+const navLinks = navItems[locale].map((item) => {
+  const href = localizePath(locale, item.href);
+  const normalizedHref = href.length > 1 ? href.replace(/\/$/, "") : href;
+  const isActive = normalizedCurrentPath === normalizedHref || normalizedCurrentPath.startsWith(`${normalizedHref}/`);
+
+  return { ...item, href, isActive };
+});
 ---
 
 <header class="site-header">
@@ -27,8 +35,8 @@ const accountLabel = {
       </span>
     </a>
     <nav class="header-nav" aria-label="Primary">
-      {navItems[locale].map((item) => (
-        <a href={localizePath(locale, item.href)}>{item.label}</a>
+      {navLinks.map((item) => (
+        <a href={item.href} aria-current={item.isActive ? "page" : undefined}>{item.label}</a>
       ))}
     </nav>
     <div class="header-tools">

@@ -294,6 +294,27 @@ Rules:
 - Use Cloudflare Pages dashboard settings or a trusted environment for `SITE_URL` and optional form endpoint configuration.
 - Do not add Workers/Functions runtime code unless a future phase explicitly scopes it.
 
+## Phase 1L: Accessibility Polish
+
+Status: implemented.
+
+Goal:
+
+Improve baseline keyboard and assistive-technology navigation without adding dependencies or redesigning the UI.
+
+Implemented:
+
+- Skip link to main content.
+- Stable `main` landmark target.
+- Active primary navigation state with `aria-current`.
+- Visible `:focus-visible` styles.
+- Source-level tests for accessibility hooks.
+
+Rules:
+
+- Treat this as baseline polish, not a complete WCAG audit.
+- Keep future accessibility work practical: forms, reading flow, contrast, language metadata, and keyboard interaction should be checked as content and UI grow.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.

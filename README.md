@@ -64,6 +64,7 @@ Implemented:
 - Build-output static HTML internal link crawler in `tests/static-html-links.test.mjs`
 - Build-output SEO check in `tests/seo-output.test.mjs`
 - GitHub Actions CI quality gate for pull requests and pushes to `main`
+- Baseline keyboard accessibility hooks: skip link, active nav state, and visible focus styles
 
 Still placeholder-only:
 

@@ -1,7 +1,7 @@
 ---
 import Header from "./Header.astro";
 import Footer from "./Footer.astro";
-import { getPageTitle, htmlLangByLocale, locales, localizePath, type Locale } from "@/lib/i18n";
+import { getPageTitle, getUiCopy, htmlLangByLocale, locales, localizePath, type Locale } from "@/lib/i18n";
 import "@/styles/global.css";
 
 type JsonLdObject = Record<string, unknown>;
@@ -52,6 +52,7 @@ const jsonLdItems = [
   websiteJsonLd,
   ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [])
 ];
+const skipLinkLabel = getUiCopy(locale, "layout.skipMain");
 
 function serializeJsonLd(item: JsonLdObject): string {
   return JSON.stringify(item).replaceAll("<", "\\u003c");
@@ -93,8 +94,9 @@ function serializeJsonLd(item: JsonLdObject): string {
     {jsonLdItems.map((item) => <script is:inline type="application/ld+json" set:html={serializeJsonLd(item)} />)}
   </head>
   <body>
+    <a class="skip-link" href="#main-content">{skipLinkLabel}</a>
     <Header locale={locale} currentPath={Astro.url.pathname} alternatePaths={alternates} />
-    <main class="site-main">
+    <main id="main-content" class="site-main" tabindex="-1">
       <slot />
     </main>
     <Footer locale={locale} />
