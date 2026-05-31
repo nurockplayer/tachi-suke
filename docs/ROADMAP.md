@@ -1,64 +1,155 @@
-# Roadmap
+# TachiSuke Roadmap
 
-## Phase 1: Content-First MVP
+## Phase 1A: Scaffold MVP
+
+Status: completed.
+
+Completed scope:
+
+- Astro + TypeScript static site.
+- pnpm-only package setup.
+- Locale-prefixed routes for `zh-tw`, `en`, `ja`, and `ko`.
+- Four locale homepages.
+- Article index and article detail routes.
+- Place index and place detail routes.
+- Area, mobile, tools, submit-place, about, and account placeholder routes.
+- Content collections for articles, areas, places, mobile plans, and tools.
+- TypeScript model boundaries for future user, favorite, and submission features.
+- Place enum values unified.
+- SEO-capable `BaseLayout`.
+- `SITE_URL` environment variable strategy.
+- Structure tests.
+- Static build passing.
+
+Phase 1A intentionally does not include real login, real favorites, real submission handling, Supabase, Postgres, RLS, or moderation admin.
+
+## Phase 1B: Content and SEO MVP
+
+Status: current phase baseline implemented.
 
 Goals:
 
-- Astro static site
-- Locale-prefixed routing
-- SEO metadata
-- Content collections for articles and data
-- Place and mobile plan UI foundations
-- Submit-place form UI
-- Placeholder account pages
-- Placeholder favorites UI
-- Docs for future auth, database, favorites, and moderation
+- Add real decision-oriented articles for mobile plans, renting, first-week setup, administrative procedures, transportation, food, and practical Japanese.
+- Expand mobile plan comparison content with update dates, source links, eligibility notes, and practical warnings.
+- Add richer area guide content for Tokyo, Osaka, Fukuoka, and other high-intent resident areas.
+- Expand food/place content with resident-friendly criteria.
+- Improve internal navigation between related articles, places, mobile plans, areas, and tools.
+- Add SEO polish such as stronger descriptions, related links, structured content blocks, and possibly schema.org where appropriate.
+- Add a build-time route/link crawl test when the static page count increases.
 
-Success criteria:
+Implemented in the current baseline:
 
-- `pnpm install`, `pnpm dev`, `pnpm build`, and `pnpm preview` are supported.
-- Public pages are readable without login.
-- The structure is ready for Supabase without implementing it prematurely.
+- Added eight more decision-oriented articles, bringing the public article set to twelve pages.
+- Added five mobile plan data entries: povo, LINEMO, Rakuten Mobile, ahamo, and UQ mobile.
+- Added four Tokyo area guide samples: Ikebukuro, Itabashi, Akabane, and Kagurazaka / Edogawabashi.
+- Improved the mobile index into a comparison entry with document, payment, data, calling, coverage, and eSIM decision points.
+- Improved the area index into a browsable set of area cards.
+- Improved place detail pages with generated guidance for fit, situations, watchouts, smoking, and payment.
+- Added a conservative Markdown internal-link check to project tests.
 
-## Phase 2: 登入與收藏功能
+Rules:
+
+- Keep content static-first.
+- Do not require login for public content.
+- Do not add a large CMS yet.
+- Keep translation coverage explicit and avoid silently showing the wrong locale.
+- Treat mobile plan data as editorial guidance. Users must confirm official carrier pages before applying.
+
+## Phase 1C: Submission Workflow MVP
+
+Status: planned, still no login required.
+
+Goal:
+
+Enable a lightweight way for users to recommend useful places while keeping moderation mandatory.
+
+Potential approaches:
+
+- Formspree
+- Netlify Forms
+- Google Forms
+- GitHub Issues
+- A small custom API
+
+Rules:
+
+- Submissions must not publish directly.
+- Submissions must require review before becoming public.
+- Submitter email must remain private.
+- Avoid unnecessary personal data.
+- Raw submission data should be normalized before it becomes a Place entry.
+- Account login is still not required in this phase unless the project explicitly changes scope.
+
+Decision needed before implementation:
+
+- Where submissions are stored.
+- Who receives moderation notifications.
+- Whether anonymous submissions are allowed.
+- How spam prevention is handled without overbuilding.
+- How approved submissions become public static content.
+
+## Phase 2: Auth and Favorites
+
+Status: future phase.
 
 Goals:
 
 - Add Supabase Auth.
-- Add user profile pages.
-- Add generic favorites with `targetType` and `targetId`.
+- Add `profiles`.
+- Add generic `favorites`.
+- Replace account placeholders with protected account pages.
 - Let logged-in users save articles, places, mobile plans, areas, and tools.
-- Move account pages from placeholders to protected routes.
+- Add Row Level Security before shipping user data.
 
 Rules:
 
 - Public content remains readable without login.
 - Saving favorites requires login.
 - Users can only read and modify their own favorites.
-- Row Level Security must be enabled before dynamic user data ships.
+- Account pages likely require Astro SSR or hybrid rendering.
+- Phase 2 should not automatically include moderation dashboard work unless explicitly scoped.
 
-## Phase 3: 投稿審核與社群功能
+## Phase 3: Moderation and Community
+
+Status: future phase.
 
 Goals:
 
-- Store place submissions.
+- Add `place_submissions`.
 - Let users view their own submission status.
-- Add moderation states: `pending_review`, `approved`, `rejected`, `needs_more_info`.
-- Create an admin-only moderation surface.
-- Publish only approved, normalized place entries.
+- Add moderation dashboard.
+- Add admin review.
+- Convert approved submissions into normalized published places.
+
+Submission moderation statuses:
+
+- `pending_review`
+- `approved`
+- `rejected`
+- `needs_more_info`
 
 Rules:
 
-- User submissions must never publish directly.
-- Submitter emails must never appear on public pages.
-- Avoid collecting unnecessary personal information.
-- Public community features should stay moderated and practical.
+- User submissions never publish directly.
+- Admin-only tools must be separated from public user pages.
+- Submitter email must not appear on public pages.
+- Published Place entries still use `status = published`.
 
-## Later Ideas
+## Phase 4: Search, Maps, Personalization
 
-- Rich comparison tools for mobile plans
-- City cost calculators
-- Saved checklists
-- Personalized onboarding by visa/status/language
-- Editorial workflow for translations
-- Search across articles, places, and tools
+Status: future ideas.
+
+Possible scope:
+
+- Site search across articles, places, mobile plans, areas, and tools.
+- Map UI for places and area guides.
+- Saved lists and user-defined collections.
+- Decision tools for mobile plans, moving, renting, and procedures.
+- Personalized onboarding by language, visa/status, city, and needs.
+- AI assistant features for guided life decisions.
+
+Rules:
+
+- Search and personalization should build on stable content models.
+- Map and AI features should not replace editorial moderation.
+- High-risk or date-sensitive advice should remain source-backed and updateable.

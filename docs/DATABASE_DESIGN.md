@@ -44,6 +44,16 @@ Phase 1 does not connect to a database. This document defines the future Supabas
 - `createdAt`
 - `updatedAt`
 
+Final enum values:
+
+- `soloFriendly`: `yes`, `maybe`, `no`, `unknown`
+- `nonSmokingStatus`: `confirmed_non_smoking`, `separated_smoking_area`, `smoking_allowed`, `unknown`
+- `japaneseDifficulty`: `easy`, `normal`, `hard`, `unknown`
+- `source`: `editor`, `user_submission`, `official`
+- `status`: `draft`, `pending_review`, `published`, `rejected`, `archived`
+
+Phase 1 stores Place records as static content. Only `published` entries should generate public list/detail pages.
+
 ### MobilePlan
 
 - `id`
@@ -58,6 +68,16 @@ Phase 1 does not connect to a database. This document defines the future Supabas
 - `pros`
 - `cons`
 - `recommendedFor`
+
+Phase 1B keeps mobile plan data in static JSON and treats it as editorial guidance. Prices, campaigns, data allowances, and eligibility can change, so future database-backed plans should add source and review metadata before being treated as a serious comparison product.
+
+Future candidate fields:
+
+- `officialUrl`
+- `lastCheckedAt`
+- `notes`
+- `locale`
+- `translationKey`
 
 ### Favorite
 
@@ -109,6 +129,41 @@ create type moderation_status as enum (
   'approved',
   'rejected',
   'needs_more_info'
+);
+
+create type place_status as enum (
+  'draft',
+  'pending_review',
+  'published',
+  'rejected',
+  'archived'
+);
+
+create type place_source as enum (
+  'editor',
+  'user_submission',
+  'official'
+);
+
+create type solo_friendly_status as enum (
+  'yes',
+  'maybe',
+  'no',
+  'unknown'
+);
+
+create type non_smoking_status as enum (
+  'confirmed_non_smoking',
+  'separated_smoking_area',
+  'smoking_allowed',
+  'unknown'
+);
+
+create type japanese_difficulty as enum (
+  'easy',
+  'normal',
+  'hard',
+  'unknown'
 );
 
 create table public.user_profiles (
@@ -193,3 +248,5 @@ with check (auth.uid() = user_id or user_id is null);
 ```
 
 Admin moderation policies should be added only after an admin role model is chosen.
+
+Supabase Auth and Postgres are Phase 2 or later. Do not wire these schema drafts into the Phase 1 static site.

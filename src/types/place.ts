@@ -1,4 +1,8 @@
-export type PlaceStatus = "draft" | "published" | "archived";
+export type SoloFriendly = "yes" | "maybe" | "no" | "unknown";
+export type NonSmokingStatus = "confirmed_non_smoking" | "separated_smoking_area" | "smoking_allowed" | "unknown";
+export type JapaneseDifficulty = "easy" | "normal" | "hard" | "unknown";
+export type PlaceSource = "editor" | "user_submission" | "official";
+export type PlaceStatus = "draft" | "pending_review" | "published" | "rejected" | "archived";
 
 export interface Place {
   id: string;
@@ -14,11 +18,11 @@ export interface Place {
   tabelogUrl?: string;
   instagramUrl?: string;
   priceRange: string;
-  soloFriendly: "yes" | "mixed" | "no" | "unknown";
-  nonSmokingStatus: "yes" | "partial" | "no" | "unknown";
-  japaneseDifficulty: "low" | "medium" | "high" | "unknown";
+  soloFriendly: SoloFriendly;
+  nonSmokingStatus: NonSmokingStatus;
+  japaneseDifficulty: JapaneseDifficulty;
   paymentMethods: string[];
-  source: "editorial" | "community" | "official";
+  source: PlaceSource;
   status: PlaceStatus;
   createdAt: string;
   updatedAt: string;

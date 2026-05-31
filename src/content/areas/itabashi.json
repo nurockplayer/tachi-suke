@@ -1,0 +1,15 @@
+{
+  "id": "area-itabashi",
+  "slug": "itabashi",
+  "locale": "en",
+  "translationKey": "tokyo-itabashi",
+  "prefecture": "Tokyo",
+  "city": "Itabashi",
+  "stations": ["Itabashi", "Shin-Itabashi", "Oyama"],
+  "rentLevel": "medium",
+  "foodLevel": "medium-high",
+  "commuteConvenience": "high",
+  "quietness": "medium",
+  "recommendedFor": ["new residents who want lower rent than central hubs", "commuters to Ikebukuro or central Tokyo", "people who prefer local shopping streets"],
+  "warnings": ["Check which train line is closest before signing.", "Commute comfort differs a lot by station.", "Some areas feel residential and quiet while others are busy."]
+}

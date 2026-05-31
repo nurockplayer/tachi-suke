@@ -1,30 +1,85 @@
 # TachiSuke Project Spec
 
-## 產品定位
+## 1. Project Overview
 
-TachiSuke is a multilingual Japan life decision assistant. It is not a generic travel blog. The product helps people living in Japan, preparing to move to Japan, studying in Japan, working in Japan, or staying long-term make practical daily-life decisions.
+TachiSuke is a multilingual Japan life decision assistant for people living in Japan, preparing to move to Japan, studying in Japan, working in Japan, or staying in Japan long-term.
 
-Core decisions include mobile plans, renting and housing, city and neighborhood choices, food and restaurants, transportation, administrative procedures, practical Japanese phrases, work topics, and community-recommended places.
+Chinese name: 達助日本生活  
+English name: Japan Life Assistant  
+Repo name: `tachi-suke`
 
-## 目標使用者
+The product helps foreign residents make practical daily-life decisions in Japan. It focuses on topics such as mobile plans, renting, transportation, food, shopping, administrative procedures, practical Japanese, work, and resident-friendly places.
 
-- 剛到日本、正在處理手機門號、住址、銀行、交通與生活用品的人
-- 準備搬到日本，想先理解成本、地區差異與流程的人
-- 在日本留學、工作或長住，需要多語系生活資訊的人
-- 日文能力有限，需要外國居民友善說明的人
-- 想用比較、清單、決策樹快速做生活決定的人
+The current MVP is an Astro static site with locale-prefixed routing, content collections, article detail pages, place detail pages, placeholder account pages, placeholder favorite UI, and a submit-place form UI that does not submit data yet.
 
-## Brand
+## 2. Brand Concept
 
-- Repo name: `tachi-suke`
-- Brand name: `TachiSuke`
-- English name: `Japan Life Assistant`
-- `Tachi` = 立ち / 達 / Tachiko
-- `Suke` = 助け / 助
+`Tachi` can reference 立ち, 達, and Tachiko. `Suke` references 助け and 助.
 
-Meaning: help people stand on their own feet and build a stable life in Japan.
+The brand meaning is:
 
-## 支援語言與 i18n 策略
+> Help people stand on their own feet and build a stable life in Japan.
+
+The product should feel calm, practical, friendly, and decision-oriented. It should not feel like a generic travel blog, a tourist list, or an unmoderated review platform.
+
+## 3. Product Positioning
+
+TachiSuke is a content-first life decision guide for Japan. Its core value is helping users compare options, avoid common mistakes, and decide what to do next.
+
+Prefer:
+
+- Comparisons
+- Checklists
+- Step-by-step guides
+- Decision trees
+- Warnings and pitfalls
+- Foreign-resident-friendly explanations
+- Multilingual clarity
+- SEO-friendly content
+- Practical notes grounded in daily life
+
+Avoid:
+
+- Generic sightseeing content
+- Vague lifestyle essays
+- Taiwan-only positioning
+- Unmoderated public reviews
+- Public comments in the MVP
+- Over-engineered dynamic features before content quality is proven
+
+## 4. Target Users
+
+Primary users:
+
+- People newly arrived in Japan who need to set up mobile service, address registration, daily shopping, transportation, and basic procedures.
+- People preparing to move to Japan who want to understand costs, neighborhoods, documents, and first-week tasks.
+- Students, workers, and long-term residents who need practical multilingual information.
+- Foreign residents with limited Japanese who need clear explanations and vocabulary support.
+- Users who prefer structured comparisons and checklists over long, vague articles.
+
+TachiSuke should be useful for a broad foreign-resident audience, not only Taiwanese users.
+
+## 5. Core User Problems
+
+- Mobile plans in Japan are hard to compare because requirements differ by carrier, payment method, identity verification, and residence status.
+- Renting and neighborhood decisions require practical local context that is often scattered across multiple sources.
+- Administrative procedures are stressful because users may not know the correct order, documents, or Japanese terms.
+- Everyday food, shopping, and service choices are easier with resident-friendly notes such as solo-friendly status, non-smoking status, payment methods, and Japanese difficulty.
+- Many users need multilingual help, but translations may be incomplete at early stages.
+- Users need trustworthy recommendations, but user-submitted content must be moderated before publication.
+
+## 6. Product Principles
+
+- Static-first until dynamic features are necessary.
+- Public content should be readable without login.
+- Every page should have a clear user goal.
+- Content should help users make decisions, not just browse.
+- Missing translations should degrade gracefully.
+- User submissions must not publish directly.
+- Account, favorites, submissions, auth, and database features should remain clear placeholders until their implementation phase.
+- Data models should be simple enough for content collections now and Supabase Postgres later.
+
+## 7. Supported Locales
 
 Supported locales:
 
@@ -33,145 +88,199 @@ Supported locales:
 - `ja`: Japanese
 - `ko`: Korean
 
-The architecture must support all four locales from the start. Core content can start with Traditional Chinese and English, while Japanese and Korean can be added gradually.
+Locale-specific routes are physical routes under `src/pages/{locale}/`.
 
-## URL Locale 設計
-
-All locale-specific pages use locale-prefixed routing:
+Current locale roots:
 
 - `/zh-tw/`
 - `/en/`
 - `/ja/`
 - `/ko/`
 
-Examples:
+Do not add Simplified Chinese unless explicitly requested in the future.
 
-- `/zh-tw/articles`
-- `/en/articles`
-- `/ja/places`
-- `/ko/mobile`
+## 8. i18n Strategy
 
-Content items include:
+All user-facing UI text should be natural for the target locale. The project uses shared page components where appropriate, but each locale route is explicit so static generation remains easy to inspect.
+
+Content items that are translated should include:
 
 - `id`
 - `slug`
 - `locale`
 - `translationKey`
 
-`translationKey` connects translations of the same content item.
+`translationKey` connects different language versions of the same concept. Article detail pages use it to build conservative `hreflang` links only for existing non-draft translations.
 
-## Fallback 語言策略
+Place content is currently locale-neutral. Place detail pages reuse the same `slug` across locales while localizing UI labels such as solo-friendly status, non-smoking status, Japanese difficulty, and field names.
 
-If a translation is missing:
+## 9. Locale Fallback Strategy
 
-1. Prefer the requested locale.
-2. Fall back to English.
-3. Fall back to Traditional Chinese.
-4. Show a clear missing-content state only if neither fallback exists.
+Expected fallback order for content:
 
-Do not use Simplified Chinese unless explicitly requested in the future.
+1. Requested locale
+2. English
+3. Traditional Chinese
+4. Clear missing-content state
 
-## MVP 範圍
+The current MVP has the routing and metadata structure needed for fallback behavior, but most pages still render only locale-specific content or static localized UI copy. Future content utilities should implement fallback without silently showing the wrong locale.
 
-The MVP focuses on:
+## 10. MVP Scope
 
-- Static content
-- Multilingual routing
-- SEO metadata
-- Clean navigation
-- Article publishing
-- City and neighborhood guide pages
-- Food and place guide pages
-- Mobile plan comparison pages
-- Simple tool pages
-- Moderated place submission planning
-- Placeholder account pages
-- Placeholder favorite functionality
+The MVP includes:
 
-The MVP does not fully implement:
+- Astro + TypeScript static site
+- pnpm-only package management
+- Locale-prefixed routing for `zh-tw`, `en`, `ja`, and `ko`
+- Four locale homepages
+- Article index pages
+- Article detail pages generated from Markdown/MDX content
+- Twelve public article pages across the supported locales in the current Phase 1B baseline
+- Areas index pages with Tokyo area guide cards
+- Places index pages
+- Place detail pages generated from JSON content with practical guidance sections
+- Mobile index pages with comparison guidance and five mobile plan entries
+- Tools index pages
+- Submit-place form UI
+- About pages
+- Account placeholder pages
+- Favorite placeholder button
+- Content collections for articles, areas, places, mobile plans, and tools
+- TypeScript model files for future auth, favorites, users, and submissions
+- SEO-oriented `BaseLayout`
+- `SITE_URL` environment variable with example-domain fallback
+- Structure tests in `tests/project-structure.test.mjs`
+- Conservative Markdown internal-link checks in `tests/project-structure.test.mjs`
 
-- Authentication
-- Database integration
+## 11. Out-of-Scope for MVP
+
+The MVP must not implement:
+
+- Real login
+- Supabase Auth
+- Database client setup
+- Postgres persistence
+- Row Level Security policies in runtime code
+- Real favorites
+- Real submit-place submission handling
 - Public comments
-- Payments
-- Complex CMS/admin
-- Real-time community features
+- Payment features
+- Large CMS or admin dashboard
 - Direct public publishing from user submissions
 
-## 資料模型
+## 12. Current Implemented Routes
 
-Primary models:
+Root:
 
-- `Article`
-- `Place`
-- `MobilePlan`
-- `CityGuide`
-- `Favorite`
-- `PlaceSubmission`
-- `UserProfile`
+- `/`
 
-See `docs/DATABASE_DESIGN.md` for the future Supabase schema draft.
+Locale home:
 
-## SEO 策略
+- `/zh-tw/`
+- `/en/`
+- `/ja/`
+- `/ko/`
 
-Each page should include:
+Content and section pages:
 
-- Locale-aware `html lang`
-- Title
-- Description
-- Canonical URL
-- Planned `hreflang` links
-- Semantic headings
-- Readable slugs
-- Structured content where useful
+- `/[locale]/articles`
+- `/[locale]/articles/[slug]`
+- `/[locale]/areas`
+- `/[locale]/places`
+- `/[locale]/places/[slug]`
+- `/[locale]/mobile`
+- `/[locale]/tools`
+- `/[locale]/submit-place`
+- `/[locale]/about`
 
-Priority SEO topics:
+Account placeholder pages:
+
+- `/[locale]/account/login`
+- `/[locale]/account/favorites`
+- `/[locale]/account/submissions`
+
+Article detail pages are generated only for non-draft articles matching the locale route. Place detail pages are generated only for places where `status = published`.
+
+## 13. Current Placeholder Routes
+
+These routes exist and are intentionally placeholder-only:
+
+- `/[locale]/account/login`
+- `/[locale]/account/favorites`
+- `/[locale]/account/submissions`
+
+The submit-place route is also UI-only in the MVP:
+
+- `/[locale]/submit-place`
+
+It displays a full form and moderation notice, but it does not send, store, email, or publish submissions.
+
+## 14. Content-First Strategy
+
+TachiSuke should prove value through high-quality content before adding complex dynamic features.
+
+Priority content types:
 
 - Mobile plan comparisons
-- City and neighborhood guides
-- Food and place recommendations
-- Administrative procedures
+- First-week Japan setup checklists
+- Renting and neighborhood guides
+- Administrative procedure guides
 - Practical Japanese phrase guides
+- Resident-friendly place recommendations
+- Everyday shopping and food guides
+- Tools and checklists that support decisions
 
-## 目錄結構
+Article pages should include clear titles, descriptions, categories, tags, publish dates, update dates, and readable content. Place pages should show practical details such as location, nearest station, price range, solo-friendly status, non-smoking status, Japanese difficulty, payment methods, Google Maps link, and official URL when available.
 
-```text
-tachi-suke/
-├── src/
-│   ├── content/
-│   ├── lib/
-│   ├── pages/
-│   ├── components/
-│   ├── styles/
-│   └── types/
-├── docs/
-├── tests/
-├── AGENTS.md
-├── README.md
-├── package.json
-├── pnpm-lock.yaml
-└── pnpm-workspace.yaml
-```
+## 15. Future Auth/Database Strategy
 
-## 開發規範
+Future dynamic features should start in Phase 2 or later.
 
-- Keep code simple and readable.
-- Prefer static pages and content collections in MVP.
-- Use semantic HTML.
-- Keep pages mobile-first.
-- Do not add dependencies unless clearly useful.
-- Keep auth, db, favorites, and submissions as clear future boundaries.
-- Run `pnpm build` before reporting completion when possible.
+Recommended direction:
 
-## pnpm 使用規則
+- Supabase Auth for login
+- Supabase Postgres for profiles, favorites, and submissions
+- Row Level Security before any user data ships
+- Astro SSR or hybrid rendering for protected account pages
+- Public content remains static-first where possible
 
-Use pnpm only:
+Reserved boundaries:
 
-```bash
-pnpm install
-pnpm dev
-pnpm build
-pnpm preview
-```
+- `src/lib/auth/`
+- `src/lib/db/`
+- `src/lib/favorites/`
+- `src/lib/submissions/`
+- `src/types/user.ts`
+- `src/types/favorite.ts`
+- `src/types/submission.ts`
 
-Do not introduce `npm`, `npx`, `yarn`, `bun`, `package-lock.json`, `yarn.lock`, `bun.lock`, or `bun.lockb`.
+## 16. Success Metrics for MVP
+
+Product and content metrics:
+
+- Users can understand the product purpose from every locale homepage.
+- Users can browse articles and places without login.
+- Users can reach all main sections from locale navigation.
+- Article and place detail pages are indexable and readable.
+- Place labels are understandable in each locale and do not expose internal enum values.
+- Submit-place clearly explains moderation and privacy limits.
+
+Engineering metrics:
+
+- `pnpm install` succeeds.
+- `pnpm test` succeeds.
+- `pnpm build` succeeds.
+- No forbidden lockfiles are present.
+- Draft articles do not generate public article detail pages.
+- Non-published places do not appear in public lists or detail pages.
+- SEO metadata includes title, description, canonical URL, Open Graph URL, Open Graph site name, locale-aware `html lang`, and conservative `hreflang`.
+
+## 17. Non-Goals
+
+- Becoming a generic Japan travel website.
+- Becoming an open public review platform.
+- Supporting only Taiwanese users.
+- Building authentication before content and SEO foundations are stable.
+- Building a large CMS before editorial workflows are understood.
+- Publishing unreviewed user submissions.
+- Treating placeholders as real account, favorite, submission, or database features.

@@ -25,7 +25,7 @@ const places = (await getCollection("places")).filter((place) => place.data.stat
   </section>
   <section class="section">
     <div class="container grid grid-3">
-      {places.map((place) => <PlaceCard place={place} />)}
+      {places.map((place) => <PlaceCard place={place} locale={locale} />)}
     </div>
   </section>
 </BaseLayout>

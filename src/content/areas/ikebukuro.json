@@ -1,0 +1,15 @@
+{
+  "id": "area-ikebukuro",
+  "slug": "ikebukuro",
+  "locale": "en",
+  "translationKey": "tokyo-ikebukuro",
+  "prefecture": "Tokyo",
+  "city": "Toshima",
+  "stations": ["Ikebukuro", "Higashi-Ikebukuro", "Kita-Ikebukuro"],
+  "rentLevel": "medium-high",
+  "foodLevel": "high",
+  "commuteConvenience": "very high",
+  "quietness": "mixed",
+  "recommendedFor": ["students", "commuters", "people who want many train lines", "people who want late-night food and shopping options"],
+  "warnings": ["Station exits can be confusing.", "Some blocks are noisy at night.", "Rent can jump quickly near major exits."]
+}

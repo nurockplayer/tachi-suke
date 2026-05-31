@@ -17,6 +17,8 @@ draft: false
 
 Choosing a mobile plan in Japan is not only about the cheapest monthly fee. Foreign residents should compare documents, payment methods, coverage, data allowance, contract rules, and how easy the setup is.
 
+Start with the [mobile plan comparison page](/en/mobile) if you need a shortlist.
+
 ## Start with your constraints
 
 If you do not have a Japanese credit card yet, filter for plans that accept your current payment method. If you need stable service immediately after arrival, a major carrier or online sub-brand may be safer than the lowest-cost option.
@@ -38,3 +40,7 @@ Major carriers are useful when you want store support and stable coverage. Budge
 ## Common pitfall
 
 Do not compare only the promotional headline price. Real costs can change based on calls, data tiers, discounts, and required payment methods. Prepare your ID, address, and payment method before applying.
+
+## Next step
+
+Compare the main online brands in [povo, LINEMO, Rakuten Mobile, and ahamo](/en/articles/povo-linemo-rakuten-ahamo-comparison). If you are still in arrival week, use [First Week in Japan](/en/articles/first-week-japan-setup) to decide what to set up first.

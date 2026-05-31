@@ -1,0 +1,14 @@
+{
+  "id": "mobile-uq-mobile",
+  "slug": "uq-mobile",
+  "provider": "UQ mobile",
+  "planName": "Komi-Komi Plan Value",
+  "monthlyPrice": "from ¥3,828 for Komi-Komi Plan Value; discounts and plans vary, confirm official latest price",
+  "dataAmount": "35GB with 10-minute domestic calls included on Komi-Komi Plan Value",
+  "paymentRequirements": ["credit_card", "bank_transfer", "confirm online shop and in-store conditions"],
+  "residenceCardRequired": true,
+  "creditCardRequired": false,
+  "pros": ["au network", "shop support available", "clear mid-data option", "domestic calls up to 10 minutes included on this plan with exceptions"],
+  "cons": ["discount conditions can be complex", "not always the lowest headline price", "store and online application conditions may differ"],
+  "recommendedFor": ["people who want carrier-sub-brand stability", "users who prefer having store support", "medium data users who also make short calls"]
+}

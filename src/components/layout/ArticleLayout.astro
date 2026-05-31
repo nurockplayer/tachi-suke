@@ -11,9 +11,10 @@ interface Props {
   tags: string[];
   publishedAt: Date;
   updatedAt: Date;
+  alternatePaths?: Partial<Record<Locale, string>>;
 }
 
-const { locale, title, description, category, tags, publishedAt, updatedAt } = Astro.props;
+const { locale, title, description, category, tags, publishedAt, updatedAt, alternatePaths } = Astro.props;
 const updatedLabel = {
   "zh-tw": "更新",
   en: "Updated",
@@ -22,7 +23,7 @@ const updatedLabel = {
 }[locale];
 ---
 
-<BaseLayout locale={locale} title={title} description={description}>
+<BaseLayout locale={locale} title={title} description={description} alternatePaths={alternatePaths}>
   <article class="article-shell narrow">
     <header class="article-header">
       <p class="article-meta">{category} · {formatDate(publishedAt, locale)} · {updatedLabel} {formatDate(updatedAt, locale)}</p>

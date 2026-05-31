@@ -1,0 +1,31 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import ArticleLayout from "@/components/layout/ArticleLayout.astro";
+import { localizePath, type Locale } from "@/lib/i18n";
+
+interface Props {
+  article: CollectionEntry<"articles">;
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+const translations = (await getCollection("articles")).filter(
+  (entry) => entry.data.translationKey === article.data.translationKey && !entry.data.draft
+);
+const alternatePaths = Object.fromEntries(
+  translations.map((entry) => [entry.data.locale, localizePath(entry.data.locale, `/articles/${entry.data.slug}`)])
+) as Partial<Record<Locale, string>>;
+---
+
+<ArticleLayout
+  locale={article.data.locale}
+  title={article.data.title}
+  description={article.data.description}
+  category={article.data.category}
+  tags={article.data.tags}
+  publishedAt={article.data.publishedAt}
+  updatedAt={article.data.updatedAt}
+  alternatePaths={alternatePaths}
+>
+  <Content />
+</ArticleLayout>

@@ -1,77 +1,86 @@
 # TachiSuke
 
-TachiSuke is a multilingual Japan life decision assistant for people living in Japan, preparing to move to Japan, studying in Japan, working in Japan, or staying long-term.
+TachiSuke, Chinese name 達助日本生活, is a multilingual Japan life decision assistant. It helps foreign residents and people preparing to move to Japan make practical decisions about mobile plans, housing, transportation, food, shopping, administrative procedures, practical Japanese, and work-related life in Japan.
 
-Brand meaning:
+TachiSuke is not a generic travel blog. The goal is to provide comparisons, checklists, warnings, guides, and resident-friendly notes that help users decide what to do next.
 
-- `Tachi` = 立ち / 達 / Tachiko
-- `Suke` = 助け / 助
+## Tech Stack
 
-The product helps users stand on their own feet in Japan by making practical daily-life decisions easier.
+- Astro
+- TypeScript
+- Markdown / MDX
+- Astro content collections
+- pnpm only
+- Static Site Generation first
+- Locale-prefixed i18n routing
 
-## MVP
+Supported locales:
 
-This first version is content-first, SEO-friendly, i18n-ready, auth-ready, database-ready, and favorites-ready.
+- `zh-tw`
+- `en`
+- `ja`
+- `ko`
 
-It includes:
+## Current MVP Status
 
-- Astro + TypeScript static site generation
-- Locale-prefixed routes for `zh-tw`, `en`, `ja`, and `ko`
-- Markdown/MDX content collections
-- Article, area, place, mobile, tool, submit-place, about, and account placeholder pages
-- Shared UI components for layout, cards, favorite placeholders, and login prompts
-- Future boundaries for auth, database, favorites, and submissions
-- Supabase Auth/Postgres planning docs without implementing dynamic features yet
+Implemented:
 
-Not included in MVP:
+- Four locale homepages
+- Start-here homepage links for articles, mobile, areas, places, submit-place, tools, and favorites placeholder
+- Four locale article index pages
+- Four locale article detail routes
+- Twelve public article pages across four locales
+- Four locale area index pages with Tokyo area guide cards
+- Four locale place index pages
+- Four locale place detail routes with practical guidance sections
+- Four locale mobile index pages with comparison guidance
+- Four locale tools index pages
+- Four locale submit-place UI pages
+- Four locale about pages
+- Four locale account placeholder pages
+- Favorite placeholder button
+- Content collections for articles, areas, places, mobile plans, and tools
+- Five mobile plan entries: povo, LINEMO, Rakuten Mobile, ahamo, and UQ mobile
+- Four area guide samples: Ikebukuro, Itabashi, Akabane, and Kagurazaka / Edogawabashi
+- Article, Place, MobilePlan, Favorite, UserProfile, and PlaceSubmission type boundaries
+- Unified Place enum values
+- SEO-oriented `BaseLayout`
+- `SITE_URL` environment variable fallback
+- Structure and conservative internal-link tests in `tests/project-structure.test.mjs`
 
-- Real authentication
-- Database-backed favorites
-- Public comments
-- Payments
-- User submissions that publish directly
-- Large CMS or admin dashboard
+Still placeholder-only:
 
-## Commands
-
-Use pnpm only.
-
-```bash
-pnpm install
-pnpm dev
-pnpm build
-pnpm preview
-pnpm test
-```
-
-Local development:
-
-```bash
-pnpm dev
-```
-
-Production build:
-
-```bash
-pnpm build
-```
-
-Production preview:
-
-```bash
-pnpm preview
-```
+- Login
+- Favorites
+- Account submissions
+- Real favorite saving
+- Real submit-place submission
+- Supabase Auth
+- Postgres/database integration
+- Row Level Security runtime setup
+- Moderation dashboard
+- Real user profile data
 
 ## Routes
 
+Root:
+
 - `/`
+
+Locale roots:
+
 - `/zh-tw/`
 - `/en/`
 - `/ja/`
 - `/ko/`
+
+Locale routes:
+
 - `/[locale]/articles`
+- `/[locale]/articles/[slug]`
 - `/[locale]/areas`
 - `/[locale]/places`
+- `/[locale]/places/[slug]`
 - `/[locale]/mobile`
 - `/[locale]/tools`
 - `/[locale]/submit-place`
@@ -80,31 +89,92 @@ pnpm preview
 - `/[locale]/account/favorites`
 - `/[locale]/account/submissions`
 
-## i18n Strategy
+Article detail pages are generated only for non-draft articles. Place detail pages are generated only for places where `status = published`.
 
-All public pages use locale-prefixed routing. Supported locales are:
+## Commands
 
-- `zh-tw`: Traditional Chinese
-- `en`: English
-- `ja`: Japanese
-- `ko`: Korean
+Use pnpm only.
 
-Content items include `id`, `slug`, `locale`, and `translationKey`. The `translationKey` connects different language versions of the same content. Missing translations should fall back to English first, then Traditional Chinese when English is unavailable.
+Install dependencies:
 
-## Future Supabase Starting Point
+```bash
+pnpm install
+```
 
-When moving into Phase 2, start with:
+Start local development:
 
-1. Add Supabase environment variables and client helpers under `src/lib/db/`.
-2. Add Supabase Auth helpers under `src/lib/auth/`.
-3. Implement the generic `favorites` table using `target_type` and `target_id`.
-4. Enable Row Level Security before shipping dynamic user data.
-5. Move account pages from placeholders to protected SSR or hybrid Astro routes.
+```bash
+pnpm dev
+```
 
-See:
+Run tests:
 
-- [Project spec](docs/PROJECT_SPEC.md)
-- [Content strategy](docs/CONTENT_STRATEGY.md)
-- [Roadmap](docs/ROADMAP.md)
-- [Auth and favorites](docs/AUTH_AND_FAVORITES.md)
-- [Database design](docs/DATABASE_DESIGN.md)
+```bash
+pnpm test
+```
+
+Build static output:
+
+```bash
+pnpm build
+```
+
+Preview production build:
+
+```bash
+pnpm preview
+```
+
+## Environment Variables
+
+Astro `site` is read from `SITE_URL`.
+
+Example:
+
+```bash
+SITE_URL=https://tachi-suke.example.com
+```
+
+For local setup:
+
+```bash
+cp .env.example .env
+```
+
+Use the real deployment URL when the production domain is decided.
+
+## Place Enum Values
+
+Published Place entries use these enum values:
+
+- `soloFriendly`: `yes`, `maybe`, `no`, `unknown`
+- `nonSmokingStatus`: `confirmed_non_smoking`, `separated_smoking_area`, `smoking_allowed`, `unknown`
+- `japaneseDifficulty`: `easy`, `normal`, `hard`, `unknown`
+- `source`: `editor`, `user_submission`, `official`
+- `status`: `draft`, `pending_review`, `published`, `rejected`, `archived`
+
+Only `status = published` places are publicly listed or rendered as detail pages.
+
+## Development Rules
+
+- Keep Phase 1 static-first.
+- Use pnpm commands only.
+- Do not add forbidden lockfiles.
+- Do not implement auth, database, favorites, or real submissions in Phase 1.
+- Do not publish user submissions directly.
+- Keep user-facing copy natural for each locale.
+- Keep content decision-oriented rather than tourist-oriented.
+- Treat mobile plan prices, campaigns, and eligibility rules as changeable; users must confirm official sites before applying.
+- Run `pnpm test` and `pnpm build` before reporting completion when possible.
+
+## Documentation Map
+
+- [Project Spec](docs/PROJECT_SPEC.md): product positioning, scope, routes, principles, and future strategy.
+- [Page Spec](docs/PAGE_SPEC.md): purpose, data source, SEO, and status for each route.
+- [Content Model](docs/CONTENT_MODEL.md): collections, types, fields, enum values, and visibility rules.
+- [Implementation Status](docs/IMPLEMENTATION_STATUS.md): completed work, placeholders, limitations, and verification.
+- [Acceptance Criteria](docs/ACCEPTANCE_CRITERIA.md): package, build, test, i18n, article, place, submit-place, SEO, placeholder, and readiness criteria.
+- [Content Strategy](docs/CONTENT_STRATEGY.md): editorial direction and first content ideas.
+- [Auth and Favorites](docs/AUTH_AND_FAVORITES.md): future Supabase Auth and favorites direction.
+- [Database Design](docs/DATABASE_DESIGN.md): future Supabase Postgres schema draft.
+- [Roadmap](docs/ROADMAP.md): phases from scaffold MVP through search, maps, personalization, and AI.
