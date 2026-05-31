@@ -52,6 +52,14 @@ This document defines the acceptance criteria for the current static-first MVP.
 - User-facing copy should be natural for each locale.
 - Do not add Simplified Chinese unless explicitly requested.
 
+## Accessibility Criteria
+
+- Public pages should expose a skip link to the main content.
+- The main landmark should have a stable `id="main-content"` target.
+- Primary navigation should mark the active section with `aria-current`.
+- Keyboard focus must be visible with `:focus-visible` styles.
+- These baseline criteria do not replace a full accessibility audit.
+
 ## Article Criteria
 
 - Article content must come from `src/content/articles`.

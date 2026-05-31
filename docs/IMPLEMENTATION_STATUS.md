@@ -56,6 +56,7 @@ This document records the current MVP state after Phase 1H static tool detail wo
 - Cloudflare Pages `_headers` with conservative security and cache defaults.
 - Cloudflare Pages `wrangler.toml` with project name, compatibility date, and `dist` output directory.
 - Deployment guide at `docs/DEPLOYMENT.md`.
+- Baseline keyboard accessibility hooks: skip link, stable main content target, active primary nav state, and visible focus styles.
 - Structure tests in `tests/project-structure.test.mjs`.
 - Conservative article internal-link checks for locale-prefixed static/generated routes.
 - Static HTML internal link crawler in `tests/static-html-links.test.mjs`, run after `pnpm build` with `pnpm check:links`.
@@ -119,6 +120,7 @@ These are intentionally present but not functional:
 - CI verifies the static site but does not deploy it. Cloudflare Pages deployment remains separate.
 - Deployment credentials and Cloudflare account-specific secrets are intentionally not committed.
 - Browser QA currently covers basic route/card/form checks, not a full accessibility or visual regression suite.
+- Accessibility work currently covers baseline keyboard navigation only, not a complete WCAG audit.
 
 ## Verification Results
 

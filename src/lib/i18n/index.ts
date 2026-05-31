@@ -144,6 +144,29 @@ export const sectionCopy = {
   }
 } satisfies Record<Locale, Record<string, string>>;
 
+type UiCopyKey = "layout.skipMain";
+
+const uiCopy = {
+  "zh-tw": {
+    "layout.skipMain": "跳到主要內容"
+  },
+  en: {
+    "layout.skipMain": "Skip to main content"
+  },
+  ja: {
+    "layout.skipMain": "本文へスキップ"
+  },
+  ko: {
+    "layout.skipMain": "본문으로 건너뛰기"
+  }
+} satisfies Record<Locale, Record<UiCopyKey, string>>;
+
+export function getUiCopy(locale: Locale, key: UiCopyKey): string {
+  return uiCopy[locale]?.[key]
+    ?? fallbackLocales.map((fallbackLocale) => uiCopy[fallbackLocale]?.[key]).find(Boolean)
+    ?? `[missing translation: ${key}]`;
+}
+
 export function getPageTitle(_locale: Locale, title?: string): string {
   const suffix = "TachiSuke";
   return title ? `${title} | ${suffix}` : suffix;

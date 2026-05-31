@@ -35,6 +35,11 @@ a {
   color: inherit;
 }
 
+:focus-visible {
+  outline: 3px solid var(--color-vermilion);
+  outline-offset: 3px;
+}
+
 img,
 svg {
   max-width: 100%;
@@ -49,6 +54,25 @@ textarea {
 
 .site-main {
   min-height: 68vh;
+}
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 16px;
+  z-index: 100;
+  transform: translateY(-140%);
+  border-radius: var(--radius);
+  background: var(--color-ink);
+  color: #fff;
+  font-weight: 800;
+  padding: 10px 14px;
+  text-decoration: none;
+  transition: transform 160ms ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
 }
 
 .container {
@@ -130,6 +154,7 @@ textarea {
 
 .header-nav a:hover,
 .locale-switcher a:hover,
+.header-nav a[aria-current="page"],
 .locale-switcher a[aria-current="true"] {
   background: var(--color-mist);
   color: var(--color-ink);
