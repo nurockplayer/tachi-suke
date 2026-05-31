@@ -17,7 +17,7 @@ This document records the current MVP state after Phase 1AK OpenSearch discovery
 - Static article table of contents generated from Markdown/MDX H2/H3 headings.
 - Build-time related article links on article detail pages, limited to non-draft same-locale articles.
 - Public detail-page correction prompts that link article, place, mobile plan, area, and tool details to contact/corrections with related page URL prefill.
-- Sixteen public article pages across `zh-tw`, `en`, `ja`, and `ko`, including Phase 1B decision-oriented content, Phase 1AG zh-tw/en commuter pass articles, and Phase 1AH zh-tw/en residence administration articles.
+- Twenty public article pages across `zh-tw`, `en`, `ja`, and `ko`, including Phase 1B decision-oriented content, Phase 1AG/1AP commuter pass articles, and Phase 1AH/1AP residence administration articles.
 - Four locale area index pages showing area guide cards.
 - Four locale area detail routes at `/[locale]/areas/[slug]`.
 - Four locale place index pages.

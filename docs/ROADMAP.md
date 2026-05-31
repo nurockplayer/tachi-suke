@@ -762,7 +762,7 @@ Rules:
 - Keep articles decision-oriented rather than generic travel content.
 - Do not present commuter pass content as a fare calculator.
 - Operator rules, reimbursements, student eligibility, refunds, route changes, and mobile IC support can vary.
-- Japanese and Korean translations can be added later after the zh-tw/en content proves useful.
+- Japanese and Korean translations were added in Phase 1AP after the zh-tw/en content proved useful.
 
 ## Phase 1AH: Residence Administration Articles
 
@@ -785,7 +785,30 @@ Rules:
 - Keep administrative content conservative and source-aware.
 - Do not promise exact deadlines, eligibility, documents, or outcomes across all municipalities or residence statuses.
 - Direct action-oriented readers to official sources, municipality counters, schools, employers, and immigration authorities as appropriate.
-- Japanese and Korean translations can be added later after the zh-tw/en content proves useful.
+- Japanese and Korean translations were added in Phase 1AP after the zh-tw/en content proved useful.
+
+## Phase 1AP: Japanese/Korean Admin and Transport Articles
+
+Status: implemented.
+
+Goal:
+
+Improve multilingual coverage for two high-intent life-decision topics that already have zh-tw/en content.
+
+Implemented:
+
+- Added ja article `japan-commuter-pass-ic-card-guide-ja`.
+- Added ko article `japan-commuter-pass-ic-card-guide-ko`.
+- Added ja article `residence-card-resident-record-my-number-ja`.
+- Added ko article `residence-card-resident-record-my-number-ko`.
+- Reused existing `translationKey` values so article detail, sitemap, RSS, search, and hreflang behavior stay aligned.
+- Added source-level and SEO-output checks for article count, locale coverage, sitemap entries, and RSS entries.
+
+Rules:
+
+- Keep transportation content decision-oriented and avoid presenting it as fare calculation.
+- Keep residence administration content conservative and avoid legal/immigration advice.
+- Continue adding ja/ko coverage for proven zh-tw/en topics when it improves user value and SEO coverage.
 
 ## Phase 1AI: Article Category Label Polish
 
