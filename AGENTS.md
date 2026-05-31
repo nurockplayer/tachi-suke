@@ -303,6 +303,13 @@ Phase 1K adds Cloudflare Pages deploy readiness:
 - Keep Phase 1 deployment static-first; do not add Workers/Functions runtime code unless explicitly scoped.
 - `_headers` should keep HTML revalidated and use conservative one-hour cache rules for sitemap, robots, manifest, RSS feeds, `llms.txt`, `opensearch.xml`, and search indexes.
 
+Phase 1AN adds Cloudflare CSP headers:
+
+- `_headers` should include a conservative `Content-Security-Policy`.
+- The Phase 1 CSP may allow `'unsafe-inline'` for current inline JSON-LD and small static enhancement scripts.
+- `form-action` should allow `https:` so provider-agnostic external form endpoints still work.
+- Do not add analytics, external script hosts, nonce infrastructure, or Workers runtime unless explicitly scoped.
+
 Phase 1AC adds Cloudflare Pages redirects:
 
 - `public/_redirects` may provide temporary English fallbacks for common locale-less public paths.

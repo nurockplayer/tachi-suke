@@ -891,6 +891,27 @@ Rules:
 - Do not point hreflang alternates at missing translations, drafts, account placeholders, search pages, or private data.
 - Keep sitemap alternates conservative until translation coverage and route volume justify more specialized sitemap handling.
 
+## Phase 1AN: Cloudflare CSP Headers
+
+Status: implemented.
+
+Goal:
+
+Add baseline static-site hardening through Cloudflare Pages `_headers` without breaking current Astro output, inline JSON-LD, static search, or provider-agnostic external forms.
+
+Implemented:
+
+- Added `Content-Security-Policy` to `public/_headers`.
+- Blocked object embeds and framing with `object-src 'none'` and `frame-ancestors 'none'`.
+- Allowed current inline scripts/styles needed by JSON-LD and small static progressive enhancements.
+- Allowed `form-action 'self' https:` so configured external form endpoints remain usable.
+- Added build-output SEO tests for representative CSP directives.
+
+Rules:
+
+- Do not add external script hosts, analytics, nonce infrastructure, or Workers runtime in Phase 1AN.
+- Revisit nonce/hash-based CSP only when the script architecture is ready.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.

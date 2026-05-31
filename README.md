@@ -73,6 +73,7 @@ Implemented:
 - Visible breadcrumbs on nested public article, category, place, mobile plan, area, and tool pages
 - Generated article table of contents for long-form article pages
 - Cloudflare Pages `_headers` for conservative security and discovery cache defaults
+- Cloudflare Pages CSP blocks framing/object embeds while allowing current inline JSON-LD/search scripts and HTTPS external form endpoints
 - Cloudflare Pages `_redirects` for locale-less section fallbacks to English
 - Cloudflare Pages `wrangler.toml` deployment metadata
 - Conservative locale switcher behavior for detail pages with missing translations
@@ -306,6 +307,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - `/404.html` is a static noindex recovery page for missing routes on Cloudflare Pages or other static hosts.
 - Cloudflare Pages `_redirects` sends common locale-less paths such as `/articles`, `/mobile/povo2`, and `/contact` to English `302` fallbacks. Canonical routes remain locale-prefixed.
 - Cloudflare Pages `_headers` caches sitemap, robots, manifest, RSS feeds, `llms.txt`, `opensearch.xml`, and search indexes conservatively for one hour while keeping HTML revalidated.
+- Cloudflare Pages CSP is intentionally conservative for Phase 1 and still allows `'unsafe-inline'` because the current static site uses inline JSON-LD and small inline enhancement scripts.
 
 ## Documentation Map
 
