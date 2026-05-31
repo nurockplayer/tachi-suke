@@ -44,7 +44,7 @@ Avoid generic sightseeing articles, vague lifestyle writing, unmoderated public 
 13. 住民票、在留卡、My Number 的基本差異
 14. 日本外食預算怎麼抓：連鎖店、食堂、家庭餐廳
 
-Phase 1AG now includes zh-tw/en commuter pass decision articles for topic 8 and links them to the commuter pass / IC card checklist. Phase 1AH includes zh-tw/en residence card, resident record, and My Number articles for topic 13, and Phase 1AP extends both topics to ja/ko.
+Phase 1AG now includes zh-tw/en commuter pass decision articles for topic 8 and links them to the commuter pass / IC card checklist. Phase 1AH includes zh-tw/en residence card, resident record, and My Number articles for topic 13, Phase 1AP extends both topics to ja/ko, and Phase 1AR extends the rental initial-cost guide across en/ja/ko.
 15. Practical Japanese Phrases for Renting an Apartment
 16. 日本打工與正職求職前要知道的用語
 17. Osaka Area Guide for New Residents
@@ -69,9 +69,9 @@ Recommended article structure:
 Phase 1B adds a public-preview content baseline:
 
 - `zh-tw`: mobile plan basics, mobile brand comparison, renting initial costs, family restaurant comparison, and first-week setup
-- `en`: mobile plan basics, mobile brand comparison, and first-week setup
-- `ja`: mobile plan basics and first-week setup
-- `ko`: mobile plan basics and first-week setup
+- `en` / `ja` / `ko`: now include mobile basics, first-week setup, commuter pass / IC card, residence administration, and renting initial-cost decision content
+
+Translations should continue to use explicit `locale` and `translationKey` metadata. Missing translations should follow the documented fallback rules: English, then Traditional Chinese, or a clear missing-content state instead of silently showing the wrong locale.
 
 All Phase 1B articles should remain decision-oriented and include internal links to relevant locale sections or related articles.
 
