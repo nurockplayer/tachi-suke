@@ -1,0 +1,66 @@
+---
+import CategoryCard from "@/components/content/CategoryCard.astro";
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import { localeNames, locales, localizePath, type Locale } from "@/lib/i18n";
+
+const localeCopy = {
+  "zh-tw": {
+    title: "找不到頁面",
+    description: "這個連結可能已移動、過期，或網址輸入錯誤。"
+  },
+  en: {
+    title: "Page not found",
+    description: "This link may have moved, expired, or been typed incorrectly."
+  },
+  ja: {
+    title: "ページが見つかりません",
+    description: "このリンクは移動、期限切れ、または URL の入力間違いの可能性があります。"
+  },
+  ko: {
+    title: "페이지를 찾을 수 없습니다",
+    description: "이 링크는 이동되었거나 만료되었거나 URL이 잘못 입력되었을 수 있습니다."
+  }
+} satisfies Record<Locale, { title: string; description: string }>;
+
+const recovery = {
+  title: "Start from a language home",
+  description: "Choose a language or jump to a practical section.",
+  articles: "Articles",
+  articlesDescription: "Read practical life guides for Japan.",
+  mobile: "Mobile plans",
+  mobileDescription: "Compare phone plan options and caveats.",
+  tools: "Life tools",
+  toolsDescription: "Use static checklists for common setup decisions."
+};
+---
+
+<BaseLayout
+  locale="en"
+  title="Page not found"
+  description="The requested TachiSuke page was not found. Choose a language or return to a practical Japan life section."
+  alternatePaths={{}}
+  robots="noindex, nofollow"
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>{recovery.title}</h1>
+      <p>{recovery.description}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-4">
+      {locales.map((locale) => (
+        <CategoryCard href={localizePath(locale)} title={localeCopy[locale].title} description={`${localeNames[locale]} - ${localeCopy[locale].description}`} />
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-3">
+      <CategoryCard href={localizePath("en", "/articles")} title={recovery.articles} description={recovery.articlesDescription} />
+      <CategoryCard href={localizePath("en", "/mobile")} title={recovery.mobile} description={recovery.mobileDescription} />
+      <CategoryCard href={localizePath("en", "/tools")} title={recovery.tools} description={recovery.toolsDescription} />
+    </div>
+  </section>
+</BaseLayout>

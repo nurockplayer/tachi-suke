@@ -264,6 +264,13 @@ Phase 1P adds detail-page correction prompts:
 - Keep correction prompts short, localized, and static.
 - Do not add analytics, form prefill JavaScript, auth, database storage, or provider-specific behavior for prompts in Phase 1P.
 
+Phase 1Q adds a static custom 404 page:
+
+- Keep `src/pages/404.astro` static and dependency-free.
+- `404.html` should be `noindex, nofollow` and excluded from `sitemap.xml`.
+- Use recovery links to locale homepages and core sections.
+- Do not add language-detection redirects, Cloudflare Functions, Workers, analytics, or error tracking unless explicitly scoped.
+
 Mobile plan prices, campaigns, payment methods, and identity requirements can change. Always phrase mobile data as editorial guidance and remind users to confirm official carrier pages before applying.
 Area rent feel, quietness, and commute convenience can also become stale. Keep area pages date-aware and practical rather than sightseeing-oriented.
 

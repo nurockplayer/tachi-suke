@@ -71,6 +71,7 @@ const requiredFiles = [
   "pnpm-lock.yaml",
   "public/_headers",
   "src/pages/index.astro",
+  "src/pages/404.astro",
   "src/pages/sitemap.xml.ts",
   "src/pages/robots.txt.ts",
   "src/pages/site.webmanifest.ts",
@@ -239,6 +240,10 @@ describe("TachiSuke project scaffold", () => {
 
     const accountPage = readFileSync(join(root, "src/components/pages/AccountPlaceholderPage.astro"), "utf8");
     assert.match(accountPage, /robots="noindex,\s*nofollow"/, "account placeholder pages should be noindex");
+
+    const notFoundPage = readFileSync(join(root, "src/pages/404.astro"), "utf8");
+    assert.match(notFoundPage, /robots="noindex,\s*nofollow"/, "custom 404 page should be noindex");
+    assert.match(notFoundPage, /localizePath\(locale\)/, "custom 404 page should link to locale home pages");
 
     const articleLayout = readFileSync(join(root, "src/components/layout/ArticleLayout.astro"), "utf8");
     assert.match(articleLayout, /relatedArticles\?:/, "ArticleLayout should accept related article links");

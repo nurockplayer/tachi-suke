@@ -407,6 +407,26 @@ Rules:
 - Do not add analytics, account-based reporting, database-backed queues, or provider-specific behavior in Phase 1.
 - Do not imply that individual replies or real-time content updates are guaranteed.
 
+## Phase 1Q: Custom Static 404
+
+Status: implemented.
+
+Goal:
+
+Give static-hosted missing routes a branded recovery page instead of a generic platform error.
+
+Implemented:
+
+- `src/pages/404.astro` generates `dist/404.html`.
+- The page is marked `noindex, nofollow`.
+- The page links to all locale homepages and key English recovery sections.
+- SEO-output tests verify `404.html` exists and stays out of the sitemap.
+
+Rules:
+
+- Keep the 404 page static.
+- Do not add language-detection redirects, Cloudflare Workers, analytics, or error tracking in Phase 1.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.
