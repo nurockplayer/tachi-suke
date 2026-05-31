@@ -634,6 +634,28 @@ Rules:
 - Link only to public discovery surfaces.
 - Do not add AI runtime behavior, analytics, crawling, or private data.
 
+## Phase 1AB: Feed Sitemap Lastmod
+
+Status: implemented.
+
+Goal:
+
+Make RSS feeds easier for crawlers and feed-aware tools to discover with meaningful update dates.
+
+Implemented:
+
+- Added `/feed.xml` to `sitemap.xml`.
+- Added `lastmod` to the global feed sitemap entry based on the newest public article update date.
+- Added `lastmod` to locale feed sitemap entries based on the newest same-locale public article update date.
+- Preserved existing `lastmod` behavior for article, category, place, area, mobile plan, and tool pages.
+- Source-level and build-output SEO tests verify feed sitemap entries and dates.
+
+Rules:
+
+- Keep feeds static and article-only.
+- Do not add per-category feeds or pagination until article volume justifies it.
+- Do not include account placeholders, search pages, search indexes, drafts, or private data in the sitemap.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.

@@ -237,12 +237,13 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Twitter metadata should use `summary_large_image`.
 - Pages should link `/site.webmanifest`.
 - Pages should include browser app metadata: `theme-color`, `application-name`, `apple-mobile-web-app-title`, and `format-detection`.
-- `sitemap.xml` must include public locale roots, section pages, locale RSS feeds, non-draft article details, article category pages, published place details, area details, mobile plan details, published tool details, submit-place thanks pages, contact/corrections pages, and launch trust pages.
+- `sitemap.xml` must include public locale roots, section pages, the global RSS feed, locale RSS feeds, non-draft article details, article category pages, published place details, area details, mobile plan details, published tool details, submit-place thanks pages, contact/corrections pages, and launch trust pages.
 - `sitemap.xml` must exclude account placeholder routes, draft articles, non-published places, non-published tools, search pages, and search index JSON endpoints.
 - `robots.txt` must reference the sitemap and disallow `/[locale]/account/`.
 - `llms.txt` must be generated as plain text, summarize the product positioning, and link only to public discovery surfaces such as sitemap, RSS feeds, locale roots, and search indexes.
 - `feed.xml` must be generated as an RSS 2.0 feed for non-draft public article detail pages.
 - `/[locale]/feed.xml` must be generated as an RSS 2.0 feed for same-locale non-draft public article detail pages.
+- Global and locale RSS feed sitemap entries should include `lastmod` derived from the newest matching public article `updatedAt`.
 - Public pages should include an RSS alternate link to `/feed.xml` and a current-locale RSS alternate link to `/[locale]/feed.xml`.
 - `404.html` must be generated as a branded static recovery page.
 - `404.html` must use `noindex, nofollow` and must not appear in `sitemap.xml`.
