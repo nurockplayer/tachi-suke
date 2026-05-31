@@ -251,7 +251,7 @@ All public pages should:
 
 **SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, and locale alternates.
 
-**Current status:** Implemented as an index/entry page with published tool cards. Phase 1H adds the first static checklist tool, `moving-to-japan-checklist`.
+**Current status:** Implemented as an index/entry page with published tool cards. Phase 1H adds `moving-to-japan-checklist`; Phase 1N adds `japan-rent-initial-cost-checklist`.
 
 **Future notes:** Add filters or groupings once there are enough published tools. Keep this page clear that account-based saved progress is not available in Phase 1.
 
@@ -267,7 +267,7 @@ All public pages should:
 
 **SEO requirements:** Use localized tool `title` and `description`, canonical URL, Open Graph metadata, locale-aware `html lang`, conservative `WebPage` JSON-LD, `ItemList` JSON-LD for checklist items, `BreadcrumbList` JSON-LD, and locale alternates only for generated tool detail routes. Published tool detail routes should appear in `sitemap.xml`.
 
-**Current status:** Implemented for all four locales in Phase 1H. The first published tool is `moving-to-japan-checklist`, a static moving-to-Japan checklist with localized sections, notes, source note, and last checked date.
+**Current status:** Implemented for all four locales. Published tools currently include `moving-to-japan-checklist` and `japan-rent-initial-cost-checklist`, both with localized sections, notes, source note, and last checked date.
 
 **Future notes:** Current checklist interaction is local to the page and does not persist progress. Saved tool state should wait for Phase 2 auth/database work or a separately scoped static-friendly storage decision.
 

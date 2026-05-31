@@ -338,11 +338,16 @@ describe("TachiSuke project scaffold", () => {
     assert.doesNotMatch(astroConfig, /site:\s*["']https:\/\/tachi-suke\.example\.com["']/);
   });
 
-  it("publishes the first static checklist tool with detail routes", () => {
+  it("publishes static checklist tools with detail routes", () => {
     const contentConfig = readFileSync(join(root, "src/content.config.ts"), "utf8");
     for (const field of ["lastCheckedAt", "sourceNote", "notes", "sections"]) {
       assert.match(contentConfig, new RegExp(field), `tools schema should include ${field}`);
     }
+
+    const publishedTools = listFiles("src/content/tools", [".json"]).map(readJson).filter((tool) => tool.status === "published");
+    assert.ok(publishedTools.length >= 2, "Phase 1N should publish at least two static tools");
+    assert.ok(publishedTools.some((tool) => tool.slug === "moving-to-japan-checklist"), "moving checklist should stay published");
+    assert.ok(publishedTools.some((tool) => tool.slug === "japan-rent-initial-cost-checklist"), "rent initial cost checklist should be published");
 
     const tool = readJson("src/content/tools/moving-checklist.json");
     assert.equal(tool.slug, "moving-to-japan-checklist");

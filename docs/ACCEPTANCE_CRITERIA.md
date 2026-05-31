@@ -121,6 +121,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Planned or draft tools must not be public.
 - Tool detail pages must show localized sections, notes, source note, and last checked date.
 - Phase 1 tool pages must stay static and must not imply that checklist progress is saved.
+- Phase 1N must keep at least two published static tools, including `moving-to-japan-checklist` and `japan-rent-initial-cost-checklist`.
 
 ## Submit-Place Criteria
 

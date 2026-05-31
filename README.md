@@ -40,7 +40,7 @@ Implemented:
 - Four locale mobile plan detail routes
 - Four locale tools index pages with published tool cards
 - Four locale tool detail routes
-- First published static checklist tool: Moving to Japan checklist
+- Published static checklist tools: Moving to Japan checklist and Japan rent initial cost checklist
 - Four locale submit-place form pages with provider-agnostic external endpoint support
 - Four locale submit-place thanks pages
 - Four locale about pages

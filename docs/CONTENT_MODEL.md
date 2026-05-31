@@ -220,6 +220,11 @@ This document records the current content collections and TypeScript model bound
 
 **Current storage:** JSON files in `src/content/tools`, loaded by the `tools` content collection.
 
+Current published tools:
+
+- `moving-to-japan-checklist`
+- `japan-rent-initial-cost-checklist`
+
 **Required fields:**
 
 - `id`

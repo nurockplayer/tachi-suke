@@ -338,6 +338,27 @@ Rules:
 - Do not imply that auth, database-backed submissions, analytics, or legal-reviewed production privacy workflows already exist.
 - Before adding login, analytics, or personal-data persistence, replace launch-readiness copy with a fuller privacy/legal review.
 
+## Phase 1N: Rent Initial Cost Tool
+
+Status: implemented.
+
+Goal:
+
+Expand static tools with a practical rental initial-cost checklist for users evaluating Japan apartments.
+
+Implemented:
+
+- Added the second published static tool, `japan-rent-initial-cost-checklist`.
+- Covered common rent initial cost categories such as deposit, key money, agency fee, advance rent, management fee, guarantor company fee, fire insurance, and lock change.
+- Added localized copy for `zh-tw`, `en`, `ja`, and `ko`.
+- Added source-level and SEO-output tests for multiple published tools and the rent-cost detail page.
+
+Rules:
+
+- Keep the tool static and decision-oriented.
+- Do not present common fee categories as universal rules or fixed prices.
+- Do not save checklist state in Phase 1.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.
