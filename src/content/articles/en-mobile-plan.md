@@ -43,4 +43,4 @@ Do not compare only the promotional headline price. Real costs can change based 
 
 ## Next step
 
-Compare the main online brands in [povo, LINEMO, Rakuten Mobile, and ahamo](/en/articles/povo-linemo-rakuten-ahamo-comparison). If you are still in arrival week, use [First Week in Japan](/en/articles/first-week-japan-setup) to decide what to set up first.
+Compare [povo](/en/mobile/povo2), [LINEMO](/en/mobile/linemo-best-plan), [Rakuten Mobile](/en/mobile/rakuten-saikyo-plan), [ahamo](/en/mobile/ahamo), and [UQ mobile](/en/mobile/uq-mobile), then read [povo, LINEMO, Rakuten Mobile, and ahamo](/en/articles/povo-linemo-rakuten-ahamo-comparison) for the broader decision frame. If you are still in arrival week, use [First Week in Japan](/en/articles/first-week-japan-setup) to decide what to set up first.

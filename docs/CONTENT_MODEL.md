@@ -134,13 +134,10 @@ This document records the current content collections and TypeScript model bound
 
 - `id`
 - `slug`
+- `title`
+- `summary`
 - `prefecture`
 - `city`
-
-**Optional fields:**
-
-- `locale`
-- `translationKey`
 - `stations`
 - `rentLevel`
 - `foodLevel`
@@ -148,6 +145,13 @@ This document records the current content collections and TypeScript model bound
 - `quietness`
 - `recommendedFor`
 - `warnings`
+- `lastCheckedAt`
+- `notes`
+
+**Optional fields:**
+
+- `locale`
+- `translationKey`
 
 **Enum values:**
 
@@ -155,13 +159,16 @@ This document records the current content collections and TypeScript model bound
 
 **Public visibility rules:**
 
-- Current MVP has area index pages only. Phase 1B shows area guide cards for Ikebukuro, Itabashi, Akabane, and Kagurazaka / Edogawabashi.
-- Future area detail pages should only render entries intended for public content.
+- Current MVP has area index pages and area detail pages at `/[locale]/areas/[slug]`.
+- Phase 1B.5 area details render all entries in the static `areas` collection.
+- Area content should remain life-decision-oriented, not sightseeing-oriented.
 
 **Future database mapping notes:**
 
 - Keep locale and `translationKey` available for localized area guides.
 - Consider normalized city, station, and prefecture tables only after content volume makes that worthwhile.
+- Keep `lastCheckedAt` because rent feel, station convenience, and area conditions can become stale.
+- Consider future fields for source URLs and localized editorial notes if area data becomes more formal.
 
 ## MobilePlan
 
@@ -177,15 +184,18 @@ This document records the current content collections and TypeScript model bound
 - `planName`
 - `monthlyPrice`
 - `dataAmount`
+- `paymentRequirements`
 - `residenceCardRequired`
 - `creditCardRequired`
-
-**Optional fields:**
-
-- `paymentRequirements`
 - `pros`
 - `cons`
 - `recommendedFor`
+- `officialUrl`
+- `lastCheckedAt`
+- `sourceNote`
+- `notes`
+
+**Optional fields:** None in the current schema.
 
 **Enum values:** None in the current schema.
 
@@ -193,14 +203,15 @@ This document records the current content collections and TypeScript model bound
 
 - Current mobile index lists all mobile plan entries in the collection.
 - Phase 1B includes povo, LINEMO, Rakuten Mobile, ahamo, and UQ mobile as decision-oriented editorial data.
+- Phase 1B.5 adds mobile detail pages at `/[locale]/mobile/[slug]`.
 - Mobile plan prices, campaigns, data allowances, payment conditions, and identity checks can change. Users must confirm official sites before applying.
-- Future plan details should include update dates because mobile plan information can change quickly.
+- Mobile plan detail pages must show `officialUrl`, `lastCheckedAt`, `sourceNote`, and `notes`.
 
 **Future database mapping notes:**
 
 - Treat pricing and plan conditions as time-sensitive editorial data.
-- Add `updatedAt`, `sourceUrl`, and review workflow fields before publishing serious comparison content.
-- Consider adding `officialUrl`, `lastCheckedAt`, `notes`, and localized caveat fields before turning mobile data into a full comparison product.
+- Consider an editorial review workflow with `reviewedBy`, `nextReviewAt`, and archived historical snapshots before publishing serious comparison content at scale.
+- Add localized caveat fields only when the same plan needs substantially different explanations per locale.
 
 ## Tool
 

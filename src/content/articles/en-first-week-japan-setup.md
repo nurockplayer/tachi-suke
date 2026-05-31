@@ -25,7 +25,7 @@ Your first week in Japan is easier when you stop trying to finish everything at 
 4. Find a supermarket, drugstore, convenience store, and safe meal spots.
 5. Then handle banking, longer-term mobile plans, and procedure-heavy tasks.
 
-Start with the [mobile plan page](/en/mobile) if you need connectivity, and check [area guides](/en/areas) if you are still deciding where to live.
+Start with the [mobile plan page](/en/mobile) if you need connectivity, and check [area guides](/en/areas) if you are still deciding where to live. Use examples like [Ikebukuro](/en/areas/ikebukuro), [Itabashi](/en/areas/itabashi), [Akabane](/en/areas/akabane), and [Kagurazaka / Edogawabashi](/en/areas/kagurazaka-edogawabashi) to compare tradeoffs.
 
 ## What not to rush
 

@@ -3,6 +3,8 @@
   "slug": "ikebukuro",
   "locale": "en",
   "translationKey": "tokyo-ikebukuro",
+  "title": "Ikebukuro Area Guide",
+  "summary": "Ikebukuro is a major Tokyo hub with strong transport, shopping, and food access, but daily comfort depends a lot on exit, street, and noise level.",
   "prefecture": "Tokyo",
   "city": "Toshima",
   "stations": ["Ikebukuro", "Higashi-Ikebukuro", "Kita-Ikebukuro"],
@@ -11,5 +13,11 @@
   "commuteConvenience": "very high",
   "quietness": "mixed",
   "recommendedFor": ["students", "commuters", "people who want many train lines", "people who want late-night food and shopping options"],
-  "warnings": ["Station exits can be confusing.", "Some blocks are noisy at night.", "Rent can jump quickly near major exits."]
+  "warnings": ["Station exits can be confusing.", "Some blocks are noisy at night.", "Rent can jump quickly near major exits."],
+  "lastCheckedAt": "2026-05-31",
+  "notes": [
+    "Rent and noise can change sharply between the east, west, north, and residential-side exits.",
+    "Walk the exact route from station to building at night before signing if you care about quietness.",
+    "Large-station convenience is useful, but daily station navigation can add hidden time."
+  ]
 }

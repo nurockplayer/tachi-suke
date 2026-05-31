@@ -1,0 +1,147 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import { formatDate } from "@/lib/content";
+import { locales, localizePath, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+  area: CollectionEntry<"areas">;
+}
+
+const { locale, area } = Astro.props;
+const data = area.data;
+const alternatePaths = Object.fromEntries(
+  locales.map((alternateLocale) => [alternateLocale, localizePath(alternateLocale, `/areas/${data.slug}`)])
+) as Partial<Record<Locale, string>>;
+const labels = {
+  "zh-tw": {
+    overview: "生活圈概要",
+    prefecture: "都道府縣",
+    city: "城市/行政區",
+    stations: "主要車站",
+    rent: "租金感",
+    food: "生活/外食",
+    commute: "交通",
+    quietness: "安靜度",
+    recommendedFor: "適合誰",
+    warnings: "不適合或需注意",
+    notes: "補充提醒",
+    lastCheckedAt: "最後整理",
+    decisionTitle: "生活決策提醒",
+    decisionText: "地區資訊不是觀光推薦。請用實際通勤路線、夜間路感、租屋條件與生活習慣一起判斷。"
+  },
+  en: {
+    overview: "Area overview",
+    prefecture: "Prefecture",
+    city: "City / ward",
+    stations: "Stations",
+    rent: "Rent feel",
+    food: "Food / daily life",
+    commute: "Commute",
+    quietness: "Quietness",
+    recommendedFor: "Recommended for",
+    warnings: "Not ideal / watchouts",
+    notes: "Notes",
+    lastCheckedAt: "Last checked",
+    decisionTitle: "Life decision note",
+    decisionText: "Area guides are not sightseeing picks. Judge them with your commute, nighttime route, rental conditions, and daily habits."
+  },
+  ja: {
+    overview: "エリア概要",
+    prefecture: "都道府県",
+    city: "市区町村",
+    stations: "主な駅",
+    rent: "家賃感",
+    food: "生活/外食",
+    commute: "交通",
+    quietness: "静かさ",
+    recommendedFor: "向いている人",
+    warnings: "注意点",
+    notes: "補足メモ",
+    lastCheckedAt: "最終整理",
+    decisionTitle: "生活判断のメモ",
+    decisionText: "エリア情報は観光紹介ではありません。実際の通勤経路、夜の雰囲気、賃貸条件、生活習慣と合わせて判断してください。"
+  },
+  ko: {
+    overview: "지역 개요",
+    prefecture: "도도부현",
+    city: "시/구",
+    stations: "주요 역",
+    rent: "월세감",
+    food: "생활/외식",
+    commute: "교통",
+    quietness: "조용함",
+    recommendedFor: "추천 대상",
+    warnings: "주의점",
+    notes: "추가 확인",
+    lastCheckedAt: "마지막 정리",
+    decisionTitle: "생활 결정 메모",
+    decisionText: "지역 가이드는 관광 추천이 아닙니다. 실제 통근 경로, 밤길 분위기, 임대 조건, 생활 습관을 함께 보고 판단하세요."
+  }
+}[locale];
+
+const facts = [
+  [labels.prefecture, data.prefecture],
+  [labels.city, data.city],
+  [labels.stations, data.stations.join(", ")],
+  [labels.rent, data.rentLevel],
+  [labels.food, data.foodLevel],
+  [labels.commute, data.commuteConvenience],
+  [labels.quietness, data.quietness],
+  [labels.lastCheckedAt, formatDate(data.lastCheckedAt, locale)]
+].filter(([, value]) => Boolean(value));
+---
+
+<BaseLayout locale={locale} title={data.title} description={data.summary} alternatePaths={alternatePaths}>
+  <section class="page-hero">
+    <div class="container">
+      <p class="article-meta">{labels.lastCheckedAt} {formatDate(data.lastCheckedAt, locale)}</p>
+      <h1>{data.title}</h1>
+      <p>{data.summary}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2">
+      <article class="notice">
+        <h2>{labels.overview}</h2>
+        <dl class="detail-list">
+          {facts.map(([label, value]) => (
+            <>
+              <dt>{label}</dt>
+              <dd>{value}</dd>
+            </>
+          ))}
+        </dl>
+      </article>
+      <aside class="notice">
+        <h2>{labels.decisionTitle}</h2>
+        <p>{labels.decisionText}</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2">
+      <article class="notice">
+        <h2>{labels.recommendedFor}</h2>
+        <ul class="check-list">
+          {data.recommendedFor.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+      <article class="notice">
+        <h2>{labels.warnings}</h2>
+        <ul class="check-list">
+          {data.warnings.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+      <article class="notice field-full">
+        <h2>{labels.notes}</h2>
+        <ul class="check-list">
+          {data.notes.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

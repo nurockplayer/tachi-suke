@@ -91,6 +91,7 @@ pnpm install
 pnpm dev
 pnpm test
 pnpm build
+pnpm check:links
 pnpm preview
 ```
 
@@ -115,9 +116,11 @@ Current public route pattern:
 - `/[locale]/articles`
 - `/[locale]/articles/[slug]`
 - `/[locale]/areas`
+- `/[locale]/areas/[slug]`
 - `/[locale]/places`
 - `/[locale]/places/[slug]`
 - `/[locale]/mobile`
+- `/[locale]/mobile/[slug]`
 - `/[locale]/tools`
 - `/[locale]/submit-place`
 - `/[locale]/about`
@@ -143,7 +146,17 @@ Phase 1B adds public-preview content depth:
 - Internal links between articles and main locale sections.
 - A conservative Markdown internal-link test.
 
+Phase 1B.5 adds maintainability/detail depth:
+
+- Mobile plan detail pages at `/[locale]/mobile/[slug]`.
+- Area detail pages at `/[locale]/areas/[slug]`.
+- Mobile plan fields: `officialUrl`, `lastCheckedAt`, `sourceNote`, `notes`.
+- Area fields: `title`, `summary`, `lastCheckedAt`, `notes`.
+- Post-build static HTML link checking with `pnpm check:links`.
+- Conservative detail-page locale switcher links that avoid missing generated pages.
+
 Mobile plan prices, campaigns, payment methods, and identity requirements can change. Always phrase mobile data as editorial guidance and remind users to confirm official carrier pages before applying.
+Area rent feel, quietness, and commute convenience can also become stale. Keep area pages date-aware and practical rather than sightseeing-oriented.
 
 Do not implement in Phase 1 unless explicitly requested:
 
@@ -237,9 +250,10 @@ Before reporting completion when possible:
 ```bash
 pnpm test
 pnpm build
+pnpm check:links
 ```
 
-For Phase 1B content work, `pnpm test` should cover content depth and conservative internal link checks. The link check is not a full crawler and does not validate external URLs.
+For Phase 1B/1B.5 content work, `pnpm test` should cover content depth and conservative source-level internal link checks. `pnpm check:links` scans built static HTML in `dist/`, so run `pnpm build` first. It does not validate external URLs, anchors, JavaScript behavior, or visual rendering.
 
 For package or scaffold work, also check that forbidden lockfiles were not introduced:
 

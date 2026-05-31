@@ -47,7 +47,7 @@ const alternates = alternatePaths ?? Object.fromEntries(locales.map((alternateLo
     <meta property="og:site_name" content="TachiSuke" />
   </head>
   <body>
-    <Header locale={locale} currentPath={Astro.url.pathname} />
+    <Header locale={locale} currentPath={Astro.url.pathname} alternatePaths={alternates} />
     <main class="site-main">
       <slot />
     </main>

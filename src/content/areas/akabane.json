@@ -3,6 +3,8 @@
   "slug": "akabane",
   "locale": "en",
   "translationKey": "tokyo-akabane",
+  "title": "Akabane Area Guide",
+  "summary": "Akabane is a practical northern Tokyo base for JR commuters who want food options, shopping, and access toward both central Tokyo and Saitama.",
   "prefecture": "Tokyo",
   "city": "Kita",
   "stations": ["Akabane", "Akabane-Iwabuchi"],
@@ -11,5 +13,11 @@
   "commuteConvenience": "high",
   "quietness": "mixed",
   "recommendedFor": ["commuters using JR lines", "people who want practical shopping and food options", "residents who want access to both Tokyo and Saitama"],
-  "warnings": ["Nightlife areas may be loud.", "Check walking route from the station at night.", "Some trains get crowded during peak commute."]
+  "warnings": ["Nightlife areas may be loud.", "Check walking route from the station at night.", "Some trains get crowded during peak commute."],
+  "lastCheckedAt": "2026-05-31",
+  "notes": [
+    "Rent changes heavily by station distance, building age, room layout, and whether the route crosses busy nightlife blocks.",
+    "Check the late-night atmosphere around the exact exit you will use, not only the station name.",
+    "Commute convenience depends on your destination line and peak-hour crowding."
+  ]
 }

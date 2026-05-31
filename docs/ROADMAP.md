@@ -55,6 +55,31 @@ Rules:
 - Keep translation coverage explicit and avoid silently showing the wrong locale.
 - Treat mobile plan data as editorial guidance. Users must confirm official carrier pages before applying.
 
+## Phase 1B.5: Content Maintainability and Detail Pages
+
+Status: implemented.
+
+Goal:
+
+Make the static content foundation easier to maintain as mobile plan and area content grows.
+
+Implemented:
+
+- Added mobile plan maintenance fields: `officialUrl`, `lastCheckedAt`, `sourceNote`, and `notes`.
+- Added area maintenance fields: `title`, `summary`, `lastCheckedAt`, and `notes`.
+- Added mobile plan detail routes at `/[locale]/mobile/[slug]`.
+- Added area detail routes at `/[locale]/areas/[slug]`.
+- Linked mobile plan cards, area cards, homepage start-here links, and relevant articles to generated detail routes.
+- Added `pnpm check:links` for post-build static HTML root-relative link checks.
+- Updated locale switcher behavior so detail pages do not link to missing article translations.
+
+Rules:
+
+- Continue to treat mobile plan information as date-sensitive editorial guidance.
+- Continue to treat area information as periodically reviewed guidance, not live rent or real-estate data.
+- Keep the site static-first and avoid auth/database work until Phase 2.
+- `pnpm check:links` requires a fresh `pnpm build` first.
+
 ## Phase 1C: Submission Workflow MVP
 
 Status: planned, still no login required.

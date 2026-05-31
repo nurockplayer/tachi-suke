@@ -78,6 +78,8 @@ const requiredFiles = [
   "src/components/places/PlaceCard.astro",
   "src/components/pages/ArticleDetailPage.astro",
   "src/components/pages/PlaceDetailPage.astro",
+  "src/components/pages/MobilePlanDetailPage.astro",
+  "src/components/pages/AreaDetailPage.astro",
   "src/components/mobile/MobilePlanCard.astro",
   "src/components/favorites/FavoriteButtonPlaceholder.astro",
   "src/components/auth/LoginPrompt.astro",
@@ -85,6 +87,7 @@ const requiredFiles = [
   "src/types/article.ts",
   "src/types/place.ts",
   "src/types/mobile-plan.ts",
+  "src/types/area.ts",
   "src/types/favorite.ts",
   "src/types/user.ts",
   "src/types/submission.ts",
@@ -121,6 +124,8 @@ const localePages = [
   "places/index.astro",
   "places/[slug].astro",
   "mobile/index.astro",
+  "mobile/[slug].astro",
+  "areas/[slug].astro",
   "tools/index.astro",
   "submit-place.astro",
   "about.astro",
@@ -156,6 +161,8 @@ describe("TachiSuke project scaffold", () => {
     const packageJson = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));
     assert.match(packageJson.packageManager, /^pnpm@10/);
     assert.equal(packageJson.scripts.preinstall, undefined);
+    assert.equal(packageJson.scripts["check:links"], "node tests/static-html-links.test.mjs");
+    assert.equal(existsSync(join(root, "tests/static-html-links.test.mjs")), true, "static HTML link crawler should exist");
   });
 
   it("defines all required content collections and avoids a fixed production domain", () => {
@@ -213,11 +220,23 @@ describe("TachiSuke project scaffold", () => {
         `mobile plan data should include ${provider}`
       );
     }
+    for (const plan of mobilePlans) {
+      assert.match(plan.officialUrl, /^https:\/\//, `${plan.id} should include an officialUrl`);
+      assert.match(plan.lastCheckedAt, /^\d{4}-\d{2}-\d{2}$/, `${plan.id} should include lastCheckedAt as YYYY-MM-DD`);
+      assert.ok(plan.sourceNote?.length > 20, `${plan.id} should include a useful sourceNote`);
+      assert.ok(Array.isArray(plan.notes) && plan.notes.length >= 2, `${plan.id} should include maintenance notes`);
+    }
 
     const areas = listFiles("src/content/areas", [".json"]).map(readJson);
     assert.ok(areas.length >= 4, "Phase 1B should include at least 4 area guides");
     for (const slug of ["ikebukuro", "itabashi", "akabane", "kagurazaka-edogawabashi"]) {
       assert.ok(areas.some((area) => area.slug === slug), `area guide data should include ${slug}`);
+    }
+    for (const area of areas) {
+      assert.ok(area.title?.length > 4, `${area.id} should include a display title`);
+      assert.ok(area.summary?.length > 40, `${area.id} should include an SEO-ready summary`);
+      assert.match(area.lastCheckedAt, /^\d{4}-\d{2}-\d{2}$/, `${area.id} should include lastCheckedAt as YYYY-MM-DD`);
+      assert.ok(Array.isArray(area.notes) && area.notes.length >= 2, `${area.id} should include area notes`);
     }
   });
 
@@ -243,6 +262,18 @@ describe("TachiSuke project scaffold", () => {
       }
     }
 
+    for (const mobilePlan of listFiles("src/content/mobile-plans", [".json"]).map(readJson)) {
+      for (const locale of locales) {
+        routeSet.add(normalizePath(`/${locale}/mobile/${mobilePlan.slug}`));
+      }
+    }
+
+    for (const area of listFiles("src/content/areas", [".json"]).map(readJson)) {
+      for (const locale of locales) {
+        routeSet.add(normalizePath(`/${locale}/areas/${area.slug}`));
+      }
+    }
+
     for (const relativePath of listFiles("src/content/articles", [".md", ".mdx"])) {
       const file = readFileSync(join(root, relativePath), "utf8");
       const links = [...file.matchAll(/\[[^\]]+\]\((\/[^)\s]+)\)/g)].map((match) => normalizePath(match[1]));
@@ -251,5 +282,13 @@ describe("TachiSuke project scaffold", () => {
         assert.ok(routeSet.has(link), `${relativePath} links to missing internal route ${link}`);
       }
     }
+  });
+
+  it("links mobile and area cards to their generated detail pages", () => {
+    const mobileCard = readFileSync(join(root, "src/components/mobile/MobilePlanCard.astro"), "utf8");
+    assert.match(mobileCard, /localizePath\(locale,\s*`\/mobile\/\$\{slug\}`\)/, "MobilePlanCard should link to mobile detail pages");
+
+    const areasPage = readFileSync(join(root, "src/components/pages/SimpleSectionPage.astro"), "utf8");
+    assert.match(areasPage, /localizePath\(locale,\s*`\/areas\/\$\{area\.data\.slug\}`\)/, "area cards should link to area detail pages");
   });
 });

@@ -5,9 +5,10 @@ import { localizePath, navItems, type Locale } from "@/lib/i18n";
 interface Props {
   locale: Locale;
   currentPath: string;
+  alternatePaths?: Partial<Record<Locale, string>>;
 }
 
-const { locale, currentPath } = Astro.props;
+const { locale, currentPath, alternatePaths } = Astro.props;
 const accountLabel = {
   "zh-tw": "帳號",
   en: "Account",
@@ -31,7 +32,7 @@ const accountLabel = {
       ))}
     </nav>
     <div class="header-tools">
-      <LocaleSwitcher locale={locale} currentPath={currentPath} />
+      <LocaleSwitcher locale={locale} currentPath={currentPath} alternatePaths={alternatePaths} />
       <a class="button-secondary" href={localizePath(locale, "/account/login")}>{accountLabel}</a>
     </div>
   </div>

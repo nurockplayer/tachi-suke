@@ -10,5 +10,13 @@
   "creditCardRequired": false,
   "pros": ["docomo network", "simple 30GB base plan", "5-minute domestic calls included with exceptions", "overseas data allowance is included within stated conditions"],
   "cons": ["online-focused support", "not the cheapest if you use very little data", "optional services and campaign conditions can change"],
-  "recommendedFor": ["medium data users", "people who want a simple docomo-brand online plan", "users who value short domestic calls and overseas data conditions"]
+  "recommendedFor": ["medium data users", "people who want a simple docomo-brand online plan", "users who value short domestic calls and overseas data conditions"],
+  "officialUrl": "https://ahamo.com/plan/index.html",
+  "lastCheckedAt": "2026-05-31",
+  "sourceNote": "Official website information summarized for comparison; confirm the latest terms before applying.",
+  "notes": [
+    "Prices, campaigns, identity verification, and included call conditions can change.",
+    "Check eSIM, physical SIM, overseas data, and support conditions on the official site before applying.",
+    "Payment and document requirements may differ by signup flow and user status."
+  ]
 }

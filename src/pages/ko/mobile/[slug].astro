@@ -1,0 +1,17 @@
+---
+import { getCollection } from "astro:content";
+import MobilePlanDetailPage from "@/components/pages/MobilePlanDetailPage.astro";
+
+export async function getStaticPaths() {
+  const plans = await getCollection("mobile-plans");
+
+  return plans.map((plan) => ({
+    params: { slug: plan.data.slug },
+    props: { plan }
+  }));
+}
+
+const { plan } = Astro.props;
+---
+
+<MobilePlanDetailPage locale="ko" plan={plan} />

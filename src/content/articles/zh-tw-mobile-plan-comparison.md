@@ -25,13 +25,13 @@ draft: false
 
 - 還沒有日本信用卡：先確認是否可用口座振替、金融卡、Paidy 或其他方式。
 - 需要穩定通勤收訊：優先確認常去地區與通勤路線。
-- 資料量很不固定：povo 或 Rakuten Mobile 這類彈性方案值得比較。
+- 資料量很不固定：[povo](/zh-tw/mobile/povo2) 或 [Rakuten Mobile](/zh-tw/mobile/rakuten-saikyo-plan) 這類彈性方案值得比較。
 - 常打電話：看 5 分、10 分或 app 通話是否符合你的用法。
 - 不想跑門市：選能線上申請、支援 eSIM 的方案。
 
 ## 方案方向怎麼看
 
-povo 適合願意自己買 topping、每月用量變化大的人。LINEMO 適合想要 SoftBank 網路、線上申請、資料量中低的人。Rakuten Mobile 適合資料用量大、能接受先查收訊的人。ahamo 適合想要簡單固定容量、重視 docomo 網路和海外資料的人。
+[povo](/zh-tw/mobile/povo2) 適合願意自己買 topping、每月用量變化大的人。[LINEMO](/zh-tw/mobile/linemo-best-plan) 適合想要 SoftBank 網路、線上申請、資料量中低的人。[Rakuten Mobile](/zh-tw/mobile/rakuten-saikyo-plan) 適合資料用量大、能接受先查收訊的人。[ahamo](/zh-tw/mobile/ahamo) 適合想要簡單固定容量、重視 docomo 網路和海外資料的人。如果你想要門市支援或 au 系列副品牌，也可以把 [UQ mobile](/zh-tw/mobile/uq-mobile) 放進候選清單。
 
 價格、活動和申請條件會變動，申請前一定要回官方網站確認最新資訊。
 

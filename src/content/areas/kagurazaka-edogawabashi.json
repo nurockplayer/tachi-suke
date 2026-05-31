@@ -3,6 +3,8 @@
   "slug": "kagurazaka-edogawabashi",
   "locale": "en",
   "translationKey": "tokyo-kagurazaka-edogawabashi",
+  "title": "Kagurazaka / Edogawabashi Area Guide",
+  "summary": "Kagurazaka and Edogawabashi offer a calmer central Tokyo lifestyle with cafes, small restaurants, and walkability, but rent and slopes need careful checking.",
   "prefecture": "Tokyo",
   "city": "Shinjuku / Bunkyo",
   "stations": ["Kagurazaka", "Edogawabashi", "Iidabashi"],
@@ -11,5 +13,11 @@
   "commuteConvenience": "high",
   "quietness": "medium-high",
   "recommendedFor": ["people who want a calmer central area", "commuters to Iidabashi or central Tokyo", "residents who value cafes, small restaurants, and walkability"],
-  "warnings": ["Rent is usually higher than outer northern areas.", "Older buildings and narrow streets require careful viewing.", "Slope and walking distance matter more than they look on a map."]
+  "warnings": ["Rent is usually higher than outer northern areas.", "Older buildings and narrow streets require careful viewing.", "Slope and walking distance matter more than they look on a map."],
+  "lastCheckedAt": "2026-05-31",
+  "notes": [
+    "Actual rent can change widely by street, building age, nearest station, and slope or staircase access.",
+    "The area feels calm compared with major hubs, but restaurant streets and event timing can change foot traffic.",
+    "Test the walk with groceries or luggage in mind because slopes and narrow streets matter in daily life."
+  ]
 }

@@ -10,5 +10,13 @@
   "creditCardRequired": false,
   "pros": ["au network", "shop support available", "clear mid-data option", "domestic calls up to 10 minutes included on this plan with exceptions"],
   "cons": ["discount conditions can be complex", "not always the lowest headline price", "store and online application conditions may differ"],
-  "recommendedFor": ["people who want carrier-sub-brand stability", "users who prefer having store support", "medium data users who also make short calls"]
+  "recommendedFor": ["people who want carrier-sub-brand stability", "users who prefer having store support", "medium data users who also make short calls"],
+  "officialUrl": "https://www.uqwimax.jp/mobile/plan/",
+  "lastCheckedAt": "2026-05-31",
+  "sourceNote": "Official website information summarized for comparison; confirm the latest plan and discount terms before applying.",
+  "notes": [
+    "Prices, discounts, data capacity, call inclusion, and campaign conditions can change.",
+    "Confirm whether online shop and in-store signup requirements differ before applying.",
+    "Shop support can help some newcomers, but discount and bundle conditions require careful checking."
+  ]
 }

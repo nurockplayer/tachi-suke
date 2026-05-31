@@ -53,6 +53,8 @@ const areas = defineCollection({
     slug: z.string(),
     locale: localeSchema.optional(),
     translationKey: z.string().optional(),
+    title: z.string(),
+    summary: z.string(),
     prefecture: z.string(),
     city: z.string(),
     stations: z.array(z.string()).default([]),
@@ -61,7 +63,9 @@ const areas = defineCollection({
     commuteConvenience: z.string().optional(),
     quietness: z.string().optional(),
     recommendedFor: z.array(z.string()).default([]),
-    warnings: z.array(z.string()).default([])
+    warnings: z.array(z.string()).default([]),
+    lastCheckedAt: z.coerce.date(),
+    notes: z.array(z.string()).default([])
   })
 });
 
@@ -79,7 +83,11 @@ const mobilePlans = defineCollection({
     creditCardRequired: z.boolean(),
     pros: z.array(z.string()).default([]),
     cons: z.array(z.string()).default([]),
-    recommendedFor: z.array(z.string()).default([])
+    recommendedFor: z.array(z.string()).default([]),
+    officialUrl: z.url(),
+    lastCheckedAt: z.coerce.date(),
+    sourceNote: z.string(),
+    notes: z.array(z.string()).default([])
   })
 });
 
