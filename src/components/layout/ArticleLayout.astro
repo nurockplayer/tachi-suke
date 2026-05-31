@@ -1,0 +1,39 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import { formatDate } from "@/lib/content";
+import type { Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+  category: string;
+  tags: string[];
+  publishedAt: Date;
+  updatedAt: Date;
+}
+
+const { locale, title, description, category, tags, publishedAt, updatedAt } = Astro.props;
+const updatedLabel = {
+  "zh-tw": "更新",
+  en: "Updated",
+  ja: "更新",
+  ko: "업데이트"
+}[locale];
+---
+
+<BaseLayout locale={locale} title={title} description={description}>
+  <article class="article-shell narrow">
+    <header class="article-header">
+      <p class="article-meta">{category} · {formatDate(publishedAt, locale)} · {updatedLabel} {formatDate(updatedAt, locale)}</p>
+      <h1>{title}</h1>
+      <p>{description}</p>
+      <ul class="tag-list" aria-label="Tags">
+        {tags.map((tag) => <li>{tag}</li>)}
+      </ul>
+    </header>
+    <div class="article-body">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>

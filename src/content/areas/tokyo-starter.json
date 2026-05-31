@@ -1,0 +1,15 @@
+{
+  "id": "area-tokyo-starter",
+  "slug": "tokyo-starter-areas",
+  "locale": "en",
+  "translationKey": "tokyo-starter-areas",
+  "prefecture": "Tokyo",
+  "city": "Tokyo",
+  "stations": ["Ikebukuro", "Nakano", "Kitasenju"],
+  "rentLevel": "medium",
+  "foodLevel": "high",
+  "commuteConvenience": "high",
+  "quietness": "mixed",
+  "recommendedFor": ["new residents", "students", "commuters"],
+  "warnings": ["Check commute direction and last train times before signing a lease."]
+}

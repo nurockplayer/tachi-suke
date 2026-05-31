@@ -1,0 +1,49 @@
+---
+import Header from "./Header.astro";
+import Footer from "./Footer.astro";
+import { getPageTitle, htmlLangByLocale, locales, localizePath, type Locale } from "@/lib/i18n";
+import "@/styles/global.css";
+
+interface Props {
+  locale: Locale;
+  title?: string;
+  description: string;
+}
+
+const { locale, title, description } = Astro.props;
+const site = Astro.site ?? new URL(Astro.url.origin);
+const pageTitle = getPageTitle(locale, title);
+const canonical = new URL(Astro.url.pathname, site);
+const pathWithoutLocale = Astro.url.pathname.replace(/^\/(zh-tw|en|ja|ko)/, "") || "/";
+---
+
+<!doctype html>
+<html lang={htmlLangByLocale[locale]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={canonical.href} />
+    {locales.map((alternateLocale) => (
+      <link
+        rel="alternate"
+        hreflang={htmlLangByLocale[alternateLocale]}
+        href={new URL(localizePath(alternateLocale, pathWithoutLocale), site).href}
+      />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={new URL(localizePath("en", pathWithoutLocale), site).href} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+  </head>
+  <body>
+    <Header locale={locale} currentPath={Astro.url.pathname} />
+    <main class="site-main">
+      <slot />
+    </main>
+    <Footer locale={locale} />
+  </body>
+</html>

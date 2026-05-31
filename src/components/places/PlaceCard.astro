@@ -1,0 +1,47 @@
+---
+interface Props {
+  place: {
+    data?: {
+      name: string;
+      category: string;
+      prefecture: string;
+      city: string;
+      area: string;
+      station: string;
+      priceRange: string;
+      soloFriendly: string;
+      nonSmokingStatus: string;
+      japaneseDifficulty: string;
+      paymentMethods: string[];
+      officialUrl?: string;
+    };
+    name?: string;
+    category?: string;
+    prefecture?: string;
+    city?: string;
+    area?: string;
+    station?: string;
+    priceRange?: string;
+    soloFriendly?: string;
+    nonSmokingStatus?: string;
+    japaneseDifficulty?: string;
+    paymentMethods?: string[];
+    officialUrl?: string;
+  };
+}
+
+const { place } = Astro.props;
+const data = place.data ?? place;
+---
+
+<article class="place-card">
+  <h3>{data.name}</h3>
+  <p>{data.category} · {data.area} · {data.station}</p>
+  <div class="place-tags" aria-label="Place facts">
+    <span>{data.priceRange}</span>
+    <span>Solo: {data.soloFriendly}</span>
+    <span>Non-smoking: {data.nonSmokingStatus}</span>
+    <span>JP: {data.japaneseDifficulty}</span>
+  </div>
+  {data.officialUrl && <p><a class="text-link" href={data.officialUrl}>Official site</a></p>}
+</article>

@@ -1,0 +1,22 @@
+---
+import { localeNames, locales, localizePath, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+  currentPath: string;
+}
+
+const { locale, currentPath } = Astro.props;
+const pathWithoutLocale = currentPath.replace(/^\/(zh-tw|en|ja|ko)/, "") || "/";
+---
+
+<nav class="locale-switcher" aria-label="Language">
+  {locales.map((targetLocale) => (
+    <a
+      href={localizePath(targetLocale, pathWithoutLocale)}
+      aria-current={targetLocale === locale ? "true" : undefined}
+    >
+      {localeNames[targetLocale]}
+    </a>
+  ))}
+</nav>

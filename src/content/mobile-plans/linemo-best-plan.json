@@ -1,0 +1,14 @@
+{
+  "id": "mobile-linemo-best",
+  "slug": "linemo-best-plan",
+  "provider": "LINEMO",
+  "planName": "Best Plan",
+  "monthlyPrice": "from ¥990",
+  "dataAmount": "3GB to 10GB tier",
+  "paymentRequirements": ["credit_card", "bank_transfer_limited"],
+  "residenceCardRequired": true,
+  "creditCardRequired": false,
+  "pros": ["online signup", "SoftBank network", "simple pricing"],
+  "cons": ["limited in-store support"],
+  "recommendedFor": ["light data users", "people who prefer online setup"]
+}

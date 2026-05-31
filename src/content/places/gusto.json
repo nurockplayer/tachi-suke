@@ -1,0 +1,21 @@
+{
+  "id": "place-gusto",
+  "slug": "gusto",
+  "name": "Gusto",
+  "category": "family-restaurant",
+  "prefecture": "Tokyo",
+  "city": "Multiple cities",
+  "area": "Multiple areas",
+  "station": "Varies by branch",
+  "googleMapUrl": "https://www.google.com/maps/search/Gusto+Japan",
+  "officialUrl": "https://www.skylark.co.jp/gusto/",
+  "priceRange": "¥600-¥1,800",
+  "soloFriendly": "yes",
+  "nonSmokingStatus": "yes",
+  "japaneseDifficulty": "low",
+  "paymentMethods": ["cash", "credit_card", "transportation_ic", "qr_payment"],
+  "source": "editorial",
+  "status": "published",
+  "createdAt": "2026-05-31",
+  "updatedAt": "2026-05-31"
+}

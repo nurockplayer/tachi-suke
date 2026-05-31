@@ -1,0 +1,33 @@
+---
+interface Props {
+  plan: {
+    data?: {
+      provider: string;
+      planName: string;
+      monthlyPrice: string;
+      dataAmount: string;
+      recommendedFor: string[];
+    };
+    provider?: string;
+    planName?: string;
+    monthlyPrice?: string;
+    dataAmount?: string;
+    recommendedFor?: string[];
+  };
+}
+
+const { plan } = Astro.props;
+const data = plan.data ?? plan;
+---
+
+<article class="mobile-card">
+  <h3>{data.provider}</h3>
+  <p><strong>{data.planName}</strong></p>
+  <ul class="facts">
+    <li><span>{data.monthlyPrice}</span></li>
+    <li><span>{data.dataAmount}</span></li>
+  </ul>
+  {data.recommendedFor && data.recommendedFor.length > 0 && (
+    <p>{data.recommendedFor.join(", ")}</p>
+  )}
+</article>

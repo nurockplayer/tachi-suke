@@ -1,0 +1,21 @@
+{
+  "id": "place-royal-host",
+  "slug": "royal-host",
+  "name": "Royal Host",
+  "category": "family-restaurant",
+  "prefecture": "Tokyo",
+  "city": "Multiple cities",
+  "area": "Multiple areas",
+  "station": "Varies by branch",
+  "googleMapUrl": "https://www.google.com/maps/search/Royal+Host+Japan",
+  "officialUrl": "https://www.royalhost.jp/",
+  "priceRange": "¥1,000-¥2,500",
+  "soloFriendly": "mixed",
+  "nonSmokingStatus": "yes",
+  "japaneseDifficulty": "low",
+  "paymentMethods": ["cash", "credit_card", "transportation_ic", "qr_payment"],
+  "source": "editorial",
+  "status": "published",
+  "createdAt": "2026-05-31",
+  "updatedAt": "2026-05-31"
+}

@@ -1,0 +1,39 @@
+---
+import { localizePath, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = {
+  "zh-tw": {
+    title: "登入功能未來會開放",
+    body: "第一版先提供公開內容與收藏 placeholder。未來登入後可以保存文章、店家、手機方案、地區與工具。",
+    cta: "查看收藏 placeholder"
+  },
+  en: {
+    title: "Login will be available later",
+    body: "The MVP keeps public content open and shows favorite placeholders. Later, logged-in users can save articles, places, mobile plans, areas, and tools.",
+    cta: "View favorites placeholder"
+  },
+  ja: {
+    title: "ログイン機能は今後追加予定です",
+    body: "第一版では公開コンテンツと保存機能の placeholder を用意します。将来は記事、お店、携帯プラン、エリア、ツールを保存できます。",
+    cta: "保存機能 placeholder を見る"
+  },
+  ko: {
+    title: "로그인 기능은 추후 제공됩니다",
+    body: "MVP에서는 공개 콘텐츠와 저장 placeholder를 제공합니다. 이후 로그인 사용자는 글, 장소, 휴대폰 요금제, 지역, 도구를 저장할 수 있습니다.",
+    cta: "저장 placeholder 보기"
+  }
+}[locale];
+---
+
+<aside class="notice">
+  <h2>{copy.title}</h2>
+  <p>{copy.body}</p>
+  <div class="inline-actions">
+    <a class="button-secondary" href={localizePath(locale, "/account/favorites")}>{copy.cta}</a>
+  </div>
+</aside>

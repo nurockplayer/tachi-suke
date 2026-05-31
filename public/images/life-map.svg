@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-label="Japan life decision map">
+  <rect width="1200" height="520" fill="#f7faf9"/>
+  <path d="M70 360C190 245 280 430 390 312c91-98 168-184 282-92 95 77 139 189 248 128 91-51 104-181 215-170" fill="none" stroke="#d7e5df" stroke-width="22" stroke-linecap="round"/>
+  <path d="M92 365C212 250 292 410 398 304c99-99 168-172 276-86 94 75 139 178 240 121 94-53 108-169 216-161" fill="none" stroke="#7fb39c" stroke-width="4" stroke-linecap="round" stroke-dasharray="14 18"/>
+  <g fill="#17324d">
+    <circle cx="192" cy="296" r="10"/>
+    <circle cx="404" cy="302" r="10"/>
+    <circle cx="672" cy="219" r="10"/>
+    <circle cx="914" cy="339" r="10"/>
+    <circle cx="1128" cy="178" r="10"/>
+  </g>
+  <g fill="#ffffff" stroke="#b9cec5" stroke-width="2">
+    <rect x="136" y="210" width="150" height="58" rx="8"/>
+    <rect x="340" y="344" width="160" height="58" rx="8"/>
+    <rect x="592" y="132" width="170" height="58" rx="8"/>
+    <rect x="832" y="378" width="166" height="58" rx="8"/>
+    <rect x="1034" y="98" width="132" height="58" rx="8"/>
+  </g>
+  <g font-family="Hiragino Sans, Noto Sans, sans-serif" font-size="22" font-weight="700" fill="#17324d">
+    <text x="170" y="247">Mobile</text>
+    <text x="382" y="381">Housing</text>
+    <text x="633" y="169">Areas</text>
+    <text x="879" y="415">Places</text>
+    <text x="1070" y="135">Tools</text>
+  </g>
+  <circle cx="1010" cy="138" r="34" fill="#e15f3f" opacity=".16"/>
+  <circle cx="103" cy="428" r="40" fill="#7fa7c7" opacity=".16"/>
+</svg>

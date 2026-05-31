@@ -1,0 +1,28 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import { localeNames, locales, localizePath } from "@/lib/i18n";
+---
+
+<BaseLayout
+  locale="en"
+  title="TachiSuke"
+  description="Choose a language for TachiSuke, a multilingual life decision assistant for living in Japan."
+>
+  <section class="hero">
+    <div class="container">
+      <h1>TachiSuke</h1>
+      <p>A multilingual life decision assistant for living in Japan.</p>
+      <div class="grid grid-4" style="margin-top: 28px;">
+        {locales.map((locale) => (
+          <a class="category-card" href={localizePath(locale)}>
+            <span>
+              <h2>{localeNames[locale]}</h2>
+              <p>{locale === "zh-tw" ? "幫你在日本站穩生活。" : locale === "en" ? "Start in English." : locale === "ja" ? "日本語で読む。" : "한국어로 보기."}</p>
+            </span>
+            <span class="card-arrow" aria-hidden="true">›</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

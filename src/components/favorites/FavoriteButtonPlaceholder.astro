@@ -1,0 +1,20 @@
+---
+import type { Locale } from "@/lib/i18n";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = "zh-tw" } = Astro.props;
+const labels = {
+  "zh-tw": "收藏功能準備中",
+  en: "Favorites coming soon",
+  ja: "保存機能は準備中です",
+  ko: "저장 기능 준비 중"
+};
+---
+
+<button class="favorite-placeholder" type="button" disabled data-default-label="收藏功能準備中">
+  <span aria-hidden="true">♡</span>
+  {labels[locale]}
+</button>

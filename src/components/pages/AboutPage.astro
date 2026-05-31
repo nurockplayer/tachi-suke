@@ -1,0 +1,28 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import { sectionCopy, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const title = sectionCopy[locale].aboutTitle;
+---
+
+<BaseLayout locale={locale} title={title} description={title}>
+  <section class="page-hero">
+    <div class="container">
+      <h1>{title}</h1>
+      <p>{locale === "zh-tw" ? "TachiSuke 是幫助外國居民在日本做生活決策的多語系資訊站。" : locale === "en" ? "TachiSuke helps foreign residents make practical daily-life decisions in Japan." : locale === "ja" ? "TachiSuke は、日本で暮らす外国人の実用的な判断を支える多言語情報サイトです。" : "TachiSuke는 일본에 사는 외국인의 실질적인 생활 결정을 돕는 다국어 정보 사이트입니다."}</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="narrow article-body">
+      <h2>{locale === "zh-tw" ? "我們重視什麼" : locale === "en" ? "What we care about" : locale === "ja" ? "大切にしていること" : "중요하게 생각하는 것"}</h2>
+      <p>{locale === "zh-tw" ? "我們偏好比較、清單、實際提醒與外國居民友善的說明，不追求泛泛的旅遊內容。" : locale === "en" ? "We prefer comparisons, checklists, practical warnings, and foreign-resident-friendly explanations over generic travel content." : locale === "ja" ? "一般的な観光情報ではなく、比較、チェックリスト、実用的な注意点、外国人にもわかりやすい説明を重視します。" : "일반 여행 정보보다 비교, 체크리스트, 실용적인 주의점, 외국인 거주자에게 쉬운 설명을 중시합니다."}</p>
+      <h2>{locale === "zh-tw" ? "第一版狀態" : locale === "en" ? "MVP status" : locale === "ja" ? "第一版の状態" : "MVP 상태"}</h2>
+      <p>{locale === "zh-tw" ? "目前以靜態內容、多語系路由、SEO、投稿表單 UI 與未來帳號架構為主。" : locale === "en" ? "The MVP focuses on static content, multilingual routing, SEO, submission form UI, and future account architecture." : locale === "ja" ? "現在は静的コンテンツ、多言語ルーティング、SEO、投稿フォーム UI、将来のアカウント構成を中心にしています。" : "현재는 정적 콘텐츠, 다국어 라우팅, SEO, 추천 폼 UI, 향후 계정 구조에 집중합니다."}</p>
+    </div>
+  </section>
+</BaseLayout>

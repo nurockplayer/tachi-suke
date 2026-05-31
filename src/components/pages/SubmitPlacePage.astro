@@ -1,0 +1,168 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import { localeNames, sectionCopy, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const title = sectionCopy[locale].submitTitle;
+const labels = {
+  "zh-tw": {
+    intro: "第一版表單尚未送出資料。未來投稿會先進入審核，不會直接公開。",
+    review: "投稿不會直接公開，投稿需要審核。Email 不會公開。不要填寫他人個資。店家資訊可能會由站長整理後發布。",
+    submit: "送出功能準備中"
+  },
+  en: {
+    intro: "This MVP form does not submit data yet. Future submissions will enter review and will not publish directly.",
+    review: "Submissions are not published directly. They require moderation. Email will not be public. Do not submit other people's personal information. Place information may be edited and normalized before publishing.",
+    submit: "Submission coming soon"
+  },
+  ja: {
+    intro: "第一版のフォームはまだ送信されません。将来の投稿は審査され、直接公開されません。",
+    review: "投稿は直接公開されず、審査が必要です。メールアドレスは公開されません。他人の個人情報を書かないでください。店舗情報は管理者が整理して公開する場合があります。",
+    submit: "送信機能は準備中です"
+  },
+  ko: {
+    intro: "MVP 폼은 아직 데이터를 전송하지 않습니다. 향후 추천은 검토 후 게시되며 바로 공개되지 않습니다.",
+    review: "추천은 바로 공개되지 않고 검토가 필요합니다. 이메일은 공개되지 않습니다. 타인의 개인정보를 입력하지 마세요. 장소 정보는 운영자가 정리한 뒤 게시할 수 있습니다.",
+    submit: "제출 기능 준비 중"
+  }
+}[locale];
+
+const field = {
+  language: locale === "zh-tw" ? "投稿語言" : locale === "en" ? "Submission language" : locale === "ja" ? "投稿言語" : "추천 언어",
+  name: locale === "zh-tw" ? "店家名稱" : locale === "en" ? "Place name" : locale === "ja" ? "お店の名前" : "장소 이름",
+  category: locale === "zh-tw" ? "分類" : locale === "en" ? "Category" : locale === "ja" ? "カテゴリ" : "카테고리",
+  prefecture: locale === "zh-tw" ? "都道府縣" : locale === "en" ? "Prefecture" : locale === "ja" ? "都道府県" : "도도부현",
+  city: locale === "zh-tw" ? "城市" : locale === "en" ? "City" : locale === "ja" ? "市区町村" : "도시",
+  area: locale === "zh-tw" ? "地區" : locale === "en" ? "Area" : locale === "ja" ? "エリア" : "지역",
+  station: locale === "zh-tw" ? "最近車站" : locale === "en" ? "Nearest station" : locale === "ja" ? "最寄り駅" : "가까운 역",
+  maps: locale === "zh-tw" ? "Google Maps URL" : "Google Maps URL",
+  official: locale === "zh-tw" ? "官方網站 URL" : locale === "en" ? "Official URL" : locale === "ja" ? "公式サイト URL" : "공식 URL",
+  reason: locale === "zh-tw" ? "推薦理由" : locale === "en" ? "Recommendation reason" : locale === "ja" ? "おすすめ理由" : "추천 이유",
+  price: locale === "zh-tw" ? "價格帶" : locale === "en" ? "Price range" : locale === "ja" ? "価格帯" : "가격대",
+  solo: locale === "zh-tw" ? "單人友善程度" : locale === "en" ? "Solo-friendly status" : locale === "ja" ? "一人利用しやすさ" : "혼자 이용하기",
+  smoke: locale === "zh-tw" ? "禁菸狀態" : locale === "en" ? "Non-smoking status" : locale === "ja" ? "禁煙状況" : "금연 상태",
+  japanese: locale === "zh-tw" ? "日文難度" : locale === "en" ? "Japanese difficulty" : locale === "ja" ? "日本語の難しさ" : "일본어 난이도",
+  payment: locale === "zh-tw" ? "付款方式" : locale === "en" ? "Payment methods" : locale === "ja" ? "支払い方法" : "결제 방법",
+  nickname: locale === "zh-tw" ? "投稿者暱稱" : locale === "en" ? "Submitter nickname" : locale === "ja" ? "投稿者ニックネーム" : "추천자 닉네임",
+  email: locale === "zh-tw" ? "Email（選填）" : locale === "en" ? "Email (optional)" : locale === "ja" ? "メール（任意）" : "이메일 (선택)"
+};
+---
+
+<BaseLayout locale={locale} title={title} description={labels.intro}>
+  <section class="page-hero">
+    <div class="container">
+      <h1>{title}</h1>
+      <p>{labels.intro}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2">
+      <aside class="notice">
+        <h2>{locale === "zh-tw" ? "投稿前請確認" : locale === "en" ? "Before submitting" : locale === "ja" ? "投稿前の確認" : "추천 전 확인"}</h2>
+        <p>{labels.review}</p>
+      </aside>
+      <form class="form-panel" aria-label={title}>
+        <div class="form-grid">
+          <div class="field">
+            <label for="submission-language">{field.language}</label>
+            <select id="submission-language" name="submissionLanguage">
+              <option value={locale}>{localeNames[locale]}</option>
+              <option value="zh-tw">繁體中文</option>
+              <option value="en">English</option>
+              <option value="ja">日本語</option>
+              <option value="ko">한국어</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="place-name">{field.name}</label>
+            <input id="place-name" name="placeName" type="text" />
+          </div>
+          <div class="field">
+            <label for="category">{field.category}</label>
+            <input id="category" name="category" type="text" />
+          </div>
+          <div class="field">
+            <label for="prefecture">{field.prefecture}</label>
+            <input id="prefecture" name="prefecture" type="text" />
+          </div>
+          <div class="field">
+            <label for="city">{field.city}</label>
+            <input id="city" name="city" type="text" />
+          </div>
+          <div class="field">
+            <label for="area">{field.area}</label>
+            <input id="area" name="area" type="text" />
+          </div>
+          <div class="field">
+            <label for="station">{field.station}</label>
+            <input id="station" name="station" type="text" />
+          </div>
+          <div class="field">
+            <label for="maps">{field.maps}</label>
+            <input id="maps" name="googleMapUrl" type="url" />
+          </div>
+          <div class="field">
+            <label for="official">{field.official}</label>
+            <input id="official" name="officialUrl" type="url" />
+          </div>
+          <div class="field">
+            <label for="price">{field.price}</label>
+            <input id="price" name="priceRange" type="text" />
+          </div>
+          <div class="field">
+            <label for="solo">{field.solo}</label>
+            <select id="solo" name="soloFriendly">
+              <option value="unknown">Unknown</option>
+              <option value="yes">Yes</option>
+              <option value="mixed">Mixed</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="smoke">{field.smoke}</label>
+            <select id="smoke" name="nonSmokingStatus">
+              <option value="unknown">Unknown</option>
+              <option value="yes">Yes</option>
+              <option value="partial">Partial</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="japanese">{field.japanese}</label>
+            <select id="japanese" name="japaneseDifficulty">
+              <option value="unknown">Unknown</option>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="payment">{field.payment}</label>
+            <input id="payment" name="paymentMethods" type="text" />
+          </div>
+          <div class="field">
+            <label for="nickname">{field.nickname}</label>
+            <input id="nickname" name="submitterNickname" type="text" />
+          </div>
+          <div class="field">
+            <label for="email">{field.email}</label>
+            <input id="email" name="submitterEmail" type="email" />
+          </div>
+          <div class="field field-full">
+            <label for="reason">{field.reason}</label>
+            <textarea id="reason" name="recommendationReason"></textarea>
+            <span class="help-text">{labels.review}</span>
+          </div>
+        </div>
+        <div class="inline-actions">
+          <button class="button-link submit-disabled" type="button" disabled>{labels.submit}</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</BaseLayout>

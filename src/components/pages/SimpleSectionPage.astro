@@ -1,0 +1,50 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import CategoryCard from "@/components/content/CategoryCard.astro";
+import { localizePath, sectionCopy, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+  section: "areas" | "tools";
+}
+
+const { locale, section } = Astro.props;
+const isAreas = section === "areas";
+const title = isAreas ? sectionCopy[locale].areasTitle : sectionCopy[locale].toolsTitle;
+const description = isAreas
+  ? {
+      "zh-tw": "未來會整理東京、大阪、福岡等城市與生活圈的租金、交通、安靜度與適合族群。",
+      en: "Future guides will compare cities and neighborhoods by rent, commute, quietness, and fit.",
+      ja: "東京、大阪、福岡などのエリアを家賃、通勤、静かさ、向いている人で整理します。",
+      ko: "도쿄, 오사카, 후쿠오카 등 지역을 월세, 통근, 조용함, 적합한 사람 기준으로 정리합니다."
+    }[locale]
+  : {
+      "zh-tw": "未來會提供搬家清單、手機方案比較、租屋費用試算與行政流程工具。",
+      en: "Future tools will include moving checklists, mobile comparisons, rent cost calculators, and procedure guides.",
+      ja: "引っ越しチェックリスト、携帯比較、賃貸費用計算、手続きガイドを追加予定です。",
+      ko: "이사 체크리스트, 휴대폰 비교, 임대 비용 계산, 행정 절차 도구를 추가할 예정입니다."
+    }[locale];
+---
+
+<BaseLayout locale={locale} title={title} description={description}>
+  <section class="page-hero">
+    <div class="container">
+      <h1>{title}</h1>
+      <p>{description}</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container grid grid-2">
+      <CategoryCard
+        href={localizePath(locale, isAreas ? "/articles" : "/mobile")}
+        title={isAreas ? (locale === "zh-tw" ? "先看生活文章" : locale === "en" ? "Start with articles" : locale === "ja" ? "まず記事を見る" : "먼저 글 보기") : (locale === "zh-tw" ? "先看手機比較" : locale === "en" ? "Start with mobile comparisons" : locale === "ja" ? "まず携帯比較を見る" : "먼저 휴대폰 비교 보기")}
+        description={description}
+      />
+      <CategoryCard
+        href={localizePath(locale, "/submit-place")}
+        title={locale === "zh-tw" ? "推薦實用地點" : locale === "en" ? "Suggest a useful place" : locale === "ja" ? "役立つ場所を投稿" : "유용한 장소 추천"}
+        description={locale === "zh-tw" ? "你的經驗可以幫助下一個剛到日本的人。" : locale === "en" ? "Your practical notes can help the next newcomer." : locale === "ja" ? "あなたの実用的な経験が次の人の助けになります。" : "당신의 실용적인 경험이 다음 사람에게 도움이 됩니다."}
+      />
+    </div>
+  </section>
+</BaseLayout>

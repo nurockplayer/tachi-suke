@@ -1,0 +1,31 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import PlaceCard from "@/components/places/PlaceCard.astro";
+import { localizePath, sectionCopy, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const title = sectionCopy[locale].placesTitle;
+const places = (await getCollection("places")).filter((place) => place.data.status === "published");
+---
+
+<BaseLayout locale={locale} title={title} description={`${title} | TachiSuke`}>
+  <section class="page-hero">
+    <div class="container">
+      <h1>{title}</h1>
+      <p>{locale === "zh-tw" ? "收集外國居民友善、適合日常使用的餐廳、咖啡廳、商店與生活場所。" : locale === "en" ? "Resident-friendly restaurants, cafes, shops, and everyday places in Japan." : locale === "ja" ? "外国人にも使いやすい、日常利用向けのお店を整理します。" : "외국인 거주자도 이용하기 쉬운 일상 장소를 정리합니다."}</p>
+      <div class="inline-actions">
+        <a class="button-link" href={localizePath(locale, "/submit-place")}>{sectionCopy[locale].submitTitle}</a>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container grid grid-3">
+      {places.map((place) => <PlaceCard place={place} />)}
+    </div>
+  </section>
+</BaseLayout>

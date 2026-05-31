@@ -1,0 +1,38 @@
+---
+import LocaleSwitcher from "./LocaleSwitcher.astro";
+import { localizePath, navItems, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+  currentPath: string;
+}
+
+const { locale, currentPath } = Astro.props;
+const accountLabel = {
+  "zh-tw": "帳號",
+  en: "Account",
+  ja: "アカウント",
+  ko: "계정"
+}[locale];
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand-link" href={localizePath(locale)}>
+      <span class="brand-mark" aria-hidden="true">立</span>
+      <span>
+        TachiSuke
+        <span class="brand-subtitle">Japan Life Assistant</span>
+      </span>
+    </a>
+    <nav class="header-nav" aria-label="Primary">
+      {navItems[locale].map((item) => (
+        <a href={localizePath(locale, item.href)}>{item.label}</a>
+      ))}
+    </nav>
+    <div class="header-tools">
+      <LocaleSwitcher locale={locale} currentPath={currentPath} />
+      <a class="button-secondary" href={localizePath(locale, "/account/login")}>{accountLabel}</a>
+    </div>
+  </div>
+</header>
