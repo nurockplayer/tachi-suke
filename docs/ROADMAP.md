@@ -830,6 +830,27 @@ Rules:
 - Do not include drafts, other locales, ratings, reviews, or unsupported author/date claims.
 - If category pages later add pagination, revisit `ItemList` semantics before shipping.
 
+## Phase 1AK: OpenSearch Discovery
+
+Status: implemented.
+
+Goal:
+
+Expose TachiSuke's existing static search route through the standard OpenSearch discovery mechanism so browsers and search-adjacent tools can find it.
+
+Implemented:
+
+- Added static `/opensearch.xml`.
+- Linked the OpenSearch description from `BaseLayout` with `rel="search"`.
+- Pointed the template at `/en/search?q={searchTerms}` as the stable locale fallback.
+- Added conservative Cloudflare cache headers for `/opensearch.xml`.
+- Added source-level and build-output SEO tests for the endpoint, discovery link, and cache header.
+
+Rules:
+
+- Keep Phase 1 search static and dependency-free.
+- Do not add backend search, language detection, analytics, account search, or private-content discovery through OpenSearch.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.

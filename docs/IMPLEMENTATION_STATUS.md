@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1S static search work. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
+This document records the current MVP state after Phase 1AK OpenSearch discovery work. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
 
 ## Completed
 
@@ -67,6 +67,7 @@ This document records the current MVP state after Phase 1S static search work. I
 - Generated `sitemap.xml` for public static routes and content collection detail pages.
 - Generated `robots.txt` with sitemap reference and account placeholder disallow rules.
 - Generated `llms.txt` with public discovery links and content caveats.
+- Generated `opensearch.xml` for browser/search-adjacent discovery of the static English search route.
 - Generated `site.webmanifest`.
 - Generated global `feed.xml` for non-draft public articles, included in the sitemap with newest-public-article `lastmod`.
 - Generated locale RSS feeds at `/zh-tw/feed.xml`, `/en/feed.xml`, `/ja/feed.xml`, and `/ko/feed.xml` for same-locale non-draft public articles, included in the sitemap with same-locale newest-article `lastmod`.
@@ -141,6 +142,7 @@ These are intentionally present but not functional:
 - RSS feeds are static and article-only. They do not include category feeds, pagination, places, tools, mobile plans, or area guides.
 - Static search is substring-based client-side filtering with shareable `?q=` URLs. It does not provide typo tolerance, semantic search, pagination, analytics, or personalization.
 - Search pages are noindex utility pages and are intentionally excluded from `sitemap.xml`.
+- OpenSearch discovery points to `/en/search?q={searchTerms}` as the stable static fallback. It does not detect language preference or provide backend search.
 - `/404.html` is static and noindex. It does not perform language detection or redirects.
 - Related article links are static and rule-based. They are not personalized and do not use analytics.
 - Article table of contents is static and does not include scroll spy, reading progress, or saved state.

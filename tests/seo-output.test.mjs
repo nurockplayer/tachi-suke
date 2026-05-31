@@ -51,6 +51,7 @@ describe("static SEO output", () => {
     const feed = readDist("feed.xml");
     const englishFeed = readDist("en/feed.xml");
     const llms = readDist("llms.txt");
+    const opensearch = readDist("opensearch.xml");
 
     assert.match(sitemap, /<urlset/);
     assert.match(robots, /Sitemap:\s*https:\/\/tachi-suke\.example\.com\/sitemap\.xml/);
@@ -60,6 +61,9 @@ describe("static SEO output", () => {
     assert.match(llms, /https:\/\/tachi-suke\.example\.com\/feed\.xml/);
     assert.match(llms, /https:\/\/tachi-suke\.example\.com\/en\/search-index\.json/);
     assert.match(llms, /Do not treat account placeholder pages as public content/i);
+    assert.match(opensearch, /<OpenSearchDescription[^>]+xmlns="http:\/\/a9\.com\/-\/spec\/opensearch\/1\.1\/">/);
+    assert.match(opensearch, /<ShortName>TachiSuke<\/ShortName>/);
+    assert.match(opensearch, /<Url type="text\/html" template="https:\/\/tachi-suke\.example\.com\/en\/search\?q=\{searchTerms\}" \/>/);
     assert.equal(manifest.name, "TachiSuke - Japan Life Assistant");
     assert.equal(manifest.short_name, "TachiSuke");
     assert.equal(manifest.start_url, "/");
@@ -68,6 +72,7 @@ describe("static SEO output", () => {
     assert.match(headers, /\/feed\.xml\s+Cache-Control:\s*public,\s*max-age=3600/m, "_headers should cache the global RSS feed conservatively");
     assert.match(headers, /\/en\/feed\.xml\s+Cache-Control:\s*public,\s*max-age=3600/m, "_headers should cache locale RSS feeds conservatively");
     assert.match(headers, /\/llms\.txt\s+Cache-Control:\s*public,\s*max-age=3600/m, "_headers should cache llms.txt conservatively");
+    assert.match(headers, /\/opensearch\.xml\s+Cache-Control:\s*public,\s*max-age=3600/m, "_headers should cache OpenSearch discovery conservatively");
     assert.match(headers, /\/en\/search-index\.json\s+Cache-Control:\s*public,\s*max-age=3600/m, "_headers should cache locale search indexes conservatively");
     assert.match(redirects, /^\/articles\s+\/en\/articles\s+302/m, "Cloudflare redirects should include locale-less article fallback");
     assert.match(redirects, /^\/mobile\/\*\s+\/en\/mobile\/:splat\s+302/m, "Cloudflare redirects should preserve mobile slugs");
@@ -167,6 +172,7 @@ describe("static SEO output", () => {
     assert.match(html, /<meta name="apple-mobile-web-app-title" content="TachiSuke">/, "root page should include Apple app title metadata");
     assert.match(html, /<meta name="format-detection" content="telephone=no">/, "root page should disable automatic phone formatting");
     assert.match(html, /rel="alternate"[^>]+type="application\/rss\+xml"[^>]+href="https:\/\/tachi-suke\.example\.com\/feed\.xml"/);
+    assert.match(html, /rel="search"[^>]+type="application\/opensearchdescription\+xml"[^>]+href="https:\/\/tachi-suke\.example\.com\/opensearch\.xml"/);
   });
 
   it("renders launch trust pages as public static HTML", () => {

@@ -36,9 +36,9 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Phase 1B/1B.5 tests should verify minimum content depth for articles, mobile plans, and area guides.
 - Phase 1B/1B.5/1H tests should scan Markdown/MDX article links that point to internal absolute paths and verify they match known static routes or generated article/place/mobile/area/tool detail routes.
 - `pnpm check:links` should scan built `dist/**/*.html` for root-relative `href="/..."` links and verify the matching file exists in `dist/`.
-- `pnpm check:seo` should verify built `sitemap.xml`, `robots.txt`, `site.webmanifest`, global RSS feed, locale RSS feeds, Cloudflare `_headers`, and Cloudflare `_redirects`.
+- `pnpm check:seo` should verify built `sitemap.xml`, `robots.txt`, `site.webmanifest`, `opensearch.xml`, global RSS feed, locale RSS feeds, Cloudflare `_headers`, and Cloudflare `_redirects`.
 - Cloudflare Pages `_redirects` should provide temporary English fallbacks for common locale-less public section paths and must not add account placeholder fallbacks.
-- Cloudflare Pages `_headers` should keep HTML revalidated while applying conservative one-hour cache headers to sitemap, robots, manifest, RSS feeds, `llms.txt`, and search indexes.
+- Cloudflare Pages `_headers` should keep HTML revalidated while applying conservative one-hour cache headers to sitemap, robots, manifest, RSS feeds, `llms.txt`, `opensearch.xml`, and search indexes.
 - The current static HTML crawler does not validate external links, anchors, JavaScript behavior, or visual rendering.
 - New required route or model decisions should be reflected in tests when they become implementation requirements.
 - CI must reject `package-lock.json`, `yarn.lock`, `bun.lock`, and `bun.lockb`.
@@ -248,6 +248,8 @@ This document defines the acceptance criteria for the current static-first MVP.
 - `sitemap.xml` must exclude account placeholder routes, draft articles, non-published places, non-published tools, search pages, and search index JSON endpoints.
 - `robots.txt` must reference the sitemap and disallow `/[locale]/account/`.
 - `llms.txt` must be generated as plain text, summarize the product positioning, and link only to public discovery surfaces such as sitemap, RSS feeds, locale roots, and search indexes.
+- `opensearch.xml` must be generated as an OpenSearch description and use the static English search template `/en/search?q={searchTerms}`.
+- Public pages should include a `rel="search"` link to `/opensearch.xml`.
 - `feed.xml` must be generated as an RSS 2.0 feed for non-draft public article detail pages.
 - `/[locale]/feed.xml` must be generated as an RSS 2.0 feed for same-locale non-draft public article detail pages.
 - Global and locale RSS feed sitemap entries should include `lastmod` derived from the newest matching public article `updatedAt`.

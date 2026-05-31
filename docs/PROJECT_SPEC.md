@@ -162,6 +162,7 @@ The MVP includes:
 - SEO-oriented `BaseLayout`
 - Generated `sitemap.xml`, `robots.txt`, and `site.webmanifest`
 - Generated `llms.txt` discovery file for public AI/search-adjacent tooling
+- Generated `opensearch.xml` browser search discovery file linked from public pages
 - Generated global `feed.xml` for public articles, included in the sitemap with content-aware `lastmod`
 - Generated locale RSS feeds at `/[locale]/feed.xml` for same-locale public articles, included in the sitemap with same-locale `lastmod`
 - Custom static `404.html` recovery page with `noindex, nofollow`
@@ -246,6 +247,7 @@ SEO and discovery routes:
 - `/sitemap.xml`
 - `/robots.txt`
 - `/llms.txt`
+- `/opensearch.xml`
 - `/site.webmanifest`
 - `/feed.xml`
 - `/404.html`
@@ -353,7 +355,7 @@ Engineering metrics:
 - No forbidden lockfiles are present.
 - Draft articles do not generate public article detail pages.
 - Non-published places do not appear in public lists or detail pages.
-- SEO metadata includes title, description, canonical URL, Open Graph URL, Open Graph site name, Open Graph image, Twitter card metadata, locale-aware `html lang`, manifest link, and conservative `hreflang`.
+- SEO metadata includes title, description, canonical URL, Open Graph URL, Open Graph site name, Open Graph image, Twitter card metadata, locale-aware `html lang`, manifest link, OpenSearch discovery link, and conservative `hreflang`.
 - Browser metadata includes `theme-color`, `application-name`, `apple-mobile-web-app-title`, and `format-detection`.
 - `sitemap.xml` includes public content and excludes account placeholders.
 - `sitemap.xml` includes public article category landing pages.
@@ -363,6 +365,7 @@ Engineering metrics:
 - `sitemap.xml` excludes noindex search pages and search index JSON endpoints.
 - `robots.txt` references the sitemap and disallows placeholder account routes.
 - `llms.txt` summarizes public discovery surfaces and excludes private, draft, account, and placeholder data.
+- `opensearch.xml` points to `/en/search?q={searchTerms}` as the stable static search fallback.
 - `404.html` is generated, marked `noindex, nofollow`, and excluded from `sitemap.xml`.
 - `feed.xml` includes non-draft public article detail pages across supported locales.
 - `/[locale]/feed.xml` includes only same-locale non-draft public article detail pages.

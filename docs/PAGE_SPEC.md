@@ -80,6 +80,22 @@ All public pages should:
 
 **Future notes:** Keep this file concise and editorially accurate. Do not turn it into an AI runtime feature, analytics endpoint, or private content dump.
 
+## `/opensearch.xml`
+
+**Purpose:** Browser/search-adjacent discovery file for TachiSuke's static site search.
+
+**User goal:** Let browsers and tools discover that TachiSuke can be searched through the existing static search page.
+
+**Data source:** Static endpoint copy in `src/pages/opensearch.xml.ts` and the configured Astro `site` URL.
+
+**Rendering mode:** Static Astro endpoint.
+
+**SEO requirements:** Generate a valid OpenSearch description, use an absolute template URL, and point to `/en/search?q={searchTerms}` as the stable fallback search route. Public pages should link it with `rel="search"` from `BaseLayout`.
+
+**Current status:** Implemented in Phase 1AK.
+
+**Future notes:** Revisit language-aware search templates only if the site gains a real language preference model or backend search. Do not add private/account content to search discovery.
+
 ## `/site.webmanifest`
 
 **Purpose:** Browser/app identity metadata.
