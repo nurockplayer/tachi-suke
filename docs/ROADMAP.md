@@ -163,6 +163,29 @@ Rules:
 - Use only fields already present in the static content model.
 - Add structured data for area and mobile plan detail pages only after deciding the correct schema types.
 
+## Phase 1F: CI Quality Gate
+
+Status: implemented.
+
+Goal:
+
+Make pull requests prove the same checks that are required locally before merge.
+
+Implemented:
+
+- GitHub Actions workflow at `.github/workflows/ci.yml`.
+- Pull request and `main` push triggers.
+- Forbidden lockfile rejection.
+- `pnpm install --frozen-lockfile`.
+- `pnpm test`, `pnpm build`, `pnpm check:links`, and `pnpm check:seo`.
+- Source tests that keep the CI workflow pnpm-only.
+
+Rules:
+
+- CI verifies quality but does not deploy to Cloudflare Pages yet.
+- Cloudflare deployment settings and secrets should be configured separately.
+- Do not add deployment credentials to the repo.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.
