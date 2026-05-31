@@ -912,6 +912,27 @@ Rules:
 - Do not add external script hosts, analytics, nonce infrastructure, or Workers runtime in Phase 1AN.
 - Revisit nonce/hash-based CSP only when the script architecture is ready.
 
+## Phase 1AO: Security.txt
+
+Status: implemented.
+
+Goal:
+
+Expose a standard security contact file for static deployment without adding a backend or committing personal contact details.
+
+Implemented:
+
+- Added static `/.well-known/security.txt`.
+- Pointed `Contact` at `/en/contact`.
+- Added `Policy`, `Preferred-Languages`, generated `Expires`, and `Canonical` fields.
+- Added a conservative Cloudflare cache header.
+- Added source-level and build-output SEO tests.
+
+Rules:
+
+- Do not imply a private vulnerability tracker, personal email commitment, guaranteed response SLA, or security operations backend in Phase 1AO.
+- Replace the generic contact route only when a dedicated security response process exists.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.

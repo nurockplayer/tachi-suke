@@ -80,6 +80,22 @@ All public pages should:
 
 **Future notes:** Keep this file concise and editorially accurate. Do not turn it into an AI runtime feature, analytics endpoint, or private content dump.
 
+## `/.well-known/security.txt`
+
+**Purpose:** Standard security contact discovery for researchers and automated tooling.
+
+**User goal:** Not a normal user-facing page; helps people report security issues through the current public contact route.
+
+**Data source:** Static endpoint copy in `src/pages/.well-known/security.txt.ts`, supported locale metadata, and configured Astro `site` URL.
+
+**Rendering mode:** Static Astro endpoint.
+
+**SEO requirements:** Remain plain text, use absolute URLs from `SITE_URL`, include `Contact`, `Policy`, `Preferred-Languages`, `Expires`, and `Canonical`, and stay out of the sitemap.
+
+**Current status:** Implemented in Phase 1AO.
+
+**Future notes:** Replace the generic contact route with a dedicated security process only after the project has an actual response workflow. Do not commit personal email addresses or private tracker URLs.
+
 ## `/opensearch.xml`
 
 **Purpose:** Browser/search-adjacent discovery file for TachiSuke's static site search.

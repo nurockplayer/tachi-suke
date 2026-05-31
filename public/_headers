@@ -21,6 +21,9 @@
 /llms.txt
   Cache-Control: public, max-age=3600
 
+/.well-known/security.txt
+  Cache-Control: public, max-age=3600
+
 /opensearch.xml
   Cache-Control: public, max-age=3600
 

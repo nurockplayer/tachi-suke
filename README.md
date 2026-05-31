@@ -64,6 +64,7 @@ Implemented:
 - Generated `sitemap.xml`, `robots.txt`, and `site.webmanifest`
 - Sitemap includes conservative `hreflang` alternates for shared locale pages and translated article details
 - Generated `llms.txt` discovery file for AI/search-adjacent tooling
+- Generated `/.well-known/security.txt` pointing security reports to the public contact route
 - Generated `opensearch.xml` browser search discovery file linked from every public page
 - Generated global `feed.xml` for public articles, included in the sitemap with content-aware `lastmod`
 - Generated locale RSS feeds at `/[locale]/feed.xml` for same-locale public articles, included in the sitemap with same-locale `lastmod`
@@ -140,6 +141,7 @@ Locale routes:
 - `/sitemap.xml`
 - `/robots.txt`
 - `/llms.txt`
+- `/.well-known/security.txt`
 - `/opensearch.xml`
 - `/site.webmanifest`
 - `/feed.xml`
@@ -304,6 +306,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - `/feed.xml` is a global RSS feed for non-draft articles across all locales.
 - `/[locale]/feed.xml` is a locale-specific RSS feed for same-locale non-draft articles.
 - `/opensearch.xml` exposes the static English search route as a browser-discoverable OpenSearch template.
+- `/.well-known/security.txt` exposes the public contact route for security reports; it does not create a support backend or response SLA.
 - `/404.html` is a static noindex recovery page for missing routes on Cloudflare Pages or other static hosts.
 - Cloudflare Pages `_redirects` sends common locale-less paths such as `/articles`, `/mobile/povo2`, and `/contact` to English `302` fallbacks. Canonical routes remain locale-prefixed.
 - Cloudflare Pages `_headers` caches sitemap, robots, manifest, RSS feeds, `llms.txt`, `opensearch.xml`, and search indexes conservatively for one hour while keeping HTML revalidated.

@@ -76,6 +76,7 @@ const requiredFiles = [
   "src/pages/sitemap.xml.ts",
   "src/pages/robots.txt.ts",
   "src/pages/llms.txt.ts",
+  "src/pages/.well-known/security.txt.ts",
   "src/pages/opensearch.xml.ts",
   "src/pages/site.webmanifest.ts",
   "src/pages/feed.xml.ts",
