@@ -175,7 +175,7 @@ The MVP includes:
 - Static article table of contents generated from Markdown/MDX headings
 - Cloudflare Pages `_headers` for conservative security and discovery cache defaults
 - Cloudflare Pages CSP header for baseline static-site hardening
-- Cloudflare Pages `_redirects` for temporary English fallbacks from common locale-less public paths
+- Cloudflare Pages `_redirects` for temporary English fallbacks from common locale-less public paths and legacy `/security.txt` discovery
 - Cloudflare Pages `wrangler.toml` metadata for `dist` static output
 - `SITE_URL` environment variable with example-domain fallback
 - Structure tests in `tests/project-structure.test.mjs`
