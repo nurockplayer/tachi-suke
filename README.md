@@ -62,6 +62,7 @@ Implemented:
 - Unified Place enum values
 - SEO-oriented `BaseLayout`
 - Generated `sitemap.xml`, `robots.txt`, and `site.webmanifest`
+- Generated `llms.txt` discovery file for AI/search-adjacent tooling
 - Generated global `feed.xml` for public articles
 - Generated locale RSS feeds at `/[locale]/feed.xml` for same-locale public articles
 - Default Open Graph image and Twitter summary metadata
@@ -134,6 +135,7 @@ Locale routes:
 - `/[locale]/feed.xml`
 - `/sitemap.xml`
 - `/robots.txt`
+- `/llms.txt`
 - `/site.webmanifest`
 - `/feed.xml`
 - `/404.html`

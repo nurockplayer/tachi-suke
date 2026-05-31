@@ -612,6 +612,28 @@ Rules:
 - Do not add analytics, backend triage, database-backed messages, or guaranteed replies in Phase 1.
 - The prefilled URL remains user-editable and does not create local storage.
 
+## Phase 1AA: LLM Discovery
+
+Status: implemented.
+
+Goal:
+
+Make TachiSuke easier for AI assistants and search-adjacent tooling to understand without exposing private, draft, or placeholder data.
+
+Implemented:
+
+- Static `/llms.txt` endpoint.
+- Plain-text product positioning and preferred summary.
+- Public locale roots, section links, sitemap, global RSS, locale RSS feeds, and static search index links.
+- Freshness caveats for mobile plans, areas, places, and user-submitted content.
+- Source-level and build-output SEO tests for the generated file.
+
+Rules:
+
+- Keep `llms.txt` static, concise, and editorially maintained.
+- Link only to public discovery surfaces.
+- Do not add AI runtime behavior, analytics, crawling, or private data.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.

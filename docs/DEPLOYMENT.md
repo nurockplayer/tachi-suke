@@ -68,6 +68,7 @@ After production deploy:
 - Open the production home page.
 - Check `/sitemap.xml`.
 - Check `/robots.txt`.
+- Check `/llms.txt`.
 - Check `/feed.xml`.
 - Check a representative locale feed such as `/en/feed.xml`.
 - Check `/en/search` and `/en/search-index.json`.

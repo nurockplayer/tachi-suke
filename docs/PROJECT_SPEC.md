@@ -161,6 +161,7 @@ The MVP includes:
 - TypeScript model files for future auth, favorites, users, and submissions
 - SEO-oriented `BaseLayout`
 - Generated `sitemap.xml`, `robots.txt`, and `site.webmanifest`
+- Generated `llms.txt` discovery file for public AI/search-adjacent tooling
 - Generated global `feed.xml` for public articles
 - Generated locale RSS feeds at `/[locale]/feed.xml` for same-locale public articles
 - Custom static `404.html` recovery page with `noindex, nofollow`
@@ -243,6 +244,7 @@ SEO and discovery routes:
 
 - `/sitemap.xml`
 - `/robots.txt`
+- `/llms.txt`
 - `/site.webmanifest`
 - `/feed.xml`
 - `/404.html`
@@ -357,6 +359,7 @@ Engineering metrics:
 - `sitemap.xml` includes public contact/corrections pages.
 - `sitemap.xml` excludes noindex search pages and search index JSON endpoints.
 - `robots.txt` references the sitemap and disallows placeholder account routes.
+- `llms.txt` summarizes public discovery surfaces and excludes private, draft, account, and placeholder data.
 - `404.html` is generated, marked `noindex, nofollow`, and excluded from `sitemap.xml`.
 - `feed.xml` includes non-draft public article detail pages across supported locales.
 - `/[locale]/feed.xml` includes only same-locale non-draft public article detail pages.

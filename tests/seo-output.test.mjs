@@ -44,9 +44,16 @@ describe("static SEO output", () => {
     const headers = readDist("_headers");
     const feed = readDist("feed.xml");
     const englishFeed = readDist("en/feed.xml");
+    const llms = readDist("llms.txt");
 
     assert.match(sitemap, /<urlset/);
     assert.match(robots, /Sitemap:\s*https:\/\/tachi-suke\.example\.com\/sitemap\.xml/);
+    assert.match(llms, /# TachiSuke/);
+    assert.match(llms, /multilingual Japan life decision assistant/i);
+    assert.match(llms, /https:\/\/tachi-suke\.example\.com\/sitemap\.xml/);
+    assert.match(llms, /https:\/\/tachi-suke\.example\.com\/feed\.xml/);
+    assert.match(llms, /https:\/\/tachi-suke\.example\.com\/en\/search-index\.json/);
+    assert.match(llms, /Do not treat account placeholder pages as public content/i);
     assert.equal(manifest.name, "TachiSuke - Japan Life Assistant");
     assert.equal(manifest.short_name, "TachiSuke");
     assert.equal(manifest.start_url, "/");
