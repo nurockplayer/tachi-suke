@@ -38,7 +38,9 @@ Implemented:
 - Four locale place detail routes with practical guidance sections
 - Four locale mobile index pages with comparison guidance
 - Four locale mobile plan detail routes
-- Four locale tools index pages
+- Four locale tools index pages with published tool cards
+- Four locale tool detail routes
+- First published static checklist tool: Moving to Japan checklist
 - Four locale submit-place form pages with provider-agnostic external endpoint support
 - Four locale submit-place thanks pages
 - Four locale about pages
@@ -98,6 +100,7 @@ Locale routes:
 - `/[locale]/mobile`
 - `/[locale]/mobile/[slug]`
 - `/[locale]/tools`
+- `/[locale]/tools/[slug]`
 - `/[locale]/submit-place`
 - `/[locale]/submit-place/thanks`
 - `/[locale]/about`
@@ -109,7 +112,7 @@ Locale routes:
 - `/site.webmanifest`
 
 Article detail pages are generated only for non-draft articles. Place detail pages are generated only for places where `status = published`.
-Area and mobile plan detail pages are generated from the current static content collections.
+Area, mobile plan, and published tool detail pages are generated from the current static content collections.
 
 ## Commands
 
@@ -226,6 +229,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - Do not add forbidden lockfiles.
 - Do not implement auth, database, favorites, or real submissions in Phase 1.
 - Related article links are static, same-locale, and non-personalized.
+- Tool checklist pages are static content pages. They do not save progress, require login, or write to a database in Phase 1.
 - Submit-place can post to an externally configured endpoint, but the repo does not store submissions or include a moderation backend.
 - Do not publish user submissions directly.
 - Keep user-facing copy natural for each locale.

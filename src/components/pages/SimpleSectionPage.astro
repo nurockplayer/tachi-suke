@@ -20,12 +20,13 @@ const description = isAreas
       ko: "도쿄 지역을 월세감, 통근, 생활 편의성, 조용함, 적합한 사람 기준으로 비교합니다."
     }[locale]
   : {
-      "zh-tw": "未來會提供搬家清單、手機方案比較、租屋費用試算與行政流程工具。",
-      en: "Future tools will include moving checklists, mobile comparisons, rent cost calculators, and procedure guides.",
-      ja: "引っ越しチェックリスト、携帯比較、賃貸費用計算、手続きガイドを追加予定です。",
-      ko: "이사 체크리스트, 휴대폰 비교, 임대 비용 계산, 행정 절차 도구를 추가할 예정입니다."
+      "zh-tw": "提供搬家清單、手機方案比較入口、租屋費用與行政流程等生活決策工具。",
+      en: "Static tools and checklists for moving, mobile plan decisions, renting costs, and procedures.",
+      ja: "引っ越し、携帯プラン、賃貸費用、手続きの判断に使える静的ツールとチェックリストです。",
+      ko: "이사, 휴대폰 요금제, 임대 비용, 행정 절차 판단에 사용할 수 있는 정적 도구와 체크리스트입니다."
     }[locale];
 const areas = isAreas ? await getCollection("areas") : [];
+const tools = isAreas ? [] : await getCollection("tools", ({ data }) => data.status === "published");
 const areaLabels = {
   "zh-tw": {
     stations: "主要車站",
@@ -103,6 +104,25 @@ const areaLabels = {
               <p><a class="text-link" href={localizePath(locale, `/areas/${area.data.slug}`)}>{locale === "zh-tw" ? "查看地區詳情" : locale === "en" ? "View area details" : locale === "ja" ? "エリア詳細を見る" : "지역 자세히 보기"}</a></p>
             </div>
           </article>
+        ))}
+      </div>
+    </section>
+  )}
+  {!isAreas && (
+    <section class="section">
+      <div class="container section-header">
+        <div>
+          <h2>{locale === "zh-tw" ? "可用工具" : locale === "en" ? "Available tools" : locale === "ja" ? "利用できるツール" : "사용 가능한 도구"}</h2>
+          <p>{locale === "zh-tw" ? "先從不需要登入、不儲存資料的靜態清單開始。" : locale === "en" ? "Start with static tools that do not require login or store your data." : locale === "ja" ? "ログイン不要、データ保存なしの静的ツールから始めます。" : "로그인이나 데이터 저장 없이 사용할 수 있는 정적 도구부터 시작합니다."}</p>
+        </div>
+      </div>
+      <div class="container grid grid-2">
+        {tools.map((tool) => (
+          <CategoryCard
+            href={localizePath(locale, `/tools/${tool.data.slug}`)}
+            title={tool.data.title[locale]}
+            description={tool.data.description[locale]}
+          />
         ))}
       </div>
     </section>

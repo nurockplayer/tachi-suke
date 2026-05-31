@@ -1,0 +1,17 @@
+---
+import { getCollection } from "astro:content";
+import ToolDetailPage from "@/components/pages/ToolDetailPage.astro";
+
+export async function getStaticPaths() {
+  const tools = await getCollection("tools", ({ data }) => data.status === "published");
+
+  return tools.map((tool) => ({
+    params: { slug: tool.data.slug },
+    props: { tool }
+  }));
+}
+
+const { tool } = Astro.props;
+---
+
+<ToolDetailPage locale="zh-tw" tool={tool} />

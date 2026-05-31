@@ -10,7 +10,7 @@ Repo name: `tachi-suke`
 
 The product helps foreign residents make practical daily-life decisions in Japan. It focuses on topics such as mobile plans, renting, transportation, food, shopping, administrative procedures, practical Japanese, work, and resident-friendly places.
 
-The current MVP is an Astro static site with locale-prefixed routing, content collections, article detail pages, place detail pages, mobile plan detail pages, area detail pages, placeholder account pages, placeholder favorite UI, and a submit-place form that can post to a provider-agnostic external endpoint when configured.
+The current MVP is an Astro static site with locale-prefixed routing, content collections, article detail pages, place detail pages, mobile plan detail pages, area detail pages, static tool detail pages, placeholder account pages, placeholder favorite UI, and a submit-place form that can post to a provider-agnostic external endpoint when configured.
 
 ## 2. Brand Concept
 
@@ -145,7 +145,9 @@ The MVP includes:
 - Place detail pages generated from JSON content with practical guidance sections
 - Mobile index pages with comparison guidance and five mobile plan entries
 - Mobile plan detail pages generated from JSON content with official URLs, `lastCheckedAt`, source notes, caveats, pros, cons, and recommended fit
-- Tools index pages
+- Tools index pages with published tool cards
+- Tool detail pages generated from JSON content with localized checklist sections, source notes, caveats, and `lastCheckedAt`
+- First published tool: `moving-to-japan-checklist`
 - Submit-place form with preview mode, external endpoint support, hidden moderation metadata, and thanks pages
 - About pages
 - Account placeholder pages
@@ -204,6 +206,7 @@ Content and section pages:
 - `/[locale]/mobile`
 - `/[locale]/mobile/[slug]`
 - `/[locale]/tools`
+- `/[locale]/tools/[slug]`
 - `/[locale]/submit-place`
 - `/[locale]/submit-place/thanks`
 - `/[locale]/about`
@@ -220,7 +223,7 @@ SEO and discovery routes:
 - `/robots.txt`
 - `/site.webmanifest`
 
-Article detail pages are generated only for non-draft articles matching the locale route. Place detail pages are generated only for places where `status = published`. Area and mobile detail pages are generated from their static content collections.
+Article detail pages are generated only for non-draft articles matching the locale route. Place detail pages are generated only for places where `status = published`. Area, mobile, and published tool detail pages are generated from their static content collections.
 
 ## 13. Current Placeholder Routes
 
@@ -253,7 +256,7 @@ Priority content types:
 
 Article pages should include clear titles, descriptions, categories, tags, publish dates, update dates, and readable content. Place pages should show practical details such as location, nearest station, price range, solo-friendly status, non-smoking status, Japanese difficulty, payment methods, Google Maps link, and official URL when available.
 
-Mobile plan pages must show official URLs, `lastCheckedAt`, source notes, and caveats because carrier prices, campaigns, identity checks, payment methods, and eSIM/SIM support can change. Area guide pages must show `lastCheckedAt` and notes because rent feel, quietness, and commute convenience can become stale.
+Mobile plan pages must show official URLs, `lastCheckedAt`, source notes, and caveats because carrier prices, campaigns, identity checks, payment methods, and eSIM/SIM support can change. Area guide pages must show `lastCheckedAt` and notes because rent feel, quietness, and commute convenience can become stale. Tool pages should be static, checklist-oriented, and explicit that progress is not saved in Phase 1.
 
 ## 15. Future Auth/Database Strategy
 
@@ -293,6 +296,7 @@ Product and content metrics:
 - Users can reach all main sections from locale navigation.
 - Article and place detail pages are indexable and readable.
 - Article pages guide readers to related same-locale articles.
+- Published tool pages can serve practical checklist intent without requiring login.
 - Place labels are understandable in each locale and do not expose internal enum values.
 - Submit-place clearly explains moderation and privacy limits.
 

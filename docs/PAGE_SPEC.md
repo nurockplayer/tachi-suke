@@ -37,15 +37,15 @@ All public pages should:
 
 **User goal:** Not user-facing; supports crawling and indexing of public content.
 
-**Data source:** Static route list, supported locales, `articles`, `areas`, `places`, and `mobile-plans` content collections.
+**Data source:** Static route list, supported locales, `articles`, `areas`, `places`, `mobile-plans`, and `tools` content collections.
 
 **Rendering mode:** Static Astro endpoint.
 
-**SEO requirements:** Include public locale roots, section pages, non-draft article detail pages, published place detail pages, area detail pages, mobile plan detail pages, and submit-place thanks pages. Exclude account placeholder routes, draft articles, and non-published places.
+**SEO requirements:** Include public locale roots, section pages, non-draft article detail pages, published place detail pages, area detail pages, mobile plan detail pages, published tool detail pages, and submit-place thanks pages. Exclude account placeholder routes, draft articles, non-published places, and non-published tools.
 
 **Current status:** Implemented.
 
-**Future notes:** Add tool detail URLs if `/[locale]/tools/[slug]` is introduced.
+**Future notes:** Add future dynamic tool URLs only after their generated static routes are known.
 
 ## `/robots.txt`
 
@@ -229,15 +229,31 @@ All public pages should:
 
 **User goal:** Find future decision tools such as moving checklists, mobile comparisons, rent calculators, and procedure guides.
 
-**Data source:** Current page uses localized static UI copy. The `tools` content collection exists and stores starter tool metadata.
+**Data source:** Localized static UI copy plus published entries from the `tools` content collection.
 
 **Rendering mode:** Static Astro pages through `SimpleSectionPage`.
 
 **SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, and locale alternates.
 
-**Current status:** Implemented as an index/entry page.
+**Current status:** Implemented as an index/entry page with published tool cards. Phase 1H adds the first static checklist tool, `moving-to-japan-checklist`.
 
-**Future notes:** Add `/[locale]/tools/[slug]` detail pages when tools become real content experiences.
+**Future notes:** Add filters or groupings once there are enough published tools. Keep this page clear that account-based saved progress is not available in Phase 1.
+
+## `/[locale]/tools/[slug]`
+
+**Purpose:** Static tool detail page for a checklist or decision helper.
+
+**User goal:** Work through a practical checklist, understand caveats, and jump to related sections without needing login or saved state.
+
+**Data source:** `tools` content collection, filtered to `status = published`.
+
+**Rendering mode:** Static generated dynamic route. Each locale has its own route file and uses `getStaticPaths`.
+
+**SEO requirements:** Use localized tool `title` and `description`, canonical URL, Open Graph metadata, locale-aware `html lang`, and locale alternates only for generated tool detail routes. Published tool detail routes should appear in `sitemap.xml`.
+
+**Current status:** Implemented for all four locales in Phase 1H. The first published tool is `moving-to-japan-checklist`, a static moving-to-Japan checklist with localized sections, notes, source note, and last checked date.
+
+**Future notes:** Current checklist interaction is local to the page and does not persist progress. Saved tool state should wait for Phase 2 auth/database work or a separately scoped static-friendly storage decision.
 
 ## `/[locale]/submit-place`
 

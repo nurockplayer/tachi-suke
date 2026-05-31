@@ -123,6 +123,7 @@ Current public route pattern:
 - `/[locale]/mobile`
 - `/[locale]/mobile/[slug]`
 - `/[locale]/tools`
+- `/[locale]/tools/[slug]`
 - `/[locale]/submit-place`
 - `/[locale]/submit-place/thanks`
 - `/[locale]/about`
@@ -138,7 +139,7 @@ Do not use Simplified Chinese unless explicitly requested.
 
 Phase 1 is content-first, SEO-friendly, i18n-ready, auth-ready, database-ready, and favorites-ready.
 
-Current MVP includes static pages, article publishing, place detail pages, mobile/area/tool entry pages, static submit-place external endpoint support, placeholder account pages, placeholder favorites, content collections, and SEO metadata.
+Current MVP includes static pages, article publishing, place detail pages, mobile/area/tool detail pages, static submit-place external endpoint support, placeholder account pages, placeholder favorites, content collections, and SEO metadata.
 
 Phase 1B adds public-preview content depth:
 
@@ -198,6 +199,14 @@ Phase 1G adds static related content:
 - Related links are build-time and rule-based, not personalized.
 - Ranking should prefer same category, shared tags, then recent updates.
 - Related links must not point to the current article, drafts, or other locales.
+
+Phase 1H adds static tools and checklists:
+
+- Tool detail pages exist at `/[locale]/tools/[slug]`.
+- Published tools are generated from `src/content/tools`.
+- Tool fields include localized `title`, `description`, `sourceNote`, `notes`, checklist `sections`, and `lastCheckedAt`.
+- Checklist pages are static and must not imply saved progress, login, or database persistence.
+- Only `status = published` tools should appear in public list/detail pages.
 
 Mobile plan prices, campaigns, payment methods, and identity requirements can change. Always phrase mobile data as editorial guidance and remind users to confirm official carrier pages before applying.
 Area rent feel, quietness, and commute convenience can also become stale. Keep area pages date-aware and practical rather than sightseeing-oriented.
