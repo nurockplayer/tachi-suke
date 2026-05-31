@@ -467,11 +467,13 @@ Implemented:
 - Primary navigation links to search in all supported locales.
 - Search indexes include public articles, places, mobile plans, area guides, and tools.
 - Search pages are `noindex, follow` and excluded from `sitemap.xml`.
+- Search pages support shareable GET query URLs with `q`, such as `/en/search?q=Denny`.
 - Source-level and build-output SEO tests verify route presence, public-only filtering, and sitemap exclusion.
 
 Rules:
 
 - Keep Phase 1 search dependency-free and static.
+- Keep search query URLs noindex and client-side only.
 - Do not add database search, hosted search, analytics, personalization, typo tolerance, or semantic search until content volume and product needs justify a new phase.
 - Do not index account placeholders, drafts, non-published content, or private data.
 

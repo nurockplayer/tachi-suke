@@ -42,7 +42,7 @@ Implemented:
 - Four locale mobile plan detail routes
 - Four locale tools index pages with published tool cards
 - Four locale tool detail routes
-- Four locale noindex search pages with dependency-free client-side filtering
+- Four locale noindex search pages with dependency-free client-side filtering and shareable `?q=` URLs
 - Four locale static search index JSON endpoints for public content
 - Published static checklist tools: Moving to Japan checklist and Japan rent initial cost checklist
 - Four locale submit-place form pages with provider-agnostic external endpoint support
@@ -275,7 +275,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - Do not add forbidden lockfiles.
 - Do not implement auth, database, favorites, or real submissions in Phase 1.
 - Related article links are static, same-locale, and non-personalized.
-- Search pages are static, noindex utility pages backed by `/[locale]/search-index.json`.
+- Search pages are static, noindex utility pages backed by `/[locale]/search-index.json`, and `/[locale]/search?q=...` can be shared to prefill/filter results.
 - Search indexes include public content only and do not include account placeholders, drafts, or non-published items.
 - Article category pages are generated from public non-draft articles and are included in the sitemap.
 - Tool checklist pages are static content pages. They do not save progress, require login, or write to a database in Phase 1.
