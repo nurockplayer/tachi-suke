@@ -53,6 +53,7 @@ This document records the current MVP state after Phase 1S static search work. I
 - Article category page public filtering by locale, category, and `draft = false`.
 - SEO base layout with title, description, canonical URL, Open Graph URL, Open Graph site name, locale-aware `html lang`, and conservative `hreflang`.
 - Default Open Graph image, Twitter summary metadata, and manifest link in `BaseLayout`.
+- Browser/PWA metadata in `BaseLayout`: `theme-color`, `application-name`, `apple-mobile-web-app-title`, and `format-detection`.
 - JSON-LD structured data support in `BaseLayout`.
 - Site-wide `Organization` and `WebSite` JSON-LD.
 - Article detail `Article` and `BreadcrumbList` JSON-LD.
