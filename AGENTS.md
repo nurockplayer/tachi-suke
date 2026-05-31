@@ -126,6 +126,8 @@ Current public route pattern:
 - `/[locale]/tools/[slug]`
 - `/[locale]/submit-place`
 - `/[locale]/submit-place/thanks`
+- `/[locale]/contact`
+- `/[locale]/contact/thanks`
 - `/[locale]/about`
 - `/[locale]/account/login`
 - `/[locale]/account/favorites`
@@ -139,7 +141,7 @@ Do not use Simplified Chinese unless explicitly requested.
 
 Phase 1 is content-first, SEO-friendly, i18n-ready, auth-ready, database-ready, and favorites-ready.
 
-Current MVP includes static pages, article publishing, place detail pages, mobile/area/tool detail pages, static submit-place external endpoint support, placeholder account pages, placeholder favorites, content collections, and SEO metadata.
+Current MVP includes static pages, article publishing, place detail pages, mobile/area/tool detail pages, static submit-place and contact/corrections external endpoint support, placeholder account pages, placeholder favorites, content collections, and SEO metadata.
 
 Phase 1B adds public-preview content depth:
 
@@ -241,9 +243,20 @@ Phase 1L adds baseline accessibility polish:
 Phase 1M adds launch trust pages:
 
 - Keep `/[locale]/privacy` and `/[locale]/editorial-policy` static and publicly linked.
-- Privacy copy should match the current static MVP: no auth, no database, optional external submit-place endpoint only.
+- Privacy copy should match the current static MVP: no auth, no database, optional external submit-place and contact/corrections endpoints only.
 - Editorial policy copy should explain moderation, source caveats, and decision-guide boundaries.
 - Do not imply that Phase 1 has a final legal privacy policy, analytics, account storage, or database-backed submissions.
+
+Phase 1O adds contact/corrections workflow MVP:
+
+- `PUBLIC_CONTACT_FORM_ENDPOINT` controls form activation.
+- Endpoint unset means preview mode with disabled submit.
+- Endpoint set means static `POST` to the external endpoint.
+- The provider must stay configurable; do not hard-code Formspree, Netlify Forms, Google Forms, Cloudflare Workers, or a custom API URL.
+- Contact thanks pages exist at `/[locale]/contact/thanks`.
+- Hidden fields should include `formName`, `source`, `locale`, `redirectUrl`, and `publicResponse`.
+- The form may collect optional email for follow-up, but the repo must not store messages or provide a support backend in Phase 1.
+- Honeypot is basic spam reduction only; do not add captcha or large anti-spam dependencies in Phase 1O.
 
 Mobile plan prices, campaigns, payment methods, and identity requirements can change. Always phrase mobile data as editorial guidance and remind users to confirm official carrier pages before applying.
 Area rent feel, quietness, and commute convenience can also become stale. Keep area pages date-aware and practical rather than sightseeing-oriented.
@@ -257,6 +270,7 @@ Do not implement in Phase 1 unless explicitly requested:
 - Row Level Security runtime integration
 - Real favorites
 - Native/database-backed submit-place storage
+- Native/database-backed contact/support storage
 - Public comments
 - Payment
 - Large CMS/admin dashboard
@@ -293,6 +307,18 @@ Rules:
 - Email is optional/private and must not be public.
 - Avoid collecting unnecessary personal information.
 - Approved submissions should be normalized before becoming public Place entries.
+
+## Contact and Corrections
+
+The contact/corrections page is static-site friendly in Phase 1O. It may post to `PUBLIC_CONTACT_FORM_ENDPOINT`, but the repo must not store, email, triage, or publish contact messages directly.
+
+Rules:
+
+- Contact messages are for corrections, outdated information, broken links, and general feedback.
+- Email is optional/private and must not be public.
+- Avoid collecting unnecessary personal or sensitive information.
+- Do not imply an individual reply is guaranteed.
+- Do not add a database-backed support queue unless explicitly scoped in a future phase.
 
 ## Place Enum Final Version
 

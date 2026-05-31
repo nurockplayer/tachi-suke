@@ -41,7 +41,7 @@ All public pages should:
 
 **Rendering mode:** Static Astro endpoint.
 
-**SEO requirements:** Include public locale roots, section pages, non-draft article detail pages, published place detail pages, area detail pages, mobile plan detail pages, published tool detail pages, and submit-place thanks pages. Exclude account placeholder routes, draft articles, non-published places, and non-published tools.
+**SEO requirements:** Include public locale roots, section pages, non-draft article detail pages, published place detail pages, area detail pages, mobile plan detail pages, published tool detail pages, submit-place thanks pages, and contact/corrections pages. Exclude account placeholder routes, draft articles, non-published places, and non-published tools.
 
 **Current status:** Implemented.
 
@@ -303,6 +303,38 @@ All public pages should:
 
 **Future notes:** If the chosen external provider requires a different redirect parameter, update the provider configuration or form hidden field mapping without changing the public route.
 
+## `/[locale]/contact`
+
+**Purpose:** Static-site friendly page for reporting outdated information, broken links, unclear copy, or general feedback through an externally configured form endpoint.
+
+**User goal:** Send a correction or feedback message when contact is enabled, or understand that the form is in preview mode when no endpoint is configured.
+
+**Data source:** Localized static UI copy and `PUBLIC_CONTACT_FORM_ENDPOINT`.
+
+**Rendering mode:** Static Astro pages through `ContactPage`.
+
+**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, and locale alternates. The page must clearly state that email is optional/private, sensitive information should not be sent, and the repo does not provide a built-in support backend.
+
+**Current status:** Implemented for all four locales in Phase 1O. If `PUBLIC_CONTACT_FORM_ENDPOINT` is unset, the page stays in preview mode and the submit button is disabled. If the endpoint is set, the form posts with `method="POST"` to that endpoint. The form includes provider-agnostic hidden fields: `formName`, `source`, `locale`, `redirectUrl`, and `publicResponse`. It also includes a visually hidden `company` honeypot field for basic spam reduction.
+
+**Future notes:** External form providers may require a provider-specific redirect field instead of `redirectUrl`. Do not add database-backed support, analytics, or CRM behavior without a separate privacy/security review.
+
+## `/[locale]/contact/thanks`
+
+**Purpose:** Thank-you page shown after an external contact/corrections provider redirects back to the site.
+
+**User goal:** Confirm that the correction or feedback message was sent and understand how TachiSuke may use it.
+
+**Data source:** Localized static UI copy.
+
+**Rendering mode:** Static Astro pages through `ContactThanksPage`.
+
+**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, locale alternates, and internal links to home, articles, and editorial policy.
+
+**Current status:** Implemented for all four locales in Phase 1O.
+
+**Future notes:** If the chosen external provider requires a different redirect parameter, update provider configuration or form hidden field mapping without changing the public route.
+
 ## `/[locale]/about`
 
 **Purpose:** Explain what TachiSuke is and what the MVP focuses on.
@@ -317,7 +349,7 @@ All public pages should:
 
 **Current status:** Implemented for all four locales.
 
-**Future notes:** Add contributor guidelines and a clearer correction/contact workflow later.
+**Future notes:** Add contributor guidelines once the static contact/corrections workflow has enough real usage.
 
 ## `/[locale]/privacy`
 
@@ -331,7 +363,7 @@ All public pages should:
 
 **SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, locale alternates, and footer links from all public pages.
 
-**Current status:** Implemented for all four locales in Phase 1M. The page states that account/favorites/submissions are placeholders, submit-place only posts to an external endpoint when configured, email is optional/private, and future auth/database features require a fuller privacy review.
+**Current status:** Implemented for all four locales in Phase 1M. The page states that account/favorites/submissions are placeholders, submit-place and contact/corrections only post to external endpoints when configured, email is optional/private, and future auth/database features require a fuller privacy review.
 
 **Future notes:** Replace this with a reviewed production privacy policy before collecting personal account data, adding analytics, or storing database-backed submissions.
 
@@ -349,7 +381,7 @@ All public pages should:
 
 **Current status:** Implemented for all four locales in Phase 1M. The page explains that user-submitted places are not published directly, editors may normalize content, and mobile/place/area information can change.
 
-**Future notes:** Add correction, source-review, and contributor guidelines once the editorial workflow is more mature.
+**Future notes:** Add source-review and contributor guidelines once the editorial workflow is more mature.
 
 ## `/[locale]/account/login`
 

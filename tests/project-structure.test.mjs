@@ -89,6 +89,8 @@ const requiredFiles = [
   "src/components/pages/AreaDetailPage.astro",
   "src/components/pages/ToolDetailPage.astro",
   "src/components/pages/SubmitPlaceThanksPage.astro",
+  "src/components/pages/ContactPage.astro",
+  "src/components/pages/ContactThanksPage.astro",
   "src/components/pages/PolicyPage.astro",
   "src/components/mobile/MobilePlanCard.astro",
   "src/components/favorites/FavoriteButtonPlaceholder.astro",
@@ -143,6 +145,8 @@ const localePages = [
   "tools/[slug].astro",
   "submit-place.astro",
   "submit-place/thanks.astro",
+  "contact.astro",
+  "contact/thanks.astro",
   "about.astro",
   "privacy.astro",
   "editorial-policy.astro",
@@ -281,14 +285,42 @@ describe("TachiSuke project scaffold", () => {
     const footer = readFileSync(join(root, "src/components/layout/Footer.astro"), "utf8");
     assert.match(footer, /localizePath\(locale,\s*"\/privacy"\)/, "Footer should link to privacy pages");
     assert.match(footer, /localizePath\(locale,\s*"\/editorial-policy"\)/, "Footer should link to editorial policy pages");
+    assert.match(footer, /localizePath\(locale,\s*"\/contact"\)/, "Footer should link to contact/corrections pages");
 
     const sitemap = readFileSync(join(root, "src/pages/sitemap.xml.ts"), "utf8");
     assert.match(sitemap, /"\/privacy"/, "sitemap should include privacy pages");
     assert.match(sitemap, /"\/editorial-policy"/, "sitemap should include editorial policy pages");
+    assert.match(sitemap, /"\/contact"/, "sitemap should include contact/corrections pages");
+    assert.match(sitemap, /"\/contact\/thanks"/, "sitemap should include contact thanks pages");
 
     const policyPage = readFileSync(join(root, "src/components/pages/PolicyPage.astro"), "utf8");
     assert.match(policyPage, /kind:\s*"privacy"\s*\|\s*"editorial-policy"/, "PolicyPage should support both trust page types");
     assert.match(policyPage, /submit-place/, "PolicyPage should explain submission-related privacy or moderation");
+  });
+
+  it("configures contact/corrections as a provider-agnostic static form", () => {
+    const envExample = readFileSync(join(root, ".env.example"), "utf8");
+    assert.match(envExample, /PUBLIC_CONTACT_FORM_ENDPOINT=/, ".env.example should document PUBLIC_CONTACT_FORM_ENDPOINT");
+
+    const contactPage = readFileSync(join(root, "src/components/pages/ContactPage.astro"), "utf8");
+    assert.match(contactPage, /PUBLIC_CONTACT_FORM_ENDPOINT/, "ContactPage should read PUBLIC_CONTACT_FORM_ENDPOINT");
+    assert.match(contactPage, /method="POST"/, "contact form should use POST");
+    assert.match(contactPage, /action=\{formEndpoint\}/, "contact form action should use configured endpoint");
+    assert.match(contactPage, /name="formName"\s+value="contact-corrections"/, "contact form should include formName hidden field");
+    assert.match(contactPage, /name="source"\s+value="tachi-suke"/, "contact form should include source hidden field");
+    assert.match(contactPage, /name="locale"\s+value=\{locale\}/, "contact form should include current locale hidden field");
+    assert.match(contactPage, /name="redirectUrl"\s+value=\{thanksUrl\}/, "contact form should include provider-agnostic redirectUrl hidden field");
+    assert.match(contactPage, /name="publicResponse"\s+value="false"/, "contact form should declare that public response is false");
+    assert.match(contactPage, /name="company"/, "contact form should include a honeypot field");
+    assert.match(contactPage, /class="honeypot-field"/, "honeypot should be visually hidden with a dedicated class");
+    assert.match(contactPage, /disabled=\{!formEndpoint\}/, "submit button should be disabled when endpoint is missing");
+
+    for (const requiredField of ["contactLanguage", "topic", "message"]) {
+      assert.match(contactPage, new RegExp(`name="${requiredField}"[\\s\\S]*?required`), `${requiredField} should be required`);
+    }
+
+    assert.match(contactPage, /name="relatedUrl"\s+type="url"/, "related page URL should use URL input type");
+    assert.match(contactPage, /name="email"\s+type="email"/, "contact email should use email input type");
   });
 
   it("configures submit-place as a provider-agnostic static form", () => {

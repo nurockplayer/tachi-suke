@@ -10,7 +10,7 @@ Repo name: `tachi-suke`
 
 The product helps foreign residents make practical daily-life decisions in Japan. It focuses on topics such as mobile plans, renting, transportation, food, shopping, administrative procedures, practical Japanese, work, and resident-friendly places.
 
-The current MVP is an Astro static site with locale-prefixed routing, content collections, article detail pages, place detail pages, mobile plan detail pages, area detail pages, static tool detail pages, placeholder account pages, placeholder favorite UI, and a submit-place form that can post to a provider-agnostic external endpoint when configured.
+The current MVP is an Astro static site with locale-prefixed routing, content collections, article detail pages, place detail pages, mobile plan detail pages, area detail pages, static tool detail pages, placeholder account pages, placeholder favorite UI, a submit-place form, and a contact/corrections form. Both forms can post to provider-agnostic external endpoints when configured.
 
 ## 2. Brand Concept
 
@@ -149,6 +149,7 @@ The MVP includes:
 - Tool detail pages generated from JSON content with localized checklist sections, source notes, caveats, and `lastCheckedAt`
 - Published tools: `moving-to-japan-checklist`, `japan-rent-initial-cost-checklist`
 - Submit-place form with preview mode, external endpoint support, hidden moderation metadata, and thanks pages
+- Contact/corrections form with preview mode, external endpoint support, hidden provider metadata, honeypot, and thanks pages
 - About pages
 - Account placeholder pages
 - Favorite placeholder button
@@ -179,6 +180,7 @@ The MVP must not implement:
 - Row Level Security policies in runtime code
 - Real favorites
 - Native/database-backed submit-place submission handling
+- Native/database-backed contact/support message handling
 - Public comments
 - Payment features
 - Large CMS or admin dashboard
@@ -211,6 +213,8 @@ Content and section pages:
 - `/[locale]/tools/[slug]`
 - `/[locale]/submit-place`
 - `/[locale]/submit-place/thanks`
+- `/[locale]/contact`
+- `/[locale]/contact/thanks`
 - `/[locale]/about`
 - `/[locale]/privacy`
 - `/[locale]/editorial-policy`
@@ -243,6 +247,12 @@ The submit-place route is static-site friendly in the MVP:
 - `/[locale]/submit-place`
 
 It displays a full form and moderation notice. If `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` is unset, it stays in preview mode and does not send. If configured, it posts to the external endpoint, but the repo still does not store, review, or publish submissions.
+
+The contact/corrections route is also static-site friendly:
+
+- `/[locale]/contact`
+
+It lets users report outdated information, broken links, unclear content, or general feedback. If `PUBLIC_CONTACT_FORM_ENDPOINT` is unset, it stays in preview mode and does not send. If configured, it posts to the external endpoint, but the repo still does not store messages or provide a support backend.
 
 ## 14. Content-First Strategy
 
@@ -306,6 +316,7 @@ Product and content metrics:
 - Published tool pages can serve practical checklist intent without requiring login.
 - Place labels are understandable in each locale and do not expose internal enum values.
 - Submit-place clearly explains moderation and privacy limits.
+- Contact/corrections clearly explains privacy limits, optional email, and that individual replies are not guaranteed.
 - Privacy and editorial policy pages make the static MVP's data, moderation, and content boundaries clear before launch.
 
 Engineering metrics:
@@ -322,6 +333,7 @@ Engineering metrics:
 - SEO metadata includes title, description, canonical URL, Open Graph URL, Open Graph site name, Open Graph image, Twitter card metadata, locale-aware `html lang`, manifest link, and conservative `hreflang`.
 - `sitemap.xml` includes public content and excludes account placeholders.
 - `sitemap.xml` includes public privacy and editorial policy pages.
+- `sitemap.xml` includes public contact/corrections pages.
 - `robots.txt` references the sitemap and disallows placeholder account routes.
 - `feed.xml` includes non-draft public article detail pages across supported locales.
 - Built representative pages include parseable JSON-LD for site identity, article detail pages, place detail pages, mobile plan detail pages, area detail pages, tool detail pages, and breadcrumbs.

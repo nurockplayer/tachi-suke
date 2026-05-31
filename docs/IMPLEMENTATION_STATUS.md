@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1N static rent-cost tool work. It should not be read as a promise that auth, database, database-backed submissions, saved checklist state, or favorites already work.
+This document records the current MVP state after Phase 1O static contact/corrections workflow work. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
 
 ## Completed
 
@@ -26,6 +26,8 @@ This document records the current MVP state after Phase 1N static rent-cost tool
 - Published static checklist tools: `moving-to-japan-checklist` and `japan-rent-initial-cost-checklist`.
 - Four locale submit-place form pages with provider-agnostic endpoint support.
 - Four locale submit-place thanks pages.
+- Four locale contact/corrections form pages with provider-agnostic endpoint support.
+- Four locale contact/corrections thanks pages.
 - Four locale about pages.
 - Four locale privacy pages.
 - Four locale editorial policy pages.
@@ -67,8 +69,10 @@ This document records the current MVP state after Phase 1N static rent-cost tool
 - Locale switcher links for detail pages use conservative alternate paths so missing article translations do not create dead links.
 - Submit-place form uses `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT`: unset means preview mode/disabled submit; set means a static `POST` to the external endpoint.
 - Submit-place includes provider-agnostic hidden fields and a visually hidden `website` honeypot field for basic spam reduction.
+- Contact/corrections form uses `PUBLIC_CONTACT_FORM_ENDPOINT`: unset means preview mode/disabled submit; set means a static `POST` to the external endpoint.
+- Contact/corrections includes provider-agnostic hidden fields and a visually hidden `company` honeypot field for basic spam reduction.
 - Tool detail pages are generated only for `status = published` tools and include localized notes, checklist sections, source note, and last checked date.
-- Footer navigation links to the static privacy and editorial policy pages for all locales.
+- Footer navigation links to contact, privacy, and editorial policy pages for all locales.
 
 ## Placeholder
 
@@ -79,6 +83,7 @@ These are intentionally present but not functional:
 - `/[locale]/account/submissions`
 - `FavoriteButtonPlaceholder`
 - Native/database-backed submit-place storage
+- Native/database-backed contact/support storage
 - `src/lib/auth/`
 - `src/lib/db/`
 - `src/lib/favorites/`
@@ -109,6 +114,7 @@ These are intentionally present but not functional:
 - Mobile plan prices, campaigns, and conditions can change, so users must confirm official sites before applying.
 - Area rent feel, quietness, and commute notes can become stale and need periodic editorial review.
 - Submit-place form only sends data when `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` is configured. The repo does not store submissions.
+- Contact/corrections form only sends data when `PUBLIC_CONTACT_FORM_ENDPOINT` is configured. The repo does not store messages or guarantee individual replies.
 - The honeypot field is basic spam reduction only. It is not a full anti-spam or abuse-prevention system.
 - Place body data is locale-neutral; only UI labels are localized.
 - `hreflang` is conservative, but full translation coverage is not complete.
@@ -150,6 +156,6 @@ Browser QA covered:
 1. Add more real content for renting, administrative procedures, transportation, and practical Japanese.
 2. Add more practical tools, starting with first-week setup, ward-office procedure, and commuter pass checklists.
 3. Choose and configure an external form provider for `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT`.
-4. Add a fuller external link checker or scheduled source-review workflow when route count grows.
-5. Add a production contact/correction flow that still avoids direct public posting.
+4. Choose and configure an external form provider for `PUBLIC_CONTACT_FORM_ENDPOINT`.
+5. Add a fuller external link checker or scheduled source-review workflow when route count grows.
 6. Start Supabase Auth, profiles, favorites, and RLS only in Phase 2.

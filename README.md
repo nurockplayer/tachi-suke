@@ -43,6 +43,8 @@ Implemented:
 - Published static checklist tools: Moving to Japan checklist and Japan rent initial cost checklist
 - Four locale submit-place form pages with provider-agnostic external endpoint support
 - Four locale submit-place thanks pages
+- Four locale contact/corrections form pages with provider-agnostic external endpoint support
+- Four locale contact/corrections thanks pages
 - Four locale about pages
 - Four locale privacy pages
 - Four locale editorial policy pages
@@ -75,6 +77,7 @@ Still placeholder-only:
 - Account submissions
 - Real favorite saving
 - Database-backed submit-place storage
+- Database-backed contact/support storage
 - Supabase Auth
 - Postgres/database integration
 - Row Level Security runtime setup
@@ -108,6 +111,8 @@ Locale routes:
 - `/[locale]/tools/[slug]`
 - `/[locale]/submit-place`
 - `/[locale]/submit-place/thanks`
+- `/[locale]/contact`
+- `/[locale]/contact/thanks`
 - `/[locale]/about`
 - `/[locale]/privacy`
 - `/[locale]/editorial-policy`
@@ -188,6 +193,7 @@ Example:
 ```bash
 SITE_URL=https://tachi-suke.example.com
 PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT=
+PUBLIC_CONTACT_FORM_ENDPOINT=
 ```
 
 `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` controls the static submit-place form:
@@ -196,6 +202,13 @@ PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT=
 - Set to an external form endpoint: the form uses `method="POST"` and posts to that URL.
 
 The endpoint can be Formspree, Netlify Forms, Cloudflare Workers, or a future custom API. TachiSuke does not hard-code a provider. External providers may require mapping the provider-agnostic `redirectUrl` hidden field to their own redirect/next field.
+
+`PUBLIC_CONTACT_FORM_ENDPOINT` controls the static contact/corrections form:
+
+- Empty or unset: preview mode, submit button disabled, no message is sent.
+- Set to an external form endpoint: the form uses `method="POST"` and posts to that URL.
+
+This endpoint is for corrections, outdated information reports, broken links, and general feedback. TachiSuke does not hard-code a provider and does not store contact messages in the repo.
 
 For local setup:
 
@@ -215,6 +228,7 @@ Recommended production settings:
 - Output directory: `dist`
 - Environment variable: `SITE_URL=https://your-production-domain.example`
 - Optional environment variable: `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT=https://your-form-endpoint.example`
+- Optional environment variable: `PUBLIC_CONTACT_FORM_ENDPOINT=https://your-contact-endpoint.example`
 - Optional CLI deploy: `pnpm dlx wrangler pages deploy dist --project-name tachi-suke`
 
 Astro remains the preferred frontend stack for the current content-first MVP. A Next.js migration should wait until the product has a concrete SSR requirement, such as authenticated account pages, personalized saved lists, or server-side workflows.
@@ -242,6 +256,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - Related article links are static, same-locale, and non-personalized.
 - Tool checklist pages are static content pages. They do not save progress, require login, or write to a database in Phase 1.
 - Submit-place can post to an externally configured endpoint, but the repo does not store submissions or include a moderation backend.
+- Contact/corrections can post to an externally configured endpoint, but the repo does not store messages or include a support backend.
 - Do not publish user submissions directly.
 - Privacy and editorial policy pages are static launch-readiness pages, not a substitute for a future legal/privacy review before auth or database-backed personal data.
 - Keep user-facing copy natural for each locale.
@@ -259,7 +274,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - [Page Spec](docs/PAGE_SPEC.md): purpose, data source, SEO, and status for each route.
 - [Content Model](docs/CONTENT_MODEL.md): collections, types, fields, enum values, and visibility rules.
 - [Implementation Status](docs/IMPLEMENTATION_STATUS.md): completed work, placeholders, limitations, and verification.
-- [Acceptance Criteria](docs/ACCEPTANCE_CRITERIA.md): package, build, test, i18n, article, place, submit-place, SEO, placeholder, and readiness criteria.
+- [Acceptance Criteria](docs/ACCEPTANCE_CRITERIA.md): package, build, test, i18n, article, place, submit-place, contact, SEO, placeholder, and readiness criteria.
 - [Content Strategy](docs/CONTENT_STRATEGY.md): editorial direction and first content ideas.
 - [Auth and Favorites](docs/AUTH_AND_FAVORITES.md): future Supabase Auth and favorites direction.
 - [Database Design](docs/DATABASE_DESIGN.md): future Supabase Postgres schema draft.

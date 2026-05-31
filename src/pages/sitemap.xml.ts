@@ -18,6 +18,8 @@ const localeIndexPaths = [
   "/tools",
   "/submit-place",
   "/submit-place/thanks",
+  "/contact",
+  "/contact/thanks",
   "/about",
   "/privacy",
   "/editorial-policy"

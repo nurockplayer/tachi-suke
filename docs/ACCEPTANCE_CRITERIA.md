@@ -162,12 +162,42 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Four locale thanks pages must exist at `/[locale]/submit-place/thanks`.
 - Thanks pages must explain moderation, privacy, non-public email, normalization, and provide links back to places, articles, and home.
 
+## Contact/Corrections Criteria
+
+- `.env.example` must include `PUBLIC_CONTACT_FORM_ENDPOINT`.
+- Four locale contact pages must exist at `/[locale]/contact`.
+- Four locale contact thanks pages must exist at `/[locale]/contact/thanks`.
+- If `PUBLIC_CONTACT_FORM_ENDPOINT` is unset, the page must show preview-mode copy and keep the submit button disabled.
+- If `PUBLIC_CONTACT_FORM_ENDPOINT` is set, the form must use `method="POST"` and enable the submit button.
+- The repo must not hard-code a specific form provider URL.
+- The repo must not store contact messages or implement a support backend in Phase 1.
+- The page must clearly state:
+  - Email is optional/private.
+  - Users should not enter sensitive information.
+  - Users should not enter other people's personal information.
+  - TachiSuke may use reports to correct or improve public content.
+  - Individual replies are not guaranteed.
+- The form must include hidden fields:
+  - `formName = contact-corrections`
+  - `source = tachi-suke`
+  - `locale`
+  - `redirectUrl`
+  - `publicResponse = false`
+- The form must include a visually hidden honeypot field such as `company`.
+- Honeypot is basic spam reduction only and must not be documented as complete spam prevention.
+- Required fields in the UI are:
+  - `contactLanguage`
+  - `topic`
+  - `message`
+- Related page URL must use URL input behavior.
+- Email must use email input behavior.
+
 ## Trust Page Criteria
 
 - Four locale privacy pages must exist at `/[locale]/privacy`.
 - Four locale editorial policy pages must exist at `/[locale]/editorial-policy`.
-- Footer navigation should link to privacy and editorial policy pages.
-- Privacy pages should explain that Phase 1 is static-first, account pages are placeholders, submit-place only posts to an external endpoint when configured, and optional email is private/not public.
+- Footer navigation should link to contact, privacy, and editorial policy pages.
+- Privacy pages should explain that Phase 1 is static-first, account pages are placeholders, submit-place/contact only post to external endpoints when configured, and optional email is private/not public.
 - Editorial policy pages should explain that content is decision-oriented, user-submitted places are moderated, and price/hours/terms can change.
 - These pages must not imply that auth, database-backed submissions, saved user data, analytics, or a final legal policy already exist.
 
@@ -180,7 +210,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Open Graph metadata must include a default `og:image`.
 - Twitter metadata should use `summary_large_image`.
 - Pages should link `/site.webmanifest`.
-- `sitemap.xml` must include public locale roots, section pages, non-draft article details, published place details, area details, mobile plan details, published tool details, submit-place thanks pages, and launch trust pages.
+- `sitemap.xml` must include public locale roots, section pages, non-draft article details, published place details, area details, mobile plan details, published tool details, submit-place thanks pages, contact/corrections pages, and launch trust pages.
 - `sitemap.xml` must exclude account placeholder routes, draft articles, non-published places, and non-published tools.
 - `robots.txt` must reference the sitemap and disallow `/[locale]/account/`.
 - `feed.xml` must be generated as an RSS 2.0 feed for non-draft public article detail pages.
@@ -206,6 +236,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Account/favorites/submissions must not imply that real login, saved items, or submission history already exist.
 - Submit-place must not publish or store user recommendations.
 - Submit-place can post to an external endpoint when configured, but account pages and favorite buttons remain placeholder-only.
+- Contact/corrections can post to an external endpoint when configured, but the repo must not store contact messages or imply a support backend exists.
 - No Supabase client, database client, or auth implementation should be added in Phase 1.
 
 ## Future Auth/Database Readiness Criteria
