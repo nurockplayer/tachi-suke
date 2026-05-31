@@ -35,6 +35,7 @@ This document records the current content collections and TypeScript model bound
 - Article detail pages are generated only for matching-locale articles where `draft = false`.
 - The global `/feed.xml` RSS feed includes only articles where `draft = false`.
 - Locale RSS feeds at `/[locale]/feed.xml` include only matching-locale articles where `draft = false`.
+- Locale search indexes include only matching-locale articles where `draft = false`.
 
 **Future database mapping notes:**
 

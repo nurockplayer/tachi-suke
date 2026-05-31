@@ -70,6 +70,7 @@ After production deploy:
 - Check `/robots.txt`.
 - Check `/feed.xml`.
 - Check a representative locale feed such as `/en/feed.xml`.
+- Check `/en/search` and `/en/search-index.json`.
 - Check `/404.html`.
 - Check a representative article detail page.
 - Check a representative mobile, area, place, and tool detail page.

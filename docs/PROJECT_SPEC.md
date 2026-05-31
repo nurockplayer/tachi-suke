@@ -10,7 +10,7 @@ Repo name: `tachi-suke`
 
 The product helps foreign residents make practical daily-life decisions in Japan. It focuses on topics such as mobile plans, renting, transportation, food, shopping, administrative procedures, practical Japanese, work, and resident-friendly places.
 
-The current MVP is an Astro static site with locale-prefixed routing, content collections, article detail pages, place detail pages, mobile plan detail pages, area detail pages, static tool detail pages, global and locale-specific RSS feeds, placeholder account pages, placeholder favorite UI, a submit-place form, and a contact/corrections form. Both forms can post to provider-agnostic external endpoints when configured.
+The current MVP is an Astro static site with locale-prefixed routing, content collections, article detail pages, place detail pages, mobile plan detail pages, area detail pages, static tool detail pages, static public-content search, global and locale-specific RSS feeds, placeholder account pages, placeholder favorite UI, a submit-place form, and a contact/corrections form. Both forms can post to provider-agnostic external endpoints when configured.
 
 ## 2. Brand Concept
 
@@ -149,6 +149,8 @@ The MVP includes:
 - Tools index pages with published tool cards
 - Tool detail pages generated from JSON content with localized checklist sections, source notes, caveats, and `lastCheckedAt`
 - Published tools: `moving-to-japan-checklist`, `japan-rent-initial-cost-checklist`
+- Static search pages at `/[locale]/search`
+- Static search index JSON endpoints at `/[locale]/search-index.json`
 - Submit-place form with preview mode, external endpoint support, hidden moderation metadata, and thanks pages
 - Contact/corrections form with preview mode, external endpoint support, hidden provider metadata, honeypot, and thanks pages
 - About pages
@@ -214,6 +216,8 @@ Content and section pages:
 - `/[locale]/mobile/[slug]`
 - `/[locale]/tools`
 - `/[locale]/tools/[slug]`
+- `/[locale]/search`
+- `/[locale]/search-index.json`
 - `/[locale]/submit-place`
 - `/[locale]/submit-place/thanks`
 - `/[locale]/contact`
@@ -319,6 +323,7 @@ Product and content metrics:
 - Article and place detail pages are indexable and readable.
 - Article pages guide readers to related same-locale articles.
 - Published tool pages can serve practical checklist intent without requiring login.
+- Users can search current public content without login or a backend.
 - Place labels are understandable in each locale and do not expose internal enum values.
 - Submit-place clearly explains moderation and privacy limits.
 - Contact/corrections clearly explains privacy limits, optional email, and that individual replies are not guaranteed.
@@ -340,6 +345,7 @@ Engineering metrics:
 - `sitemap.xml` includes public content and excludes account placeholders.
 - `sitemap.xml` includes public privacy and editorial policy pages.
 - `sitemap.xml` includes public contact/corrections pages.
+- `sitemap.xml` excludes noindex search pages and search index JSON endpoints.
 - `robots.txt` references the sitemap and disallows placeholder account routes.
 - `404.html` is generated, marked `noindex, nofollow`, and excluded from `sitemap.xml`.
 - `feed.xml` includes non-draft public article detail pages across supported locales.

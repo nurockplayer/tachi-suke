@@ -123,6 +123,22 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Phase 1 tool pages must stay static and must not imply that checklist progress is saved.
 - Phase 1N must keep at least two published static tools, including `moving-to-japan-checklist` and `japan-rent-initial-cost-checklist`.
 
+## Static Search Criteria
+
+- Four locale search pages must exist at `/[locale]/search`.
+- Four locale search index JSON endpoints must exist at `/[locale]/search-index.json`.
+- Search pages must be static and must not require login, a database, a hosted search service, or a server runtime.
+- Search pages must use `robots="noindex, follow"`.
+- Search pages and search index JSON endpoints must not appear in `sitemap.xml`.
+- Search indexes must include only public content:
+  - matching-locale non-draft articles
+  - published places
+  - current mobile plans
+  - current area guides
+  - published tools
+- Search indexes must not include account placeholders, draft articles, non-published places, planned tools, form submissions, or private user data.
+- Search should remain dependency-free in Phase 1 unless a future phase explicitly scopes a search service.
+
 ## Submit-Place Criteria
 
 - Submit-place pages must remain static-site friendly in Phase 1C.
@@ -211,7 +227,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Twitter metadata should use `summary_large_image`.
 - Pages should link `/site.webmanifest`.
 - `sitemap.xml` must include public locale roots, section pages, locale RSS feeds, non-draft article details, published place details, area details, mobile plan details, published tool details, submit-place thanks pages, contact/corrections pages, and launch trust pages.
-- `sitemap.xml` must exclude account placeholder routes, draft articles, non-published places, and non-published tools.
+- `sitemap.xml` must exclude account placeholder routes, draft articles, non-published places, non-published tools, search pages, and search index JSON endpoints.
 - `robots.txt` must reference the sitemap and disallow `/[locale]/account/`.
 - `feed.xml` must be generated as an RSS 2.0 feed for non-draft public article detail pages.
 - `/[locale]/feed.xml` must be generated as an RSS 2.0 feed for same-locale non-draft public article detail pages.

@@ -92,6 +92,8 @@ describe("static SEO output", () => {
     }
 
     for (const excludedPath of [
+      "/en/search",
+      "/en/search-index.json",
       "/zh-tw/account/login",
       "/en/account/favorites",
       "/ja/account/submissions",
@@ -167,6 +169,37 @@ describe("static SEO output", () => {
     assert.match(zhTwFeed, /<dc:language>zh-Hant-TW<\/dc:language>/);
     assert.match(zhTwFeed, /<link>https:\/\/tachi-suke\.example\.com\/zh-tw\/articles\/taiwanese-newcomer-mobile-plan-japan<\/link>/);
     assert.doesNotMatch(zhTwFeed, /\/en\/articles\//, "zh-tw feed should not include English article URLs");
+  });
+
+  it("generates noindex locale search pages and public search index JSON", () => {
+    const html = readHtml("en/search/index.html");
+    assert.match(html, /Search \| TachiSuke/, "search page should have an SEO title");
+    assert.match(html, /name="robots" content="noindex, follow"/, "search page should be noindex but follow links");
+    assert.match(html, /data-search-input/, "search page should include the client-side search input");
+    assert.match(html, /href="\/en\/articles\/choose-mobile-plan-japan-foreigner"/, "search page should render static article results");
+    assert.doesNotMatch(html, /<h2><a href="\/en\/account\//, "search page should not render account placeholder results");
+
+    const index = JSON.parse(readDist("en/search-index.json"));
+    assert.equal(index.locale, "en");
+    assert.ok(Array.isArray(index.items), "search index should include items");
+    assert.ok(index.items.length >= 10, "English search index should include public content across collections");
+
+    const types = new Set(index.items.map((item) => item.type));
+    for (const type of ["article", "place", "mobile_plan", "area", "tool"]) {
+      assert.ok(types.has(type), `search index should include ${type} entries`);
+    }
+
+    assert.ok(
+      index.items.some((item) => item.url === "/en/articles/choose-mobile-plan-japan-foreigner"),
+      "search index should include English public articles"
+    );
+    assert.ok(
+      index.items.some((item) => item.url === "/en/places/dennys"),
+      "search index should include published places"
+    );
+    assert.equal(index.items.some((item) => item.url.startsWith("/zh-tw/articles/")), false, "English search index should not include zh-tw article URLs");
+    assert.equal(index.items.some((item) => item.url.includes("/account/")), false, "search index should not include account placeholders");
+    assert.equal(JSON.stringify(index).toLowerCase().includes("draft"), false, "search index should not expose draft metadata");
   });
 
   it("renders article and breadcrumb JSON-LD on article detail pages", () => {

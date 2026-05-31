@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1R locale RSS feed work. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
+This document records the current MVP state after Phase 1S static search work. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
 
 ## Completed
 
@@ -24,6 +24,8 @@ This document records the current MVP state after Phase 1R locale RSS feed work.
 - Four locale mobile detail routes at `/[locale]/mobile/[slug]`.
 - Four locale tools index pages showing published tool cards.
 - Four locale tool detail routes at `/[locale]/tools/[slug]`.
+- Four locale static search pages at `/[locale]/search`, marked `noindex, follow`.
+- Four locale static search index JSON endpoints at `/[locale]/search-index.json`.
 - Published static checklist tools: `moving-to-japan-checklist` and `japan-rent-initial-cost-checklist`.
 - Four locale submit-place form pages with provider-agnostic endpoint support.
 - Four locale submit-place thanks pages.
@@ -103,7 +105,6 @@ These are intentionally present but not functional:
 
 ## Not Started
 
-- Site search.
 - Map UI.
 - Native submission backend.
 - Authenticated account pages.
@@ -125,6 +126,8 @@ These are intentionally present but not functional:
 - `pnpm test` scans Markdown article links and generated/static source routes.
 - `pnpm check:links` scans built static HTML root-relative links in `dist/`, but it does not validate external links, anchors, JavaScript behavior, form submission behavior, or visual rendering.
 - RSS feeds are static and article-only. They do not include category feeds, pagination, places, tools, mobile plans, or area guides.
+- Static search is substring-based client-side filtering. It does not provide typo tolerance, semantic search, pagination, analytics, or personalization.
+- Search pages are noindex utility pages and are intentionally excluded from `sitemap.xml`.
 - `/404.html` is static and noindex. It does not perform language detection or redirects.
 - Related article links are static and rule-based. They are not personalized and do not use analytics.
 - Correction prompts are static links to `/[locale]/contact`; they do not prefill form fields, track reports, or guarantee individual replies.
@@ -134,7 +137,7 @@ These are intentionally present but not functional:
 - Cloudflare Pages is the preferred static deployment target for Phase 1. Set `SITE_URL` to the production domain before launch.
 - CI verifies the static site but does not deploy it. Cloudflare Pages deployment remains separate.
 - Deployment credentials and Cloudflare account-specific secrets are intentionally not committed.
-- Browser QA currently covers basic route/card/form checks, not a full accessibility or visual regression suite.
+- Browser QA currently covers basic route/card/form/search checks, not a full accessibility or visual regression suite.
 - Accessibility work currently covers baseline keyboard navigation only, not a complete WCAG audit.
 - Privacy and editorial policy pages are launch-readiness guidance for the current static MVP, not a final legal review for future auth, analytics, or database-backed personal data.
 
@@ -147,7 +150,7 @@ Most recent recorded verification:
 - `pnpm build`: passed
 - `pnpm check:links`: passed
 - `pnpm check:seo`: passed
-- Browser QA: basic route/card/form check passed
+- Browser QA: basic route/card/form/search check passed
 
 Browser QA covered:
 
@@ -155,6 +158,7 @@ Browser QA covered:
 - Submit-place form field interaction.
 - Required fields and URL/email input types.
 - Disabled submit button.
+- Headless Chrome check for `/en/search`: typing `Denny` filters results to `Denny's` and preserves `noindex, follow`.
 - No observed console error/warning during the checked flows.
 
 ## Next Recommended Tasks

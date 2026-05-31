@@ -112,6 +112,38 @@ All public pages should:
 
 **Future notes:** Keep feeds static and lightweight. Do not add per-category feeds, pagination, or runtime feed generation until content volume requires it.
 
+## `/[locale]/search`
+
+**Purpose:** Static utility page for searching public TachiSuke content in one locale.
+
+**User goal:** Find relevant articles, places, mobile plans, area guides, and tools without manually browsing every section.
+
+**Data source:** Public entries from `articles`, `places`, `mobile-plans`, `areas`, and `tools` content collections through `src/lib/content/search.ts`.
+
+**Rendering mode:** Static Astro pages through `SearchPage`. Initial HTML includes browseable result cards, and vanilla client-side JavaScript filters results in the browser.
+
+**SEO requirements:** Use a meaningful title and description, locale-aware `html lang`, canonical URL, Open Graph metadata, and `robots="noindex, follow"`. Search pages are utility pages and should not appear in `sitemap.xml`.
+
+**Current status:** Implemented for all four locales in Phase 1S and linked from the primary navigation.
+
+**Future notes:** Current search is substring-based and dependency-free. Add typo tolerance, ranking, pagination, or hosted search only after content volume justifies it.
+
+## `/[locale]/search-index.json`
+
+**Purpose:** Static JSON index used by the locale search page.
+
+**User goal:** Not directly user-facing; supports fast client-side filtering over public content.
+
+**Data source:** `src/lib/content/search.ts`, which filters to public content only: non-draft same-locale articles, published places, all current mobile plans, all current area guides, and published tools.
+
+**Rendering mode:** Static Astro JSON endpoint.
+
+**SEO requirements:** Must be valid JSON and excluded from `sitemap.xml`. It should not include draft articles, account placeholders, non-published places, planned tools, form data, or private data.
+
+**Current status:** Implemented for all four locales in Phase 1S.
+
+**Future notes:** If index size grows substantially, consider splitting by type or moving to a dedicated search service in a separately scoped phase.
+
 ## `/404.html`
 
 **Purpose:** Static missing-page recovery page for Cloudflare Pages and other static hosts.
