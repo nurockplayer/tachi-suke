@@ -719,6 +719,28 @@ Rules:
 - Municipality procedures, deadlines, documents, and language support can vary.
 - Do not add saved checklist state, account requirements, backend storage, or a database in Phase 1AE.
 
+## Phase 1AF: Commuter Pass and IC Card Checklist
+
+Status: implemented.
+
+Goal:
+
+Add a transportation-life checklist for readers deciding whether to buy a commuter pass and how to prepare Suica/PASMO-style IC card details without adding fare calculation or route search.
+
+Implemented:
+
+- Added the fourth published static tool, `commuter-pass-ic-card-checklist`.
+- Reused optional `sourceLinks` to cite Tokyo Metro and PASMO official confirmation pages.
+- Covered route preparation, purchase details, daily-use caveats, and change/loss/refund reminders.
+- Added source-level and SEO-output checks for the new tool and source links.
+
+Rules:
+
+- Do not present the tool as a fare calculator.
+- Operator rules, purchasable route segments, student proof, refunds, changes, and mobile IC support can vary.
+- Keep pass purchase decisions source-backed and date-aware.
+- Do not add saved commute profiles, route search integrations, backend storage, or a database in Phase 1AF.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.

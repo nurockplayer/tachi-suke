@@ -1,0 +1,191 @@
+{
+  "id": "tool-commuter-pass-ic-card-checklist",
+  "slug": "commuter-pass-ic-card-checklist",
+  "title": {
+    "zh-tw": "通勤定期券／IC 卡清單",
+    "en": "Commuter Pass and IC Card Checklist",
+    "ja": "通勤定期券・ICカードチェックリスト",
+    "ko": "통근 정기권·IC 카드 체크리스트"
+  },
+  "description": {
+    "zh-tw": "用這份清單判斷是否該買通勤定期券、要準備哪些路線與證明資訊，以及 Suica／PASMO 等 IC 卡在日常通勤中的注意事項。",
+    "en": "A practical checklist for deciding whether to buy a commuter pass, preparing route and proof details, and avoiding common Suica/PASMO IC card commute mistakes.",
+    "ja": "通勤定期券を買うべきか、必要な経路・証明情報をどう準備するか、Suica/PASMOなどICカード利用時の注意点を整理するチェックリストです。",
+    "ko": "통근 정기권을 살지 판단하고, 필요한 노선·증명 정보를 준비하며, Suica/PASMO 같은 IC 카드 통근 실수를 줄이기 위한 체크리스트입니다."
+  },
+  "status": "published",
+  "lastCheckedAt": "2026-06-01",
+  "sourceNote": {
+    "zh-tw": "本站依東京圈常見通勤與 IC 卡使用情境整理，並連到鐵道公司與 PASMO 官方資訊作為確認入口。定期券可購買路線、學生資格、退費、變更與行動 IC 支援會因公司、區間與卡片種類而不同。",
+    "en": "Compiled from common Tokyo-area commute and IC card use cases, with operator and PASMO official pages linked for confirmation. Eligible routes, student proof, refunds, changes, and mobile IC support vary by operator, segment, and card type.",
+    "ja": "東京圏でよくある通勤・ICカード利用の場面をもとに整理し、鉄道会社とPASMO公式情報への確認リンクを掲載しています。購入できる区間、学生証明、払い戻し、変更、モバイルIC対応は会社、区間、カード種類によって異なります。",
+    "ko": "도쿄권에서 자주 있는 통근 및 IC 카드 이용 상황을 기준으로 정리하고, 철도회사와 PASMO 공식 정보 확인 링크를 제공합니다. 구매 가능한 구간, 학생 증명, 환불, 변경, 모바일 IC 지원은 회사, 구간, 카드 종류에 따라 다릅니다."
+  },
+  "sourceLinks": [
+    {
+      "label": {
+        "zh-tw": "Tokyo Metro：學生／通勤定期券",
+        "en": "Tokyo Metro: Student/Commuter Railway Pass",
+        "ja": "東京メトロ：通学・通勤定期券",
+        "ko": "도쿄메트로: 통학·통근 정기권"
+      },
+      "url": "https://www.tokyometro.jp/lang_en/ticket/types/pass/commuter/index.html"
+    },
+    {
+      "label": {
+        "zh-tw": "Tokyo Metro：PASMO IC 卡",
+        "en": "Tokyo Metro: PASMO IC Card",
+        "ja": "東京メトロ：PASMO ICカード",
+        "ko": "도쿄메트로: PASMO IC 카드"
+      },
+      "url": "https://www.tokyometro.jp/en/ticket/pasmo/index.html"
+    },
+    {
+      "label": {
+        "zh-tw": "PASMO 官方：使用 PASMO",
+        "en": "PASMO: Using PASMO",
+        "ja": "PASMO公式：PASMOを使う",
+        "ko": "PASMO 공식: PASMO 사용하기"
+      },
+      "url": "https://www.pasmo.co.jp/visitors/en/use/"
+    }
+  ],
+  "notes": [
+    {
+      "zh-tw": "這份清單不是票價計算器。購買前請用實際上學、上班路線與鐵道公司的 fare/commuter pass 查詢確認。",
+      "en": "This is not a fare calculator. Before buying, confirm with your real school or work route and the operator's fare or commuter pass search.",
+      "ja": "これは運賃計算ツールではありません。購入前に、実際の通学・通勤経路と鉄道会社の運賃・定期券検索で確認してください。",
+      "ko": "이 도구는 운임 계산기가 아닙니다. 구매 전 실제 학교·직장 경로와 철도회사 운임·정기권 검색으로 확인하세요."
+    },
+    {
+      "zh-tw": "公司交通費、學校通學證明、學生定期券資格與可購買區間，請依公司、學校與鐵道公司規則確認。",
+      "en": "Confirm commuter allowance, school proof, student-pass eligibility, and purchasable route segments with your employer, school, and rail operator.",
+      "ja": "交通費支給、通学証明、学生定期券の資格、購入できる区間は勤務先、学校、鉄道会社のルールで確認してください。",
+      "ko": "교통비 지급, 통학 증명, 학생 정기권 자격, 구매 가능한 구간은 회사, 학교, 철도회사 규칙으로 확인하세요."
+    },
+    {
+      "zh-tw": "定期券退費、路線變更、遺失補發與行動 IC 卡支援會變動，請以發行公司最新資訊為準。",
+      "en": "Refunds, route changes, lost-card reissue, and mobile IC support can change. Use the issuing operator's latest information.",
+      "ja": "払い戻し、区間変更、紛失再発行、モバイルIC対応は変わる場合があります。発行会社の最新情報を確認してください。",
+      "ko": "환불, 구간 변경, 분실 재발급, 모바일 IC 지원은 바뀔 수 있습니다. 발행 회사의 최신 정보를 확인하세요."
+    }
+  ],
+  "sections": [
+    {
+      "id": "decide-if-worth-it",
+      "title": {
+        "zh-tw": "先判斷是否值得買",
+        "en": "Decide whether it is worth buying",
+        "ja": "買う価値があるか判断する",
+        "ko": "구매할 가치가 있는지 판단"
+      },
+      "items": [
+        {
+          "zh-tw": "寫下固定的出發站、到達站、轉乘站與實際通勤天數，不要只用地圖推薦路線決定。",
+          "en": "Write down your fixed origin, destination, transfer stations, and real commute days instead of relying only on a map's suggested route.",
+          "ja": "地図アプリのおすすめだけで決めず、固定の出発駅、到着駅、乗換駅、実際の通勤日数を書き出す。",
+          "ko": "지도 앱 추천만 믿지 말고 고정 출발역, 도착역, 환승역, 실제 통근 일수를 적는다."
+        },
+        {
+          "zh-tw": "比較單次來回交通費與 1 個月、3 個月、6 個月定期券成本，並估算請假、遠端工作或出差日。",
+          "en": "Compare round-trip fares with 1-month, 3-month, and 6-month pass prices, then account for leave, remote work, and business travel days.",
+          "ja": "往復運賃と1か月、3か月、6か月定期券の金額を比べ、休み、在宅勤務、出張日も考える。",
+          "ko": "왕복 운임과 1개월, 3개월, 6개월 정기권 가격을 비교하고 휴가, 재택근무, 출장일도 고려한다."
+        },
+        {
+          "zh-tw": "確認公司或學校是否指定路線、起訖站、最便宜路線或最合理路線。",
+          "en": "Confirm whether your employer or school requires a specific route, station pair, cheapest route, or most reasonable route.",
+          "ja": "勤務先や学校が指定する経路、発着駅、最安経路、合理的な経路があるか確認する。",
+          "ko": "회사나 학교가 지정하는 경로, 출발·도착역, 최저가 경로, 합리적 경로가 있는지 확인한다."
+        }
+      ]
+    },
+    {
+      "id": "prepare-purchase-details",
+      "title": {
+        "zh-tw": "購買前準備資料",
+        "en": "Prepare purchase details",
+        "ja": "購入前に情報を準備する",
+        "ko": "구매 전 정보 준비"
+      },
+      "items": [
+        {
+          "zh-tw": "準備車站名稱的日文漢字、路線名稱、轉乘站與想購買的期間，降低售票機或窗口操作錯誤。",
+          "en": "Prepare station names in Japanese, line names, transfer stations, and desired pass duration to reduce machine or counter mistakes.",
+          "ja": "券売機や窓口で間違えないよう、駅名の漢字、路線名、乗換駅、購入したい期間を準備する。",
+          "ko": "발권기나 창구에서 실수하지 않도록 역 이름 한자, 노선명, 환승역, 구매 기간을 준비한다."
+        },
+        {
+          "zh-tw": "如果要買學生定期券，先向學校確認通學證明、學生證或指定購買流程。",
+          "en": "For a student commuter pass, ask your school about proof of commuting, student ID, or any required purchase process.",
+          "ja": "学生定期券を買う場合は、通学証明、学生証、指定された購入手順を学校に確認する。",
+          "ko": "학생 정기권을 살 경우 통학 증명, 학생증, 지정 구매 절차를 학교에 확인한다."
+        },
+        {
+          "zh-tw": "確認這張定期券應該放在 Suica、PASMO、Mobile Suica、Mobile PASMO 或其他發行公司指定媒介。",
+          "en": "Confirm whether the pass should be on Suica, PASMO, Mobile Suica, Mobile PASMO, or another medium specified by the issuing operator.",
+          "ja": "定期券をSuica、PASMO、モバイルSuica、モバイルPASMO、または発行会社指定の媒体に載せるか確認する。",
+          "ko": "정기권을 Suica, PASMO, Mobile Suica, Mobile PASMO 또는 발행 회사가 지정한 매체에 넣어야 하는지 확인한다."
+        }
+      ]
+    },
+    {
+      "id": "daily-use",
+      "title": {
+        "zh-tw": "日常使用時注意",
+        "en": "Daily use checks",
+        "ja": "日常利用時の確認",
+        "ko": "일상 이용 시 확인"
+      },
+      "items": [
+        {
+          "zh-tw": "確認定期券涵蓋的是哪一段路線；超出區間、不同公司或繞路時可能會另外扣款。",
+          "en": "Confirm the exact covered segment. Extra fares may apply outside the segment, with other operators, or when taking a detour.",
+          "ja": "定期券の対象区間を確認する。区間外、別会社、遠回りでは追加運賃が必要な場合があります。",
+          "ko": "정기권 적용 구간을 확인한다. 구간 외, 다른 회사, 우회 경로에서는 추가 운임이 필요할 수 있다."
+        },
+        {
+          "zh-tw": "即使有定期券，也保留足夠 IC 餘額，以便支付區間外、巴士、電子錢包或臨時路線。",
+          "en": "Keep enough IC balance even with a commuter pass for out-of-segment fares, buses, e-money, or temporary route changes.",
+          "ja": "定期券があっても、区間外運賃、バス、電子マネー、一時的な経路変更に備えてIC残高を残す。",
+          "ko": "정기권이 있어도 구간 외 운임, 버스, 전자머니, 임시 경로 변경에 대비해 IC 잔액을 남겨 둔다."
+        },
+        {
+          "zh-tw": "第一次使用新定期券時，保留收據並確認閘門、IC 顯示與 app 內資訊是否符合預期。",
+          "en": "When using a new pass for the first time, keep the receipt and check the gate display, IC card display, or app details.",
+          "ja": "新しい定期券を初めて使うときは、控えを保管し、改札表示、IC表示、アプリ情報を確認する。",
+          "ko": "새 정기권을 처음 사용할 때는 영수증을 보관하고 개찰구 표시, IC 표시, 앱 정보를 확인한다."
+        }
+      ]
+    },
+    {
+      "id": "changes-loss-refunds",
+      "title": {
+        "zh-tw": "變更、遺失與退費",
+        "en": "Changes, loss, and refunds",
+        "ja": "変更・紛失・払い戻し",
+        "ko": "변경, 분실, 환불"
+      },
+      "items": [
+        {
+          "zh-tw": "搬家、換學校、換公司或通勤路線改變時，先查是否能變更區間或需要退費重買。",
+          "en": "If you move, change school, change job, or alter your route, check whether the segment can be changed or whether refund and repurchase are needed.",
+          "ja": "引っ越し、転校、転職、経路変更がある場合、区間変更できるか、払い戻して買い直す必要があるか確認する。",
+          "ko": "이사, 전학, 이직, 경로 변경이 있을 때 구간 변경이 가능한지, 환불 후 재구매가 필요한지 확인한다."
+        },
+        {
+          "zh-tw": "使用記名式 IC 卡或定期券時，確認遺失補發條件、本人確認文件與可停止使用的流程。",
+          "en": "For registered IC cards or commuter passes, confirm lost-card reissue conditions, identity documents, and suspension procedures.",
+          "ja": "記名式ICカードや定期券は、紛失再発行条件、本人確認書類、利用停止手順を確認する。",
+          "ko": "기명식 IC 카드나 정기권은 분실 재발급 조건, 본인 확인 서류, 이용 정지 절차를 확인한다."
+        },
+        {
+          "zh-tw": "保留購買收據、定期券內容截圖與公司／學校申請紀錄，日後報銷或更正時比較容易說明。",
+          "en": "Keep purchase receipts, screenshots of pass details, and employer or school application records for reimbursement or corrections.",
+          "ja": "購入控え、定期券内容のスクリーンショット、勤務先・学校への申請記録を保管し、精算や訂正に備える。",
+          "ko": "구매 영수증, 정기권 상세 화면, 회사·학교 신청 기록을 보관해 정산이나 수정에 대비한다."
+        }
+      ]
+    }
+  ]
+}

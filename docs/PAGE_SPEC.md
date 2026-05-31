@@ -348,7 +348,7 @@ All public pages should:
 
 **SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, and locale alternates.
 
-**Current status:** Implemented as an index/entry page with published tool cards. Phase 1H adds `moving-to-japan-checklist`; Phase 1N adds `japan-rent-initial-cost-checklist`; Phase 1AE adds `ward-office-moving-in-checklist`.
+**Current status:** Implemented as an index/entry page with published tool cards. Phase 1H adds `moving-to-japan-checklist`; Phase 1N adds `japan-rent-initial-cost-checklist`; Phase 1AE adds `ward-office-moving-in-checklist`; Phase 1AF adds `commuter-pass-ic-card-checklist`.
 
 **Future notes:** Add filters or groupings once there are enough published tools. Keep this page clear that account-based saved progress is not available in Phase 1.
 
@@ -364,7 +364,7 @@ All public pages should:
 
 **SEO requirements:** Use localized tool `title` and `description`, canonical URL, Open Graph metadata, locale-aware `html lang`, visible breadcrumbs, conservative `WebPage` JSON-LD, `ItemList` JSON-LD for checklist items, `BreadcrumbList` JSON-LD, and locale alternates only for generated tool detail routes. Published tool detail routes should appear in `sitemap.xml`.
 
-**Current status:** Implemented for all four locales. Published tools currently include `moving-to-japan-checklist`, `japan-rent-initial-cost-checklist`, and `ward-office-moving-in-checklist`, with localized sections, notes, source note, and last checked date. Tools can render official source links when provided.
+**Current status:** Implemented for all four locales. Published tools currently include `moving-to-japan-checklist`, `japan-rent-initial-cost-checklist`, `ward-office-moving-in-checklist`, and `commuter-pass-ic-card-checklist`, with localized sections, notes, source note, and last checked date. Tools can render official source links when provided.
 
 **Future notes:** Current checklist interaction is local to the page and does not persist progress. Saved tool state should wait for Phase 2 auth/database work or a separately scoped static-friendly storage decision.
 

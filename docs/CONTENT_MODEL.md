@@ -228,6 +228,7 @@ Current published tools:
 - `moving-to-japan-checklist`
 - `japan-rent-initial-cost-checklist`
 - `ward-office-moving-in-checklist`
+- `commuter-pass-ic-card-checklist`
 
 **Required fields:**
 

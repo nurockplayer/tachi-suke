@@ -28,7 +28,7 @@ This document records the current MVP state after Phase 1S static search work. I
 - Four locale tool detail routes at `/[locale]/tools/[slug]`.
 - Four locale static search pages at `/[locale]/search`, marked `noindex, follow`, with shareable `?q=` query support.
 - Four locale static search index JSON endpoints at `/[locale]/search-index.json`.
-- Published static checklist tools: `moving-to-japan-checklist`, `japan-rent-initial-cost-checklist`, and `ward-office-moving-in-checklist`.
+- Published static checklist tools: `moving-to-japan-checklist`, `japan-rent-initial-cost-checklist`, `ward-office-moving-in-checklist`, and `commuter-pass-ic-card-checklist`.
 - Four locale submit-place form pages with provider-agnostic endpoint support.
 - Four locale submit-place thanks pages.
 - Four locale contact/corrections form pages with provider-agnostic endpoint support.

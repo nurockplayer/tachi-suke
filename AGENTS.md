@@ -212,7 +212,7 @@ Phase 1H adds static tools and checklists:
 - Tool detail pages exist at `/[locale]/tools/[slug]`.
 - Published tools are generated from `src/content/tools`.
 - Tool fields include localized `title`, `description`, `sourceNote`, optional `sourceLinks`, `notes`, checklist `sections`, and `lastCheckedAt`.
-- Published Phase 1 tools include `moving-to-japan-checklist`, `japan-rent-initial-cost-checklist`, and `ward-office-moving-in-checklist`.
+- Published Phase 1 tools include `moving-to-japan-checklist`, `japan-rent-initial-cost-checklist`, `ward-office-moving-in-checklist`, and `commuter-pass-ic-card-checklist`.
 - Checklist pages are static and must not imply saved progress, login, or database persistence.
 - Only `status = published` tools should appear in public list/detail pages.
 

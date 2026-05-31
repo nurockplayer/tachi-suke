@@ -521,10 +521,11 @@ describe("TachiSuke project scaffold", () => {
     }
 
     const publishedTools = listFiles("src/content/tools", [".json"]).map(readJson).filter((tool) => tool.status === "published");
-    assert.ok(publishedTools.length >= 3, "Phase 1AE should publish at least three static tools");
+    assert.ok(publishedTools.length >= 4, "Phase 1AF should publish at least four static tools");
     assert.ok(publishedTools.some((tool) => tool.slug === "moving-to-japan-checklist"), "moving checklist should stay published");
     assert.ok(publishedTools.some((tool) => tool.slug === "japan-rent-initial-cost-checklist"), "rent initial cost checklist should be published");
     assert.ok(publishedTools.some((tool) => tool.slug === "ward-office-moving-in-checklist"), "ward office moving-in checklist should be published");
+    assert.ok(publishedTools.some((tool) => tool.slug === "commuter-pass-ic-card-checklist"), "commuter pass and IC card checklist should be published");
 
     const tool = readJson("src/content/tools/moving-checklist.json");
     assert.equal(tool.slug, "moving-to-japan-checklist");
@@ -581,6 +582,19 @@ describe("TachiSuke project scaffold", () => {
       assert.ok(wardOfficeTool.description[locale]?.length > 30, `ward office tool should include ${locale} description`);
       assert.ok(wardOfficeTool.sourceNote[locale]?.length > 30, `ward office tool should include ${locale} source note`);
     }
+
+    const commuterTool = readJson("src/content/tools/commuter-pass-ic-card-checklist.json");
+    assert.equal(commuterTool.status, "published");
+    assert.equal(commuterTool.slug, "commuter-pass-ic-card-checklist");
+    assert.ok(Array.isArray(commuterTool.sourceLinks) && commuterTool.sourceLinks.length >= 2, "commuter tool should link official sources");
+    assert.ok(
+      commuterTool.sourceLinks.some((source) => source.url.includes("tokyometro.jp")),
+      "commuter tool should include a Tokyo Metro source link"
+    );
+    assert.ok(
+      commuterTool.sourceLinks.some((source) => source.url.includes("pasmo.co.jp")),
+      "commuter tool should include a PASMO source link"
+    );
   });
 
   it("uses the finalized Place enum names across schema and types", () => {
