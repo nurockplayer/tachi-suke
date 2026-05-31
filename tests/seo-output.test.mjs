@@ -101,6 +101,7 @@ describe("static SEO output", () => {
     assert.match(headers, /\/en\/search-index\.json\s+Cache-Control:\s*public,\s*max-age=3600/m, "_headers should cache locale search indexes conservatively");
     assert.match(redirects, /^\/articles\s+\/en\/articles\s+302/m, "Cloudflare redirects should include locale-less article fallback");
     assert.match(redirects, /^\/mobile\/\*\s+\/en\/mobile\/:splat\s+302/m, "Cloudflare redirects should preserve mobile slugs");
+    assert.match(redirects, /^\/security\.txt\s+\/\.well-known\/security\.txt\s+302/m, "Cloudflare redirects should include legacy security.txt fallback");
     assert.doesNotMatch(redirects, /\/account/, "Cloudflare redirects should not add account placeholder fallbacks");
     assert.match(feed, /<rss[^>]+version="2\.0"/, "feed.xml should be an RSS 2.0 feed");
     assert.match(feed, /<title>TachiSuke - Japan Life Assistant<\/title>/);

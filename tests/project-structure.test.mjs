@@ -247,6 +247,7 @@ describe("TachiSuke project scaffold", () => {
     assert.match(redirects, /^\/articles\s+\/en\/articles\s+302/m, "_redirects should send locale-less articles to English");
     assert.match(redirects, /^\/mobile\/\*\s+\/en\/mobile\/:splat\s+302/m, "_redirects should preserve mobile plan slugs");
     assert.match(redirects, /^\/contact\s+\/en\/contact\s+302/m, "_redirects should send locale-less contact to English");
+    assert.match(redirects, /^\/security\.txt\s+\/\.well-known\/security\.txt\s+302/m, "_redirects should expose the legacy security.txt fallback");
     assert.doesNotMatch(redirects, /\/account/, "_redirects should not expose account placeholder fallbacks");
   });
 

@@ -70,6 +70,7 @@ After production deploy:
 - Check `/robots.txt`.
 - Check `/llms.txt`.
 - Check `/.well-known/security.txt`.
+- Check `/security.txt` redirects to `/.well-known/security.txt`.
 - Check `/opensearch.xml`.
 - Check `/feed.xml`.
 - Check a representative locale feed such as `/en/feed.xml`.

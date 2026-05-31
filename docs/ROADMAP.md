@@ -956,6 +956,24 @@ Rules:
 - Do not imply a private vulnerability tracker, personal email commitment, guaranteed response SLA, or security operations backend in Phase 1AO.
 - Replace the generic contact route only when a dedicated security response process exists.
 
+## Phase 1AQ: Security.txt Legacy Redirect
+
+Status: implemented.
+
+Goal:
+
+Support scanners and tools that probe `/security.txt` while keeping `/.well-known/security.txt` as the canonical generated file.
+
+Implemented:
+
+- Added Cloudflare Pages `_redirects` rule from `/security.txt` to `/.well-known/security.txt`.
+- Added source-level and build-output redirect tests.
+
+Rules:
+
+- Do not duplicate the security file at root.
+- Keep `/.well-known/security.txt` as the canonical URL.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.
