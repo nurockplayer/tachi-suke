@@ -590,6 +590,28 @@ Rules:
 - Keep Phase 1 static and lightweight.
 - Do not add a service worker, install prompt, or PWA runtime until that is explicitly scoped.
 
+## Phase 1Z: Contact Related URL Prefill
+
+Status: implemented.
+
+Goal:
+
+Make content correction reports easier to triage by carrying the current detail-page URL into the contact/corrections form.
+
+Implemented:
+
+- `CorrectionPrompt` accepts the current public path.
+- Public article, place, mobile plan, area, and tool detail pages pass `Astro.url.pathname` into the correction prompt.
+- Prompt links include `/[locale]/contact?relatedUrl=...` with an encoded absolute site URL.
+- Contact/corrections pages prefill the optional related URL field from `relatedUrl` using browser-side progressive enhancement.
+- Source-level and build-output SEO tests verify the prompt link and prefill hook.
+
+Rules:
+
+- Keep the workflow static-first and provider-agnostic.
+- Do not add analytics, backend triage, database-backed messages, or guaranteed replies in Phase 1.
+- The prefilled URL remains user-editable and does not create local storage.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.

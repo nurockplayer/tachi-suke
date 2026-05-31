@@ -406,6 +406,7 @@ Current published tools:
 - Contact messages must not publish directly.
 - Email must never appear on public pages.
 - Reports may inform future public content corrections after editorial review.
+- Detail-page correction prompts can prefill `relatedUrl` through a URL query parameter, but the value is still user-editable and does not create local storage.
 
 **Future database mapping notes:**
 

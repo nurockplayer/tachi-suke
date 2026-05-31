@@ -212,7 +212,7 @@ const jsonLd = [
 
   <section class="section">
     <div class="container">
-      <CorrectionPrompt locale={locale} />
+      <CorrectionPrompt locale={locale} currentPath={Astro.url.pathname} />
     </div>
   </section>
 </BaseLayout>

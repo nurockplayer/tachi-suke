@@ -139,7 +139,7 @@ The MVP includes:
 - Article detail pages generated from Markdown/MDX content
 - Article category landing pages generated from non-draft article frontmatter
 - Related article links generated at build time for article detail pages
-- Correction prompts on public detail pages that link readers to the contact/corrections route
+- Correction prompts on public detail pages that link readers to the contact/corrections route with related page URL prefill
 - Twelve public article pages across the supported locales in the current Phase 1B baseline
 - Areas index pages with Tokyo area guide cards
 - Area detail pages generated from JSON content with decision notes, warnings, `lastCheckedAt`, and maintenance notes
@@ -267,7 +267,7 @@ The contact/corrections route is also static-site friendly:
 
 - `/[locale]/contact`
 
-It lets users report outdated information, broken links, unclear content, or general feedback. If `PUBLIC_CONTACT_FORM_ENDPOINT` is unset, it stays in preview mode and does not send. If configured, it posts to the external endpoint, but the repo still does not store messages or provide a support backend.
+It lets users report outdated information, broken links, unclear content, or general feedback. If `PUBLIC_CONTACT_FORM_ENDPOINT` is unset, it stays in preview mode and does not send. If configured, it posts to the external endpoint, but the repo still does not store messages or provide a support backend. Public detail-page prompts may pass an encoded absolute `relatedUrl` query value so the optional related page field can be prefilled without server-side state.
 
 ## 14. Content-First Strategy
 

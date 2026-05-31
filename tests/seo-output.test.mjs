@@ -154,6 +154,20 @@ describe("static SEO output", () => {
     assert.match(thanks, /不會公開你的 Email/, "contact thanks page should explain private email handling");
   });
 
+  it("prefills contact corrections from public detail-page prompts", () => {
+    const article = readHtml("en/articles/choose-mobile-plan-japan-foreigner/index.html");
+    assert.match(
+      article,
+      /href="\/en\/contact\?relatedUrl=https%3A%2F%2Ftachi-suke\.example\.com%2Fen%2Farticles%2Fchoose-mobile-plan-japan-foreigner(?:%2F)?"/,
+      "article correction prompt should carry the encoded canonical URL into contact"
+    );
+
+    const contact = readHtml("en/contact/index.html");
+    assert.match(contact, /data-related-url-input/, "contact page should expose the related URL input hook");
+    assert.match(contact, /new URLSearchParams\(window\.location\.search\)/, "contact page should include query prefill logic");
+    assert.match(contact, /\.get\("relatedUrl"\)/, "contact page should read relatedUrl from the query string");
+  });
+
   it("generates an RSS feed for public article detail pages", () => {
     const feed = readDist("feed.xml");
     assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/zh-tw\/articles\/taiwanese-newcomer-mobile-plan-japan<\/link>/);

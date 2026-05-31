@@ -179,7 +179,7 @@ const topicOptions = {
 
           <div class="field field-full">
             <label for="related-url">{copy.relatedUrl}</label>
-            <input id="related-url" name="relatedUrl" type="url" aria-describedby="related-url-help" />
+            <input id="related-url" name="relatedUrl" type="url" aria-describedby="related-url-help" data-related-url-input />
             <span class="help-text" id="related-url-help">{copy.urlHelp}</span>
           </div>
 
@@ -207,4 +207,23 @@ const topicOptions = {
       </form>
     </div>
   </section>
+
+  <script is:inline>
+    (() => {
+      const relatedUrlInput = document.querySelector("[data-related-url-input]");
+      if (!(relatedUrlInput instanceof HTMLInputElement)) return;
+
+      const relatedUrl = new URLSearchParams(window.location.search).get("relatedUrl");
+      if (!relatedUrl) return;
+
+      try {
+        const parsedUrl = new URL(relatedUrl, window.location.origin);
+        if (parsedUrl.protocol === "http:" || parsedUrl.protocol === "https:") {
+          relatedUrlInput.value = parsedUrl.href;
+        }
+      } catch {
+        // Ignore malformed prefill values; the user can still enter a URL manually.
+      }
+    })();
+  </script>
 </BaseLayout>
