@@ -57,6 +57,7 @@ This document records the current MVP state after Phase 1AK OpenSearch discovery
 - Browser/PWA metadata in `BaseLayout`: `theme-color`, `application-name`, `apple-mobile-web-app-title`, and `format-detection`.
 - JSON-LD structured data support in `BaseLayout`.
 - Site-wide `Organization` and `WebSite` JSON-LD.
+- Site-wide `WebSite` JSON-LD includes a conservative `SearchAction` for the static English search fallback.
 - Article detail `Article` and `BreadcrumbList` JSON-LD.
 - Article category `WebPage` and `BreadcrumbList` JSON-LD.
 - Place detail `LocalBusiness` and `BreadcrumbList` JSON-LD.
@@ -143,6 +144,7 @@ These are intentionally present but not functional:
 - Static search is substring-based client-side filtering with shareable `?q=` URLs. It does not provide typo tolerance, semantic search, pagination, analytics, or personalization.
 - Search pages are noindex utility pages and are intentionally excluded from `sitemap.xml`.
 - OpenSearch discovery points to `/en/search?q={searchTerms}` as the stable static fallback. It does not detect language preference or provide backend search.
+- WebSite `SearchAction` points to `/en/search?q={search_term_string}` and has the same limitations as static search.
 - `/404.html` is static and noindex. It does not perform language detection or redirects.
 - Related article links are static and rule-based. They are not personalized and do not use analytics.
 - Article table of contents is static and does not include scroll spy, reading progress, or saved state.

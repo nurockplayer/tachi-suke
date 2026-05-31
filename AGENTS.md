@@ -276,6 +276,12 @@ Phase 1AK adds OpenSearch discovery:
 - Public pages include `<link rel="search" type="application/opensearchdescription+xml">`.
 - Keep it static and provider-free; do not add backend search, language detection, analytics, or private-content search in Phase 1.
 
+Phase 1AL adds WebSite SearchAction JSON-LD:
+
+- Site-wide `WebSite` JSON-LD includes `SearchAction` pointing at `/en/search?q={search_term_string}`.
+- Keep the target aligned with static search and OpenSearch.
+- Do not imply backend, personalized, account, analytics, or private-content search in Phase 1.
+
 Phase 1T adds article category landing pages:
 
 - `/[locale]/articles/category/[category]` is generated from non-draft same-locale article categories.

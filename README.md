@@ -68,7 +68,7 @@ Implemented:
 - Generated locale RSS feeds at `/[locale]/feed.xml` for same-locale public articles, included in the sitemap with same-locale `lastmod`
 - Default Open Graph image and Twitter summary metadata
 - Browser/PWA metadata for theme color, app name, Apple app title, and phone number format detection
-- JSON-LD structured data for site identity, articles, places, mobile plan details, area details, tool details, and breadcrumbs
+- JSON-LD structured data for site identity, site search, articles, places, mobile plan details, area details, tool details, and breadcrumbs
 - Visible breadcrumbs on nested public article, category, place, mobile plan, area, and tool pages
 - Generated article table of contents for long-form article pages
 - Cloudflare Pages `_headers` for conservative security and discovery cache defaults
@@ -295,6 +295,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - Run `pnpm test`, `pnpm check:content`, `pnpm build`, and `pnpm check:links` before reporting completion when relevant.
 - Run `pnpm check:seo` after `pnpm build` when changing SEO, routing, metadata, or deployment files.
 - Structured data must be backed by current static content. Do not invent ratings, review counts, opening hours, or exact addresses.
+- WebSite JSON-LD exposes only the static English search fallback as `SearchAction`; do not imply backend or private-content search.
 - Visible breadcrumbs should stay locale-aware, link only to existing public routes, and mark the current page with `aria-current="page"`.
 - Mobile plan structured data must stay conservative. Do not add `Offer` price markup until pricing and campaign review workflows are mature.
 - `/feed.xml` is a global RSS feed for non-draft articles across all locales.

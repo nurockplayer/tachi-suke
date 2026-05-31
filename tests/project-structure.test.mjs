@@ -257,6 +257,9 @@ describe("TachiSuke project scaffold", () => {
     assert.match(baseLayout, /rel="manifest"\s+href="\/site\.webmanifest"/, "BaseLayout should link the web manifest");
     assert.match(baseLayout, /rel="search"[\s\S]*application\/opensearchdescription\+xml/, "BaseLayout should expose OpenSearch discovery");
     assert.match(baseLayout, /href=\{new URL\("\/opensearch\.xml",\s*site\)\.href\}/, "BaseLayout should link the OpenSearch description");
+    assert.match(baseLayout, /"@type":\s*"SearchAction"/, "WebSite JSON-LD should expose a SearchAction");
+    assert.match(baseLayout, /\/en\/search\?q=\{search_term_string\}/, "SearchAction should target the stable English static search route");
+    assert.match(baseLayout, /"query-input":\s*"required name=search_term_string"/, "SearchAction should describe the query input");
     assert.match(baseLayout, /name="theme-color"/, "BaseLayout should include theme-color metadata");
     assert.match(baseLayout, /name="application-name"\s+content="TachiSuke"/, "BaseLayout should include application-name metadata");
     assert.match(baseLayout, /name="apple-mobile-web-app-title"\s+content="TachiSuke"/, "BaseLayout should include Apple app title metadata");

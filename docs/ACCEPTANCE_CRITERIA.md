@@ -258,6 +258,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - `404.html` must use `noindex, nofollow` and must not appear in `sitemap.xml`.
 - Account placeholder pages must use `noindex, nofollow`.
 - Built pages should include parseable JSON-LD for site identity.
+- Site-wide `WebSite` JSON-LD should include a conservative `SearchAction` targeting `/en/search?q={search_term_string}`.
 - Article detail pages should include `Article` and `BreadcrumbList` JSON-LD.
 - Article category pages should include conservative `WebPage` and `BreadcrumbList` JSON-LD.
 - Place detail pages should include `LocalBusiness` and `BreadcrumbList` JSON-LD.
