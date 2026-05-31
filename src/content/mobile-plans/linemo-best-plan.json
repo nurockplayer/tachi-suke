@@ -10,5 +10,13 @@
   "creditCardRequired": false,
   "pros": ["online signup", "SoftBank network", "simple low-to-medium data tiers", "eSIM support should be checked during signup"],
   "cons": ["online-only support", "campaigns and plan tiers can change", "call charges may apply outside included conditions"],
-  "recommendedFor": ["light to medium data users", "people who prefer online setup", "users who want a SoftBank-brand option without full carrier pricing"]
+  "recommendedFor": ["light to medium data users", "people who prefer online setup", "users who want a SoftBank-brand option without full carrier pricing"],
+  "officialUrl": "https://www.linemo.jp/plan/",
+  "lastCheckedAt": "2026-05-31",
+  "sourceNote": "Official website information summarized for comparison; confirm the latest terms before applying.",
+  "notes": [
+    "Prices, campaigns, data tiers, and call option conditions can change.",
+    "Confirm eSIM, physical SIM, payment, and identity verification requirements during signup.",
+    "Online-only support may not fit users who need in-store help."
+  ]
 }

@@ -10,5 +10,13 @@
   "creditCardRequired": false,
   "pros": ["tiered pricing", "online signup", "eSIM support", "Rakuten Link calling can reduce domestic call cost for eligible calls"],
   "cons": ["coverage should be checked by home, work, and commute area", "Rakuten Link conditions and excluded numbers must be checked", "price and campaign benefits can change"],
-  "recommendedFor": ["heavy data users", "people comfortable checking coverage", "users already in the Rakuten ecosystem"]
+  "recommendedFor": ["heavy data users", "people comfortable checking coverage", "users already in the Rakuten ecosystem"],
+  "officialUrl": "https://network.mobile.rakuten.co.jp/en/fee/saikyo-plan/",
+  "lastCheckedAt": "2026-05-31",
+  "sourceNote": "Official website information summarized for comparison; confirm the latest terms before applying.",
+  "notes": [
+    "Prices, benefits, campaign points, and Rakuten Link conditions can change.",
+    "Coverage should be checked around home, school, work, and commute routes before relying on it as a main line.",
+    "Payment, identity verification, and eligible call conditions may differ by user status and signup route."
+  ]
 }

@@ -8,7 +8,8 @@
     "dev": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "test": "node --test tests/project-structure.test.mjs"
+    "test": "node --test tests/project-structure.test.mjs",
+    "check:links": "node tests/static-html-links.test.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^6.0.1",

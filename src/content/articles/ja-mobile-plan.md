@@ -39,4 +39,4 @@ draft: false
 
 ## 次の行動
 
-毎月のデータ量、支払い方法、通話の必要性を書き出してから申し込みます。来日直後の順番に迷う場合は [最初の1週間で先に整えること](/ja/articles/japan-life-first-week-setup-ja) も確認してください。
+毎月のデータ量、支払い方法、通話の必要性を書き出してから申し込みます。候補は [povo](/ja/mobile/povo2)、[LINEMO](/ja/mobile/linemo-best-plan)、[Rakuten Mobile](/ja/mobile/rakuten-saikyo-plan)、[ahamo](/ja/mobile/ahamo)、[UQ mobile](/ja/mobile/uq-mobile) の詳細ページから比較できます。来日直後の順番に迷う場合は [最初の1週間で先に整えること](/ja/articles/japan-life-first-week-setup-ja) も確認してください。

@@ -10,5 +10,13 @@
   "creditCardRequired": false,
   "pros": ["flexible data toppings", "au network", "eSIM support", "useful as a secondary line for people who manage data manually"],
   "cons": ["requires active topping management", "service may be suspended if no paid topping is purchased for a long period", "0GB base speed is very limited"],
-  "recommendedFor": ["people with uneven monthly data use", "dual SIM users", "users comfortable managing plans through an app"]
+  "recommendedFor": ["people with uneven monthly data use", "dual SIM users", "users comfortable managing plans through an app"],
+  "officialUrl": "https://povo.jp/",
+  "lastCheckedAt": "2026-05-31",
+  "sourceNote": "Official website information summarized for comparison; confirm the latest topping prices and terms before applying.",
+  "notes": [
+    "Topping prices, campaign bundles, signup requirements, and suspension rules can change.",
+    "Check eSIM, app setup, payment methods, and first-topping requirements on the official site.",
+    "The no-base-fee model requires active management and may not fit users who want a fixed monthly bundle."
+  ]
 }

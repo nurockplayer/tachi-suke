@@ -31,9 +31,11 @@ Implemented:
 - Four locale article detail routes
 - Twelve public article pages across four locales
 - Four locale area index pages with Tokyo area guide cards
+- Four locale area detail routes
 - Four locale place index pages
 - Four locale place detail routes with practical guidance sections
 - Four locale mobile index pages with comparison guidance
+- Four locale mobile plan detail routes
 - Four locale tools index pages
 - Four locale submit-place UI pages
 - Four locale about pages
@@ -42,11 +44,13 @@ Implemented:
 - Content collections for articles, areas, places, mobile plans, and tools
 - Five mobile plan entries: povo, LINEMO, Rakuten Mobile, ahamo, and UQ mobile
 - Four area guide samples: Ikebukuro, Itabashi, Akabane, and Kagurazaka / Edogawabashi
-- Article, Place, MobilePlan, Favorite, UserProfile, and PlaceSubmission type boundaries
+- Article, Place, AreaGuide, MobilePlan, Favorite, UserProfile, and PlaceSubmission type boundaries
 - Unified Place enum values
 - SEO-oriented `BaseLayout`
+- Conservative locale switcher behavior for detail pages with missing translations
 - `SITE_URL` environment variable fallback
 - Structure and conservative internal-link tests in `tests/project-structure.test.mjs`
+- Build-output static HTML internal link crawler in `tests/static-html-links.test.mjs`
 
 Still placeholder-only:
 
@@ -79,9 +83,11 @@ Locale routes:
 - `/[locale]/articles`
 - `/[locale]/articles/[slug]`
 - `/[locale]/areas`
+- `/[locale]/areas/[slug]`
 - `/[locale]/places`
 - `/[locale]/places/[slug]`
 - `/[locale]/mobile`
+- `/[locale]/mobile/[slug]`
 - `/[locale]/tools`
 - `/[locale]/submit-place`
 - `/[locale]/about`
@@ -90,6 +96,7 @@ Locale routes:
 - `/[locale]/account/submissions`
 
 Article detail pages are generated only for non-draft articles. Place detail pages are generated only for places where `status = published`.
+Area and mobile plan detail pages are generated from the current static content collections.
 
 ## Commands
 
@@ -119,11 +126,25 @@ Build static output:
 pnpm build
 ```
 
+Check internal links in built HTML after build:
+
+```bash
+pnpm check:links
+```
+
 Preview production build:
 
 ```bash
 pnpm preview
 ```
+
+Recommended verification order:
+
+1. `pnpm test`
+2. `pnpm build`
+3. `pnpm check:links`
+
+`pnpm test` checks source-level structure and content links. `pnpm check:links` scans built `dist/**/*.html`, so run `pnpm build` first.
 
 ## Environment Variables
 
@@ -165,7 +186,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - Keep user-facing copy natural for each locale.
 - Keep content decision-oriented rather than tourist-oriented.
 - Treat mobile plan prices, campaigns, and eligibility rules as changeable; users must confirm official sites before applying.
-- Run `pnpm test` and `pnpm build` before reporting completion when possible.
+- Run `pnpm test`, `pnpm build`, and `pnpm check:links` before reporting completion when relevant.
 
 ## Documentation Map
 

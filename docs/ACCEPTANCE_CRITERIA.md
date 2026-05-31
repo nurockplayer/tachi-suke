@@ -25,10 +25,12 @@ This document defines the acceptance criteria for the current static-first MVP.
 ## Test Criteria
 
 - `pnpm test` must pass.
+- `pnpm check:links` must pass after `pnpm build` when verifying built static output.
 - Structure tests should verify required files, required locale routes, pnpm-only lockfile policy, content collections, `SITE_URL` fallback strategy, and finalized Place enum values.
-- Phase 1B tests should verify minimum content depth for articles, mobile plans, and area guides.
-- Phase 1B tests should scan Markdown/MDX article links that point to internal absolute paths and verify they match known static routes or generated article/place detail routes.
-- The current link check is conservative. It does not render pages, crawl built HTML, validate external links, or verify links generated from component code.
+- Phase 1B/1B.5 tests should verify minimum content depth for articles, mobile plans, and area guides.
+- Phase 1B/1B.5 tests should scan Markdown/MDX article links that point to internal absolute paths and verify they match known static routes or generated article/place/mobile/area detail routes.
+- `pnpm check:links` should scan built `dist/**/*.html` for root-relative `href="/..."` links and verify the matching file exists in `dist/`.
+- The current static HTML crawler does not validate external links, anchors, JavaScript behavior, or visual rendering.
 - New required route or model decisions should be reflected in tests when they become implementation requirements.
 
 ## i18n Routing Criteria
@@ -72,6 +74,25 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Place UI must show localized labels and must not expose internal enum values such as `confirmed_non_smoking` to users.
 - Missing optional URLs must not render `undefined`.
 
+## Area Criteria
+
+- Area content must come from `src/content/areas`.
+- Area entries must include `title`, `summary`, `lastCheckedAt`, and `notes`.
+- Area index cards must link to `/[locale]/areas/[slug]`.
+- Area detail pages must use `getStaticPaths`.
+- Area detail pages must show rent feel, food/daily-life level, commute convenience, quietness, recommended fit, warnings, notes, and last checked date.
+- Area content should be life-decision-oriented, not sightseeing-oriented.
+
+## Mobile Plan Criteria
+
+- Mobile plan content must come from `src/content/mobile-plans`.
+- Mobile plan entries must include `officialUrl`, `lastCheckedAt`, `sourceNote`, and `notes`.
+- Mobile index cards must link to `/[locale]/mobile/[slug]`.
+- Mobile detail pages must use `getStaticPaths`.
+- Mobile detail pages must show provider, plan name, monthly price, data amount, payment requirements, residence-card and credit-card assumptions, pros, cons, recommended fit, official URL, source note, notes, and last checked date.
+- Mobile detail pages must clearly remind users that prices, terms, campaigns, identity checks, and support status can change.
+- Users must be directed to official carrier sites before applying.
+
 ## Submit-Place Criteria
 
 - Submit-place pages must be UI-only in the current MVP.
@@ -102,6 +123,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Open Graph metadata must include `og:url` and `og:site_name = TachiSuke`.
 - Public pages should use semantic HTML.
 - Detail pages should avoid `hreflang` links to missing detail pages.
+- Locale switcher links on detail pages should also avoid missing generated detail pages.
 - The site should stay mobile-first and comfortable for long-form reading.
 - Mobile plan pages must clearly remind users that prices, campaigns, eligibility, and application rules can change and must be checked on official sites.
 

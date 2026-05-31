@@ -4,16 +4,21 @@ import { localeNames, locales, localizePath, type Locale } from "@/lib/i18n";
 interface Props {
   locale: Locale;
   currentPath: string;
+  alternatePaths?: Partial<Record<Locale, string>>;
 }
 
-const { locale, currentPath } = Astro.props;
+const { locale, currentPath, alternatePaths } = Astro.props;
 const pathWithoutLocale = currentPath.replace(/^\/(zh-tw|en|ja|ko)/, "") || "/";
+const switcherPaths = alternatePaths ?? Object.fromEntries(locales.map((targetLocale) => [
+  targetLocale,
+  localizePath(targetLocale, pathWithoutLocale)
+])) as Partial<Record<Locale, string>>;
 ---
 
 <nav class="locale-switcher" aria-label="Language">
-  {locales.map((targetLocale) => (
+  {locales.map((targetLocale) => switcherPaths[targetLocale] && (
     <a
-      href={localizePath(targetLocale, pathWithoutLocale)}
+      href={switcherPaths[targetLocale]}
       aria-current={targetLocale === locale ? "true" : undefined}
     >
       {localeNames[targetLocale]}

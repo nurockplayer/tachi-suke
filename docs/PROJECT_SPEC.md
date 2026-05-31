@@ -10,7 +10,7 @@ Repo name: `tachi-suke`
 
 The product helps foreign residents make practical daily-life decisions in Japan. It focuses on topics such as mobile plans, renting, transportation, food, shopping, administrative procedures, practical Japanese, work, and resident-friendly places.
 
-The current MVP is an Astro static site with locale-prefixed routing, content collections, article detail pages, place detail pages, placeholder account pages, placeholder favorite UI, and a submit-place form UI that does not submit data yet.
+The current MVP is an Astro static site with locale-prefixed routing, content collections, article detail pages, place detail pages, mobile plan detail pages, area detail pages, placeholder account pages, placeholder favorite UI, and a submit-place form UI that does not submit data yet.
 
 ## 2. Brand Concept
 
@@ -114,6 +114,8 @@ Content items that are translated should include:
 
 Place content is currently locale-neutral. Place detail pages reuse the same `slug` across locales while localizing UI labels such as solo-friendly status, non-smoking status, Japanese difficulty, and field names.
 
+Mobile plan and area detail pages currently reuse locale-neutral data across locale routes while localizing UI labels and decision reminders.
+
 ## 9. Locale Fallback Strategy
 
 Expected fallback order for content:
@@ -137,9 +139,11 @@ The MVP includes:
 - Article detail pages generated from Markdown/MDX content
 - Twelve public article pages across the supported locales in the current Phase 1B baseline
 - Areas index pages with Tokyo area guide cards
+- Area detail pages generated from JSON content with decision notes, warnings, `lastCheckedAt`, and maintenance notes
 - Places index pages
 - Place detail pages generated from JSON content with practical guidance sections
 - Mobile index pages with comparison guidance and five mobile plan entries
+- Mobile plan detail pages generated from JSON content with official URLs, `lastCheckedAt`, source notes, caveats, pros, cons, and recommended fit
 - Tools index pages
 - Submit-place form UI
 - About pages
@@ -151,6 +155,7 @@ The MVP includes:
 - `SITE_URL` environment variable with example-domain fallback
 - Structure tests in `tests/project-structure.test.mjs`
 - Conservative Markdown internal-link checks in `tests/project-structure.test.mjs`
+- Post-build static HTML internal link checks in `tests/static-html-links.test.mjs`
 
 ## 11. Out-of-Scope for MVP
 
@@ -186,9 +191,11 @@ Content and section pages:
 - `/[locale]/articles`
 - `/[locale]/articles/[slug]`
 - `/[locale]/areas`
+- `/[locale]/areas/[slug]`
 - `/[locale]/places`
 - `/[locale]/places/[slug]`
 - `/[locale]/mobile`
+- `/[locale]/mobile/[slug]`
 - `/[locale]/tools`
 - `/[locale]/submit-place`
 - `/[locale]/about`
@@ -199,7 +206,7 @@ Account placeholder pages:
 - `/[locale]/account/favorites`
 - `/[locale]/account/submissions`
 
-Article detail pages are generated only for non-draft articles matching the locale route. Place detail pages are generated only for places where `status = published`.
+Article detail pages are generated only for non-draft articles matching the locale route. Place detail pages are generated only for places where `status = published`. Area and mobile detail pages are generated from their static content collections.
 
 ## 13. Current Placeholder Routes
 
@@ -231,6 +238,8 @@ Priority content types:
 - Tools and checklists that support decisions
 
 Article pages should include clear titles, descriptions, categories, tags, publish dates, update dates, and readable content. Place pages should show practical details such as location, nearest station, price range, solo-friendly status, non-smoking status, Japanese difficulty, payment methods, Google Maps link, and official URL when available.
+
+Mobile plan pages must show official URLs, `lastCheckedAt`, source notes, and caveats because carrier prices, campaigns, identity checks, payment methods, and eSIM/SIM support can change. Area guide pages must show `lastCheckedAt` and notes because rent feel, quietness, and commute convenience can become stale.
 
 ## 15. Future Auth/Database Strategy
 
@@ -270,10 +279,12 @@ Engineering metrics:
 - `pnpm install` succeeds.
 - `pnpm test` succeeds.
 - `pnpm build` succeeds.
+- `pnpm check:links` succeeds after `pnpm build`.
 - No forbidden lockfiles are present.
 - Draft articles do not generate public article detail pages.
 - Non-published places do not appear in public lists or detail pages.
 - SEO metadata includes title, description, canonical URL, Open Graph URL, Open Graph site name, locale-aware `html lang`, and conservative `hreflang`.
+- Detail-page language switcher links avoid missing generated pages.
 
 ## 17. Non-Goals
 

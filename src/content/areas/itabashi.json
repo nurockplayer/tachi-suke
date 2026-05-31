@@ -3,6 +3,8 @@
   "slug": "itabashi",
   "locale": "en",
   "translationKey": "tokyo-itabashi",
+  "title": "Itabashi Area Guide",
+  "summary": "Itabashi can be a balanced choice for newcomers who want lower rent pressure than central hubs while keeping access to Ikebukuro and central Tokyo.",
   "prefecture": "Tokyo",
   "city": "Itabashi",
   "stations": ["Itabashi", "Shin-Itabashi", "Oyama"],
@@ -11,5 +13,11 @@
   "commuteConvenience": "high",
   "quietness": "medium",
   "recommendedFor": ["new residents who want lower rent than central hubs", "commuters to Ikebukuro or central Tokyo", "people who prefer local shopping streets"],
-  "warnings": ["Check which train line is closest before signing.", "Commute comfort differs a lot by station.", "Some areas feel residential and quiet while others are busy."]
+  "warnings": ["Check which train line is closest before signing.", "Commute comfort differs a lot by station.", "Some areas feel residential and quiet while others are busy."],
+  "lastCheckedAt": "2026-05-31",
+  "notes": [
+    "Do not judge the whole ward by one station; train line, local shopping street, and walking route matter a lot.",
+    "Rent is still shaped by building age, station distance, and room layout, so compare multiple stations.",
+    "Commute comfort should be checked against your actual workplace or school, not only map distance."
+  ]
 }

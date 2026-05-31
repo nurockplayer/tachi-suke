@@ -90,9 +90,25 @@ All public pages should:
 
 **SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, and locale alternates.
 
-**Current status:** Implemented as an index/entry page. Phase 1B shows area guide cards for Ikebukuro, Itabashi, Akabane, and Kagurazaka / Edogawabashi.
+**Current status:** Implemented as an index/entry page. Phase 1B shows area guide cards for Ikebukuro, Itabashi, Akabane, and Kagurazaka / Edogawabashi. Phase 1B.5 links each card to its detail page.
 
-**Future notes:** Add `/[locale]/areas/[slug]` detail pages when area content becomes substantial.
+**Future notes:** Add richer localized body content, source links, and related articles when area content becomes substantial.
+
+## `/[locale]/areas/[slug]`
+
+**Purpose:** Area guide detail page for comparing whether a neighborhood fits a user's living needs.
+
+**User goal:** Check rent feel, food/daily-life convenience, commute, quietness, recommended fit, warnings, notes, and the last checked date before choosing whether to research the area further.
+
+**Data source:** `areas` content collection.
+
+**Rendering mode:** Static generated dynamic route. Each locale has its own route file and uses `getStaticPaths`.
+
+**SEO requirements:** Use area `title` and `summary`, canonical URL, Open Graph metadata, locale-aware `html lang`, and locale alternates only for generated area detail routes.
+
+**Current status:** Implemented for all four locales in Phase 1B.5. UI labels are localized while current area data remains locale-neutral sample content.
+
+**Future notes:** Add localized area content, source URLs, map context, nearby place links, and related housing/renting articles after editorial patterns stabilize.
 
 ## `/[locale]/places`
 
@@ -138,9 +154,25 @@ All public pages should:
 
 **SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, and locale alternates.
 
-**Current status:** Implemented as an index page with comparison guidance and five mobile plan cards for povo, LINEMO, Rakuten Mobile, ahamo, and UQ mobile.
+**Current status:** Implemented as an index page with comparison guidance and five mobile plan cards for povo, LINEMO, Rakuten Mobile, ahamo, and UQ mobile. Phase 1B.5 links each card to its detail page.
 
-**Future notes:** Add detailed plan pages, provider comparisons, eligibility notes, source URLs, `lastCheckedAt`, and date-sensitive update workflow. Prices and plan conditions must remain clearly marked as changeable.
+**Future notes:** Add stronger provider comparisons, localized caveats, next review scheduling, and source-backed update workflow. Prices and plan conditions must remain clearly marked as changeable.
+
+## `/[locale]/mobile/[slug]`
+
+**Purpose:** Mobile plan detail page for one plan/provider option.
+
+**User goal:** Review monthly price summary, data amount, payment requirements, residence-card and credit-card assumptions, pros, cons, recommended fit, official URL, source note, notes, and last checked date before going to the official site.
+
+**Data source:** `mobile-plans` content collection.
+
+**Rendering mode:** Static generated dynamic route. Each locale has its own route file and uses `getStaticPaths`.
+
+**SEO requirements:** Use provider + plan name as title. Generate description from data amount, monthly price, and recommended user fit. Include canonical URL, Open Graph metadata, locale-aware `html lang`, and locale alternates only for generated mobile detail routes.
+
+**Current status:** Implemented for all four locales in Phase 1B.5. Detail pages clearly state that prices, conditions, campaigns, identity checks, and support status can change.
+
+**Future notes:** Add localized caveats, screenshots or comparison tables if needed, and an editorial review schedule before relying on these pages for high-stakes comparison traffic.
 
 ## `/[locale]/tools`
 

@@ -1,0 +1,175 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import { formatDate } from "@/lib/content";
+import { locales, localizePath, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+  plan: CollectionEntry<"mobile-plans">;
+}
+
+const { locale, plan } = Astro.props;
+const data = plan.data;
+const description = `${data.provider} ${data.planName}: ${data.dataAmount}, ${data.monthlyPrice}. ${data.recommendedFor.slice(0, 2).join(", ")}.`;
+const alternatePaths = Object.fromEntries(
+  locales.map((alternateLocale) => [alternateLocale, localizePath(alternateLocale, `/mobile/${data.slug}`)])
+) as Partial<Record<Locale, string>>;
+const labels = {
+  "zh-tw": {
+    overview: "方案概要",
+    price: "月費",
+    data: "資料量",
+    payment: "付款條件",
+    documents: "本人確認文件",
+    creditCard: "日本信用卡",
+    pros: "優點",
+    cons: "注意事項",
+    recommendedFor: "適合誰",
+    official: "官方網站",
+    source: "資料來源",
+    lastCheckedAt: "最後確認",
+    notes: "補充提醒",
+    yes: "通常需要",
+    no: "不一定需要，仍請確認官方條件",
+    noticeTitle: "申請前請確認",
+    notice: "手機方案的價格、條件、活動、本人確認與支援狀態可能變動。申請前請以官方網站最新資訊為準。"
+  },
+  en: {
+    overview: "Plan overview",
+    price: "Monthly price",
+    data: "Data amount",
+    payment: "Payment requirements",
+    documents: "Identity documents",
+    creditCard: "Japanese credit card",
+    pros: "Pros",
+    cons: "Watchouts",
+    recommendedFor: "Recommended for",
+    official: "Official site",
+    source: "Source note",
+    lastCheckedAt: "Last checked",
+    notes: "Notes",
+    yes: "Usually required",
+    no: "Not necessarily required; confirm official terms",
+    noticeTitle: "Confirm before applying",
+    notice: "Mobile plan pricing, terms, campaigns, identity checks, and support status can change. Confirm the latest official information before applying."
+  },
+  ja: {
+    overview: "プラン概要",
+    price: "月額料金",
+    data: "データ容量",
+    payment: "支払い条件",
+    documents: "本人確認書類",
+    creditCard: "日本のクレジットカード",
+    pros: "よい点",
+    cons: "注意点",
+    recommendedFor: "向いている人",
+    official: "公式サイト",
+    source: "情報源メモ",
+    lastCheckedAt: "最終確認",
+    notes: "補足メモ",
+    yes: "通常必要",
+    no: "必須とは限りません。公式条件を確認してください",
+    noticeTitle: "申し込み前の確認",
+    notice: "携帯プランの料金、条件、キャンペーン、本人確認、対応状況は変わる場合があります。申し込み前に必ず公式サイトの最新情報を確認してください。"
+  },
+  ko: {
+    overview: "요금제 개요",
+    price: "월 요금",
+    data: "데이터",
+    payment: "결제 조건",
+    documents: "본인 확인 서류",
+    creditCard: "일본 신용카드",
+    pros: "장점",
+    cons: "주의점",
+    recommendedFor: "추천 대상",
+    official: "공식 사이트",
+    source: "자료 출처 메모",
+    lastCheckedAt: "마지막 확인",
+    notes: "추가 확인",
+    yes: "보통 필요",
+    no: "반드시 필요한 것은 아니며 공식 조건을 확인하세요",
+    noticeTitle: "신청 전 확인",
+    notice: "휴대폰 요금제의 가격, 조건, 캠페인, 본인 확인, 지원 상태는 바뀔 수 있습니다. 신청 전 공식 사이트의 최신 정보를 확인하세요."
+  }
+}[locale];
+
+function formatToken(value: string): string {
+  return value.replaceAll("_", " ");
+}
+
+const facts = [
+  [labels.price, data.monthlyPrice],
+  [labels.data, data.dataAmount],
+  [labels.payment, data.paymentRequirements.map(formatToken).join(", ")],
+  [labels.documents, data.residenceCardRequired ? labels.yes : labels.no],
+  [labels.creditCard, data.creditCardRequired ? labels.yes : labels.no],
+  [labels.lastCheckedAt, formatDate(data.lastCheckedAt, locale)]
+].filter(([, value]) => Boolean(value));
+---
+
+<BaseLayout locale={locale} title={`${data.provider} ${data.planName}`} description={description} alternatePaths={alternatePaths}>
+  <section class="page-hero">
+    <div class="container">
+      <p class="article-meta">{labels.lastCheckedAt} {formatDate(data.lastCheckedAt, locale)}</p>
+      <h1>{data.provider} {data.planName}</h1>
+      <p>{description}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2">
+      <article class="notice">
+        <h2>{labels.overview}</h2>
+        <dl class="detail-list">
+          {facts.map(([label, value]) => (
+            <>
+              <dt>{label}</dt>
+              <dd>{value}</dd>
+            </>
+          ))}
+        </dl>
+      </article>
+      <aside class="notice">
+        <h2>{labels.noticeTitle}</h2>
+        <p>{labels.notice}</p>
+        <div class="inline-actions">
+          <a class="button-link" href={data.officialUrl}>{labels.official}</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2">
+      <article class="notice">
+        <h2>{labels.recommendedFor}</h2>
+        <ul class="check-list">
+          {data.recommendedFor.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+      <article class="notice">
+        <h2>{labels.pros}</h2>
+        <ul class="check-list">
+          {data.pros.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+      <article class="notice">
+        <h2>{labels.cons}</h2>
+        <ul class="check-list">
+          {data.cons.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+      <article class="notice">
+        <h2>{labels.notes}</h2>
+        <ul class="check-list">
+          {data.notes.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+      <article class="notice field-full">
+        <h2>{labels.source}</h2>
+        <p>{data.sourceNote}</p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

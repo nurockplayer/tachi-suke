@@ -25,7 +25,7 @@ draft: false
 4. 找到超市、藥妝店、便利商店和可安心吃飯的店。
 5. 整理銀行、行政手續和長期手機方案。
 
-如果你還沒有門號，先看 [手機門號入口](/zh-tw/mobile)。如果還在選居住區域，先看 [地區生活圈入口](/zh-tw/areas)。
+如果你還沒有門號，先看 [手機門號入口](/zh-tw/mobile)。如果還在選居住區域，先看 [地區生活圈入口](/zh-tw/areas)，再用 [池袋](/zh-tw/areas/ikebukuro)、[板橋](/zh-tw/areas/itabashi)、[赤羽](/zh-tw/areas/akabane)、[神樂坂 / 江戶川橋](/zh-tw/areas/kagurazaka-edogawabashi) 這類範例建立比較方式。
 
 ## 不要急著做的事
 

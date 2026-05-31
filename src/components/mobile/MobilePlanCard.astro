@@ -1,10 +1,12 @@
 ---
-import type { Locale } from "@/lib/i18n";
+import { localizePath, type Locale } from "@/lib/i18n";
 
 interface Props {
   plan: {
+    id?: string;
     data?: {
       provider: string;
+      slug: string;
       planName: string;
       monthlyPrice: string;
       dataAmount: string;
@@ -16,6 +18,7 @@ interface Props {
       recommendedFor: string[];
     };
     provider?: string;
+    slug?: string;
     planName?: string;
     monthlyPrice?: string;
     dataAmount?: string;
@@ -25,6 +28,7 @@ interface Props {
     pros?: string[];
     cons?: string[];
     recommendedFor?: string[];
+    officialUrl?: string;
   };
   locale?: Locale;
 }
@@ -41,6 +45,7 @@ const labels = {
     recommendedFor: "適合",
     pros: "優點",
     cons: "注意",
+    details: "查看方案詳情",
     required: "通常需要確認本人文件",
     notRequired: "不一定只限信用卡，仍需看官方條件",
     official: "價格與條件可能變動，申請前請確認官方最新資訊。"
@@ -54,6 +59,7 @@ const labels = {
     recommendedFor: "Recommended for",
     pros: "Pros",
     cons: "Watchouts",
+    details: "View plan details",
     required: "Identity documents usually need confirmation",
     notRequired: "Not necessarily credit-card-only; confirm official conditions",
     official: "Prices and conditions can change. Check the official site before applying."
@@ -67,6 +73,7 @@ const labels = {
     recommendedFor: "向いている人",
     pros: "よい点",
     cons: "注意点",
+    details: "プラン詳細を見る",
     required: "本人確認書類の確認が必要です",
     notRequired: "クレジットカード限定とは限りませんが、公式条件を確認してください",
     official: "料金や条件は変わる場合があります。申し込み前に公式サイトを確認してください。"
@@ -80,6 +87,7 @@ const labels = {
     recommendedFor: "추천 대상",
     pros: "장점",
     cons: "주의점",
+    details: "요금제 자세히 보기",
     required: "본인 확인 서류 확인이 필요할 수 있습니다",
     notRequired: "신용카드만 가능한 것은 아닐 수 있으나 공식 조건을 확인하세요",
     official: "요금과 조건은 바뀔 수 있습니다. 신청 전 공식 사이트를 확인하세요."
@@ -89,10 +97,13 @@ const labels = {
 function formatToken(value: string): string {
   return value.replaceAll("_", " ");
 }
+
+const slug = data.slug ?? plan.id;
+const detailHref = slug ? localizePath(locale, `/mobile/${slug}`) : undefined;
 ---
 
 <article class="mobile-card">
-  <h3>{data.provider}</h3>
+  <h3>{detailHref ? <a href={detailHref}>{data.provider}</a> : data.provider}</h3>
   <p><strong>{data.planName}</strong></p>
   <ul class="facts">
     <li><span>{labels.price}: {data.monthlyPrice}</span></li>
@@ -113,4 +124,5 @@ function formatToken(value: string): string {
     <p><strong>{labels.cons}:</strong> {data.cons.slice(0, 2).join(", ")}</p>
   )}
   <p class="help-text">{labels.official}</p>
+  {detailHref && <p><a class="text-link" href={detailHref}>{labels.details}</a></p>}
 </article>

@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after the second-round scaffold cleanup. It should not be read as a promise that auth, database, submissions, or favorites already work.
+This document records the current MVP state after Phase 1B.5 content maintainability work. It should not be read as a promise that auth, database, submissions, or favorites already work.
 
 ## Completed
 
@@ -15,9 +15,11 @@ This document records the current MVP state after the second-round scaffold clea
 - Four locale article detail routes at `/[locale]/articles/[slug]`.
 - Twelve public article pages across `zh-tw`, `en`, `ja`, and `ko`, including Phase 1B decision-oriented content.
 - Four locale area index pages showing area guide cards.
+- Four locale area detail routes at `/[locale]/areas/[slug]`.
 - Four locale place index pages.
 - Four locale place detail routes at `/[locale]/places/[slug]`.
 - Four locale mobile index pages with comparison guidance and mobile plan cards.
+- Four locale mobile detail routes at `/[locale]/mobile/[slug]`.
 - Four locale tools index pages.
 - Four locale submit-place UI pages.
 - Four locale about pages.
@@ -28,13 +30,17 @@ This document records the current MVP state after the second-round scaffold clea
 - Content collections for `articles`, `areas`, `places`, `mobile-plans`, and `tools`.
 - Five mobile plan entries: povo, LINEMO, Rakuten Mobile, ahamo, and UQ mobile.
 - Four Tokyo area guide samples: Ikebukuro, Itabashi, Akabane, and Kagurazaka / Edogawabashi.
-- TypeScript model boundaries for `Article`, `Place`, `MobilePlan`, `Favorite`, `UserProfile`, and `PlaceSubmission`.
+- TypeScript model boundaries for `Article`, `Place`, `AreaGuide`, `MobilePlan`, `Favorite`, `UserProfile`, and `PlaceSubmission`.
+- Mobile plan source-maintenance fields: `officialUrl`, `lastCheckedAt`, `sourceNote`, and `notes`.
+- Area source-maintenance fields: `title`, `summary`, `lastCheckedAt`, and `notes`.
 - Place enum values unified across schema, types, example data, UI labels, and docs.
 - Place list/detail public filtering by `status = published`.
 - Article list/detail public filtering by `draft = false`.
 - SEO base layout with title, description, canonical URL, Open Graph URL, Open Graph site name, locale-aware `html lang`, and conservative `hreflang`.
 - Structure tests in `tests/project-structure.test.mjs`.
 - Conservative article internal-link checks for locale-prefixed static/generated routes.
+- Static HTML internal link crawler in `tests/static-html-links.test.mjs`, run after `pnpm build` with `pnpm check:links`.
+- Locale switcher links for detail pages use conservative alternate paths so missing article translations do not create dead links.
 
 ## Placeholder
 
@@ -59,8 +65,6 @@ These are intentionally present but not functional:
 
 ## Not Started
 
-- Area detail pages at `/[locale]/areas/[slug]`.
-- Mobile plan detail pages at `/[locale]/mobile/[slug]`.
 - Tool detail pages at `/[locale]/tools/[slug]`.
 - Site search.
 - Map UI.
@@ -72,12 +76,15 @@ These are intentionally present but not functional:
 ## Known Limitations
 
 - Content volume is still early editorial sample-level, though Phase 1B now has enough pages for public preview.
-- Areas and tools have collections but no detail pages.
-- Mobile plans are static editorial summaries. Prices, campaigns, and conditions can change, so users must confirm official sites before applying.
+- Tools have a collection but no detail pages.
+- Areas and mobile plans now have detail pages, but the content is still static editorial guidance rather than live data.
+- Mobile plan prices, campaigns, and conditions can change, so users must confirm official sites before applying.
+- Area rent feel, quietness, and commute notes can become stale and need periodic editorial review.
 - Submit-place form is disabled and does not send data.
 - Place body data is locale-neutral; only UI labels are localized.
 - `hreflang` is conservative, but full translation coverage is not complete.
-- The link check scans Markdown article links and generated/static routes, but it is not a full crawler and does not verify rendered HTML or external links.
+- `pnpm test` scans Markdown article links and generated/static source routes.
+- `pnpm check:links` scans built static HTML root-relative links in `dist/`, but it does not validate external links, anchors, JavaScript behavior, or visual rendering.
 - Account pages are static placeholders and do not protect user data because no user data exists yet.
 - Browser QA currently covers basic route/card/form checks, not a full accessibility or visual regression suite.
 
@@ -88,6 +95,7 @@ Most recent recorded verification:
 - `pnpm install`: passed
 - `pnpm test`: passed
 - `pnpm build`: passed
+- `pnpm check:links`: passed
 - Browser QA: basic route/card/form check passed
 
 Browser QA covered:
@@ -101,8 +109,8 @@ Browser QA covered:
 ## Next Recommended Tasks
 
 1. Add more real content for renting, administrative procedures, transportation, and practical Japanese.
-2. Add area, mobile plan, and tool detail routes when content supports them.
+2. Add richer localized area and mobile plan copy where the current shared data feels too generic.
 3. Improve related-content navigation inside article/detail pages.
-4. Add a fuller build-time static HTML crawl or external link checker when route count grows.
+4. Add a fuller external link checker or scheduled source-review workflow when route count grows.
 5. Decide Phase 1C submission workflow technology without adding login yet.
 6. Start Supabase Auth, profiles, favorites, and RLS only in Phase 2.

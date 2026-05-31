@@ -11,4 +11,8 @@ export interface MobilePlan {
   pros: string[];
   cons: string[];
   recommendedFor: string[];
+  officialUrl: string;
+  lastCheckedAt: string;
+  sourceNote: string;
+  notes: string[];
 }

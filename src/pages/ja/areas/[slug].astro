@@ -1,0 +1,17 @@
+---
+import { getCollection } from "astro:content";
+import AreaDetailPage from "@/components/pages/AreaDetailPage.astro";
+
+export async function getStaticPaths() {
+  const areas = await getCollection("areas");
+
+  return areas.map((area) => ({
+    params: { slug: area.data.slug },
+    props: { area }
+  }));
+}
+
+const { area } = Astro.props;
+---
+
+<AreaDetailPage locale="ja" area={area} />

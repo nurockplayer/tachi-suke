@@ -43,4 +43,4 @@ draft: false
 
 ## 下一步
 
-先列出你的資料量、付款方式和通話需求，再比較 [povo、LINEMO、Rakuten Mobile、ahamo 的差異](/zh-tw/articles/povo-linemo-rakuten-ahamo-difference)。如果你還在整理剛到日本的順序，也可以搭配 [第一週生活設定清單](/zh-tw/articles/newcomer-first-week-japan-setup)。
+先列出你的資料量、付款方式和通話需求，再比較 [povo](/zh-tw/mobile/povo2)、[LINEMO](/zh-tw/mobile/linemo-best-plan)、[Rakuten Mobile](/zh-tw/mobile/rakuten-saikyo-plan)、[ahamo](/zh-tw/mobile/ahamo) 與 [UQ mobile](/zh-tw/mobile/uq-mobile)，也可以先看 [povo、LINEMO、Rakuten Mobile、ahamo 的差異](/zh-tw/articles/povo-linemo-rakuten-ahamo-difference)。如果你還在整理剛到日本的順序，也可以搭配 [第一週生活設定清單](/zh-tw/articles/newcomer-first-week-japan-setup)。
