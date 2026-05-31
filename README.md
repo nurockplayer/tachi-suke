@@ -65,6 +65,7 @@ Implemented:
 - Generated global `feed.xml` for public articles
 - Generated locale RSS feeds at `/[locale]/feed.xml` for same-locale public articles
 - Default Open Graph image and Twitter summary metadata
+- Browser/PWA metadata for theme color, app name, Apple app title, and phone number format detection
 - JSON-LD structured data for site identity, articles, places, mobile plan details, area details, tool details, and breadcrumbs
 - Visible breadcrumbs on nested public article, category, place, mobile plan, area, and tool pages
 - Generated article table of contents for long-form article pages

@@ -129,6 +129,10 @@ describe("static SEO output", () => {
     const objects = jsonLdObjects(html);
     assert.ok(hasJsonLdType(objects, "Organization"), "root page should include Organization JSON-LD");
     assert.ok(hasJsonLdType(objects, "WebSite"), "root page should include WebSite JSON-LD");
+    assert.match(html, /<meta name="theme-color" content="#f5f8f7">/, "root page should include browser theme color");
+    assert.match(html, /<meta name="application-name" content="TachiSuke">/, "root page should include application name metadata");
+    assert.match(html, /<meta name="apple-mobile-web-app-title" content="TachiSuke">/, "root page should include Apple app title metadata");
+    assert.match(html, /<meta name="format-detection" content="telephone=no">/, "root page should disable automatic phone formatting");
     assert.match(html, /rel="alternate"[^>]+type="application\/rss\+xml"[^>]+href="https:\/\/tachi-suke\.example\.com\/feed\.xml"/);
   });
 

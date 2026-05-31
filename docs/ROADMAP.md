@@ -567,6 +567,27 @@ Rules:
 - Do not fetch external URLs in CI.
 - Do not treat this as live price, campaign, opening-hours, or provider-term validation.
 
+## Phase 1X: Browser Metadata
+
+Status: implemented.
+
+Goal:
+
+Polish static launch metadata for browsers and mobile surfaces.
+
+Implemented:
+
+- `theme-color` metadata in `BaseLayout`.
+- `application-name` metadata in `BaseLayout`.
+- `apple-mobile-web-app-title` metadata in `BaseLayout`.
+- `format-detection` metadata in `BaseLayout`.
+- Source-level and build-output tests for representative generated HTML.
+
+Rules:
+
+- Keep Phase 1 static and lightweight.
+- Do not add a service worker, install prompt, or PWA runtime until that is explicitly scoped.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.

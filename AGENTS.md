@@ -242,6 +242,11 @@ Phase 1W adds content health checks:
 - Content health checks do not fetch external URLs and do not validate live prices, campaigns, opening hours, or provider terms.
 - CI should run `pnpm check:content` before `pnpm build`.
 
+Phase 1X adds browser metadata polish:
+
+- `BaseLayout` should include site-wide `theme-color`, `application-name`, `apple-mobile-web-app-title`, and `format-detection` metadata.
+- Keep this lightweight; do not add a service worker, install prompt, or PWA runtime without a dedicated phase.
+
 Phase 1J adds a static RSS feed:
 
 - `/feed.xml` is generated from non-draft public articles.

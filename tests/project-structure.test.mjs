@@ -246,6 +246,10 @@ describe("TachiSuke project scaffold", () => {
     assert.match(baseLayout, /jsonLd\?:/, "BaseLayout should accept optional JSON-LD metadata");
     assert.match(baseLayout, /<meta\s+name="robots"\s+content=\{robots\}/, "BaseLayout should render robots metadata when provided");
     assert.match(baseLayout, /rel="manifest"\s+href="\/site\.webmanifest"/, "BaseLayout should link the web manifest");
+    assert.match(baseLayout, /name="theme-color"/, "BaseLayout should include theme-color metadata");
+    assert.match(baseLayout, /name="application-name"\s+content="TachiSuke"/, "BaseLayout should include application-name metadata");
+    assert.match(baseLayout, /name="apple-mobile-web-app-title"\s+content="TachiSuke"/, "BaseLayout should include Apple app title metadata");
+    assert.match(baseLayout, /name="format-detection"/, "BaseLayout should include format-detection metadata");
     assert.match(baseLayout, /href=\{new URL\(localizePath\(locale,\s*"\/feed\.xml"\),\s*site\)\.href\}/, "BaseLayout should link the current locale RSS feed");
     assert.match(baseLayout, /property="og:image"/, "BaseLayout should include an Open Graph image");
     assert.match(baseLayout, /name="twitter:card"\s+content="summary_large_image"/, "BaseLayout should include a summary_large_image card");

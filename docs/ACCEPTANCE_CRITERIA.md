@@ -234,6 +234,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Open Graph metadata must include a default `og:image`.
 - Twitter metadata should use `summary_large_image`.
 - Pages should link `/site.webmanifest`.
+- Pages should include browser app metadata: `theme-color`, `application-name`, `apple-mobile-web-app-title`, and `format-detection`.
 - `sitemap.xml` must include public locale roots, section pages, locale RSS feeds, non-draft article details, article category pages, published place details, area details, mobile plan details, published tool details, submit-place thanks pages, contact/corrections pages, and launch trust pages.
 - `sitemap.xml` must exclude account placeholder routes, draft articles, non-published places, non-published tools, search pages, and search index JSON endpoints.
 - `robots.txt` must reference the sitemap and disallow `/[locale]/account/`.
