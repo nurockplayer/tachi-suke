@@ -79,6 +79,22 @@ All public pages should:
 
 **Future notes:** Replace SVG-only icons with a fuller icon set before a polished PWA launch.
 
+## `/feed.xml`
+
+**Purpose:** RSS feed for public article discovery.
+
+**User goal:** Let readers, feed readers, search tools, and external automation discover recently updated public TachiSuke articles.
+
+**Data source:** `articles` content collection filtered to `draft = false`, sorted by `updatedAt` descending.
+
+**Rendering mode:** Static Astro endpoint.
+
+**SEO requirements:** Generate valid RSS 2.0 XML with absolute article URLs, titles, descriptions, categories/tags, publish dates, and per-item language metadata. Public pages should include an RSS alternate link to `/feed.xml`.
+
+**Current status:** Implemented as a global multilingual feed in Phase 1J.
+
+**Future notes:** Add locale-specific feeds only after there is clear demand or enough content volume to justify more feed routes.
+
 ## `/zh-tw/`, `/en/`, `/ja/`, `/ko/`
 
 **Purpose:** Locale homepage.

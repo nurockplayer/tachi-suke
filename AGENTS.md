@@ -215,6 +215,13 @@ Phase 1I adds conservative detail-page structured data:
 - Tool detail pages emit `WebPage`, `ItemList`, and `BreadcrumbList` JSON-LD.
 - Do not add `Offer`, ratings, reviews, coordinates, opening hours, or exact addresses unless the content model and editorial review process actually support those claims.
 
+Phase 1J adds a static RSS feed:
+
+- `/feed.xml` is generated from non-draft public articles.
+- Public pages include an RSS alternate link in `BaseLayout`.
+- The current feed is global across all locales; do not add per-locale feeds until explicitly scoped.
+- Draft articles must not appear in the feed.
+
 Mobile plan prices, campaigns, payment methods, and identity requirements can change. Always phrase mobile data as editorial guidance and remind users to confirm official carrier pages before applying.
 Area rent feel, quietness, and commute convenience can also become stale. Keep area pages date-aware and practical rather than sightseeing-oriented.
 

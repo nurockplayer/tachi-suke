@@ -53,6 +53,7 @@ Implemented:
 - Unified Place enum values
 - SEO-oriented `BaseLayout`
 - Generated `sitemap.xml`, `robots.txt`, and `site.webmanifest`
+- Generated global `feed.xml` for public articles
 - Default Open Graph image and Twitter summary metadata
 - JSON-LD structured data for site identity, articles, places, mobile plan details, area details, tool details, and breadcrumbs
 - Cloudflare Pages `_headers` for conservative security and cache defaults
@@ -110,6 +111,7 @@ Locale routes:
 - `/sitemap.xml`
 - `/robots.txt`
 - `/site.webmanifest`
+- `/feed.xml`
 
 Article detail pages are generated only for non-draft articles. Place detail pages are generated only for places where `status = published`.
 Area, mobile plan, and published tool detail pages are generated from the current static content collections.
@@ -239,6 +241,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - Run `pnpm check:seo` after `pnpm build` when changing SEO, routing, metadata, or deployment files.
 - Structured data must be backed by current static content. Do not invent ratings, review counts, opening hours, or exact addresses.
 - Mobile plan structured data must stay conservative. Do not add `Offer` price markup until pricing and campaign review workflows are mature.
+- `/feed.xml` is a global RSS feed for non-draft articles across all locales. Locale-specific feeds are not implemented yet.
 
 ## Documentation Map
 

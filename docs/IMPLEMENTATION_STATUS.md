@@ -52,6 +52,7 @@ This document records the current MVP state after Phase 1H static tool detail wo
 - Generated `sitemap.xml` for public static routes and content collection detail pages.
 - Generated `robots.txt` with sitemap reference and account placeholder disallow rules.
 - Generated `site.webmanifest`.
+- Generated global `feed.xml` for non-draft public articles.
 - Cloudflare Pages `_headers` with conservative security and cache defaults.
 - Structure tests in `tests/project-structure.test.mjs`.
 - Conservative article internal-link checks for locale-prefixed static/generated routes.
@@ -107,6 +108,7 @@ These are intentionally present but not functional:
 - `hreflang` is conservative, but full translation coverage is not complete.
 - `pnpm test` scans Markdown article links and generated/static source routes.
 - `pnpm check:links` scans built static HTML root-relative links in `dist/`, but it does not validate external links, anchors, JavaScript behavior, form submission behavior, or visual rendering.
+- `/feed.xml` is currently global across all locales. Locale-specific article feeds are not implemented yet.
 - Related article links are static and rule-based. They are not personalized and do not use analytics.
 - Account pages are static placeholders and do not protect user data because no user data exists yet.
 - Account placeholder pages are marked `noindex, nofollow` and excluded from the sitemap.

@@ -42,6 +42,7 @@ describe("static SEO output", () => {
     const robots = readDist("robots.txt");
     const manifest = JSON.parse(readDist("site.webmanifest"));
     const headers = readDist("_headers");
+    const feed = readDist("feed.xml");
 
     assert.match(sitemap, /<urlset/);
     assert.match(robots, /Sitemap:\s*https:\/\/tachi-suke\.example\.com\/sitemap\.xml/);
@@ -50,6 +51,8 @@ describe("static SEO output", () => {
     assert.equal(manifest.start_url, "/");
     assert.ok(Array.isArray(manifest.icons) && manifest.icons.length > 0, "manifest should include icons");
     assert.match(headers, /X-Content-Type-Options:\s*nosniff/);
+    assert.match(feed, /<rss[^>]+version="2\.0"/, "feed.xml should be an RSS 2.0 feed");
+    assert.match(feed, /<title>TachiSuke - Japan Life Assistant<\/title>/);
   });
 
   it("includes public multilingual content and excludes account placeholders in sitemap", () => {
@@ -94,9 +97,18 @@ describe("static SEO output", () => {
   });
 
   it("renders site-wide JSON-LD on the root page", () => {
-    const objects = jsonLdObjects(readHtml("index.html"));
+    const html = readHtml("index.html");
+    const objects = jsonLdObjects(html);
     assert.ok(hasJsonLdType(objects, "Organization"), "root page should include Organization JSON-LD");
     assert.ok(hasJsonLdType(objects, "WebSite"), "root page should include WebSite JSON-LD");
+    assert.match(html, /rel="alternate"[^>]+type="application\/rss\+xml"[^>]+href="https:\/\/tachi-suke\.example\.com\/feed\.xml"/);
+  });
+
+  it("generates an RSS feed for public article detail pages", () => {
+    const feed = readDist("feed.xml");
+    assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/zh-tw\/articles\/taiwanese-newcomer-mobile-plan-japan<\/link>/);
+    assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/en\/articles\/choose-mobile-plan-japan-foreigner<\/link>/);
+    assert.doesNotMatch(feed, /draft/i, "feed should not expose draft article data");
   });
 
   it("renders article and breadcrumb JSON-LD on article detail pages", () => {
