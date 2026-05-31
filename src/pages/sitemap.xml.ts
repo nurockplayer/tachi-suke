@@ -91,6 +91,16 @@ export const GET: APIRoute = async ({ site }) => {
     }
   }
 
+  const tools = await getCollection("tools", ({ data }) => data.status === "published");
+  for (const tool of tools) {
+    for (const locale of locales) {
+      entries.push({
+        path: localizePath(locale, `/tools/${tool.data.slug}`),
+        lastmod: tool.data.lastCheckedAt
+      });
+    }
+  }
+
   const urls = uniqueEntries(entries)
     .map((entry) => {
       const loc = new URL(entry.path, siteUrl).href;

@@ -215,7 +215,7 @@ This document records the current content collections and TypeScript model bound
 
 ## Tool
 
-**Purpose:** Metadata for future life tools such as checklists, calculators, decision trees, and procedure helpers.
+**Purpose:** Static life tools such as checklists, decision aids, procedure helpers, and future calculators that support practical decisions.
 
 **Current storage:** JSON files in `src/content/tools`, loaded by the `tools` content collection.
 
@@ -225,10 +225,15 @@ This document records the current content collections and TypeScript model bound
 - `slug`
 - `title`
 - `description`
+- `status`
+- `lastCheckedAt`
+- `sourceNote`
+- `notes`
+- `sections`
 
-**Optional fields:**
+`title`, `description`, `sourceNote`, `notes`, section titles, and section items are localized records for `zh-tw`, `en`, `ja`, and `ko`.
 
-- `status`, defaulting to `planned`
+**Optional fields:** None in the current schema.
 
 **Enum values:**
 
@@ -236,12 +241,16 @@ This document records the current content collections and TypeScript model bound
 
 **Public visibility rules:**
 
-- Current tools page is an entry/placeholder-style section page and does not render tool details.
-- Future public tool pages should show only published tools.
+- Tools index pages show only `status = published` tool cards.
+- Tool detail pages are generated only for `status = published` tools at `/[locale]/tools/[slug]`.
+- Planned or draft tools must not appear in public list/detail pages.
+- Current checklist pages are static. They do not save progress, require login, or write to a database.
 
 **Future database mapping notes:**
 
-- Keep tools mostly static unless personalization or saved tool state becomes necessary.
+- Keep tools static while they are editorial checklists and simple decision aids.
+- Add saved progress only after Phase 2 auth/favorites and a clear persistence model exist.
+- If calculators become dynamic, consider whether Cloudflare Workers, Astro server islands, or a separate backend is needed before adding runtime dependencies.
 
 ## Favorite
 

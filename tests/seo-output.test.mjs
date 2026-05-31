@@ -69,6 +69,8 @@ describe("static SEO output", () => {
       "/en/mobile/ahamo",
       "/ja/areas/ikebukuro",
       "/ko/places/dennys",
+      "/en/tools/moving-to-japan-checklist",
+      "/zh-tw/tools/moving-to-japan-checklist",
       "/zh-tw/submit-place/thanks"
     ]) {
       assert.ok(paths.has(expectedPath), `sitemap should include ${expectedPath}`);

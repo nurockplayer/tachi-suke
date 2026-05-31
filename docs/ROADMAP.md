@@ -208,6 +208,29 @@ Rules:
 - Do not link to draft articles or other locales as related content.
 - Broaden related navigation to places, areas, and mobile plans only after content volume grows.
 
+## Phase 1H: Static Tools and Checklists
+
+Status: implemented.
+
+Goal:
+
+Turn the tools section from a placeholder entry page into a static, SEO-friendly tool surface without adding auth, persistence, or runtime dependencies.
+
+Implemented:
+
+- Expanded the `tools` content collection with localized `title`, `description`, `sourceNote`, `notes`, checklist `sections`, and `lastCheckedAt`.
+- Added tool detail routes at `/[locale]/tools/[slug]`.
+- Added the first published tool, `moving-to-japan-checklist`.
+- Linked tools index cards to generated detail pages.
+- Added published tool detail routes to sitemap and source/build-output checks.
+
+Rules:
+
+- Tool detail pages are generated only for `status = published` tools.
+- Checklist progress is not saved in Phase 1.
+- Do not add database-backed tool state until auth and persistence are explicitly scoped.
+- Keep tool content practical, date-aware, and decision-oriented.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.

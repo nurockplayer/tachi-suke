@@ -85,6 +85,7 @@ const requiredFiles = [
   "src/components/pages/PlaceDetailPage.astro",
   "src/components/pages/MobilePlanDetailPage.astro",
   "src/components/pages/AreaDetailPage.astro",
+  "src/components/pages/ToolDetailPage.astro",
   "src/components/pages/SubmitPlaceThanksPage.astro",
   "src/components/mobile/MobilePlanCard.astro",
   "src/components/favorites/FavoriteButtonPlaceholder.astro",
@@ -94,6 +95,7 @@ const requiredFiles = [
   "src/types/place.ts",
   "src/types/mobile-plan.ts",
   "src/types/area.ts",
+  "src/types/tool.ts",
   "src/types/favorite.ts",
   "src/types/user.ts",
   "src/types/submission.ts",
@@ -134,6 +136,7 @@ const localePages = [
   "mobile/[slug].astro",
   "areas/[slug].astro",
   "tools/index.astro",
+  "tools/[slug].astro",
   "submit-place.astro",
   "submit-place/thanks.astro",
   "about.astro",
@@ -276,6 +279,50 @@ describe("TachiSuke project scaffold", () => {
     assert.doesNotMatch(astroConfig, /site:\s*["']https:\/\/tachi-suke\.example\.com["']/);
   });
 
+  it("publishes the first static checklist tool with detail routes", () => {
+    const contentConfig = readFileSync(join(root, "src/content.config.ts"), "utf8");
+    for (const field of ["lastCheckedAt", "sourceNote", "notes", "sections"]) {
+      assert.match(contentConfig, new RegExp(field), `tools schema should include ${field}`);
+    }
+
+    const tool = readJson("src/content/tools/moving-checklist.json");
+    assert.equal(tool.slug, "moving-to-japan-checklist");
+    assert.equal(tool.status, "published");
+    assert.match(tool.lastCheckedAt, /^\d{4}-\d{2}-\d{2}$/);
+    for (const locale of locales) {
+      assert.ok(tool.title[locale], `tool should include ${locale} title`);
+      assert.ok(tool.description[locale]?.length > 20, `tool should include ${locale} description`);
+      assert.ok(tool.sourceNote[locale]?.length > 20, `tool should include ${locale} source note`);
+    }
+    assert.ok(Array.isArray(tool.notes) && tool.notes.length >= 2, "tool should include maintenance notes");
+    for (const note of tool.notes) {
+      for (const locale of locales) {
+        assert.ok(note[locale], `tool note should include ${locale} copy`);
+      }
+    }
+    assert.ok(Array.isArray(tool.sections) && tool.sections.length >= 3, "tool should include checklist sections");
+    for (const section of tool.sections) {
+      for (const locale of locales) {
+        assert.ok(section.title[locale], `tool section should include ${locale} title`);
+      }
+      assert.ok(section.items.length >= 2, "each tool section should include checklist items");
+      for (const item of section.items) {
+        for (const locale of locales) {
+          assert.ok(item[locale], `tool checklist item should include ${locale} copy`);
+        }
+      }
+    }
+
+    const toolsPage = readFileSync(join(root, "src/components/pages/SimpleSectionPage.astro"), "utf8");
+    assert.match(toolsPage, /getCollection\("tools"/, "tools index should load tools collection");
+    assert.match(toolsPage, /localizePath\(locale,\s*`\/tools\/\$\{tool\.data\.slug\}`\)/, "tools index cards should link to tool detail pages");
+
+    const toolDetailPage = readFileSync(join(root, "src/components/pages/ToolDetailPage.astro"), "utf8");
+    assert.match(toolDetailPage, /sourceNote/, "tool detail page should show source note");
+    assert.match(toolDetailPage, /lastCheckedAt/, "tool detail page should show last checked date");
+    assert.match(toolDetailPage, /sections\.map/, "tool detail page should render checklist sections");
+  });
+
   it("uses the finalized Place enum names across schema and types", () => {
     const contentConfig = readFileSync(join(root, "src/content.config.ts"), "utf8");
     const placeTypes = readFileSync(join(root, "src/types/place.ts"), "utf8");
@@ -373,6 +420,14 @@ describe("TachiSuke project scaffold", () => {
       }
     }
 
+    for (const tool of listFiles("src/content/tools", [".json"]).map(readJson)) {
+      if (tool.status === "published") {
+        for (const locale of locales) {
+          routeSet.add(normalizePath(`/${locale}/tools/${tool.slug}`));
+        }
+      }
+    }
+
     for (const relativePath of listFiles("src/content/articles", [".md", ".mdx"])) {
       const file = readFileSync(join(root, relativePath), "utf8");
       const links = [...file.matchAll(/\[[^\]]+\]\((\/[^)\s]+)\)/g)].map((match) => normalizePath(match[1]));
@@ -389,5 +444,6 @@ describe("TachiSuke project scaffold", () => {
 
     const areasPage = readFileSync(join(root, "src/components/pages/SimpleSectionPage.astro"), "utf8");
     assert.match(areasPage, /localizePath\(locale,\s*`\/areas\/\$\{area\.data\.slug\}`\)/, "area cards should link to area detail pages");
+    assert.match(areasPage, /localizePath\(locale,\s*`\/tools\/\$\{tool\.data\.slug\}`\)/, "tool cards should link to tool detail pages");
   });
 });

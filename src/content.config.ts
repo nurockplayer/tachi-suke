@@ -3,6 +3,12 @@ import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
 const localeSchema = z.enum(["zh-tw", "en", "ja", "ko"]);
+const localizedTextSchema = z.object({
+  "zh-tw": z.string(),
+  en: z.string(),
+  ja: z.string(),
+  ko: z.string()
+});
 
 const articles = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/articles" }),
@@ -96,9 +102,17 @@ const tools = defineCollection({
   schema: z.object({
     id: z.string(),
     slug: z.string(),
-    title: z.string(),
-    description: z.string(),
-    status: z.enum(["planned", "draft", "published"]).default("planned")
+    title: localizedTextSchema,
+    description: localizedTextSchema,
+    status: z.enum(["planned", "draft", "published"]).default("planned"),
+    lastCheckedAt: z.coerce.date(),
+    sourceNote: localizedTextSchema,
+    notes: z.array(localizedTextSchema).default([]),
+    sections: z.array(z.object({
+      id: z.string(),
+      title: localizedTextSchema,
+      items: z.array(localizedTextSchema)
+    })).default([])
   })
 });
 

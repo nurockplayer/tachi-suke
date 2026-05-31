@@ -349,6 +349,31 @@ textarea {
   color: var(--color-vermilion);
 }
 
+.tool-section {
+  display: grid;
+  gap: 16px;
+}
+
+.tool-checklist {
+  display: grid;
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tool-checklist label {
+  align-items: start;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 20px 1fr;
+}
+
+.tool-checklist input {
+  accent-color: var(--color-green);
+  margin-top: 5px;
+}
+
 .area-card {
   display: grid;
   gap: 14px;

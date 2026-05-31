@@ -1,7 +1,127 @@
 {
   "id": "tool-moving-checklist",
   "slug": "moving-to-japan-checklist",
-  "title": "Moving to Japan Checklist",
-  "description": "A planned checklist for arrival week tasks such as address registration, phone setup, and transit cards.",
-  "status": "planned"
+  "title": {
+    "zh-tw": "赴日生活啟動清單",
+    "en": "Moving to Japan Checklist",
+    "ja": "日本生活スタートチェックリスト",
+    "ko": "일본 생활 시작 체크리스트"
+  },
+  "description": {
+    "zh-tw": "用抵日前、抵日第一週與生活穩定三個階段，整理手機、地址、交通、日常採買與行政手續的優先順序。",
+    "en": "A staged checklist for before arrival, the first week, and settling into life in Japan, covering mobile service, address, transit, daily shopping, and procedures.",
+    "ja": "来日前、到着後1週間、生活を整える段階に分けて、携帯、住所、交通、日用品、手続きを整理するチェックリストです。",
+    "ko": "입국 전, 첫 주, 생활 안정 단계로 나누어 휴대폰, 주소, 교통, 생활 준비, 행정 절차를 정리하는 체크리스트입니다."
+  },
+  "status": "published",
+  "lastCheckedAt": "2026-06-01",
+  "sourceNote": {
+    "zh-tw": "本站依日本生活常見流程整理。行政規定、窗口與所需文件可能因自治體、在留資格與時期不同而變動。",
+    "en": "Compiled from common Japan life setup flows. Procedures, offices, and required documents can vary by municipality, residence status, and timing.",
+    "ja": "日本での生活開始時によくある流れをもとに整理しています。手続き、窓口、必要書類は自治体、在留資格、時期によって変わる場合があります。",
+    "ko": "일본 생활 시작 시 자주 필요한 흐름을 기준으로 정리했습니다. 절차, 창구, 필요 서류는 지자체, 체류 자격, 시기에 따라 달라질 수 있습니다."
+  },
+  "notes": [
+    {
+      "zh-tw": "這份清單是生活決策輔助，不是法律或行政保證。",
+      "en": "This checklist is a life setup aid, not legal or administrative guarantee.",
+      "ja": "このチェックリストは生活準備の補助であり、法的または行政上の保証ではありません。",
+      "ko": "이 체크리스트는 생활 준비를 돕기 위한 것이며 법률 또는 행정 보장이 아닙니다."
+    },
+    {
+      "zh-tw": "正式辦理前，請確認居住地自治體、學校、公司或官方網站的最新要求。",
+      "en": "Before completing procedures, confirm the latest requirements with your municipality, school, employer, or official websites.",
+      "ja": "手続き前に、居住地の自治体、学校、勤務先、公式サイトで最新条件を確認してください。",
+      "ko": "절차를 진행하기 전 거주지 지자체, 학교, 회사, 공식 사이트의 최신 조건을 확인하세요."
+    }
+  ],
+  "sections": [
+    {
+      "id": "before-arrival",
+      "title": {
+        "zh-tw": "抵日前先準備",
+        "en": "Before arrival",
+        "ja": "来日前に準備すること",
+        "ko": "입국 전 준비"
+      },
+      "items": [
+        {
+          "zh-tw": "確認護照、簽證或在留資格相關文件的有效期限。",
+          "en": "Check the validity of your passport, visa, or residence-status documents.",
+          "ja": "パスポート、ビザ、在留資格関連書類の有効期限を確認する。",
+          "ko": "여권, 비자, 체류 자격 관련 서류의 유효 기간을 확인한다."
+        },
+        {
+          "zh-tw": "準備最初住宿地址、學校或公司聯絡方式，以及抵日後可使用的網路方案。",
+          "en": "Prepare your first address, school or employer contact details, and a way to get online after arrival.",
+          "ja": "最初の滞在先住所、学校または勤務先の連絡先、到着後の通信手段を準備する。",
+          "ko": "첫 숙소 주소, 학교 또는 회사 연락처, 도착 후 사용할 인터넷 수단을 준비한다."
+        },
+        {
+          "zh-tw": "先列出抵日第一週最重要的三件事，不要一次排滿所有手續。",
+          "en": "List the three most important first-week tasks instead of trying to finish every procedure at once.",
+          "ja": "すべての手続きを一度に終わらせようとせず、最初の1週間で重要な3項目を決める。",
+          "ko": "모든 절차를 한 번에 끝내려 하지 말고 첫 주에 가장 중요한 세 가지를 정한다."
+        }
+      ]
+    },
+    {
+      "id": "first-week",
+      "title": {
+        "zh-tw": "抵日第一週",
+        "en": "First week in Japan",
+        "ja": "到着後1週間",
+        "ko": "일본 도착 첫 주"
+      },
+      "items": [
+        {
+          "zh-tw": "讓手機網路先能穩定使用，再慢慢比較長期手機方案。",
+          "en": "Get stable mobile data first, then compare long-term mobile plans calmly.",
+          "ja": "まず安定して使える通信手段を確保し、その後で長期の携帯プランを比較する。",
+          "ko": "먼저 안정적인 모바일 데이터를 확보한 뒤 장기 휴대폰 요금제를 비교한다."
+        },
+        {
+          "zh-tw": "熟悉最近車站、通勤路線、IC 卡或交通付款方式。",
+          "en": "Learn your nearest station, commute route, IC card, or transit payment setup.",
+          "ja": "最寄り駅、通勤経路、ICカードや交通系支払い方法を確認する。",
+          "ko": "가까운 역, 통근 경로, IC 카드 또는 교통 결제 방식을 확인한다."
+        },
+        {
+          "zh-tw": "找到超市、藥妝店、便利商店與可安心用餐的店。",
+          "en": "Find a supermarket, drugstore, convenience store, and a reliable place to eat.",
+          "ja": "スーパー、ドラッグストア、コンビニ、安心して食事できる場所を見つける。",
+          "ko": "슈퍼마켓, 드러그스토어, 편의점, 안심하고 식사할 수 있는 곳을 찾는다."
+        }
+      ]
+    },
+    {
+      "id": "procedures",
+      "title": {
+        "zh-tw": "地址與行政手續",
+        "en": "Address and procedures",
+        "ja": "住所と手続き",
+        "ko": "주소와 행정 절차"
+      },
+      "items": [
+        {
+          "zh-tw": "確認是否需要在期限內辦理住民登錄、地址登記或相關更新。",
+          "en": "Confirm whether residence registration, address registration, or related updates are required by a deadline.",
+          "ja": "住民登録、住所登録、関連する更新手続きに期限があるか確認する。",
+          "ko": "주민 등록, 주소 등록, 관련 갱신 절차에 기한이 있는지 확인한다."
+        },
+        {
+          "zh-tw": "把護照、在留卡、住址資料、印章或簽名需求集中整理。",
+          "en": "Keep passport, residence card, address details, and seal or signature requirements together.",
+          "ja": "パスポート、在留カード、住所情報、印鑑または署名に関する条件をまとめておく。",
+          "ko": "여권, 재류카드, 주소 정보, 도장 또는 서명 관련 조건을 한곳에 정리한다."
+        },
+        {
+          "zh-tw": "如果是學生或公司員工，先確認學校/公司是否有指定流程。",
+          "en": "If you are a student or employee, confirm whether your school or employer has a required process.",
+          "ja": "学生または会社員の場合、学校や勤務先に指定された手順があるか確認する。",
+          "ko": "학생이나 회사원이라면 학교 또는 회사에서 지정한 절차가 있는지 확인한다."
+        }
+      ]
+    }
+  ]
 }

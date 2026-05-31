@@ -1,0 +1,130 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import CategoryCard from "@/components/content/CategoryCard.astro";
+import { formatDate } from "@/lib/content";
+import { locales, localizePath, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+  tool: CollectionEntry<"tools">;
+}
+
+const { locale, tool } = Astro.props;
+const data = tool.data;
+const title = data.title[locale];
+const description = data.description[locale];
+const alternatePaths = Object.fromEntries(
+  locales.map((alternateLocale) => [alternateLocale, localizePath(alternateLocale, `/tools/${data.slug}`)])
+) as Partial<Record<Locale, string>>;
+const labels = {
+  "zh-tw": {
+    lastChecked: "最後確認",
+    source: "資料來源與限制",
+    notes: "使用前提醒",
+    related: "接著看",
+    mobile: "手機方案比較",
+    areas: "地區生活圈"
+  },
+  en: {
+    lastChecked: "Last checked",
+    source: "Source and limits",
+    notes: "Before using this checklist",
+    related: "Next steps",
+    mobile: "Mobile plan comparison",
+    areas: "Area guides"
+  },
+  ja: {
+    lastChecked: "最終確認",
+    source: "情報源と前提",
+    notes: "使う前の注意",
+    related: "次に見る",
+    mobile: "携帯プラン比較",
+    areas: "エリアガイド"
+  },
+  ko: {
+    lastChecked: "마지막 확인",
+    source: "자료 출처와 한계",
+    notes: "사용 전 확인",
+    related: "다음 단계",
+    mobile: "휴대폰 요금제 비교",
+    areas: "지역 가이드"
+  }
+}[locale];
+const relatedDescriptions = {
+  "zh-tw": {
+    mobile: "先決定抵日初期與長期使用的手機網路方案。",
+    areas: "用租金感、交通與生活機能比較可能居住的地區。"
+  },
+  en: {
+    mobile: "Choose a short-term and long-term mobile setup for life in Japan.",
+    areas: "Compare areas by rent feel, commute, and daily convenience."
+  },
+  ja: {
+    mobile: "来日直後と長期利用に向いた通信手段を比較します。",
+    areas: "家賃感、通勤、生活利便性で住むエリアを比べます。"
+  },
+  ko: {
+    mobile: "입국 직후와 장기 생활에 맞는 모바일 환경을 비교합니다.",
+    areas: "월세감, 통근, 생활 편의성을 기준으로 지역을 비교합니다."
+  }
+}[locale];
+---
+
+<BaseLayout locale={locale} title={title} description={description} alternatePaths={alternatePaths}>
+  <section class="page-hero">
+    <div class="container">
+      <p class="article-meta">{labels.lastChecked} {formatDate(data.lastCheckedAt, locale)}</p>
+      <h1>{title}</h1>
+      <p>{description}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2">
+      {data.sections.map((section) => (
+        <article class="notice tool-section">
+          <h2>{section.title[locale]}</h2>
+          <ul class="tool-checklist">
+            {section.items.map((item) => (
+              <li>
+                <label>
+                  <input type="checkbox" />
+                  <span>{item[locale]}</span>
+                </label>
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2">
+      <article class="notice">
+        <h2>{labels.source}</h2>
+        <p>{data.sourceNote[locale]}</p>
+        <p>{labels.lastChecked} {formatDate(data.lastCheckedAt, locale)}</p>
+      </article>
+      <article class="notice">
+        <h2>{labels.notes}</h2>
+        <ul class="check-list">
+          {data.notes.map((note) => <li>{note[locale]}</li>)}
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container section-header">
+      <div>
+        <h2>{labels.related}</h2>
+      </div>
+    </div>
+    <div class="container grid grid-2">
+      <CategoryCard href={localizePath(locale, "/mobile")} title={labels.mobile} description={relatedDescriptions.mobile} />
+      <CategoryCard href={localizePath(locale, "/areas")} title={labels.areas} description={relatedDescriptions.areas} />
+    </div>
+  </section>
+</BaseLayout>

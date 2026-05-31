@@ -30,7 +30,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - CI must run the same verification chain for pull requests and pushes to `main`.
 - Structure tests should verify required files, required locale routes, pnpm-only lockfile policy, content collections, `SITE_URL` fallback strategy, and finalized Place enum values.
 - Phase 1B/1B.5 tests should verify minimum content depth for articles, mobile plans, and area guides.
-- Phase 1B/1B.5 tests should scan Markdown/MDX article links that point to internal absolute paths and verify they match known static routes or generated article/place/mobile/area detail routes.
+- Phase 1B/1B.5/1H tests should scan Markdown/MDX article links that point to internal absolute paths and verify they match known static routes or generated article/place/mobile/area/tool detail routes.
 - `pnpm check:links` should scan built `dist/**/*.html` for root-relative `href="/..."` links and verify the matching file exists in `dist/`.
 - `pnpm check:seo` should verify built `sitemap.xml`, `robots.txt`, `site.webmanifest`, and Cloudflare `_headers`.
 - The current static HTML crawler does not validate external links, anchors, JavaScript behavior, or visual rendering.
@@ -100,6 +100,18 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Mobile detail pages must clearly remind users that prices, terms, campaigns, identity checks, and support status can change.
 - Users must be directed to official carrier sites before applying.
 
+## Tool Criteria
+
+- Tool content must come from `src/content/tools`.
+- Tool entries must include localized `title`, `description`, `sourceNote`, `notes`, and checklist section copy for `zh-tw`, `en`, `ja`, and `ko`.
+- Tool entries must include `lastCheckedAt`.
+- Tool index cards must link to `/[locale]/tools/[slug]`.
+- Tool detail pages must use `getStaticPaths`.
+- Tool detail pages must generate only `status = published` tools.
+- Planned or draft tools must not be public.
+- Tool detail pages must show localized sections, notes, source note, and last checked date.
+- Phase 1 tool pages must stay static and must not imply that checklist progress is saved.
+
 ## Submit-Place Criteria
 
 - Submit-place pages must remain static-site friendly in Phase 1C.
@@ -148,8 +160,8 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Open Graph metadata must include a default `og:image`.
 - Twitter metadata should use `summary_large_image`.
 - Pages should link `/site.webmanifest`.
-- `sitemap.xml` must include public locale roots, section pages, non-draft article details, published place details, area details, mobile plan details, and submit-place thanks pages.
-- `sitemap.xml` must exclude account placeholder routes, draft articles, and non-published places.
+- `sitemap.xml` must include public locale roots, section pages, non-draft article details, published place details, area details, mobile plan details, published tool details, and submit-place thanks pages.
+- `sitemap.xml` must exclude account placeholder routes, draft articles, non-published places, and non-published tools.
 - `robots.txt` must reference the sitemap and disallow `/[locale]/account/`.
 - Account placeholder pages must use `noindex, nofollow`.
 - Built pages should include parseable JSON-LD for site identity.
