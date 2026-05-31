@@ -29,28 +29,32 @@ export const navItems: Record<Locale, Array<{ href: string; label: string }>> = 
     { href: "/areas", label: "地區" },
     { href: "/places", label: "店家" },
     { href: "/mobile", label: "手機" },
-    { href: "/tools", label: "工具" }
+    { href: "/tools", label: "工具" },
+    { href: "/search", label: "搜尋" }
   ],
   en: [
     { href: "/articles", label: "Articles" },
     { href: "/areas", label: "Areas" },
     { href: "/places", label: "Places" },
     { href: "/mobile", label: "Mobile" },
-    { href: "/tools", label: "Tools" }
+    { href: "/tools", label: "Tools" },
+    { href: "/search", label: "Search" }
   ],
   ja: [
     { href: "/articles", label: "記事" },
     { href: "/areas", label: "エリア" },
     { href: "/places", label: "お店" },
     { href: "/mobile", label: "携帯" },
-    { href: "/tools", label: "ツール" }
+    { href: "/tools", label: "ツール" },
+    { href: "/search", label: "検索" }
   ],
   ko: [
     { href: "/articles", label: "글" },
     { href: "/areas", label: "지역" },
     { href: "/places", label: "장소" },
     { href: "/mobile", label: "휴대폰" },
-    { href: "/tools", label: "도구" }
+    { href: "/tools", label: "도구" },
+    { href: "/search", label: "검색" }
   ]
 };
 

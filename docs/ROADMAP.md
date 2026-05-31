@@ -451,6 +451,30 @@ Rules:
 - Do not include draft articles.
 - Do not add per-category feeds, pagination, or runtime feed generation until article volume makes it useful.
 
+## Phase 1S: Static Search
+
+Status: implemented.
+
+Goal:
+
+Let users find public TachiSuke content across content types without adding a backend or hosted search service.
+
+Implemented:
+
+- Static search pages at `/[locale]/search`.
+- Static search index JSON endpoints at `/[locale]/search-index.json`.
+- Shared search index helper in `src/lib/content/search.ts`.
+- Primary navigation links to search in all supported locales.
+- Search indexes include public articles, places, mobile plans, area guides, and tools.
+- Search pages are `noindex, follow` and excluded from `sitemap.xml`.
+- Source-level and build-output SEO tests verify route presence, public-only filtering, and sitemap exclusion.
+
+Rules:
+
+- Keep Phase 1 search dependency-free and static.
+- Do not add database search, hosted search, analytics, personalization, typo tolerance, or semantic search until content volume and product needs justify a new phase.
+- Do not index account placeholders, drafts, non-published content, or private data.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.
@@ -504,7 +528,7 @@ Status: future ideas.
 
 Possible scope:
 
-- Site search across articles, places, mobile plans, areas, and tools.
+- Advanced search across articles, places, mobile plans, areas, and tools.
 - Map UI for places and area guides.
 - Saved lists and user-defined collections.
 - Decision tools for mobile plans, moving, renting, and procedures.

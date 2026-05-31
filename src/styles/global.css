@@ -404,6 +404,64 @@ textarea {
   gap: 14px;
 }
 
+.search-section {
+  padding-top: 28px;
+}
+
+.search-panel {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: #fff;
+  padding: 18px;
+  margin-bottom: 20px;
+}
+
+.search-panel input {
+  font-size: 1.05rem;
+}
+
+.search-results {
+  display: grid;
+  gap: 14px;
+}
+
+.search-result-card {
+  display: grid;
+  gap: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: #fff;
+  padding: 18px;
+}
+
+.search-result-card h2 {
+  margin: 0;
+  font-size: 1.18rem;
+}
+
+.search-result-card h2 a {
+  text-decoration: none;
+}
+
+.search-result-card p {
+  margin: 0;
+  color: var(--color-ink-soft);
+}
+
+.search-result-meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  color: var(--color-muted);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.search-empty,
+.search-noscript {
+  margin-bottom: 18px;
+}
+
 .card-arrow {
   align-self: end;
   justify-self: end;

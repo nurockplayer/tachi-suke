@@ -77,6 +77,7 @@ const requiredFiles = [
   "src/pages/site.webmanifest.ts",
   "src/pages/feed.xml.ts",
   "src/lib/content/rss.ts",
+  "src/lib/content/search.ts",
   "src/content.config.ts",
   "src/components/layout/BaseLayout.astro",
   "src/components/layout/Header.astro",
@@ -95,6 +96,7 @@ const requiredFiles = [
   "src/components/pages/ContactPage.astro",
   "src/components/pages/ContactThanksPage.astro",
   "src/components/pages/PolicyPage.astro",
+  "src/components/pages/SearchPage.astro",
   "src/components/mobile/MobilePlanCard.astro",
   "src/components/favorites/FavoriteButtonPlaceholder.astro",
   "src/components/auth/LoginPrompt.astro",
@@ -154,6 +156,8 @@ const localePages = [
   "privacy.astro",
   "editorial-policy.astro",
   "feed.xml.ts",
+  "search.astro",
+  "search-index.json.ts",
   "account/login.astro",
   "account/favorites.astro",
   "account/submissions.astro"
@@ -263,6 +267,28 @@ describe("TachiSuke project scaffold", () => {
     assert.match(placeDetailPage, /"@type":\s*"LocalBusiness"/, "PlaceDetailPage should define LocalBusiness JSON-LD");
     assert.match(placeDetailPage, /"@type":\s*"BreadcrumbList"/, "PlaceDetailPage should define BreadcrumbList JSON-LD");
     assert.match(placeDetailPage, /jsonLd=\{jsonLd\}/, "PlaceDetailPage should pass JSON-LD into BaseLayout");
+  });
+
+  it("includes dependency-free static search routes and source filters", () => {
+    const i18n = readFileSync(join(root, "src/lib/i18n/index.ts"), "utf8");
+    assert.match(i18n, /href:\s*"\/search"/, "primary navigation should link to locale search");
+
+    const searchPage = readFileSync(join(root, "src/components/pages/SearchPage.astro"), "utf8");
+    assert.match(searchPage, /robots="noindex,\s*follow"/, "search pages should be noindex utility pages");
+    assert.match(searchPage, /data-search-root/, "SearchPage should expose a stable client-side root");
+    assert.match(searchPage, /data-search-input/, "SearchPage should expose a query input");
+    assert.match(searchPage, /data-search-results/, "SearchPage should expose a result container");
+    assert.match(searchPage, /search-index\.json/, "SearchPage should point to the static locale search index");
+    assert.match(searchPage, /type="search"/, "SearchPage query field should use search input behavior");
+
+    const searchHelper = readFileSync(join(root, "src/lib/content/search.ts"), "utf8");
+    assert.match(searchHelper, /export async function getSearchEntries/, "search helper should expose getSearchEntries");
+    assert.match(searchHelper, /getCollection\("articles"[\s\S]*!data\.draft/, "search should include only non-draft articles");
+    assert.match(searchHelper, /getCollection\("places"[\s\S]*data\.status === "published"/, "search should include only published places");
+    assert.match(searchHelper, /getCollection\("tools"[\s\S]*data\.status === "published"/, "search should include only published tools");
+    for (const type of ["article", "place", "mobile_plan", "area", "tool"]) {
+      assert.match(searchHelper, new RegExp(`["']${type}["']`), `search index should support ${type} entries`);
+    }
   });
 
   it("includes baseline keyboard accessibility hooks", () => {
@@ -515,7 +541,7 @@ describe("TachiSuke project scaffold", () => {
   it("keeps article internal links pointed at existing static or generated routes", () => {
     const routeSet = new Set(["/"]);
     for (const locale of locales) {
-      for (const route of ["", "/articles", "/areas", "/places", "/mobile", "/tools", "/submit-place", "/submit-place/thanks", "/about", "/account/login", "/account/favorites", "/account/submissions"]) {
+      for (const route of ["", "/articles", "/areas", "/places", "/mobile", "/tools", "/search", "/submit-place", "/submit-place/thanks", "/about", "/account/login", "/account/favorites", "/account/submissions"]) {
         routeSet.add(normalizePath(`/${locale}${route}/`));
       }
     }

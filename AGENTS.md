@@ -124,6 +124,8 @@ Current public route pattern:
 - `/[locale]/mobile/[slug]`
 - `/[locale]/tools`
 - `/[locale]/tools/[slug]`
+- `/[locale]/search`
+- `/[locale]/search-index.json`
 - `/[locale]/submit-place`
 - `/[locale]/submit-place/thanks`
 - `/[locale]/contact`
@@ -231,6 +233,13 @@ Phase 1R adds locale RSS feeds:
 - `/[locale]/feed.xml` is generated from same-locale non-draft public articles.
 - Public pages include a current-locale RSS alternate link in addition to `/feed.xml`.
 - Feeds remain static and article-only; do not add category feeds, pagination, or runtime feed generation unless explicitly scoped.
+
+Phase 1S adds static search:
+
+- `/[locale]/search` is a noindex static utility page.
+- `/[locale]/search-index.json` is generated from public content collections.
+- Search indexes include only public content: matching-locale non-draft articles, published places, current mobile plans, current area guides, and published tools.
+- Do not add hosted search, database search, analytics, personalization, or large search dependencies in Phase 1 unless explicitly scoped.
 
 Phase 1K adds Cloudflare Pages deploy readiness:
 

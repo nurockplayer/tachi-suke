@@ -1,0 +1,234 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import { getSearchEntries, type SearchEntry, type SearchEntryType } from "@/lib/content/search";
+import { localizePath, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const entries = await getSearchEntries(locale);
+const searchIndexUrl = localizePath(locale, "/search-index.json");
+const copy = {
+  "zh-tw": {
+    title: "搜尋",
+    description: "搜尋 TachiSuke 目前公開的文章、店家、手機方案、地區指南與生活工具。",
+    label: "搜尋關鍵字",
+    placeholder: "輸入手機、租屋、池袋、Denny's...",
+    count: "目前可搜尋 {count} 筆公開內容",
+    empty: "沒有找到符合的公開內容。",
+    updated: "更新",
+    noscript: "未啟用 JavaScript 時，你仍可以瀏覽下方全部公開內容。"
+  },
+  en: {
+    title: "Search",
+    description: "Search TachiSuke's current public articles, places, mobile plans, area guides, and life tools.",
+    label: "Search keywords",
+    placeholder: "Try mobile, rent, Ikebukuro, Denny's...",
+    count: "{count} public items searchable",
+    empty: "No matching public content found.",
+    updated: "Updated",
+    noscript: "Without JavaScript, you can still browse all public content below."
+  },
+  ja: {
+    title: "検索",
+    description: "TachiSuke の公開記事、お店、携帯プラン、エリアガイド、生活ツールを検索できます。",
+    label: "検索キーワード",
+    placeholder: "携帯、賃貸、池袋、Denny's など",
+    count: "{count} 件の公開コンテンツを検索できます",
+    empty: "一致する公開コンテンツはありません。",
+    updated: "更新",
+    noscript: "JavaScript が無効でも、下の公開コンテンツ一覧は閲覧できます。"
+  },
+  ko: {
+    title: "검색",
+    description: "TachiSuke의 공개 글, 장소, 휴대폰 요금제, 지역 가이드, 생활 도구를 검색합니다.",
+    label: "검색어",
+    placeholder: "휴대폰, 월세, 이케부쿠로, Denny's...",
+    count: "검색 가능한 공개 콘텐츠 {count}개",
+    empty: "일치하는 공개 콘텐츠가 없습니다.",
+    updated: "업데이트",
+    noscript: "JavaScript가 꺼져 있어도 아래 공개 콘텐츠 목록은 볼 수 있습니다."
+  }
+}[locale];
+const typeLabels: Record<SearchEntryType, string> = {
+  article: {
+    "zh-tw": "文章",
+    en: "Article",
+    ja: "記事",
+    ko: "글"
+  }[locale],
+  place: {
+    "zh-tw": "店家",
+    en: "Place",
+    ja: "お店",
+    ko: "장소"
+  }[locale],
+  mobile_plan: {
+    "zh-tw": "手機方案",
+    en: "Mobile plan",
+    ja: "携帯プラン",
+    ko: "휴대폰 요금제"
+  }[locale],
+  area: {
+    "zh-tw": "地區",
+    en: "Area",
+    ja: "エリア",
+    ko: "지역"
+  }[locale],
+  tool: {
+    "zh-tw": "工具",
+    en: "Tool",
+    ja: "ツール",
+    ko: "도구"
+  }[locale]
+};
+
+function renderCount(count: number): string {
+  return copy.count.replace("{count}", String(count));
+}
+
+function serializeJson(value: unknown): string {
+  return JSON.stringify(value).replaceAll("<", "\\u003c");
+}
+---
+
+<BaseLayout locale={locale} title={copy.title} description={copy.description} robots="noindex, follow">
+  <section class="page-hero">
+    <div class="container">
+      <h1>{copy.title}</h1>
+      <p>{copy.description}</p>
+    </div>
+  </section>
+
+  <section
+    class="section search-section"
+    data-search-root
+    data-search-index-url={searchIndexUrl}
+    data-count-template={copy.count}
+    data-empty-message={copy.empty}
+    data-type-labels={serializeJson(typeLabels)}
+    data-updated-label={copy.updated}
+  >
+    <div class="container">
+      <div class="search-panel">
+        <div class="field">
+          <label for="site-search">{copy.label}</label>
+          <input id="site-search" type="search" name="q" placeholder={copy.placeholder} autocomplete="off" data-search-input />
+          <p class="help-text" data-search-count>{renderCount(entries.length)}</p>
+        </div>
+      </div>
+
+      <noscript>
+        <p class="notice search-noscript">{copy.noscript}</p>
+      </noscript>
+
+      <p class="notice search-empty" data-search-empty hidden>{copy.empty}</p>
+
+      <div class="search-results" data-search-results>
+        {entries.map((entry: SearchEntry) => (
+          <article class="search-result-card" data-search-card data-search-text={entry.searchText}>
+            <div class="search-result-meta">
+              <span>{typeLabels[entry.type]}</span>
+              <span>{copy.updated}: {entry.updatedAt}</span>
+            </div>
+            <h2><a href={entry.url}>{entry.title}</a></h2>
+            <p>{entry.description}</p>
+            <ul class="tag-list">
+              {entry.tags.slice(0, 5).map((tag) => <li>{tag}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <script is:inline type="application/json" id={`search-data-${locale}`} set:html={serializeJson(entries)} />
+    <script is:inline>
+      (() => {
+        const root = document.querySelector("[data-search-root]");
+        if (!root) return;
+
+        const input = root.querySelector("[data-search-input]");
+        const results = root.querySelector("[data-search-results]");
+        const count = root.querySelector("[data-search-count]");
+        const empty = root.querySelector("[data-search-empty]");
+        const dataScript = document.getElementById(`search-data-${document.documentElement.lang.startsWith("zh") ? "zh-tw" : document.documentElement.lang}`);
+        const countTemplate = root.dataset.countTemplate || "{count}";
+        const emptyMessage = root.dataset.emptyMessage || "";
+        const updatedLabel = root.dataset.updatedLabel || "Updated";
+        const typeLabels = JSON.parse(root.dataset.typeLabels || "{}");
+        let entries = JSON.parse(dataScript?.textContent || "[]");
+
+        function searchText(entry) {
+          return String(entry.searchText || "").toLocaleLowerCase();
+        }
+
+        function matchEntry(entry, query) {
+          const tokens = query.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
+          if (tokens.length === 0) return true;
+          const haystack = searchText(entry);
+          return tokens.every((token) => haystack.includes(token));
+        }
+
+        function createCard(entry) {
+          const card = document.createElement("article");
+          card.className = "search-result-card";
+
+          const meta = document.createElement("div");
+          meta.className = "search-result-meta";
+          const type = document.createElement("span");
+          type.textContent = typeLabels[entry.type] || entry.type;
+          const updated = document.createElement("span");
+          updated.textContent = `${updatedLabel}: ${entry.updatedAt}`;
+          meta.append(type, updated);
+
+          const heading = document.createElement("h2");
+          const link = document.createElement("a");
+          link.href = entry.url;
+          link.textContent = entry.title;
+          heading.append(link);
+
+          const description = document.createElement("p");
+          description.textContent = entry.description;
+
+          const tags = document.createElement("ul");
+          tags.className = "tag-list";
+          for (const tag of (entry.tags || []).slice(0, 5)) {
+            const item = document.createElement("li");
+            item.textContent = tag;
+            tags.append(item);
+          }
+
+          card.append(meta, heading, description, tags);
+          return card;
+        }
+
+        function render() {
+          if (!input || !results || !count || !empty) return;
+          const query = input.value || "";
+          const filtered = entries.filter((entry) => matchEntry(entry, query));
+          results.replaceChildren(...filtered.map(createCard));
+          count.textContent = countTemplate.replace("{count}", String(filtered.length));
+          empty.textContent = emptyMessage;
+          empty.hidden = filtered.length > 0;
+        }
+
+        input?.addEventListener("input", render);
+
+        const indexUrl = root.dataset.searchIndexUrl;
+        if (indexUrl) {
+          fetch(indexUrl, { headers: { Accept: "application/json" } })
+            .then((response) => response.ok ? response.json() : undefined)
+            .then((data) => {
+              if (Array.isArray(data?.items)) {
+                entries = data.items;
+                render();
+              }
+            })
+            .catch(() => {});
+        }
+      })();
+    </script>
+  </section>
+</BaseLayout>
