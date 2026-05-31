@@ -152,10 +152,14 @@ The MVP includes:
 - Content collections for articles, areas, places, mobile plans, and tools
 - TypeScript model files for future auth, favorites, users, and submissions
 - SEO-oriented `BaseLayout`
+- Generated `sitemap.xml`, `robots.txt`, and `site.webmanifest`
+- Default Open Graph image and Twitter summary metadata
+- Cloudflare Pages `_headers` for conservative security and cache defaults
 - `SITE_URL` environment variable with example-domain fallback
 - Structure tests in `tests/project-structure.test.mjs`
 - Conservative Markdown internal-link checks in `tests/project-structure.test.mjs`
 - Post-build static HTML internal link checks in `tests/static-html-links.test.mjs`
+- Post-build SEO output checks in `tests/seo-output.test.mjs`
 
 ## 11. Out-of-Scope for MVP
 
@@ -206,6 +210,12 @@ Account placeholder pages:
 - `/[locale]/account/login`
 - `/[locale]/account/favorites`
 - `/[locale]/account/submissions`
+
+SEO and discovery routes:
+
+- `/sitemap.xml`
+- `/robots.txt`
+- `/site.webmanifest`
 
 Article detail pages are generated only for non-draft articles matching the locale route. Place detail pages are generated only for places where `status = published`. Area and mobile detail pages are generated from their static content collections.
 
@@ -264,6 +274,13 @@ Reserved boundaries:
 - `src/types/favorite.ts`
 - `src/types/submission.ts`
 
+Current deployment direction:
+
+- Prefer Cloudflare Pages for Phase 1 static deployment.
+- Use `pnpm build` with output directory `dist`.
+- Set `SITE_URL` to the production domain so canonical URLs, sitemap URLs, robots sitemap reference, and Open Graph URLs are correct.
+- Keep Astro until SSR/account requirements are concrete. A Next.js migration is not justified for the current content-first static MVP.
+
 ## 16. Success Metrics for MVP
 
 Product and content metrics:
@@ -281,10 +298,13 @@ Engineering metrics:
 - `pnpm test` succeeds.
 - `pnpm build` succeeds.
 - `pnpm check:links` succeeds after `pnpm build`.
+- `pnpm check:seo` succeeds after `pnpm build`.
 - No forbidden lockfiles are present.
 - Draft articles do not generate public article detail pages.
 - Non-published places do not appear in public lists or detail pages.
-- SEO metadata includes title, description, canonical URL, Open Graph URL, Open Graph site name, locale-aware `html lang`, and conservative `hreflang`.
+- SEO metadata includes title, description, canonical URL, Open Graph URL, Open Graph site name, Open Graph image, Twitter card metadata, locale-aware `html lang`, manifest link, and conservative `hreflang`.
+- `sitemap.xml` includes public content and excludes account placeholders.
+- `robots.txt` references the sitemap and disallows placeholder account routes.
 - Detail-page language switcher links avoid missing generated pages.
 
 ## 17. Non-Goals
