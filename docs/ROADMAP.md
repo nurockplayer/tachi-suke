@@ -82,19 +82,20 @@ Rules:
 
 ## Phase 1C: Submission Workflow MVP
 
-Status: planned, still no login required.
+Status: implemented as a static-site friendly external endpoint workflow, still no login required.
 
 Goal:
 
 Enable a lightweight way for users to recommend useful places while keeping moderation mandatory.
 
-Potential approaches:
+Implemented:
 
-- Formspree
-- Netlify Forms
-- Google Forms
-- GitHub Issues
-- A small custom API
+- `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` controls whether the static form can submit.
+- Endpoint unset means preview mode with disabled submit.
+- Endpoint set means the form posts with `method="POST"` to the configured external endpoint.
+- Four locale thanks pages at `/[locale]/submit-place/thanks`.
+- Provider-agnostic hidden fields for classification and moderation metadata.
+- A visually hidden `website` honeypot field for basic spam reduction.
 
 Rules:
 
@@ -104,13 +105,15 @@ Rules:
 - Avoid unnecessary personal data.
 - Raw submission data should be normalized before it becomes a Place entry.
 - Account login is still not required in this phase unless the project explicitly changes scope.
+- The form provider is not hard-coded. It can be Formspree, Netlify Forms, Cloudflare Workers, or a future custom API.
+- Honeypot is basic spam reduction only, not complete abuse prevention.
 
-Decision needed before implementation:
+Operational decisions still needed:
 
-- Where submissions are stored.
+- Which external endpoint provider to configure in deployment.
 - Who receives moderation notifications.
 - Whether anonymous submissions are allowed.
-- How spam prevention is handled without overbuilding.
+- Whether provider-specific redirect field mapping is required instead of `redirectUrl`.
 - How approved submissions become public static content.
 
 ## Phase 2: Auth and Favorites

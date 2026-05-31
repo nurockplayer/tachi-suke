@@ -29,8 +29,8 @@ Do not use AWP-lite for:
 - Use pnpm only for JavaScript and Astro commands.
 - Do not create `package-lock.json`, `yarn.lock`, `bun.lock`, or `bun.lockb`.
 - Do not introduce lifecycle scripts such as `preinstall`, `install`, `postinstall`, or `prepare` without explicit approval.
-- Keep Phase 1 static-first. Do not implement real login, Supabase Auth, database clients, persistence, RLS runtime integration, real favorites, real submission handling, comments, payments, or a large admin dashboard unless the user explicitly asks for Phase 2 work.
-- The submit-place page remains UI-only in Phase 1. It must not submit, store, email, or publish data.
+- Keep Phase 1 static-first. Do not implement real login, Supabase Auth, database clients, persistence, RLS runtime integration, real favorites, database-backed submission handling, comments, payments, or a large admin dashboard unless the user explicitly asks for Phase 2 work.
+- The submit-place page may post to `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` in Phase 1C, but the repo must not store, email, moderate, or publish submission data directly.
 - Only published Place entries may appear in public list and detail pages.
 
 ## Startup Readback

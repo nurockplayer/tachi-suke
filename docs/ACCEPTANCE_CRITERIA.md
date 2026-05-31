@@ -95,15 +95,29 @@ This document defines the acceptance criteria for the current static-first MVP.
 
 ## Submit-Place Criteria
 
-- Submit-place pages must be UI-only in the current MVP.
-- The form must not actually submit, store, email, or publish data.
-- The submit button must remain disabled until a real submission workflow is intentionally designed.
+- Submit-place pages must remain static-site friendly in Phase 1C.
+- The form action must come from `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT`.
+- If `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` is unset, the page must show preview-mode copy and keep the submit button disabled.
+- If `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` is set, the form must use `method="POST"` and enable the submit button.
+- The repo must not hard-code a specific form provider URL.
+- The repo must not store, moderate, or publish submissions directly.
 - The page must clearly state:
   - Submissions are not published directly.
   - Submissions require moderation.
   - Email is optional/private and will not be public.
   - Users should not enter other people's personal information.
+  - Users should not enter sensitive information.
   - Site owners may edit and normalize place information before publication.
+  - Hours, prices, payment methods, and smoking rules can change.
+- The form must include hidden fields:
+  - `formName = submit-place`
+  - `source = tachi-suke`
+  - `locale`
+  - `moderationRequired = true`
+  - `publishDirectly = false`
+  - `redirectUrl`
+- The form must include a visually hidden honeypot field such as `website`.
+- Honeypot is basic spam reduction only and must not be documented as complete spam prevention.
 - Required fields in the UI are:
   - `submissionLanguage`
   - `placeName`
@@ -113,7 +127,10 @@ This document defines the acceptance criteria for the current static-first MVP.
   - `googleMapUrl`
   - `recommendationReason`
 - Google Maps URL must use URL input behavior.
+- Official URL must use URL input behavior.
 - Email must use email input behavior.
+- Four locale thanks pages must exist at `/[locale]/submit-place/thanks`.
+- Thanks pages must explain moderation, privacy, non-public email, normalization, and provide links back to places, articles, and home.
 
 ## SEO Criteria
 
@@ -133,6 +150,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Favorite buttons must remain placeholder-only in Phase 1.
 - Account/favorites/submissions must not imply that real login, saved items, or submission history already exist.
 - Submit-place must not publish or store user recommendations.
+- Submit-place can post to an external endpoint when configured, but account pages and favorite buttons remain placeholder-only.
 - No Supabase client, database client, or auth implementation should be added in Phase 1.
 
 ## Future Auth/Database Readiness Criteria

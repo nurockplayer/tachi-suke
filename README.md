@@ -37,7 +37,8 @@ Implemented:
 - Four locale mobile index pages with comparison guidance
 - Four locale mobile plan detail routes
 - Four locale tools index pages
-- Four locale submit-place UI pages
+- Four locale submit-place form pages with provider-agnostic external endpoint support
+- Four locale submit-place thanks pages
 - Four locale about pages
 - Four locale account placeholder pages
 - Favorite placeholder button
@@ -58,7 +59,7 @@ Still placeholder-only:
 - Favorites
 - Account submissions
 - Real favorite saving
-- Real submit-place submission
+- Database-backed submit-place storage
 - Supabase Auth
 - Postgres/database integration
 - Row Level Security runtime setup
@@ -90,6 +91,7 @@ Locale routes:
 - `/[locale]/mobile/[slug]`
 - `/[locale]/tools`
 - `/[locale]/submit-place`
+- `/[locale]/submit-place/thanks`
 - `/[locale]/about`
 - `/[locale]/account/login`
 - `/[locale]/account/favorites`
@@ -154,7 +156,15 @@ Example:
 
 ```bash
 SITE_URL=https://tachi-suke.example.com
+PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT=
 ```
+
+`PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` controls the static submit-place form:
+
+- Empty or unset: preview mode, submit button disabled, no submission is sent.
+- Set to an external form endpoint: the form uses `method="POST"` and posts to that URL.
+
+The endpoint can be Formspree, Netlify Forms, Cloudflare Workers, or a future custom API. TachiSuke does not hard-code a provider. External providers may require mapping the provider-agnostic `redirectUrl` hidden field to their own redirect/next field.
 
 For local setup:
 
@@ -182,6 +192,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - Use pnpm commands only.
 - Do not add forbidden lockfiles.
 - Do not implement auth, database, favorites, or real submissions in Phase 1.
+- Submit-place can post to an externally configured endpoint, but the repo does not store submissions or include a moderation backend.
 - Do not publish user submissions directly.
 - Keep user-facing copy natural for each locale.
 - Keep content decision-oriented rather than tourist-oriented.

@@ -10,7 +10,7 @@ Repo name: `tachi-suke`
 
 The product helps foreign residents make practical daily-life decisions in Japan. It focuses on topics such as mobile plans, renting, transportation, food, shopping, administrative procedures, practical Japanese, work, and resident-friendly places.
 
-The current MVP is an Astro static site with locale-prefixed routing, content collections, article detail pages, place detail pages, mobile plan detail pages, area detail pages, placeholder account pages, placeholder favorite UI, and a submit-place form UI that does not submit data yet.
+The current MVP is an Astro static site with locale-prefixed routing, content collections, article detail pages, place detail pages, mobile plan detail pages, area detail pages, placeholder account pages, placeholder favorite UI, and a submit-place form that can post to a provider-agnostic external endpoint when configured.
 
 ## 2. Brand Concept
 
@@ -145,7 +145,7 @@ The MVP includes:
 - Mobile index pages with comparison guidance and five mobile plan entries
 - Mobile plan detail pages generated from JSON content with official URLs, `lastCheckedAt`, source notes, caveats, pros, cons, and recommended fit
 - Tools index pages
-- Submit-place form UI
+- Submit-place form with preview mode, external endpoint support, hidden moderation metadata, and thanks pages
 - About pages
 - Account placeholder pages
 - Favorite placeholder button
@@ -167,7 +167,7 @@ The MVP must not implement:
 - Postgres persistence
 - Row Level Security policies in runtime code
 - Real favorites
-- Real submit-place submission handling
+- Native/database-backed submit-place submission handling
 - Public comments
 - Payment features
 - Large CMS or admin dashboard
@@ -198,6 +198,7 @@ Content and section pages:
 - `/[locale]/mobile/[slug]`
 - `/[locale]/tools`
 - `/[locale]/submit-place`
+- `/[locale]/submit-place/thanks`
 - `/[locale]/about`
 
 Account placeholder pages:
@@ -216,11 +217,11 @@ These routes exist and are intentionally placeholder-only:
 - `/[locale]/account/favorites`
 - `/[locale]/account/submissions`
 
-The submit-place route is also UI-only in the MVP:
+The submit-place route is static-site friendly in the MVP:
 
 - `/[locale]/submit-place`
 
-It displays a full form and moderation notice, but it does not send, store, email, or publish submissions.
+It displays a full form and moderation notice. If `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` is unset, it stays in preview mode and does not send. If configured, it posts to the external endpoint, but the repo still does not store, review, or publish submissions.
 
 ## 14. Content-First Strategy
 
