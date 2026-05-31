@@ -1,0 +1,21 @@
+# Cloudflare Pages locale-less convenience fallbacks.
+# Canonical public routes remain locale-prefixed.
+
+/articles /en/articles 302
+/articles/* /en/articles/:splat 302
+/areas /en/areas 302
+/areas/* /en/areas/:splat 302
+/places /en/places 302
+/places/* /en/places/:splat 302
+/mobile /en/mobile 302
+/mobile/* /en/mobile/:splat 302
+/tools /en/tools 302
+/tools/* /en/tools/:splat 302
+/search /en/search 302
+/submit-place /en/submit-place 302
+/submit-place/thanks /en/submit-place/thanks 302
+/contact /en/contact 302
+/contact/thanks /en/contact/thanks 302
+/about /en/about 302
+/privacy /en/privacy 302
+/editorial-policy /en/editorial-policy 302

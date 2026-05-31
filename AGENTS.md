@@ -282,6 +282,12 @@ Phase 1K adds Cloudflare Pages deploy readiness:
 - Deployment details live in `docs/DEPLOYMENT.md`.
 - Keep Phase 1 deployment static-first; do not add Workers/Functions runtime code unless explicitly scoped.
 
+Phase 1AC adds Cloudflare Pages redirects:
+
+- `public/_redirects` may provide temporary English fallbacks for common locale-less public paths.
+- Keep canonical URLs and in-app navigation locale-prefixed.
+- Do not add account placeholder redirects, language-detection redirects, Cloudflare Workers, or auth-aware routing in Phase 1AC.
+
 Phase 1L adds baseline accessibility polish:
 
 - Keep the skip link to `#main-content`.

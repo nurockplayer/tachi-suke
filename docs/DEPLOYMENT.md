@@ -73,6 +73,7 @@ After production deploy:
 - Check a representative locale feed such as `/en/feed.xml`.
 - Check `/en/search` and `/en/search-index.json`.
 - Check `/404.html`.
+- Check a locale-less fallback such as `/mobile/povo2` redirects to `/en/mobile/povo2`.
 - Check a representative article detail page.
 - Check a representative article category page such as `/en/articles/category/mobile`.
 - Check a representative mobile, area, place, and tool detail page.
