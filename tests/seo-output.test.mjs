@@ -167,6 +167,14 @@ describe("static SEO output", () => {
     const objects = jsonLdObjects(html);
     assert.ok(hasJsonLdType(objects, "Organization"), "root page should include Organization JSON-LD");
     assert.ok(hasJsonLdType(objects, "WebSite"), "root page should include WebSite JSON-LD");
+    const website = objects.find((object) => object["@type"] === "WebSite");
+    assert.equal(website?.potentialAction?.["@type"], "SearchAction", "WebSite JSON-LD should expose site search");
+    assert.equal(
+      website?.potentialAction?.target,
+      "https://tachi-suke.example.com/en/search?q={search_term_string}",
+      "WebSite SearchAction should target the stable English search route"
+    );
+    assert.equal(website?.potentialAction?.["query-input"], "required name=search_term_string");
     assert.match(html, /<meta name="theme-color" content="#f5f8f7">/, "root page should include browser theme color");
     assert.match(html, /<meta name="application-name" content="TachiSuke">/, "root page should include application name metadata");
     assert.match(html, /<meta name="apple-mobile-web-app-title" content="TachiSuke">/, "root page should include Apple app title metadata");

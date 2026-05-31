@@ -27,6 +27,8 @@ const alternates = alternatePaths ?? Object.fromEntries(locales.map((alternateLo
   alternateLocale,
   localizePath(alternateLocale, pathWithoutLocale)
 ])) as Partial<Record<Locale, string>>;
+const searchActionTargetPath = "/en/search?q={search_term_string}";
+const searchActionTarget = `${new URL("/", site).href.replace(/\/$/, "")}${searchActionTargetPath}`;
 const organizationId = new URL("/#organization", site).href;
 const organizationJsonLd = {
   "@context": "https://schema.org",
@@ -45,7 +47,12 @@ const websiteJsonLd = {
   url: new URL("/", site).href,
   description: "A multilingual life decision assistant for living in Japan.",
   inLanguage: Object.values(htmlLangByLocale),
-  publisher: { "@id": organizationId }
+  publisher: { "@id": organizationId },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: searchActionTarget,
+    "query-input": "required name=search_term_string"
+  }
 };
 const jsonLdItems = [
   organizationJsonLd,

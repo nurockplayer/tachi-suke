@@ -851,6 +851,25 @@ Rules:
 - Keep Phase 1 search static and dependency-free.
 - Do not add backend search, language detection, analytics, account search, or private-content discovery through OpenSearch.
 
+## Phase 1AL: WebSite SearchAction JSON-LD
+
+Status: implemented.
+
+Goal:
+
+Expose TachiSuke's static search route through schema.org `WebSite` structured data so search engines can understand the site search entry point.
+
+Implemented:
+
+- Added `potentialAction` to site-wide `WebSite` JSON-LD.
+- Used `SearchAction` targeting `/en/search?q={search_term_string}` as the stable fallback.
+- Added source-level and build-output SEO tests for the JSON-LD.
+
+Rules:
+
+- Keep the SearchAction target aligned with static search and OpenSearch.
+- Do not add backend search, language detection, account search, analytics, or private-content discovery through this schema.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.
