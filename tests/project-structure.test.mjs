@@ -213,9 +213,15 @@ describe("TachiSuke project scaffold", () => {
     assert.match(accountPage, /robots="noindex,\s*nofollow"/, "account placeholder pages should be noindex");
 
     const articleLayout = readFileSync(join(root, "src/components/layout/ArticleLayout.astro"), "utf8");
+    assert.match(articleLayout, /relatedArticles\?:/, "ArticleLayout should accept related article links");
+    assert.match(articleLayout, /class="related-articles"/, "ArticleLayout should render a related articles section");
     assert.match(articleLayout, /"@type":\s*"Article"/, "ArticleLayout should define Article JSON-LD");
     assert.match(articleLayout, /"@type":\s*"BreadcrumbList"/, "ArticleLayout should define BreadcrumbList JSON-LD");
     assert.match(articleLayout, /jsonLd=\{jsonLd\}/, "ArticleLayout should pass JSON-LD into BaseLayout");
+
+    const articleDetailPage = readFileSync(join(root, "src/components/pages/ArticleDetailPage.astro"), "utf8");
+    assert.match(articleDetailPage, /const relatedArticles/, "ArticleDetailPage should compute related articles");
+    assert.match(articleDetailPage, /relatedArticles=\{relatedArticles\}/, "ArticleDetailPage should pass related articles into ArticleLayout");
 
     const placeDetailPage = readFileSync(join(root, "src/components/pages/PlaceDetailPage.astro"), "utf8");
     assert.match(placeDetailPage, /"@type":\s*"LocalBusiness"/, "PlaceDetailPage should define LocalBusiness JSON-LD");

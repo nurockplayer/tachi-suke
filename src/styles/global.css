@@ -423,6 +423,41 @@ textarea {
   font-weight: 700;
 }
 
+.related-articles {
+  border-top: 1px solid var(--color-border);
+  margin-top: 40px;
+  padding-top: 28px;
+}
+
+.related-articles h2 {
+  margin-bottom: 8px;
+}
+
+.related-article-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.related-article-card {
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: inherit;
+  display: grid;
+  gap: 8px;
+  padding: 16px;
+  text-decoration: none;
+}
+
+.related-article-card:hover {
+  border-color: var(--color-green);
+  box-shadow: 0 10px 24px rgba(31, 51, 47, 0.08);
+}
+
+.related-article-card span {
+  color: var(--color-muted);
+}
+
 .tag-list,
 .facts,
 .place-tags {

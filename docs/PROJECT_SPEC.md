@@ -137,6 +137,7 @@ The MVP includes:
 - Four locale homepages
 - Article index pages
 - Article detail pages generated from Markdown/MDX content
+- Related article links generated at build time for article detail pages
 - Twelve public article pages across the supported locales in the current Phase 1B baseline
 - Areas index pages with Tokyo area guide cards
 - Area detail pages generated from JSON content with decision notes, warnings, `lastCheckedAt`, and maintenance notes
@@ -291,6 +292,7 @@ Product and content metrics:
 - Users can browse articles and places without login.
 - Users can reach all main sections from locale navigation.
 - Article and place detail pages are indexable and readable.
+- Article pages guide readers to related same-locale articles.
 - Place labels are understandable in each locale and do not expose internal enum values.
 - Submit-place clearly explains moderation and privacy limits.
 

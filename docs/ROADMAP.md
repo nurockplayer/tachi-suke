@@ -186,6 +186,28 @@ Rules:
 - Cloudflare deployment settings and secrets should be configured separately.
 - Do not add deployment credentials to the repo.
 
+## Phase 1G: Related Content Navigation
+
+Status: implemented.
+
+Goal:
+
+Improve article reading flow and internal linking without adding search or personalization.
+
+Implemented:
+
+- Article detail pages compute related articles at build time.
+- Related articles are limited to the same locale and non-draft entries.
+- Ranking prefers same category, shared tags, and recent updates.
+- Article pages render up to three related guide links after the article body.
+- Build-output SEO tests verify representative related links.
+
+Rules:
+
+- Do not use analytics, login state, or personalization in Phase 1.
+- Do not link to draft articles or other locales as related content.
+- Broaden related navigation to places, areas, and mobile plans only after content volume grows.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.
