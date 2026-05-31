@@ -69,6 +69,7 @@ This document records the current MVP state after Phase 1AK OpenSearch discovery
 - Sitemap entries include conservative `hreflang` alternates for shared locale pages and translated article detail pages.
 - Generated `robots.txt` with sitemap reference and account placeholder disallow rules.
 - Generated `llms.txt` with public discovery links and content caveats.
+- Generated `/.well-known/security.txt` with public contact, policy, canonical, preferred-language, and expiration fields.
 - Generated `opensearch.xml` for browser/search-adjacent discovery of the static English search route.
 - Generated `site.webmanifest`.
 - Generated global `feed.xml` for non-draft public articles, included in the sitemap with newest-public-article `lastmod`.
@@ -136,6 +137,7 @@ These are intentionally present but not functional:
 - Area rent feel, quietness, and commute notes can become stale and need periodic editorial review.
 - Submit-place form only sends data when `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` is configured. The repo does not store submissions.
 - Contact/corrections form only sends data when `PUBLIC_CONTACT_FORM_ENDPOINT` is configured. The repo does not store messages or guarantee individual replies.
+- `/.well-known/security.txt` points to the existing contact route. It does not create a private vulnerability tracker, personal email commitment, or guaranteed response SLA.
 - The honeypot field is basic spam reduction only. It is not a full anti-spam or abuse-prevention system.
 - Place body data is locale-neutral; only UI labels are localized.
 - `hreflang` is conservative, but full translation coverage is not complete.

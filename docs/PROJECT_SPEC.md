@@ -163,6 +163,7 @@ The MVP includes:
 - Generated `sitemap.xml`, `robots.txt`, and `site.webmanifest`
 - Sitemap `hreflang` alternates for shared locale pages and translated public articles
 - Generated `llms.txt` discovery file for public AI/search-adjacent tooling
+- Generated `/.well-known/security.txt` for public security contact discovery
 - Generated `opensearch.xml` browser search discovery file linked from public pages
 - Generated global `feed.xml` for public articles, included in the sitemap with content-aware `lastmod`
 - Generated locale RSS feeds at `/[locale]/feed.xml` for same-locale public articles, included in the sitemap with same-locale `lastmod`
@@ -249,6 +250,7 @@ SEO and discovery routes:
 - `/sitemap.xml`
 - `/robots.txt`
 - `/llms.txt`
+- `/.well-known/security.txt`
 - `/opensearch.xml`
 - `/site.webmanifest`
 - `/feed.xml`
@@ -369,6 +371,7 @@ Engineering metrics:
 - `sitemap.xml` excludes noindex search pages and search index JSON endpoints.
 - `robots.txt` references the sitemap and disallows placeholder account routes.
 - `llms.txt` summarizes public discovery surfaces and excludes private, draft, account, and placeholder data.
+- `/.well-known/security.txt` points to the public contact route without implying a dedicated security backend or response SLA.
 - `opensearch.xml` points to `/en/search?q={searchTerms}` as the stable static search fallback.
 - `404.html` is generated, marked `noindex, nofollow`, and excluded from `sitemap.xml`.
 - `feed.xml` includes non-draft public article detail pages across supported locales.

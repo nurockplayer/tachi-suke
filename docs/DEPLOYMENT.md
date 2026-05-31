@@ -69,6 +69,7 @@ After production deploy:
 - Check `/sitemap.xml`.
 - Check `/robots.txt`.
 - Check `/llms.txt`.
+- Check `/.well-known/security.txt`.
 - Check `/opensearch.xml`.
 - Check `/feed.xml`.
 - Check a representative locale feed such as `/en/feed.xml`.

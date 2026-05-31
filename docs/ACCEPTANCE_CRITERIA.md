@@ -251,6 +251,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Article sitemap alternates must be grouped by `translationKey` and must not point to missing or draft translations.
 - `robots.txt` must reference the sitemap and disallow `/[locale]/account/`.
 - `llms.txt` must be generated as plain text, summarize the product positioning, and link only to public discovery surfaces such as sitemap, RSS feeds, locale roots, and search indexes.
+- `/.well-known/security.txt` must be generated as plain text, point `Contact` to `/en/contact`, include `Canonical`, `Preferred-Languages`, and a future `Expires` value, and must not imply a private support backend.
 - `opensearch.xml` must be generated as an OpenSearch description and use the static English search template `/en/search?q={searchTerms}`.
 - Public pages should include a `rel="search"` link to `/opensearch.xml`.
 - `feed.xml` must be generated as an RSS 2.0 feed for non-draft public article detail pages.

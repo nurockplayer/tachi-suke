@@ -310,6 +310,13 @@ Phase 1AN adds Cloudflare CSP headers:
 - `form-action` should allow `https:` so provider-agnostic external form endpoints still work.
 - Do not add analytics, external script hosts, nonce infrastructure, or Workers runtime unless explicitly scoped.
 
+Phase 1AO adds `/.well-known/security.txt`:
+
+- Generate it as a static endpoint from `SITE_URL`.
+- Use `/en/contact` as the public security contact route until a dedicated security process exists.
+- Include `Canonical`, `Preferred-Languages`, `Policy`, and a future `Expires` value.
+- Do not commit personal email addresses, private trackers, response SLAs, or a support backend in Phase 1AO.
+
 Phase 1AC adds Cloudflare Pages redirects:
 
 - `public/_redirects` may provide temporary English fallbacks for common locale-less public paths.
