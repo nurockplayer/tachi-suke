@@ -44,6 +44,8 @@ Implemented:
 - Four locale submit-place form pages with provider-agnostic external endpoint support
 - Four locale submit-place thanks pages
 - Four locale about pages
+- Four locale privacy pages
+- Four locale editorial policy pages
 - Four locale account placeholder pages
 - Favorite placeholder button
 - Content collections for articles, areas, places, mobile plans, and tools
@@ -107,6 +109,8 @@ Locale routes:
 - `/[locale]/submit-place`
 - `/[locale]/submit-place/thanks`
 - `/[locale]/about`
+- `/[locale]/privacy`
+- `/[locale]/editorial-policy`
 - `/[locale]/account/login`
 - `/[locale]/account/favorites`
 - `/[locale]/account/submissions`
@@ -239,6 +243,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - Tool checklist pages are static content pages. They do not save progress, require login, or write to a database in Phase 1.
 - Submit-place can post to an externally configured endpoint, but the repo does not store submissions or include a moderation backend.
 - Do not publish user submissions directly.
+- Privacy and editorial policy pages are static launch-readiness pages, not a substitute for a future legal/privacy review before auth or database-backed personal data.
 - Keep user-facing copy natural for each locale.
 - Keep content decision-oriented rather than tourist-oriented.
 - Treat mobile plan prices, campaigns, and eligibility rules as changeable; users must confirm official sites before applying.

@@ -315,6 +315,29 @@ Rules:
 - Treat this as baseline polish, not a complete WCAG audit.
 - Keep future accessibility work practical: forms, reading flow, contrast, language metadata, and keyboard interaction should be checked as content and UI grow.
 
+## Phase 1M: Launch Trust Pages
+
+Status: implemented.
+
+Goal:
+
+Add public static trust pages that explain privacy posture, editorial boundaries, and moderation rules before launch.
+
+Implemented:
+
+- Four locale privacy pages at `/[locale]/privacy`.
+- Four locale editorial policy pages at `/[locale]/editorial-policy`.
+- Shared `PolicyPage` component for static localized trust content.
+- Footer links to privacy and editorial policy pages.
+- Sitemap inclusion for public trust pages.
+- Tests for route presence, footer links, sitemap output, and trust page HTML.
+
+Rules:
+
+- Keep these pages static and informational in Phase 1.
+- Do not imply that auth, database-backed submissions, analytics, or legal-reviewed production privacy workflows already exist.
+- Before adding login, analytics, or personal-data persistence, replace launch-readiness copy with a fuller privacy/legal review.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.

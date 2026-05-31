@@ -161,6 +161,15 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Four locale thanks pages must exist at `/[locale]/submit-place/thanks`.
 - Thanks pages must explain moderation, privacy, non-public email, normalization, and provide links back to places, articles, and home.
 
+## Trust Page Criteria
+
+- Four locale privacy pages must exist at `/[locale]/privacy`.
+- Four locale editorial policy pages must exist at `/[locale]/editorial-policy`.
+- Footer navigation should link to privacy and editorial policy pages.
+- Privacy pages should explain that Phase 1 is static-first, account pages are placeholders, submit-place only posts to an external endpoint when configured, and optional email is private/not public.
+- Editorial policy pages should explain that content is decision-oriented, user-submitted places are moderated, and price/hours/terms can change.
+- These pages must not imply that auth, database-backed submissions, saved user data, analytics, or a final legal policy already exist.
+
 ## SEO Criteria
 
 - Each page should have a title and description.
@@ -170,7 +179,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Open Graph metadata must include a default `og:image`.
 - Twitter metadata should use `summary_large_image`.
 - Pages should link `/site.webmanifest`.
-- `sitemap.xml` must include public locale roots, section pages, non-draft article details, published place details, area details, mobile plan details, published tool details, and submit-place thanks pages.
+- `sitemap.xml` must include public locale roots, section pages, non-draft article details, published place details, area details, mobile plan details, published tool details, submit-place thanks pages, and launch trust pages.
 - `sitemap.xml` must exclude account placeholder routes, draft articles, non-published places, and non-published tools.
 - `robots.txt` must reference the sitemap and disallow `/[locale]/account/`.
 - `feed.xml` must be generated as an RSS 2.0 feed for non-draft public article detail pages.

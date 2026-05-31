@@ -212,6 +212,8 @@ Content and section pages:
 - `/[locale]/submit-place`
 - `/[locale]/submit-place/thanks`
 - `/[locale]/about`
+- `/[locale]/privacy`
+- `/[locale]/editorial-policy`
 
 Account placeholder pages:
 
@@ -303,6 +305,7 @@ Product and content metrics:
 - Published tool pages can serve practical checklist intent without requiring login.
 - Place labels are understandable in each locale and do not expose internal enum values.
 - Submit-place clearly explains moderation and privacy limits.
+- Privacy and editorial policy pages make the static MVP's data, moderation, and content boundaries clear before launch.
 
 Engineering metrics:
 
@@ -317,6 +320,7 @@ Engineering metrics:
 - Non-published places do not appear in public lists or detail pages.
 - SEO metadata includes title, description, canonical URL, Open Graph URL, Open Graph site name, Open Graph image, Twitter card metadata, locale-aware `html lang`, manifest link, and conservative `hreflang`.
 - `sitemap.xml` includes public content and excludes account placeholders.
+- `sitemap.xml` includes public privacy and editorial policy pages.
 - `robots.txt` references the sitemap and disallows placeholder account routes.
 - `feed.xml` includes non-draft public article detail pages across supported locales.
 - Built representative pages include parseable JSON-LD for site identity, article detail pages, place detail pages, mobile plan detail pages, area detail pages, tool detail pages, and breadcrumbs.

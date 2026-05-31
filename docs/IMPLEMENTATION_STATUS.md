@@ -27,6 +27,8 @@ This document records the current MVP state after Phase 1H static tool detail wo
 - Four locale submit-place form pages with provider-agnostic endpoint support.
 - Four locale submit-place thanks pages.
 - Four locale about pages.
+- Four locale privacy pages.
+- Four locale editorial policy pages.
 - Four locale account login placeholder pages.
 - Four locale account favorites placeholder pages.
 - Four locale account submissions placeholder pages.
@@ -66,6 +68,7 @@ This document records the current MVP state after Phase 1H static tool detail wo
 - Submit-place form uses `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT`: unset means preview mode/disabled submit; set means a static `POST` to the external endpoint.
 - Submit-place includes provider-agnostic hidden fields and a visually hidden `website` honeypot field for basic spam reduction.
 - Tool detail pages are generated only for `status = published` tools and include localized notes, checklist sections, source note, and last checked date.
+- Footer navigation links to the static privacy and editorial policy pages for all locales.
 
 ## Placeholder
 
@@ -121,6 +124,7 @@ These are intentionally present but not functional:
 - Deployment credentials and Cloudflare account-specific secrets are intentionally not committed.
 - Browser QA currently covers basic route/card/form checks, not a full accessibility or visual regression suite.
 - Accessibility work currently covers baseline keyboard navigation only, not a complete WCAG audit.
+- Privacy and editorial policy pages are launch-readiness guidance for the current static MVP, not a final legal review for future auth, analytics, or database-backed personal data.
 
 ## Verification Results
 
@@ -145,7 +149,7 @@ Browser QA covered:
 
 1. Add more real content for renting, administrative procedures, transportation, and practical Japanese.
 2. Add more practical tools, starting with rent initial-cost and first-week setup checklists.
-3. Add schema.org JSON-LD for area, mobile plan, and tool detail pages after choosing the right schema types.
-4. Choose and configure an external form provider for `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT`.
-5. Add a fuller external link checker or scheduled source-review workflow when route count grows.
+3. Choose and configure an external form provider for `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT`.
+4. Add a fuller external link checker or scheduled source-review workflow when route count grows.
+5. Add a production contact/correction flow that still avoids direct public posting.
 6. Start Supabase Auth, profiles, favorites, and RLS only in Phase 2.
