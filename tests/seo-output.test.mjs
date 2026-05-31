@@ -100,6 +100,8 @@ describe("static SEO output", () => {
       "/en/tools/moving-to-japan-checklist",
       "/zh-tw/tools/moving-to-japan-checklist",
       "/en/tools/japan-rent-initial-cost-checklist",
+      "/en/tools/ward-office-moving-in-checklist",
+      "/zh-tw/tools/ward-office-moving-in-checklist",
       "/zh-tw/submit-place/thanks",
       "/en/contact",
       "/ja/contact/thanks",
@@ -362,5 +364,11 @@ describe("static SEO output", () => {
     const rentTool = readHtml("en/tools/japan-rent-initial-cost-checklist/index.html");
     assert.match(rentTool, /Japan Rent Initial Cost Checklist/, "rent initial cost tool should build a detail page");
     assert.match(rentTool, /key money/i, "rent initial cost tool should include practical renting cost content");
+
+    const wardOfficeTool = readHtml("en/tools/ward-office-moving-in-checklist/index.html");
+    assert.match(wardOfficeTool, /Ward Office Moving-In Checklist/, "ward office tool should build a detail page");
+    assert.match(wardOfficeTool, /Digital Agency/, "ward office tool should show official source labels");
+    assert.match(wardOfficeTool, /digital\.go\.jp/, "ward office tool should link the Digital Agency source");
+    assert.match(wardOfficeTool, /moj\.go\.jp/, "ward office tool should link the Immigration Services Agency source");
   });
 });

@@ -28,7 +28,7 @@ This document records the current MVP state after Phase 1S static search work. I
 - Four locale tool detail routes at `/[locale]/tools/[slug]`.
 - Four locale static search pages at `/[locale]/search`, marked `noindex, follow`, with shareable `?q=` query support.
 - Four locale static search index JSON endpoints at `/[locale]/search-index.json`.
-- Published static checklist tools: `moving-to-japan-checklist` and `japan-rent-initial-cost-checklist`.
+- Published static checklist tools: `moving-to-japan-checklist`, `japan-rent-initial-cost-checklist`, and `ward-office-moving-in-checklist`.
 - Four locale submit-place form pages with provider-agnostic endpoint support.
 - Four locale submit-place thanks pages.
 - Four locale contact/corrections form pages with provider-agnostic endpoint support.
@@ -181,7 +181,7 @@ Browser QA covered:
 ## Next Recommended Tasks
 
 1. Add more real content for renting, administrative procedures, transportation, and practical Japanese.
-2. Add more practical tools, starting with first-week setup, ward-office procedure, and commuter pass checklists.
+2. Add more practical tools, starting with commuter pass, practical Japanese, moving-out, and housing document checklists.
 3. Choose and configure an external form provider for `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT`.
 4. Choose and configure an external form provider for `PUBLIC_CONTACT_FORM_ENDPOINT`.
 5. Add a fuller external link checker or scheduled source-review workflow when route count grows.

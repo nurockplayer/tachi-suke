@@ -124,14 +124,16 @@ This document defines the acceptance criteria for the current static-first MVP.
 
 - Tool content must come from `src/content/tools`.
 - Tool entries must include localized `title`, `description`, `sourceNote`, `notes`, and checklist section copy for `zh-tw`, `en`, `ja`, and `ko`.
+- Tool entries may include localized `sourceLinks` for official confirmation links.
 - Tool entries must include `lastCheckedAt`.
 - Tool index cards must link to `/[locale]/tools/[slug]`.
 - Tool detail pages must use `getStaticPaths`.
 - Tool detail pages must generate only `status = published` tools.
 - Planned or draft tools must not be public.
 - Tool detail pages must show localized sections, notes, source note, and last checked date.
+- Tool detail pages must show official source links when `sourceLinks` are present.
 - Phase 1 tool pages must stay static and must not imply that checklist progress is saved.
-- Phase 1N must keep at least two published static tools, including `moving-to-japan-checklist` and `japan-rent-initial-cost-checklist`.
+- Phase 1AE must keep at least three published static tools, including `moving-to-japan-checklist`, `japan-rent-initial-cost-checklist`, and `ward-office-moving-in-checklist`.
 
 ## Static Search Criteria
 

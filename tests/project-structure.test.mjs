@@ -516,14 +516,15 @@ describe("TachiSuke project scaffold", () => {
 
   it("publishes static checklist tools with detail routes", () => {
     const contentConfig = readFileSync(join(root, "src/content.config.ts"), "utf8");
-    for (const field of ["lastCheckedAt", "sourceNote", "notes", "sections"]) {
+    for (const field of ["lastCheckedAt", "sourceNote", "sourceLinks", "notes", "sections"]) {
       assert.match(contentConfig, new RegExp(field), `tools schema should include ${field}`);
     }
 
     const publishedTools = listFiles("src/content/tools", [".json"]).map(readJson).filter((tool) => tool.status === "published");
-    assert.ok(publishedTools.length >= 2, "Phase 1N should publish at least two static tools");
+    assert.ok(publishedTools.length >= 3, "Phase 1AE should publish at least three static tools");
     assert.ok(publishedTools.some((tool) => tool.slug === "moving-to-japan-checklist"), "moving checklist should stay published");
     assert.ok(publishedTools.some((tool) => tool.slug === "japan-rent-initial-cost-checklist"), "rent initial cost checklist should be published");
+    assert.ok(publishedTools.some((tool) => tool.slug === "ward-office-moving-in-checklist"), "ward office moving-in checklist should be published");
 
     const tool = readJson("src/content/tools/moving-checklist.json");
     assert.equal(tool.slug, "moving-to-japan-checklist");
@@ -559,8 +560,27 @@ describe("TachiSuke project scaffold", () => {
 
     const toolDetailPage = readFileSync(join(root, "src/components/pages/ToolDetailPage.astro"), "utf8");
     assert.match(toolDetailPage, /sourceNote/, "tool detail page should show source note");
+    assert.match(toolDetailPage, /sourceLinks/, "tool detail page should render optional official source links");
     assert.match(toolDetailPage, /lastCheckedAt/, "tool detail page should show last checked date");
     assert.match(toolDetailPage, /sections\.map/, "tool detail page should render checklist sections");
+
+    const wardOfficeTool = readJson("src/content/tools/ward-office-moving-in-checklist.json");
+    assert.equal(wardOfficeTool.status, "published");
+    assert.equal(wardOfficeTool.slug, "ward-office-moving-in-checklist");
+    assert.ok(Array.isArray(wardOfficeTool.sourceLinks) && wardOfficeTool.sourceLinks.length >= 2, "ward office tool should link official sources");
+    assert.ok(
+      wardOfficeTool.sourceLinks.some((source) => source.url.includes("digital.go.jp")),
+      "ward office tool should include a Digital Agency source link"
+    );
+    assert.ok(
+      wardOfficeTool.sourceLinks.some((source) => source.url.includes("moj.go.jp")),
+      "ward office tool should include an Immigration Services Agency source link"
+    );
+    for (const locale of locales) {
+      assert.ok(wardOfficeTool.title[locale], `ward office tool should include ${locale} title`);
+      assert.ok(wardOfficeTool.description[locale]?.length > 30, `ward office tool should include ${locale} description`);
+      assert.ok(wardOfficeTool.sourceNote[locale]?.length > 30, `ward office tool should include ${locale} source note`);
+    }
   });
 
   it("uses the finalized Place enum names across schema and types", () => {

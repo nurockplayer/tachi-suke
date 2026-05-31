@@ -8,6 +8,11 @@ export interface ToolSection {
   items: LocalizedText[];
 }
 
+export interface ToolSourceLink {
+  label: LocalizedText;
+  url: string;
+}
+
 export interface Tool {
   id: string;
   slug: string;
@@ -16,6 +21,7 @@ export interface Tool {
   status: "planned" | "draft" | "published";
   lastCheckedAt: string;
   sourceNote: LocalizedText;
+  sourceLinks: ToolSourceLink[];
   notes: LocalizedText[];
   sections: ToolSection[];
 }

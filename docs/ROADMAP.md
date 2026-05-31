@@ -697,6 +697,28 @@ Rules:
 - Keep HTML revalidated.
 - Do not add CDN purge automation, Workers, or runtime cache logic in Phase 1.
 
+## Phase 1AE: Ward Office Moving-In Checklist
+
+Status: implemented.
+
+Goal:
+
+Add a high-intent administrative procedure checklist for readers who have just arrived in Japan or moved addresses, while keeping TachiSuke static-first and source-aware.
+
+Implemented:
+
+- Added the third published static tool, `ward-office-moving-in-checklist`.
+- Added optional `sourceLinks` to the tools content model.
+- Rendered official source links on tool detail pages when present.
+- Linked the locale homepages directly to the ward office checklist from the start-here section.
+- Added source-level and SEO-output checks for the new tool and source links.
+
+Rules:
+
+- Treat government links as confirmation starting points, not as copied legal advice.
+- Municipality procedures, deadlines, documents, and language support can vary.
+- Do not add saved checklist state, account requirements, backend storage, or a database in Phase 1AE.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.

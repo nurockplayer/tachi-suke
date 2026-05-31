@@ -107,6 +107,10 @@ const tools = defineCollection({
     status: z.enum(["planned", "draft", "published"]).default("planned"),
     lastCheckedAt: z.coerce.date(),
     sourceNote: localizedTextSchema,
+    sourceLinks: z.array(z.object({
+      label: localizedTextSchema,
+      url: z.url()
+    })).default([]),
     notes: z.array(localizedTextSchema).default([]),
     sections: z.array(z.object({
       id: z.string(),
