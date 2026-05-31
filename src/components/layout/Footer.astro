@@ -11,25 +11,33 @@ const copy = {
     line: "幫你在日本站穩生活的多語系決策助手。",
     about: "關於",
     submit: "推薦店家",
-    favorites: "收藏功能"
+    favorites: "收藏功能",
+    privacy: "隱私權",
+    editorial: "編輯政策"
   },
   en: {
     line: "A multilingual life decision assistant for living in Japan.",
     about: "About",
     submit: "Submit place",
-    favorites: "Favorites"
+    favorites: "Favorites",
+    privacy: "Privacy",
+    editorial: "Editorial policy"
   },
   ja: {
     line: "日本での生活をサポートする多言語ライフガイド。",
     about: "概要",
     submit: "おすすめ投稿",
-    favorites: "保存機能"
+    favorites: "保存機能",
+    privacy: "プライバシー",
+    editorial: "編集方針"
   },
   ko: {
     line: "일본 생활을 도와주는 다국어 생활 가이드.",
     about: "소개",
     submit: "장소 추천",
-    favorites: "저장 기능"
+    favorites: "저장 기능",
+    privacy: "개인정보",
+    editorial: "편집 정책"
   }
 }[locale];
 ---
@@ -44,6 +52,8 @@ const copy = {
       <a href={localizePath(locale, "/about")}>{copy.about}</a>
       <a href={localizePath(locale, "/submit-place")}>{copy.submit}</a>
       <a href={localizePath(locale, "/account/favorites")}>{copy.favorites}</a>
+      <a href={localizePath(locale, "/privacy")}>{copy.privacy}</a>
+      <a href={localizePath(locale, "/editorial-policy")}>{copy.editorial}</a>
     </nav>
   </div>
 </footer>

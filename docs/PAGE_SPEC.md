@@ -317,7 +317,39 @@ All public pages should:
 
 **Current status:** Implemented for all four locales.
 
-**Future notes:** Add editorial policy, correction policy, and contributor guidelines later.
+**Future notes:** Add contributor guidelines and a clearer correction/contact workflow later.
+
+## `/[locale]/privacy`
+
+**Purpose:** Explain the current static-site privacy posture before launch.
+
+**User goal:** Understand what data TachiSuke currently does and does not handle, especially around submit-place and optional email.
+
+**Data source:** Localized static UI copy in `PolicyPage`.
+
+**Rendering mode:** Static Astro pages through `PolicyPage`.
+
+**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, locale alternates, and footer links from all public pages.
+
+**Current status:** Implemented for all four locales in Phase 1M. The page states that account/favorites/submissions are placeholders, submit-place only posts to an external endpoint when configured, email is optional/private, and future auth/database features require a fuller privacy review.
+
+**Future notes:** Replace this with a reviewed production privacy policy before collecting personal account data, adding analytics, or storing database-backed submissions.
+
+## `/[locale]/editorial-policy`
+
+**Purpose:** Explain TachiSuke's editorial standards, moderation rules, and information boundaries.
+
+**User goal:** Understand that content is decision-oriented, date-sensitive, moderated, and not a substitute for official sources or professional advice.
+
+**Data source:** Localized static UI copy in `PolicyPage`.
+
+**Rendering mode:** Static Astro pages through `PolicyPage`.
+
+**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, locale alternates, and footer links from all public pages.
+
+**Current status:** Implemented for all four locales in Phase 1M. The page explains that user-submitted places are not published directly, editors may normalize content, and mobile/place/area information can change.
+
+**Future notes:** Add correction, source-review, and contributor guidelines once the editorial workflow is more mature.
 
 ## `/[locale]/account/login`
 

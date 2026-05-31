@@ -1,0 +1,348 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import CategoryCard from "@/components/content/CategoryCard.astro";
+import { localizePath, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+  kind: "privacy" | "editorial-policy";
+}
+
+interface PolicyCopy {
+  title: string;
+  description: string;
+  intro: string;
+  sections: Array<{
+    title: string;
+    items: string[];
+  }>;
+  related: {
+    submit: string;
+    about: string;
+  };
+}
+
+const { locale, kind } = Astro.props;
+const copy = {
+  "zh-tw": {
+    privacy: {
+      title: "隱私權說明",
+      description: "TachiSuke 目前作為靜態資訊站如何處理投稿、Email 與未來會員功能的隱私原則。",
+      intro: "這份說明記錄 Phase 1 靜態網站階段的資料處理方式。未來若加入登入、收藏或資料庫，隱私說明會重新整理。",
+      sections: [
+        {
+          title: "目前網站狀態",
+          items: [
+            "TachiSuke 目前是 static-first 的資訊站，公開頁面不需要登入。",
+            "account、favorites 與 submissions 目前仍是 placeholder，不會儲存會員資料。",
+            "網站尚未接 Supabase、Postgres 或自建資料庫。"
+          ]
+        },
+        {
+          title: "投稿與 Email",
+          items: [
+            "submit-place 表單只有在設定 PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT 後，才會送到外部表單 endpoint。",
+            "Email 是選填且不會公開；請不要填寫他人個資或敏感資訊。",
+            "投稿內容可能由站長整理、修正與標準化後才發布。"
+          ]
+        },
+        {
+          title: "未來資料功能",
+          items: [
+            "Phase 2 才會規劃登入、收藏與會員資料。",
+            "Phase 3 才會規劃投稿資料表與審核後台。",
+            "任何涉及個人資料的功能上線前，都需要重新確認資料保留、刪除與權限規則。"
+          ]
+        }
+      ],
+      related: {
+        submit: "推薦實用店家",
+        about: "了解 TachiSuke"
+      }
+    },
+    "editorial-policy": {
+      title: "編輯政策",
+      description: "TachiSuke 的內容原則、資料更新提醒、投稿審核與生活決策資訊邊界。",
+      intro: "TachiSuke 不是開放式評論站，也不是旅遊清單。我們優先整理能幫助外國人在日本做生活決策的資訊。",
+      sections: [
+        {
+          title: "內容原則",
+          items: [
+            "優先提供比較、清單、注意事項與決策線索。",
+            "避免把內容寫成泛泛旅遊介紹或未經整理的公開留言。",
+            "手機方案、地區與店家資訊都可能變動，使用前請確認官方最新資訊。"
+          ]
+        },
+        {
+          title: "投稿審核",
+          items: [
+            "使用者推薦的店家不會直接公開。",
+            "站長會先人工審核，並可能整理、改寫或標準化內容。",
+            "含有他人個資、敏感資訊或無法確認的內容不應發布。"
+          ]
+        },
+        {
+          title: "資訊邊界",
+          items: [
+            "TachiSuke 提供生活決策輔助，不取代官方條款、法律、醫療或財務建議。",
+            "價格、營業時間、禁菸規則與申請條件請以官方或現場最新資訊為準。",
+            "未來會建立更清楚的更正與回報流程。"
+          ]
+        }
+      ],
+      related: {
+        submit: "送出店家推薦",
+        about: "關於我們"
+      }
+    }
+  },
+  en: {
+    privacy: {
+      title: "Privacy",
+      description: "How TachiSuke handles submissions, optional email, and future account data while the site remains static-first.",
+      intro: "This page explains the current Phase 1 privacy posture. The site is static-first today; any future login, favorites, or database features will require a fuller privacy review.",
+      sections: [
+        {
+          title: "Current site status",
+          items: [
+            "Public TachiSuke pages are readable without login.",
+            "Account, favorites, and submission history pages are placeholders and do not store real account data.",
+            "The site does not currently connect to Supabase, PostgreSQL, or a custom database."
+          ]
+        },
+        {
+          title: "Submit-place and email",
+          items: [
+            "The submit-place form only posts to an external form endpoint when PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT is configured.",
+            "Email is optional and private; do not submit someone else's personal data or sensitive information.",
+            "Submitted place information may be edited, corrected, and normalized before publication."
+          ]
+        },
+        {
+          title: "Future data features",
+          items: [
+            "Phase 2 may add login, favorites, and user profiles.",
+            "Phase 3 may add place submission storage and a moderation dashboard.",
+            "Before collecting personal account data, retention, deletion, and access control rules must be reviewed."
+          ]
+        }
+      ],
+      related: {
+        submit: "Submit a useful place",
+        about: "About TachiSuke"
+      }
+    },
+    "editorial-policy": {
+      title: "Editorial Policy",
+      description: "TachiSuke's content principles, update caveats, submission moderation, and decision-guide boundaries.",
+      intro: "TachiSuke is not an unmoderated review site or a travel list. We prioritize practical information that helps foreign residents make daily-life decisions in Japan.",
+      sections: [
+        {
+          title: "Content principles",
+          items: [
+            "Prefer comparisons, checklists, watchouts, and practical decision cues.",
+            "Avoid generic travel writing and unstructured public comments.",
+            "Mobile plan, area, and place information can change; confirm official sources before applying or visiting."
+          ]
+        },
+        {
+          title: "Submission moderation",
+          items: [
+            "User-submitted places are not published directly.",
+            "Editors review submissions manually and may rewrite, standardize, or correct details.",
+            "Personal data, sensitive information, or unverifiable claims should not be published."
+          ]
+        },
+        {
+          title: "Information boundaries",
+          items: [
+            "TachiSuke supports life decisions but does not replace official terms, legal, medical, or financial advice.",
+            "Prices, hours, smoking rules, and signup conditions should be checked against official or on-site sources.",
+            "A clearer correction and feedback workflow is planned for later phases."
+          ]
+        }
+      ],
+      related: {
+        submit: "Submit a place",
+        about: "About us"
+      }
+    }
+  },
+  ja: {
+    privacy: {
+      title: "プライバシー",
+      description: "TachiSuke の静的サイト段階における投稿、任意メール、将来のアカウント情報の扱い。",
+      intro: "このページは Phase 1 の静的サイト段階における取り扱いを説明します。今後ログインや保存機能を追加する場合は、プライバシー方針を再確認します。",
+      sections: [
+        {
+          title: "現在のサイト状態",
+          items: [
+            "公開ページはログインなしで閲覧できます。",
+            "アカウント、保存、投稿履歴ページは placeholder で、実際の会員情報は保存しません。",
+            "現在は Supabase、PostgreSQL、独自データベースに接続していません。"
+          ]
+        },
+        {
+          title: "投稿とメール",
+          items: [
+            "submit-place フォームは PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT が設定された場合のみ外部 endpoint に送信されます。",
+            "メールは任意で非公開です。他人の個人情報やセンシティブな情報を入力しないでください。",
+            "投稿された情報は、公開前に編集、修正、標準化される場合があります。"
+          ]
+        },
+        {
+          title: "将来のデータ機能",
+          items: [
+            "Phase 2 でログイン、保存、プロフィールを検討します。",
+            "Phase 3 で投稿データ保存と審査画面を検討します。",
+            "個人情報を扱う前に、保存期間、削除、アクセス制御を再確認します。"
+          ]
+        }
+      ],
+      related: {
+        submit: "おすすめを投稿",
+        about: "TachiSuke について"
+      }
+    },
+    "editorial-policy": {
+      title: "編集方針",
+      description: "TachiSuke の内容原則、更新時の注意、投稿審査、生活判断ガイドとしての範囲。",
+      intro: "TachiSuke は未審査のレビューサイトや観光リストではありません。日本で暮らす外国人の生活判断に役立つ情報を優先します。",
+      sections: [
+        {
+          title: "内容原則",
+          items: [
+            "比較、チェックリスト、注意点、判断材料を重視します。",
+            "一般的な旅行記事や整理されていない公開コメントは避けます。",
+            "携帯プラン、エリア、お店の情報は変わるため、公式情報を確認してください。"
+          ]
+        },
+        {
+          title: "投稿審査",
+          items: [
+            "ユーザー投稿のお店情報は直接公開されません。",
+            "編集者が確認し、必要に応じて整理、書き直し、標準化します。",
+            "個人情報、センシティブ情報、確認できない内容は公開しません。"
+          ]
+        },
+        {
+          title: "情報の範囲",
+          items: [
+            "TachiSuke は生活判断を助ける情報であり、公式条件、法律、医療、金融助言の代わりではありません。",
+            "価格、営業時間、禁煙ルール、申込条件は公式または現地の最新情報を確認してください。",
+            "今後、修正やフィードバックの導線を整備します。"
+          ]
+        }
+      ],
+      related: {
+        submit: "お店を投稿",
+        about: "概要を見る"
+      }
+    }
+  },
+  ko: {
+    privacy: {
+      title: "개인정보 안내",
+      description: "정적 사이트 단계에서 TachiSuke가 추천 제출, 선택 이메일, 향후 계정 정보를 다루는 방식.",
+      intro: "이 페이지는 Phase 1 정적 사이트 단계의 개인정보 원칙을 설명합니다. 향후 로그인, 저장, 데이터베이스 기능을 추가하기 전에는 다시 검토합니다.",
+      sections: [
+        {
+          title: "현재 사이트 상태",
+          items: [
+            "공개 페이지는 로그인 없이 읽을 수 있습니다.",
+            "계정, 저장, 제출 내역 페이지는 placeholder이며 실제 회원 정보를 저장하지 않습니다.",
+            "현재 Supabase, PostgreSQL, 자체 데이터베이스에 연결되어 있지 않습니다."
+          ]
+        },
+        {
+          title: "장소 추천과 이메일",
+          items: [
+            "submit-place 폼은 PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT가 설정된 경우에만 외부 endpoint로 전송됩니다.",
+            "이메일은 선택 사항이며 공개되지 않습니다. 타인의 개인정보나 민감한 정보를 입력하지 마세요.",
+            "제출된 장소 정보는 공개 전에 정리, 수정, 표준화될 수 있습니다."
+          ]
+        },
+        {
+          title: "향후 데이터 기능",
+          items: [
+            "Phase 2에서 로그인, 저장, 프로필을 검토합니다.",
+            "Phase 3에서 장소 추천 저장과 심사 대시보드를 검토합니다.",
+            "개인 계정 데이터를 수집하기 전 보관, 삭제, 접근 권한 규칙을 다시 검토해야 합니다."
+          ]
+        }
+      ],
+      related: {
+        submit: "유용한 장소 추천",
+        about: "TachiSuke 소개"
+      }
+    },
+    "editorial-policy": {
+      title: "편집 정책",
+      description: "TachiSuke의 콘텐츠 원칙, 업데이트 주의사항, 추천 심사, 생활 판단 정보의 범위.",
+      intro: "TachiSuke는 무심사 리뷰 사이트나 여행 목록이 아닙니다. 일본에서 생활하는 외국인이 실제 결정을 내리는 데 필요한 정보를 우선합니다.",
+      sections: [
+        {
+          title: "콘텐츠 원칙",
+          items: [
+            "비교, 체크리스트, 주의사항, 판단 기준을 우선합니다.",
+            "일반적인 여행 글이나 정리되지 않은 공개 댓글은 피합니다.",
+            "휴대폰 요금제, 지역, 장소 정보는 바뀔 수 있으므로 공식 정보를 확인해야 합니다."
+          ]
+        },
+        {
+          title: "추천 심사",
+          items: [
+            "사용자가 추천한 장소는 바로 공개되지 않습니다.",
+            "편집자가 먼저 확인하고 필요하면 정리, 수정, 표준화합니다.",
+            "개인정보, 민감한 정보, 확인하기 어려운 내용은 공개하지 않습니다."
+          ]
+        },
+        {
+          title: "정보의 범위",
+          items: [
+            "TachiSuke는 생활 결정을 돕는 정보이며 공식 조건, 법률, 의료, 금융 조언을 대신하지 않습니다.",
+            "가격, 영업시간, 금연 규칙, 신청 조건은 공식 또는 현장의 최신 정보를 확인하세요.",
+            "향후 수정 및 피드백 흐름을 더 명확히 만들 예정입니다."
+          ]
+        }
+      ],
+      related: {
+        submit: "장소 추천하기",
+        about: "소개 보기"
+      }
+    }
+  }
+} satisfies Record<Locale, Record<Props["kind"], PolicyCopy>>;
+
+const page = copy[locale][kind];
+---
+
+<BaseLayout locale={locale} title={page.title} description={page.description}>
+  <section class="page-hero">
+    <div class="container">
+      <h1>{page.title}</h1>
+      <p>{page.description}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="narrow content-stack">
+      <p>{page.intro}</p>
+      {page.sections.map((section) => (
+        <article class="notice">
+          <h2>{section.title}</h2>
+          <ul class="check-list">
+            {section.items.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2">
+      <CategoryCard href={localizePath(locale, "/submit-place")} title={page.related.submit} description={page.description} />
+      <CategoryCard href={localizePath(locale, "/about")} title={page.related.about} description={page.intro} />
+    </div>
+  </section>
+</BaseLayout>

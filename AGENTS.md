@@ -237,6 +237,13 @@ Phase 1L adds baseline accessibility polish:
 - Preserve visible `:focus-visible` styles for keyboard users.
 - Treat this as baseline work, not a complete accessibility audit.
 
+Phase 1M adds launch trust pages:
+
+- Keep `/[locale]/privacy` and `/[locale]/editorial-policy` static and publicly linked.
+- Privacy copy should match the current static MVP: no auth, no database, optional external submit-place endpoint only.
+- Editorial policy copy should explain moderation, source caveats, and decision-guide boundaries.
+- Do not imply that Phase 1 has a final legal privacy policy, analytics, account storage, or database-backed submissions.
+
 Mobile plan prices, campaigns, payment methods, and identity requirements can change. Always phrase mobile data as editorial guidance and remind users to confirm official carrier pages before applying.
 Area rent feel, quietness, and commute convenience can also become stale. Keep area pages date-aware and practical rather than sightseeing-oriented.
 

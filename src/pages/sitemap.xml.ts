@@ -18,7 +18,9 @@ const localeIndexPaths = [
   "/tools",
   "/submit-place",
   "/submit-place/thanks",
-  "/about"
+  "/about",
+  "/privacy",
+  "/editorial-policy"
 ];
 
 function formatDate(date: Date): string {

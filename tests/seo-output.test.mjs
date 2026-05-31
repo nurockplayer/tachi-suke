@@ -74,7 +74,9 @@ describe("static SEO output", () => {
       "/ko/places/dennys",
       "/en/tools/moving-to-japan-checklist",
       "/zh-tw/tools/moving-to-japan-checklist",
-      "/zh-tw/submit-place/thanks"
+      "/zh-tw/submit-place/thanks",
+      "/en/privacy",
+      "/zh-tw/editorial-policy"
     ]) {
       assert.ok(paths.has(expectedPath), `sitemap should include ${expectedPath}`);
     }
@@ -102,6 +104,16 @@ describe("static SEO output", () => {
     assert.ok(hasJsonLdType(objects, "Organization"), "root page should include Organization JSON-LD");
     assert.ok(hasJsonLdType(objects, "WebSite"), "root page should include WebSite JSON-LD");
     assert.match(html, /rel="alternate"[^>]+type="application\/rss\+xml"[^>]+href="https:\/\/tachi-suke\.example\.com\/feed\.xml"/);
+  });
+
+  it("renders launch trust pages as public static HTML", () => {
+    const privacy = readHtml("en/privacy/index.html");
+    assert.match(privacy, /Privacy \| TachiSuke/, "privacy page should have an SEO title");
+    assert.match(privacy, /external form endpoint/i, "privacy page should mention external form endpoint behavior");
+
+    const editorialPolicy = readHtml("zh-tw/editorial-policy/index.html");
+    assert.match(editorialPolicy, /編輯政策 \| TachiSuke/, "editorial policy page should have an SEO title");
+    assert.match(editorialPolicy, /不會直接公開/, "editorial policy should explain moderation");
   });
 
   it("generates an RSS feed for public article detail pages", () => {

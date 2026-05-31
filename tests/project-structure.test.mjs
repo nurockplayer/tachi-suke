@@ -89,6 +89,7 @@ const requiredFiles = [
   "src/components/pages/AreaDetailPage.astro",
   "src/components/pages/ToolDetailPage.astro",
   "src/components/pages/SubmitPlaceThanksPage.astro",
+  "src/components/pages/PolicyPage.astro",
   "src/components/mobile/MobilePlanCard.astro",
   "src/components/favorites/FavoriteButtonPlaceholder.astro",
   "src/components/auth/LoginPrompt.astro",
@@ -143,6 +144,8 @@ const localePages = [
   "submit-place.astro",
   "submit-place/thanks.astro",
   "about.astro",
+  "privacy.astro",
+  "editorial-policy.astro",
   "account/login.astro",
   "account/favorites.astro",
   "account/submissions.astro"
@@ -272,6 +275,20 @@ describe("TachiSuke project scaffold", () => {
       "utf8"
     );
     assert.doesNotMatch(accessibilityPlan, /^### Task/m, "accessibility plan should not skip heading levels");
+  });
+
+  it("includes public launch trust pages in locale routes and footer navigation", () => {
+    const footer = readFileSync(join(root, "src/components/layout/Footer.astro"), "utf8");
+    assert.match(footer, /localizePath\(locale,\s*"\/privacy"\)/, "Footer should link to privacy pages");
+    assert.match(footer, /localizePath\(locale,\s*"\/editorial-policy"\)/, "Footer should link to editorial policy pages");
+
+    const sitemap = readFileSync(join(root, "src/pages/sitemap.xml.ts"), "utf8");
+    assert.match(sitemap, /"\/privacy"/, "sitemap should include privacy pages");
+    assert.match(sitemap, /"\/editorial-policy"/, "sitemap should include editorial policy pages");
+
+    const policyPage = readFileSync(join(root, "src/components/pages/PolicyPage.astro"), "utf8");
+    assert.match(policyPage, /kind:\s*"privacy"\s*\|\s*"editorial-policy"/, "PolicyPage should support both trust page types");
+    assert.match(policyPage, /submit-place/, "PolicyPage should explain submission-related privacy or moderation");
   });
 
   it("configures submit-place as a provider-agnostic static form", () => {
