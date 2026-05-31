@@ -20,6 +20,11 @@ function sitemapPaths(xml) {
   return [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => normalizePath(new URL(match[1]).pathname));
 }
 
+function sitemapLastmodByPath(xml) {
+  const entries = [...xml.matchAll(/<url>\s*<loc>(.*?)<\/loc>(?:\s*<lastmod>(.*?)<\/lastmod>)?\s*<\/url>/g)];
+  return new Map(entries.map((match) => [normalizePath(new URL(match[1]).pathname), match[2] || ""]));
+}
+
 function readHtml(relativePath) {
   return readDist(relativePath);
 }
@@ -90,6 +95,7 @@ describe("static SEO output", () => {
       "/zh-tw/submit-place/thanks",
       "/en/contact",
       "/ja/contact/thanks",
+      "/feed.xml",
       "/zh-tw/feed.xml",
       "/en/feed.xml",
       "/ja/feed.xml",
@@ -196,6 +202,13 @@ describe("static SEO output", () => {
     assert.match(zhTwFeed, /<dc:language>zh-Hant-TW<\/dc:language>/);
     assert.match(zhTwFeed, /<link>https:\/\/tachi-suke\.example\.com\/zh-tw\/articles\/taiwanese-newcomer-mobile-plan-japan<\/link>/);
     assert.doesNotMatch(zhTwFeed, /\/en\/articles\//, "zh-tw feed should not include English article URLs");
+  });
+
+  it("adds content-aware lastmod values for RSS feeds in sitemap", () => {
+    const lastmods = sitemapLastmodByPath(readDist("sitemap.xml"));
+    for (const path of ["/feed.xml", "/en/feed.xml", "/zh-tw/feed.xml", "/ja/feed.xml", "/ko/feed.xml"]) {
+      assert.match(lastmods.get(path) ?? "", /^\d{4}-\d{2}-\d{2}$/, `${path} should have an article-derived lastmod date`);
+    }
   });
 
   it("generates noindex locale search pages and public search index JSON", () => {

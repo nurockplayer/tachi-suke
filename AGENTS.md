@@ -326,6 +326,13 @@ Phase 1AA adds `llms.txt` discovery:
 - Link only to public discovery surfaces such as sitemap, RSS feeds, locale roots, section pages, and static search indexes.
 - Do not include account placeholders, drafts, private data, analytics, crawling, or AI runtime behavior.
 
+Phase 1AB adds feed-aware sitemap discovery:
+
+- Include `/feed.xml` and `/[locale]/feed.xml` in `sitemap.xml`.
+- Global feed `lastmod` should use the newest public article update date.
+- Locale feed `lastmod` should use the newest public same-locale article update date.
+- Keep account placeholders, search pages, and search indexes out of the sitemap.
+
 Phase 1Q adds a static custom 404 page:
 
 - Keep `src/pages/404.astro` static and dependency-free.

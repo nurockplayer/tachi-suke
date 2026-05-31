@@ -397,6 +397,9 @@ describe("TachiSuke project scaffold", () => {
     assert.match(sitemap, /"\/editorial-policy"/, "sitemap should include editorial policy pages");
     assert.match(sitemap, /"\/contact"/, "sitemap should include contact/corrections pages");
     assert.match(sitemap, /"\/contact\/thanks"/, "sitemap should include contact thanks pages");
+    assert.match(sitemap, /path:\s*"\/feed\.xml"/, "sitemap should include the global RSS feed");
+    assert.match(sitemap, /newestArticleUpdatedAt/, "sitemap should compute a global feed lastmod from public articles");
+    assert.match(sitemap, /newestArticleUpdatedAtByLocale/, "sitemap should compute locale feed lastmod from same-locale public articles");
 
     const policyPage = readFileSync(join(root, "src/components/pages/PolicyPage.astro"), "utf8");
     assert.match(policyPage, /kind:\s*"privacy"\s*\|\s*"editorial-policy"/, "PolicyPage should support both trust page types");

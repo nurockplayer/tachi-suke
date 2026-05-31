@@ -48,12 +48,34 @@ function uniqueEntries(entries: SitemapEntry[]): SitemapEntry[] {
   return [...byPath.values()].sort((a, b) => a.path.localeCompare(b.path));
 }
 
+function newestDate(current: Date | undefined, next: Date): Date {
+  return !current || next > current ? next : current;
+}
+
 export const GET: APIRoute = async ({ site }) => {
   const siteUrl = site ?? new URL("https://tachi-suke.example.com");
-  const entries: SitemapEntry[] = [{ path: "/" }];
+  const articles = await getCollection("articles", ({ data }) => !data.draft);
+  let newestArticleUpdatedAt: Date | undefined;
+  const newestArticleUpdatedAtByLocale = new Map<Locale, Date>();
+
+  for (const article of articles) {
+    newestArticleUpdatedAt = newestDate(newestArticleUpdatedAt, article.data.updatedAt);
+    newestArticleUpdatedAtByLocale.set(
+      article.data.locale,
+      newestDate(newestArticleUpdatedAtByLocale.get(article.data.locale), article.data.updatedAt)
+    );
+  }
+
+  const entries: SitemapEntry[] = [
+    { path: "/" },
+    { path: "/feed.xml", lastmod: newestArticleUpdatedAt }
+  ];
 
   for (const locale of locales) {
-    entries.push({ path: localizePath(locale, "/feed.xml") });
+    entries.push({
+      path: localizePath(locale, "/feed.xml"),
+      lastmod: newestArticleUpdatedAtByLocale.get(locale)
+    });
 
     for (const path of localeIndexPaths) {
       entries.push({ path: localizePath(locale, path) });
@@ -68,7 +90,6 @@ export const GET: APIRoute = async ({ site }) => {
     }
   }
 
-  const articles = await getCollection("articles", ({ data }) => !data.draft);
   for (const article of articles) {
     entries.push({
       path: localizePath(article.data.locale, `/articles/${article.data.slug}`),

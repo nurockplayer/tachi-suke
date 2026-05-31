@@ -162,8 +162,8 @@ The MVP includes:
 - SEO-oriented `BaseLayout`
 - Generated `sitemap.xml`, `robots.txt`, and `site.webmanifest`
 - Generated `llms.txt` discovery file for public AI/search-adjacent tooling
-- Generated global `feed.xml` for public articles
-- Generated locale RSS feeds at `/[locale]/feed.xml` for same-locale public articles
+- Generated global `feed.xml` for public articles, included in the sitemap with content-aware `lastmod`
+- Generated locale RSS feeds at `/[locale]/feed.xml` for same-locale public articles, included in the sitemap with same-locale `lastmod`
 - Custom static `404.html` recovery page with `noindex, nofollow`
 - Default Open Graph image and Twitter summary metadata
 - Browser/PWA metadata for theme color, app name, Apple app title, and phone number format detection
@@ -357,6 +357,7 @@ Engineering metrics:
 - `sitemap.xml` includes public article category landing pages.
 - `sitemap.xml` includes public privacy and editorial policy pages.
 - `sitemap.xml` includes public contact/corrections pages.
+- `sitemap.xml` includes the global RSS feed and locale RSS feeds with article-derived `lastmod`.
 - `sitemap.xml` excludes noindex search pages and search index JSON endpoints.
 - `robots.txt` references the sitemap and disallows placeholder account routes.
 - `llms.txt` summarizes public discovery surfaces and excludes private, draft, account, and placeholder data.
