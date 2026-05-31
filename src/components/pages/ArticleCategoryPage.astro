@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import FavoriteButtonPlaceholder from "@/components/favorites/FavoriteButtonPlaceholder.astro";
+import Breadcrumbs from "@/components/navigation/Breadcrumbs.astro";
 import { formatDate } from "@/lib/content";
 import {
   getArticleCategoryDescription,
@@ -9,7 +10,7 @@ import {
   getArticleCategoryTitle,
   slugifyArticleCategory
 } from "@/lib/content/article-categories";
-import { locales, localizePath, sectionCopy, type Locale } from "@/lib/i18n";
+import { htmlLangByLocale, locales, localizePath, sectionCopy, type Locale } from "@/lib/i18n";
 
 interface Props {
   locale: Locale;
@@ -20,6 +21,10 @@ const { locale, category } = Astro.props;
 const categorySlug = slugifyArticleCategory(category);
 const title = getArticleCategoryTitle(locale, category);
 const description = getArticleCategoryDescription(locale, category);
+const site = Astro.site ?? new URL(Astro.url.origin);
+const canonicalUrl = new URL(Astro.url.pathname, site).href;
+const localeHomeUrl = new URL(localizePath(locale), site).href;
+const articlesUrl = new URL(localizePath(locale, "/articles"), site).href;
 const articles = (await getCollection("articles"))
   .filter((article) => article.data.locale === locale && !article.data.draft && slugifyArticleCategory(article.data.category) === categorySlug)
   .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
@@ -40,11 +45,57 @@ const allArticlesLabel = {
   ja: "すべての記事",
   ko: "전체 글"
 }[locale];
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${canonicalUrl}#webpage`,
+    name: title,
+    description,
+    url: canonicalUrl,
+    inLanguage: htmlLangByLocale[locale],
+    isPartOf: { "@id": new URL("/#website", site).href },
+    publisher: { "@id": new URL("/#organization", site).href }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": `${canonicalUrl}#breadcrumb`,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "TachiSuke",
+        item: localeHomeUrl
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: sectionCopy[locale].articlesTitle,
+        item: articlesUrl
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: title,
+        item: canonicalUrl
+      }
+    ]
+  }
+];
 ---
 
-<BaseLayout locale={locale} title={title} description={description} alternatePaths={alternatePaths}>
+<BaseLayout locale={locale} title={title} description={description} alternatePaths={alternatePaths} jsonLd={jsonLd}>
   <section class="page-hero">
     <div class="container">
+      <Breadcrumbs
+        locale={locale}
+        items={[
+          { label: "TachiSuke", href: localizePath(locale) },
+          { label: sectionCopy[locale].articlesTitle, href: localizePath(locale, "/articles") },
+          { label: title }
+        ]}
+      />
       <p class="article-meta"><a class="article-meta-link" href={localizePath(locale, "/articles")}>{sectionCopy[locale].articlesTitle}</a></p>
       <h1>{title}</h1>
       <p>{description}</p>

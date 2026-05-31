@@ -222,6 +222,13 @@ Phase 1I adds conservative detail-page structured data:
 - Tool detail pages emit `WebPage`, `ItemList`, and `BreadcrumbList` JSON-LD.
 - Do not add `Offer`, ratings, reviews, coordinates, opening hours, or exact addresses unless the content model and editorial review process actually support those claims.
 
+Phase 1U adds visible breadcrumbs:
+
+- Nested public article, article category, place, mobile plan, area, and tool pages should render locale-aware visible breadcrumbs.
+- Breadcrumb parent links must point to existing public routes only.
+- The current breadcrumb item should use `aria-current="page"` and should not be a link.
+- Keep visible breadcrumbs aligned with JSON-LD breadcrumbs when both exist.
+
 Phase 1J adds a static RSS feed:
 
 - `/feed.xml` is generated from non-draft public articles.

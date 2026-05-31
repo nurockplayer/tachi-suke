@@ -85,6 +85,7 @@ const requiredFiles = [
   "src/components/layout/Footer.astro",
   "src/components/layout/ArticleLayout.astro",
   "src/components/layout/LocaleSwitcher.astro",
+  "src/components/navigation/Breadcrumbs.astro",
   "src/components/content/CategoryCard.astro",
   "src/components/content/CorrectionPrompt.astro",
   "src/components/places/PlaceCard.astro",
@@ -256,6 +257,7 @@ describe("TachiSuke project scaffold", () => {
     assert.match(notFoundPage, /localizePath\(locale\)/, "custom 404 page should link to locale home pages");
 
     const articleLayout = readFileSync(join(root, "src/components/layout/ArticleLayout.astro"), "utf8");
+    assert.match(articleLayout, /Breadcrumbs/, "ArticleLayout should render visible breadcrumbs");
     assert.match(articleLayout, /relatedArticles\?:/, "ArticleLayout should accept related article links");
     assert.match(articleLayout, /class="related-articles"/, "ArticleLayout should render a related articles section");
     assert.match(articleLayout, /"@type":\s*"Article"/, "ArticleLayout should define Article JSON-LD");
@@ -267,9 +269,25 @@ describe("TachiSuke project scaffold", () => {
     assert.match(articleDetailPage, /relatedArticles=\{relatedArticles\}/, "ArticleDetailPage should pass related articles into ArticleLayout");
 
     const placeDetailPage = readFileSync(join(root, "src/components/pages/PlaceDetailPage.astro"), "utf8");
+    assert.match(placeDetailPage, /Breadcrumbs/, "PlaceDetailPage should render visible breadcrumbs");
     assert.match(placeDetailPage, /"@type":\s*"LocalBusiness"/, "PlaceDetailPage should define LocalBusiness JSON-LD");
     assert.match(placeDetailPage, /"@type":\s*"BreadcrumbList"/, "PlaceDetailPage should define BreadcrumbList JSON-LD");
     assert.match(placeDetailPage, /jsonLd=\{jsonLd\}/, "PlaceDetailPage should pass JSON-LD into BaseLayout");
+
+    const categoryPage = readFileSync(join(root, "src/components/pages/ArticleCategoryPage.astro"), "utf8");
+    assert.match(categoryPage, /Breadcrumbs/, "ArticleCategoryPage should render visible breadcrumbs");
+    assert.match(categoryPage, /"@type":\s*"WebPage"/, "ArticleCategoryPage should define WebPage JSON-LD");
+    assert.match(categoryPage, /"@type":\s*"BreadcrumbList"/, "ArticleCategoryPage should define BreadcrumbList JSON-LD");
+
+    for (const [file, label] of [
+      ["src/components/pages/MobilePlanDetailPage.astro", "MobilePlanDetailPage"],
+      ["src/components/pages/AreaDetailPage.astro", "AreaDetailPage"],
+      ["src/components/pages/ToolDetailPage.astro", "ToolDetailPage"]
+    ]) {
+      const source = readFileSync(join(root, file), "utf8");
+      assert.match(source, /Breadcrumbs/, `${label} should render visible breadcrumbs`);
+      assert.match(source, /"@type":\s*"BreadcrumbList"/, `${label} should keep BreadcrumbList JSON-LD`);
+    }
   });
 
   it("includes dependency-free static search routes and source filters", () => {

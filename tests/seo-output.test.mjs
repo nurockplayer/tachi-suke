@@ -217,12 +217,45 @@ describe("static SEO output", () => {
     assert.match(housing, /href="\/zh-tw\/articles\/japan-renting-initial-costs"/, "housing category should link to zh-tw housing article");
   });
 
+  it("renders visible breadcrumbs on nested public pages", () => {
+    const article = readHtml("en/articles/choose-mobile-plan-japan-foreigner/index.html");
+    assert.match(article, /<nav class="breadcrumbs" aria-label="Breadcrumb">/, "article detail should render breadcrumb navigation");
+    assert.match(article, /href="\/en\/articles"/, "article breadcrumb should link to article index");
+    assert.match(article, /href="\/en\/articles\/category\/mobile"/, "article breadcrumb should link to category landing page");
+    assert.match(article, /aria-current="page"[^>]*>How to Choose a Mobile Plan in Japan as a Foreigner/, "article breadcrumb should mark current page");
+
+    const category = readHtml("en/articles/category/mobile/index.html");
+    assert.match(category, /<nav class="breadcrumbs" aria-label="Breadcrumb">/, "category page should render breadcrumb navigation");
+    assert.match(category, /href="\/en\/articles"/, "category breadcrumb should link to article index");
+    assert.match(category, /aria-current="page"[^>]*>Mobile guides/, "category breadcrumb should mark current page");
+
+    for (const [path, parentPath, currentText] of [
+      ["en/places/dennys/index.html", "/en/places", "Denny"],
+      ["en/mobile/povo2/index.html", "/en/mobile", "povo"],
+      ["en/areas/ikebukuro/index.html", "/en/areas", "Ikebukuro"],
+      ["en/tools/moving-to-japan-checklist/index.html", "/en/tools", "Moving to Japan Checklist"]
+    ]) {
+      const html = readHtml(path);
+      assert.match(html, /<nav class="breadcrumbs" aria-label="Breadcrumb">/, `${path} should render breadcrumb navigation`);
+      assert.match(html, new RegExp(`href="${parentPath}"`), `${path} should link to its parent index`);
+      assert.match(html, new RegExp(`aria-current="page"[^>]*>${currentText}`), `${path} should mark current page`);
+    }
+  });
+
   it("renders article and breadcrumb JSON-LD on article detail pages", () => {
     const objects = jsonLdObjects(readHtml("en/articles/choose-mobile-plan-japan-foreigner/index.html"));
     assert.ok(hasJsonLdType(objects, "Organization"), "article page should include Organization JSON-LD");
     assert.ok(hasJsonLdType(objects, "WebSite"), "article page should include WebSite JSON-LD");
     assert.ok(hasJsonLdType(objects, "Article"), "article page should include Article JSON-LD");
     assert.ok(hasJsonLdType(objects, "BreadcrumbList"), "article page should include BreadcrumbList JSON-LD");
+  });
+
+  it("renders conservative JSON-LD on article category landing pages", () => {
+    const objects = jsonLdObjects(readHtml("en/articles/category/mobile/index.html"));
+    assert.ok(hasJsonLdType(objects, "Organization"), "category page should include Organization JSON-LD");
+    assert.ok(hasJsonLdType(objects, "WebSite"), "category page should include WebSite JSON-LD");
+    assert.ok(hasJsonLdType(objects, "WebPage"), "category page should include WebPage JSON-LD");
+    assert.ok(hasJsonLdType(objects, "BreadcrumbList"), "category page should include BreadcrumbList JSON-LD");
   });
 
   it("renders same-locale related article links on article detail pages", () => {

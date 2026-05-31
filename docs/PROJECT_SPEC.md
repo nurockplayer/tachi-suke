@@ -166,6 +166,7 @@ The MVP includes:
 - Custom static `404.html` recovery page with `noindex, nofollow`
 - Default Open Graph image and Twitter summary metadata
 - JSON-LD structured data for `Organization`, `WebSite`, `Article`, `LocalBusiness`, `Service`, `WebPage`, `ItemList`, and `BreadcrumbList`
+- Visible breadcrumbs for nested public article, category, place, mobile plan, area, and tool pages
 - Cloudflare Pages `_headers` for conservative security and cache defaults
 - Cloudflare Pages `wrangler.toml` metadata for `dist` static output
 - `SITE_URL` environment variable with example-domain fallback
@@ -356,6 +357,7 @@ Engineering metrics:
 - `/[locale]/feed.xml` includes only same-locale non-draft public article detail pages.
 - Built representative pages include parseable JSON-LD for site identity, article detail pages, place detail pages, mobile plan detail pages, area detail pages, tool detail pages, and breadcrumbs.
 - Structured data must not claim unavailable ratings, review counts, opening hours, coordinates, offers, or exact addresses.
+- Nested public pages render visible breadcrumbs that link to existing parent routes and mark the current page with `aria-current="page"`.
 - Detail-page language switcher links avoid missing generated pages.
 
 ## 17. Non-Goals

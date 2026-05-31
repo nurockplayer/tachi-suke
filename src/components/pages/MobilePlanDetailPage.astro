@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import CorrectionPrompt from "@/components/content/CorrectionPrompt.astro";
 import BaseLayout from "@/components/layout/BaseLayout.astro";
+import Breadcrumbs from "@/components/navigation/Breadcrumbs.astro";
 import { formatDate } from "@/lib/content";
 import { locales, localizePath, type Locale } from "@/lib/i18n";
 
@@ -167,6 +168,14 @@ const jsonLd = [
 <BaseLayout locale={locale} title={`${data.provider} ${data.planName}`} description={description} alternatePaths={alternatePaths} jsonLd={jsonLd}>
   <section class="page-hero">
     <div class="container">
+      <Breadcrumbs
+        locale={locale}
+        items={[
+          { label: "TachiSuke", href: localizePath(locale) },
+          { label: mobileLabel, href: localizePath(locale, "/mobile") },
+          { label: `${data.provider} ${data.planName}` }
+        ]}
+      />
       <p class="article-meta">{labels.lastCheckedAt} {formatDate(data.lastCheckedAt, locale)}</p>
       <h1>{data.provider} {data.planName}</h1>
       <p>{description}</p>

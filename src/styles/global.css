@@ -538,6 +538,45 @@ textarea {
   font-size: 0.8rem;
 }
 
+.breadcrumbs {
+  color: var(--color-muted);
+  font-size: 0.86rem;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+
+.breadcrumbs ol {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.breadcrumbs li {
+  align-items: center;
+  display: inline-flex;
+  min-width: 0;
+}
+
+.breadcrumbs li + li::before {
+  color: var(--color-border);
+  content: "/";
+  margin: 0 8px 0 4px;
+}
+
+.breadcrumbs a {
+  color: var(--color-ink-soft);
+  text-decoration-color: var(--color-green);
+  text-underline-offset: 3px;
+}
+
+.breadcrumbs span[aria-current="page"] {
+  color: var(--color-muted);
+}
+
 .page-hero {
   padding: 50px 0 24px;
   background: var(--color-mist);
