@@ -58,6 +58,7 @@ Implemented:
 - Structure and conservative internal-link tests in `tests/project-structure.test.mjs`
 - Build-output static HTML internal link crawler in `tests/static-html-links.test.mjs`
 - Build-output SEO check in `tests/seo-output.test.mjs`
+- GitHub Actions CI quality gate for pull requests and pushes to `main`
 
 Still placeholder-only:
 
@@ -163,6 +164,8 @@ Recommended verification order:
 4. `pnpm check:seo`
 
 `pnpm test` checks source-level structure and content links. `pnpm check:links` scans built `dist/**/*.html`. `pnpm check:seo` checks built `sitemap.xml`, `robots.txt`, `site.webmanifest`, and Cloudflare headers. Run `pnpm build` before both build-output checks.
+
+GitHub Actions runs the same verification order on pull requests and pushes to `main`, including forbidden lockfile rejection. Cloudflare Pages deployment is still configured separately.
 
 ## Environment Variables
 

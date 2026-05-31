@@ -51,6 +51,7 @@ This document records the current MVP state after Phase 1D SEO launch-readiness 
 - Conservative article internal-link checks for locale-prefixed static/generated routes.
 - Static HTML internal link crawler in `tests/static-html-links.test.mjs`, run after `pnpm build` with `pnpm check:links`.
 - Static SEO output check in `tests/seo-output.test.mjs`, run after `pnpm build` with `pnpm check:seo`.
+- GitHub Actions CI workflow that rejects forbidden lockfiles and runs `pnpm install --frozen-lockfile`, `pnpm test`, `pnpm build`, `pnpm check:links`, and `pnpm check:seo`.
 - Locale switcher links for detail pages use conservative alternate paths so missing article translations do not create dead links.
 - Submit-place form uses `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT`: unset means preview mode/disabled submit; set means a static `POST` to the external endpoint.
 - Submit-place includes provider-agnostic hidden fields and a visually hidden `website` honeypot field for basic spam reduction.
@@ -103,6 +104,7 @@ These are intentionally present but not functional:
 - Account placeholder pages are marked `noindex, nofollow` and excluded from the sitemap.
 - Structured data is intentionally conservative and does not claim ratings, reviews, opening hours, offers, or exact street addresses.
 - Cloudflare Pages is the preferred static deployment target for Phase 1. Set `SITE_URL` to the production domain before launch.
+- CI verifies the static site but does not deploy it. Cloudflare Pages deployment remains separate.
 - Browser QA currently covers basic route/card/form checks, not a full accessibility or visual regression suite.
 
 ## Verification Results

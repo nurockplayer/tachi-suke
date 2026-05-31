@@ -63,6 +63,7 @@ const requiredFiles = [
   "AGENTS.md",
   "README.md",
   ".env.example",
+  ".github/workflows/ci.yml",
   "astro.config.mjs",
   "tsconfig.json",
   "package.json",
@@ -172,6 +173,29 @@ describe("TachiSuke project scaffold", () => {
     assert.equal(packageJson.scripts["check:seo"], "node --test tests/seo-output.test.mjs");
     assert.equal(existsSync(join(root, "tests/static-html-links.test.mjs")), true, "static HTML link crawler should exist");
     assert.equal(existsSync(join(root, "tests/seo-output.test.mjs")), true, "static SEO output check should exist");
+  });
+
+  it("runs a pnpm-only CI quality gate", () => {
+    const workflow = readFileSync(join(root, ".github/workflows/ci.yml"), "utf8");
+    for (const command of [
+      "pnpm install --frozen-lockfile",
+      "pnpm test",
+      "pnpm build",
+      "pnpm check:links",
+      "pnpm check:seo"
+    ]) {
+      assert.match(workflow, new RegExp(command.replaceAll(" ", "\\s+")), `CI should run ${command}`);
+    }
+
+    for (const forbiddenLockfile of ["package-lock.json", "yarn.lock", "bun.lock", "bun.lockb"]) {
+      assert.match(workflow, new RegExp(forbiddenLockfile.replace(".", "\\.")), `CI should reject ${forbiddenLockfile}`);
+    }
+
+    assert.doesNotMatch(workflow, /(^|\n)\s*run:\s*npm\s+/m, "CI should not use npm run commands");
+    assert.doesNotMatch(workflow, /(^|\n)\s*npm\s+(install|ci|run)\b/m, "CI should not use npm shell commands");
+    assert.doesNotMatch(workflow, /\bnpx\b/, "CI should not use npx");
+    assert.doesNotMatch(workflow, /yarn\s+/, "CI should not use yarn commands");
+    assert.doesNotMatch(workflow, /bun\s+/, "CI should not use bun commands");
   });
 
   it("includes static SEO discovery and social metadata hooks", () => {

@@ -185,6 +185,13 @@ Phase 1E adds structured data:
 - Do not invent ratings, review counts, opening hours, offers, or exact street addresses.
 - `pnpm check:seo` parses representative built pages for JSON-LD.
 
+Phase 1F adds CI quality gates:
+
+- GitHub Actions must use pnpm only.
+- CI should reject `package-lock.json`, `yarn.lock`, `bun.lock`, and `bun.lockb`.
+- CI should run `pnpm install --frozen-lockfile`, `pnpm test`, `pnpm build`, `pnpm check:links`, and `pnpm check:seo`.
+- CI does not deploy to Cloudflare Pages yet; deployment secrets and project settings stay outside the repo until explicitly scoped.
+
 Mobile plan prices, campaigns, payment methods, and identity requirements can change. Always phrase mobile data as editorial guidance and remind users to confirm official carrier pages before applying.
 Area rent feel, quietness, and commute convenience can also become stale. Keep area pages date-aware and practical rather than sightseeing-oriented.
 

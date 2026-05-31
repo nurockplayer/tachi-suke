@@ -27,6 +27,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - `pnpm test` must pass.
 - `pnpm check:links` must pass after `pnpm build` when verifying built static output.
 - `pnpm check:seo` must pass after `pnpm build` when verifying generated SEO output.
+- CI must run the same verification chain for pull requests and pushes to `main`.
 - Structure tests should verify required files, required locale routes, pnpm-only lockfile policy, content collections, `SITE_URL` fallback strategy, and finalized Place enum values.
 - Phase 1B/1B.5 tests should verify minimum content depth for articles, mobile plans, and area guides.
 - Phase 1B/1B.5 tests should scan Markdown/MDX article links that point to internal absolute paths and verify they match known static routes or generated article/place/mobile/area detail routes.
@@ -34,6 +35,8 @@ This document defines the acceptance criteria for the current static-first MVP.
 - `pnpm check:seo` should verify built `sitemap.xml`, `robots.txt`, `site.webmanifest`, and Cloudflare `_headers`.
 - The current static HTML crawler does not validate external links, anchors, JavaScript behavior, or visual rendering.
 - New required route or model decisions should be reflected in tests when they become implementation requirements.
+- CI must reject `package-lock.json`, `yarn.lock`, `bun.lock`, and `bun.lockb`.
+- CI must use pnpm commands and must not use command-level npm, yarn, or bun invocations.
 
 ## i18n Routing Criteria
 
