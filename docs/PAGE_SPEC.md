@@ -42,7 +42,7 @@ All public pages should:
 
 **Rendering mode:** Static Astro endpoint.
 
-**SEO requirements:** Include public locale roots, section pages, global and locale RSS feeds, non-draft article detail pages, published place detail pages, area detail pages, mobile plan detail pages, published tool detail pages, submit-place thanks pages, and contact/corrections pages. Exclude account placeholder routes, draft articles, non-published places, non-published tools, search pages, and search index JSON endpoints. Feed entries should include `lastmod` from the newest matching public article.
+**SEO requirements:** Include public locale roots, section pages, global and locale RSS feeds, non-draft article detail pages, published place detail pages, area detail pages, mobile plan detail pages, published tool detail pages, submit-place thanks pages, and contact/corrections pages. Exclude account placeholder routes, draft articles, non-published places, non-published tools, search pages, and search index JSON endpoints. Feed entries should include `lastmod` from the newest matching public article. Shared locale entries should include conservative `xhtml:link` hreflang alternates, and article alternates should only point to non-draft generated translations sharing the same `translationKey`.
 
 **Current status:** Implemented.
 

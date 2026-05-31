@@ -66,6 +66,7 @@ This document records the current MVP state after Phase 1AK OpenSearch discovery
 - Tool detail `WebPage`, `ItemList`, and `BreadcrumbList` JSON-LD.
 - Visible breadcrumbs on article detail, article category, place detail, mobile plan detail, area detail, and tool detail pages.
 - Generated `sitemap.xml` for public static routes and content collection detail pages.
+- Sitemap entries include conservative `hreflang` alternates for shared locale pages and translated article detail pages.
 - Generated `robots.txt` with sitemap reference and account placeholder disallow rules.
 - Generated `llms.txt` with public discovery links and content caveats.
 - Generated `opensearch.xml` for browser/search-adjacent discovery of the static English search route.
@@ -137,6 +138,7 @@ These are intentionally present but not functional:
 - The honeypot field is basic spam reduction only. It is not a full anti-spam or abuse-prevention system.
 - Place body data is locale-neutral; only UI labels are localized.
 - `hreflang` is conservative, but full translation coverage is not complete.
+- Sitemap article alternates are limited to non-draft articles sharing a `translationKey`; untranslated articles do not get invented alternates.
 - `pnpm test` scans Markdown article links and generated/static source routes.
 - `pnpm check:content` checks source content metadata and stored URL fields, but it does not fetch external URLs or validate live business/provider data.
 - `pnpm check:links` scans built static HTML root-relative links in `dist/`, but it does not validate external links, anchors, JavaScript behavior, form submission behavior, or visual rendering.

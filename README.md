@@ -62,6 +62,7 @@ Implemented:
 - Unified Place enum values
 - SEO-oriented `BaseLayout`
 - Generated `sitemap.xml`, `robots.txt`, and `site.webmanifest`
+- Sitemap includes conservative `hreflang` alternates for shared locale pages and translated article details
 - Generated `llms.txt` discovery file for AI/search-adjacent tooling
 - Generated `opensearch.xml` browser search discovery file linked from every public page
 - Generated global `feed.xml` for public articles, included in the sitemap with content-aware `lastmod`
@@ -283,6 +284,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - Search pages are static, noindex utility pages backed by `/[locale]/search-index.json`, and `/[locale]/search?q=...` can be shared to prefill/filter results.
 - Search indexes include public content only and do not include account placeholders, drafts, or non-published items.
 - Article category pages are generated from public non-draft articles and are included in the sitemap.
+- Sitemap `hreflang` alternates must only point to generated public URLs; article alternates are grouped by `translationKey`.
 - Tool checklist pages are static content pages. They do not save progress, require login, or write to a database in Phase 1.
 - Submit-place can post to an externally configured endpoint, but the repo does not store submissions or include a moderation backend.
 - Contact/corrections can post to an externally configured endpoint, but the repo does not store messages or include a support backend.

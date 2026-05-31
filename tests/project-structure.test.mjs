@@ -383,6 +383,10 @@ describe("TachiSuke project scaffold", () => {
 
     const sitemap = readFileSync(join(root, "src/pages/sitemap.xml.ts"), "utf8");
     assert.match(sitemap, /getArticleCategorySummaries/, "sitemap should include article category pages");
+    assert.match(sitemap, /xmlns:xhtml/, "sitemap should declare the XHTML namespace for hreflang alternates");
+    assert.match(sitemap, /xhtml:link/, "sitemap should render hreflang alternate links");
+    assert.match(sitemap, /htmlLangByLocale/, "sitemap hreflang values should use the shared locale metadata");
+    assert.match(sitemap, /translationKey/, "article sitemap alternates should be grouped by translation key");
   });
 
   it("includes baseline keyboard accessibility hooks", () => {
