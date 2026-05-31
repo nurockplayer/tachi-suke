@@ -132,6 +132,7 @@ Current public route pattern:
 - `/[locale]/account/login`
 - `/[locale]/account/favorites`
 - `/[locale]/account/submissions`
+- `/[locale]/feed.xml`
 
 Content translations should use `locale` and `translationKey`. Missing translations should fall back to English, then Traditional Chinese, or show a clear missing-content state.
 
@@ -222,8 +223,14 @@ Phase 1J adds a static RSS feed:
 
 - `/feed.xml` is generated from non-draft public articles.
 - Public pages include an RSS alternate link in `BaseLayout`.
-- The current feed is global across all locales; do not add per-locale feeds until explicitly scoped.
+- The global feed remains multilingual across all locales.
 - Draft articles must not appear in the feed.
+
+Phase 1R adds locale RSS feeds:
+
+- `/[locale]/feed.xml` is generated from same-locale non-draft public articles.
+- Public pages include a current-locale RSS alternate link in addition to `/feed.xml`.
+- Feeds remain static and article-only; do not add category feeds, pagination, or runtime feed generation unless explicitly scoped.
 
 Phase 1K adds Cloudflare Pages deploy readiness:
 

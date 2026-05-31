@@ -34,7 +34,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Phase 1B/1B.5 tests should verify minimum content depth for articles, mobile plans, and area guides.
 - Phase 1B/1B.5/1H tests should scan Markdown/MDX article links that point to internal absolute paths and verify they match known static routes or generated article/place/mobile/area/tool detail routes.
 - `pnpm check:links` should scan built `dist/**/*.html` for root-relative `href="/..."` links and verify the matching file exists in `dist/`.
-- `pnpm check:seo` should verify built `sitemap.xml`, `robots.txt`, `site.webmanifest`, and Cloudflare `_headers`.
+- `pnpm check:seo` should verify built `sitemap.xml`, `robots.txt`, `site.webmanifest`, global RSS feed, locale RSS feeds, and Cloudflare `_headers`.
 - The current static HTML crawler does not validate external links, anchors, JavaScript behavior, or visual rendering.
 - New required route or model decisions should be reflected in tests when they become implementation requirements.
 - CI must reject `package-lock.json`, `yarn.lock`, `bun.lock`, and `bun.lockb`.
@@ -210,11 +210,12 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Open Graph metadata must include a default `og:image`.
 - Twitter metadata should use `summary_large_image`.
 - Pages should link `/site.webmanifest`.
-- `sitemap.xml` must include public locale roots, section pages, non-draft article details, published place details, area details, mobile plan details, published tool details, submit-place thanks pages, contact/corrections pages, and launch trust pages.
+- `sitemap.xml` must include public locale roots, section pages, locale RSS feeds, non-draft article details, published place details, area details, mobile plan details, published tool details, submit-place thanks pages, contact/corrections pages, and launch trust pages.
 - `sitemap.xml` must exclude account placeholder routes, draft articles, non-published places, and non-published tools.
 - `robots.txt` must reference the sitemap and disallow `/[locale]/account/`.
 - `feed.xml` must be generated as an RSS 2.0 feed for non-draft public article detail pages.
-- Public pages should include an RSS alternate link to `/feed.xml`.
+- `/[locale]/feed.xml` must be generated as an RSS 2.0 feed for same-locale non-draft public article detail pages.
+- Public pages should include an RSS alternate link to `/feed.xml` and a current-locale RSS alternate link to `/[locale]/feed.xml`.
 - `404.html` must be generated as a branded static recovery page.
 - `404.html` must use `noindex, nofollow` and must not appear in `sitemap.xml`.
 - Account placeholder pages must use `noindex, nofollow`.

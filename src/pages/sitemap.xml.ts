@@ -52,6 +52,8 @@ export const GET: APIRoute = async ({ site }) => {
   const entries: SitemapEntry[] = [{ path: "/" }];
 
   for (const locale of locales) {
+    entries.push({ path: localizePath(locale, "/feed.xml") });
+
     for (const path of localeIndexPaths) {
       entries.push({ path: localizePath(locale, path) });
     }

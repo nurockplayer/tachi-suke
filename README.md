@@ -60,6 +60,7 @@ Implemented:
 - SEO-oriented `BaseLayout`
 - Generated `sitemap.xml`, `robots.txt`, and `site.webmanifest`
 - Generated global `feed.xml` for public articles
+- Generated locale RSS feeds at `/[locale]/feed.xml` for same-locale public articles
 - Default Open Graph image and Twitter summary metadata
 - JSON-LD structured data for site identity, articles, places, mobile plan details, area details, tool details, and breadcrumbs
 - Cloudflare Pages `_headers` for conservative security and cache defaults
@@ -121,6 +122,7 @@ Locale routes:
 - `/[locale]/account/login`
 - `/[locale]/account/favorites`
 - `/[locale]/account/submissions`
+- `/[locale]/feed.xml`
 - `/sitemap.xml`
 - `/robots.txt`
 - `/site.webmanifest`
@@ -183,7 +185,7 @@ Recommended verification order:
 3. `pnpm check:links`
 4. `pnpm check:seo`
 
-`pnpm test` checks source-level structure and content links. `pnpm check:links` scans built `dist/**/*.html`. `pnpm check:seo` checks built `sitemap.xml`, `robots.txt`, `site.webmanifest`, and Cloudflare headers. Run `pnpm build` before both build-output checks.
+`pnpm test` checks source-level structure and content links. `pnpm check:links` scans built `dist/**/*.html`. `pnpm check:seo` checks built `sitemap.xml`, `robots.txt`, `site.webmanifest`, global RSS feed, locale RSS feeds, and Cloudflare headers. Run `pnpm build` before both build-output checks.
 
 GitHub Actions runs the same verification order on pull requests and pushes to `main`, including forbidden lockfile rejection. Cloudflare Pages deployment is still configured separately.
 
@@ -270,7 +272,8 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - Run `pnpm check:seo` after `pnpm build` when changing SEO, routing, metadata, or deployment files.
 - Structured data must be backed by current static content. Do not invent ratings, review counts, opening hours, or exact addresses.
 - Mobile plan structured data must stay conservative. Do not add `Offer` price markup until pricing and campaign review workflows are mature.
-- `/feed.xml` is a global RSS feed for non-draft articles across all locales. Locale-specific feeds are not implemented yet.
+- `/feed.xml` is a global RSS feed for non-draft articles across all locales.
+- `/[locale]/feed.xml` is a locale-specific RSS feed for same-locale non-draft articles.
 - `/404.html` is a static noindex recovery page for missing routes on Cloudflare Pages or other static hosts.
 
 ## Documentation Map
