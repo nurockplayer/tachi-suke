@@ -3,9 +3,13 @@ import { localizePath, type Locale } from "@/lib/i18n";
 
 interface Props {
   locale: Locale;
+  currentPath?: string;
 }
 
-const { locale } = Astro.props;
+const { locale, currentPath } = Astro.props;
+const contactPath = localizePath(locale, "/contact");
+const relatedPageUrl = currentPath ? new URL(currentPath, Astro.site ?? new URL(Astro.url.origin)).href : "";
+const contactHref = relatedPageUrl ? `${contactPath}?relatedUrl=${encodeURIComponent(relatedPageUrl)}` : contactPath;
 const copy = {
   "zh-tw": {
     title: "看到需要修正的地方？",
@@ -35,5 +39,5 @@ const copy = {
     <h2 id="correction-prompt-title">{copy.title}</h2>
     <p>{copy.description}</p>
   </div>
-  <a class="button-secondary" href={localizePath(locale, "/contact")}>{copy.cta}</a>
+  <a class="button-secondary" href={contactHref}>{copy.cta}</a>
 </aside>

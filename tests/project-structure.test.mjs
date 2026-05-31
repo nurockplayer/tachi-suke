@@ -416,10 +416,17 @@ describe("TachiSuke project scaffold", () => {
 
     assert.match(contactPage, /name="relatedUrl"\s+type="url"/, "related page URL should use URL input type");
     assert.match(contactPage, /name="email"\s+type="email"/, "contact email should use email input type");
+    assert.match(contactPage, /data-related-url-input/, "related URL input should expose a stable prefill hook");
+    assert.match(contactPage, /new URLSearchParams\(window\.location\.search\)/, "contact page should read query parameters");
+    assert.match(contactPage, /\.get\("relatedUrl"\)/, "contact page should read the relatedUrl query parameter");
   });
 
   it("links public detail pages to the contact/corrections workflow", () => {
     const correctionPrompt = readFileSync(join(root, "src/components/content/CorrectionPrompt.astro"), "utf8");
+    assert.match(correctionPrompt, /currentPath\?:\s*string/, "CorrectionPrompt should accept an optional currentPath");
+    assert.match(correctionPrompt, /new URL\(currentPath/, "CorrectionPrompt should convert currentPath to an absolute URL");
+    assert.match(correctionPrompt, /relatedUrl/, "CorrectionPrompt should add relatedUrl to contact links when possible");
+    assert.match(correctionPrompt, /encodeURIComponent\(relatedPageUrl\)/, "CorrectionPrompt should encode relatedUrl query values");
     assert.match(correctionPrompt, /localizePath\(locale,\s*"\/contact"\)/, "CorrectionPrompt should link to locale contact pages");
     assert.match(correctionPrompt, /correction-prompt/, "CorrectionPrompt should expose a stable class for styling");
 
@@ -433,6 +440,7 @@ describe("TachiSuke project scaffold", () => {
       const source = readFileSync(join(root, detailPage), "utf8");
       assert.match(source, /CorrectionPrompt/, `${detailPage} should render CorrectionPrompt`);
       assert.match(source, /locale=\{locale\}/, `${detailPage} should pass locale into CorrectionPrompt`);
+      assert.match(source, /currentPath=\{Astro\.url\.pathname\}/, `${detailPage} should pass the current public path into CorrectionPrompt`);
     }
 
     const css = readFileSync(join(root, "src/styles/global.css"), "utf8");

@@ -175,7 +175,7 @@ const jsonLd = [
     <div class="article-body">
       <slot />
     </div>
-    <CorrectionPrompt locale={locale} />
+    <CorrectionPrompt locale={locale} currentPath={Astro.url.pathname} />
     {relatedArticles.length > 0 && (
       <aside class="related-articles" aria-labelledby="related-articles-title">
         <div>

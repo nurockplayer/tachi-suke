@@ -32,7 +32,7 @@ Implemented:
 - Four locale article detail routes
 - Four locale article category landing page routes
 - Build-time related article links on article detail pages
-- Detail-page correction prompts linking public content to contact/corrections
+- Detail-page correction prompts linking public content to contact/corrections with related page URL prefill
 - Twelve public article pages across four locales
 - Four locale area index pages with Tokyo area guide cards
 - Four locale area detail routes
@@ -281,7 +281,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - Tool checklist pages are static content pages. They do not save progress, require login, or write to a database in Phase 1.
 - Submit-place can post to an externally configured endpoint, but the repo does not store submissions or include a moderation backend.
 - Contact/corrections can post to an externally configured endpoint, but the repo does not store messages or include a support backend.
-- Public detail pages link to contact/corrections so readers can report outdated content, broken links, or unclear information.
+- Public detail pages link to contact/corrections with a `relatedUrl` prefill so readers can report outdated content, broken links, or unclear information from the page they were reading.
 - Do not publish user submissions directly.
 - Privacy and editorial policy pages are static launch-readiness pages, not a substitute for a future legal/privacy review before auth or database-backed personal data.
 - Keep user-facing copy natural for each locale.

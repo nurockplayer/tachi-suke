@@ -14,7 +14,7 @@ All public pages should:
 - Include a manifest link, default Open Graph image, and Twitter summary metadata.
 - Keep `hreflang` conservative. Detail pages should only link to alternates that exist.
 - Avoid requiring login for public content.
-- Public detail pages should include a concise correction prompt that links to the locale-specific contact/corrections page.
+- Public detail pages should include a concise correction prompt that links to the locale-specific contact/corrections page and, when possible, passes the current page as `relatedUrl`.
 
 ## `/`
 
@@ -396,7 +396,7 @@ All public pages should:
 
 **SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, and locale alternates. The page must clearly state that email is optional/private, sensitive information should not be sent, and the repo does not provide a built-in support backend.
 
-**Current status:** Implemented for all four locales in Phase 1O. If `PUBLIC_CONTACT_FORM_ENDPOINT` is unset, the page stays in preview mode and the submit button is disabled. If the endpoint is set, the form posts with `method="POST"` to that endpoint. The form includes provider-agnostic hidden fields: `formName`, `source`, `locale`, `redirectUrl`, and `publicResponse`. It also includes a visually hidden `company` honeypot field for basic spam reduction.
+**Current status:** Implemented for all four locales in Phase 1O. If `PUBLIC_CONTACT_FORM_ENDPOINT` is unset, the page stays in preview mode and the submit button is disabled. If the endpoint is set, the form posts with `method="POST"` to that endpoint. The form includes provider-agnostic hidden fields: `formName`, `source`, `locale`, `redirectUrl`, and `publicResponse`. It also includes a visually hidden `company` honeypot field for basic spam reduction. Phase 1Z adds browser-side prefill for the optional `relatedUrl` field when detail-page correction prompts link to `/[locale]/contact?relatedUrl=...`.
 
 **Future notes:** External form providers may require a provider-specific redirect field instead of `redirectUrl`. Do not add database-backed support, analytics, or CRM behavior without a separate privacy/security review.
 

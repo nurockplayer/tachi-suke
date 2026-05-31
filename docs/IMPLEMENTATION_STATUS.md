@@ -16,7 +16,7 @@ This document records the current MVP state after Phase 1S static search work. I
 - Four locale article category routes at `/[locale]/articles/category/[category]`.
 - Static article table of contents generated from Markdown/MDX H2/H3 headings.
 - Build-time related article links on article detail pages, limited to non-draft same-locale articles.
-- Public detail-page correction prompts that link article, place, mobile plan, area, and tool details to contact/corrections.
+- Public detail-page correction prompts that link article, place, mobile plan, area, and tool details to contact/corrections with related page URL prefill.
 - Twelve public article pages across `zh-tw`, `en`, `ja`, and `ko`, including Phase 1B decision-oriented content.
 - Four locale area index pages showing area guide cards.
 - Four locale area detail routes at `/[locale]/areas/[slug]`.
@@ -141,7 +141,7 @@ These are intentionally present but not functional:
 - `/404.html` is static and noindex. It does not perform language detection or redirects.
 - Related article links are static and rule-based. They are not personalized and do not use analytics.
 - Article table of contents is static and does not include scroll spy, reading progress, or saved state.
-- Correction prompts are static links to `/[locale]/contact`; they do not prefill form fields, track reports, or guarantee individual replies.
+- Correction prompts pass an encoded absolute `relatedUrl` into `/[locale]/contact`; they still do not track reports, store messages, or guarantee individual replies.
 - Account pages are static placeholders and do not protect user data because no user data exists yet.
 - Account placeholder pages are marked `noindex, nofollow` and excluded from the sitemap.
 - Structured data is intentionally conservative and does not claim ratings, reviews, opening hours, coordinates, offers, or exact street addresses.

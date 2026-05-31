@@ -311,7 +311,13 @@ Phase 1P adds detail-page correction prompts:
 
 - Public article, place, mobile plan, area, and tool detail pages should link readers to `/[locale]/contact`.
 - Keep correction prompts short, localized, and static.
-- Do not add analytics, form prefill JavaScript, auth, database storage, or provider-specific behavior for prompts in Phase 1P.
+- Do not add analytics, auth, database storage, or provider-specific behavior for prompts in Phase 1P.
+
+Phase 1Z adds correction prompt URL prefill:
+
+- Detail-page correction prompts may append an encoded absolute `relatedUrl` query value for the current public page.
+- Contact/corrections may use small browser-side JavaScript to prefill the optional related URL field.
+- Prefill must stay progressive enhancement only; do not change endpoint behavior, add tracking, or add server-side storage.
 
 Phase 1Q adds a static custom 404 page:
 
@@ -377,6 +383,7 @@ The contact/corrections page is static-site friendly in Phase 1O. It may post to
 Rules:
 
 - Contact messages are for corrections, outdated information, broken links, and general feedback.
+- Public detail prompts can pass the current page URL as `relatedUrl` so reports are easier to triage.
 - Email is optional/private and must not be public.
 - Avoid collecting unnecessary personal or sensitive information.
 - Do not imply an individual reply is guaranteed.
