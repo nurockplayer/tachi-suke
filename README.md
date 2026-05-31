@@ -57,6 +57,7 @@ Implemented:
 - Default Open Graph image and Twitter summary metadata
 - JSON-LD structured data for site identity, articles, places, mobile plan details, area details, tool details, and breadcrumbs
 - Cloudflare Pages `_headers` for conservative security and cache defaults
+- Cloudflare Pages `wrangler.toml` deployment metadata
 - Conservative locale switcher behavior for detail pages with missing translations
 - `SITE_URL` environment variable fallback
 - Structure and conservative internal-link tests in `tests/project-structure.test.mjs`
@@ -209,8 +210,11 @@ Recommended production settings:
 - Output directory: `dist`
 - Environment variable: `SITE_URL=https://your-production-domain.example`
 - Optional environment variable: `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT=https://your-form-endpoint.example`
+- Optional CLI deploy: `pnpm dlx wrangler pages deploy dist --project-name tachi-suke`
 
 Astro remains the preferred frontend stack for the current content-first MVP. A Next.js migration should wait until the product has a concrete SSR requirement, such as authenticated account pages, personalized saved lists, or server-side workflows.
+
+See [Deployment](docs/DEPLOYMENT.md) for Cloudflare Pages setup, environment variables, verification, and rollback notes.
 
 ## Place Enum Values
 
@@ -253,4 +257,5 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - [Content Strategy](docs/CONTENT_STRATEGY.md): editorial direction and first content ideas.
 - [Auth and Favorites](docs/AUTH_AND_FAVORITES.md): future Supabase Auth and favorites direction.
 - [Database Design](docs/DATABASE_DESIGN.md): future Supabase Postgres schema draft.
+- [Deployment](docs/DEPLOYMENT.md): Cloudflare Pages deployment setup and verification.
 - [Roadmap](docs/ROADMAP.md): phases from scaffold MVP through search, maps, personalization, and AI.

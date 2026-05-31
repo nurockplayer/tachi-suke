@@ -54,6 +54,8 @@ This document records the current MVP state after Phase 1H static tool detail wo
 - Generated `site.webmanifest`.
 - Generated global `feed.xml` for non-draft public articles.
 - Cloudflare Pages `_headers` with conservative security and cache defaults.
+- Cloudflare Pages `wrangler.toml` with project name, compatibility date, and `dist` output directory.
+- Deployment guide at `docs/DEPLOYMENT.md`.
 - Structure tests in `tests/project-structure.test.mjs`.
 - Conservative article internal-link checks for locale-prefixed static/generated routes.
 - Static HTML internal link crawler in `tests/static-html-links.test.mjs`, run after `pnpm build` with `pnpm check:links`.
@@ -115,6 +117,7 @@ These are intentionally present but not functional:
 - Structured data is intentionally conservative and does not claim ratings, reviews, opening hours, coordinates, offers, or exact street addresses.
 - Cloudflare Pages is the preferred static deployment target for Phase 1. Set `SITE_URL` to the production domain before launch.
 - CI verifies the static site but does not deploy it. Cloudflare Pages deployment remains separate.
+- Deployment credentials and Cloudflare account-specific secrets are intentionally not committed.
 - Browser QA currently covers basic route/card/form checks, not a full accessibility or visual regression suite.
 
 ## Verification Results
