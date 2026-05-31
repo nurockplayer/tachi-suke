@@ -161,6 +161,7 @@ The MVP includes:
 - TypeScript model files for future auth, favorites, users, and submissions
 - SEO-oriented `BaseLayout`
 - Generated `sitemap.xml`, `robots.txt`, and `site.webmanifest`
+- Sitemap `hreflang` alternates for shared locale pages and translated public articles
 - Generated `llms.txt` discovery file for public AI/search-adjacent tooling
 - Generated `opensearch.xml` browser search discovery file linked from public pages
 - Generated global `feed.xml` for public articles, included in the sitemap with content-aware `lastmod`
@@ -358,6 +359,7 @@ Engineering metrics:
 - SEO metadata includes title, description, canonical URL, Open Graph URL, Open Graph site name, Open Graph image, Twitter card metadata, locale-aware `html lang`, manifest link, OpenSearch discovery link, and conservative `hreflang`.
 - Browser metadata includes `theme-color`, `application-name`, `apple-mobile-web-app-title`, and `format-detection`.
 - `sitemap.xml` includes public content and excludes account placeholders.
+- `sitemap.xml` includes conservative `hreflang` alternates only for generated public URLs.
 - `sitemap.xml` includes public article category landing pages.
 - `sitemap.xml` includes public privacy and editorial policy pages.
 - `sitemap.xml` includes public contact/corrections pages.

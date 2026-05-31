@@ -282,6 +282,13 @@ Phase 1AL adds WebSite SearchAction JSON-LD:
 - Keep the target aligned with static search and OpenSearch.
 - Do not imply backend, personalized, account, analytics, or private-content search in Phase 1.
 
+Phase 1AM adds sitemap hreflang alternates:
+
+- `sitemap.xml` declares the XHTML namespace and includes conservative `xhtml:link` alternates.
+- Shared locale pages and shared static detail pages can include all supported locales plus `x-default` to English.
+- Article alternates must be grouped by `translationKey` and include only non-draft generated article pages.
+- Do not add alternates to missing translations, account placeholders, search pages, or private data.
+
 Phase 1T adds article category landing pages:
 
 - `/[locale]/articles/category/[category]` is generated from non-draft same-locale article categories.

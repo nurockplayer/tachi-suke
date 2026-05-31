@@ -1,14 +1,17 @@
 import { getCollection } from "astro:content";
 import type { APIRoute } from "astro";
 import { getArticleCategorySummaries } from "@/lib/content/article-categories";
-import { locales, localizePath, type Locale } from "@/lib/i18n";
+import { htmlLangByLocale, locales, localizePath, type Locale } from "@/lib/i18n";
 
 export const prerender = true;
 
 interface SitemapEntry {
   path: string;
   lastmod?: Date;
+  alternates?: SitemapAlternates;
 }
+
+type SitemapAlternates = Partial<Record<Locale | "x-default", string>>;
 
 const localeIndexPaths = [
   "/",
@@ -52,6 +55,25 @@ function newestDate(current: Date | undefined, next: Date): Date {
   return !current || next > current ? next : current;
 }
 
+function localizedAlternates(path: string): SitemapAlternates {
+  return {
+    ...Object.fromEntries(locales.map((locale) => [locale, localizePath(locale, path)])),
+    "x-default": localizePath("en", path)
+  };
+}
+
+function renderAlternates(alternates: SitemapAlternates | undefined, siteUrl: URL): string {
+  if (!alternates) return "";
+
+  return Object.entries(alternates)
+    .map(([locale, path]) => {
+      const hreflang = locale === "x-default" ? locale : htmlLangByLocale[locale as Locale];
+      const href = new URL(path, siteUrl).href;
+      return `\n    <xhtml:link rel="alternate" hreflang="${escapeXml(hreflang)}" href="${escapeXml(href)}" />`;
+    })
+    .join("");
+}
+
 export const GET: APIRoute = async ({ site }) => {
   const siteUrl = site ?? new URL("https://tachi-suke.example.com");
   const articles = await getCollection("articles", ({ data }) => !data.draft);
@@ -78,7 +100,10 @@ export const GET: APIRoute = async ({ site }) => {
     });
 
     for (const path of localeIndexPaths) {
-      entries.push({ path: localizePath(locale, path) });
+      entries.push({
+        path: localizePath(locale, path),
+        alternates: localizedAlternates(path)
+      });
     }
 
     const categorySummaries = await getArticleCategorySummaries(locale);
@@ -90,10 +115,21 @@ export const GET: APIRoute = async ({ site }) => {
     }
   }
 
+  const articleAlternatesByTranslationKey = new Map<string, SitemapAlternates>();
+  for (const article of articles) {
+    const existing = articleAlternatesByTranslationKey.get(article.data.translationKey) ?? {};
+    existing[article.data.locale] = localizePath(article.data.locale, `/articles/${article.data.slug}`);
+    if (article.data.locale === "en") {
+      existing["x-default"] = localizePath(article.data.locale, `/articles/${article.data.slug}`);
+    }
+    articleAlternatesByTranslationKey.set(article.data.translationKey, existing);
+  }
+
   for (const article of articles) {
     entries.push({
       path: localizePath(article.data.locale, `/articles/${article.data.slug}`),
-      lastmod: article.data.updatedAt
+      lastmod: article.data.updatedAt,
+      alternates: articleAlternatesByTranslationKey.get(article.data.translationKey)
     });
   }
 
@@ -102,7 +138,8 @@ export const GET: APIRoute = async ({ site }) => {
     for (const locale of locales) {
       entries.push({
         path: localizePath(locale, `/areas/${area.data.slug}`),
-        lastmod: area.data.lastCheckedAt
+        lastmod: area.data.lastCheckedAt,
+        alternates: localizedAlternates(`/areas/${area.data.slug}`)
       });
     }
   }
@@ -112,7 +149,8 @@ export const GET: APIRoute = async ({ site }) => {
     for (const locale of locales) {
       entries.push({
         path: localizePath(locale, `/mobile/${plan.data.slug}`),
-        lastmod: plan.data.lastCheckedAt
+        lastmod: plan.data.lastCheckedAt,
+        alternates: localizedAlternates(`/mobile/${plan.data.slug}`)
       });
     }
   }
@@ -122,7 +160,8 @@ export const GET: APIRoute = async ({ site }) => {
     for (const locale of locales as readonly Locale[]) {
       entries.push({
         path: localizePath(locale, `/places/${place.data.slug}`),
-        lastmod: place.data.updatedAt
+        lastmod: place.data.updatedAt,
+        alternates: localizedAlternates(`/places/${place.data.slug}`)
       });
     }
   }
@@ -132,7 +171,8 @@ export const GET: APIRoute = async ({ site }) => {
     for (const locale of locales) {
       entries.push({
         path: localizePath(locale, `/tools/${tool.data.slug}`),
-        lastmod: tool.data.lastCheckedAt
+        lastmod: tool.data.lastCheckedAt,
+        alternates: localizedAlternates(`/tools/${tool.data.slug}`)
       });
     }
   }
@@ -140,12 +180,13 @@ export const GET: APIRoute = async ({ site }) => {
   const urls = uniqueEntries(entries)
     .map((entry) => {
       const loc = new URL(entry.path, siteUrl).href;
+      const alternates = renderAlternates(entry.alternates, siteUrl);
       const lastmod = entry.lastmod ? `\n    <lastmod>${formatDate(entry.lastmod)}</lastmod>` : "";
-      return `  <url>\n    <loc>${escapeXml(loc)}</loc>${lastmod}\n  </url>`;
+      return `  <url>\n    <loc>${escapeXml(loc)}</loc>${alternates}${lastmod}\n  </url>`;
     })
     .join("\n");
 
-  return new Response(`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`, {
+  return new Response(`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls}\n</urlset>\n`, {
     headers: {
       "Content-Type": "application/xml; charset=utf-8"
     }

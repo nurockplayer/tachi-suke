@@ -21,8 +21,21 @@ function sitemapPaths(xml) {
 }
 
 function sitemapLastmodByPath(xml) {
-  const entries = [...xml.matchAll(/<url>\s*<loc>(.*?)<\/loc>(?:\s*<lastmod>(.*?)<\/lastmod>)?\s*<\/url>/g)];
-  return new Map(entries.map((match) => [normalizePath(new URL(match[1]).pathname), match[2] || ""]));
+  const entries = [...xml.matchAll(/<url>[\s\S]*?<\/url>/g)];
+  return new Map(entries.map((match) => {
+    const loc = match[0].match(/<loc>(.*?)<\/loc>/)?.[1] ?? "";
+    const lastmod = match[0].match(/<lastmod>(.*?)<\/lastmod>/)?.[1] ?? "";
+    return [normalizePath(new URL(loc).pathname), lastmod];
+  }));
+}
+
+function sitemapBlock(xml, pathname) {
+  const loc = `<loc>https://tachi-suke.example.com${pathname}</loc>`;
+  const block = [...xml.matchAll(/<url>[\s\S]*?<\/url>/g)]
+    .map((match) => match[0])
+    .find((entry) => entry.includes(loc));
+  assert.ok(block, `sitemap should include ${pathname}`);
+  return block;
 }
 
 function readHtml(relativePath) {
@@ -54,6 +67,7 @@ describe("static SEO output", () => {
     const opensearch = readDist("opensearch.xml");
 
     assert.match(sitemap, /<urlset/);
+    assert.match(sitemap, /xmlns:xhtml="http:\/\/www\.w3\.org\/1999\/xhtml"/, "sitemap should declare XHTML alternates");
     assert.match(robots, /Sitemap:\s*https:\/\/tachi-suke\.example\.com\/sitemap\.xml/);
     assert.match(llms, /# TachiSuke/);
     assert.match(llms, /multilingual Japan life decision assistant/i);
@@ -141,6 +155,27 @@ describe("static SEO output", () => {
     ]) {
       assert.equal(paths.has(excludedPath), false, `sitemap should not include ${excludedPath}`);
     }
+  });
+
+  it("adds conservative hreflang alternates to shared sitemap entries", () => {
+    const sitemap = readDist("sitemap.xml");
+    const mobile = sitemapBlock(sitemap, "/en/mobile/povo2");
+    for (const [hreflang, href] of [
+      ["zh-Hant-TW", "https://tachi-suke.example.com/zh-tw/mobile/povo2"],
+      ["en", "https://tachi-suke.example.com/en/mobile/povo2"],
+      ["ja", "https://tachi-suke.example.com/ja/mobile/povo2"],
+      ["ko", "https://tachi-suke.example.com/ko/mobile/povo2"],
+      ["x-default", "https://tachi-suke.example.com/en/mobile/povo2"]
+    ]) {
+      assert.match(mobile, new RegExp(`<xhtml:link rel="alternate" hreflang="${hreflang}" href="${href.replaceAll("/", "\\/")}" \\/>`));
+    }
+
+    const article = sitemapBlock(sitemap, "/en/articles/choose-mobile-plan-japan-foreigner");
+    assert.match(article, /hreflang="zh-Hant-TW" href="https:\/\/tachi-suke\.example\.com\/zh-tw\/articles\/taiwanese-newcomer-mobile-plan-japan"/);
+    assert.match(article, /hreflang="en" href="https:\/\/tachi-suke\.example\.com\/en\/articles\/choose-mobile-plan-japan-foreigner"/);
+    assert.match(article, /hreflang="ja" href="https:\/\/tachi-suke\.example\.com\/ja\/articles\/foreign-resident-mobile-plan-basics-japan"/);
+    assert.match(article, /hreflang="ko" href="https:\/\/tachi-suke\.example\.com\/ko\/articles\/foreigner-mobile-plan-basics-japan"/);
+    assert.match(article, /hreflang="x-default" href="https:\/\/tachi-suke\.example\.com\/en\/articles\/choose-mobile-plan-japan-foreigner"/);
   });
 
   it("keeps robots directives aligned with placeholder account routes", () => {

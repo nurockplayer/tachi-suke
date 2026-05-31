@@ -870,6 +870,27 @@ Rules:
 - Keep the SearchAction target aligned with static search and OpenSearch.
 - Do not add backend search, language detection, account search, analytics, or private-content discovery through this schema.
 
+## Phase 1AM: Sitemap Hreflang Alternates
+
+Status: implemented.
+
+Goal:
+
+Help search engines understand TachiSuke's multilingual URL relationships directly from `sitemap.xml`.
+
+Implemented:
+
+- Added the XHTML sitemap namespace.
+- Added `xhtml:link` hreflang alternates for shared locale pages and shared static detail pages.
+- Added article detail alternates grouped by `translationKey`, limited to non-draft generated pages.
+- Added `x-default` alternates to English when an English generated URL exists.
+- Added source-level and build-output SEO tests for representative shared and article alternates.
+
+Rules:
+
+- Do not point hreflang alternates at missing translations, drafts, account placeholders, search pages, or private data.
+- Keep sitemap alternates conservative until translation coverage and route volume justify more specialized sitemap handling.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.
