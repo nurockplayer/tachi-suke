@@ -167,7 +167,10 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Built pages should include parseable JSON-LD for site identity.
 - Article detail pages should include `Article` and `BreadcrumbList` JSON-LD.
 - Place detail pages should include `LocalBusiness` and `BreadcrumbList` JSON-LD.
-- JSON-LD must not invent ratings, review counts, opening hours, offers, or exact addresses that are not in the content model.
+- Mobile plan detail pages should include conservative `Service` and `BreadcrumbList` JSON-LD.
+- Area detail pages should include conservative `WebPage` and `BreadcrumbList` JSON-LD.
+- Tool detail pages should include conservative `WebPage`, `ItemList`, and `BreadcrumbList` JSON-LD.
+- JSON-LD must not invent ratings, review counts, opening hours, coordinates, offers, or exact addresses that are not in the content model.
 - Public pages should use semantic HTML.
 - Detail pages should avoid `hreflang` links to missing detail pages.
 - Locale switcher links on detail pages should also avoid missing generated detail pages.

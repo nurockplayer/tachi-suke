@@ -208,6 +208,13 @@ Phase 1H adds static tools and checklists:
 - Checklist pages are static and must not imply saved progress, login, or database persistence.
 - Only `status = published` tools should appear in public list/detail pages.
 
+Phase 1I adds conservative detail-page structured data:
+
+- Mobile plan detail pages emit `Service` and `BreadcrumbList` JSON-LD.
+- Area detail pages emit `WebPage` and `BreadcrumbList` JSON-LD.
+- Tool detail pages emit `WebPage`, `ItemList`, and `BreadcrumbList` JSON-LD.
+- Do not add `Offer`, ratings, reviews, coordinates, opening hours, or exact addresses unless the content model and editorial review process actually support those claims.
+
 Mobile plan prices, campaigns, payment methods, and identity requirements can change. Always phrase mobile data as editorial guidance and remind users to confirm official carrier pages before applying.
 Area rent feel, quietness, and commute convenience can also become stale. Keep area pages date-aware and practical rather than sightseeing-oriented.
 
@@ -310,6 +317,7 @@ pnpm check:seo
 For Phase 1B/1B.5 content work, `pnpm test` should cover content depth and conservative source-level internal link checks. `pnpm check:links` scans built static HTML in `dist/`, so run `pnpm build` first. It does not validate external URLs, anchors, JavaScript behavior, or visual rendering.
 
 For SEO/routing/deployment work, run `pnpm check:seo` after `pnpm build`; it verifies generated sitemap, robots, manifest, and Cloudflare headers.
+It also parses representative detail pages for conservative JSON-LD.
 
 For package or scaffold work, also check that forbidden lockfiles were not introduced:
 
