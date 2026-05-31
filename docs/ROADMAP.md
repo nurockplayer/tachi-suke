@@ -499,6 +499,30 @@ Rules:
 - Do not add tag pages until article volume justifies them.
 - Keep category pages static and content-first.
 
+## Phase 1U: Visible Breadcrumbs
+
+Status: implemented.
+
+Goal:
+
+Make nested public pages easier to scan and navigate while keeping structured data aligned with visible route hierarchy.
+
+Implemented:
+
+- Shared `Breadcrumbs` component with locale-aware aria labels.
+- Visible breadcrumbs on article detail pages.
+- Visible breadcrumbs on article category landing pages.
+- Visible breadcrumbs on place, mobile plan, area, and tool detail pages.
+- Article detail JSON-LD now includes the article category page in its breadcrumb trail.
+- Article category pages emit conservative `WebPage` and `BreadcrumbList` JSON-LD.
+- Source-level and build-output SEO tests verify breadcrumb component usage and representative rendered HTML.
+
+Rules:
+
+- Breadcrumbs link only to existing public parent routes.
+- The current page breadcrumb item is not a link and uses `aria-current="page"`.
+- Keep visible breadcrumb trails and JSON-LD breadcrumb trails aligned.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.

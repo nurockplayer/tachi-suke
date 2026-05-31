@@ -202,7 +202,7 @@ All public pages should:
 
 **Rendering mode:** Static generated dynamic route. Each locale has its own route file and uses `getStaticPaths`.
 
-**SEO requirements:** Use article `title` and `description`, article category/tags/dates, canonical URL, Open Graph metadata, locale-aware `html lang`, `Article` JSON-LD, `BreadcrumbList` JSON-LD, and `hreflang` alternates only for existing non-draft translations connected by `translationKey`.
+**SEO requirements:** Use article `title` and `description`, article category/tags/dates, canonical URL, Open Graph metadata, locale-aware `html lang`, visible breadcrumbs, `Article` JSON-LD, `BreadcrumbList` JSON-LD, and `hreflang` alternates only for existing non-draft translations connected by `translationKey`.
 
 **Current status:** Implemented for all four locales. Draft articles are not generated.
 
@@ -218,7 +218,7 @@ All public pages should:
 
 **Rendering mode:** Static generated dynamic route. Each locale has its own route file and uses category static paths from `src/lib/content/article-categories.ts`.
 
-**SEO requirements:** Use localized category title/description, canonical URL, Open Graph metadata, locale-aware `html lang`, conservative category alternates only when the category exists in that locale, and `sitemap.xml` inclusion with `lastmod` based on the newest article update date in the category.
+**SEO requirements:** Use localized category title/description, canonical URL, Open Graph metadata, locale-aware `html lang`, visible breadcrumbs, conservative `WebPage` and `BreadcrumbList` JSON-LD, conservative category alternates only when the category exists in that locale, and `sitemap.xml` inclusion with `lastmod` based on the newest article update date in the category.
 
 **Current status:** Implemented for all four locales in Phase 1T. Article index pages link to category pages, and article detail category labels link to the matching category page.
 
@@ -250,7 +250,7 @@ All public pages should:
 
 **Rendering mode:** Static generated dynamic route. Each locale has its own route file and uses `getStaticPaths`.
 
-**SEO requirements:** Use area `title` and `summary`, canonical URL, Open Graph metadata, locale-aware `html lang`, conservative `WebPage` JSON-LD, `BreadcrumbList` JSON-LD, and locale alternates only for generated area detail routes.
+**SEO requirements:** Use area `title` and `summary`, canonical URL, Open Graph metadata, locale-aware `html lang`, visible breadcrumbs, conservative `WebPage` JSON-LD, `BreadcrumbList` JSON-LD, and locale alternates only for generated area detail routes.
 
 **Current status:** Implemented for all four locales in Phase 1B.5. UI labels are localized while current area data remains locale-neutral sample content.
 
@@ -282,7 +282,7 @@ All public pages should:
 
 **Rendering mode:** Static generated dynamic route. Each locale has its own route file and uses `getStaticPaths`.
 
-**SEO requirements:** Generate description from place name, category, location, and price range. Include canonical URL, Open Graph metadata, locale-aware `html lang`, `LocalBusiness` JSON-LD, `BreadcrumbList` JSON-LD, and locale alternates using the shared place slug.
+**SEO requirements:** Generate description from place name, category, location, and price range. Include canonical URL, Open Graph metadata, locale-aware `html lang`, visible breadcrumbs, `LocalBusiness` JSON-LD, `BreadcrumbList` JSON-LD, and locale alternates using the shared place slug.
 
 **Current status:** Implemented for all four locales. Only `status = published` places are generated. UI labels are localized while place body data remains locale-neutral. Phase 1B adds generated guidance sections for who the place fits, use cases, watchouts, smoking notes, and payment notes.
 
@@ -314,7 +314,7 @@ All public pages should:
 
 **Rendering mode:** Static generated dynamic route. Each locale has its own route file and uses `getStaticPaths`.
 
-**SEO requirements:** Use provider + plan name as title. Generate description from data amount, monthly price, and recommended user fit. Include canonical URL, Open Graph metadata, locale-aware `html lang`, conservative `Service` JSON-LD, `BreadcrumbList` JSON-LD, and locale alternates only for generated mobile detail routes.
+**SEO requirements:** Use provider + plan name as title. Generate description from data amount, monthly price, and recommended user fit. Include canonical URL, Open Graph metadata, locale-aware `html lang`, visible breadcrumbs, conservative `Service` JSON-LD, `BreadcrumbList` JSON-LD, and locale alternates only for generated mobile detail routes.
 
 **Current status:** Implemented for all four locales in Phase 1B.5. Detail pages clearly state that prices, conditions, campaigns, identity checks, and support status can change.
 
@@ -346,7 +346,7 @@ All public pages should:
 
 **Rendering mode:** Static generated dynamic route. Each locale has its own route file and uses `getStaticPaths`.
 
-**SEO requirements:** Use localized tool `title` and `description`, canonical URL, Open Graph metadata, locale-aware `html lang`, conservative `WebPage` JSON-LD, `ItemList` JSON-LD for checklist items, `BreadcrumbList` JSON-LD, and locale alternates only for generated tool detail routes. Published tool detail routes should appear in `sitemap.xml`.
+**SEO requirements:** Use localized tool `title` and `description`, canonical URL, Open Graph metadata, locale-aware `html lang`, visible breadcrumbs, conservative `WebPage` JSON-LD, `ItemList` JSON-LD for checklist items, `BreadcrumbList` JSON-LD, and locale alternates only for generated tool detail routes. Published tool detail routes should appear in `sitemap.xml`.
 
 **Current status:** Implemented for all four locales. Published tools currently include `moving-to-japan-checklist` and `japan-rent-initial-cost-checklist`, both with localized sections, notes, source note, and last checked date.
 

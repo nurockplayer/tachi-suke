@@ -55,10 +55,12 @@ This document records the current MVP state after Phase 1S static search work. I
 - JSON-LD structured data support in `BaseLayout`.
 - Site-wide `Organization` and `WebSite` JSON-LD.
 - Article detail `Article` and `BreadcrumbList` JSON-LD.
+- Article category `WebPage` and `BreadcrumbList` JSON-LD.
 - Place detail `LocalBusiness` and `BreadcrumbList` JSON-LD.
 - Mobile plan detail `Service` and `BreadcrumbList` JSON-LD.
 - Area detail `WebPage` and `BreadcrumbList` JSON-LD.
 - Tool detail `WebPage`, `ItemList`, and `BreadcrumbList` JSON-LD.
+- Visible breadcrumbs on article detail, article category, place detail, mobile plan detail, area detail, and tool detail pages.
 - Generated `sitemap.xml` for public static routes and content collection detail pages.
 - Generated `robots.txt` with sitemap reference and account placeholder disallow rules.
 - Generated `site.webmanifest`.
@@ -137,6 +139,7 @@ These are intentionally present but not functional:
 - Account pages are static placeholders and do not protect user data because no user data exists yet.
 - Account placeholder pages are marked `noindex, nofollow` and excluded from the sitemap.
 - Structured data is intentionally conservative and does not claim ratings, reviews, opening hours, coordinates, offers, or exact street addresses.
+- Visible breadcrumbs currently focus on nested public pages and do not appear on top-level section pages.
 - Cloudflare Pages is the preferred static deployment target for Phase 1. Set `SITE_URL` to the production domain before launch.
 - CI verifies the static site but does not deploy it. Cloudflare Pages deployment remains separate.
 - Deployment credentials and Cloudflare account-specific secrets are intentionally not committed.
