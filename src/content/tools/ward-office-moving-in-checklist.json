@@ -1,0 +1,182 @@
+{
+  "id": "tool-ward-office-moving-in-checklist",
+  "slug": "ward-office-moving-in-checklist",
+  "title": {
+    "zh-tw": "區役所／市役所搬入手續清單",
+    "en": "Ward Office Moving-In Checklist",
+    "ja": "区役所・市役所の転入手続きチェックリスト",
+    "ko": "구청·시청 전입 절차 체크리스트"
+  },
+  "description": {
+    "zh-tw": "抵日或搬家後，用這份清單整理在區役所、市役所可能需要確認的地址、在留卡、健康保險、年金、My Number 與後續更新事項。",
+    "en": "A practical checklist for address, residence card, health insurance, pension, My Number, and follow-up updates you may need to confirm at a ward or city office after arriving or moving.",
+    "ja": "来日後や引っ越し後に、区役所・市役所で確認したい住所、在留カード、健康保険、年金、マイナンバー、後続の更新事項を整理するチェックリストです。",
+    "ko": "입국 또는 이사 후 구청·시청에서 확인할 수 있는 주소, 재류카드, 건강보험, 연금, 마이넘버, 후속 업데이트 항목을 정리하는 체크리스트입니다."
+  },
+  "status": "published",
+  "lastCheckedAt": "2026-06-01",
+  "sourceNote": {
+    "zh-tw": "本站依外國人在日本生活時常見的市區町村窗口流程整理，並連到政府官方資料作為確認入口。實際期限、文件、窗口與可使用語言會因自治體、在留資格與家庭狀況不同而變動。",
+    "en": "Compiled from common municipal-office setup flows for foreign residents in Japan, with official government pages linked as starting points for confirmation. Deadlines, documents, counters, and language support vary by municipality, residence status, and household situation.",
+    "ja": "外国人住民が日本で生活を始める際によく確認する市区町村窓口の流れをもとに整理し、確認用の公式情報へのリンクを掲載しています。期限、書類、窓口、対応言語は自治体、在留資格、世帯状況によって変わります。",
+    "ko": "일본에서 생활을 시작하는 외국인 주민이 시구정촌 창구에서 자주 확인하는 흐름을 기준으로 정리하고, 확인용 공식 자료 링크를 함께 제공합니다. 기한, 서류, 창구, 언어 지원은 지자체, 체류 자격, 가구 상황에 따라 달라질 수 있습니다."
+  },
+  "sourceLinks": [
+    {
+      "label": {
+        "zh-tw": "日本數位廳：My Number FAQ",
+        "en": "Digital Agency: My Number FAQ",
+        "ja": "デジタル庁：マイナンバーFAQ",
+        "ko": "일본 디지털청: 마이넘버 FAQ"
+      },
+      "url": "https://www.digital.go.jp/en/policies/mynumber_faq_02"
+    },
+    {
+      "label": {
+        "zh-tw": "出入國在留管理廳：外國人生活與就業指南",
+        "en": "Immigration Services Agency: Guidebook on Living and Working",
+        "ja": "出入国在留管理庁：生活・就労ガイドブック",
+        "ko": "출입국재류관리청: 생활·취업 가이드북"
+      },
+      "url": "https://www.moj.go.jp/content/001297615.pdf"
+    }
+  ],
+  "notes": [
+    {
+      "zh-tw": "這份清單是生活準備輔助，不是法律、行政或移民建議。",
+      "en": "This checklist is a life setup aid, not legal, administrative, or immigration advice.",
+      "ja": "このチェックリストは生活準備の補助であり、法律、行政、入管手続きの助言ではありません。",
+      "ko": "이 체크리스트는 생활 준비를 돕기 위한 것이며 법률, 행정, 출입국 절차 조언이 아닙니다."
+    },
+    {
+      "zh-tw": "搬入、轉入、保險、年金與 My Number 相關流程可能有期限，請以居住地自治體與官方網站最新資訊為準。",
+      "en": "Moving-in, registration, insurance, pension, and My Number procedures may have deadlines. Confirm the latest requirements with your municipality and official websites.",
+      "ja": "転入、住民登録、保険、年金、マイナンバー関連の手続きには期限がある場合があります。居住地の自治体と公式サイトで最新情報を確認してください。",
+      "ko": "전입, 주민 등록, 보험, 연금, 마이넘버 관련 절차에는 기한이 있을 수 있습니다. 거주지 지자체와 공식 사이트에서 최신 정보를 확인하세요."
+    },
+    {
+      "zh-tw": "如果學校、公司、家人或代辦單位有指定流程，請先確認是否需要依照指定順序辦理。",
+      "en": "If your school, employer, family, or support office gives you a specific process, confirm whether you should follow that order first.",
+      "ja": "学校、勤務先、家族、支援窓口から指定された流れがある場合は、その順番に従う必要があるか先に確認してください。",
+      "ko": "학교, 회사, 가족, 지원 창구에서 지정한 절차가 있다면 먼저 그 순서를 따라야 하는지 확인하세요."
+    }
+  ],
+  "sections": [
+    {
+      "id": "before-visiting-office",
+      "title": {
+        "zh-tw": "去窗口前先準備",
+        "en": "Before visiting the office",
+        "ja": "窓口へ行く前に準備すること",
+        "ko": "창구 방문 전 준비"
+      },
+      "items": [
+        {
+          "zh-tw": "確認居住地是哪一個市區町村，以及負責的區役所、市役所或出張所位置。",
+          "en": "Confirm which municipality handles your address and where the ward office, city office, or branch office is located.",
+          "ja": "自分の住所を管轄する市区町村と、区役所・市役所・出張所の場所を確認する。",
+          "ko": "내 주소를 담당하는 시구정촌과 구청, 시청 또는 출장소 위치를 확인한다."
+        },
+        {
+          "zh-tw": "準備護照、在留卡、住址資料、租約或入住證明，以及學校／公司可提供的說明文件。",
+          "en": "Prepare your passport, residence card, address details, lease or move-in proof, and any supporting documents from your school or employer.",
+          "ja": "パスポート、在留カード、住所情報、賃貸契約書や入居を示す書類、学校・勤務先の補足書類を準備する。",
+          "ko": "여권, 재류카드, 주소 정보, 임대차 계약서 또는 입주 증명, 학교나 회사의 보충 서류를 준비한다."
+        },
+        {
+          "zh-tw": "先查詢窗口時間、是否需要預約、外語支援與混雜時段，避免白跑一趟。",
+          "en": "Check counter hours, reservation rules, language support, and busy periods before you go.",
+          "ja": "窓口時間、予約の要否、外国語対応、混雑しやすい時間帯を事前に確認する。",
+          "ko": "방문 전 창구 운영 시간, 예약 필요 여부, 외국어 지원, 혼잡 시간대를 확인한다."
+        }
+      ]
+    },
+    {
+      "id": "address-and-residence-card",
+      "title": {
+        "zh-tw": "地址與在留卡相關確認",
+        "en": "Address and residence card checks",
+        "ja": "住所と在留カードの確認",
+        "ko": "주소와 재류카드 확인"
+      },
+      "items": [
+        {
+          "zh-tw": "詢問是否需要辦理轉入、住民登錄、地址登記或從海外搬入相關程序。",
+          "en": "Ask whether you need moving-in, resident registration, address registration, or overseas-arrival procedures.",
+          "ja": "転入、住民登録、住所登録、国外からの転入に関する手続きが必要か確認する。",
+          "ko": "전입, 주민 등록, 주소 등록, 해외 전입 관련 절차가 필요한지 확인한다."
+        },
+        {
+          "zh-tw": "確認在留卡背面地址更新是否可在同一窗口處理，並核對姓名、地址與有效期限。",
+          "en": "Confirm whether the address update on the back of your residence card can be handled at the same counter, and check your name, address, and validity period.",
+          "ja": "在留カード裏面の住所更新を同じ窓口で行えるか確認し、氏名、住所、有効期限を見直す。",
+          "ko": "재류카드 뒷면 주소 업데이트를 같은 창구에서 처리할 수 있는지 확인하고 이름, 주소, 유효 기간을 점검한다."
+        },
+        {
+          "zh-tw": "如果有家人同住，確認世帶資料、戶長或家族關係文件是否需要另外準備。",
+          "en": "If you live with family, confirm whether household details, head-of-household information, or family relationship documents are needed.",
+          "ja": "家族と同居する場合は、世帯情報、世帯主、家族関係を示す書類が必要か確認する。",
+          "ko": "가족과 함께 거주한다면 세대 정보, 세대주, 가족 관계 서류가 필요한지 확인한다."
+        }
+      ]
+    },
+    {
+      "id": "insurance-pension-my-number",
+      "title": {
+        "zh-tw": "保險、年金與 My Number",
+        "en": "Insurance, pension, and My Number",
+        "ja": "保険・年金・マイナンバー",
+        "ko": "보험, 연금, 마이넘버"
+      },
+      "items": [
+        {
+          "zh-tw": "詢問你是否需要加入國民健康保險，或是否應由公司、學校、家人制度處理。",
+          "en": "Ask whether you need National Health Insurance or whether your employer, school, or family arrangement handles coverage.",
+          "ja": "国民健康保険への加入が必要か、勤務先、学校、家族の制度で対応するのか確認する。",
+          "ko": "국민건강보험 가입이 필요한지, 회사, 학교, 가족 제도로 처리되는지 확인한다."
+        },
+        {
+          "zh-tw": "確認國民年金、學生納付特例、免除或猶豫制度是否需要另行諮詢。",
+          "en": "Confirm whether you should ask about National Pension, student payment special systems, exemption, or postponement options.",
+          "ja": "国民年金、学生納付特例、免除、猶予制度について相談が必要か確認する。",
+          "ko": "국민연금, 학생 납부 특례, 면제, 유예 제도에 대해 상담이 필요한지 확인한다."
+        },
+        {
+          "zh-tw": "確認 My Number 通知、マイナンバーカード申請或地址變更後的處理方式。",
+          "en": "Confirm how My Number notification, My Number Card application, or post-address-change handling applies to you.",
+          "ja": "マイナンバー通知、マイナンバーカード申請、住所変更後の扱いを確認する。",
+          "ko": "마이넘버 통지, 마이넘버 카드 신청, 주소 변경 후 처리 방법을 확인한다."
+        }
+      ]
+    },
+    {
+      "id": "after-the-visit",
+      "title": {
+        "zh-tw": "辦完後要更新的地方",
+        "en": "After the office visit",
+        "ja": "手続き後に更新すること",
+        "ko": "방문 후 업데이트할 것"
+      },
+      "items": [
+        {
+          "zh-tw": "把新的地址或證明文件更新到手機門號、銀行、學校、公司、信用卡與配送服務。",
+          "en": "Update your new address or proof documents with your mobile carrier, bank, school, employer, credit card, and delivery services.",
+          "ja": "新しい住所や証明書類を携帯会社、銀行、学校、勤務先、クレジットカード、配送サービスに更新する。",
+          "ko": "새 주소나 증명 서류를 휴대폰 통신사, 은행, 학교, 회사, 신용카드, 배송 서비스에 업데이트한다."
+        },
+        {
+          "zh-tw": "保存窗口提供的收據、證明、說明書與下一步期限，並拍照或掃描備份。",
+          "en": "Keep receipts, certificates, instructions, and next deadlines from the counter, then photo or scan a backup.",
+          "ja": "窓口でもらった控え、証明書、案内、次の期限を保管し、写真やスキャンでバックアップする。",
+          "ko": "창구에서 받은 영수증, 증명서, 안내문, 다음 기한을 보관하고 사진이나 스캔으로 백업한다."
+        },
+        {
+          "zh-tw": "如果聽不懂窗口說明，請對方寫下關鍵字、期限與下一個窗口名稱，回家後再確認。",
+          "en": "If the explanation is hard to follow, ask staff to write down keywords, deadlines, and the next counter name so you can confirm later.",
+          "ja": "説明が分かりにくい場合は、キーワード、期限、次の窓口名を書いてもらい、後で確認する。",
+          "ko": "설명이 어렵다면 담당자에게 핵심 단어, 기한, 다음 창구명을 적어 달라고 요청한 뒤 나중에 다시 확인한다."
+        }
+      ]
+    }
+  ]
+}

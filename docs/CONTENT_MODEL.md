@@ -227,6 +227,7 @@ Current published tools:
 
 - `moving-to-japan-checklist`
 - `japan-rent-initial-cost-checklist`
+- `ward-office-moving-in-checklist`
 
 **Required fields:**
 
@@ -240,9 +241,11 @@ Current published tools:
 - `notes`
 - `sections`
 
-`title`, `description`, `sourceNote`, `notes`, section titles, and section items are localized records for `zh-tw`, `en`, `ja`, and `ko`.
+`title`, `description`, `sourceNote`, source link labels, `notes`, section titles, and section items are localized records for `zh-tw`, `en`, `ja`, and `ko`.
 
-**Optional fields:** None in the current schema.
+**Optional fields:**
+
+- `sourceLinks`: defaults to `[]`. Use this for official or high-trust confirmation links when a tool depends on public procedures, government guidance, or date-sensitive external facts.
 
 **Enum values:**
 
@@ -254,6 +257,7 @@ Current published tools:
 - Tool detail pages are generated only for `status = published` tools at `/[locale]/tools/[slug]`.
 - Planned or draft tools must not appear in public list/detail pages.
 - Current checklist pages are static. They do not save progress, require login, or write to a database.
+- Official source links are confirmation starting points, not a guarantee that every municipality, carrier, landlord, or institution follows the same process.
 
 **Future database mapping notes:**
 

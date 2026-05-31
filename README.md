@@ -44,7 +44,7 @@ Implemented:
 - Four locale tool detail routes
 - Four locale noindex search pages with dependency-free client-side filtering and shareable `?q=` URLs
 - Four locale static search index JSON endpoints for public content
-- Published static checklist tools: Moving to Japan checklist and Japan rent initial cost checklist
+- Published static checklist tools: Moving to Japan checklist, Japan rent initial cost checklist, and ward office moving-in checklist
 - Four locale submit-place form pages with provider-agnostic external endpoint support
 - Four locale submit-place thanks pages
 - Four locale contact/corrections form pages with provider-agnostic external endpoint support
@@ -142,7 +142,7 @@ Locale routes:
 - `/404.html`
 
 Article detail pages are generated only for non-draft articles. Place detail pages are generated only for places where `status = published`.
-Area, mobile plan, and published tool detail pages are generated from the current static content collections.
+Area, mobile plan, and published tool detail pages are generated from the current static content collections. Tool pages may include editorial source notes and official source links when a checklist depends on date-sensitive public information.
 
 ## Commands
 

@@ -27,6 +27,7 @@ const labels = {
   "zh-tw": {
     lastChecked: "最後確認",
     source: "資料來源與限制",
+    officialSources: "官方確認入口",
     notes: "使用前提醒",
     related: "接著看",
     mobile: "手機方案比較",
@@ -35,6 +36,7 @@ const labels = {
   en: {
     lastChecked: "Last checked",
     source: "Source and limits",
+    officialSources: "Official sources",
     notes: "Before using this checklist",
     related: "Next steps",
     mobile: "Mobile plan comparison",
@@ -43,6 +45,7 @@ const labels = {
   ja: {
     lastChecked: "最終確認",
     source: "情報源と前提",
+    officialSources: "公式確認先",
     notes: "使う前の注意",
     related: "次に見る",
     mobile: "携帯プラン比較",
@@ -51,6 +54,7 @@ const labels = {
   ko: {
     lastChecked: "마지막 확인",
     source: "자료 출처와 한계",
+    officialSources: "공식 확인처",
     notes: "사용 전 확인",
     related: "다음 단계",
     mobile: "휴대폰 요금제 비교",
@@ -188,6 +192,20 @@ const jsonLd = [
         <h2>{labels.source}</h2>
         <p>{data.sourceNote[locale]}</p>
         <p>{labels.lastChecked} {formatDate(data.lastCheckedAt, locale)}</p>
+        {data.sourceLinks.length > 0 && (
+          <>
+            <h3>{labels.officialSources}</h3>
+            <ul class="check-list">
+              {data.sourceLinks.map((source) => (
+                <li>
+                  <a href={source.url} target="_blank" rel="noopener noreferrer">
+                    {source.label[locale]}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
       </article>
       <article class="notice">
         <h2>{labels.notes}</h2>
