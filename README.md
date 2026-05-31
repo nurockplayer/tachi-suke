@@ -30,6 +30,7 @@ Implemented:
 - Start-here homepage links for articles, mobile, areas, places, submit-place, tools, and favorites placeholder
 - Four locale article index pages
 - Four locale article detail routes
+- Build-time related article links on article detail pages
 - Twelve public article pages across four locales
 - Four locale area index pages with Tokyo area guide cards
 - Four locale area detail routes
@@ -224,6 +225,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - Use pnpm commands only.
 - Do not add forbidden lockfiles.
 - Do not implement auth, database, favorites, or real submissions in Phase 1.
+- Related article links are static, same-locale, and non-personalized.
 - Submit-place can post to an externally configured endpoint, but the repo does not store submissions or include a moderation backend.
 - Do not publish user submissions directly.
 - Keep user-facing copy natural for each locale.

@@ -9,12 +9,27 @@ interface Props {
 
 const { article } = Astro.props;
 const { Content } = await render(article);
-const translations = (await getCollection("articles")).filter(
+const allArticles = await getCollection("articles");
+const translations = allArticles.filter(
   (entry) => entry.data.translationKey === article.data.translationKey && !entry.data.draft
 );
 const alternatePaths = Object.fromEntries(
   translations.map((entry) => [entry.data.locale, localizePath(entry.data.locale, `/articles/${entry.data.slug}`)])
 ) as Partial<Record<Locale, string>>;
+const relatedArticles = allArticles
+  .filter((entry) => entry.id !== article.id && entry.data.locale === article.data.locale && !entry.data.draft)
+  .map((entry) => {
+    const sharedTags = entry.data.tags.filter((tag) => article.data.tags.includes(tag)).length;
+    const score = (entry.data.category === article.data.category ? 100 : 0) + sharedTags * 10;
+    return { entry, score };
+  })
+  .sort((a, b) => b.score - a.score || b.entry.data.updatedAt.getTime() - a.entry.data.updatedAt.getTime())
+  .slice(0, 3)
+  .map(({ entry }) => ({
+    title: entry.data.title,
+    description: entry.data.description,
+    href: localizePath(entry.data.locale, `/articles/${entry.data.slug}`)
+  }));
 ---
 
 <ArticleLayout
@@ -26,6 +41,7 @@ const alternatePaths = Object.fromEntries(
   publishedAt={article.data.publishedAt}
   updatedAt={article.data.updatedAt}
   alternatePaths={alternatePaths}
+  relatedArticles={relatedArticles}
 >
   <Content />
 </ArticleLayout>

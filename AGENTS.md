@@ -192,6 +192,13 @@ Phase 1F adds CI quality gates:
 - CI should run `pnpm install --frozen-lockfile`, `pnpm test`, `pnpm build`, `pnpm check:links`, and `pnpm check:seo`.
 - CI does not deploy to Cloudflare Pages yet; deployment secrets and project settings stay outside the repo until explicitly scoped.
 
+Phase 1G adds static related content:
+
+- Article detail pages can show up to three related same-locale, non-draft articles.
+- Related links are build-time and rule-based, not personalized.
+- Ranking should prefer same category, shared tags, then recent updates.
+- Related links must not point to the current article, drafts, or other locales.
+
 Mobile plan prices, campaigns, payment methods, and identity requirements can change. Always phrase mobile data as editorial guidance and remind users to confirm official carrier pages before applying.
 Area rent feel, quietness, and commute convenience can also become stale. Keep area pages date-aware and practical rather than sightseeing-oriented.
 

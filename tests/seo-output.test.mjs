@@ -105,6 +105,16 @@ describe("static SEO output", () => {
     assert.ok(hasJsonLdType(objects, "BreadcrumbList"), "article page should include BreadcrumbList JSON-LD");
   });
 
+  it("renders same-locale related article links on article detail pages", () => {
+    const html = readHtml("en/articles/choose-mobile-plan-japan-foreigner/index.html");
+    assert.match(html, /class="related-articles"/, "article page should include a related articles section");
+    assert.match(
+      html,
+      /href="\/en\/articles\/povo-linemo-rakuten-ahamo-comparison"/,
+      "article page should link to another English article"
+    );
+  });
+
   it("renders local business and breadcrumb JSON-LD on place detail pages", () => {
     const objects = jsonLdObjects(readHtml("en/places/dennys/index.html"));
     assert.ok(hasJsonLdType(objects, "Organization"), "place page should include Organization JSON-LD");

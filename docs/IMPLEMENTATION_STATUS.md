@@ -13,6 +13,7 @@ This document records the current MVP state after Phase 1D SEO launch-readiness 
 - Four locale homepages with start-here links and internal navigation to articles, mobile, areas, places, submit-place, tools, and favorites placeholder.
 - Four locale article index pages.
 - Four locale article detail routes at `/[locale]/articles/[slug]`.
+- Build-time related article links on article detail pages, limited to non-draft same-locale articles.
 - Twelve public article pages across `zh-tw`, `en`, `ja`, and `ko`, including Phase 1B decision-oriented content.
 - Four locale area index pages showing area guide cards.
 - Four locale area detail routes at `/[locale]/areas/[slug]`.
@@ -100,6 +101,7 @@ These are intentionally present but not functional:
 - `hreflang` is conservative, but full translation coverage is not complete.
 - `pnpm test` scans Markdown article links and generated/static source routes.
 - `pnpm check:links` scans built static HTML root-relative links in `dist/`, but it does not validate external links, anchors, JavaScript behavior, or visual rendering.
+- Related article links are static and rule-based. They are not personalized and do not use analytics.
 - Account pages are static placeholders and do not protect user data because no user data exists yet.
 - Account placeholder pages are marked `noindex, nofollow` and excluded from the sitemap.
 - Structured data is intentionally conservative and does not claim ratings, reviews, opening hours, offers, or exact street addresses.

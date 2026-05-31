@@ -3,6 +3,12 @@ import BaseLayout from "./BaseLayout.astro";
 import { formatDate } from "@/lib/content";
 import { htmlLangByLocale, localizePath, type Locale } from "@/lib/i18n";
 
+interface RelatedArticleLink {
+  title: string;
+  description: string;
+  href: string;
+}
+
 interface Props {
   locale: Locale;
   title: string;
@@ -12,9 +18,10 @@ interface Props {
   publishedAt: Date;
   updatedAt: Date;
   alternatePaths?: Partial<Record<Locale, string>>;
+  relatedArticles?: RelatedArticleLink[];
 }
 
-const { locale, title, description, category, tags, publishedAt, updatedAt, alternatePaths } = Astro.props;
+const { locale, title, description, category, tags, publishedAt, updatedAt, alternatePaths, relatedArticles = [] } = Astro.props;
 const site = Astro.site ?? new URL(Astro.url.origin);
 const canonicalUrl = new URL(Astro.url.pathname, site).href;
 const localeHomeUrl = new URL(localizePath(locale), site).href;
@@ -30,6 +37,24 @@ const articlesLabel = {
   en: "Articles",
   ja: "記事",
   ko: "글"
+}[locale];
+const relatedCopy = {
+  "zh-tw": {
+    title: "相關文章",
+    description: "接著閱讀同語言的實用指南。"
+  },
+  en: {
+    title: "Related guides",
+    description: "Keep reading practical guides in the same language."
+  },
+  ja: {
+    title: "関連ガイド",
+    description: "同じ言語の実用ガイドを続けて読めます。"
+  },
+  ko: {
+    title: "관련 가이드",
+    description: "같은 언어의 실용 가이드를 이어서 읽어보세요."
+  }
 }[locale];
 const jsonLd = [
   {
@@ -87,5 +112,21 @@ const jsonLd = [
     <div class="article-body">
       <slot />
     </div>
+    {relatedArticles.length > 0 && (
+      <aside class="related-articles" aria-labelledby="related-articles-title">
+        <div>
+          <h2 id="related-articles-title">{relatedCopy.title}</h2>
+          <p>{relatedCopy.description}</p>
+        </div>
+        <div class="related-article-list">
+          {relatedArticles.map((relatedArticle) => (
+            <a class="related-article-card" href={relatedArticle.href}>
+              <strong>{relatedArticle.title}</strong>
+              <span>{relatedArticle.description}</span>
+            </a>
+          ))}
+        </div>
+      </aside>
+    )}
   </article>
 </BaseLayout>
