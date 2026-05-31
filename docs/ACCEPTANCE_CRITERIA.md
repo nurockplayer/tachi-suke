@@ -147,6 +147,10 @@ This document defines the acceptance criteria for the current static-first MVP.
 - `sitemap.xml` must exclude account placeholder routes, draft articles, and non-published places.
 - `robots.txt` must reference the sitemap and disallow `/[locale]/account/`.
 - Account placeholder pages must use `noindex, nofollow`.
+- Built pages should include parseable JSON-LD for site identity.
+- Article detail pages should include `Article` and `BreadcrumbList` JSON-LD.
+- Place detail pages should include `LocalBusiness` and `BreadcrumbList` JSON-LD.
+- JSON-LD must not invent ratings, review counts, opening hours, offers, or exact addresses that are not in the content model.
 - Public pages should use semantic HTML.
 - Detail pages should avoid `hreflang` links to missing detail pages.
 - Locale switcher links on detail pages should also avoid missing generated detail pages.

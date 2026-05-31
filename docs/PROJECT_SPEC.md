@@ -154,6 +154,7 @@ The MVP includes:
 - SEO-oriented `BaseLayout`
 - Generated `sitemap.xml`, `robots.txt`, and `site.webmanifest`
 - Default Open Graph image and Twitter summary metadata
+- JSON-LD structured data for `Organization`, `WebSite`, `Article`, `LocalBusiness`, and `BreadcrumbList`
 - Cloudflare Pages `_headers` for conservative security and cache defaults
 - `SITE_URL` environment variable with example-domain fallback
 - Structure tests in `tests/project-structure.test.mjs`
@@ -305,6 +306,8 @@ Engineering metrics:
 - SEO metadata includes title, description, canonical URL, Open Graph URL, Open Graph site name, Open Graph image, Twitter card metadata, locale-aware `html lang`, manifest link, and conservative `hreflang`.
 - `sitemap.xml` includes public content and excludes account placeholders.
 - `robots.txt` references the sitemap and disallows placeholder account routes.
+- Built representative pages include parseable JSON-LD for site identity, article detail pages, place detail pages, and breadcrumbs.
+- Structured data must not claim unavailable ratings, review counts, opening hours, offers, or exact addresses.
 - Detail-page language switcher links avoid missing generated pages.
 
 ## 17. Non-Goals

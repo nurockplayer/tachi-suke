@@ -51,6 +51,7 @@ Implemented:
 - SEO-oriented `BaseLayout`
 - Generated `sitemap.xml`, `robots.txt`, and `site.webmanifest`
 - Default Open Graph image and Twitter summary metadata
+- JSON-LD structured data for site identity, articles, places, and breadcrumbs
 - Cloudflare Pages `_headers` for conservative security and cache defaults
 - Conservative locale switcher behavior for detail pages with missing translations
 - `SITE_URL` environment variable fallback
@@ -227,6 +228,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - Treat mobile plan prices, campaigns, and eligibility rules as changeable; users must confirm official sites before applying.
 - Run `pnpm test`, `pnpm build`, and `pnpm check:links` before reporting completion when relevant.
 - Run `pnpm check:seo` after `pnpm build` when changing SEO, routing, metadata, or deployment files.
+- Structured data must be backed by current static content. Do not invent ratings, review counts, opening hours, or exact addresses.
 
 ## Documentation Map
 

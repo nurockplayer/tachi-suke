@@ -4,6 +4,8 @@ import Footer from "./Footer.astro";
 import { getPageTitle, htmlLangByLocale, locales, localizePath, type Locale } from "@/lib/i18n";
 import "@/styles/global.css";
 
+type JsonLdObject = Record<string, unknown>;
+
 interface Props {
   locale: Locale;
   title?: string;
@@ -12,9 +14,10 @@ interface Props {
   robots?: string;
   ogImage?: string;
   ogType?: "website" | "article";
+  jsonLd?: JsonLdObject | JsonLdObject[];
 }
 
-const { locale, title, description, alternatePaths, robots, ogImage = "/images/og-default.svg", ogType = "website" } = Astro.props;
+const { locale, title, description, alternatePaths, robots, ogImage = "/images/og-default.svg", ogType = "website", jsonLd } = Astro.props;
 const site = Astro.site ?? new URL(Astro.url.origin);
 const pageTitle = getPageTitle(locale, title);
 const canonical = new URL(Astro.url.pathname, site);
@@ -24,6 +27,35 @@ const alternates = alternatePaths ?? Object.fromEntries(locales.map((alternateLo
   alternateLocale,
   localizePath(alternateLocale, pathWithoutLocale)
 ])) as Partial<Record<Locale, string>>;
+const organizationId = new URL("/#organization", site).href;
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": organizationId,
+  name: "TachiSuke",
+  alternateName: ["達助日本生活", "Japan Life Assistant"],
+  url: new URL("/", site).href,
+  logo: new URL("/favicon.svg", site).href
+};
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": new URL("/#website", site).href,
+  name: "TachiSuke",
+  url: new URL("/", site).href,
+  description: "A multilingual life decision assistant for living in Japan.",
+  inLanguage: Object.values(htmlLangByLocale),
+  publisher: { "@id": organizationId }
+};
+const jsonLdItems = [
+  organizationJsonLd,
+  websiteJsonLd,
+  ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [])
+];
+
+function serializeJsonLd(item: JsonLdObject): string {
+  return JSON.stringify(item).replaceAll("<", "\\u003c");
+}
 ---
 
 <!doctype html>
@@ -57,6 +89,7 @@ const alternates = alternatePaths ?? Object.fromEntries(locales.map((alternateLo
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl.href} />
+    {jsonLdItems.map((item) => <script is:inline type="application/ld+json" set:html={serializeJsonLd(item)} />)}
   </head>
   <body>
     <Header locale={locale} currentPath={Astro.url.pathname} alternatePaths={alternates} />

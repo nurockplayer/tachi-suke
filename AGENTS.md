@@ -177,6 +177,14 @@ Phase 1D adds SEO and launch readiness:
 - Set `SITE_URL` to the production domain before launch.
 - Keep Astro unless SSR/account/personalization requirements justify a future migration.
 
+Phase 1E adds structured data:
+
+- `BaseLayout` emits site-wide `Organization` and `WebSite` JSON-LD.
+- Article detail pages emit `Article` and `BreadcrumbList` JSON-LD.
+- Place detail pages emit `LocalBusiness` and `BreadcrumbList` JSON-LD.
+- Do not invent ratings, review counts, opening hours, offers, or exact street addresses.
+- `pnpm check:seo` parses representative built pages for JSON-LD.
+
 Mobile plan prices, campaigns, payment methods, and identity requirements can change. Always phrase mobile data as editorial guidance and remind users to confirm official carrier pages before applying.
 Area rent feel, quietness, and commute convenience can also become stale. Keep area pages date-aware and practical rather than sightseeing-oriented.
 

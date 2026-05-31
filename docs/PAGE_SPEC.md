@@ -121,7 +121,7 @@ All public pages should:
 
 **Rendering mode:** Static generated dynamic route. Each locale has its own route file and uses `getStaticPaths`.
 
-**SEO requirements:** Use article `title` and `description`, article category/tags/dates, canonical URL, Open Graph metadata, locale-aware `html lang`, and `hreflang` alternates only for existing non-draft translations connected by `translationKey`.
+**SEO requirements:** Use article `title` and `description`, article category/tags/dates, canonical URL, Open Graph metadata, locale-aware `html lang`, `Article` JSON-LD, `BreadcrumbList` JSON-LD, and `hreflang` alternates only for existing non-draft translations connected by `translationKey`.
 
 **Current status:** Implemented for all four locales. Draft articles are not generated.
 
@@ -185,7 +185,7 @@ All public pages should:
 
 **Rendering mode:** Static generated dynamic route. Each locale has its own route file and uses `getStaticPaths`.
 
-**SEO requirements:** Generate description from place name, category, location, and price range. Include canonical URL, Open Graph metadata, locale-aware `html lang`, and locale alternates using the shared place slug.
+**SEO requirements:** Generate description from place name, category, location, and price range. Include canonical URL, Open Graph metadata, locale-aware `html lang`, `LocalBusiness` JSON-LD, `BreadcrumbList` JSON-LD, and locale alternates using the shared place slug.
 
 **Current status:** Implemented for all four locales. Only `status = published` places are generated. UI labels are localized while place body data remains locale-neutral. Phase 1B adds generated guidance sections for who the place fits, use cases, watchouts, smoking notes, and payment notes.
 

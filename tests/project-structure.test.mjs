@@ -177,14 +177,26 @@ describe("TachiSuke project scaffold", () => {
   it("includes static SEO discovery and social metadata hooks", () => {
     const baseLayout = readFileSync(join(root, "src/components/layout/BaseLayout.astro"), "utf8");
     assert.match(baseLayout, /robots\?:\s*string/, "BaseLayout should accept optional robots metadata");
+    assert.match(baseLayout, /jsonLd\?:/, "BaseLayout should accept optional JSON-LD metadata");
     assert.match(baseLayout, /<meta\s+name="robots"\s+content=\{robots\}/, "BaseLayout should render robots metadata when provided");
     assert.match(baseLayout, /rel="manifest"\s+href="\/site\.webmanifest"/, "BaseLayout should link the web manifest");
     assert.match(baseLayout, /property="og:image"/, "BaseLayout should include an Open Graph image");
     assert.match(baseLayout, /name="twitter:card"\s+content="summary_large_image"/, "BaseLayout should include a summary_large_image card");
     assert.match(baseLayout, /name="twitter:image"/, "BaseLayout should include a Twitter image");
+    assert.match(baseLayout, /application\/ld\+json/, "BaseLayout should render JSON-LD scripts");
 
     const accountPage = readFileSync(join(root, "src/components/pages/AccountPlaceholderPage.astro"), "utf8");
     assert.match(accountPage, /robots="noindex,\s*nofollow"/, "account placeholder pages should be noindex");
+
+    const articleLayout = readFileSync(join(root, "src/components/layout/ArticleLayout.astro"), "utf8");
+    assert.match(articleLayout, /"@type":\s*"Article"/, "ArticleLayout should define Article JSON-LD");
+    assert.match(articleLayout, /"@type":\s*"BreadcrumbList"/, "ArticleLayout should define BreadcrumbList JSON-LD");
+    assert.match(articleLayout, /jsonLd=\{jsonLd\}/, "ArticleLayout should pass JSON-LD into BaseLayout");
+
+    const placeDetailPage = readFileSync(join(root, "src/components/pages/PlaceDetailPage.astro"), "utf8");
+    assert.match(placeDetailPage, /"@type":\s*"LocalBusiness"/, "PlaceDetailPage should define LocalBusiness JSON-LD");
+    assert.match(placeDetailPage, /"@type":\s*"BreadcrumbList"/, "PlaceDetailPage should define BreadcrumbList JSON-LD");
+    assert.match(placeDetailPage, /jsonLd=\{jsonLd\}/, "PlaceDetailPage should pass JSON-LD into BaseLayout");
   });
 
   it("configures submit-place as a provider-agnostic static form", () => {
