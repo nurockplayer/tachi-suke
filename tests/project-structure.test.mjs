@@ -636,17 +636,21 @@ describe("TachiSuke project scaffold", () => {
   it("includes Phase 1B content depth for articles, mobile plans, and area guides", () => {
     const articleFiles = listFiles("src/content/articles", [".md", ".mdx"]);
     const articles = articleFiles.map(readFrontmatter);
-    assert.ok(articles.length >= 16, "Phase 1AH should include residence administration articles on top of the Phase 1AG baseline");
+    assert.ok(articles.length >= 20, "Phase 1AP should include ja/ko transportation and procedures article coverage");
 
     const localeCounts = Object.fromEntries(locales.map((locale) => [locale, articles.filter((article) => article.locale === locale).length]));
     assert.ok(localeCounts["zh-tw"] >= 7, "Phase 1AH should include at least 7 zh-tw articles");
     assert.ok(localeCounts.en >= 5, "Phase 1AH should include at least 5 en articles");
-    assert.ok(localeCounts.ja >= 2, "Phase 1B should include at least 2 ja articles");
-    assert.ok(localeCounts.ko >= 2, "Phase 1B should include at least 2 ko articles");
+    assert.ok(localeCounts.ja >= 4, "Phase 1AP should include at least 4 ja articles");
+    assert.ok(localeCounts.ko >= 4, "Phase 1AP should include at least 4 ko articles");
     assert.ok(articles.some((article) => article.slug === "japan-commuter-pass-ic-card-guide"), "zh-tw commuter pass article should exist");
     assert.ok(articles.some((article) => article.slug === "japan-commuter-pass-ic-card-guide-en"), "English commuter pass article should exist");
+    assert.ok(articles.some((article) => article.slug === "japan-commuter-pass-ic-card-guide-ja"), "Japanese commuter pass article should exist");
+    assert.ok(articles.some((article) => article.slug === "japan-commuter-pass-ic-card-guide-ko"), "Korean commuter pass article should exist");
     assert.ok(articles.some((article) => article.slug === "residence-card-resident-record-my-number"), "zh-tw residence admin article should exist");
     assert.ok(articles.some((article) => article.slug === "residence-card-resident-record-my-number-en"), "English residence admin article should exist");
+    assert.ok(articles.some((article) => article.slug === "residence-card-resident-record-my-number-ja"), "Japanese residence admin article should exist");
+    assert.ok(articles.some((article) => article.slug === "residence-card-resident-record-my-number-ko"), "Korean residence admin article should exist");
 
     assert.equal(new Set(articles.map((article) => article.id)).size, articles.length, "article ids should be unique");
     assert.equal(new Set(articles.map((article) => article.slug)).size, articles.length, "article slugs should be globally unique for Astro content ids");
