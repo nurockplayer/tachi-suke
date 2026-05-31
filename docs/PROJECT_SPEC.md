@@ -173,6 +173,7 @@ The MVP includes:
 - Visible breadcrumbs for nested public article, category, place, mobile plan, area, and tool pages
 - Static article table of contents generated from Markdown/MDX headings
 - Cloudflare Pages `_headers` for conservative security and discovery cache defaults
+- Cloudflare Pages CSP header for baseline static-site hardening
 - Cloudflare Pages `_redirects` for temporary English fallbacks from common locale-less public paths
 - Cloudflare Pages `wrangler.toml` metadata for `dist` static output
 - `SITE_URL` environment variable with example-domain fallback
@@ -353,6 +354,7 @@ Engineering metrics:
 - `pnpm check:links` succeeds after `pnpm build`.
 - `pnpm check:seo` succeeds after `pnpm build`.
 - GitHub Actions CI runs forbidden lockfile rejection, frozen pnpm install, source tests, content health check, static build, link check, and SEO output check.
+- Cloudflare Pages `_headers` include CSP, frame/object protections, and provider-compatible `form-action` rules.
 - No forbidden lockfiles are present.
 - Draft articles do not generate public article detail pages.
 - Non-published places do not appear in public lists or detail pages.

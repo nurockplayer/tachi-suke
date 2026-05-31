@@ -74,6 +74,7 @@ This document records the current MVP state after Phase 1AK OpenSearch discovery
 - Generated global `feed.xml` for non-draft public articles, included in the sitemap with newest-public-article `lastmod`.
 - Generated locale RSS feeds at `/zh-tw/feed.xml`, `/en/feed.xml`, `/ja/feed.xml`, and `/ko/feed.xml` for same-locale non-draft public articles, included in the sitemap with same-locale newest-article `lastmod`.
 - Cloudflare Pages `_headers` with conservative security and discovery cache defaults.
+- Cloudflare Pages CSP header for baseline static-site hardening while preserving current inline JSON-LD/search scripts and HTTPS external form endpoints.
 - Cloudflare Pages `_redirects` with temporary English fallbacks for common locale-less public paths.
 - Cloudflare Pages `wrangler.toml` with project name, compatibility date, and `dist` output directory.
 - Deployment guide at `docs/DEPLOYMENT.md`.
@@ -156,6 +157,7 @@ These are intentionally present but not functional:
 - Structured data is intentionally conservative and does not claim ratings, reviews, opening hours, coordinates, offers, or exact street addresses.
 - Visible breadcrumbs currently focus on nested public pages and do not appear on top-level section pages.
 - Cloudflare Pages is the preferred static deployment target for Phase 1. Set `SITE_URL` to the production domain before launch.
+- The Phase 1 CSP still allows `'unsafe-inline'` because the current Astro output uses inline JSON-LD and small inline progressive enhancement scripts. A nonce/hash CSP can be revisited later.
 - Locale-less redirects are convenience fallbacks only. Canonical URLs and navigation remain locale-prefixed.
 - CI verifies the static site but does not deploy it. Cloudflare Pages deployment remains separate.
 - Deployment credentials and Cloudflare account-specific secrets are intentionally not committed.

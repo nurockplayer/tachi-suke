@@ -83,6 +83,11 @@ describe("static SEO output", () => {
     assert.equal(manifest.start_url, "/");
     assert.ok(Array.isArray(manifest.icons) && manifest.icons.length > 0, "manifest should include icons");
     assert.match(headers, /X-Content-Type-Options:\s*nosniff/);
+    assert.match(headers, /Content-Security-Policy:\s*default-src 'self'/, "_headers should define a baseline CSP");
+    assert.match(headers, /script-src 'self' 'unsafe-inline'/, "CSP should allow current inline JSON-LD/search scripts");
+    assert.match(headers, /form-action 'self' https:/, "CSP should allow provider-agnostic HTTPS form endpoints");
+    assert.match(headers, /frame-ancestors 'none'/, "CSP should block framing");
+    assert.match(headers, /object-src 'none'/, "CSP should block object embeds");
     assert.match(headers, /\/feed\.xml\s+Cache-Control:\s*public,\s*max-age=3600/m, "_headers should cache the global RSS feed conservatively");
     assert.match(headers, /\/en\/feed\.xml\s+Cache-Control:\s*public,\s*max-age=3600/m, "_headers should cache locale RSS feeds conservatively");
     assert.match(headers, /\/llms\.txt\s+Cache-Control:\s*public,\s*max-age=3600/m, "_headers should cache llms.txt conservatively");
