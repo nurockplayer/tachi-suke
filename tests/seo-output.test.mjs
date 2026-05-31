@@ -88,10 +88,14 @@ describe("static SEO output", () => {
       "/ja",
       "/ko",
       "/zh-tw/articles/taiwanese-newcomer-mobile-plan-japan",
+      "/zh-tw/articles/japan-commuter-pass-ic-card-guide",
       "/en/articles/choose-mobile-plan-japan-foreigner",
+      "/en/articles/japan-commuter-pass-ic-card-guide-en",
       "/ja/articles/foreign-resident-mobile-plan-basics-japan",
       "/ko/articles/foreigner-mobile-plan-basics-japan",
       "/en/articles/category/mobile",
+      "/en/articles/category/transportation",
+      "/zh-tw/articles/category/transportation",
       "/zh-tw/articles/category/housing",
       "/zh-tw/mobile/povo2",
       "/en/mobile/ahamo",
@@ -196,7 +200,9 @@ describe("static SEO output", () => {
   it("generates an RSS feed for public article detail pages", () => {
     const feed = readDist("feed.xml");
     assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/zh-tw\/articles\/taiwanese-newcomer-mobile-plan-japan<\/link>/);
+    assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/zh-tw\/articles\/japan-commuter-pass-ic-card-guide<\/link>/);
     assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/en\/articles\/choose-mobile-plan-japan-foreigner<\/link>/);
+    assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/en\/articles\/japan-commuter-pass-ic-card-guide-en<\/link>/);
     assert.doesNotMatch(feed, /draft/i, "feed should not expose draft article data");
   });
 

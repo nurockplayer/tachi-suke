@@ -39,7 +39,7 @@ Goals:
 
 Implemented in the current baseline:
 
-- Added eight more decision-oriented articles, bringing the public article set to twelve pages.
+- Added eight more decision-oriented articles, bringing the Phase 1B public article set to twelve pages.
 - Added five mobile plan data entries: povo, LINEMO, Rakuten Mobile, ahamo, and UQ mobile.
 - Added four Tokyo area guide samples: Ikebukuro, Itabashi, Akabane, and Kagurazaka / Edogawabashi.
 - Improved the mobile index into a comparison entry with document, payment, data, calling, coverage, and eSIM decision points.
@@ -740,6 +740,29 @@ Rules:
 - Operator rules, purchasable route segments, student proof, refunds, changes, and mobile IC support can vary.
 - Keep pass purchase decisions source-backed and date-aware.
 - Do not add saved commute profiles, route search integrations, backend storage, or a database in Phase 1AF.
+
+## Phase 1AG: Commuter Pass Articles
+
+Status: implemented.
+
+Goal:
+
+Connect the commuter pass / IC card checklist to searchable article content so readers can discover the topic from article indexes, transportation category pages, RSS feeds, and search engines.
+
+Implemented:
+
+- Added zh-tw article `japan-commuter-pass-ic-card-guide`.
+- Added en article `japan-commuter-pass-ic-card-guide-en`.
+- Added `transportation` category landing pages through existing dynamic category routes.
+- Linked the articles to the commuter pass checklist, first-week setup content, area guides, mobile setup, and ward office checklist.
+- Added source-level and SEO-output checks for article counts, slugs, sitemap paths, category paths, and RSS feed entries.
+
+Rules:
+
+- Keep articles decision-oriented rather than generic travel content.
+- Do not present commuter pass content as a fare calculator.
+- Operator rules, reimbursements, student eligibility, refunds, route changes, and mobile IC support can vary.
+- Japanese and Korean translations can be added later after the zh-tw/en content proves useful.
 
 ## Phase 2: Auth and Favorites
 
