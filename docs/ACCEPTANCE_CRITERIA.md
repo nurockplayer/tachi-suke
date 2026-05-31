@@ -27,9 +27,11 @@ This document defines the acceptance criteria for the current static-first MVP.
 ## Test Criteria
 
 - `pnpm test` must pass.
+- `pnpm check:content` must pass.
 - `pnpm check:links` must pass after `pnpm build` when verifying built static output.
 - `pnpm check:seo` must pass after `pnpm build` when verifying generated SEO output.
 - CI must run the same verification chain for pull requests and pushes to `main`.
+- `pnpm check:content` should verify content IDs, slugs, dates, review dates, and stored URL fields without fetching the network.
 - Structure tests should verify required files, required locale routes, pnpm-only lockfile policy, content collections, `SITE_URL` fallback strategy, and finalized Place enum values.
 - Phase 1B/1B.5 tests should verify minimum content depth for articles, mobile plans, and area guides.
 - Phase 1B/1B.5/1H tests should scan Markdown/MDX article links that point to internal absolute paths and verify they match known static routes or generated article/place/mobile/area/tool detail routes.

@@ -172,10 +172,11 @@ The MVP includes:
 - Cloudflare Pages `wrangler.toml` metadata for `dist` static output
 - `SITE_URL` environment variable with example-domain fallback
 - Structure tests in `tests/project-structure.test.mjs`
+- Content health checks in `tests/content-health.test.mjs`
 - Conservative Markdown internal-link checks in `tests/project-structure.test.mjs`
 - Post-build static HTML internal link checks in `tests/static-html-links.test.mjs`
 - Post-build SEO output checks in `tests/seo-output.test.mjs`
-- GitHub Actions CI quality gate for pull requests and pushes to `main`
+- GitHub Actions CI quality gate for pull requests and pushes to `main`, including source tests, content health, build, link, and SEO checks
 
 ## 11. Out-of-Scope for MVP
 
@@ -339,10 +340,11 @@ Engineering metrics:
 
 - `pnpm install` succeeds.
 - `pnpm test` succeeds.
+- `pnpm check:content` succeeds.
 - `pnpm build` succeeds.
 - `pnpm check:links` succeeds after `pnpm build`.
 - `pnpm check:seo` succeeds after `pnpm build`.
-- GitHub Actions CI runs forbidden lockfile rejection, frozen pnpm install, source tests, static build, link check, and SEO output check.
+- GitHub Actions CI runs forbidden lockfile rejection, frozen pnpm install, source tests, content health check, static build, link check, and SEO output check.
 - No forbidden lockfiles are present.
 - Draft articles do not generate public article detail pages.
 - Non-published places do not appear in public lists or detail pages.

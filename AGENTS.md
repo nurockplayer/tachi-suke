@@ -196,7 +196,7 @@ Phase 1F adds CI quality gates:
 
 - GitHub Actions must use pnpm only.
 - CI should reject `package-lock.json`, `yarn.lock`, `bun.lock`, and `bun.lockb`.
-- CI should run `pnpm install --frozen-lockfile`, `pnpm test`, `pnpm build`, `pnpm check:links`, and `pnpm check:seo`.
+- CI should run `pnpm install --frozen-lockfile`, `pnpm test`, `pnpm check:content`, `pnpm build`, `pnpm check:links`, and `pnpm check:seo`.
 - CI does not deploy to Cloudflare Pages yet; deployment secrets and project settings stay outside the repo until explicitly scoped.
 
 Phase 1G adds static related content:
@@ -235,6 +235,12 @@ Phase 1V adds article table of contents:
 - `ArticleLayout` should render a static, locale-aware table of contents for useful H2/H3 heading sets.
 - TOC links must point to same-page generated heading anchors only.
 - Do not add scroll spy, saved reading state, or client dependencies in Phase 1V.
+
+Phase 1W adds content health checks:
+
+- `pnpm check:content` runs dependency-free source checks for content IDs, slugs, dates, `lastCheckedAt`, and stored URL fields.
+- Content health checks do not fetch external URLs and do not validate live prices, campaigns, opening hours, or provider terms.
+- CI should run `pnpm check:content` before `pnpm build`.
 
 Phase 1J adds a static RSS feed:
 
@@ -415,6 +421,7 @@ Before reporting completion when possible:
 
 ```bash
 pnpm test
+pnpm check:content
 pnpm build
 pnpm check:links
 pnpm check:seo

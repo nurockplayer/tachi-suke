@@ -40,6 +40,9 @@ jobs:
       - name: Run source tests
         run: pnpm test
 
+      - name: Check content health
+        run: pnpm check:content
+
       - name: Build static site
         run: pnpm build
 

@@ -545,6 +545,28 @@ Rules:
 - Do not add scroll spy, saved reading progress, analytics, or personalization in Phase 1.
 - TOC links must remain same-page anchors generated from article headings.
 
+## Phase 1W: Content Health Check
+
+Status: implemented.
+
+Goal:
+
+Prevent malformed static content from shipping as the editorial surface grows.
+
+Implemented:
+
+- `tests/content-health.test.mjs`.
+- `pnpm check:content`.
+- CI runs `pnpm check:content` before `pnpm build`.
+- Checks article IDs, slugs, published/updated dates, and HTTPS external Markdown links.
+- Checks JSON collection IDs, slugs, `lastCheckedAt`, place created/updated dates, stored URL fields, and accidental `undefined` placeholder strings.
+
+Rules:
+
+- Keep the check dependency-free.
+- Do not fetch external URLs in CI.
+- Do not treat this as live price, campaign, opening-hours, or provider-term validation.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.

@@ -194,8 +194,10 @@ describe("TachiSuke project scaffold", () => {
     const packageJson = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));
     assert.match(packageJson.packageManager, /^pnpm@10/);
     assert.equal(packageJson.scripts.preinstall, undefined);
+    assert.equal(packageJson.scripts["check:content"], "node --test tests/content-health.test.mjs");
     assert.equal(packageJson.scripts["check:links"], "node tests/static-html-links.test.mjs");
     assert.equal(packageJson.scripts["check:seo"], "node --test tests/seo-output.test.mjs");
+    assert.equal(existsSync(join(root, "tests/content-health.test.mjs")), true, "content health check should exist");
     assert.equal(existsSync(join(root, "tests/static-html-links.test.mjs")), true, "static HTML link crawler should exist");
     assert.equal(existsSync(join(root, "tests/seo-output.test.mjs")), true, "static SEO output check should exist");
   });
@@ -205,6 +207,7 @@ describe("TachiSuke project scaffold", () => {
     for (const command of [
       "pnpm install --frozen-lockfile",
       "pnpm test",
+      "pnpm check:content",
       "pnpm build",
       "pnpm check:links",
       "pnpm check:seo"

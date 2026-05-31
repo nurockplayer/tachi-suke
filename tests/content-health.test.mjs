@@ -1,0 +1,182 @@
+import { describe, it } from "node:test";
+import assert from "node:assert/strict";
+import { readdirSync, readFileSync } from "node:fs";
+import { join } from "node:path";
+
+const root = process.cwd();
+const contentRoot = join(root, "src/content");
+const tomorrow = new Date();
+tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
+
+function listFiles(dir, extensions) {
+  return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const fullPath = join(dir, entry.name);
+    if (entry.isDirectory()) {
+      return listFiles(fullPath, extensions);
+    }
+
+    return extensions.some((extension) => entry.name.endsWith(extension)) ? [fullPath] : [];
+  });
+}
+
+function relative(fullPath) {
+  return fullPath.replace(`${root}/`, "");
+}
+
+function readJson(fullPath) {
+  return JSON.parse(readFileSync(fullPath, "utf8"));
+}
+
+function readFrontmatter(fullPath) {
+  const file = readFileSync(fullPath, "utf8");
+  const match = file.match(/^---\n([\s\S]*?)\n---/);
+  assert.ok(match, `${relative(fullPath)} should include frontmatter`);
+
+  const data = {};
+  let currentArrayKey;
+  for (const line of match[1].split("\n")) {
+    if (!line.trim()) continue;
+
+    const arrayItem = line.match(/^\s+-\s+"?(.+?)"?\s*$/);
+    if (arrayItem && currentArrayKey) {
+      data[currentArrayKey].push(arrayItem[1]);
+      continue;
+    }
+
+    const property = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+    if (!property) continue;
+
+    currentArrayKey = undefined;
+    const [, key, rawValue] = property;
+    if (!rawValue) {
+      data[key] = [];
+      currentArrayKey = key;
+      continue;
+    }
+
+    data[key] = rawValue.replace(/^"|"$/g, "");
+  }
+
+  return data;
+}
+
+function parseDate(value, label) {
+  const date = new Date(value);
+  assert.ok(!Number.isNaN(date.getTime()), `${label} should be a valid date`);
+  return date;
+}
+
+function assertNotFuture(date, label) {
+  assert.ok(date <= tomorrow, `${label} should not be set in the future`);
+}
+
+function assertUnique(entries, field, label) {
+  const seen = new Map();
+  for (const entry of entries) {
+    const value = entry.data[field];
+    assert.ok(value, `${entry.path} should include ${field}`);
+    assert.equal(seen.has(value), false, `${label} ${field} "${value}" is duplicated in ${entry.path} and ${seen.get(value)}`);
+    seen.set(value, entry.path);
+  }
+}
+
+function assertHttpsUrl(value, label) {
+  if (!value) return;
+  const url = new URL(value);
+  assert.equal(url.protocol, "https:", `${label} should use https`);
+}
+
+function assertNoUndefinedString(value, label) {
+  if (typeof value === "string") {
+    assert.notEqual(value.trim().toLowerCase(), "undefined", `${label} should not contain an undefined placeholder string`);
+    return;
+  }
+
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => assertNoUndefinedString(item, `${label}[${index}]`));
+    return;
+  }
+
+  if (value && typeof value === "object") {
+    for (const [key, child] of Object.entries(value)) {
+      assertNoUndefinedString(child, `${label}.${key}`);
+    }
+  }
+}
+
+function assertUrlFieldsAreHttps(value, label) {
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => assertUrlFieldsAreHttps(item, `${label}[${index}]`));
+    return;
+  }
+
+  if (!value || typeof value !== "object") return;
+
+  for (const [key, child] of Object.entries(value)) {
+    const childLabel = `${label}.${key}`;
+    if (typeof child === "string" && /Url$/.test(key)) {
+      assertHttpsUrl(child, childLabel);
+    } else {
+      assertUrlFieldsAreHttps(child, childLabel);
+    }
+  }
+}
+
+function markdownExternalLinks(fullPath) {
+  const file = readFileSync(fullPath, "utf8");
+  return [...file.matchAll(/\]\((https?:\/\/[^)\s]+)\)/g)].map((match) => match[1]);
+}
+
+describe("content health", () => {
+  it("keeps article ids, slugs, dates, and external links healthy", () => {
+    const articles = listFiles(join(contentRoot, "articles"), [".md", ".mdx"]).map((fullPath) => ({
+      path: relative(fullPath),
+      data: readFrontmatter(fullPath),
+      fullPath
+    }));
+
+    assertUnique(articles, "id", "article");
+    assertUnique(articles, "slug", "article");
+
+    for (const article of articles) {
+      const publishedAt = parseDate(article.data.publishedAt, `${article.path} publishedAt`);
+      const updatedAt = parseDate(article.data.updatedAt, `${article.path} updatedAt`);
+      assert.ok(updatedAt >= publishedAt, `${article.path} updatedAt should not be earlier than publishedAt`);
+      assertNotFuture(publishedAt, `${article.path} publishedAt`);
+      assertNotFuture(updatedAt, `${article.path} updatedAt`);
+
+      for (const url of markdownExternalLinks(article.fullPath)) {
+        assertHttpsUrl(url, `${article.path} external markdown link ${url}`);
+      }
+    }
+  });
+
+  it("keeps JSON collection ids, slugs, review dates, and URL fields healthy", () => {
+    for (const collection of ["areas", "mobile-plans", "places", "tools"]) {
+      const entries = listFiles(join(contentRoot, collection), [".json"]).map((fullPath) => ({
+        path: relative(fullPath),
+        data: readJson(fullPath)
+      }));
+
+      assertUnique(entries, "id", collection);
+      assertUnique(entries, "slug", collection);
+
+      for (const entry of entries) {
+        assertNoUndefinedString(entry.data, entry.path);
+        assertUrlFieldsAreHttps(entry.data, entry.path);
+
+        if ("lastCheckedAt" in entry.data) {
+          assertNotFuture(parseDate(entry.data.lastCheckedAt, `${entry.path} lastCheckedAt`), `${entry.path} lastCheckedAt`);
+        }
+
+        if ("createdAt" in entry.data || "updatedAt" in entry.data) {
+          const createdAt = parseDate(entry.data.createdAt, `${entry.path} createdAt`);
+          const updatedAt = parseDate(entry.data.updatedAt, `${entry.path} updatedAt`);
+          assert.ok(updatedAt >= createdAt, `${entry.path} updatedAt should not be earlier than createdAt`);
+          assertNotFuture(createdAt, `${entry.path} createdAt`);
+          assertNotFuture(updatedAt, `${entry.path} updatedAt`);
+        }
+      }
+    }
+  });
+});
