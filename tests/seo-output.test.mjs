@@ -281,6 +281,14 @@ describe("static SEO output", () => {
     const housing = readHtml("zh-tw/articles/category/housing/index.html");
     assert.match(housing, /租屋文章 \| TachiSuke/, "zh-tw housing category should have a localized SEO title");
     assert.match(housing, /href="\/zh-tw\/articles\/japan-renting-initial-costs"/, "housing category should link to zh-tw housing article");
+
+    const transportation = readHtml("en/articles/category/transportation/index.html");
+    assert.match(transportation, /Transportation guides \| TachiSuke/, "English transportation category should have a localized SEO title");
+    assert.match(transportation, /href="\/en\/articles\/japan-commuter-pass-ic-card-guide-en"/, "transportation category should link to English commuter pass article");
+
+    const procedures = readHtml("zh-tw/articles/category/procedures/index.html");
+    assert.match(procedures, /行政手續文章 \| TachiSuke/, "zh-tw procedures category should have a localized SEO title");
+    assert.match(procedures, /href="\/zh-tw\/articles\/residence-card-resident-record-my-number"/, "procedures category should link to zh-tw residence admin article");
   });
 
   it("renders visible breadcrumbs on nested public pages", () => {

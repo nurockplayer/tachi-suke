@@ -32,6 +32,18 @@ const categoryTitles: Record<string, Record<Locale, string>> = {
     en: "Food guides",
     ja: "外食ガイド",
     ko: "외식 글"
+  },
+  transportation: {
+    "zh-tw": "交通通勤文章",
+    en: "Transportation guides",
+    ja: "交通・通勤ガイド",
+    ko: "교통·통근 글"
+  },
+  procedures: {
+    "zh-tw": "行政手續文章",
+    en: "Procedure guides",
+    ja: "行政手続きガイド",
+    ko: "행정 절차 글"
   }
 };
 
@@ -59,6 +71,18 @@ const categoryDescriptions: Record<string, Record<Locale, string>> = {
     en: "Compare everyday food options in Japan by solo use, smoking policy, payment, and use case.",
     ja: "一人利用、禁煙、支払い、利用シーンで日本の日常的な外食先を比較します。",
     ko: "혼자 이용, 금연, 결제, 이용 상황을 기준으로 일본의 일상 외식 선택지를 비교합니다."
+  },
+  transportation: {
+    "zh-tw": "整理日本通勤、電車、IC 卡、定期券與日常移動的決策重點。",
+    en: "Decision guides for commuting, trains, IC cards, commuter passes, and everyday movement in Japan.",
+    ja: "日本の通勤、電車、ICカード、定期券、日常移動の判断ポイントを整理します。",
+    ko: "일본의 통근, 전철, IC 카드, 정기권, 일상 이동 판단 포인트를 정리합니다."
+  },
+  procedures: {
+    "zh-tw": "整理外國居民在日本生活時常見的地址、在留、My Number 與自治體手續。",
+    en: "Practical guides for address, residence, My Number, and municipal procedures for foreign residents in Japan.",
+    ja: "外国人住民向けに、住所、在留、マイナンバー、自治体手続きの確認点を整理します。",
+    ko: "외국인 주민을 위한 주소, 체류, 마이넘버, 지자체 절차 확인 포인트를 정리합니다."
   }
 };
 

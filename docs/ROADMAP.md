@@ -787,6 +787,27 @@ Rules:
 - Direct action-oriented readers to official sources, municipality counters, schools, employers, and immigration authorities as appropriate.
 - Japanese and Korean translations can be added later after the zh-tw/en content proves useful.
 
+## Phase 1AI: Article Category Label Polish
+
+Status: implemented.
+
+Goal:
+
+Prevent newly added article category pages from exposing raw category keys in titles and descriptions.
+
+Implemented:
+
+- Added localized title and description copy for `transportation`.
+- Added localized title and description copy for `procedures`.
+- Added source-level tests to require category helper support for these keys.
+- Added build-output SEO tests for representative transportation and procedures category pages.
+
+Rules:
+
+- Keep category copy centralized in `src/lib/content/article-categories.ts`.
+- When adding a new recurring category, add localized title and description copy in the same change.
+- Do not redesign category taxonomy, filters, icons, or pagination until article volume justifies it.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.
