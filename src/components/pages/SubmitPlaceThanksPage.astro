@@ -1,0 +1,95 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import CategoryCard from "@/components/content/CategoryCard.astro";
+import { localizePath, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = {
+  "zh-tw": {
+    title: "謝謝你的推薦",
+    description: "投稿已送出後不會直接公開，站長會先審核、整理與標準化資訊。",
+    reviewTitle: "接下來會發生什麼",
+    review:
+      "你的推薦不會直接公開。站長會人工審核內容，必要時整理、修正或標準化店家資訊後才可能發布。Email 不會公開，只會在需要確認資訊時使用。",
+    privacyTitle: "隱私與內容提醒",
+    privacy:
+      "請不要提交他人個資或敏感資訊。店家營業時間、價格、付款方式與禁菸規則可能變動，發布前仍需要再次確認。",
+    places: "回到店家推薦",
+    articles: "閱讀生活文章",
+    home: "回首頁"
+  },
+  en: {
+    title: "Thanks for your recommendation",
+    description: "Your submission will not publish directly. The site owner will review, edit, and normalize information first.",
+    reviewTitle: "What happens next",
+    review:
+      "Your recommendation will not publish directly. The site owner manually reviews submissions and may edit, rewrite, or normalize place information before publishing. Email will not be public and is only used for follow-up if needed.",
+    privacyTitle: "Privacy and content note",
+    privacy:
+      "Do not submit other people's personal or sensitive information. Hours, prices, payment methods, and smoking rules can change, so details still need confirmation before publication.",
+    places: "Back to places",
+    articles: "Read articles",
+    home: "Home"
+  },
+  ja: {
+    title: "おすすめありがとうございます",
+    description: "投稿は直接公開されません。管理者が先に確認し、内容を整理・標準化します。",
+    reviewTitle: "この後の流れ",
+    review:
+      "投稿は直接公開されません。管理者が内容を確認し、必要に応じて店舗情報を整理、書き直し、標準化してから掲載する場合があります。メールアドレスは公開されず、確認が必要な場合にのみ使います。",
+    privacyTitle: "プライバシーと内容の注意",
+    privacy:
+      "他人の個人情報や機微な情報は送らないでください。営業時間、価格、支払い方法、禁煙ルールは変わる場合があるため、掲載前にも確認が必要です。",
+    places: "お店一覧へ",
+    articles: "生活記事を読む",
+    home: "ホームへ"
+  },
+  ko: {
+    title: "추천해 주셔서 감사합니다",
+    description: "추천은 바로 공개되지 않습니다. 운영자가 먼저 검토하고 내용을 정리, 표준화합니다.",
+    reviewTitle: "다음 절차",
+    review:
+      "추천은 바로 공개되지 않습니다. 운영자가 내용을 직접 검토하고 필요하면 장소 정보를 정리, 수정, 표준화한 뒤 게시할 수 있습니다. 이메일은 공개되지 않으며 필요한 확인 연락에만 사용합니다.",
+    privacyTitle: "개인정보와 내용 안내",
+    privacy:
+      "타인의 개인정보나 민감한 정보는 보내지 마세요. 영업시간, 가격, 결제 방식, 금연 규칙은 바뀔 수 있으므로 게시 전에도 확인이 필요합니다.",
+    places: "장소로 돌아가기",
+    articles: "생활 글 읽기",
+    home: "홈으로"
+  }
+}[locale];
+---
+
+<BaseLayout locale={locale} title={copy.title} description={copy.description}>
+  <section class="page-hero">
+    <div class="container">
+      <h1>{copy.title}</h1>
+      <p>{copy.description}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2">
+      <article class="notice">
+        <h2>{copy.reviewTitle}</h2>
+        <p>{copy.review}</p>
+      </article>
+      <article class="notice">
+        <h2>{copy.privacyTitle}</h2>
+        <p>{copy.privacy}</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-3">
+      <CategoryCard href={localizePath(locale, "/places")} title={copy.places} description={copy.description} />
+      <CategoryCard href={localizePath(locale, "/articles")} title={copy.articles} description={copy.review} />
+      <CategoryCard href={localizePath(locale)} title={copy.home} description={copy.privacy} />
+    </div>
+  </section>
+</BaseLayout>

@@ -81,8 +81,8 @@ export const nonSmokingStatusLabels: LabelSet<NonSmokingStatus> = {
     unknown: "未確認"
   },
   en: {
-    confirmed_non_smoking: "Confirmed",
-    separated_smoking_area: "Separated area",
+    confirmed_non_smoking: "Confirmed non-smoking",
+    separated_smoking_area: "Separated smoking area",
     smoking_allowed: "Smoking allowed",
     unknown: "Unknown"
   },

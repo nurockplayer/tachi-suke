@@ -34,13 +34,20 @@ Phase 2 should support:
 - Save favorite tools
 - View saved items
 
+Phase 1C supports:
+
+- Static submit-place form posting to `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` when configured.
+- Preview mode with disabled submit when the endpoint is unset.
+- No login requirement.
+- No local database storage, user submission history, or moderation dashboard.
+
 Phase 3 should support:
 
 - Submit recommended places
 - View own submission history
 - Track moderation status
 
-The current submit-place page is UI only. It does not submit, store, email, or publish recommendations.
+The current submit-place page may submit to an external endpoint, but TachiSuke still does not store, email, moderate, or publish recommendations directly from repo code.
 
 ## Favorite Model
 

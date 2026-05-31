@@ -309,7 +309,7 @@ This document records the current content collections and TypeScript model bound
 
 **Purpose:** Future raw recommendation submissions from users before editorial review.
 
-**Current storage:** TypeScript placeholder in `src/types/submission.ts`. The submit-place page is UI-only and does not create records in Phase 1.
+**Current storage:** TypeScript placeholder in `src/types/submission.ts`. Phase 1C can post the submit-place form to an external endpoint configured by `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT`, but the repo does not create database records or store submissions locally.
 
 **Required fields:**
 
@@ -355,5 +355,7 @@ This document records the current content collections and TypeScript model bound
 **Future database mapping notes:**
 
 - Anonymous submissions may be allowed in Phase 1C, but should still avoid unnecessary personal data.
+- Phase 1C hidden form metadata includes `formName`, `source`, `locale`, `moderationRequired`, `publishDirectly`, and `redirectUrl`.
+- Phase 1C includes a visually hidden `website` honeypot field for basic spam reduction. It is not a complete anti-spam system.
 - Authenticated submissions in Phase 3 should let users view only their own submission history.
 - Admin moderation requires a separate admin role model and RLS policies.

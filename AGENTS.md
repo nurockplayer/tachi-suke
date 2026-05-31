@@ -123,6 +123,7 @@ Current public route pattern:
 - `/[locale]/mobile/[slug]`
 - `/[locale]/tools`
 - `/[locale]/submit-place`
+- `/[locale]/submit-place/thanks`
 - `/[locale]/about`
 - `/[locale]/account/login`
 - `/[locale]/account/favorites`
@@ -136,7 +137,7 @@ Do not use Simplified Chinese unless explicitly requested.
 
 Phase 1 is content-first, SEO-friendly, i18n-ready, auth-ready, database-ready, and favorites-ready.
 
-Current MVP includes static pages, article publishing, place detail pages, mobile/area/tool entry pages, submit-place UI, placeholder account pages, placeholder favorites, content collections, and SEO metadata.
+Current MVP includes static pages, article publishing, place detail pages, mobile/area/tool entry pages, static submit-place external endpoint support, placeholder account pages, placeholder favorites, content collections, and SEO metadata.
 
 Phase 1B adds public-preview content depth:
 
@@ -155,6 +156,16 @@ Phase 1B.5 adds maintainability/detail depth:
 - Post-build static HTML link checking with `pnpm check:links`.
 - Conservative detail-page locale switcher links that avoid missing generated pages.
 
+Phase 1C adds submit-place workflow MVP:
+
+- `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` controls form activation.
+- Endpoint unset means preview mode with disabled submit.
+- Endpoint set means static `POST` to the external endpoint.
+- The provider must stay configurable; do not hard-code Formspree, Netlify Forms, Google Forms, Cloudflare Workers, or a custom API URL.
+- Submit-place thanks pages exist at `/[locale]/submit-place/thanks`.
+- Hidden fields should include `formName`, `source`, `locale`, `moderationRequired`, `publishDirectly`, and `redirectUrl`.
+- Honeypot is basic spam reduction only; do not add captcha or large anti-spam dependencies in Phase 1C.
+
 Mobile plan prices, campaigns, payment methods, and identity requirements can change. Always phrase mobile data as editorial guidance and remind users to confirm official carrier pages before applying.
 Area rent feel, quietness, and commute convenience can also become stale. Keep area pages date-aware and practical rather than sightseeing-oriented.
 
@@ -166,7 +177,7 @@ Do not implement in Phase 1 unless explicitly requested:
 - Postgres persistence
 - Row Level Security runtime integration
 - Real favorites
-- Real submit-place submission
+- Native/database-backed submit-place storage
 - Public comments
 - Payment
 - Large CMS/admin dashboard
@@ -194,7 +205,7 @@ Rules:
 
 ## User-Submitted Places
 
-The submit-place page is UI-only in Phase 1. It must not submit, store, email, or publish data.
+The submit-place page is static-site friendly in Phase 1C. It may post to `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT`, but the repo must not store, email, moderate, or publish submissions directly.
 
 Rules:
 

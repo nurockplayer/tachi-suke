@@ -80,6 +80,7 @@ const requiredFiles = [
   "src/components/pages/PlaceDetailPage.astro",
   "src/components/pages/MobilePlanDetailPage.astro",
   "src/components/pages/AreaDetailPage.astro",
+  "src/components/pages/SubmitPlaceThanksPage.astro",
   "src/components/mobile/MobilePlanCard.astro",
   "src/components/favorites/FavoriteButtonPlaceholder.astro",
   "src/components/auth/LoginPrompt.astro",
@@ -128,6 +129,7 @@ const localePages = [
   "areas/[slug].astro",
   "tools/index.astro",
   "submit-place.astro",
+  "submit-place/thanks.astro",
   "about.astro",
   "account/login.astro",
   "account/favorites.astro",
@@ -163,6 +165,41 @@ describe("TachiSuke project scaffold", () => {
     assert.equal(packageJson.scripts.preinstall, undefined);
     assert.equal(packageJson.scripts["check:links"], "node tests/static-html-links.test.mjs");
     assert.equal(existsSync(join(root, "tests/static-html-links.test.mjs")), true, "static HTML link crawler should exist");
+  });
+
+  it("configures submit-place as a provider-agnostic static form", () => {
+    const envExample = readFileSync(join(root, ".env.example"), "utf8");
+    assert.match(envExample, /PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT=/);
+
+    const submitPage = readFileSync(join(root, "src/components/pages/SubmitPlacePage.astro"), "utf8");
+    assert.match(submitPage, /PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT/, "SubmitPlacePage should read PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT");
+    assert.match(submitPage, /method="POST"/, "submit-place form should use POST");
+    assert.match(submitPage, /action=\{formEndpoint\}/, "submit-place form action should use configured endpoint");
+    assert.match(submitPage, /name="formName"\s+value="submit-place"/, "submit-place form should include formName hidden field");
+    assert.match(submitPage, /name="source"\s+value="tachi-suke"/, "submit-place form should include source hidden field");
+    assert.match(submitPage, /name="moderationRequired"\s+value="true"/, "submit-place form should include moderationRequired hidden field");
+    assert.match(submitPage, /name="publishDirectly"\s+value="false"/, "submit-place form should include publishDirectly hidden field");
+    assert.match(submitPage, /name="locale"\s+value=\{locale\}/, "submit-place form should include current locale hidden field");
+    assert.match(submitPage, /name="redirectUrl"\s+value=\{thanksUrl\}/, "submit-place form should include provider-agnostic redirectUrl hidden field");
+    assert.match(submitPage, /name="website"/, "submit-place form should include a honeypot field");
+    assert.match(submitPage, /class="honeypot-field"/, "honeypot should be visually hidden with a dedicated class");
+    assert.match(submitPage, /disabled=\{!formEndpoint\}/, "submit button should be disabled when endpoint is missing");
+
+    for (const requiredField of [
+      "submissionLanguage",
+      "placeName",
+      "category",
+      "prefecture",
+      "city",
+      "googleMapUrl",
+      "recommendationReason"
+    ]) {
+      assert.match(submitPage, new RegExp(`name="${requiredField}"[\\s\\S]*?required`), `${requiredField} should be required`);
+    }
+
+    assert.match(submitPage, /name="googleMapUrl"\s+type="url"/, "Google Maps URL should use URL input type");
+    assert.match(submitPage, /name="officialUrl"\s+type="url"/, "Official URL should use URL input type");
+    assert.match(submitPage, /name="submitterEmail"\s+type="email"/, "Submitter email should use email input type");
   });
 
   it("defines all required content collections and avoids a fixed production domain", () => {
@@ -243,7 +280,7 @@ describe("TachiSuke project scaffold", () => {
   it("keeps article internal links pointed at existing static or generated routes", () => {
     const routeSet = new Set(["/"]);
     for (const locale of locales) {
-      for (const route of ["", "/articles", "/areas", "/places", "/mobile", "/tools", "/submit-place", "/about", "/account/login", "/account/favorites", "/account/submissions"]) {
+      for (const route of ["", "/articles", "/areas", "/places", "/mobile", "/tools", "/submit-place", "/submit-place/thanks", "/about", "/account/login", "/account/favorites", "/account/submissions"]) {
         routeSet.add(normalizePath(`/${locale}${route}/`));
       }
     }

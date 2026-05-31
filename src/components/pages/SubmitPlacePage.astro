@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
-import { localeNames, locales, sectionCopy, type Locale } from "@/lib/i18n";
+import { localeNames, locales, localizePath, sectionCopy, type Locale } from "@/lib/i18n";
 import { japaneseDifficultyLabels, nonSmokingStatusLabels, soloFriendlyLabels } from "@/lib/places";
 
 interface Props {
@@ -9,37 +9,43 @@ interface Props {
 
 const { locale } = Astro.props;
 const title = sectionCopy[locale].submitTitle;
+const formEndpoint = import.meta.env.PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT?.trim() ?? "";
+const thanksUrl = new URL(localizePath(locale, "/submit-place/thanks"), Astro.site ?? new URL(Astro.url.origin)).href;
 const labels = {
   "zh-tw": {
-    intro: "第一版表單尚未送出資料。未來投稿會先進入審核，不會直接公開。",
-    review: "投稿不會直接公開，投稿需要審核。Email 不會公開。不要填寫他人個資。店家資訊可能會由站長整理後發布。",
-    submit: "送出功能準備中",
+    intro: formEndpoint ? "你可以推薦日常生活中實用的店家。投稿會先人工審核，不會直接公開。" : "投稿表單目前是 preview mode。站長設定外部表單 endpoint 後才會開放送出。",
+    review: "投稿不會直接公開，內容會先人工審核。站長可能會整理、改寫、標準化內容後發布。Email 不會公開。不要填寫他人個資或敏感資訊；營業時間、價格、禁菸規則等資訊發布前仍需確認。",
+    preview: "投稿功能準備中：目前尚未設定外部表單 endpoint，所以表單不會送出。",
+    submit: "送出推薦",
     mapsHelp: "Google Maps URL 最重要，請優先提供正確連結。",
-    privacyHelp: "不要填寫他人個資。",
+    privacyHelp: "不要填寫他人個資或敏感資訊。",
     emailHelp: "Email 選填且不會公開，只會用於必要時聯絡確認。"
   },
   en: {
-    intro: "This MVP form does not submit data yet. Future submissions will enter review and will not publish directly.",
-    review: "Submissions are not published directly. They require moderation. Email will not be public. Do not submit other people's personal information. Place information may be edited and normalized before publishing.",
-    submit: "Submission coming soon",
+    intro: formEndpoint ? "Recommend a useful everyday place. Submissions are manually reviewed and will not publish directly." : "This form is in preview mode. Submissions open after the site owner configures an external form endpoint.",
+    review: "Submissions are not published directly. Content is manually reviewed first. The site owner may edit, rewrite, and normalize information before publishing. Email will not be public. Do not submit other people's personal or sensitive information; hours, prices, and smoking rules still need confirmation before publication.",
+    preview: "Submission is not active yet: no external form endpoint is configured, so this form will not send.",
+    submit: "Submit recommendation",
     mapsHelp: "Google Maps URL is the most important field. Please provide the exact place link.",
-    privacyHelp: "Do not enter other people's personal information.",
+    privacyHelp: "Do not enter other people's personal or sensitive information.",
     emailHelp: "Email is optional and private. It is only for follow-up if needed."
   },
   ja: {
-    intro: "第一版のフォームはまだ送信されません。将来の投稿は審査され、直接公開されません。",
-    review: "投稿は直接公開されず、審査が必要です。メールアドレスは公開されません。他人の個人情報を書かないでください。店舗情報は管理者が整理して公開する場合があります。",
-    submit: "送信機能は準備中です",
+    intro: formEndpoint ? "日常生活で役立つお店を推薦できます。投稿は人の確認を経て、直接公開されません。" : "このフォームは preview mode です。外部フォーム endpoint が設定されるまで送信できません。",
+    review: "投稿は直接公開されず、先に人の確認が入ります。管理者が内容を整理、書き直し、標準化して掲載する場合があります。メールアドレスは公開されません。他人の個人情報や機微な情報を書かないでください。営業時間、価格、禁煙ルールは掲載前にも確認が必要です。",
+    preview: "投稿機能は準備中です。外部フォーム endpoint が未設定のため、このフォームは送信されません。",
+    submit: "おすすめを送信",
     mapsHelp: "Google Maps URL が最も重要です。正確なお店のリンクを入力してください。",
-    privacyHelp: "他人の個人情報を書かないでください。",
+    privacyHelp: "他人の個人情報や機微な情報を書かないでください。",
     emailHelp: "メールは任意で、公開されません。必要な確認連絡にのみ使います。"
   },
   ko: {
-    intro: "MVP 폼은 아직 데이터를 전송하지 않습니다. 향후 추천은 검토 후 게시되며 바로 공개되지 않습니다.",
-    review: "추천은 바로 공개되지 않고 검토가 필요합니다. 이메일은 공개되지 않습니다. 타인의 개인정보를 입력하지 마세요. 장소 정보는 운영자가 정리한 뒤 게시할 수 있습니다.",
-    submit: "제출 기능 준비 중",
+    intro: formEndpoint ? "일상생활에 유용한 장소를 추천할 수 있습니다. 추천은 사람이 검토하며 바로 공개되지 않습니다." : "이 폼은 preview mode입니다. 외부 폼 endpoint가 설정된 뒤에만 제출할 수 있습니다.",
+    review: "추천은 바로 공개되지 않고 먼저 사람이 검토합니다. 운영자가 내용을 정리, 수정, 표준화한 뒤 게시할 수 있습니다. 이메일은 공개되지 않습니다. 타인의 개인정보나 민감한 정보를 입력하지 마세요. 영업시간, 가격, 금연 규칙은 게시 전에도 확인이 필요합니다.",
+    preview: "추천 기능은 준비 중입니다. 외부 폼 endpoint가 설정되지 않아 이 폼은 전송되지 않습니다.",
+    submit: "추천 보내기",
     mapsHelp: "Google Maps URL이 가장 중요합니다. 정확한 장소 링크를 입력해 주세요.",
-    privacyHelp: "타인의 개인정보를 입력하지 마세요.",
+    privacyHelp: "타인의 개인정보나 민감한 정보를 입력하지 마세요.",
     emailHelp: "이메일은 선택 사항이며 공개되지 않습니다. 필요한 확인 연락에만 사용합니다."
   }
 }[locale];
@@ -78,8 +84,19 @@ const field = {
       <aside class="notice">
         <h2>{locale === "zh-tw" ? "投稿前請確認" : locale === "en" ? "Before submitting" : locale === "ja" ? "投稿前の確認" : "추천 전 확인"}</h2>
         <p>{labels.review}</p>
+        {!formEndpoint && <p class="help-text">{labels.preview}</p>}
       </aside>
-      <form class="form-panel" aria-label={title}>
+      <form class="form-panel" aria-label={title} method="POST" action={formEndpoint}>
+        <input type="hidden" name="formName" value="submit-place" />
+        <input type="hidden" name="source" value="tachi-suke" />
+        <input type="hidden" name="locale" value={locale} />
+        <input type="hidden" name="moderationRequired" value="true" />
+        <input type="hidden" name="publishDirectly" value="false" />
+        <input type="hidden" name="redirectUrl" value={thanksUrl} />
+        <div class="honeypot-field" aria-hidden="true">
+          <label for="website">Website</label>
+          <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
         <div class="form-grid">
           <div class="field">
             <label for="submission-language">{field.language}</label>
@@ -173,7 +190,7 @@ const field = {
           </div>
         </div>
         <div class="inline-actions">
-          <button class="button-link submit-disabled" type="button" disabled>{labels.submit}</button>
+          <button class={`button-link ${formEndpoint ? "" : "submit-disabled"}`} type="submit" disabled={!formEndpoint}>{labels.submit}</button>
         </div>
       </form>
     </div>

@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1B.5 content maintainability work. It should not be read as a promise that auth, database, submissions, or favorites already work.
+This document records the current MVP state after Phase 1C submit-place workflow work. It should not be read as a promise that auth, database, database-backed submissions, or favorites already work.
 
 ## Completed
 
@@ -21,7 +21,8 @@ This document records the current MVP state after Phase 1B.5 content maintainabi
 - Four locale mobile index pages with comparison guidance and mobile plan cards.
 - Four locale mobile detail routes at `/[locale]/mobile/[slug]`.
 - Four locale tools index pages.
-- Four locale submit-place UI pages.
+- Four locale submit-place form pages with provider-agnostic endpoint support.
+- Four locale submit-place thanks pages.
 - Four locale about pages.
 - Four locale account login placeholder pages.
 - Four locale account favorites placeholder pages.
@@ -41,6 +42,8 @@ This document records the current MVP state after Phase 1B.5 content maintainabi
 - Conservative article internal-link checks for locale-prefixed static/generated routes.
 - Static HTML internal link crawler in `tests/static-html-links.test.mjs`, run after `pnpm build` with `pnpm check:links`.
 - Locale switcher links for detail pages use conservative alternate paths so missing article translations do not create dead links.
+- Submit-place form uses `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT`: unset means preview mode/disabled submit; set means a static `POST` to the external endpoint.
+- Submit-place includes provider-agnostic hidden fields and a visually hidden `website` honeypot field for basic spam reduction.
 
 ## Placeholder
 
@@ -50,7 +53,7 @@ These are intentionally present but not functional:
 - `/[locale]/account/favorites`
 - `/[locale]/account/submissions`
 - `FavoriteButtonPlaceholder`
-- Submit-place actual submission behavior
+- Native/database-backed submit-place storage
 - `src/lib/auth/`
 - `src/lib/db/`
 - `src/lib/favorites/`
@@ -68,7 +71,7 @@ These are intentionally present but not functional:
 - Tool detail pages at `/[locale]/tools/[slug]`.
 - Site search.
 - Map UI.
-- Real submission backend.
+- Native submission backend.
 - Authenticated account pages.
 - Admin moderation dashboard.
 - Personalization or AI assistant features.
@@ -80,7 +83,8 @@ These are intentionally present but not functional:
 - Areas and mobile plans now have detail pages, but the content is still static editorial guidance rather than live data.
 - Mobile plan prices, campaigns, and conditions can change, so users must confirm official sites before applying.
 - Area rent feel, quietness, and commute notes can become stale and need periodic editorial review.
-- Submit-place form is disabled and does not send data.
+- Submit-place form only sends data when `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` is configured. The repo does not store submissions.
+- The honeypot field is basic spam reduction only. It is not a full anti-spam or abuse-prevention system.
 - Place body data is locale-neutral; only UI labels are localized.
 - `hreflang` is conservative, but full translation coverage is not complete.
 - `pnpm test` scans Markdown article links and generated/static source routes.
@@ -112,5 +116,5 @@ Browser QA covered:
 2. Add richer localized area and mobile plan copy where the current shared data feels too generic.
 3. Improve related-content navigation inside article/detail pages.
 4. Add a fuller external link checker or scheduled source-review workflow when route count grows.
-5. Decide Phase 1C submission workflow technology without adding login yet.
+5. Choose and configure an external form provider for `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT`.
 6. Start Supabase Auth, profiles, favorites, and RLS only in Phase 2.

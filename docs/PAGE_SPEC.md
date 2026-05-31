@@ -192,19 +192,35 @@ All public pages should:
 
 ## `/[locale]/submit-place`
 
-**Purpose:** UI-only page for recommending useful places.
+**Purpose:** Static-site friendly page for recommending useful places through an externally configured form endpoint.
 
-**User goal:** Understand what information would be needed to recommend a place and see moderation/privacy rules.
+**User goal:** Recommend a useful place when submissions are enabled, or understand that the form is in preview mode when no endpoint is configured.
 
-**Data source:** Localized static UI copy and locale-aware enum labels.
+**Data source:** Localized static UI copy, locale-aware enum labels, and `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT`.
 
 **Rendering mode:** Static Astro pages through `SubmitPlacePage`.
 
 **SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, and locale alternates. The page must clearly state that submissions do not publish directly.
 
-**Current status:** Implemented as a disabled form UI. It does not submit, store, email, or publish data.
+**Current status:** Implemented for all four locales in Phase 1C. If `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` is unset, the page stays in preview mode and the submit button is disabled. If the endpoint is set, the form posts with `method="POST"` to that endpoint. The form includes provider-agnostic hidden fields: `formName`, `source`, `locale`, `moderationRequired`, `publishDirectly`, and `redirectUrl`. It also includes a visually hidden `website` honeypot field for basic spam reduction.
 
-**Future notes:** Phase 1C may choose a lightweight submission backend such as Formspree, Netlify Forms, Google Forms, GitHub Issues, or a small custom API. Submissions must still require moderation before publication.
+**Future notes:** External form providers may require a provider-specific redirect field instead of `redirectUrl`. Submissions must still require moderation before publication. Phase 3 should add a real `place_submissions` table and moderation dashboard if the project moves beyond static endpoint handling.
+
+## `/[locale]/submit-place/thanks`
+
+**Purpose:** Thank-you page shown after an external submit-place provider redirects back to the site.
+
+**User goal:** Confirm that the recommendation was received by the external flow and understand moderation, privacy, and publication rules.
+
+**Data source:** Localized static UI copy.
+
+**Rendering mode:** Static Astro pages through `SubmitPlaceThanksPage`.
+
+**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, locale alternates, and internal links to places, articles, and home.
+
+**Current status:** Implemented for all four locales in Phase 1C.
+
+**Future notes:** If the chosen external provider requires a different redirect parameter, update the provider configuration or form hidden field mapping without changing the public route.
 
 ## `/[locale]/about`
 

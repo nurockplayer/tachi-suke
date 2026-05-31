@@ -528,6 +528,14 @@ textarea {
   opacity: 0.68;
 }
 
+.honeypot-field {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 @media (min-width: 760px) {
   .header-inner {
     grid-template-columns: auto 1fr auto;

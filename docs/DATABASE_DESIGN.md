@@ -89,6 +89,8 @@ Future candidate fields:
 
 ### PlaceSubmission
 
+Phase 1C does not create this table. The static submit-place form can post to `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT`, but database-backed `place_submissions`, RLS, and moderation dashboard work remain Phase 3.
+
 - `id`
 - `userId`
 - `submissionLocale`
