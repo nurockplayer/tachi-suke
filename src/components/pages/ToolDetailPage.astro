@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import CategoryCard from "@/components/content/CategoryCard.astro";
+import CorrectionPrompt from "@/components/content/CorrectionPrompt.astro";
 import { formatDate } from "@/lib/content";
 import { htmlLangByLocale, locales, localizePath, type Locale } from "@/lib/i18n";
 
@@ -197,6 +198,12 @@ const jsonLd = [
     <div class="container grid grid-2">
       <CategoryCard href={localizePath(locale, "/mobile")} title={labels.mobile} description={relatedDescriptions.mobile} />
       <CategoryCard href={localizePath(locale, "/areas")} title={labels.areas} description={relatedDescriptions.areas} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <CorrectionPrompt locale={locale} />
     </div>
   </section>
 </BaseLayout>

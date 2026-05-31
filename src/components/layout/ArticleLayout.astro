@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import CorrectionPrompt from "@/components/content/CorrectionPrompt.astro";
 import { formatDate } from "@/lib/content";
 import { htmlLangByLocale, localizePath, type Locale } from "@/lib/i18n";
 
@@ -112,6 +113,7 @@ const jsonLd = [
     <div class="article-body">
       <slot />
     </div>
+    <CorrectionPrompt locale={locale} />
     {relatedArticles.length > 0 && (
       <aside class="related-articles" aria-labelledby="related-articles-title">
         <div>

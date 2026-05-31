@@ -229,6 +229,13 @@ This document defines the acceptance criteria for the current static-first MVP.
 - The site should stay mobile-first and comfortable for long-form reading.
 - Mobile plan pages must clearly remind users that prices, campaigns, eligibility, and application rules can change and must be checked on official sites.
 
+## Content Maintenance Criteria
+
+- Public article, place, mobile plan, area, and tool detail pages should include a localized correction prompt.
+- The prompt should link to `/[locale]/contact`.
+- The prompt must not imply guaranteed individual replies or real-time verification.
+- The prompt must not add analytics, authentication, database storage, or provider-specific form behavior.
+
 ## Placeholder Criteria
 
 - Account login, favorites, and submissions pages must remain placeholder-only in Phase 1.

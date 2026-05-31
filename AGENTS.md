@@ -258,6 +258,12 @@ Phase 1O adds contact/corrections workflow MVP:
 - The form may collect optional email for follow-up, but the repo must not store messages or provide a support backend in Phase 1.
 - Honeypot is basic spam reduction only; do not add captcha or large anti-spam dependencies in Phase 1O.
 
+Phase 1P adds detail-page correction prompts:
+
+- Public article, place, mobile plan, area, and tool detail pages should link readers to `/[locale]/contact`.
+- Keep correction prompts short, localized, and static.
+- Do not add analytics, form prefill JavaScript, auth, database storage, or provider-specific behavior for prompts in Phase 1P.
+
 Mobile plan prices, campaigns, payment methods, and identity requirements can change. Always phrase mobile data as editorial guidance and remind users to confirm official carrier pages before applying.
 Area rent feel, quietness, and commute convenience can also become stale. Keep area pages date-aware and practical rather than sightseeing-oriented.
 

@@ -138,6 +138,7 @@ The MVP includes:
 - Article index pages
 - Article detail pages generated from Markdown/MDX content
 - Related article links generated at build time for article detail pages
+- Correction prompts on public detail pages that link readers to the contact/corrections route
 - Twelve public article pages across the supported locales in the current Phase 1B baseline
 - Areas index pages with Tokyo area guide cards
 - Area detail pages generated from JSON content with decision notes, warnings, `lastCheckedAt`, and maintenance notes
@@ -317,6 +318,7 @@ Product and content metrics:
 - Place labels are understandable in each locale and do not expose internal enum values.
 - Submit-place clearly explains moderation and privacy limits.
 - Contact/corrections clearly explains privacy limits, optional email, and that individual replies are not guaranteed.
+- Public detail pages provide a clear correction prompt so outdated information and broken links can be reported.
 - Privacy and editorial policy pages make the static MVP's data, moderation, and content boundaries clear before launch.
 
 Engineering metrics:

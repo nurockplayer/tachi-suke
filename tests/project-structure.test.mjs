@@ -82,6 +82,7 @@ const requiredFiles = [
   "src/components/layout/ArticleLayout.astro",
   "src/components/layout/LocaleSwitcher.astro",
   "src/components/content/CategoryCard.astro",
+  "src/components/content/CorrectionPrompt.astro",
   "src/components/places/PlaceCard.astro",
   "src/components/pages/ArticleDetailPage.astro",
   "src/components/pages/PlaceDetailPage.astro",
@@ -321,6 +322,27 @@ describe("TachiSuke project scaffold", () => {
 
     assert.match(contactPage, /name="relatedUrl"\s+type="url"/, "related page URL should use URL input type");
     assert.match(contactPage, /name="email"\s+type="email"/, "contact email should use email input type");
+  });
+
+  it("links public detail pages to the contact/corrections workflow", () => {
+    const correctionPrompt = readFileSync(join(root, "src/components/content/CorrectionPrompt.astro"), "utf8");
+    assert.match(correctionPrompt, /localizePath\(locale,\s*"\/contact"\)/, "CorrectionPrompt should link to locale contact pages");
+    assert.match(correctionPrompt, /correction-prompt/, "CorrectionPrompt should expose a stable class for styling");
+
+    for (const detailPage of [
+      "src/components/layout/ArticleLayout.astro",
+      "src/components/pages/PlaceDetailPage.astro",
+      "src/components/pages/MobilePlanDetailPage.astro",
+      "src/components/pages/AreaDetailPage.astro",
+      "src/components/pages/ToolDetailPage.astro"
+    ]) {
+      const source = readFileSync(join(root, detailPage), "utf8");
+      assert.match(source, /CorrectionPrompt/, `${detailPage} should render CorrectionPrompt`);
+      assert.match(source, /locale=\{locale\}/, `${detailPage} should pass locale into CorrectionPrompt`);
+    }
+
+    const css = readFileSync(join(root, "src/styles/global.css"), "utf8");
+    assert.match(css, /\.correction-prompt/, "global CSS should style CorrectionPrompt");
   });
 
   it("configures submit-place as a provider-agnostic static form", () => {
