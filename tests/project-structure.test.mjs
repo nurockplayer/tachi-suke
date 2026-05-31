@@ -258,6 +258,8 @@ describe("TachiSuke project scaffold", () => {
 
     const articleLayout = readFileSync(join(root, "src/components/layout/ArticleLayout.astro"), "utf8");
     assert.match(articleLayout, /Breadcrumbs/, "ArticleLayout should render visible breadcrumbs");
+    assert.match(articleLayout, /headings\?:/, "ArticleLayout should accept rendered article headings");
+    assert.match(articleLayout, /class="article-toc"/, "ArticleLayout should render an article table of contents");
     assert.match(articleLayout, /relatedArticles\?:/, "ArticleLayout should accept related article links");
     assert.match(articleLayout, /class="related-articles"/, "ArticleLayout should render a related articles section");
     assert.match(articleLayout, /"@type":\s*"Article"/, "ArticleLayout should define Article JSON-LD");
@@ -265,6 +267,8 @@ describe("TachiSuke project scaffold", () => {
     assert.match(articleLayout, /jsonLd=\{jsonLd\}/, "ArticleLayout should pass JSON-LD into BaseLayout");
 
     const articleDetailPage = readFileSync(join(root, "src/components/pages/ArticleDetailPage.astro"), "utf8");
+    assert.match(articleDetailPage, /const\s+\{\s*Content,\s*headings\s*\}\s*=\s*await render\(article\)/, "ArticleDetailPage should read rendered headings");
+    assert.match(articleDetailPage, /headings=\{headings\}/, "ArticleDetailPage should pass headings into ArticleLayout");
     assert.match(articleDetailPage, /const relatedArticles/, "ArticleDetailPage should compute related articles");
     assert.match(articleDetailPage, /relatedArticles=\{relatedArticles\}/, "ArticleDetailPage should pass related articles into ArticleLayout");
 

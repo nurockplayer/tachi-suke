@@ -67,6 +67,7 @@ Implemented:
 - Default Open Graph image and Twitter summary metadata
 - JSON-LD structured data for site identity, articles, places, mobile plan details, area details, tool details, and breadcrumbs
 - Visible breadcrumbs on nested public article, category, place, mobile plan, area, and tool pages
+- Generated article table of contents for long-form article pages
 - Cloudflare Pages `_headers` for conservative security and cache defaults
 - Cloudflare Pages `wrangler.toml` deployment metadata
 - Conservative locale switcher behavior for detail pages with missing translations

@@ -8,7 +8,7 @@ interface Props {
 }
 
 const { article } = Astro.props;
-const { Content } = await render(article);
+const { Content, headings } = await render(article);
 const allArticles = await getCollection("articles");
 const translations = allArticles.filter(
   (entry) => entry.data.translationKey === article.data.translationKey && !entry.data.draft
@@ -41,6 +41,7 @@ const relatedArticles = allArticles
   publishedAt={article.data.publishedAt}
   updatedAt={article.data.updatedAt}
   alternatePaths={alternatePaths}
+  headings={headings}
   relatedArticles={relatedArticles}
 >
   <Content />

@@ -523,6 +523,28 @@ Rules:
 - The current page breadcrumb item is not a link and uses `aria-current="page"`.
 - Keep visible breadcrumb trails and JSON-LD breadcrumb trails aligned.
 
+## Phase 1V: Article Table of Contents
+
+Status: implemented.
+
+Goal:
+
+Improve long-form article readability with static, dependency-free in-page navigation.
+
+Implemented:
+
+- `ArticleDetailPage` passes Astro-rendered Markdown/MDX headings into `ArticleLayout`.
+- `ArticleLayout` renders a locale-aware table of contents for useful H2/H3 heading sets.
+- TOC links point to generated same-page heading anchors.
+- Mobile-first styling keeps the TOC compact before the article body.
+- Source-level and build-output SEO tests verify TOC wiring and representative generated anchors.
+
+Rules:
+
+- Keep TOC generation static and dependency-free.
+- Do not add scroll spy, saved reading progress, analytics, or personalization in Phase 1.
+- TOC links must remain same-page anchors generated from article headings.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.

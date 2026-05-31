@@ -242,6 +242,15 @@ describe("static SEO output", () => {
     }
   });
 
+  it("renders article table of contents links to generated heading anchors", () => {
+    const html = readHtml("en/articles/choose-mobile-plan-japan-foreigner/index.html");
+    assert.match(html, /<nav class="article-toc" aria-labelledby="article-toc-title">/, "article detail should render a table of contents");
+    assert.match(html, /href="#start-with-your-constraints"/, "TOC should link to the first generated h2 anchor");
+    assert.match(html, /href="#what-to-compare"/, "TOC should link to another generated heading anchor");
+    assert.match(html, /id="start-with-your-constraints"/, "target heading anchor should exist in article body");
+    assert.match(html, /id="what-to-compare"/, "second target heading anchor should exist in article body");
+  });
+
   it("renders article and breadcrumb JSON-LD on article detail pages", () => {
     const objects = jsonLdObjects(readHtml("en/articles/choose-mobile-plan-japan-foreigner/index.html"));
     assert.ok(hasJsonLdType(objects, "Organization"), "article page should include Organization JSON-LD");

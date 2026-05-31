@@ -202,9 +202,9 @@ All public pages should:
 
 **Rendering mode:** Static generated dynamic route. Each locale has its own route file and uses `getStaticPaths`.
 
-**SEO requirements:** Use article `title` and `description`, article category/tags/dates, canonical URL, Open Graph metadata, locale-aware `html lang`, visible breadcrumbs, `Article` JSON-LD, `BreadcrumbList` JSON-LD, and `hreflang` alternates only for existing non-draft translations connected by `translationKey`.
+**SEO requirements:** Use article `title` and `description`, article category/tags/dates, canonical URL, Open Graph metadata, locale-aware `html lang`, visible breadcrumbs, static article table of contents links to generated heading anchors, `Article` JSON-LD, `BreadcrumbList` JSON-LD, and `hreflang` alternates only for existing non-draft translations connected by `translationKey`.
 
-**Current status:** Implemented for all four locales. Draft articles are not generated.
+**Current status:** Implemented for all four locales. Draft articles are not generated. Article detail pages render a static table of contents from useful H2/H3 Markdown headings.
 
 **Future notes:** Add table-of-contents support after content patterns stabilize. Correction prompts currently link to contact/corrections but do not prefill the form.
 

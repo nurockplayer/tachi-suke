@@ -229,6 +229,13 @@ Phase 1U adds visible breadcrumbs:
 - The current breadcrumb item should use `aria-current="page"` and should not be a link.
 - Keep visible breadcrumbs aligned with JSON-LD breadcrumbs when both exist.
 
+Phase 1V adds article table of contents:
+
+- Article detail pages should pass Astro-rendered Markdown/MDX headings into `ArticleLayout`.
+- `ArticleLayout` should render a static, locale-aware table of contents for useful H2/H3 heading sets.
+- TOC links must point to same-page generated heading anchors only.
+- Do not add scroll spy, saved reading state, or client dependencies in Phase 1V.
+
 Phase 1J adds a static RSS feed:
 
 - `/feed.xml` is generated from non-draft public articles.

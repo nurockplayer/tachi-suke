@@ -77,6 +77,8 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Article `hreflang` should only point to existing non-draft translations.
 - Article detail pages should show up to three related non-draft articles from the same locale.
 - Related article links must not point to the current article, drafts, or other locales.
+- Article detail pages should render a static table of contents from Markdown/MDX H2/H3 headings when enough headings exist.
+- Article TOC links must point to generated same-page heading anchors.
 
 ## Place Criteria
 
