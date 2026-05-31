@@ -222,6 +222,13 @@ Phase 1J adds a static RSS feed:
 - The current feed is global across all locales; do not add per-locale feeds until explicitly scoped.
 - Draft articles must not appear in the feed.
 
+Phase 1K adds Cloudflare Pages deploy readiness:
+
+- `wrangler.toml` should stay minimal: `name`, `compatibility_date`, and `pages_build_output_dir = "./dist"`.
+- Do not commit Cloudflare account IDs, API tokens, secrets, or production-only environment values.
+- Deployment details live in `docs/DEPLOYMENT.md`.
+- Keep Phase 1 deployment static-first; do not add Workers/Functions runtime code unless explicitly scoped.
+
 Mobile plan prices, campaigns, payment methods, and identity requirements can change. Always phrase mobile data as editorial guidance and remind users to confirm official carrier pages before applying.
 Area rent feel, quietness, and commute convenience can also become stale. Keep area pages date-aware and practical rather than sightseeing-oriented.
 

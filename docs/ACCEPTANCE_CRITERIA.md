@@ -21,6 +21,8 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Astro check must report no TypeScript or Astro diagnostics that block build.
 - Static route generation must include the implemented locale routes.
 - The project must remain Static Site Generation first in Phase 1.
+- Cloudflare Pages static output directory must remain `dist`.
+- `wrangler.toml` must not contain account IDs, API tokens, or deployment secrets.
 
 ## Test Criteria
 

@@ -65,6 +65,7 @@ const requiredFiles = [
   ".env.example",
   ".github/workflows/ci.yml",
   "astro.config.mjs",
+  "wrangler.toml",
   "tsconfig.json",
   "package.json",
   "pnpm-lock.yaml",
@@ -109,7 +110,8 @@ const requiredFiles = [
   "docs/CONTENT_STRATEGY.md",
   "docs/ROADMAP.md",
   "docs/AUTH_AND_FAVORITES.md",
-  "docs/DATABASE_DESIGN.md"
+  "docs/DATABASE_DESIGN.md",
+  "docs/DEPLOYMENT.md"
 ];
 
 const requiredDirs = [
@@ -200,6 +202,20 @@ describe("TachiSuke project scaffold", () => {
     assert.doesNotMatch(workflow, /\bnpx\b/, "CI should not use npx");
     assert.doesNotMatch(workflow, /yarn\s+/, "CI should not use yarn commands");
     assert.doesNotMatch(workflow, /bun\s+/, "CI should not use bun commands");
+  });
+
+  it("documents Cloudflare Pages deployment without committing secrets", () => {
+    const wrangler = readFileSync(join(root, "wrangler.toml"), "utf8");
+    assert.match(wrangler, /^name\s*=\s*"tachi-suke"/m, "wrangler.toml should name the Pages project");
+    assert.match(wrangler, /^compatibility_date\s*=\s*"\d{4}-\d{2}-\d{2}"/m, "wrangler.toml should set a compatibility date");
+    assert.match(wrangler, /^pages_build_output_dir\s*=\s*"\.\/dist"/m, "wrangler.toml should point Pages at dist");
+    assert.doesNotMatch(wrangler, /account_id|api_token|CLOUDFLARE_API_TOKEN|secret/i, "wrangler.toml must not contain secrets");
+
+    const deploymentDocs = readFileSync(join(root, "docs/DEPLOYMENT.md"), "utf8");
+    for (const term of ["Cloudflare Pages", "pnpm build", "dist", "SITE_URL", "PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT"]) {
+      assert.match(deploymentDocs, new RegExp(term.replaceAll("/", "\\/")), `deployment docs should mention ${term}`);
+    }
+    assert.doesNotMatch(deploymentDocs, /CLOUDFLARE_API_TOKEN=.*[A-Za-z0-9_-]{16,}/, "deployment docs should not include a real API token");
   });
 
   it("includes static SEO discovery and social metadata hooks", () => {

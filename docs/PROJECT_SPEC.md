@@ -160,6 +160,7 @@ The MVP includes:
 - Default Open Graph image and Twitter summary metadata
 - JSON-LD structured data for `Organization`, `WebSite`, `Article`, `LocalBusiness`, `Service`, `WebPage`, `ItemList`, and `BreadcrumbList`
 - Cloudflare Pages `_headers` for conservative security and cache defaults
+- Cloudflare Pages `wrangler.toml` metadata for `dist` static output
 - `SITE_URL` environment variable with example-domain fallback
 - Structure tests in `tests/project-structure.test.mjs`
 - Conservative Markdown internal-link checks in `tests/project-structure.test.mjs`
@@ -286,6 +287,7 @@ Current deployment direction:
 
 - Prefer Cloudflare Pages for Phase 1 static deployment.
 - Use `pnpm build` with output directory `dist`.
+- Keep `wrangler.toml` free of secrets and limited to Pages-safe project metadata.
 - Set `SITE_URL` to the production domain so canonical URLs, sitemap URLs, robots sitemap reference, and Open Graph URLs are correct.
 - Keep Astro until SSR/account requirements are concrete. A Next.js migration is not justified for the current content-first static MVP.
 

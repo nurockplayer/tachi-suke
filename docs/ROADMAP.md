@@ -274,6 +274,26 @@ Rules:
 - Draft articles must not appear in the feed.
 - Locale-specific feeds can wait until content volume and reader demand justify them.
 
+## Phase 1K: Cloudflare Deploy Readiness
+
+Status: implemented.
+
+Goal:
+
+Make static deployment to Cloudflare Pages explicit and repeatable without committing credentials.
+
+Implemented:
+
+- Minimal `wrangler.toml` with project name, compatibility date, and `pages_build_output_dir = "./dist"`.
+- Deployment guide at `docs/DEPLOYMENT.md`.
+- Source-level tests for deployment config, docs, and secret-free configuration.
+
+Rules:
+
+- Cloudflare credentials, API tokens, account IDs, and production-only values must not be committed.
+- Use Cloudflare Pages dashboard settings or a trusted environment for `SITE_URL` and optional form endpoint configuration.
+- Do not add Workers/Functions runtime code unless a future phase explicitly scopes it.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.
