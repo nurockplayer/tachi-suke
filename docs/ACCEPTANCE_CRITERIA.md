@@ -68,7 +68,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 
 - Article content must come from `src/content/articles`.
 - Article content should include `id`, `slug`, `locale`, `translationKey`, `title`, `description`, `category`, `tags`, `publishedAt`, `updatedAt`, and `draft`.
-- Phase 1AG must keep at least fourteen public articles, including zh-tw and en commuter pass / IC card decision articles.
+- Phase 1AH must keep at least sixteen public articles, including zh-tw/en commuter pass and residence administration decision articles.
 - Article slugs should be globally unique inside the content collection so Astro does not overwrite entries during content loading.
 - Article index pages must filter to matching locale and `draft = false`.
 - Article detail pages must use `getStaticPaths`.
