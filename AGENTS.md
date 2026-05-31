@@ -137,6 +137,7 @@ Current public route pattern:
 - `/[locale]/account/submissions`
 - `/[locale]/feed.xml`
 - `/llms.txt`
+- `/opensearch.xml`
 
 Content translations should use `locale` and `translationKey`. Missing translations should fall back to English, then Traditional Chinese, or show a clear missing-content state.
 
@@ -146,7 +147,7 @@ Do not use Simplified Chinese unless explicitly requested.
 
 Phase 1 is content-first, SEO-friendly, i18n-ready, auth-ready, database-ready, and favorites-ready.
 
-Current MVP includes static pages, article publishing, place detail pages, mobile/area/tool detail pages, static submit-place and contact/corrections external endpoint support, placeholder account pages, placeholder favorites, content collections, SEO metadata, RSS feeds, static search indexes, and `llms.txt` discovery.
+Current MVP includes static pages, article publishing, place detail pages, mobile/area/tool detail pages, static submit-place and contact/corrections external endpoint support, placeholder account pages, placeholder favorites, content collections, SEO metadata, RSS feeds, static search indexes, `llms.txt` discovery, and browser OpenSearch discovery.
 
 Phase 1B adds public-preview content depth:
 
@@ -269,6 +270,12 @@ Phase 1S adds static search:
 - Search indexes include only public content: matching-locale non-draft articles, published places, current mobile plans, current area guides, and published tools.
 - Do not add hosted search, database search, analytics, personalization, or large search dependencies in Phase 1 unless explicitly scoped.
 
+Phase 1AK adds OpenSearch discovery:
+
+- `/opensearch.xml` points browser/search-adjacent tooling at `/en/search?q={searchTerms}` as the stable static search fallback.
+- Public pages include `<link rel="search" type="application/opensearchdescription+xml">`.
+- Keep it static and provider-free; do not add backend search, language detection, analytics, or private-content search in Phase 1.
+
 Phase 1T adds article category landing pages:
 
 - `/[locale]/articles/category/[category]` is generated from non-draft same-locale article categories.
@@ -281,7 +288,7 @@ Phase 1K adds Cloudflare Pages deploy readiness:
 - Do not commit Cloudflare account IDs, API tokens, secrets, or production-only environment values.
 - Deployment details live in `docs/DEPLOYMENT.md`.
 - Keep Phase 1 deployment static-first; do not add Workers/Functions runtime code unless explicitly scoped.
-- `_headers` should keep HTML revalidated and use conservative one-hour cache rules for sitemap, robots, manifest, RSS feeds, `llms.txt`, and search indexes.
+- `_headers` should keep HTML revalidated and use conservative one-hour cache rules for sitemap, robots, manifest, RSS feeds, `llms.txt`, `opensearch.xml`, and search indexes.
 
 Phase 1AC adds Cloudflare Pages redirects:
 

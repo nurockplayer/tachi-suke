@@ -20,6 +20,9 @@
 /llms.txt
   Cache-Control: public, max-age=3600
 
+/opensearch.xml
+  Cache-Control: public, max-age=3600
+
 /site.webmanifest
   Cache-Control: public, max-age=3600
 

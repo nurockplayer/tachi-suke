@@ -74,6 +74,7 @@ function serializeJsonLd(item: JsonLdObject): string {
     {robots && <meta name="robots" content={robots} />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="search" type="application/opensearchdescription+xml" title="TachiSuke Search" href={new URL("/opensearch.xml", site).href} />
     <link rel="alternate" type="application/rss+xml" title="TachiSuke RSS" href={new URL("/feed.xml", site).href} />
     <link rel="alternate" type="application/rss+xml" title={`TachiSuke ${locale} RSS`} href={new URL(localizePath(locale, "/feed.xml"), site).href} />
     <link rel="canonical" href={canonical.href} />

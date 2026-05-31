@@ -63,6 +63,7 @@ Implemented:
 - SEO-oriented `BaseLayout`
 - Generated `sitemap.xml`, `robots.txt`, and `site.webmanifest`
 - Generated `llms.txt` discovery file for AI/search-adjacent tooling
+- Generated `opensearch.xml` browser search discovery file linked from every public page
 - Generated global `feed.xml` for public articles, included in the sitemap with content-aware `lastmod`
 - Generated locale RSS feeds at `/[locale]/feed.xml` for same-locale public articles, included in the sitemap with same-locale `lastmod`
 - Default Open Graph image and Twitter summary metadata
@@ -137,6 +138,7 @@ Locale routes:
 - `/sitemap.xml`
 - `/robots.txt`
 - `/llms.txt`
+- `/opensearch.xml`
 - `/site.webmanifest`
 - `/feed.xml`
 - `/404.html`
@@ -204,7 +206,7 @@ Recommended verification order:
 4. `pnpm check:links`
 5. `pnpm check:seo`
 
-`pnpm test` checks source-level structure and content links. `pnpm check:content` checks content IDs, slugs, dates, review dates, and stored URL fields without fetching the network. `pnpm check:links` scans built `dist/**/*.html`. `pnpm check:seo` checks built `sitemap.xml`, `robots.txt`, `site.webmanifest`, global RSS feed, locale RSS feeds, and Cloudflare headers. Run `pnpm build` before both build-output checks.
+`pnpm test` checks source-level structure and content links. `pnpm check:content` checks content IDs, slugs, dates, review dates, and stored URL fields without fetching the network. `pnpm check:links` scans built `dist/**/*.html`. `pnpm check:seo` checks built `sitemap.xml`, `robots.txt`, `site.webmanifest`, `opensearch.xml`, global RSS feed, locale RSS feeds, and Cloudflare headers. Run `pnpm build` before both build-output checks.
 
 GitHub Actions runs the same verification order on pull requests and pushes to `main`, including forbidden lockfile rejection. Cloudflare Pages deployment is still configured separately.
 
@@ -297,9 +299,10 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - Mobile plan structured data must stay conservative. Do not add `Offer` price markup until pricing and campaign review workflows are mature.
 - `/feed.xml` is a global RSS feed for non-draft articles across all locales.
 - `/[locale]/feed.xml` is a locale-specific RSS feed for same-locale non-draft articles.
+- `/opensearch.xml` exposes the static English search route as a browser-discoverable OpenSearch template.
 - `/404.html` is a static noindex recovery page for missing routes on Cloudflare Pages or other static hosts.
 - Cloudflare Pages `_redirects` sends common locale-less paths such as `/articles`, `/mobile/povo2`, and `/contact` to English `302` fallbacks. Canonical routes remain locale-prefixed.
-- Cloudflare Pages `_headers` caches sitemap, robots, manifest, RSS feeds, `llms.txt`, and search indexes conservatively for one hour while keeping HTML revalidated.
+- Cloudflare Pages `_headers` caches sitemap, robots, manifest, RSS feeds, `llms.txt`, `opensearch.xml`, and search indexes conservatively for one hour while keeping HTML revalidated.
 
 ## Documentation Map
 
