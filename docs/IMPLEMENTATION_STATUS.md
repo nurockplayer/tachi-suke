@@ -39,6 +39,10 @@ This document records the current MVP state after Phase 1D SEO launch-readiness 
 - Article list/detail public filtering by `draft = false`.
 - SEO base layout with title, description, canonical URL, Open Graph URL, Open Graph site name, locale-aware `html lang`, and conservative `hreflang`.
 - Default Open Graph image, Twitter summary metadata, and manifest link in `BaseLayout`.
+- JSON-LD structured data support in `BaseLayout`.
+- Site-wide `Organization` and `WebSite` JSON-LD.
+- Article detail `Article` and `BreadcrumbList` JSON-LD.
+- Place detail `LocalBusiness` and `BreadcrumbList` JSON-LD.
 - Generated `sitemap.xml` for public static routes and content collection detail pages.
 - Generated `robots.txt` with sitemap reference and account placeholder disallow rules.
 - Generated `site.webmanifest`.
@@ -97,6 +101,7 @@ These are intentionally present but not functional:
 - `pnpm check:links` scans built static HTML root-relative links in `dist/`, but it does not validate external links, anchors, JavaScript behavior, or visual rendering.
 - Account pages are static placeholders and do not protect user data because no user data exists yet.
 - Account placeholder pages are marked `noindex, nofollow` and excluded from the sitemap.
+- Structured data is intentionally conservative and does not claim ratings, reviews, opening hours, offers, or exact street addresses.
 - Cloudflare Pages is the preferred static deployment target for Phase 1. Set `SITE_URL` to the production domain before launch.
 - Browser QA currently covers basic route/card/form checks, not a full accessibility or visual regression suite.
 
@@ -123,7 +128,7 @@ Browser QA covered:
 
 1. Add more real content for renting, administrative procedures, transportation, and practical Japanese.
 2. Add related-content navigation inside article/detail pages.
-3. Add schema.org JSON-LD for articles, places, breadcrumbs, and mobile plan comparison pages.
+3. Add schema.org JSON-LD for area and mobile plan detail pages after choosing the right schema types.
 4. Choose and configure an external form provider for `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT`.
 5. Add a fuller external link checker or scheduled source-review workflow when route count grows.
 6. Start Supabase Auth, profiles, favorites, and RLS only in Phase 2.

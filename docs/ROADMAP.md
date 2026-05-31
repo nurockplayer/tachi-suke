@@ -141,6 +141,28 @@ Rules:
 - Set `SITE_URL` to the production domain before launch.
 - Do not migrate to Next.js until SSR/account/personalization requirements are concrete.
 
+## Phase 1E: Structured Data
+
+Status: implemented.
+
+Goal:
+
+Help search engines understand site identity, article detail pages, place detail pages, and route hierarchy without adding runtime dependencies.
+
+Implemented:
+
+- `BaseLayout` support for page-specific JSON-LD.
+- Site-wide `Organization` and `WebSite` JSON-LD.
+- Article detail `Article` and `BreadcrumbList` JSON-LD.
+- Place detail `LocalBusiness` and `BreadcrumbList` JSON-LD.
+- Post-build SEO tests that parse representative built HTML pages.
+
+Rules:
+
+- Do not invent ratings, review counts, opening hours, offers, or exact street addresses.
+- Use only fields already present in the static content model.
+- Add structured data for area and mobile plan detail pages only after deciding the correct schema types.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.

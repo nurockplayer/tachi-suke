@@ -21,6 +21,10 @@ const { locale, place } = Astro.props;
 const data = place.data;
 const labels = placeFieldLabels[locale];
 const description = getPlaceDescription(locale, data);
+const site = Astro.site ?? new URL(Astro.url.origin);
+const canonicalUrl = new URL(Astro.url.pathname, site).href;
+const localeHomeUrl = new URL(localizePath(locale), site).href;
+const placesUrl = new URL(localizePath(locale, "/places"), site).href;
 const alternatePaths = Object.fromEntries(
   locales.map((alternateLocale) => [alternateLocale, localizePath(alternateLocale, `/places/${data.slug}`)])
 ) as Partial<Record<Locale, string>>;
@@ -44,6 +48,57 @@ const updatedText = {
   ja: "更新",
   ko: "업데이트"
 }[locale];
+const placesLabel = {
+  "zh-tw": "店家",
+  en: "Places",
+  ja: "お店",
+  ko: "장소"
+}[locale];
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": `${canonicalUrl}#place`,
+    name: data.name,
+    description,
+    url: data.officialUrl ?? canonicalUrl,
+    sameAs: data.officialUrl ? [data.officialUrl] : undefined,
+    hasMap: data.googleMapUrl,
+    priceRange: data.priceRange,
+    paymentAccepted: data.paymentMethods.map(formatPaymentMethod).join(", "),
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: data.city,
+      addressRegion: data.prefecture,
+      addressCountry: "JP"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": `${canonicalUrl}#breadcrumb`,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "TachiSuke",
+        item: localeHomeUrl
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: placesLabel,
+        item: placesUrl
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: data.name,
+        item: canonicalUrl
+      }
+    ]
+  }
+];
 const guidance = {
   "zh-tw": {
     goodForTitle: "適合誰",
@@ -108,7 +163,7 @@ const guidance = {
 }[locale];
 ---
 
-<BaseLayout locale={locale} title={data.name} description={description} alternatePaths={alternatePaths}>
+<BaseLayout locale={locale} title={data.name} description={description} alternatePaths={alternatePaths} jsonLd={jsonLd}>
   <section class="page-hero">
     <div class="container">
       <p class="article-meta">{data.category} · {updatedText} {formatDate(data.updatedAt, locale)}</p>
