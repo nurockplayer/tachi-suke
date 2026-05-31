@@ -72,10 +72,12 @@ This document records the current MVP state after Phase 1S static search work. I
 - Deployment guide at `docs/DEPLOYMENT.md`.
 - Baseline keyboard accessibility hooks: skip link, stable main content target, active primary nav state, and visible focus styles.
 - Structure tests in `tests/project-structure.test.mjs`.
+- Source content health checks in `tests/content-health.test.mjs`, run with `pnpm check:content`.
 - Conservative article internal-link checks for locale-prefixed static/generated routes.
 - Static HTML internal link crawler in `tests/static-html-links.test.mjs`, run after `pnpm build` with `pnpm check:links`.
 - Static SEO output check in `tests/seo-output.test.mjs`, run after `pnpm build` with `pnpm check:seo`.
 - GitHub Actions CI workflow that rejects forbidden lockfiles and runs `pnpm install --frozen-lockfile`, `pnpm test`, `pnpm build`, `pnpm check:links`, and `pnpm check:seo`.
+- GitHub Actions CI runs `pnpm check:content` before static build.
 - Locale switcher links for detail pages use conservative alternate paths so missing article translations do not create dead links.
 - Submit-place form uses `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT`: unset means preview mode/disabled submit; set means a static `POST` to the external endpoint.
 - Submit-place includes provider-agnostic hidden fields and a visually hidden `website` honeypot field for basic spam reduction.
@@ -130,6 +132,7 @@ These are intentionally present but not functional:
 - Place body data is locale-neutral; only UI labels are localized.
 - `hreflang` is conservative, but full translation coverage is not complete.
 - `pnpm test` scans Markdown article links and generated/static source routes.
+- `pnpm check:content` checks source content metadata and stored URL fields, but it does not fetch external URLs or validate live business/provider data.
 - `pnpm check:links` scans built static HTML root-relative links in `dist/`, but it does not validate external links, anchors, JavaScript behavior, form submission behavior, or visual rendering.
 - RSS feeds are static and article-only. They do not include category feeds, pagination, places, tools, mobile plans, or area guides.
 - Static search is substring-based client-side filtering. It does not provide typo tolerance, semantic search, pagination, analytics, or personalization.
@@ -155,6 +158,7 @@ Most recent recorded verification:
 
 - `pnpm install`: passed
 - `pnpm test`: passed
+- `pnpm check:content`: passed
 - `pnpm build`: passed
 - `pnpm check:links`: passed
 - `pnpm check:seo`: passed

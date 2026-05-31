@@ -162,6 +162,12 @@ Run tests:
 pnpm test
 ```
 
+Check source content health:
+
+```bash
+pnpm check:content
+```
+
 Build static output:
 
 ```bash
@@ -189,11 +195,12 @@ pnpm preview
 Recommended verification order:
 
 1. `pnpm test`
-2. `pnpm build`
-3. `pnpm check:links`
-4. `pnpm check:seo`
+2. `pnpm check:content`
+3. `pnpm build`
+4. `pnpm check:links`
+5. `pnpm check:seo`
 
-`pnpm test` checks source-level structure and content links. `pnpm check:links` scans built `dist/**/*.html`. `pnpm check:seo` checks built `sitemap.xml`, `robots.txt`, `site.webmanifest`, global RSS feed, locale RSS feeds, and Cloudflare headers. Run `pnpm build` before both build-output checks.
+`pnpm test` checks source-level structure and content links. `pnpm check:content` checks content IDs, slugs, dates, review dates, and stored URL fields without fetching the network. `pnpm check:links` scans built `dist/**/*.html`. `pnpm check:seo` checks built `sitemap.xml`, `robots.txt`, `site.webmanifest`, global RSS feed, locale RSS feeds, and Cloudflare headers. Run `pnpm build` before both build-output checks.
 
 GitHub Actions runs the same verification order on pull requests and pushes to `main`, including forbidden lockfile rejection. Cloudflare Pages deployment is still configured separately.
 
@@ -279,7 +286,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - Keep user-facing copy natural for each locale.
 - Keep content decision-oriented rather than tourist-oriented.
 - Treat mobile plan prices, campaigns, and eligibility rules as changeable; users must confirm official sites before applying.
-- Run `pnpm test`, `pnpm build`, and `pnpm check:links` before reporting completion when relevant.
+- Run `pnpm test`, `pnpm check:content`, `pnpm build`, and `pnpm check:links` before reporting completion when relevant.
 - Run `pnpm check:seo` after `pnpm build` when changing SEO, routing, metadata, or deployment files.
 - Structured data must be backed by current static content. Do not invent ratings, review counts, opening hours, or exact addresses.
 - Visible breadcrumbs should stay locale-aware, link only to existing public routes, and mark the current page with `aria-current="page"`.
