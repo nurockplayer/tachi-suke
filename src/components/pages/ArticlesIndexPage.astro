@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import FavoriteButtonPlaceholder from "@/components/favorites/FavoriteButtonPlaceholder.astro";
 import { formatDate } from "@/lib/content";
+import { getArticleCategorySummaries, getArticleCategoryTitle } from "@/lib/content/article-categories";
 import { localizePath, sectionCopy, type Locale } from "@/lib/i18n";
 
 interface Props {
@@ -14,6 +15,7 @@ const title = sectionCopy[locale].articlesTitle;
 const articles = (await getCollection("articles"))
   .filter((article) => article.data.locale === locale && !article.data.draft)
   .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+const categories = await getArticleCategorySummaries(locale);
 ---
 
 <BaseLayout locale={locale} title={title} description={`${title} | TachiSuke`}>
@@ -24,6 +26,16 @@ const articles = (await getCollection("articles"))
     </div>
   </section>
   <section class="section">
+    <div class="container category-link-list" aria-label="Article categories">
+      {categories.map((category) => (
+        <a href={localizePath(locale, `/articles/category/${category.slug}`)}>
+          <span>{getArticleCategoryTitle(locale, category.category)}</span>
+          <strong>{category.count}</strong>
+        </a>
+      ))}
+    </div>
+  </section>
+  <section class="section article-index-section">
     <div class="container article-list">
       {articles.map((article) => (
         <article class="article-row">

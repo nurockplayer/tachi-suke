@@ -475,6 +475,30 @@ Rules:
 - Do not add database search, hosted search, analytics, personalization, typo tolerance, or semantic search until content volume and product needs justify a new phase.
 - Do not index account placeholders, drafts, non-published content, or private data.
 
+## Phase 1T: Article Category Landing Pages
+
+Status: implemented.
+
+Goal:
+
+Expose article categories as static, indexable landing pages for higher-intent SEO and clearer article browsing.
+
+Implemented:
+
+- Category routes at `/[locale]/articles/category/[category]`.
+- Shared category slug/summary helper in `src/lib/content/article-categories.ts`.
+- Article category pages generated only from non-draft same-locale articles.
+- Article index pages link to category landing pages.
+- Article detail category labels link to the matching category page.
+- `sitemap.xml` includes category pages with `lastmod` from the newest article update in each category.
+- Source-level and build-output tests verify route files, links, sitemap entries, and same-locale public filtering.
+
+Rules:
+
+- Do not generate empty categories.
+- Do not add tag pages until article volume justifies them.
+- Keep category pages static and content-first.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.

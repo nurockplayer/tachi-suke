@@ -13,6 +13,7 @@ This document records the current MVP state after Phase 1S static search work. I
 - Four locale homepages with start-here links and internal navigation to articles, mobile, areas, places, submit-place, tools, and favorites placeholder.
 - Four locale article index pages.
 - Four locale article detail routes at `/[locale]/articles/[slug]`.
+- Four locale article category routes at `/[locale]/articles/category/[category]`.
 - Build-time related article links on article detail pages, limited to non-draft same-locale articles.
 - Public detail-page correction prompts that link article, place, mobile plan, area, and tool details to contact/corrections.
 - Twelve public article pages across `zh-tw`, `en`, `ja`, and `ko`, including Phase 1B decision-oriented content.
@@ -48,6 +49,7 @@ This document records the current MVP state after Phase 1S static search work. I
 - Place enum values unified across schema, types, example data, UI labels, and docs.
 - Place list/detail public filtering by `status = published`.
 - Article list/detail public filtering by `draft = false`.
+- Article category page public filtering by locale, category, and `draft = false`.
 - SEO base layout with title, description, canonical URL, Open Graph URL, Open Graph site name, locale-aware `html lang`, and conservative `hreflang`.
 - Default Open Graph image, Twitter summary metadata, and manifest link in `BaseLayout`.
 - JSON-LD structured data support in `BaseLayout`.
@@ -114,6 +116,7 @@ These are intentionally present but not functional:
 ## Known Limitations
 
 - Content volume is still early editorial sample-level, though Phase 1B now has enough pages for public preview.
+- Article category pages are useful for current high-intent categories, but richer category copy should wait until there are more articles per category.
 - Tools currently include two static checklists. Checklist state is not saved and there is no user-specific progress tracking.
 - Areas and mobile plans now have detail pages, but the content is still static editorial guidance rather than live data.
 - Mobile plan prices, campaigns, and conditions can change, so users must confirm official sites before applying.

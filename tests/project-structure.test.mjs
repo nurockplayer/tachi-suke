@@ -76,6 +76,7 @@ const requiredFiles = [
   "src/pages/robots.txt.ts",
   "src/pages/site.webmanifest.ts",
   "src/pages/feed.xml.ts",
+  "src/lib/content/article-categories.ts",
   "src/lib/content/rss.ts",
   "src/lib/content/search.ts",
   "src/content.config.ts",
@@ -88,6 +89,7 @@ const requiredFiles = [
   "src/components/content/CorrectionPrompt.astro",
   "src/components/places/PlaceCard.astro",
   "src/components/pages/ArticleDetailPage.astro",
+  "src/components/pages/ArticleCategoryPage.astro",
   "src/components/pages/PlaceDetailPage.astro",
   "src/components/pages/MobilePlanDetailPage.astro",
   "src/components/pages/AreaDetailPage.astro",
@@ -140,6 +142,7 @@ const localePages = [
   "index.astro",
   "articles/index.astro",
   "articles/[slug].astro",
+  "articles/category/[category].astro",
   "areas/index.astro",
   "places/index.astro",
   "places/[slug].astro",
@@ -289,6 +292,29 @@ describe("TachiSuke project scaffold", () => {
     for (const type of ["article", "place", "mobile_plan", "area", "tool"]) {
       assert.match(searchHelper, new RegExp(`["']${type}["']`), `search index should support ${type} entries`);
     }
+  });
+
+  it("includes static article category pages linked from article surfaces", () => {
+    const categoryHelper = readFileSync(join(root, "src/lib/content/article-categories.ts"), "utf8");
+    assert.match(categoryHelper, /export function slugifyArticleCategory/, "category helper should expose a stable category slugifier");
+    assert.match(categoryHelper, /export async function getArticleCategoryStaticPaths/, "category helper should expose category static paths");
+    assert.match(categoryHelper, /getCollection\("articles"[\s\S]*!data\.draft/, "category helper should use only non-draft articles");
+
+    const categoryPage = readFileSync(join(root, "src/components/pages/ArticleCategoryPage.astro"), "utf8");
+    assert.match(categoryPage, /slugifyArticleCategory/, "ArticleCategoryPage should use category slugs");
+    assert.match(categoryPage, /getCollection\("articles"[\s\S]*!article\.data\.draft/, "ArticleCategoryPage should render only non-draft articles");
+    assert.match(categoryPage, /localizePath\(locale,\s*`\/articles\/\$\{article\.data\.slug\}`\)/, "ArticleCategoryPage should link to article details");
+
+    const articlesIndex = readFileSync(join(root, "src/components/pages/ArticlesIndexPage.astro"), "utf8");
+    assert.match(articlesIndex, /getArticleCategorySummaries/, "articles index should show category entry links");
+    assert.match(articlesIndex, /`\/articles\/category\/\$\{category\.slug\}`/, "articles index should link to category pages");
+
+    const articleLayout = readFileSync(join(root, "src/components/layout/ArticleLayout.astro"), "utf8");
+    assert.match(articleLayout, /slugifyArticleCategory/, "article detail layout should compute category href");
+    assert.match(articleLayout, /`\/articles\/category\/\$\{slugifyArticleCategory\(category\)\}`/, "article detail category should link to category page");
+
+    const sitemap = readFileSync(join(root, "src/pages/sitemap.xml.ts"), "utf8");
+    assert.match(sitemap, /getArticleCategorySummaries/, "sitemap should include article category pages");
   });
 
   it("includes baseline keyboard accessibility hooks", () => {

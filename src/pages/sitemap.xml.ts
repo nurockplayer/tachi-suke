@@ -1,5 +1,6 @@
 import { getCollection } from "astro:content";
 import type { APIRoute } from "astro";
+import { getArticleCategorySummaries } from "@/lib/content/article-categories";
 import { locales, localizePath, type Locale } from "@/lib/i18n";
 
 export const prerender = true;
@@ -56,6 +57,14 @@ export const GET: APIRoute = async ({ site }) => {
 
     for (const path of localeIndexPaths) {
       entries.push({ path: localizePath(locale, path) });
+    }
+
+    const categorySummaries = await getArticleCategorySummaries(locale);
+    for (const category of categorySummaries) {
+      entries.push({
+        path: localizePath(locale, `/articles/category/${category.slug}`),
+        lastmod: category.updatedAt
+      });
     }
   }
 

@@ -2,6 +2,7 @@
 import BaseLayout from "./BaseLayout.astro";
 import CorrectionPrompt from "@/components/content/CorrectionPrompt.astro";
 import { formatDate } from "@/lib/content";
+import { slugifyArticleCategory } from "@/lib/content/article-categories";
 import { htmlLangByLocale, localizePath, type Locale } from "@/lib/i18n";
 
 interface RelatedArticleLink {
@@ -27,6 +28,7 @@ const site = Astro.site ?? new URL(Astro.url.origin);
 const canonicalUrl = new URL(Astro.url.pathname, site).href;
 const localeHomeUrl = new URL(localizePath(locale), site).href;
 const articlesUrl = new URL(localizePath(locale, "/articles"), site).href;
+const categoryHref = localizePath(locale, `/articles/category/${slugifyArticleCategory(category)}`);
 const updatedLabel = {
   "zh-tw": "更新",
   en: "Updated",
@@ -103,7 +105,7 @@ const jsonLd = [
 <BaseLayout locale={locale} title={title} description={description} alternatePaths={alternatePaths} ogType="article" jsonLd={jsonLd}>
   <article class="article-shell narrow">
     <header class="article-header">
-      <p class="article-meta">{category} · {formatDate(publishedAt, locale)} · {updatedLabel} {formatDate(updatedAt, locale)}</p>
+      <p class="article-meta"><a class="article-meta-link" href={categoryHref}>{category}</a> · {formatDate(publishedAt, locale)} · {updatedLabel} {formatDate(updatedAt, locale)}</p>
       <h1>{title}</h1>
       <p>{description}</p>
       <ul class="tag-list" aria-label="Tags">

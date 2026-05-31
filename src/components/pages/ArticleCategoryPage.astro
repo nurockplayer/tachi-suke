@@ -1,0 +1,75 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import FavoriteButtonPlaceholder from "@/components/favorites/FavoriteButtonPlaceholder.astro";
+import { formatDate } from "@/lib/content";
+import {
+  getArticleCategoryDescription,
+  getArticleCategorySummaries,
+  getArticleCategoryTitle,
+  slugifyArticleCategory
+} from "@/lib/content/article-categories";
+import { locales, localizePath, sectionCopy, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+  category: string;
+}
+
+const { locale, category } = Astro.props;
+const categorySlug = slugifyArticleCategory(category);
+const title = getArticleCategoryTitle(locale, category);
+const description = getArticleCategoryDescription(locale, category);
+const articles = (await getCollection("articles"))
+  .filter((article) => article.data.locale === locale && !article.data.draft && slugifyArticleCategory(article.data.category) === categorySlug)
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+const categoryAlternates = await Promise.all(
+  locales.map(async (alternateLocale) => ({
+    locale: alternateLocale,
+    summary: (await getArticleCategorySummaries(alternateLocale)).find((summary) => summary.slug === categorySlug)
+  }))
+);
+const alternatePaths = Object.fromEntries(
+  categoryAlternates
+    .filter((entry) => entry.summary)
+    .map((entry) => [entry.locale, localizePath(entry.locale, `/articles/category/${categorySlug}`)])
+) as Partial<Record<Locale, string>>;
+const allArticlesLabel = {
+  "zh-tw": "全部文章",
+  en: "All articles",
+  ja: "すべての記事",
+  ko: "전체 글"
+}[locale];
+---
+
+<BaseLayout locale={locale} title={title} description={description} alternatePaths={alternatePaths}>
+  <section class="page-hero">
+    <div class="container">
+      <p class="article-meta"><a class="article-meta-link" href={localizePath(locale, "/articles")}>{sectionCopy[locale].articlesTitle}</a></p>
+      <h1>{title}</h1>
+      <p>{description}</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2>{allArticlesLabel}</h2>
+          <p>{locale === "zh-tw" ? `目前有 ${articles.length} 篇公開文章。` : locale === "en" ? `${articles.length} public guides in this category.` : locale === "ja" ? `このカテゴリには ${articles.length} 件の公開記事があります。` : `이 카테고리에는 공개 글 ${articles.length}개가 있습니다.`}</p>
+        </div>
+      </div>
+      <div class="article-list">
+        {articles.map((article) => (
+          <article class="article-row">
+            <a href={localizePath(locale, `/articles/${article.data.slug}`)}>
+              <span class="article-meta">{article.data.category} · {formatDate(article.data.publishedAt, locale)}</span>
+              <h2>{article.data.title}</h2>
+              <p>{article.data.description}</p>
+            </a>
+            <FavoriteButtonPlaceholder locale={locale} />
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

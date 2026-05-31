@@ -116,6 +116,7 @@ Current public route pattern:
 
 - `/[locale]/articles`
 - `/[locale]/articles/[slug]`
+- `/[locale]/articles/category/[category]`
 - `/[locale]/areas`
 - `/[locale]/areas/[slug]`
 - `/[locale]/places`
@@ -240,6 +241,12 @@ Phase 1S adds static search:
 - `/[locale]/search-index.json` is generated from public content collections.
 - Search indexes include only public content: matching-locale non-draft articles, published places, current mobile plans, current area guides, and published tools.
 - Do not add hosted search, database search, analytics, personalization, or large search dependencies in Phase 1 unless explicitly scoped.
+
+Phase 1T adds article category landing pages:
+
+- `/[locale]/articles/category/[category]` is generated from non-draft same-locale article categories.
+- Article category pages are public, indexable, and included in `sitemap.xml`.
+- Do not generate empty categories or tag pages unless explicitly scoped.
 
 Phase 1K adds Cloudflare Pages deploy readiness:
 

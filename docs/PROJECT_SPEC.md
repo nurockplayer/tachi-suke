@@ -137,6 +137,7 @@ The MVP includes:
 - Four locale homepages
 - Article index pages
 - Article detail pages generated from Markdown/MDX content
+- Article category landing pages generated from non-draft article frontmatter
 - Related article links generated at build time for article detail pages
 - Correction prompts on public detail pages that link readers to the contact/corrections route
 - Twelve public article pages across the supported locales in the current Phase 1B baseline
@@ -208,6 +209,7 @@ Content and section pages:
 
 - `/[locale]/articles`
 - `/[locale]/articles/[slug]`
+- `/[locale]/articles/category/[category]`
 - `/[locale]/areas`
 - `/[locale]/areas/[slug]`
 - `/[locale]/places`
@@ -321,6 +323,7 @@ Product and content metrics:
 - Users can browse articles and places without login.
 - Users can reach all main sections from locale navigation.
 - Article and place detail pages are indexable and readable.
+- Article category landing pages expose category intent such as mobile, setup, housing, and food.
 - Article pages guide readers to related same-locale articles.
 - Published tool pages can serve practical checklist intent without requiring login.
 - Users can search current public content without login or a backend.
@@ -343,6 +346,7 @@ Engineering metrics:
 - Non-published places do not appear in public lists or detail pages.
 - SEO metadata includes title, description, canonical URL, Open Graph URL, Open Graph site name, Open Graph image, Twitter card metadata, locale-aware `html lang`, manifest link, and conservative `hreflang`.
 - `sitemap.xml` includes public content and excludes account placeholders.
+- `sitemap.xml` includes public article category landing pages.
 - `sitemap.xml` includes public privacy and editorial policy pages.
 - `sitemap.xml` includes public contact/corrections pages.
 - `sitemap.xml` excludes noindex search pages and search index JSON endpoints.

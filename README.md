@@ -30,6 +30,7 @@ Implemented:
 - Start-here homepage links for articles, mobile, areas, places, submit-place, tools, and favorites placeholder
 - Four locale article index pages
 - Four locale article detail routes
+- Four locale article category landing page routes
 - Build-time related article links on article detail pages
 - Detail-page correction prompts linking public content to contact/corrections
 - Twelve public article pages across four locales
@@ -106,6 +107,7 @@ Locale routes:
 
 - `/[locale]/articles`
 - `/[locale]/articles/[slug]`
+- `/[locale]/articles/category/[category]`
 - `/[locale]/areas`
 - `/[locale]/areas/[slug]`
 - `/[locale]/places`
@@ -265,6 +267,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - Related article links are static, same-locale, and non-personalized.
 - Search pages are static, noindex utility pages backed by `/[locale]/search-index.json`.
 - Search indexes include public content only and do not include account placeholders, drafts, or non-published items.
+- Article category pages are generated from public non-draft articles and are included in the sitemap.
 - Tool checklist pages are static content pages. They do not save progress, require login, or write to a database in Phase 1.
 - Submit-place can post to an externally configured endpoint, but the repo does not store submissions or include a moderation backend.
 - Contact/corrections can post to an externally configured endpoint, but the repo does not store messages or include a support backend.

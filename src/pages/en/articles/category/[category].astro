@@ -1,0 +1,12 @@
+---
+import ArticleCategoryPage from "@/components/pages/ArticleCategoryPage.astro";
+import { getArticleCategoryStaticPaths } from "@/lib/content/article-categories";
+
+export async function getStaticPaths() {
+  return getArticleCategoryStaticPaths("en");
+}
+
+const { category } = Astro.props;
+---
+
+<ArticleCategoryPage locale="en" category={category} />

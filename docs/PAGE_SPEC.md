@@ -208,6 +208,22 @@ All public pages should:
 
 **Future notes:** Add table-of-contents support after content patterns stabilize. Correction prompts currently link to contact/corrections but do not prefill the form.
 
+## `/[locale]/articles/category/[category]`
+
+**Purpose:** Static landing page for one article category in a locale.
+
+**User goal:** Browse guides for one practical intent, such as mobile, setup, housing, or food.
+
+**Data source:** `articles` content collection filtered to matching `locale`, matching `category`, and `draft = false`.
+
+**Rendering mode:** Static generated dynamic route. Each locale has its own route file and uses category static paths from `src/lib/content/article-categories.ts`.
+
+**SEO requirements:** Use localized category title/description, canonical URL, Open Graph metadata, locale-aware `html lang`, conservative category alternates only when the category exists in that locale, and `sitemap.xml` inclusion with `lastmod` based on the newest article update date in the category.
+
+**Current status:** Implemented for all four locales in Phase 1T. Article index pages link to category pages, and article detail category labels link to the matching category page.
+
+**Future notes:** Tag pages, category descriptions with richer editorial copy, and category-specific related content can wait until article volume grows.
+
 ## `/[locale]/areas`
 
 **Purpose:** Area guide index.
