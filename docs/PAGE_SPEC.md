@@ -120,11 +120,11 @@ All public pages should:
 
 **Data source:** Public entries from `articles`, `places`, `mobile-plans`, `areas`, and `tools` content collections through `src/lib/content/search.ts`.
 
-**Rendering mode:** Static Astro pages through `SearchPage`. Initial HTML includes browseable result cards, and vanilla client-side JavaScript filters results in the browser.
+**Rendering mode:** Static Astro pages through `SearchPage`. Initial HTML includes browseable result cards, a normal GET search form, and vanilla client-side JavaScript that filters results in the browser.
 
 **SEO requirements:** Use a meaningful title and description, locale-aware `html lang`, canonical URL, Open Graph metadata, and `robots="noindex, follow"`. Search pages are utility pages and should not appear in `sitemap.xml`.
 
-**Current status:** Implemented for all four locales in Phase 1S and linked from the primary navigation.
+**Current status:** Implemented for all four locales in Phase 1S and linked from the primary navigation. Phase 1Y adds shareable `?q=` URLs that prefill the input, filter results, and update the URL without adding a backend.
 
 **Future notes:** Current search is substring-based and dependency-free. Add typo tolerance, ranking, pagination, or hosted search only after content volume justifies it.
 

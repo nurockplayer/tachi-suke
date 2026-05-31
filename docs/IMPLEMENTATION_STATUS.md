@@ -26,7 +26,7 @@ This document records the current MVP state after Phase 1S static search work. I
 - Four locale mobile detail routes at `/[locale]/mobile/[slug]`.
 - Four locale tools index pages showing published tool cards.
 - Four locale tool detail routes at `/[locale]/tools/[slug]`.
-- Four locale static search pages at `/[locale]/search`, marked `noindex, follow`.
+- Four locale static search pages at `/[locale]/search`, marked `noindex, follow`, with shareable `?q=` query support.
 - Four locale static search index JSON endpoints at `/[locale]/search-index.json`.
 - Published static checklist tools: `moving-to-japan-checklist` and `japan-rent-initial-cost-checklist`.
 - Four locale submit-place form pages with provider-agnostic endpoint support.
@@ -136,7 +136,7 @@ These are intentionally present but not functional:
 - `pnpm check:content` checks source content metadata and stored URL fields, but it does not fetch external URLs or validate live business/provider data.
 - `pnpm check:links` scans built static HTML root-relative links in `dist/`, but it does not validate external links, anchors, JavaScript behavior, form submission behavior, or visual rendering.
 - RSS feeds are static and article-only. They do not include category feeds, pagination, places, tools, mobile plans, or area guides.
-- Static search is substring-based client-side filtering. It does not provide typo tolerance, semantic search, pagination, analytics, or personalization.
+- Static search is substring-based client-side filtering with shareable `?q=` URLs. It does not provide typo tolerance, semantic search, pagination, analytics, or personalization.
 - Search pages are noindex utility pages and are intentionally excluded from `sitemap.xml`.
 - `/404.html` is static and noindex. It does not perform language detection or redirects.
 - Related article links are static and rule-based. They are not personalized and do not use analytics.

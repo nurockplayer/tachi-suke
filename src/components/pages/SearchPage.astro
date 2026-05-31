@@ -16,6 +16,7 @@ const copy = {
     description: "搜尋 TachiSuke 目前公開的文章、店家、手機方案、地區指南與生活工具。",
     label: "搜尋關鍵字",
     placeholder: "輸入手機、租屋、池袋、Denny's...",
+    submit: "搜尋",
     count: "目前可搜尋 {count} 筆公開內容",
     empty: "沒有找到符合的公開內容。",
     updated: "更新",
@@ -26,6 +27,7 @@ const copy = {
     description: "Search TachiSuke's current public articles, places, mobile plans, area guides, and life tools.",
     label: "Search keywords",
     placeholder: "Try mobile, rent, Ikebukuro, Denny's...",
+    submit: "Search",
     count: "{count} public items searchable",
     empty: "No matching public content found.",
     updated: "Updated",
@@ -36,6 +38,7 @@ const copy = {
     description: "TachiSuke の公開記事、お店、携帯プラン、エリアガイド、生活ツールを検索できます。",
     label: "検索キーワード",
     placeholder: "携帯、賃貸、池袋、Denny's など",
+    submit: "検索",
     count: "{count} 件の公開コンテンツを検索できます",
     empty: "一致する公開コンテンツはありません。",
     updated: "更新",
@@ -46,6 +49,7 @@ const copy = {
     description: "TachiSuke의 공개 글, 장소, 휴대폰 요금제, 지역 가이드, 생활 도구를 검색합니다.",
     label: "검색어",
     placeholder: "휴대폰, 월세, 이케부쿠로, Denny's...",
+    submit: "검색",
     count: "검색 가능한 공개 콘텐츠 {count}개",
     empty: "일치하는 공개 콘텐츠가 없습니다.",
     updated: "업데이트",
@@ -112,13 +116,16 @@ function serializeJson(value: unknown): string {
     data-updated-label={copy.updated}
   >
     <div class="container">
-      <div class="search-panel">
+      <form class="search-panel" role="search" method="get" action={localizePath(locale, "/search")} data-search-form>
         <div class="field">
           <label for="site-search">{copy.label}</label>
-          <input id="site-search" type="search" name="q" placeholder={copy.placeholder} autocomplete="off" data-search-input />
+          <div class="search-form-row">
+            <input id="site-search" type="search" name="q" placeholder={copy.placeholder} autocomplete="off" data-search-input />
+            <button class="button-link" type="submit">{copy.submit}</button>
+          </div>
           <p class="help-text" data-search-count>{renderCount(entries.length)}</p>
         </div>
-      </div>
+      </form>
 
       <noscript>
         <p class="notice search-noscript">{copy.noscript}</p>
@@ -149,6 +156,7 @@ function serializeJson(value: unknown): string {
         const root = document.querySelector("[data-search-root]");
         if (!root) return;
 
+        const form = root.querySelector("[data-search-form]");
         const input = root.querySelector("[data-search-input]");
         const results = root.querySelector("[data-search-results]");
         const count = root.querySelector("[data-search-count]");
@@ -159,6 +167,12 @@ function serializeJson(value: unknown): string {
         const updatedLabel = root.dataset.updatedLabel || "Updated";
         const typeLabels = JSON.parse(root.dataset.typeLabels || "{}");
         let entries = JSON.parse(dataScript?.textContent || "[]");
+        const initialParams = new URLSearchParams(window.location.search);
+        const initialQuery = initialParams.get("q") || "";
+
+        if (input && initialQuery) {
+          input.value = initialQuery;
+        }
 
         function searchText(entry) {
           return String(entry.searchText || "").toLocaleLowerCase();
@@ -169,6 +183,18 @@ function serializeJson(value: unknown): string {
           if (tokens.length === 0) return true;
           const haystack = searchText(entry);
           return tokens.every((token) => haystack.includes(token));
+        }
+
+        function syncQueryUrl(query) {
+          if (!window.history?.replaceState) return;
+          const url = new URL(window.location.href);
+          const normalizedQuery = String(query || "").trim();
+          if (normalizedQuery) {
+            url.searchParams.set("q", normalizedQuery);
+          } else {
+            url.searchParams.delete("q");
+          }
+          history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
         }
 
         function createCard(entry) {
@@ -204,7 +230,7 @@ function serializeJson(value: unknown): string {
           return card;
         }
 
-        function render() {
+        function render(options = {}) {
           if (!input || !results || !count || !empty) return;
           const query = input.value || "";
           const filtered = entries.filter((entry) => matchEntry(entry, query));
@@ -212,9 +238,17 @@ function serializeJson(value: unknown): string {
           count.textContent = countTemplate.replace("{count}", String(filtered.length));
           empty.textContent = emptyMessage;
           empty.hidden = filtered.length > 0;
+          if (options.syncUrl) {
+            syncQueryUrl(query);
+          }
         }
 
-        input?.addEventListener("input", render);
+        input?.addEventListener("input", () => render({ syncUrl: true }));
+        form?.addEventListener("submit", (event) => {
+          event.preventDefault();
+          render({ syncUrl: true });
+        });
+        render();
 
         const indexUrl = root.dataset.searchIndexUrl;
         if (indexUrl) {

@@ -181,7 +181,11 @@ describe("static SEO output", () => {
     const html = readHtml("en/search/index.html");
     assert.match(html, /Search \| TachiSuke/, "search page should have an SEO title");
     assert.match(html, /name="robots" content="noindex, follow"/, "search page should be noindex but follow links");
+    assert.match(html, /<form class="search-panel" role="search" method="get" action="\/en\/search" data-search-form>/, "search page should render a shareable GET form");
     assert.match(html, /data-search-input/, "search page should include the client-side search input");
+    assert.match(html, /name="q"/, "search input should submit q query values");
+    assert.match(html, /new URLSearchParams\(window\.location\.search\)/, "search script should read q from the URL");
+    assert.match(html, /history\.replaceState/, "search script should sync q back to the URL");
     assert.match(html, /href="\/en\/articles\/choose-mobile-plan-japan-foreigner"/, "search page should render static article results");
     assert.doesNotMatch(html, /<h2><a href="\/en\/account\//, "search page should not render account placeholder results");
 

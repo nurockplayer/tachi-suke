@@ -312,6 +312,11 @@ describe("TachiSuke project scaffold", () => {
     assert.match(searchPage, /data-search-results/, "SearchPage should expose a result container");
     assert.match(searchPage, /search-index\.json/, "SearchPage should point to the static locale search index");
     assert.match(searchPage, /type="search"/, "SearchPage query field should use search input behavior");
+    assert.match(searchPage, /role="search"/, "SearchPage should render a search form landmark");
+    assert.match(searchPage, /method="get"/, "SearchPage should use GET query behavior");
+    assert.match(searchPage, /data-search-form/, "SearchPage should expose a stable form hook");
+    assert.match(searchPage, /new URLSearchParams\(window\.location\.search\)/, "SearchPage should read the initial q query parameter");
+    assert.match(searchPage, /history\.replaceState/, "SearchPage should sync query input back to the URL");
 
     const searchHelper = readFileSync(join(root, "src/lib/content/search.ts"), "utf8");
     assert.match(searchHelper, /export async function getSearchEntries/, "search helper should expose getSearchEntries");

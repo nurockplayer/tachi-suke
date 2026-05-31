@@ -150,7 +150,7 @@ The MVP includes:
 - Tools index pages with published tool cards
 - Tool detail pages generated from JSON content with localized checklist sections, source notes, caveats, and `lastCheckedAt`
 - Published tools: `moving-to-japan-checklist`, `japan-rent-initial-cost-checklist`
-- Static search pages at `/[locale]/search`
+- Static search pages at `/[locale]/search`, including shareable `?q=` query behavior
 - Static search index JSON endpoints at `/[locale]/search-index.json`
 - Submit-place form with preview mode, external endpoint support, hidden moderation metadata, and thanks pages
 - Contact/corrections form with preview mode, external endpoint support, hidden provider metadata, honeypot, and thanks pages

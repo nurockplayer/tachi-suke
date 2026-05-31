@@ -137,6 +137,8 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Four locale search index JSON endpoints must exist at `/[locale]/search-index.json`.
 - Search pages must be static and must not require login, a database, a hosted search service, or a server runtime.
 - Search pages must use `robots="noindex, follow"`.
+- Search pages must support shareable GET query URLs with `q`, such as `/en/search?q=Denny`.
+- Search pages should read the initial `q` value, prefill the input, filter client-side results, and keep the URL query in sync.
 - Search pages and search index JSON endpoints must not appear in `sitemap.xml`.
 - Search indexes must include only public content:
   - matching-locale non-draft articles

@@ -263,6 +263,7 @@ Phase 1R adds locale RSS feeds:
 Phase 1S adds static search:
 
 - `/[locale]/search` is a noindex static utility page.
+- `/[locale]/search?q=...` should prefill the search input, filter results, and keep the URL query in sync while staying noindex.
 - `/[locale]/search-index.json` is generated from public content collections.
 - Search indexes include only public content: matching-locale non-draft articles, published places, current mobile plans, current area guides, and published tools.
 - Do not add hosted search, database search, analytics, personalization, or large search dependencies in Phase 1 unless explicitly scoped.
