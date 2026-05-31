@@ -1,0 +1,348 @@
+# TachiSuke Content Model
+
+This document records the current content collections and TypeScript model boundaries. Phase 1 stores public content in Astro content collections and keeps auth, favorites, user profiles, and submissions as TypeScript-ready placeholders only.
+
+## Article
+
+**Purpose:** Long-form practical guides that help users make decisions about life in Japan.
+
+**Current storage:** Markdown/MDX files in `src/content/articles`, loaded by the `articles` content collection.
+
+**Required fields:**
+
+- `id`
+- `slug`
+- `locale`
+- `translationKey`
+- `title`
+- `description`
+- `category`
+- `tags`
+- `publishedAt`
+- `updatedAt`
+- `draft`
+
+**Optional fields:** None in the current schema.
+
+**Enum values:**
+
+- `locale`: `zh-tw`, `en`, `ja`, `ko`
+- `draft`: boolean
+
+**Public visibility rules:**
+
+- Article index pages show only matching-locale articles where `draft = false`.
+- Article detail pages are generated only for matching-locale articles where `draft = false`.
+
+**Future database mapping notes:**
+
+- If articles move to Postgres or a CMS later, preserve `translationKey`, `locale`, and stable `slug`.
+- Keep a separate draft/publish workflow and avoid exposing draft content through public routes or APIs.
+
+## Place
+
+**Purpose:** Resident-friendly places such as restaurants, cafes, shops, diners, and practical everyday locations.
+
+**Current storage:** JSON files in `src/content/places`, loaded by the `places` content collection.
+
+**Required fields:**
+
+- `id`
+- `slug`
+- `name`
+- `category`
+- `prefecture`
+- `city`
+- `area`
+- `station`
+- `priceRange`
+- `soloFriendly`
+- `nonSmokingStatus`
+- `japaneseDifficulty`
+- `paymentMethods`
+- `source`
+- `status`
+- `createdAt`
+- `updatedAt`
+
+**Optional fields:**
+
+- `googleMapUrl`
+- `officialUrl`
+- `tabelogUrl` in the TypeScript type, not currently in the content schema
+- `instagramUrl` in the TypeScript type, not currently in the content schema
+- Future candidate: localized editorial notes such as `goodFor`, `useCases`, `watchouts`, `smokingNote`, and `paymentNote`
+
+**Enum values:**
+
+`soloFriendly`:
+
+- `yes`
+- `maybe`
+- `no`
+- `unknown`
+
+`nonSmokingStatus`:
+
+- `confirmed_non_smoking`
+- `separated_smoking_area`
+- `smoking_allowed`
+- `unknown`
+
+`japaneseDifficulty`:
+
+- `easy`
+- `normal`
+- `hard`
+- `unknown`
+
+`source`:
+
+- `editor`
+- `user_submission`
+- `official`
+
+`status`:
+
+- `draft`
+- `pending_review`
+- `published`
+- `rejected`
+- `archived`
+
+**Public visibility rules:**
+
+- Only `status = published` Place entries can appear in public list pages.
+- Only `status = published` Place entries can generate public detail pages.
+- `draft`, `pending_review`, `rejected`, and `archived` must stay out of public list/detail pages.
+- User-submitted places must be moderated and normalized before becoming public Place entries.
+
+**Future database mapping notes:**
+
+- Keep Place publication status separate from raw submission moderation status.
+- If a submission is approved, normalize it into a public Place record instead of publishing the raw submission directly.
+- Add database constraints that match the enum values above.
+- Phase 1B place detail pages generate explanatory sections from existing fields. Add explicit notes fields only when editorial content becomes too nuanced for generated guidance.
+
+## Area / CityGuide
+
+**Purpose:** City and neighborhood guide data for comparing living areas by rent, commute, convenience, quietness, and fit.
+
+**Current storage:** JSON files in `src/content/areas`, loaded by the `areas` content collection.
+
+**Required fields:**
+
+- `id`
+- `slug`
+- `prefecture`
+- `city`
+
+**Optional fields:**
+
+- `locale`
+- `translationKey`
+- `stations`
+- `rentLevel`
+- `foodLevel`
+- `commuteConvenience`
+- `quietness`
+- `recommendedFor`
+- `warnings`
+
+**Enum values:**
+
+- `locale`: `zh-tw`, `en`, `ja`, `ko` when present
+
+**Public visibility rules:**
+
+- Current MVP has area index pages only. Phase 1B shows area guide cards for Ikebukuro, Itabashi, Akabane, and Kagurazaka / Edogawabashi.
+- Future area detail pages should only render entries intended for public content.
+
+**Future database mapping notes:**
+
+- Keep locale and `translationKey` available for localized area guides.
+- Consider normalized city, station, and prefecture tables only after content volume makes that worthwhile.
+
+## MobilePlan
+
+**Purpose:** Data for comparing mobile plans by provider, price, data amount, requirements, pros, cons, and recommended users.
+
+**Current storage:** JSON files in `src/content/mobile-plans`, loaded by the `mobile-plans` content collection.
+
+**Required fields:**
+
+- `id`
+- `slug`
+- `provider`
+- `planName`
+- `monthlyPrice`
+- `dataAmount`
+- `residenceCardRequired`
+- `creditCardRequired`
+
+**Optional fields:**
+
+- `paymentRequirements`
+- `pros`
+- `cons`
+- `recommendedFor`
+
+**Enum values:** None in the current schema.
+
+**Public visibility rules:**
+
+- Current mobile index lists all mobile plan entries in the collection.
+- Phase 1B includes povo, LINEMO, Rakuten Mobile, ahamo, and UQ mobile as decision-oriented editorial data.
+- Mobile plan prices, campaigns, data allowances, payment conditions, and identity checks can change. Users must confirm official sites before applying.
+- Future plan details should include update dates because mobile plan information can change quickly.
+
+**Future database mapping notes:**
+
+- Treat pricing and plan conditions as time-sensitive editorial data.
+- Add `updatedAt`, `sourceUrl`, and review workflow fields before publishing serious comparison content.
+- Consider adding `officialUrl`, `lastCheckedAt`, `notes`, and localized caveat fields before turning mobile data into a full comparison product.
+
+## Tool
+
+**Purpose:** Metadata for future life tools such as checklists, calculators, decision trees, and procedure helpers.
+
+**Current storage:** JSON files in `src/content/tools`, loaded by the `tools` content collection.
+
+**Required fields:**
+
+- `id`
+- `slug`
+- `title`
+- `description`
+
+**Optional fields:**
+
+- `status`, defaulting to `planned`
+
+**Enum values:**
+
+- `status`: `planned`, `draft`, `published`
+
+**Public visibility rules:**
+
+- Current tools page is an entry/placeholder-style section page and does not render tool details.
+- Future public tool pages should show only published tools.
+
+**Future database mapping notes:**
+
+- Keep tools mostly static unless personalization or saved tool state becomes necessary.
+
+## Favorite
+
+**Purpose:** Future user-saved items across articles, places, mobile plans, areas, and tools.
+
+**Current storage:** TypeScript placeholder in `src/types/favorite.ts`. No runtime storage exists in Phase 1.
+
+**Required fields:**
+
+- `id`
+- `userId`
+- `targetType`
+- `targetId`
+- `createdAt`
+
+**Optional fields:** None in the current type.
+
+**Enum values:**
+
+- `targetType`: `article`, `place`, `mobile_plan`, `area`, `tool`
+
+**Public visibility rules:**
+
+- Favorites do not exist in Phase 1.
+- Future favorites require login.
+- Users must only read, create, and delete their own favorites.
+
+**Future database mapping notes:**
+
+- Use a unique constraint on `(user_id, target_type, target_id)`.
+- Enable Row Level Security before shipping.
+
+## UserProfile
+
+**Purpose:** Future user profile metadata connected to an authenticated user.
+
+**Current storage:** TypeScript placeholder in `src/types/user.ts`. No runtime storage exists in Phase 1.
+
+**Required fields:**
+
+- `id`
+- `createdAt`
+- `updatedAt`
+
+**Optional fields:**
+
+- `displayName`
+- `preferredLocale`
+
+**Enum values:**
+
+- `preferredLocale`: `zh-tw`, `en`, `ja`, `ko` when present
+
+**Public visibility rules:**
+
+- User profiles do not exist in Phase 1.
+- Future profiles should be private to the user unless a public profile feature is explicitly designed.
+
+**Future database mapping notes:**
+
+- `id` should reference `auth.users(id)` in Supabase.
+- Users should read and update only their own profile unless admin workflows are explicitly added.
+
+## PlaceSubmission
+
+**Purpose:** Future raw recommendation submissions from users before editorial review.
+
+**Current storage:** TypeScript placeholder in `src/types/submission.ts`. The submit-place page is UI-only and does not create records in Phase 1.
+
+**Required fields:**
+
+- `id`
+- `submissionLocale`
+- `placeName`
+- `category`
+- `prefecture`
+- `city`
+- `recommendationReason`
+- `paymentMethods`
+- `status`
+- `createdAt`
+- `updatedAt`
+
+**Optional fields:**
+
+- `userId`
+- `area`
+- `station`
+- `googleMapUrl`
+- `officialUrl`
+- `priceRange`
+- `soloFriendly`
+- `nonSmokingStatus`
+- `japaneseDifficulty`
+- `submitterNickname`
+- `submitterEmail`
+- `moderatorNote`
+
+**Enum values:**
+
+- `status`: `pending_review`, `approved`, `rejected`, `needs_more_info`
+- `submissionLocale`: `zh-tw`, `en`, `ja`, `ko`
+
+**Public visibility rules:**
+
+- Raw submissions must never publish directly.
+- Submitter email must never appear on public pages.
+- Approved submissions should be edited and normalized into Place entries.
+- Public Place visibility is still controlled by `Place.status = published`.
+
+**Future database mapping notes:**
+
+- Anonymous submissions may be allowed in Phase 1C, but should still avoid unnecessary personal data.
+- Authenticated submissions in Phase 3 should let users view only their own submission history.
+- Admin moderation requires a separate admin role model and RLS policies.

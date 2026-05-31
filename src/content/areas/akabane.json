@@ -1,0 +1,15 @@
+{
+  "id": "area-akabane",
+  "slug": "akabane",
+  "locale": "en",
+  "translationKey": "tokyo-akabane",
+  "prefecture": "Tokyo",
+  "city": "Kita",
+  "stations": ["Akabane", "Akabane-Iwabuchi"],
+  "rentLevel": "medium",
+  "foodLevel": "high",
+  "commuteConvenience": "high",
+  "quietness": "mixed",
+  "recommendedFor": ["commuters using JR lines", "people who want practical shopping and food options", "residents who want access to both Tokyo and Saitama"],
+  "warnings": ["Nightlife areas may be loud.", "Check walking route from the station at night.", "Some trains get crowded during peak commute."]
+}

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
-import { localeNames, sectionCopy, type Locale } from "@/lib/i18n";
+import { localeNames, locales, sectionCopy, type Locale } from "@/lib/i18n";
+import { japaneseDifficultyLabels, nonSmokingStatusLabels, soloFriendlyLabels } from "@/lib/places";
 
 interface Props {
   locale: Locale;
@@ -12,22 +13,34 @@ const labels = {
   "zh-tw": {
     intro: "第一版表單尚未送出資料。未來投稿會先進入審核，不會直接公開。",
     review: "投稿不會直接公開，投稿需要審核。Email 不會公開。不要填寫他人個資。店家資訊可能會由站長整理後發布。",
-    submit: "送出功能準備中"
+    submit: "送出功能準備中",
+    mapsHelp: "Google Maps URL 最重要，請優先提供正確連結。",
+    privacyHelp: "不要填寫他人個資。",
+    emailHelp: "Email 選填且不會公開，只會用於必要時聯絡確認。"
   },
   en: {
     intro: "This MVP form does not submit data yet. Future submissions will enter review and will not publish directly.",
     review: "Submissions are not published directly. They require moderation. Email will not be public. Do not submit other people's personal information. Place information may be edited and normalized before publishing.",
-    submit: "Submission coming soon"
+    submit: "Submission coming soon",
+    mapsHelp: "Google Maps URL is the most important field. Please provide the exact place link.",
+    privacyHelp: "Do not enter other people's personal information.",
+    emailHelp: "Email is optional and private. It is only for follow-up if needed."
   },
   ja: {
     intro: "第一版のフォームはまだ送信されません。将来の投稿は審査され、直接公開されません。",
     review: "投稿は直接公開されず、審査が必要です。メールアドレスは公開されません。他人の個人情報を書かないでください。店舗情報は管理者が整理して公開する場合があります。",
-    submit: "送信機能は準備中です"
+    submit: "送信機能は準備中です",
+    mapsHelp: "Google Maps URL が最も重要です。正確なお店のリンクを入力してください。",
+    privacyHelp: "他人の個人情報を書かないでください。",
+    emailHelp: "メールは任意で、公開されません。必要な確認連絡にのみ使います。"
   },
   ko: {
     intro: "MVP 폼은 아직 데이터를 전송하지 않습니다. 향후 추천은 검토 후 게시되며 바로 공개되지 않습니다.",
     review: "추천은 바로 공개되지 않고 검토가 필요합니다. 이메일은 공개되지 않습니다. 타인의 개인정보를 입력하지 마세요. 장소 정보는 운영자가 정리한 뒤 게시할 수 있습니다.",
-    submit: "제출 기능 준비 중"
+    submit: "제출 기능 준비 중",
+    mapsHelp: "Google Maps URL이 가장 중요합니다. 정확한 장소 링크를 입력해 주세요.",
+    privacyHelp: "타인의 개인정보를 입력하지 마세요.",
+    emailHelp: "이메일은 선택 사항이며 공개되지 않습니다. 필요한 확인 연락에만 사용합니다."
   }
 }[locale];
 
@@ -70,29 +83,27 @@ const field = {
         <div class="form-grid">
           <div class="field">
             <label for="submission-language">{field.language}</label>
-            <select id="submission-language" name="submissionLanguage">
-              <option value={locale}>{localeNames[locale]}</option>
-              <option value="zh-tw">繁體中文</option>
-              <option value="en">English</option>
-              <option value="ja">日本語</option>
-              <option value="ko">한국어</option>
+            <select id="submission-language" name="submissionLanguage" required>
+              {locales.map((optionLocale) => (
+                <option value={optionLocale} selected={optionLocale === locale}>{localeNames[optionLocale]}</option>
+              ))}
             </select>
           </div>
           <div class="field">
             <label for="place-name">{field.name}</label>
-            <input id="place-name" name="placeName" type="text" />
+            <input id="place-name" name="placeName" type="text" required />
           </div>
           <div class="field">
             <label for="category">{field.category}</label>
-            <input id="category" name="category" type="text" />
+            <input id="category" name="category" type="text" required />
           </div>
           <div class="field">
             <label for="prefecture">{field.prefecture}</label>
-            <input id="prefecture" name="prefecture" type="text" />
+            <input id="prefecture" name="prefecture" type="text" required />
           </div>
           <div class="field">
             <label for="city">{field.city}</label>
-            <input id="city" name="city" type="text" />
+            <input id="city" name="city" type="text" required />
           </div>
           <div class="field">
             <label for="area">{field.area}</label>
@@ -104,7 +115,8 @@ const field = {
           </div>
           <div class="field">
             <label for="maps">{field.maps}</label>
-            <input id="maps" name="googleMapUrl" type="url" />
+            <input id="maps" name="googleMapUrl" type="url" aria-describedby="maps-help" required />
+            <span class="help-text" id="maps-help">{labels.mapsHelp}</span>
           </div>
           <div class="field">
             <label for="official">{field.official}</label>
@@ -117,28 +129,28 @@ const field = {
           <div class="field">
             <label for="solo">{field.solo}</label>
             <select id="solo" name="soloFriendly">
-              <option value="unknown">Unknown</option>
-              <option value="yes">Yes</option>
-              <option value="mixed">Mixed</option>
-              <option value="no">No</option>
+              <option value="unknown">{soloFriendlyLabels[locale].unknown}</option>
+              <option value="yes">{soloFriendlyLabels[locale].yes}</option>
+              <option value="maybe">{soloFriendlyLabels[locale].maybe}</option>
+              <option value="no">{soloFriendlyLabels[locale].no}</option>
             </select>
           </div>
           <div class="field">
             <label for="smoke">{field.smoke}</label>
             <select id="smoke" name="nonSmokingStatus">
-              <option value="unknown">Unknown</option>
-              <option value="yes">Yes</option>
-              <option value="partial">Partial</option>
-              <option value="no">No</option>
+              <option value="unknown">{nonSmokingStatusLabels[locale].unknown}</option>
+              <option value="confirmed_non_smoking">{nonSmokingStatusLabels[locale].confirmed_non_smoking}</option>
+              <option value="separated_smoking_area">{nonSmokingStatusLabels[locale].separated_smoking_area}</option>
+              <option value="smoking_allowed">{nonSmokingStatusLabels[locale].smoking_allowed}</option>
             </select>
           </div>
           <div class="field">
             <label for="japanese">{field.japanese}</label>
             <select id="japanese" name="japaneseDifficulty">
-              <option value="unknown">Unknown</option>
-              <option value="low">Low</option>
-              <option value="medium">Medium</option>
-              <option value="high">High</option>
+              <option value="unknown">{japaneseDifficultyLabels[locale].unknown}</option>
+              <option value="easy">{japaneseDifficultyLabels[locale].easy}</option>
+              <option value="normal">{japaneseDifficultyLabels[locale].normal}</option>
+              <option value="hard">{japaneseDifficultyLabels[locale].hard}</option>
             </select>
           </div>
           <div class="field">
@@ -151,12 +163,13 @@ const field = {
           </div>
           <div class="field">
             <label for="email">{field.email}</label>
-            <input id="email" name="submitterEmail" type="email" />
+            <input id="email" name="submitterEmail" type="email" aria-describedby="email-help" />
+            <span class="help-text" id="email-help">{labels.emailHelp}</span>
           </div>
           <div class="field field-full">
             <label for="reason">{field.reason}</label>
-            <textarea id="reason" name="recommendationReason"></textarea>
-            <span class="help-text">{labels.review}</span>
+            <textarea id="reason" name="recommendationReason" required></textarea>
+            <span class="help-text">{labels.privacyHelp}</span>
           </div>
         </div>
         <div class="inline-actions">

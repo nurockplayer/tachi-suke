@@ -3,12 +3,12 @@
   "slug": "rakuten-saikyo-plan",
   "provider": "Rakuten Mobile",
   "planName": "Rakuten Saikyo Plan",
-  "monthlyPrice": "from ¥1,078",
-  "dataAmount": "tiered, up to unlimited",
-  "paymentRequirements": ["credit_card", "bank_transfer", "debit_card_limited"],
+  "monthlyPrice": "tiered from ¥1,078 to ¥3,278; confirm official latest price",
+  "dataAmount": "tiered by usage, with high-data/unlimited-positioning on Rakuten network",
+  "paymentRequirements": ["credit_card", "bank_transfer", "debit_card_limited", "Rakuten Points optional"],
   "residenceCardRequired": true,
   "creditCardRequired": false,
-  "pros": ["tiered pricing", "online signup", "eSIM support"],
-  "cons": ["coverage should be checked by area"],
-  "recommendedFor": ["heavy data users", "people comfortable checking coverage"]
+  "pros": ["tiered pricing", "online signup", "eSIM support", "Rakuten Link calling can reduce domestic call cost for eligible calls"],
+  "cons": ["coverage should be checked by home, work, and commute area", "Rakuten Link conditions and excluded numbers must be checked", "price and campaign benefits can change"],
+  "recommendedFor": ["heavy data users", "people comfortable checking coverage", "users already in the Rakuten ecosystem"]
 }

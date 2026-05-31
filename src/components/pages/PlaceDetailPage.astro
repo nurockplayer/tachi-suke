@@ -1,0 +1,168 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import { formatDate } from "@/lib/content";
+import { locales, localizePath, type Locale } from "@/lib/i18n";
+import {
+  formatPaymentMethod,
+  getPlaceDescription,
+  japaneseDifficultyLabels,
+  nonSmokingStatusLabels,
+  placeFieldLabels,
+  soloFriendlyLabels
+} from "@/lib/places";
+
+interface Props {
+  locale: Locale;
+  place: CollectionEntry<"places">;
+}
+
+const { locale, place } = Astro.props;
+const data = place.data;
+const labels = placeFieldLabels[locale];
+const description = getPlaceDescription(locale, data);
+const alternatePaths = Object.fromEntries(
+  locales.map((alternateLocale) => [alternateLocale, localizePath(alternateLocale, `/places/${data.slug}`)])
+) as Partial<Record<Locale, string>>;
+
+const facts = [
+  [labels.category, data.category],
+  [labels.prefecture, data.prefecture],
+  [labels.city, data.city],
+  [labels.area, data.area],
+  [labels.station, data.station],
+  [labels.priceRange, data.priceRange],
+  [labels.soloFriendly, soloFriendlyLabels[locale][data.soloFriendly]],
+  [labels.nonSmokingStatus, nonSmokingStatusLabels[locale][data.nonSmokingStatus]],
+  [labels.japaneseDifficulty, japaneseDifficultyLabels[locale][data.japaneseDifficulty]],
+  [labels.paymentMethods, data.paymentMethods.map(formatPaymentMethod).join(", ")]
+].filter(([, value]) => Boolean(value));
+
+const updatedText = {
+  "zh-tw": "更新",
+  en: "Updated",
+  ja: "更新",
+  ko: "업데이트"
+}[locale];
+const guidance = {
+  "zh-tw": {
+    goodForTitle: "適合誰",
+    situationsTitle: "使用情境",
+    watchoutsTitle: "注意事項",
+    smokingTitle: "禁菸資訊提醒",
+    paymentTitle: "付款方式提醒",
+    goodFor:
+      data.soloFriendly === "yes"
+        ? `${data.name} 適合一個人吃飯、短暫休息，或剛到日本還在熟悉點餐流程的人。`
+        : `${data.name} 適合想要穩定環境與清楚菜單的人；若是一個人用餐，建議先看分店座位配置。`,
+    situations: `可以作為通勤前後、等朋友、讀文件、臨時用餐的安全選項。${data.area} / ${data.station} 的實際便利性仍要看你常去的分店。`,
+    watchouts: "連鎖品牌的菜單、營業時間、座位與尖峰時段會因分店不同而不同。出發前請確認 Google Maps 和官方網站。",
+    smoking: `${nonSmokingStatusLabels[locale][data.nonSmokingStatus]}。禁菸規則可能因分店、建築或時段調整，介意菸味的人建議出發前再次確認。`,
+    payment: `${data.paymentMethods.map(formatPaymentMethod).join(", ")}。付款方式可能因分店或設備狀態不同，建議保留現金或一種備用支付方式。`
+  },
+  en: {
+    goodForTitle: "Good for",
+    situationsTitle: "Useful situations",
+    watchoutsTitle: "Watchouts",
+    smokingTitle: "Non-smoking note",
+    paymentTitle: "Payment note",
+    goodFor:
+      data.soloFriendly === "yes"
+        ? `${data.name} is useful for solo meals, short breaks, and newcomers who want an easy ordering environment.`
+        : `${data.name} is useful when you want a predictable menu and calm setting; solo comfort can still depend on the branch layout.`,
+    situations: `Use it before or after commuting, while waiting for someone, reading documents, or when you need a safe meal option. Actual convenience depends on the branch near ${data.station}.`,
+    watchouts: "Menus, hours, seating, and peak-time comfort can differ by branch. Check Google Maps and the official site before going.",
+    smoking: `${nonSmokingStatusLabels[locale][data.nonSmokingStatus]}. Non-smoking rules can vary by branch, building, or time, so confirm again if smoke matters to you.`,
+    payment: `${data.paymentMethods.map(formatPaymentMethod).join(", ")}. Payment support can vary by branch or terminal status, so keep cash or a backup method.`
+  },
+  ja: {
+    goodForTitle: "向いている人",
+    situationsTitle: "使いやすい場面",
+    watchoutsTitle: "注意事項",
+    smokingTitle: "禁煙情報の注意",
+    paymentTitle: "支払い方法の注意",
+    goodFor:
+      data.soloFriendly === "yes"
+        ? `${data.name} は一人での食事、短い休憩、注文に慣れたい来日直後の人に使いやすい場所です。`
+        : `${data.name} は安定したメニューと落ち着いた環境を求める人に向いています。一人利用のしやすさは店舗の席配置も確認しましょう。`,
+    situations: `通勤前後、待ち合わせ、書類整理、急な食事の安全な選択肢として使えます。${data.station} 周辺での便利さは利用する店舗によって変わります。`,
+    watchouts: "メニュー、営業時間、席、混雑度は店舗によって異なります。行く前に Google Maps と公式サイトを確認してください。",
+    smoking: `${nonSmokingStatusLabels[locale][data.nonSmokingStatus]}。禁煙ルールは店舗、建物、時間帯で変わる場合があります。気になる場合は事前確認がおすすめです。`,
+    payment: `${data.paymentMethods.map(formatPaymentMethod).join(", ")}。支払い方法は店舗や端末状況で変わる場合があるため、現金や予備の支払い方法も用意しましょう。`
+  },
+  ko: {
+    goodForTitle: "추천 대상",
+    situationsTitle: "이용하기 좋은 상황",
+    watchoutsTitle: "주의사항",
+    smokingTitle: "금연 정보 확인",
+    paymentTitle: "결제 방식 확인",
+    goodFor:
+      data.soloFriendly === "yes"
+        ? `${data.name}은 혼자 식사, 짧은 휴식, 주문 방식에 익숙해지고 싶은 일본 생활 초반에 쓰기 좋습니다.`
+        : `${data.name}은 안정적인 메뉴와 차분한 환경을 원하는 사람에게 좋습니다. 혼자 이용하기 편한지는 지점 좌석을 확인하세요.`,
+    situations: `통근 전후, 약속 대기, 서류 확인, 갑작스러운 식사 장소로 활용할 수 있습니다. ${data.station} 주변의 편리함은 실제 지점에 따라 달라집니다.`,
+    watchouts: "메뉴, 영업시간, 좌석, 혼잡도는 지점마다 다를 수 있습니다. 방문 전 Google Maps와 공식 사이트를 확인하세요.",
+    smoking: `${nonSmokingStatusLabels[locale][data.nonSmokingStatus]}. 금연 규칙은 지점, 건물, 시간대에 따라 달라질 수 있으니 민감하다면 미리 확인하세요.`,
+    payment: `${data.paymentMethods.map(formatPaymentMethod).join(", ")}. 결제 방식은 지점이나 단말 상태에 따라 다를 수 있으므로 현금이나 예비 결제 수단을 준비하세요.`
+  }
+}[locale];
+---
+
+<BaseLayout locale={locale} title={data.name} description={description} alternatePaths={alternatePaths}>
+  <section class="page-hero">
+    <div class="container">
+      <p class="article-meta">{data.category} · {updatedText} {formatDate(data.updatedAt, locale)}</p>
+      <h1>{data.name}</h1>
+      <p>{description}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2">
+      <article class="notice">
+        <h2>{locale === "zh-tw" ? "基本資訊" : locale === "en" ? "Details" : locale === "ja" ? "基本情報" : "기본 정보"}</h2>
+        <dl class="detail-list">
+          {facts.map(([label, value]) => (
+            <>
+              <dt>{label}</dt>
+              <dd>{value}</dd>
+            </>
+          ))}
+        </dl>
+      </article>
+
+      <aside class="notice">
+        <h2>{locale === "zh-tw" ? "相關連結" : locale === "en" ? "Links" : locale === "ja" ? "関連リンク" : "관련 링크"}</h2>
+        <div class="inline-actions">
+          {data.googleMapUrl && <a class="button-link" href={data.googleMapUrl}>{labels.googleMapUrl}</a>}
+          {data.officialUrl && <a class="button-secondary" href={data.officialUrl}>{labels.officialUrl}</a>}
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2">
+      <article class="notice">
+        <h2>{guidance.goodForTitle}</h2>
+        <p>{guidance.goodFor}</p>
+      </article>
+      <article class="notice">
+        <h2>{guidance.situationsTitle}</h2>
+        <p>{guidance.situations}</p>
+      </article>
+      <article class="notice">
+        <h2>{guidance.smokingTitle}</h2>
+        <p>{guidance.smoking}</p>
+      </article>
+      <article class="notice">
+        <h2>{guidance.paymentTitle}</h2>
+        <p>{guidance.payment}</p>
+      </article>
+      <article class="notice field-full">
+        <h2>{guidance.watchoutsTitle}</h2>
+        <p>{guidance.watchouts}</p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

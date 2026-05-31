@@ -8,13 +8,18 @@ interface Props {
   locale: Locale;
   title?: string;
   description: string;
+  alternatePaths?: Partial<Record<Locale, string>>;
 }
 
-const { locale, title, description } = Astro.props;
+const { locale, title, description, alternatePaths } = Astro.props;
 const site = Astro.site ?? new URL(Astro.url.origin);
 const pageTitle = getPageTitle(locale, title);
 const canonical = new URL(Astro.url.pathname, site);
 const pathWithoutLocale = Astro.url.pathname.replace(/^\/(zh-tw|en|ja|ko)/, "") || "/";
+const alternates = alternatePaths ?? Object.fromEntries(locales.map((alternateLocale) => [
+  alternateLocale,
+  localizePath(alternateLocale, pathWithoutLocale)
+])) as Partial<Record<Locale, string>>;
 ---
 
 <!doctype html>
@@ -27,17 +32,19 @@ const pathWithoutLocale = Astro.url.pathname.replace(/^\/(zh-tw|en|ja|ko)/, "") 
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href={canonical.href} />
-    {locales.map((alternateLocale) => (
+    {locales.map((alternateLocale) => alternates[alternateLocale] && (
       <link
         rel="alternate"
         hreflang={htmlLangByLocale[alternateLocale]}
-        href={new URL(localizePath(alternateLocale, pathWithoutLocale), site).href}
+        href={new URL(alternates[alternateLocale] ?? "/", site).href}
       />
     ))}
-    <link rel="alternate" hreflang="x-default" href={new URL(localizePath("en", pathWithoutLocale), site).href} />
+    {alternates.en && <link rel="alternate" hreflang="x-default" href={new URL(alternates.en, site).href} />}
     <meta property="og:type" content="website" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:site_name" content="TachiSuke" />
   </head>
   <body>
     <Header locale={locale} currentPath={Astro.url.pathname} />

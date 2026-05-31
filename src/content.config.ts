@@ -35,12 +35,12 @@ const places = defineCollection({
     googleMapUrl: z.url().optional(),
     officialUrl: z.url().optional(),
     priceRange: z.string(),
-    soloFriendly: z.enum(["yes", "mixed", "no", "unknown"]),
-    nonSmokingStatus: z.enum(["yes", "partial", "no", "unknown"]),
-    japaneseDifficulty: z.enum(["low", "medium", "high", "unknown"]),
+    soloFriendly: z.enum(["yes", "maybe", "no", "unknown"]),
+    nonSmokingStatus: z.enum(["confirmed_non_smoking", "separated_smoking_area", "smoking_allowed", "unknown"]),
+    japaneseDifficulty: z.enum(["easy", "normal", "hard", "unknown"]),
     paymentMethods: z.array(z.string()),
-    source: z.enum(["editorial", "community", "official"]),
-    status: z.enum(["draft", "published", "archived"]),
+    source: z.enum(["editor", "user_submission", "official"]),
+    status: z.enum(["draft", "pending_review", "published", "rejected", "archived"]),
     createdAt: z.coerce.date(),
     updatedAt: z.coerce.date()
   })

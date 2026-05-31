@@ -62,6 +62,17 @@ Recommended article structure:
 - Recommended next steps
 - Related content
 
+## Phase 1B Content Baseline
+
+Phase 1B adds a public-preview content baseline:
+
+- `zh-tw`: mobile plan basics, mobile brand comparison, renting initial costs, family restaurant comparison, and first-week setup
+- `en`: mobile plan basics, mobile brand comparison, and first-week setup
+- `ja`: mobile plan basics and first-week setup
+- `ko`: mobile plan basics and first-week setup
+
+All Phase 1B articles should remain decision-oriented and include internal links to relevant locale sections or related articles.
+
 ## Place Content
 
 Place content should focus on practical daily-life usefulness:
@@ -76,6 +87,22 @@ Place content should focus on practical daily-life usefulness:
 
 User-submitted places must be moderated and normalized before publication.
 
+Public Place pages now exist at `/[locale]/places/[slug]`. Place body data can remain locale-neutral in Phase 1, but UI labels must be localized by locale.
+
+Final Place enum values:
+
+- `soloFriendly`: `yes`, `maybe`, `no`, `unknown`
+- `nonSmokingStatus`: `confirmed_non_smoking`, `separated_smoking_area`, `smoking_allowed`, `unknown`
+- `japaneseDifficulty`: `easy`, `normal`, `hard`, `unknown`
+- `source`: `editor`, `user_submission`, `official`
+- `status`: `draft`, `pending_review`, `published`, `rejected`, `archived`
+
+Only `published` places are public. `draft`, `pending_review`, `rejected`, and `archived` must stay out of public lists and detail pages.
+
 ## SEO Priorities
 
 Use readable slugs, clear metadata, semantic headings, locale-aware URLs, and useful internal linking. Prioritize content that answers high-intent questions about living in Japan rather than broad tourist discovery.
+
+Article detail routes use article descriptions for SEO metadata. Place detail routes generate descriptions from name, category, location, and price range.
+
+Mobile plan content is time-sensitive. Pricing, campaigns, eligibility, and application rules must be framed as changeable and should point users back to official carrier pages before applying.

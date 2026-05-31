@@ -1,0 +1,15 @@
+{
+  "id": "area-kagurazaka-edogawabashi",
+  "slug": "kagurazaka-edogawabashi",
+  "locale": "en",
+  "translationKey": "tokyo-kagurazaka-edogawabashi",
+  "prefecture": "Tokyo",
+  "city": "Shinjuku / Bunkyo",
+  "stations": ["Kagurazaka", "Edogawabashi", "Iidabashi"],
+  "rentLevel": "high",
+  "foodLevel": "high",
+  "commuteConvenience": "high",
+  "quietness": "medium-high",
+  "recommendedFor": ["people who want a calmer central area", "commuters to Iidabashi or central Tokyo", "residents who value cafes, small restaurants, and walkability"],
+  "warnings": ["Rent is usually higher than outer northern areas.", "Older buildings and narrow streets require careful viewing.", "Slope and walking distance matter more than they look on a map."]
+}

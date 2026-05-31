@@ -11,10 +11,10 @@
   "officialUrl": "https://www.skylark.co.jp/gusto/",
   "priceRange": "¥600-¥1,800",
   "soloFriendly": "yes",
-  "nonSmokingStatus": "yes",
-  "japaneseDifficulty": "low",
+  "nonSmokingStatus": "confirmed_non_smoking",
+  "japaneseDifficulty": "easy",
   "paymentMethods": ["cash", "credit_card", "transportation_ic", "qr_payment"],
-  "source": "editorial",
+  "source": "editor",
   "status": "published",
   "createdAt": "2026-05-31",
   "updatedAt": "2026-05-31"

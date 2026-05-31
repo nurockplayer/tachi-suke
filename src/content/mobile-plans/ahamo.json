@@ -1,0 +1,14 @@
+{
+  "id": "mobile-ahamo",
+  "slug": "ahamo",
+  "provider": "ahamo",
+  "planName": "ahamo",
+  "monthlyPrice": "¥2,970 for 30GB; ¥4,950 with ahamo oomori 110GB option; confirm official latest price",
+  "dataAmount": "30GB base, 110GB with paid oomori option",
+  "paymentRequirements": ["credit_card", "bank_transfer"],
+  "residenceCardRequired": true,
+  "creditCardRequired": false,
+  "pros": ["docomo network", "simple 30GB base plan", "5-minute domestic calls included with exceptions", "overseas data allowance is included within stated conditions"],
+  "cons": ["online-focused support", "not the cheapest if you use very little data", "optional services and campaign conditions can change"],
+  "recommendedFor": ["medium data users", "people who want a simple docomo-brand online plan", "users who value short domestic calls and overseas data conditions"]
+}

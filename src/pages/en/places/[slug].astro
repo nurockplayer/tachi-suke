@@ -1,0 +1,17 @@
+---
+import { getCollection } from "astro:content";
+import PlaceDetailPage from "@/components/pages/PlaceDetailPage.astro";
+
+export async function getStaticPaths() {
+  const places = (await getCollection("places")).filter((place) => place.data.status === "published");
+
+  return places.map((place) => ({
+    params: { slug: place.data.slug },
+    props: { place }
+  }));
+}
+
+const { place } = Astro.props;
+---
+
+<PlaceDetailPage locale="en" place={place} />

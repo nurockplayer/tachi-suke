@@ -1,4 +1,6 @@
 ---
+import type { Locale } from "@/lib/i18n";
+
 interface Props {
   plan: {
     data?: {
@@ -6,28 +8,109 @@ interface Props {
       planName: string;
       monthlyPrice: string;
       dataAmount: string;
+      paymentRequirements?: string[];
+      residenceCardRequired?: boolean;
+      creditCardRequired?: boolean;
+      pros?: string[];
+      cons?: string[];
       recommendedFor: string[];
     };
     provider?: string;
     planName?: string;
     monthlyPrice?: string;
     dataAmount?: string;
+    paymentRequirements?: string[];
+    residenceCardRequired?: boolean;
+    creditCardRequired?: boolean;
+    pros?: string[];
+    cons?: string[];
     recommendedFor?: string[];
   };
+  locale?: Locale;
 }
 
-const { plan } = Astro.props;
+const { plan, locale = "en" } = Astro.props;
 const data = plan.data ?? plan;
+const labels = {
+  "zh-tw": {
+    price: "月費",
+    data: "資料量",
+    payment: "付款",
+    docs: "文件",
+    creditCard: "日本信用卡",
+    recommendedFor: "適合",
+    pros: "優點",
+    cons: "注意",
+    required: "通常需要確認本人文件",
+    notRequired: "不一定只限信用卡，仍需看官方條件",
+    official: "價格與條件可能變動，申請前請確認官方最新資訊。"
+  },
+  en: {
+    price: "Price",
+    data: "Data",
+    payment: "Payment",
+    docs: "Documents",
+    creditCard: "Japanese credit card",
+    recommendedFor: "Recommended for",
+    pros: "Pros",
+    cons: "Watchouts",
+    required: "Identity documents usually need confirmation",
+    notRequired: "Not necessarily credit-card-only; confirm official conditions",
+    official: "Prices and conditions can change. Check the official site before applying."
+  },
+  ja: {
+    price: "料金",
+    data: "データ",
+    payment: "支払い",
+    docs: "本人確認",
+    creditCard: "日本のクレジットカード",
+    recommendedFor: "向いている人",
+    pros: "よい点",
+    cons: "注意点",
+    required: "本人確認書類の確認が必要です",
+    notRequired: "クレジットカード限定とは限りませんが、公式条件を確認してください",
+    official: "料金や条件は変わる場合があります。申し込み前に公式サイトを確認してください。"
+  },
+  ko: {
+    price: "요금",
+    data: "데이터",
+    payment: "결제",
+    docs: "본인 확인",
+    creditCard: "일본 신용카드",
+    recommendedFor: "추천 대상",
+    pros: "장점",
+    cons: "주의점",
+    required: "본인 확인 서류 확인이 필요할 수 있습니다",
+    notRequired: "신용카드만 가능한 것은 아닐 수 있으나 공식 조건을 확인하세요",
+    official: "요금과 조건은 바뀔 수 있습니다. 신청 전 공식 사이트를 확인하세요."
+  }
+}[locale];
+
+function formatToken(value: string): string {
+  return value.replaceAll("_", " ");
+}
 ---
 
 <article class="mobile-card">
   <h3>{data.provider}</h3>
   <p><strong>{data.planName}</strong></p>
   <ul class="facts">
-    <li><span>{data.monthlyPrice}</span></li>
-    <li><span>{data.dataAmount}</span></li>
+    <li><span>{labels.price}: {data.monthlyPrice}</span></li>
+    <li><span>{labels.data}: {data.dataAmount}</span></li>
+    {typeof data.residenceCardRequired === "boolean" && <li><span>{labels.docs}: {data.residenceCardRequired ? labels.required : "-"}</span></li>}
+    {typeof data.creditCardRequired === "boolean" && <li><span>{labels.creditCard}: {data.creditCardRequired ? "required" : labels.notRequired}</span></li>}
   </ul>
-  {data.recommendedFor && data.recommendedFor.length > 0 && (
-    <p>{data.recommendedFor.join(", ")}</p>
+  {data.paymentRequirements && data.paymentRequirements.length > 0 && (
+    <p><strong>{labels.payment}:</strong> {data.paymentRequirements.map(formatToken).join(", ")}</p>
   )}
+  {data.recommendedFor && data.recommendedFor.length > 0 && (
+    <p><strong>{labels.recommendedFor}:</strong> {data.recommendedFor.join(", ")}</p>
+  )}
+  {data.pros && data.pros.length > 0 && (
+    <p><strong>{labels.pros}:</strong> {data.pros.slice(0, 2).join(", ")}</p>
+  )}
+  {data.cons && data.cons.length > 0 && (
+    <p><strong>{labels.cons}:</strong> {data.cons.slice(0, 2).join(", ")}</p>
+  )}
+  <p class="help-text">{labels.official}</p>
 </article>

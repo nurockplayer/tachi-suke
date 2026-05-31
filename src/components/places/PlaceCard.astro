@@ -1,7 +1,18 @@
 ---
+import { localizePath, type Locale } from "@/lib/i18n";
+import {
+  japaneseDifficultyLabels,
+  nonSmokingStatusLabels,
+  placeFieldLabels,
+  soloFriendlyLabels
+} from "@/lib/places";
+import type { JapaneseDifficulty, NonSmokingStatus, SoloFriendly } from "@/types/place";
+
 interface Props {
   place: {
+    id?: string;
     data?: {
+      slug: string;
       name: string;
       category: string;
       prefecture: string;
@@ -9,12 +20,14 @@ interface Props {
       area: string;
       station: string;
       priceRange: string;
-      soloFriendly: string;
-      nonSmokingStatus: string;
-      japaneseDifficulty: string;
+      soloFriendly: SoloFriendly;
+      nonSmokingStatus: NonSmokingStatus;
+      japaneseDifficulty: JapaneseDifficulty;
       paymentMethods: string[];
+      googleMapUrl?: string;
       officialUrl?: string;
     };
+    slug?: string;
     name?: string;
     category?: string;
     prefecture?: string;
@@ -22,26 +35,38 @@ interface Props {
     area?: string;
     station?: string;
     priceRange?: string;
-    soloFriendly?: string;
-    nonSmokingStatus?: string;
-    japaneseDifficulty?: string;
+    soloFriendly?: SoloFriendly;
+    nonSmokingStatus?: NonSmokingStatus;
+    japaneseDifficulty?: JapaneseDifficulty;
     paymentMethods?: string[];
+    googleMapUrl?: string;
     officialUrl?: string;
   };
+  locale: Locale;
 }
 
-const { place } = Astro.props;
+const { place, locale } = Astro.props;
 const data = place.data ?? place;
+const labels = placeFieldLabels[locale];
+const slug = data.slug ?? place.id;
+const detailHref = slug ? localizePath(locale, `/places/${slug}`) : undefined;
+const soloFriendly = data.soloFriendly ? soloFriendlyLabels[locale][data.soloFriendly] : soloFriendlyLabels[locale].unknown;
+const nonSmokingStatus = data.nonSmokingStatus
+  ? nonSmokingStatusLabels[locale][data.nonSmokingStatus]
+  : nonSmokingStatusLabels[locale].unknown;
+const japaneseDifficulty = data.japaneseDifficulty
+  ? japaneseDifficultyLabels[locale][data.japaneseDifficulty]
+  : japaneseDifficultyLabels[locale].unknown;
 ---
 
 <article class="place-card">
-  <h3>{data.name}</h3>
-  <p>{data.category} · {data.area} · {data.station}</p>
+  <h3>{detailHref ? <a href={detailHref}>{data.name}</a> : data.name}</h3>
+  <p>{[data.category, data.area, data.station].filter(Boolean).join(" · ")}</p>
   <div class="place-tags" aria-label="Place facts">
-    <span>{data.priceRange}</span>
-    <span>Solo: {data.soloFriendly}</span>
-    <span>Non-smoking: {data.nonSmokingStatus}</span>
-    <span>JP: {data.japaneseDifficulty}</span>
+    {data.priceRange && <span>{data.priceRange}</span>}
+    <span>{labels.soloFriendly}: {soloFriendly}</span>
+    <span>{labels.nonSmokingStatus}: {nonSmokingStatus}</span>
+    <span>{labels.japaneseDifficulty}: {japaneseDifficulty}</span>
   </div>
-  {data.officialUrl && <p><a class="text-link" href={data.officialUrl}>Official site</a></p>}
+  {detailHref && <p><a class="text-link" href={detailHref}>{labels.details}</a></p>}
 </article>

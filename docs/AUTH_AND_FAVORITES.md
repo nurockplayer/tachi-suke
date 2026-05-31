@@ -10,6 +10,8 @@ Authentication and favorites are placeholders in Phase 1. The source tree alread
 - `src/components/favorites/`
 - `src/pages/[locale]/account/`
 
+Phase 1 article and place detail pages are public static routes. They do not require login and do not read user data.
+
 ## Future Auth Stack
 
 Recommended stack:
@@ -37,6 +39,8 @@ Phase 3 should support:
 - Submit recommended places
 - View own submission history
 - Track moderation status
+
+The current submit-place page is UI only. It does not submit, store, email, or publish recommendations.
 
 ## Favorite Model
 

@@ -11,18 +11,90 @@ interface Props {
 const { locale } = Astro.props;
 const title = sectionCopy[locale].mobileTitle;
 const plans = await getCollection("mobile-plans");
+const description = {
+  "zh-tw": "比較日本手機門號時，先確認本人文件、付款方式、資料量、通話需求、收訊穩定性與 eSIM，再回官方網站確認最新價格與條件。",
+  en: "Compare Japanese mobile plans by identity documents, payment method, data needs, calling, coverage stability, and eSIM support before checking official conditions.",
+  ja: "本人確認、支払い方法、データ容量、通話、通信エリア、eSIM 対応から日本の携帯プランを比較します。",
+  ko: "본인 확인, 결제 방법, 데이터, 통화, 통신 품질, eSIM 지원을 기준으로 일본 휴대폰 요금제를 비교합니다."
+}[locale];
+const guideTitle = {
+  "zh-tw": "選手機門號時先看什麼",
+  en: "What to check first",
+  ja: "先に確認すること",
+  ko: "먼저 확인할 것"
+}[locale];
+const officialNotice = {
+  "zh-tw": "手機方案的價格、活動、資料量與申請條件都可能變動。這裡是決策整理，不是最終申請條件；申請前請以官方網站最新資訊為準。",
+  en: "Mobile pricing, campaigns, data allowances, and signup rules can change. This page is a decision guide, not final application terms; confirm the official site before applying.",
+  ja: "料金、キャンペーン、データ容量、申し込み条件は変わる場合があります。このページは判断用の整理であり、申し込み前に必ず公式サイトを確認してください。",
+  ko: "요금, 캠페인, 데이터 용량, 신청 조건은 바뀔 수 있습니다. 이 페이지는 판단을 돕는 정리이며 신청 전 공식 사이트를 꼭 확인하세요."
+}[locale];
+const checks = {
+  "zh-tw": [
+    "是否有在留卡或可用的本人確認文件",
+    "是否已經有日本信用卡，或需要口座振替、Paidy、金融卡等替代方式",
+    "每月資料量大約是 3GB、10GB、30GB，還是接近無限量",
+    "是否常打電話，需要 5 分或 10 分內通話方案",
+    "住家、公司、學校與通勤路線的收訊穩定性",
+    "是否需要 eSIM 或雙 SIM"
+  ],
+  en: [
+    "Whether you have a residence card or usable identity documents",
+    "Whether you have a Japanese credit card or need bank transfer, Paidy, debit, or another option",
+    "Whether your monthly data use is closer to 3GB, 10GB, 30GB, or very high",
+    "Whether you make enough calls to need included 5-minute or 10-minute calling",
+    "Coverage around home, work, school, and commute routes",
+    "Whether you need eSIM or dual SIM"
+  ],
+  ja: [
+    "在留カードなどの本人確認書類が使えるか",
+    "日本のクレジットカードがあるか、口座振替などが必要か",
+    "毎月のデータ量が 3GB、10GB、30GB、または大容量か",
+    "5分・10分以内の通話定額が必要か",
+    "自宅、職場、学校、通勤経路の通信エリア",
+    "eSIM やデュアル SIM が必要か"
+  ],
+  ko: [
+    "재류카드 등 본인 확인 서류를 사용할 수 있는지",
+    "일본 신용카드가 있는지, 계좌이체나 다른 결제 방법이 필요한지",
+    "월 데이터 사용량이 3GB, 10GB, 30GB 또는 대용량인지",
+    "5분 또는 10분 통화 포함이 필요한지",
+    "집, 회사, 학교, 통근 경로의 통신 품질",
+    "eSIM 또는 듀얼 SIM이 필요한지"
+  ]
+}[locale];
 ---
 
-<BaseLayout locale={locale} title={title} description={`${title} | TachiSuke`}>
+<BaseLayout locale={locale} title={title} description={description}>
   <section class="page-hero">
     <div class="container">
       <h1>{title}</h1>
-      <p>{locale === "zh-tw" ? "用文件、付款方式、資料量、收訊與申請難度比較日本手機方案。" : locale === "en" ? "Compare Japanese mobile plans by documents, payment methods, data, coverage, and setup difficulty." : locale === "ja" ? "本人確認、支払い方法、データ容量、通信エリア、申し込みやすさで比較します。" : "서류, 결제 방법, 데이터, 통신 품질, 신청 난이도로 비교합니다."}</p>
+      <p>{description}</p>
     </div>
   </section>
   <section class="section">
     <div class="container grid grid-2">
-      {plans.map((plan) => <MobilePlanCard plan={plan} />)}
+      <article class="notice">
+        <h2>{guideTitle}</h2>
+        <ul class="check-list">
+          {checks.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+      <aside class="notice">
+        <h2>{locale === "zh-tw" ? "申請前提醒" : locale === "en" ? "Before applying" : locale === "ja" ? "申し込み前の注意" : "신청 전 확인"}</h2>
+        <p>{officialNotice}</p>
+      </aside>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container section-header">
+      <div>
+        <h2>{locale === "zh-tw" ? "方案比較資料" : locale === "en" ? "Plan comparison data" : locale === "ja" ? "プラン比較データ" : "요금제 비교 데이터"}</h2>
+        <p>{locale === "zh-tw" ? "先用這些資料排除不適合的方案，再到官方網站確認最新條件。" : locale === "en" ? "Use these notes to narrow your shortlist, then confirm the official terms." : locale === "ja" ? "ここで候補を絞り、最後に公式条件を確認してください。" : "이 정보로 후보를 줄인 뒤 공식 조건을 확인하세요."}</p>
+      </div>
+    </div>
+    <div class="container grid grid-2">
+      {plans.map((plan) => <MobilePlanCard plan={plan} locale={locale} />)}
     </div>
   </section>
 </BaseLayout>

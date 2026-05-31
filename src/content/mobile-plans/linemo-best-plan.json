@@ -3,12 +3,12 @@
   "slug": "linemo-best-plan",
   "provider": "LINEMO",
   "planName": "Best Plan",
-  "monthlyPrice": "from ¥990",
-  "dataAmount": "3GB to 10GB tier",
-  "paymentRequirements": ["credit_card", "bank_transfer_limited"],
+  "monthlyPrice": "from ¥990; confirm current official price",
+  "dataAmount": "3GB to 10GB tier; Best Plan V offers larger data",
+  "paymentRequirements": ["credit_card", "bank_transfer", "confirm PayPay-related conditions on official site"],
   "residenceCardRequired": true,
   "creditCardRequired": false,
-  "pros": ["online signup", "SoftBank network", "simple pricing"],
-  "cons": ["limited in-store support"],
-  "recommendedFor": ["light data users", "people who prefer online setup"]
+  "pros": ["online signup", "SoftBank network", "simple low-to-medium data tiers", "eSIM support should be checked during signup"],
+  "cons": ["online-only support", "campaigns and plan tiers can change", "call charges may apply outside included conditions"],
+  "recommendedFor": ["light to medium data users", "people who prefer online setup", "users who want a SoftBank-brand option without full carrier pricing"]
 }
