@@ -67,7 +67,11 @@ const requiredFiles = [
   "tsconfig.json",
   "package.json",
   "pnpm-lock.yaml",
+  "public/_headers",
   "src/pages/index.astro",
+  "src/pages/sitemap.xml.ts",
+  "src/pages/robots.txt.ts",
+  "src/pages/site.webmanifest.ts",
   "src/content.config.ts",
   "src/components/layout/BaseLayout.astro",
   "src/components/layout/Header.astro",
@@ -92,6 +96,7 @@ const requiredFiles = [
   "src/types/favorite.ts",
   "src/types/user.ts",
   "src/types/submission.ts",
+  "public/images/og-default.svg",
   "docs/PROJECT_SPEC.md",
   "docs/PAGE_SPEC.md",
   "docs/CONTENT_MODEL.md",
@@ -164,7 +169,22 @@ describe("TachiSuke project scaffold", () => {
     assert.match(packageJson.packageManager, /^pnpm@10/);
     assert.equal(packageJson.scripts.preinstall, undefined);
     assert.equal(packageJson.scripts["check:links"], "node tests/static-html-links.test.mjs");
+    assert.equal(packageJson.scripts["check:seo"], "node --test tests/seo-output.test.mjs");
     assert.equal(existsSync(join(root, "tests/static-html-links.test.mjs")), true, "static HTML link crawler should exist");
+    assert.equal(existsSync(join(root, "tests/seo-output.test.mjs")), true, "static SEO output check should exist");
+  });
+
+  it("includes static SEO discovery and social metadata hooks", () => {
+    const baseLayout = readFileSync(join(root, "src/components/layout/BaseLayout.astro"), "utf8");
+    assert.match(baseLayout, /robots\?:\s*string/, "BaseLayout should accept optional robots metadata");
+    assert.match(baseLayout, /<meta\s+name="robots"\s+content=\{robots\}/, "BaseLayout should render robots metadata when provided");
+    assert.match(baseLayout, /rel="manifest"\s+href="\/site\.webmanifest"/, "BaseLayout should link the web manifest");
+    assert.match(baseLayout, /property="og:image"/, "BaseLayout should include an Open Graph image");
+    assert.match(baseLayout, /name="twitter:card"\s+content="summary_large_image"/, "BaseLayout should include a summary_large_image card");
+    assert.match(baseLayout, /name="twitter:image"/, "BaseLayout should include a Twitter image");
+
+    const accountPage = readFileSync(join(root, "src/components/pages/AccountPlaceholderPage.astro"), "utf8");
+    assert.match(accountPage, /robots="noindex,\s*nofollow"/, "account placeholder pages should be noindex");
   });
 
   it("configures submit-place as a provider-agnostic static form", () => {

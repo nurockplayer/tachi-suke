@@ -11,6 +11,7 @@ All public pages should:
 - Set a meaningful `<title>` and meta description through `BaseLayout`.
 - Set `<html lang>` from the route locale.
 - Include canonical and Open Graph metadata.
+- Include a manifest link, default Open Graph image, and Twitter summary metadata.
 - Keep `hreflang` conservative. Detail pages should only link to alternates that exist.
 - Avoid requiring login for public content.
 
@@ -29,6 +30,54 @@ All public pages should:
 **Current status:** Implemented.
 
 **Future notes:** Consider redirecting based on browser language only after confirming SEO and user-experience tradeoffs.
+
+## `/sitemap.xml`
+
+**Purpose:** Machine-readable discovery map for search engines.
+
+**User goal:** Not user-facing; supports crawling and indexing of public content.
+
+**Data source:** Static route list, supported locales, `articles`, `areas`, `places`, and `mobile-plans` content collections.
+
+**Rendering mode:** Static Astro endpoint.
+
+**SEO requirements:** Include public locale roots, section pages, non-draft article detail pages, published place detail pages, area detail pages, mobile plan detail pages, and submit-place thanks pages. Exclude account placeholder routes, draft articles, and non-published places.
+
+**Current status:** Implemented.
+
+**Future notes:** Add tool detail URLs if `/[locale]/tools/[slug]` is introduced.
+
+## `/robots.txt`
+
+**Purpose:** Crawler guidance and sitemap discovery.
+
+**User goal:** Not user-facing; tells crawlers where the sitemap lives and which placeholder paths should not be crawled.
+
+**Data source:** Supported locales and configured Astro `site` URL.
+
+**Rendering mode:** Static Astro endpoint.
+
+**SEO requirements:** Allow public content, disallow `/[locale]/account/`, and reference `/sitemap.xml`.
+
+**Current status:** Implemented.
+
+**Future notes:** Revisit once account pages become protected dynamic routes.
+
+## `/site.webmanifest`
+
+**Purpose:** Browser/app identity metadata.
+
+**User goal:** Let browsers identify TachiSuke consistently if saved or installed.
+
+**Data source:** Static brand metadata.
+
+**Rendering mode:** Static Astro endpoint.
+
+**SEO requirements:** Include name, short name, description, start URL, theme color, and icons.
+
+**Current status:** Implemented.
+
+**Future notes:** Replace SVG-only icons with a fuller icon set before a polished PWA launch.
 
 ## `/zh-tw/`, `/en/`, `/ja/`, `/ko/`
 
@@ -248,7 +297,7 @@ All public pages should:
 
 **Rendering mode:** Static Astro placeholder page through `AccountPlaceholderPage`.
 
-**SEO requirements:** Basic no-surprise metadata. This page should not imply that authentication exists.
+**SEO requirements:** Basic no-surprise metadata with `noindex, nofollow`. This page should not imply that authentication exists and should not be promoted for search indexing.
 
 **Current status:** Placeholder only.
 
@@ -264,7 +313,7 @@ All public pages should:
 
 **Rendering mode:** Static Astro placeholder page through `AccountPlaceholderPage`.
 
-**SEO requirements:** Basic no-surprise metadata. This page should not imply that real favorites exist.
+**SEO requirements:** Basic no-surprise metadata with `noindex, nofollow`. This page should not imply that real favorites exist and should not be promoted for search indexing.
 
 **Current status:** Placeholder only.
 
@@ -280,7 +329,7 @@ All public pages should:
 
 **Rendering mode:** Static Astro placeholder page through `AccountPlaceholderPage`.
 
-**SEO requirements:** Basic no-surprise metadata. This page should not imply that submission history exists.
+**SEO requirements:** Basic no-surprise metadata with `noindex, nofollow`. This page should not imply that submission history exists and should not be promoted for search indexing.
 
 **Current status:** Placeholder only.
 

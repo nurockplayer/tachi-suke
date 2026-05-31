@@ -13,6 +13,7 @@ TachiSuke is not a generic travel blog. The goal is to provide comparisons, chec
 - pnpm only
 - Static Site Generation first
 - Locale-prefixed i18n routing
+- Cloudflare Pages-oriented static deployment
 
 Supported locales:
 
@@ -48,10 +49,14 @@ Implemented:
 - Article, Place, AreaGuide, MobilePlan, Favorite, UserProfile, and PlaceSubmission type boundaries
 - Unified Place enum values
 - SEO-oriented `BaseLayout`
+- Generated `sitemap.xml`, `robots.txt`, and `site.webmanifest`
+- Default Open Graph image and Twitter summary metadata
+- Cloudflare Pages `_headers` for conservative security and cache defaults
 - Conservative locale switcher behavior for detail pages with missing translations
 - `SITE_URL` environment variable fallback
 - Structure and conservative internal-link tests in `tests/project-structure.test.mjs`
 - Build-output static HTML internal link crawler in `tests/static-html-links.test.mjs`
+- Build-output SEO check in `tests/seo-output.test.mjs`
 
 Still placeholder-only:
 
@@ -96,6 +101,9 @@ Locale routes:
 - `/[locale]/account/login`
 - `/[locale]/account/favorites`
 - `/[locale]/account/submissions`
+- `/sitemap.xml`
+- `/robots.txt`
+- `/site.webmanifest`
 
 Article detail pages are generated only for non-draft articles. Place detail pages are generated only for places where `status = published`.
 Area and mobile plan detail pages are generated from the current static content collections.
@@ -134,6 +142,12 @@ Check internal links in built HTML after build:
 pnpm check:links
 ```
 
+Check generated SEO output after build:
+
+```bash
+pnpm check:seo
+```
+
 Preview production build:
 
 ```bash
@@ -145,8 +159,9 @@ Recommended verification order:
 1. `pnpm test`
 2. `pnpm build`
 3. `pnpm check:links`
+4. `pnpm check:seo`
 
-`pnpm test` checks source-level structure and content links. `pnpm check:links` scans built `dist/**/*.html`, so run `pnpm build` first.
+`pnpm test` checks source-level structure and content links. `pnpm check:links` scans built `dist/**/*.html`. `pnpm check:seo` checks built `sitemap.xml`, `robots.txt`, `site.webmanifest`, and Cloudflare headers. Run `pnpm build` before both build-output checks.
 
 ## Environment Variables
 
@@ -174,6 +189,19 @@ cp .env.example .env
 
 Use the real deployment URL when the production domain is decided.
 
+## Deployment
+
+Preferred Phase 1 deployment target: Cloudflare Pages static output.
+
+Recommended production settings:
+
+- Build command: `pnpm build`
+- Output directory: `dist`
+- Environment variable: `SITE_URL=https://your-production-domain.example`
+- Optional environment variable: `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT=https://your-form-endpoint.example`
+
+Astro remains the preferred frontend stack for the current content-first MVP. A Next.js migration should wait until the product has a concrete SSR requirement, such as authenticated account pages, personalized saved lists, or server-side workflows.
+
 ## Place Enum Values
 
 Published Place entries use these enum values:
@@ -198,6 +226,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - Keep content decision-oriented rather than tourist-oriented.
 - Treat mobile plan prices, campaigns, and eligibility rules as changeable; users must confirm official sites before applying.
 - Run `pnpm test`, `pnpm build`, and `pnpm check:links` before reporting completion when relevant.
+- Run `pnpm check:seo` after `pnpm build` when changing SEO, routing, metadata, or deployment files.
 
 ## Documentation Map
 

@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1C submit-place workflow work. It should not be read as a promise that auth, database, database-backed submissions, or favorites already work.
+This document records the current MVP state after Phase 1D SEO launch-readiness work. It should not be read as a promise that auth, database, database-backed submissions, or favorites already work.
 
 ## Completed
 
@@ -38,9 +38,15 @@ This document records the current MVP state after Phase 1C submit-place workflow
 - Place list/detail public filtering by `status = published`.
 - Article list/detail public filtering by `draft = false`.
 - SEO base layout with title, description, canonical URL, Open Graph URL, Open Graph site name, locale-aware `html lang`, and conservative `hreflang`.
+- Default Open Graph image, Twitter summary metadata, and manifest link in `BaseLayout`.
+- Generated `sitemap.xml` for public static routes and content collection detail pages.
+- Generated `robots.txt` with sitemap reference and account placeholder disallow rules.
+- Generated `site.webmanifest`.
+- Cloudflare Pages `_headers` with conservative security and cache defaults.
 - Structure tests in `tests/project-structure.test.mjs`.
 - Conservative article internal-link checks for locale-prefixed static/generated routes.
 - Static HTML internal link crawler in `tests/static-html-links.test.mjs`, run after `pnpm build` with `pnpm check:links`.
+- Static SEO output check in `tests/seo-output.test.mjs`, run after `pnpm build` with `pnpm check:seo`.
 - Locale switcher links for detail pages use conservative alternate paths so missing article translations do not create dead links.
 - Submit-place form uses `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT`: unset means preview mode/disabled submit; set means a static `POST` to the external endpoint.
 - Submit-place includes provider-agnostic hidden fields and a visually hidden `website` honeypot field for basic spam reduction.
@@ -90,6 +96,8 @@ These are intentionally present but not functional:
 - `pnpm test` scans Markdown article links and generated/static source routes.
 - `pnpm check:links` scans built static HTML root-relative links in `dist/`, but it does not validate external links, anchors, JavaScript behavior, or visual rendering.
 - Account pages are static placeholders and do not protect user data because no user data exists yet.
+- Account placeholder pages are marked `noindex, nofollow` and excluded from the sitemap.
+- Cloudflare Pages is the preferred static deployment target for Phase 1. Set `SITE_URL` to the production domain before launch.
 - Browser QA currently covers basic route/card/form checks, not a full accessibility or visual regression suite.
 
 ## Verification Results
@@ -100,6 +108,7 @@ Most recent recorded verification:
 - `pnpm test`: passed
 - `pnpm build`: passed
 - `pnpm check:links`: passed
+- `pnpm check:seo`: passed
 - Browser QA: basic route/card/form check passed
 
 Browser QA covered:
@@ -113,8 +122,8 @@ Browser QA covered:
 ## Next Recommended Tasks
 
 1. Add more real content for renting, administrative procedures, transportation, and practical Japanese.
-2. Add richer localized area and mobile plan copy where the current shared data feels too generic.
-3. Improve related-content navigation inside article/detail pages.
-4. Add a fuller external link checker or scheduled source-review workflow when route count grows.
-5. Choose and configure an external form provider for `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT`.
+2. Add related-content navigation inside article/detail pages.
+3. Add schema.org JSON-LD for articles, places, breadcrumbs, and mobile plan comparison pages.
+4. Choose and configure an external form provider for `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT`.
+5. Add a fuller external link checker or scheduled source-review workflow when route count grows.
 6. Start Supabase Auth, profiles, favorites, and RLS only in Phase 2.

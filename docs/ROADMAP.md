@@ -116,6 +116,31 @@ Operational decisions still needed:
 - Whether provider-specific redirect field mapping is required instead of `redirectUrl`.
 - How approved submissions become public static content.
 
+## Phase 1D: SEO and Launch Readiness
+
+Status: implemented.
+
+Goal:
+
+Make the static MVP easier to crawl, preview, and deploy on Cloudflare Pages.
+
+Implemented:
+
+- Generated `sitemap.xml` from static routes and content collections.
+- Generated `robots.txt` with sitemap reference and account placeholder disallow rules.
+- Generated `site.webmanifest` with TachiSuke brand metadata.
+- Default Open Graph image and Twitter summary metadata.
+- Account placeholder pages marked `noindex, nofollow`.
+- Cloudflare Pages `_headers` for conservative security and cache defaults.
+- `pnpm check:seo` for post-build SEO output verification.
+
+Rules:
+
+- Keep Astro as the frontend stack while the product is content-first and static-first.
+- Use Cloudflare Pages as the preferred Phase 1 deployment target.
+- Set `SITE_URL` to the production domain before launch.
+- Do not migrate to Next.js until SSR/account/personalization requirements are concrete.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.

@@ -92,6 +92,7 @@ pnpm dev
 pnpm test
 pnpm build
 pnpm check:links
+pnpm check:seo
 pnpm preview
 ```
 
@@ -165,6 +166,16 @@ Phase 1C adds submit-place workflow MVP:
 - Submit-place thanks pages exist at `/[locale]/submit-place/thanks`.
 - Hidden fields should include `formName`, `source`, `locale`, `moderationRequired`, `publishDirectly`, and `redirectUrl`.
 - Honeypot is basic spam reduction only; do not add captcha or large anti-spam dependencies in Phase 1C.
+
+Phase 1D adds SEO and launch readiness:
+
+- Generate `sitemap.xml`, `robots.txt`, and `site.webmanifest`.
+- Keep account placeholder routes accessible but `noindex, nofollow`.
+- Exclude account placeholders, draft articles, and non-published places from the sitemap.
+- Include default Open Graph image and Twitter summary metadata.
+- Prefer Cloudflare Pages static deployment with `pnpm build` and `dist`.
+- Set `SITE_URL` to the production domain before launch.
+- Keep Astro unless SSR/account/personalization requirements justify a future migration.
 
 Mobile plan prices, campaigns, payment methods, and identity requirements can change. Always phrase mobile data as editorial guidance and remind users to confirm official carrier pages before applying.
 Area rent feel, quietness, and commute convenience can also become stale. Keep area pages date-aware and practical rather than sightseeing-oriented.
@@ -262,9 +273,12 @@ Before reporting completion when possible:
 pnpm test
 pnpm build
 pnpm check:links
+pnpm check:seo
 ```
 
 For Phase 1B/1B.5 content work, `pnpm test` should cover content depth and conservative source-level internal link checks. `pnpm check:links` scans built static HTML in `dist/`, so run `pnpm build` first. It does not validate external URLs, anchors, JavaScript behavior, or visual rendering.
+
+For SEO/routing/deployment work, run `pnpm check:seo` after `pnpm build`; it verifies generated sitemap, robots, manifest, and Cloudflare headers.
 
 For package or scaffold work, also check that forbidden lockfiles were not introduced:
 

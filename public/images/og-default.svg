@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">TachiSuke - Japan Life Assistant</title>
+  <desc id="desc">Open Graph image for TachiSuke, a multilingual Japan life decision assistant.</desc>
+  <rect width="1200" height="630" fill="#f8f7f2"/>
+  <rect x="72" y="72" width="1056" height="486" rx="28" fill="#ffffff"/>
+  <path d="M72 164h1056" stroke="#d9e5df" stroke-width="2"/>
+  <circle cx="120" cy="118" r="14" fill="#d85c4a"/>
+  <circle cx="164" cy="118" r="14" fill="#e3b74f"/>
+  <circle cx="208" cy="118" r="14" fill="#3d8b77"/>
+  <text x="112" y="272" fill="#1f332f" font-family="Arial, Helvetica, sans-serif" font-size="78" font-weight="700">TachiSuke</text>
+  <text x="116" y="344" fill="#25635c" font-family="Arial, Helvetica, sans-serif" font-size="36" font-weight="700">Japan Life Assistant</text>
+  <text x="116" y="418" fill="#42524d" font-family="Arial, Helvetica, sans-serif" font-size="30">A multilingual decision guide for living in Japan.</text>
+  <text x="116" y="476" fill="#42524d" font-family="Arial, Helvetica, sans-serif" font-size="28">Mobile plans · Area guides · Useful places · Daily procedures</text>
+  <path d="M868 248c60 0 108 48 108 108s-48 108-108 108-108-48-108-108 48-108 108-108Z" fill="#e7f0ec"/>
+  <path d="M868 286v142M797 357h142" stroke="#25635c" stroke-width="22" stroke-linecap="round"/>
+</svg>
