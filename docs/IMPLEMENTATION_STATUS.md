@@ -36,6 +36,7 @@ This document records the current MVP state after Phase 1S static search work. I
 - Four locale about pages.
 - Four locale privacy pages.
 - Four locale editorial policy pages.
+- Static `llms.txt` discovery file for public AI/search-adjacent tooling.
 - Custom static `404.html` recovery page with multilingual links and `noindex, nofollow`.
 - Four locale account login placeholder pages.
 - Four locale account favorites placeholder pages.
@@ -65,6 +66,7 @@ This document records the current MVP state after Phase 1S static search work. I
 - Visible breadcrumbs on article detail, article category, place detail, mobile plan detail, area detail, and tool detail pages.
 - Generated `sitemap.xml` for public static routes and content collection detail pages.
 - Generated `robots.txt` with sitemap reference and account placeholder disallow rules.
+- Generated `llms.txt` with public discovery links and content caveats.
 - Generated `site.webmanifest`.
 - Generated global `feed.xml` for non-draft public articles.
 - Generated locale RSS feeds at `/zh-tw/feed.xml`, `/en/feed.xml`, `/ja/feed.xml`, and `/ko/feed.xml` for same-locale non-draft public articles.

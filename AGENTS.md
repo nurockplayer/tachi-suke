@@ -136,6 +136,7 @@ Current public route pattern:
 - `/[locale]/account/favorites`
 - `/[locale]/account/submissions`
 - `/[locale]/feed.xml`
+- `/llms.txt`
 
 Content translations should use `locale` and `translationKey`. Missing translations should fall back to English, then Traditional Chinese, or show a clear missing-content state.
 
@@ -145,7 +146,7 @@ Do not use Simplified Chinese unless explicitly requested.
 
 Phase 1 is content-first, SEO-friendly, i18n-ready, auth-ready, database-ready, and favorites-ready.
 
-Current MVP includes static pages, article publishing, place detail pages, mobile/area/tool detail pages, static submit-place and contact/corrections external endpoint support, placeholder account pages, placeholder favorites, content collections, and SEO metadata.
+Current MVP includes static pages, article publishing, place detail pages, mobile/area/tool detail pages, static submit-place and contact/corrections external endpoint support, placeholder account pages, placeholder favorites, content collections, SEO metadata, RSS feeds, static search indexes, and `llms.txt` discovery.
 
 Phase 1B adds public-preview content depth:
 
@@ -176,7 +177,7 @@ Phase 1C adds submit-place workflow MVP:
 
 Phase 1D adds SEO and launch readiness:
 
-- Generate `sitemap.xml`, `robots.txt`, and `site.webmanifest`.
+- Generate `sitemap.xml`, `robots.txt`, `llms.txt`, and `site.webmanifest`.
 - Keep account placeholder routes accessible but `noindex, nofollow`.
 - Exclude account placeholders, draft articles, and non-published places from the sitemap.
 - Include default Open Graph image and Twitter summary metadata.
@@ -318,6 +319,12 @@ Phase 1Z adds correction prompt URL prefill:
 - Detail-page correction prompts may append an encoded absolute `relatedUrl` query value for the current public page.
 - Contact/corrections may use small browser-side JavaScript to prefill the optional related URL field.
 - Prefill must stay progressive enhancement only; do not change endpoint behavior, add tracking, or add server-side storage.
+
+Phase 1AA adds `llms.txt` discovery:
+
+- Keep `/llms.txt` static, concise, and plain text.
+- Link only to public discovery surfaces such as sitemap, RSS feeds, locale roots, section pages, and static search indexes.
+- Do not include account placeholders, drafts, private data, analytics, crawling, or AI runtime behavior.
 
 Phase 1Q adds a static custom 404 page:
 

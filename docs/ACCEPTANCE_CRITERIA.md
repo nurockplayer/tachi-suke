@@ -240,6 +240,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - `sitemap.xml` must include public locale roots, section pages, locale RSS feeds, non-draft article details, article category pages, published place details, area details, mobile plan details, published tool details, submit-place thanks pages, contact/corrections pages, and launch trust pages.
 - `sitemap.xml` must exclude account placeholder routes, draft articles, non-published places, non-published tools, search pages, and search index JSON endpoints.
 - `robots.txt` must reference the sitemap and disallow `/[locale]/account/`.
+- `llms.txt` must be generated as plain text, summarize the product positioning, and link only to public discovery surfaces such as sitemap, RSS feeds, locale roots, and search indexes.
 - `feed.xml` must be generated as an RSS 2.0 feed for non-draft public article detail pages.
 - `/[locale]/feed.xml` must be generated as an RSS 2.0 feed for same-locale non-draft public article detail pages.
 - Public pages should include an RSS alternate link to `/feed.xml` and a current-locale RSS alternate link to `/[locale]/feed.xml`.

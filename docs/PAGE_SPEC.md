@@ -64,6 +64,22 @@ All public pages should:
 
 **Future notes:** Revisit once account pages become protected dynamic routes.
 
+## `/llms.txt`
+
+**Purpose:** Plain-text discovery summary for AI assistants and search-adjacent tools.
+
+**User goal:** Help tooling understand TachiSuke's positioning, supported locales, public discovery URLs, and content caveats without crawling private or placeholder pages.
+
+**Data source:** Static endpoint copy in `src/pages/llms.txt.ts`, locale configuration, and the configured Astro `site` URL.
+
+**Rendering mode:** Static Astro endpoint.
+
+**SEO requirements:** The file should remain plain text, use the configured canonical site URL, link only to public static discovery surfaces, and avoid private, draft, account, or placeholder data.
+
+**Current status:** Implemented in Phase 1AA. It includes locale roots, sitemap, global/locale RSS feeds, static search indexes, public section links, and freshness caveats.
+
+**Future notes:** Keep this file concise and editorially accurate. Do not turn it into an AI runtime feature, analytics endpoint, or private content dump.
+
 ## `/site.webmanifest`
 
 **Purpose:** Browser/app identity metadata.
