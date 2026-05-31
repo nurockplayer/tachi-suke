@@ -74,6 +74,7 @@ describe("static SEO output", () => {
       "/ko/places/dennys",
       "/en/tools/moving-to-japan-checklist",
       "/zh-tw/tools/moving-to-japan-checklist",
+      "/en/tools/japan-rent-initial-cost-checklist",
       "/zh-tw/submit-place/thanks",
       "/en/privacy",
       "/zh-tw/editorial-policy"
@@ -172,5 +173,9 @@ describe("static SEO output", () => {
     assert.ok(hasJsonLdType(objects, "WebPage"), "tool page should include WebPage JSON-LD");
     assert.ok(hasJsonLdType(objects, "ItemList"), "tool page should include ItemList JSON-LD");
     assert.ok(hasJsonLdType(objects, "BreadcrumbList"), "tool page should include BreadcrumbList JSON-LD");
+
+    const rentTool = readHtml("en/tools/japan-rent-initial-cost-checklist/index.html");
+    assert.match(rentTool, /Japan Rent Initial Cost Checklist/, "rent initial cost tool should build a detail page");
+    assert.match(rentTool, /key money/i, "rent initial cost tool should include practical renting cost content");
   });
 });

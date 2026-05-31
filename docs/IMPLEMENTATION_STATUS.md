@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1H static tool detail work. It should not be read as a promise that auth, database, database-backed submissions, saved checklist state, or favorites already work.
+This document records the current MVP state after Phase 1N static rent-cost tool work. It should not be read as a promise that auth, database, database-backed submissions, saved checklist state, or favorites already work.
 
 ## Completed
 
@@ -23,7 +23,7 @@ This document records the current MVP state after Phase 1H static tool detail wo
 - Four locale mobile detail routes at `/[locale]/mobile/[slug]`.
 - Four locale tools index pages showing published tool cards.
 - Four locale tool detail routes at `/[locale]/tools/[slug]`.
-- First published static checklist tool: `moving-to-japan-checklist`.
+- Published static checklist tools: `moving-to-japan-checklist` and `japan-rent-initial-cost-checklist`.
 - Four locale submit-place form pages with provider-agnostic endpoint support.
 - Four locale submit-place thanks pages.
 - Four locale about pages.
@@ -104,7 +104,7 @@ These are intentionally present but not functional:
 ## Known Limitations
 
 - Content volume is still early editorial sample-level, though Phase 1B now has enough pages for public preview.
-- Tools currently include one static checklist. Checklist state is not saved and there is no user-specific progress tracking.
+- Tools currently include two static checklists. Checklist state is not saved and there is no user-specific progress tracking.
 - Areas and mobile plans now have detail pages, but the content is still static editorial guidance rather than live data.
 - Mobile plan prices, campaigns, and conditions can change, so users must confirm official sites before applying.
 - Area rent feel, quietness, and commute notes can become stale and need periodic editorial review.
@@ -148,7 +148,7 @@ Browser QA covered:
 ## Next Recommended Tasks
 
 1. Add more real content for renting, administrative procedures, transportation, and practical Japanese.
-2. Add more practical tools, starting with rent initial-cost and first-week setup checklists.
+2. Add more practical tools, starting with first-week setup, ward-office procedure, and commuter pass checklists.
 3. Choose and configure an external form provider for `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT`.
 4. Add a fuller external link checker or scheduled source-review workflow when route count grows.
 5. Add a production contact/correction flow that still avoids direct public posting.

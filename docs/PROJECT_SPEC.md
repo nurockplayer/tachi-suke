@@ -147,7 +147,7 @@ The MVP includes:
 - Mobile plan detail pages generated from JSON content with official URLs, `lastCheckedAt`, source notes, caveats, pros, cons, and recommended fit
 - Tools index pages with published tool cards
 - Tool detail pages generated from JSON content with localized checklist sections, source notes, caveats, and `lastCheckedAt`
-- First published tool: `moving-to-japan-checklist`
+- Published tools: `moving-to-japan-checklist`, `japan-rent-initial-cost-checklist`
 - Submit-place form with preview mode, external endpoint support, hidden moderation metadata, and thanks pages
 - About pages
 - Account placeholder pages
@@ -252,6 +252,7 @@ Priority content types:
 
 - Mobile plan comparisons
 - First-week Japan setup checklists
+- Rent initial-cost checklists
 - Renting and neighborhood guides
 - Administrative procedure guides
 - Practical Japanese phrase guides
