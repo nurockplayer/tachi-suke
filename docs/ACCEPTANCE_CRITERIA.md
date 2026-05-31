@@ -76,6 +76,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Article category pages must use `getStaticPaths`.
 - Article category pages must generate only categories that have matching-locale, non-draft articles.
 - Article category pages must list only matching-locale, non-draft articles.
+- Known article categories should have localized title and description copy instead of exposing raw category keys.
 - Article index and detail pages should link to generated category pages.
 - Draft articles must not be public.
 - Article SEO must use article title and description.

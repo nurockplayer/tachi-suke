@@ -350,6 +350,8 @@ describe("TachiSuke project scaffold", () => {
     assert.match(categoryHelper, /export function slugifyArticleCategory/, "category helper should expose a stable category slugifier");
     assert.match(categoryHelper, /export async function getArticleCategoryStaticPaths/, "category helper should expose category static paths");
     assert.match(categoryHelper, /getCollection\("articles"[\s\S]*!data\.draft/, "category helper should use only non-draft articles");
+    assert.match(categoryHelper, /transportation/, "category helper should include localized transportation category copy");
+    assert.match(categoryHelper, /procedures/, "category helper should include localized procedures category copy");
 
     const categoryPage = readFileSync(join(root, "src/components/pages/ArticleCategoryPage.astro"), "utf8");
     assert.match(categoryPage, /slugifyArticleCategory/, "ArticleCategoryPage should use category slugs");
