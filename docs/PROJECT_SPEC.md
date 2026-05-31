@@ -171,6 +171,7 @@ The MVP includes:
 - Visible breadcrumbs for nested public article, category, place, mobile plan, area, and tool pages
 - Static article table of contents generated from Markdown/MDX headings
 - Cloudflare Pages `_headers` for conservative security and cache defaults
+- Cloudflare Pages `_redirects` for temporary English fallbacks from common locale-less public paths
 - Cloudflare Pages `wrangler.toml` metadata for `dist` static output
 - `SITE_URL` environment variable with example-domain fallback
 - Structure tests in `tests/project-structure.test.mjs`
@@ -316,6 +317,7 @@ Reserved boundaries:
 Current deployment direction:
 
 - Prefer Cloudflare Pages for Phase 1 static deployment.
+- Keep canonical URLs locale-prefixed; locale-less redirects are deployment fallbacks only.
 - Use `pnpm build` with output directory `dist`.
 - Keep `wrangler.toml` free of secrets and limited to Pages-safe project metadata.
 - Set `SITE_URL` to the production domain so canonical URLs, sitemap URLs, robots sitemap reference, and Open Graph URLs are correct.

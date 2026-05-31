@@ -70,6 +70,7 @@ const requiredFiles = [
   "package.json",
   "pnpm-lock.yaml",
   "public/_headers",
+  "public/_redirects",
   "src/pages/index.astro",
   "src/pages/404.astro",
   "src/pages/sitemap.xml.ts",
@@ -239,6 +240,12 @@ describe("TachiSuke project scaffold", () => {
       assert.match(deploymentDocs, new RegExp(term.replaceAll("/", "\\/")), `deployment docs should mention ${term}`);
     }
     assert.doesNotMatch(deploymentDocs, /CLOUDFLARE_API_TOKEN=.*[A-Za-z0-9_-]{16,}/, "deployment docs should not include a real API token");
+
+    const redirects = readFileSync(join(root, "public/_redirects"), "utf8");
+    assert.match(redirects, /^\/articles\s+\/en\/articles\s+302/m, "_redirects should send locale-less articles to English");
+    assert.match(redirects, /^\/mobile\/\*\s+\/en\/mobile\/:splat\s+302/m, "_redirects should preserve mobile plan slugs");
+    assert.match(redirects, /^\/contact\s+\/en\/contact\s+302/m, "_redirects should send locale-less contact to English");
+    assert.doesNotMatch(redirects, /\/account/, "_redirects should not expose account placeholder fallbacks");
   });
 
   it("includes static SEO discovery and social metadata hooks", () => {

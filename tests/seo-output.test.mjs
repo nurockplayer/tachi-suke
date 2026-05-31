@@ -47,6 +47,7 @@ describe("static SEO output", () => {
     const robots = readDist("robots.txt");
     const manifest = JSON.parse(readDist("site.webmanifest"));
     const headers = readDist("_headers");
+    const redirects = readDist("_redirects");
     const feed = readDist("feed.xml");
     const englishFeed = readDist("en/feed.xml");
     const llms = readDist("llms.txt");
@@ -64,6 +65,9 @@ describe("static SEO output", () => {
     assert.equal(manifest.start_url, "/");
     assert.ok(Array.isArray(manifest.icons) && manifest.icons.length > 0, "manifest should include icons");
     assert.match(headers, /X-Content-Type-Options:\s*nosniff/);
+    assert.match(redirects, /^\/articles\s+\/en\/articles\s+302/m, "Cloudflare redirects should include locale-less article fallback");
+    assert.match(redirects, /^\/mobile\/\*\s+\/en\/mobile\/:splat\s+302/m, "Cloudflare redirects should preserve mobile slugs");
+    assert.doesNotMatch(redirects, /\/account/, "Cloudflare redirects should not add account placeholder fallbacks");
     assert.match(feed, /<rss[^>]+version="2\.0"/, "feed.xml should be an RSS 2.0 feed");
     assert.match(feed, /<title>TachiSuke - Japan Life Assistant<\/title>/);
     assert.match(englishFeed, /<rss[^>]+version="2\.0"/, "locale feed should be an RSS 2.0 feed");

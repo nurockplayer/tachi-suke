@@ -656,6 +656,26 @@ Rules:
 - Do not add per-category feeds or pagination until article volume justifies it.
 - Do not include account placeholders, search pages, search indexes, drafts, or private data in the sitemap.
 
+## Phase 1AC: Cloudflare Locale-Less Redirects
+
+Status: implemented.
+
+Goal:
+
+Reduce avoidable 404s on Cloudflare Pages when users type or share common section URLs without a locale prefix.
+
+Implemented:
+
+- Added `public/_redirects`.
+- Temporary `302` fallbacks from common locale-less public section paths to English routes.
+- Splat redirects for public article, area, place, mobile, and tool detail-like paths.
+- Source-level and build-output SEO tests verify representative redirects and ensure account placeholders are not redirected.
+
+Rules:
+
+- Canonical URLs remain locale-prefixed.
+- Do not add language detection, Cloudflare Workers/Functions, auth-aware routing, or account placeholder fallbacks.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.
