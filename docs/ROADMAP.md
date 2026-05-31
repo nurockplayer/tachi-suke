@@ -764,6 +764,29 @@ Rules:
 - Operator rules, reimbursements, student eligibility, refunds, route changes, and mobile IC support can vary.
 - Japanese and Korean translations can be added later after the zh-tw/en content proves useful.
 
+## Phase 1AH: Residence Administration Articles
+
+Status: implemented.
+
+Goal:
+
+Add procedures-category article content that explains the practical difference between residence cards, resident records, and My Number for foreign residents without turning the site into legal advice.
+
+Implemented:
+
+- Added zh-tw article `residence-card-resident-record-my-number`.
+- Added en article `residence-card-resident-record-my-number-en`.
+- Added `procedures` category landing pages through existing dynamic category routes.
+- Linked the articles to the ward office moving-in checklist, first-week setup content, and mobile setup.
+- Added source-level and SEO-output checks for article counts, slugs, sitemap paths, category paths, and RSS feed entries.
+
+Rules:
+
+- Keep administrative content conservative and source-aware.
+- Do not promise exact deadlines, eligibility, documents, or outcomes across all municipalities or residence statuses.
+- Direct action-oriented readers to official sources, municipality counters, schools, employers, and immigration authorities as appropriate.
+- Japanese and Korean translations can be added later after the zh-tw/en content proves useful.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.
