@@ -12,6 +12,12 @@ interface RelatedArticleLink {
   href: string;
 }
 
+interface ArticleHeading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
 interface Props {
   locale: Locale;
   title: string;
@@ -21,10 +27,11 @@ interface Props {
   publishedAt: Date;
   updatedAt: Date;
   alternatePaths?: Partial<Record<Locale, string>>;
+  headings?: ArticleHeading[];
   relatedArticles?: RelatedArticleLink[];
 }
 
-const { locale, title, description, category, tags, publishedAt, updatedAt, alternatePaths, relatedArticles = [] } = Astro.props;
+const { locale, title, description, category, tags, publishedAt, updatedAt, alternatePaths, headings = [], relatedArticles = [] } = Astro.props;
 const site = Astro.site ?? new URL(Astro.url.origin);
 const canonicalUrl = new URL(Astro.url.pathname, site).href;
 const localeHomeUrl = new URL(localizePath(locale), site).href;
@@ -61,6 +68,27 @@ const relatedCopy = {
     description: "같은 언어의 실용 가이드를 이어서 읽어보세요."
   }
 }[locale];
+const tocCopy = {
+  "zh-tw": {
+    title: "本文目錄",
+    description: "快速跳到你需要的段落。"
+  },
+  en: {
+    title: "On this page",
+    description: "Jump to the section you need."
+  },
+  ja: {
+    title: "この記事の目次",
+    description: "必要なセクションへ移動できます。"
+  },
+  ko: {
+    title: "이 글의 목차",
+    description: "필요한 부분으로 바로 이동하세요."
+  }
+}[locale];
+const tocHeadings = headings
+  .filter((heading) => heading.depth >= 2 && heading.depth <= 3 && heading.slug && heading.text)
+  .slice(0, 12);
 const jsonLd = [
   {
     "@context": "https://schema.org",
@@ -129,6 +157,21 @@ const jsonLd = [
         {tags.map((tag) => <li>{tag}</li>)}
       </ul>
     </header>
+    {tocHeadings.length >= 2 && (
+      <nav class="article-toc" aria-labelledby="article-toc-title">
+        <div>
+          <h2 id="article-toc-title">{tocCopy.title}</h2>
+          <p>{tocCopy.description}</p>
+        </div>
+        <ol>
+          {tocHeadings.map((heading) => (
+            <li class={`toc-depth-${heading.depth}`}>
+              <a href={`#${heading.slug}`}>{heading.text}</a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    )}
     <div class="article-body">
       <slot />
     </div>
