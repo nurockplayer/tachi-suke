@@ -357,6 +357,9 @@ describe("TachiSuke project scaffold", () => {
     assert.match(categoryPage, /slugifyArticleCategory/, "ArticleCategoryPage should use category slugs");
     assert.match(categoryPage, /getCollection\("articles"[\s\S]*!article\.data\.draft/, "ArticleCategoryPage should render only non-draft articles");
     assert.match(categoryPage, /localizePath\(locale,\s*`\/articles\/\$\{article\.data\.slug\}`\)/, "ArticleCategoryPage should link to article details");
+    assert.match(categoryPage, /"@type":\s*"ItemList"/, "ArticleCategoryPage should define ItemList JSON-LD");
+    assert.match(categoryPage, /numberOfItems:\s*articles\.length/, "ArticleCategoryPage should set ItemList numberOfItems from rendered articles");
+    assert.match(categoryPage, /itemListElement:\s*articles\.map/, "ArticleCategoryPage should map visible articles into ItemList entries");
 
     const articlesIndex = readFileSync(join(root, "src/components/pages/ArticlesIndexPage.astro"), "utf8");
     assert.match(articlesIndex, /getArticleCategorySummaries/, "articles index should show category entry links");

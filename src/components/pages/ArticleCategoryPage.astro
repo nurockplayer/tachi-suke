@@ -59,6 +59,24 @@ const jsonLd = [
   },
   {
     "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${canonicalUrl}#article-list`,
+    name: title,
+    description,
+    numberOfItems: articles.length,
+    itemListElement: articles.map((article, index) => {
+      const articleUrl = new URL(localizePath(locale, `/articles/${article.data.slug}`), site).href;
+      return {
+        "@type": "ListItem",
+        position: index + 1,
+        url: articleUrl,
+        name: article.data.title,
+        description: article.data.description
+      };
+    })
+  },
+  {
+    "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "@id": `${canonicalUrl}#breadcrumb`,
     itemListElement: [
