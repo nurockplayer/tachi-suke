@@ -73,6 +73,7 @@ After production deploy:
 - Check `/en/search` and `/en/search-index.json`.
 - Check `/404.html`.
 - Check a representative article detail page.
+- Check a representative article category page such as `/en/articles/category/mobile`.
 - Check a representative mobile, area, place, and tool detail page.
 - Confirm canonical URLs and Open Graph URLs use the production `SITE_URL`.
 - Confirm account placeholder routes remain `noindex, nofollow`.

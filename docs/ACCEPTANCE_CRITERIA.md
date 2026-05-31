@@ -68,6 +68,10 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Article index pages must filter to matching locale and `draft = false`.
 - Article detail pages must use `getStaticPaths`.
 - Article detail pages must generate only matching-locale, non-draft articles.
+- Article category pages must use `getStaticPaths`.
+- Article category pages must generate only categories that have matching-locale, non-draft articles.
+- Article category pages must list only matching-locale, non-draft articles.
+- Article index and detail pages should link to generated category pages.
 - Draft articles must not be public.
 - Article SEO must use article title and description.
 - Article `hreflang` should only point to existing non-draft translations.
@@ -226,7 +230,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Open Graph metadata must include a default `og:image`.
 - Twitter metadata should use `summary_large_image`.
 - Pages should link `/site.webmanifest`.
-- `sitemap.xml` must include public locale roots, section pages, locale RSS feeds, non-draft article details, published place details, area details, mobile plan details, published tool details, submit-place thanks pages, contact/corrections pages, and launch trust pages.
+- `sitemap.xml` must include public locale roots, section pages, locale RSS feeds, non-draft article details, article category pages, published place details, area details, mobile plan details, published tool details, submit-place thanks pages, contact/corrections pages, and launch trust pages.
 - `sitemap.xml` must exclude account placeholder routes, draft articles, non-published places, non-published tools, search pages, and search index JSON endpoints.
 - `robots.txt` must reference the sitemap and disallow `/[locale]/account/`.
 - `feed.xml` must be generated as an RSS 2.0 feed for non-draft public article detail pages.

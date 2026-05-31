@@ -71,6 +71,8 @@ describe("static SEO output", () => {
       "/en/articles/choose-mobile-plan-japan-foreigner",
       "/ja/articles/foreign-resident-mobile-plan-basics-japan",
       "/ko/articles/foreigner-mobile-plan-basics-japan",
+      "/en/articles/category/mobile",
+      "/zh-tw/articles/category/housing",
       "/zh-tw/mobile/povo2",
       "/en/mobile/ahamo",
       "/ja/areas/ikebukuro",
@@ -200,6 +202,19 @@ describe("static SEO output", () => {
     assert.equal(index.items.some((item) => item.url.startsWith("/zh-tw/articles/")), false, "English search index should not include zh-tw article URLs");
     assert.equal(index.items.some((item) => item.url.includes("/account/")), false, "search index should not include account placeholders");
     assert.equal(JSON.stringify(index).toLowerCase().includes("draft"), false, "search index should not expose draft metadata");
+  });
+
+  it("generates article category landing pages for public same-locale articles", () => {
+    const mobile = readHtml("en/articles/category/mobile/index.html");
+    assert.match(mobile, /Mobile guides \| TachiSuke/, "English mobile category page should have an SEO title");
+    assert.match(mobile, /href="\/en\/articles\/choose-mobile-plan-japan-foreigner"/, "mobile category should link to English mobile articles");
+    assert.match(mobile, /href="\/en\/articles\/povo-linemo-rakuten-ahamo-comparison"/, "mobile category should include all matching English articles");
+    assert.doesNotMatch(mobile, /<a href="\/zh-tw\/articles\/[^"]+">\s*<span class="article-meta"/, "English category page should not list zh-tw articles");
+    assert.doesNotMatch(mobile, /draft/i, "category page should not expose draft article data");
+
+    const housing = readHtml("zh-tw/articles/category/housing/index.html");
+    assert.match(housing, /租屋文章 \| TachiSuke/, "zh-tw housing category should have a localized SEO title");
+    assert.match(housing, /href="\/zh-tw\/articles\/japan-renting-initial-costs"/, "housing category should link to zh-tw housing article");
   });
 
   it("renders article and breadcrumb JSON-LD on article detail pages", () => {
