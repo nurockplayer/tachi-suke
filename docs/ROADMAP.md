@@ -810,6 +810,29 @@ Rules:
 - Keep residence administration content conservative and avoid legal/immigration advice.
 - Continue adding ja/ko coverage for proven zh-tw/en topics when it improves user value and SEO coverage.
 
+## Phase 1AR: Multilingual Rental Initial-Cost Guides
+
+Status: implemented.
+
+Goal:
+
+Expand high-intent housing content by giving English, Japanese, and Korean users the same rental initial-cost decision guidance already available in Traditional Chinese.
+
+Implemented:
+
+- Added en article `japan-renting-initial-costs-en`.
+- Added ja article `japan-renting-initial-costs-ja`.
+- Added ko article `japan-renting-initial-costs-ko`.
+- Reused `translationKey = renting-initial-costs-japan` so sitemap hreflang alternates can connect existing generated translations.
+- Linked the articles to area guides, first-week setup articles, and the rent initial-cost checklist.
+- Added source-level and SEO-output checks for article count, locale coverage, and sitemap entries.
+
+Rules:
+
+- Keep rental cost content as practical editorial guidance, not legal or real-estate brokerage advice.
+- Avoid exact fee promises because costs vary by property, region, agency, and contract.
+- Do not add a rent calculator or backend storage in this phase.
+
 ## Phase 1AI: Article Category Label Polish
 
 Status: implemented.

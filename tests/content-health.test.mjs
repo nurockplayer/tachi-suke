@@ -149,6 +149,19 @@ describe("content health", () => {
         assertHttpsUrl(url, `${article.path} external markdown link ${url}`);
       }
     }
+
+    const rentInitialCostLocales = new Set(
+      articles
+        .filter((article) => article.data.translationKey === "renting-initial-costs-japan")
+        .map((article) => article.data.locale)
+    );
+    for (const locale of ["zh-tw", "en", "ja", "ko"]) {
+      assert.equal(
+        rentInitialCostLocales.has(locale),
+        true,
+        `renting-initial-costs-japan should include a public ${locale} article`
+      );
+    }
   });
 
   it("keeps JSON collection ids, slugs, review dates, and URL fields healthy", () => {
