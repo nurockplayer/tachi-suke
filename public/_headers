@@ -17,5 +17,35 @@
 /robots.txt
   Cache-Control: public, max-age=3600
 
+/llms.txt
+  Cache-Control: public, max-age=3600
+
 /site.webmanifest
+  Cache-Control: public, max-age=3600
+
+/feed.xml
+  Cache-Control: public, max-age=3600
+
+/zh-tw/feed.xml
+  Cache-Control: public, max-age=3600
+
+/en/feed.xml
+  Cache-Control: public, max-age=3600
+
+/ja/feed.xml
+  Cache-Control: public, max-age=3600
+
+/ko/feed.xml
+  Cache-Control: public, max-age=3600
+
+/zh-tw/search-index.json
+  Cache-Control: public, max-age=3600
+
+/en/search-index.json
+  Cache-Control: public, max-age=3600
+
+/ja/search-index.json
+  Cache-Control: public, max-age=3600
+
+/ko/search-index.json
   Cache-Control: public, max-age=3600

@@ -72,6 +72,7 @@ After production deploy:
 - Check `/feed.xml`.
 - Check a representative locale feed such as `/en/feed.xml`.
 - Check `/en/search` and `/en/search-index.json`.
+- Confirm discovery files use the expected conservative cache headers from `_headers`.
 - Check `/404.html`.
 - Check a locale-less fallback such as `/mobile/povo2` redirects to `/en/mobile/povo2`.
 - Check a representative article detail page.

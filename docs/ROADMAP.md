@@ -676,6 +676,27 @@ Rules:
 - Canonical URLs remain locale-prefixed.
 - Do not add language detection, Cloudflare Workers/Functions, auth-aware routing, or account placeholder fallbacks.
 
+## Phase 1AD: Discovery Cache Headers
+
+Status: implemented.
+
+Goal:
+
+Make Cloudflare Pages cache behavior explicit for frequently read static discovery files.
+
+Implemented:
+
+- One-hour cache headers for `/feed.xml`.
+- One-hour cache headers for locale RSS feeds.
+- One-hour cache headers for `/llms.txt`.
+- One-hour cache headers for locale search index JSON files.
+- Build-output SEO tests verify representative header rules.
+
+Rules:
+
+- Keep HTML revalidated.
+- Do not add CDN purge automation, Workers, or runtime cache logic in Phase 1.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.

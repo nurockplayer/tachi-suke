@@ -65,6 +65,10 @@ describe("static SEO output", () => {
     assert.equal(manifest.start_url, "/");
     assert.ok(Array.isArray(manifest.icons) && manifest.icons.length > 0, "manifest should include icons");
     assert.match(headers, /X-Content-Type-Options:\s*nosniff/);
+    assert.match(headers, /\/feed\.xml\s+Cache-Control:\s*public,\s*max-age=3600/m, "_headers should cache the global RSS feed conservatively");
+    assert.match(headers, /\/en\/feed\.xml\s+Cache-Control:\s*public,\s*max-age=3600/m, "_headers should cache locale RSS feeds conservatively");
+    assert.match(headers, /\/llms\.txt\s+Cache-Control:\s*public,\s*max-age=3600/m, "_headers should cache llms.txt conservatively");
+    assert.match(headers, /\/en\/search-index\.json\s+Cache-Control:\s*public,\s*max-age=3600/m, "_headers should cache locale search indexes conservatively");
     assert.match(redirects, /^\/articles\s+\/en\/articles\s+302/m, "Cloudflare redirects should include locale-less article fallback");
     assert.match(redirects, /^\/mobile\/\*\s+\/en\/mobile\/:splat\s+302/m, "Cloudflare redirects should preserve mobile slugs");
     assert.doesNotMatch(redirects, /\/account/, "Cloudflare redirects should not add account placeholder fallbacks");

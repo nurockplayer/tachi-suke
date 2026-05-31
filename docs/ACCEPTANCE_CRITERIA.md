@@ -38,6 +38,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - `pnpm check:links` should scan built `dist/**/*.html` for root-relative `href="/..."` links and verify the matching file exists in `dist/`.
 - `pnpm check:seo` should verify built `sitemap.xml`, `robots.txt`, `site.webmanifest`, global RSS feed, locale RSS feeds, Cloudflare `_headers`, and Cloudflare `_redirects`.
 - Cloudflare Pages `_redirects` should provide temporary English fallbacks for common locale-less public section paths and must not add account placeholder fallbacks.
+- Cloudflare Pages `_headers` should keep HTML revalidated while applying conservative one-hour cache headers to sitemap, robots, manifest, RSS feeds, `llms.txt`, and search indexes.
 - The current static HTML crawler does not validate external links, anchors, JavaScript behavior, or visual rendering.
 - New required route or model decisions should be reflected in tests when they become implementation requirements.
 - CI must reject `package-lock.json`, `yarn.lock`, `bun.lock`, and `bun.lockb`.
