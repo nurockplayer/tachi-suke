@@ -39,7 +39,8 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Phase 1B/1B.5 tests should verify minimum content depth for articles, mobile plans, and area guides.
 - Source content tests should scan Markdown/MDX article links that point to internal absolute paths and verify they match known public static routes or generated article/category/place/mobile/area/tool detail routes.
 - `pnpm check:links` should scan built `dist/**/*.html` for root-relative `href="/..."` links and verify the matching file exists in `dist/`.
-- `pnpm check:seo` should verify built `sitemap.xml`, `robots.txt`, `site.webmanifest`, `opensearch.xml`, global RSS feed, locale RSS feeds, Cloudflare `_headers`, and Cloudflare `_redirects` against the same `SITE_URL` used for the build.
+- `pnpm check:seo` should verify built `sitemap.xml`, `robots.txt`, `site.webmanifest`, `opensearch.xml`, global RSS feed, locale RSS feeds, Cloudflare `_headers`, and Cloudflare `_redirects` against the same `SITE_URL` used for the build when provided.
+- If `SITE_URL` is unset, `pnpm check:seo` should infer the expected origin from the current built sitemap or robots output instead of assuming a different fallback domain.
 - `pnpm check:deploy` should require an HTTPS `SITE_URL`, reject the example fallback domain, scan deployable `dist` text assets, and fail if `https://tachi-suke.example.com` remains in deployment output.
 - Cloudflare Pages `_redirects` should provide temporary English fallbacks for common locale-less public section paths and must not add account placeholder fallbacks.
 - Cloudflare Pages `_headers` should keep HTML revalidated while applying conservative one-hour cache headers to sitemap, robots, manifest, RSS feeds, `llms.txt`, `opensearch.xml`, and search indexes.

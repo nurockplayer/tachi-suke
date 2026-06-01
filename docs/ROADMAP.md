@@ -630,6 +630,26 @@ Rules:
 - Keep `404.html` static, noindex, nofollow, and excluded from `sitemap.xml`.
 - Do not add language-detection redirects, client-side locale switching, Cloudflare Functions, Workers, analytics, backend error tracking, auth, database, or route changes in Phase 1CS.
 
+## Phase 1CT: SEO Check URL Inference
+
+Status: implemented.
+
+Goal:
+
+Make local `pnpm check:seo` validate the build output that actually exists, even when the previous build used an explicit production `SITE_URL` and the current shell does not have `SITE_URL` set.
+
+Implemented:
+
+- `tests/seo-output.test.mjs` still uses an explicit `SITE_URL` when provided.
+- When `SITE_URL` is unset, the SEO check infers the expected origin from the first built sitemap URL, with a robots fallback and example-domain fallback.
+- Added build-output coverage for the inferred-origin behavior.
+- Updated developer docs to keep production/deploy verification explicit with `SITE_URL=<production-url>`.
+
+Rules:
+
+- Do not loosen production deployment checks; `pnpm check:deploy` still requires an HTTPS non-example `SITE_URL`.
+- Do not change Astro `site` runtime behavior, canonical URL generation, deployment domains, routes, auth, database, or backend behavior in Phase 1CT.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.

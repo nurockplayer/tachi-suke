@@ -242,6 +242,13 @@ Phase 1CS completes static 404 multilingual copy:
 - Keep `404.html` static, noindex, nofollow, and excluded from `sitemap.xml`.
 - Do not add language-detection redirects, client-side locale switching, Cloudflare Functions, Workers, analytics, backend error tracking, auth, database, or route changes in Phase 1CS.
 
+Phase 1CT improves SEO check URL inference:
+
+- `pnpm check:seo` should prefer an explicit `SITE_URL` when provided.
+- When `SITE_URL` is unset, `pnpm check:seo` may infer the expected origin from the current built `dist/sitemap.xml` or `dist/robots.txt` so local checks validate the build that actually exists.
+- Production/deploy verification should still build with the real `SITE_URL` and run `SITE_URL=<production-url> pnpm check:seo` plus `SITE_URL=<production-url> pnpm check:deploy`.
+- Do not change Astro `site` runtime behavior, canonical URL generation, deployment domains, routes, auth, database, or backend behavior in Phase 1CT.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.

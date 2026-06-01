@@ -63,7 +63,7 @@ SITE_URL=https://tachi-suke.pages.dev pnpm check:seo
 SITE_URL=https://tachi-suke.pages.dev pnpm check:deploy
 ```
 
-`pnpm check:links` requires a fresh build. `pnpm check:seo` should use the same `SITE_URL` as the deploy build so canonical URLs, feeds, sitemap entries, OpenSearch discovery, structured data, and search indexes are checked against the production domain. `pnpm check:deploy` also requires the same `SITE_URL` and fails if generated output still references `https://tachi-suke.example.com`.
+`pnpm check:links` requires a fresh build. `pnpm check:seo` can infer the origin from the current build output when `SITE_URL` is unset, which is useful for local checks. For deployment, still pass the same `SITE_URL` used for the deploy build so canonical URLs, feeds, sitemap entries, OpenSearch discovery, structured data, and search indexes are checked against the production domain. `pnpm check:deploy` also requires the same `SITE_URL` and fails if generated output still references `https://tachi-suke.example.com`.
 
 ## Post-Deploy Checks
 
