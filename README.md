@@ -33,7 +33,7 @@ Implemented:
 - Four locale article category landing page routes
 - Build-time related article links on article detail pages
 - Detail-page correction prompts linking public content to contact/corrections with related page URL prefill
-- Thirty-five public article pages across four locales, including zh-tw/en/ja/ko commuter pass, residence administration, rental initial-cost, apartment-viewing practical Japanese, ward-office moving-in procedure, and apartment moving-out articles
+- Thirty-nine public article pages across four locales, including zh-tw/en/ja/ko commuter pass, residence administration, rental initial-cost, apartment-viewing practical Japanese, ward-office moving-in procedure, apartment moving-out, and garbage sorting articles
 - Four locale area index pages with Tokyo area guide cards
 - Four locale area detail routes
 - Four locale place index pages

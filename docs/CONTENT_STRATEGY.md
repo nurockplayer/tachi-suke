@@ -44,7 +44,7 @@ Avoid generic sightseeing articles, vague lifestyle writing, unmoderated public 
 13. 住民票、在留卡、My Number 的基本差異
 14. 日本外食預算怎麼抓：連鎖店、食堂、家庭餐廳
 
-Phase 1AG now includes zh-tw/en commuter pass decision articles for topic 8 and links them to the commuter pass / IC card checklist. Phase 1AH includes zh-tw/en residence card, resident record, and My Number articles for topic 13, Phase 1AP extends both topics to ja/ko, Phase 1AR extends the rental initial-cost guide across en/ja/ko, Phase 1AV adds zh-tw/en/ja/ko apartment-viewing practical Japanese articles for topic 15, Phase 1AW adds zh-tw/en/ja/ko ward-office moving-in procedure articles for the administrative setup cluster, and Phase 1AX adds zh-tw/en/ja/ko apartment moving-out articles for the rental lifecycle cluster.
+Phase 1AG now includes zh-tw/en commuter pass decision articles for topic 8 and links them to the commuter pass / IC card checklist. Phase 1AH includes zh-tw/en residence card, resident record, and My Number articles for topic 13, Phase 1AP extends both topics to ja/ko, Phase 1AR extends the rental initial-cost guide across en/ja/ko, Phase 1AV adds zh-tw/en/ja/ko apartment-viewing practical Japanese articles for topic 15, Phase 1AW adds zh-tw/en/ja/ko ward-office moving-in procedure articles for the administrative setup cluster, Phase 1AX adds zh-tw/en/ja/ko apartment moving-out articles for the rental lifecycle cluster, and Phase 1AY adds zh-tw/en/ja/ko garbage sorting articles for daily-life rules.
 15. Practical Japanese Phrases for Renting an Apartment
 16. 日本打工與正職求職前要知道的用語
 17. Osaka Area Guide for New Residents
@@ -72,6 +72,7 @@ Phase 1B adds a public-preview content baseline:
 - `zh-tw` / `en` / `ja` / `ko`: now include apartment-viewing practical Japanese content linked to the phrase tool and rent initial-cost checklist
 - `zh-tw` / `en` / `ja` / `ko`: now include ward-office moving-in procedure content linked to the moving-in checklist, first-week setup, and residence administration basics
 - `zh-tw` / `en` / `ja` / `ko`: now include apartment moving-out content linked to the moving-out checklist, rental initial-cost articles, and moving-in procedures for the next address
+- `zh-tw` / `en` / `ja` / `ko`: now include garbage sorting and oversized trash content under the `daily-life` category
 - `en` / `ja` / `ko`: now include mobile basics, first-week setup, commuter pass / IC card, residence administration, and renting initial-cost decision content
 
 Translations should continue to use explicit `locale` and `translationKey` metadata. Missing translations should follow the documented fallback rules: English, then Traditional Chinese, or a clear missing-content state instead of silently showing the wrong locale.
