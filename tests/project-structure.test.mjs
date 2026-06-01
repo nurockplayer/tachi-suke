@@ -366,6 +366,7 @@ describe("TachiSuke project scaffold", () => {
     assert.match(categoryHelper, /getCollection\("articles"[\s\S]*!data\.draft/, "category helper should use only non-draft articles");
     assert.match(categoryHelper, /transportation/, "category helper should include localized transportation category copy");
     assert.match(categoryHelper, /procedures/, "category helper should include localized procedures category copy");
+    assert.match(categoryHelper, /language/, "category helper should include localized practical language category copy");
 
     const categoryPage = readFileSync(join(root, "src/components/pages/ArticleCategoryPage.astro"), "utf8");
     assert.match(categoryPage, /slugifyArticleCategory/, "ArticleCategoryPage should use category slugs");
@@ -659,13 +660,13 @@ describe("TachiSuke project scaffold", () => {
   it("includes Phase 1B content depth for articles, mobile plans, and area guides", () => {
     const articleFiles = listFiles("src/content/articles", [".md", ".mdx"]);
     const articles = articleFiles.map(readFrontmatter);
-    assert.ok(articles.length >= 23, "Phase 1AR should include multilingual rental initial cost article coverage");
+    assert.ok(articles.length >= 27, "Phase 1AV should include multilingual apartment viewing phrase article coverage");
 
     const localeCounts = Object.fromEntries(locales.map((locale) => [locale, articles.filter((article) => article.locale === locale).length]));
-    assert.ok(localeCounts["zh-tw"] >= 7, "Phase 1AH should include at least 7 zh-tw articles");
-    assert.ok(localeCounts.en >= 6, "Phase 1AR should include at least 6 en articles");
-    assert.ok(localeCounts.ja >= 5, "Phase 1AR should include at least 5 ja articles");
-    assert.ok(localeCounts.ko >= 5, "Phase 1AR should include at least 5 ko articles");
+    assert.ok(localeCounts["zh-tw"] >= 8, "Phase 1AV should include at least 8 zh-tw articles");
+    assert.ok(localeCounts.en >= 7, "Phase 1AV should include at least 7 en articles");
+    assert.ok(localeCounts.ja >= 6, "Phase 1AV should include at least 6 ja articles");
+    assert.ok(localeCounts.ko >= 6, "Phase 1AV should include at least 6 ko articles");
     assert.ok(articles.some((article) => article.slug === "japan-commuter-pass-ic-card-guide"), "zh-tw commuter pass article should exist");
     assert.ok(articles.some((article) => article.slug === "japan-commuter-pass-ic-card-guide-en"), "English commuter pass article should exist");
     assert.ok(articles.some((article) => article.slug === "japan-commuter-pass-ic-card-guide-ja"), "Japanese commuter pass article should exist");
@@ -677,6 +678,10 @@ describe("TachiSuke project scaffold", () => {
     assert.ok(articles.some((article) => article.slug === "japan-renting-initial-costs-en"), "English rental initial cost article should exist");
     assert.ok(articles.some((article) => article.slug === "japan-renting-initial-costs-ja"), "Japanese rental initial cost article should exist");
     assert.ok(articles.some((article) => article.slug === "japan-renting-initial-costs-ko"), "Korean rental initial cost article should exist");
+    assert.ok(articles.some((article) => article.slug === "apartment-viewing-japanese-phrases-zh-tw"), "zh-tw apartment viewing phrase article should exist");
+    assert.ok(articles.some((article) => article.slug === "apartment-viewing-japanese-phrases-en"), "English apartment viewing phrase article should exist");
+    assert.ok(articles.some((article) => article.slug === "apartment-viewing-japanese-phrases-ja"), "Japanese apartment viewing phrase article should exist");
+    assert.ok(articles.some((article) => article.slug === "apartment-viewing-japanese-phrases-ko"), "Korean apartment viewing phrase article should exist");
 
     assert.equal(new Set(articles.map((article) => article.id)).size, articles.length, "article ids should be unique");
     assert.equal(new Set(articles.map((article) => article.slug)).size, articles.length, "article slugs should be globally unique for Astro content ids");

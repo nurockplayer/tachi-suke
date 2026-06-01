@@ -875,6 +875,30 @@ Rules:
 - Remind users that deadlines and fees vary by contract, municipality, management company, and provider.
 - Do not add saved state, quote workflows, or backend storage in Phase 1.
 
+## Phase 1AV: Apartment Viewing Practical Japanese Articles
+
+Status: implemented.
+
+Goal:
+
+Turn the apartment-viewing phrase tool into an indexable four-locale practical-language content cluster for residents searching before a rental viewing.
+
+Implemented:
+
+- Added zh-tw article `apartment-viewing-japanese-phrases-zh-tw`.
+- Added en article `apartment-viewing-japanese-phrases-en`.
+- Added ja article `apartment-viewing-japanese-phrases-ja`.
+- Added ko article `apartment-viewing-japanese-phrases-ko`.
+- Added localized article category copy for `language`.
+- Linked the articles to the apartment-viewing phrase tool, rent initial-cost checklist, rental cost articles, first-week setup articles, and area guides.
+- Added source-level and SEO-output checks for article count, locale coverage, category copy, sitemap entries, and RSS inclusion.
+
+Rules:
+
+- Keep phrase guidance as practical communication support, not contract translation or legal advice.
+- Encourage users to confirm important fees and conditions in writing.
+- Do not add audio playback, flashcards, saved progress, or backend storage in Phase 1.
+
 ## Phase 1AI: Article Category Label Polish
 
 Status: implemented.
