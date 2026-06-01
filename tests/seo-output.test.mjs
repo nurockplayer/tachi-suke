@@ -371,6 +371,15 @@ describe("static SEO output", () => {
     assert.match(article, /rel="noreferrer"/, "official source links should avoid leaking referrer context");
   });
 
+  it("renders official source links on residence administration article pages", () => {
+    const article = readHtml("en/articles/residence-card-resident-record-my-number-en/index.html");
+    assert.match(article, /data-article-source-links/, "residence admin article should render official source links");
+    assert.match(article, /Digital Agency: My Number FAQ/, "residence admin article should link the Digital Agency source");
+    assert.match(article, /https:\/\/www\.digital\.go\.jp\/en\/policies\/mynumber_faq_02/, "residence admin article should include Digital Agency URL");
+    assert.match(article, /Immigration Services Agency: Guidebook on Living and Working/, "residence admin article should link the ISA source");
+    assert.match(article, /https:\/\/www\.moj\.go\.jp\/content\/001297615\.pdf/, "residence admin article should include Immigration Services Agency URL");
+  });
+
   it("generates an RSS feed for public article detail pages", () => {
     const feed = readDist("feed.xml");
     assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/zh-tw\/articles\/taiwanese-newcomer-mobile-plan-japan<\/link>/);

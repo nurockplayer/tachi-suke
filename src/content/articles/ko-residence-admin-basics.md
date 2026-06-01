@@ -13,6 +13,13 @@ tags:
   - "행정 절차"
 publishedAt: "2026-06-01"
 updatedAt: "2026-06-01"
+sourceLinks:
+  - label: "일본 디지털청: 마이넘버 FAQ"
+    url: "https://www.digital.go.jp/en/policies/mynumber_faq_02"
+    note: "마이넘버와 마이넘버 카드 기본 정보를 확인하는 공식 출발점입니다."
+  - label: "출입국재류관리청: 생활·취업 가이드북"
+    url: "https://www.moj.go.jp/content/001297615.pdf"
+    note: "외국인 주민의 생활과 체류 관련 기본 정보를 정리한 공식 가이드입니다."
 draft: false
 ---
 

@@ -245,6 +245,25 @@ Rules:
 - Keep source labels localized in the article file.
 - Do not introduce a crawler, database, CMS, or backend review workflow for Phase 1 source links.
 
+## Phase 1BV: Residence Admin Source Links
+
+Status: implemented.
+
+Goal:
+
+Extend structured article source-link coverage to residence card, resident record, and My Number basics articles.
+
+Implemented:
+
+- Four residence/admin basics articles now include Digital Agency My Number FAQ and Immigration Services Agency guidebook links.
+- Content-health tests require `digital.go.jp` and `moj.go.jp` source links for the residence/admin translation set.
+- Build-output SEO tests verify the English residence/admin article renders the expected official source links.
+
+Rules:
+
+- Keep the article as practical orientation, not immigration/legal advice.
+- Remind readers to confirm details with their municipality, school, employer, Immigration Services Agency, or other official counter when acting.
+
 ## Phase 1E: Structured Data
 
 Status: implemented.

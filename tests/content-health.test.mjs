@@ -250,6 +250,7 @@ describe("content health", () => {
 
     assertArticleSourceLinks(articles, "japan-emergency-disaster-basics", ["fdma.go.jp", "jma.go.jp"]);
     assertArticleSourceLinks(articles, "japan-work-contract-basics", ["studyinjapan.go.jp", "check-roudou.mhlw.go.jp"]);
+    assertArticleSourceLinks(articles, "residence-card-resident-record-my-number", ["digital.go.jp", "moj.go.jp"]);
   });
 
   it("keeps JSON collection ids, slugs, review dates, and URL fields healthy", () => {

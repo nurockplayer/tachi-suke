@@ -13,6 +13,13 @@ tags:
   - "手続き"
 publishedAt: "2026-06-01"
 updatedAt: "2026-06-01"
+sourceLinks:
+  - label: "デジタル庁：マイナンバーFAQ"
+    url: "https://www.digital.go.jp/en/policies/mynumber_faq_02"
+    note: "マイナンバーとマイナンバーカードの基本を確認する公式入口です。"
+  - label: "出入国在留管理庁：生活・就労ガイドブック"
+    url: "https://www.moj.go.jp/content/001297615.pdf"
+    note: "外国人住民の生活と在留に関する基本情報を整理した公式ガイドです。"
 draft: false
 ---
 
