@@ -149,20 +149,28 @@ export const sectionCopy = {
   }
 } satisfies Record<Locale, Record<string, string>>;
 
-type UiCopyKey = "layout.skipMain";
+type UiCopyKey = "layout.skipMain" | "layout.languageNavigation" | "layout.changeLanguage";
 
 const uiCopy = {
   "zh-tw": {
-    "layout.skipMain": "跳到主要內容"
+    "layout.skipMain": "跳到主要內容",
+    "layout.languageNavigation": "語言選單",
+    "layout.changeLanguage": "切換語言"
   },
   en: {
-    "layout.skipMain": "Skip to main content"
+    "layout.skipMain": "Skip to main content",
+    "layout.languageNavigation": "Language",
+    "layout.changeLanguage": "Change language"
   },
   ja: {
-    "layout.skipMain": "本文へスキップ"
+    "layout.skipMain": "本文へスキップ",
+    "layout.languageNavigation": "言語メニュー",
+    "layout.changeLanguage": "言語を切り替える"
   },
   ko: {
-    "layout.skipMain": "본문으로 건너뛰기"
+    "layout.skipMain": "본문으로 건너뛰기",
+    "layout.languageNavigation": "언어 메뉴",
+    "layout.changeLanguage": "언어 변경"
   }
 } satisfies Record<Locale, Record<UiCopyKey, string>>;
 
