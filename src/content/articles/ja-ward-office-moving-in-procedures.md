@@ -12,7 +12,14 @@ tags:
   - "転入手続き"
   - "日本生活"
 publishedAt: "2026-06-01"
-updatedAt: "2026-06-01"
+updatedAt: "2026-06-02"
+sourceLinks:
+  - label: "出入国在留管理庁：外国人生活支援ポータルサイト"
+    url: "https://www.moj.go.jp/isa/support/portal/guidebook_all.html?hl=ja"
+    note: "外国人住民向けの生活・就労情報を確認できる政府公式ページです。自治体窓口へ行く前の確認に使えます。"
+  - label: "デジタル庁：マイナンバー FAQ"
+    url: "https://www.digital.go.jp/en/policies/mynumber_faq_02"
+    note: "マイナンバー通知や住民登録に関係する公式情報です。実際の手続きは自治体の案内を優先してください。"
 draft: false
 ---
 

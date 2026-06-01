@@ -12,7 +12,14 @@ tags:
   - "전입 절차"
   - "일본 생활"
 publishedAt: "2026-06-01"
-updatedAt: "2026-06-01"
+updatedAt: "2026-06-02"
+sourceLinks:
+  - label: "출입국재류관리청: 외국인 생활 지원 포털"
+    url: "https://www.moj.go.jp/isa/support/portal/guidebook_all.html?hl=ja"
+    note: "외국인 거주자를 위한 생활・취업 정보를 확인할 수 있는 일본 정부 공식 페이지입니다. 지자체 방문 전 확인용으로 활용할 수 있습니다."
+  - label: "Digital Agency: My Number FAQ"
+    url: "https://www.digital.go.jp/en/policies/mynumber_faq_02"
+    note: "마이넘버 통지와 주민 등록 관련 공식 안내입니다. 실제 절차는 거주지 지자체 안내를 우선하세요."
 draft: false
 ---
 

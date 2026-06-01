@@ -11,7 +11,14 @@ tags:
   - "첫 주"
   - "생활 준비"
 publishedAt: "2026-05-31"
-updatedAt: "2026-05-31"
+updatedAt: "2026-06-02"
+sourceLinks:
+  - label: "출입국재류관리청: 외국인 생활 지원 포털"
+    url: "https://www.moj.go.jp/isa/support/portal/guidebook_all.html?hl=ja"
+    note: "외국인 거주자를 위한 생활・취업 정보를 확인할 수 있는 일본 정부 공식 페이지입니다."
+  - label: "Digital Agency: My Number FAQ"
+    url: "https://www.digital.go.jp/en/policies/mynumber_faq_02"
+    note: "마이넘버 통지와 주민 등록에 관한 공식 안내입니다. 실제 절차는 거주지 지자체 안내도 확인하세요."
 draft: false
 ---
 

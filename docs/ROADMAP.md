@@ -409,6 +409,27 @@ Rules:
 - Do not collect purchase data, save checklist state, personalize recommendations, or add affiliate/store database features in Phase 1.
 - Saved checklist state and personalized shopping routines must wait for a separately scoped auth/database design.
 
+## Phase 1CI: Source-Backed Setup Guides
+
+Status: implemented.
+
+Goal:
+
+Extend structured official-source coverage to setup articles that influence first-week and municipal-office decisions.
+
+Implemented:
+
+- First-week setup articles in `zh-tw`, `en`, `ja`, and `ko` include Immigration Services Agency and Digital Agency source links.
+- Ward-office moving-in procedure articles in `zh-tw`, `en`, `ja`, and `ko` include Immigration Services Agency and Digital Agency source links.
+- Content-health checks require these two translation sets to keep official source links.
+- Build-output SEO checks verify representative English setup and ward-office article pages render the official source-link section.
+
+Rules:
+
+- Treat these links as official confirmation starting points, not exhaustive municipal procedure instructions.
+- Keep municipality, school, employer, and immigration counter confirmation in the article copy.
+- Do not add a crawler, CMS, database, or backend review workflow in Phase 1.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.

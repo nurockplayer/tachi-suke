@@ -11,7 +11,14 @@ tags:
   - "日本生活"
   - "生活準備"
 publishedAt: "2026-05-31"
-updatedAt: "2026-05-31"
+updatedAt: "2026-06-02"
+sourceLinks:
+  - label: "出入国在留管理庁：外国人生活支援ポータルサイト"
+    url: "https://www.moj.go.jp/isa/support/portal/guidebook_all.html?hl=ja"
+    note: "外国人住民向けの生活・就労情報を確認できる政府公式ページです。"
+  - label: "デジタル庁：マイナンバー FAQ"
+    url: "https://www.digital.go.jp/en/policies/mynumber_faq_02"
+    note: "マイナンバー通知と住民登録に関係する公式情報です。実際の手続きは自治体の案内も確認してください。"
 draft: false
 ---
 

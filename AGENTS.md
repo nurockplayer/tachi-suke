@@ -181,6 +181,12 @@ Phase 1B adds public-preview content depth:
 - Internal links between articles and main locale sections.
 - A conservative Markdown internal-link test.
 
+Phase 1CI adds source-backed setup guide coverage:
+
+- First-week setup and ward-office moving-in procedure article clusters should include official source links in all supported locales.
+- Use source links as confirmation starting points, not exhaustive procedure guarantees.
+- Do not add live external crawling, CMS workflows, database-backed source review, or Phase 2 behavior in Phase 1CI.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.

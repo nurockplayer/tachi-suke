@@ -364,6 +364,8 @@ describe("content health", () => {
     assertArticleSourceLinks(articles, "japan-emergency-disaster-basics", ["fdma.go.jp", "jma.go.jp"]);
     assertArticleSourceLinks(articles, "japan-work-contract-basics", ["studyinjapan.go.jp", "check-roudou.mhlw.go.jp"]);
     assertArticleSourceLinks(articles, "residence-card-resident-record-my-number", ["digital.go.jp", "moj.go.jp"]);
+    assertArticleSourceLinks(articles, "first-week-japan-setup", ["moj.go.jp/isa/support/portal/guidebook_all", "digital.go.jp"]);
+    assertArticleSourceLinks(articles, "ward-office-moving-in-procedures", ["moj.go.jp/isa/support/portal/guidebook_all", "digital.go.jp"]);
   });
 
   it("keeps Markdown and MDX internal links pointed at generated public routes", () => {
