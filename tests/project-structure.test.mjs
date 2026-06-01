@@ -783,13 +783,14 @@ describe("TachiSuke project scaffold", () => {
     }
 
     const publishedTools = listFiles("src/content/tools", [".json"]).map(readJson).filter((tool) => tool.status === "published");
-    assert.ok(publishedTools.length >= 8, "Phase 1CF should publish at least eight static tools");
+    assert.ok(publishedTools.length >= 9, "Phase 1CG should publish at least nine static tools");
     assert.ok(publishedTools.some((tool) => tool.slug === "moving-to-japan-checklist"), "moving checklist should stay published");
     assert.ok(publishedTools.some((tool) => tool.slug === "japan-rent-initial-cost-checklist"), "rent initial cost checklist should be published");
     assert.ok(publishedTools.some((tool) => tool.slug === "ward-office-moving-in-checklist"), "ward office moving-in checklist should be published");
     assert.ok(publishedTools.some((tool) => tool.slug === "commuter-pass-ic-card-checklist"), "commuter pass and IC card checklist should be published");
     assert.ok(publishedTools.some((tool) => tool.slug === "apartment-viewing-japanese-phrases"), "apartment viewing Japanese phrases tool should be published");
     assert.ok(publishedTools.some((tool) => tool.slug === "apartment-application-documents-checklist"), "apartment application documents checklist should be published");
+    assert.ok(publishedTools.some((tool) => tool.slug === "japan-job-application-documents-checklist"), "job application documents checklist should be published");
     assert.ok(publishedTools.some((tool) => tool.slug === "moving-out-checklist"), "moving-out checklist should be published");
     assert.ok(publishedTools.some((tool) => tool.slug === "japan-emergency-disaster-checklist"), "emergency and disaster checklist should be published");
 
@@ -891,6 +892,28 @@ describe("TachiSuke project scaffold", () => {
       assert.ok(apartmentDocumentsTool.title[locale], `apartment documents tool should include ${locale} title`);
       assert.ok(apartmentDocumentsTool.description[locale]?.length > 30, `apartment documents tool should include ${locale} description`);
       assert.ok(apartmentDocumentsTool.sourceNote[locale]?.length > 30, `apartment documents tool should include ${locale} source note`);
+    }
+
+    const jobDocumentsTool = readJson("src/content/tools/japan-job-application-documents-checklist.json");
+    assert.equal(jobDocumentsTool.status, "published");
+    assert.equal(jobDocumentsTool.slug, "japan-job-application-documents-checklist");
+    assert.ok(jobDocumentsTool.sections.length >= 5, "job application documents checklist should include practical sections");
+    assert.ok(Array.isArray(jobDocumentsTool.sourceLinks) && jobDocumentsTool.sourceLinks.length >= 2, "job application documents checklist should link official source material");
+    assert.ok(
+      jobDocumentsTool.sourceLinks.some((source) => source.url.includes("mhlw.go.jp")),
+      "job application documents checklist should include a Ministry of Health, Labour and Welfare source link"
+    );
+    assert.ok(
+      jobDocumentsTool.sourceLinks.some((source) => source.url.includes("moj.go.jp")),
+      "job application documents checklist should include an Immigration Services Agency source link"
+    );
+    assert.ok(jobDocumentsTool.sections.some((section) => section.id === "resume-and-career-history"), "job application documents checklist should include resume/career-history checks");
+    assert.ok(jobDocumentsTool.sections.some((section) => section.id === "residence-status-and-work-permission"), "job application documents checklist should include residence/work-permission checks");
+    assert.ok(jobDocumentsTool.sections.some((section) => section.id === "offer-and-onboarding"), "job application documents checklist should include offer/onboarding checks");
+    for (const locale of locales) {
+      assert.ok(jobDocumentsTool.title[locale], `job application documents tool should include ${locale} title`);
+      assert.ok(jobDocumentsTool.description[locale]?.length > 30, `job application documents tool should include ${locale} description`);
+      assert.ok(jobDocumentsTool.sourceNote[locale]?.length > 30, `job application documents tool should include ${locale} source note`);
     }
 
     const movingOutTool = readJson("src/content/tools/moving-out-checklist.json");

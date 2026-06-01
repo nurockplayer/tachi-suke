@@ -1,0 +1,241 @@
+{
+  "id": "tool-japan-job-application-documents-checklist",
+  "slug": "japan-job-application-documents-checklist",
+  "title": {
+    "zh-tw": "日本求職申請文件清單",
+    "en": "Japan Job Application Documents Checklist",
+    "ja": "日本の求職・応募書類チェックリスト",
+    "ko": "일본 구직 지원 서류 체크리스트"
+  },
+  "description": {
+    "zh-tw": "在日本投履歷、面試或收到內定前，用這份清單整理履歷書、職務經歷書、在留資格、本人確認、銀行與入社前文件。",
+    "en": "A practical checklist for resumes, career-history sheets, residence status, identity checks, bank details, and pre-onboarding documents when applying for work in Japan.",
+    "ja": "日本で応募、面接、内定対応を進める前に、履歴書、職務経歴書、在留資格、本人確認、銀行情報、入社前書類を整理するチェックリストです。",
+    "ko": "일본에서 지원, 면접, 내정 대응을 하기 전에 이력서, 직무경력서, 체류 자격, 본인 확인, 은행 정보, 입사 전 서류를 정리하는 체크리스트입니다."
+  },
+  "status": "published",
+  "lastCheckedAt": "2026-06-01",
+  "sourceNote": {
+    "zh-tw": "本站依外國人在日本求職與入社前常見確認事項整理，並連到厚生勞動省與出入國在留管理廳相關公開資料作為確認入口。實際必要文件會依雇主、雇用型態、在留資格、學校、派遣公司與職種不同而變動。",
+    "en": "Compiled from common job-application and pre-onboarding checks for foreign residents in Japan, with Ministry of Health, Labour and Welfare and Immigration Services Agency public materials linked as confirmation starting points. Actual required documents vary by employer, employment type, residence status, school, staffing agency, and role.",
+    "ja": "外国人住民が日本で応募・入社前に確認しやすい項目を整理し、厚生労働省と出入国在留管理庁の公開情報への確認リンクを掲載しています。実際の必要書類は雇用主、雇用形態、在留資格、学校、派遣会社、職種によって異なります。",
+    "ko": "일본에서 외국인 주민이 구직 및 입사 전에 자주 확인하는 항목을 정리하고, 후생노동성과 출입국재류관리청 공개 자료 확인 링크를 제공합니다. 실제 필요 서류는 고용주, 고용 형태, 체류 자격, 학교, 파견회사, 직종에 따라 달라집니다."
+  },
+  "sourceLinks": [
+    {
+      "label": {
+        "zh-tw": "厚生勞動省：外國人勞動相談入口",
+        "en": "MHLW: Foreign worker consultation resources",
+        "ja": "厚生労働省：外国人労働者向け相談情報",
+        "ko": "후생노동성: 외국인 노동자 상담 정보"
+      },
+      "url": "https://www.check-roudou.mhlw.go.jp/soudan/foreigner.html"
+    },
+    {
+      "label": {
+        "zh-tw": "出入國在留管理廳：外國人生活與就業指南",
+        "en": "Immigration Services Agency: Guidebook on Living and Working",
+        "ja": "出入国在留管理庁：生活・就労ガイドブック",
+        "ko": "출입국재류관리청: 생활·취업 가이드북"
+      },
+      "url": "https://www.moj.go.jp/isa/support/fresc/01_00265.html"
+    }
+  ],
+  "notes": [
+    {
+      "zh-tw": "這份清單是求職與入社前準備輔助，不是履歷代寫、在留資格判斷、法律建議或錄取保證。",
+      "en": "This checklist supports job-search and pre-onboarding preparation. It is not resume writing, residence-status judgment, legal advice, or a guarantee of employment.",
+      "ja": "このチェックリストは応募・入社前準備の補助であり、履歴書代筆、在留資格判断、法律上の助言、採用保証ではありません。",
+      "ko": "이 체크리스트는 구직 및 입사 전 준비를 돕기 위한 것이며 이력서 작성 대행, 체류 자격 판단, 법률 조언, 채용 보장이 아닙니다."
+    },
+    {
+      "zh-tw": "請不要把護照、在留卡、My Number、銀行資料或其他敏感文件傳給不明帳號；送出前先確認雇主或招募窗口的正式收件方式。",
+      "en": "Do not send passport, residence card, My Number, bank details, or other sensitive files to unknown accounts. Confirm the employer or recruiter submission method first.",
+      "ja": "パスポート、在留カード、マイナンバー、銀行情報などの機微な情報を不明な相手に送らないでください。提出前に雇用主や採用窓口の正式な提出方法を確認しましょう。",
+      "ko": "여권, 재류카드, 마이넘버, 은행 정보 등 민감한 파일을 확인되지 않은 계정에 보내지 마세요. 제출 전 고용주나 채용 창구의 공식 제출 방법을 확인하세요."
+    },
+    {
+      "zh-tw": "工作內容、工時、在留資格限制、稅務與社會保險條件會依個人與雇用型態不同，請以官方資料與實際雇主說明為準。",
+      "en": "Job duties, working hours, residence-status restrictions, taxes, and social-insurance conditions differ by person and employment type. Confirm official materials and the employer's latest instructions.",
+      "ja": "業務内容、労働時間、在留資格の制限、税金、社会保険の条件は個人と雇用形態によって異なります。公式情報と実際の雇用主の最新案内を確認してください。",
+      "ko": "업무 내용, 근무 시간, 체류 자격 제한, 세금, 사회보험 조건은 개인과 고용 형태에 따라 다릅니다. 공식 자료와 실제 고용주의 최신 안내를 확인하세요."
+    }
+  ],
+  "sections": [
+    {
+      "id": "resume-and-career-history",
+      "title": {
+        "zh-tw": "履歷書與職務經歷書",
+        "en": "Resume and career history",
+        "ja": "履歴書・職務経歴書",
+        "ko": "이력서 및 직무경력서"
+      },
+      "items": [
+        {
+          "zh-tw": "準備日文履歷書基本資料：姓名、片假名、地址、電話、Email、學歷、職歷、證照與可勤務時間。",
+          "en": "Prepare basic Japanese resume details: name, katakana, address, phone, email, education, work history, licenses, and available working hours.",
+          "ja": "氏名、フリガナ、住所、電話、メール、学歴、職歴、資格、勤務可能時間など、履歴書の基本情報を準備する。",
+          "ko": "이름, 후리가나, 주소, 전화번호, 이메일, 학력, 경력, 자격증, 근무 가능 시간 등 일본어 이력서 기본 정보를 준비한다."
+        },
+        {
+          "zh-tw": "若申請正職或專門職，整理職務經歷書：公司、職稱、期間、負責工作、成果、使用工具與語言能力。",
+          "en": "For full-time or specialist roles, prepare a career-history sheet with companies, titles, dates, responsibilities, results, tools, and language ability.",
+          "ja": "正社員や専門職に応募する場合は、会社名、職種、期間、担当業務、成果、使用ツール、語学力を職務経歴書に整理する。",
+          "ko": "정규직이나 전문직에 지원한다면 회사명, 직무, 기간, 담당 업무, 성과, 사용 도구, 언어 능력을 직무경력서에 정리한다."
+        },
+        {
+          "zh-tw": "確認姓名拼寫、片假名、地址、在留卡姓名與履歷內容一致，避免面試或入社文件重新修正。",
+          "en": "Check that name spelling, katakana, address, residence-card name, and resume content match to avoid corrections during interview or onboarding.",
+          "ja": "氏名表記、フリガナ、住所、在留カード上の氏名、履歴書の内容が一致しているか確認し、面接や入社時の修正を減らす。",
+          "ko": "이름 표기, 가타카나, 주소, 재류카드 이름, 이력서 내용이 일치하는지 확인해 면접이나 입사 서류 수정이 생기지 않게 한다."
+        },
+        {
+          "zh-tw": "若有作品集、GitHub、LinkedIn 或語言檢定成績，只附上與工作相關且可公開查看的連結。",
+          "en": "If you include a portfolio, GitHub, LinkedIn, or language-test result, use only job-relevant links that are safe for the employer to view.",
+          "ja": "ポートフォリオ、GitHub、LinkedIn、語学試験結果を載せる場合は、仕事に関係し、企業に見せても問題ないリンクだけにする。",
+          "ko": "포트폴리오, GitHub, LinkedIn, 어학 시험 결과를 넣는다면 업무와 관련 있고 고용주가 봐도 괜찮은 링크만 사용한다."
+        }
+      ]
+    },
+    {
+      "id": "residence-status-and-work-permission",
+      "title": {
+        "zh-tw": "在留資格與工作限制",
+        "en": "Residence status and work permission",
+        "ja": "在留資格・就労制限",
+        "ko": "체류 자격 및 취업 제한"
+      },
+      "items": [
+        {
+          "zh-tw": "確認目前在留資格是否允許該工作內容、職種、工時與雇用型態；不確定時先查官方資料或詢問可信任窗口。",
+          "en": "Confirm whether your current residence status allows the job duties, role type, working hours, and employment type. If unsure, check official materials or a trusted support desk.",
+          "ja": "現在の在留資格で業務内容、職種、労働時間、雇用形態が認められるか確認する。不明な場合は公式情報や信頼できる窓口で確認する。",
+          "ko": "현재 체류 자격으로 업무 내용, 직종, 근무 시간, 고용 형태가 가능한지 확인한다. 불확실하면 공식 자료나 신뢰할 수 있는 창구에 확인한다."
+        },
+        {
+          "zh-tw": "留學生或家族滯在等身分若需要資格外活動許可，先確認許可範圍、每週工時與禁止工作的類型。",
+          "en": "If your status requires permission to engage in activity outside your status, confirm the permission scope, weekly hour limit, and prohibited work types.",
+          "ja": "留学生や家族滞在など資格外活動許可が必要な場合は、許可範囲、週の時間制限、禁止される仕事の種類を確認する。",
+          "ko": "유학생이나 가족체재처럼 자격외활동허가가 필요한 경우 허가 범위, 주간 시간 제한, 금지되는 업무 유형을 확인한다."
+        },
+        {
+          "zh-tw": "面試前先準備可說明在留期限、更新予定、畢業予定或轉職予定的簡短資訊，但不要交出不必要的個資影本。",
+          "en": "Before interviews, prepare a concise explanation of your period of stay, renewal plan, graduation plan, or job-change timing, without handing over unnecessary personal-document copies.",
+          "ja": "面接前に在留期限、更新予定、卒業予定、転職時期を簡潔に説明できるようにし、不要な個人書類の写しは渡さない。",
+          "ko": "면접 전에 체류 기간, 갱신 예정, 졸업 예정, 이직 시기를 간단히 설명할 수 있게 준비하되 불필요한 개인정보 서류 사본은 제출하지 않는다."
+        },
+        {
+          "zh-tw": "若工作內容可能需要在留資格變更或就勞資格證明，先把時間成本與雇主支援方式問清楚。",
+          "en": "If the role may require a residence-status change or work-eligibility certificate, ask about timing, required support, and employer responsibilities early.",
+          "ja": "在留資格変更や就労資格証明が必要になりそうな場合は、必要期間、支援内容、雇用主側の対応を早めに確認する。",
+          "ko": "체류 자격 변경이나 취업자격증명이 필요할 수 있다면 필요한 기간, 지원 내용, 고용주의 대응을 미리 확인한다."
+        }
+      ]
+    },
+    {
+      "id": "interview-and-offer-documents",
+      "title": {
+        "zh-tw": "面試與內定階段文件",
+        "en": "Interview and offer-stage documents",
+        "ja": "面接・内定段階の書類",
+        "ko": "면접 및 내정 단계 서류"
+      },
+      "items": [
+        {
+          "zh-tw": "面試前確認是否需要帶履歷書紙本、職務經歷書、學生證、在學證明、畢業證明、語言成績或作品集。",
+          "en": "Before the interview, confirm whether you need printed resumes, career-history sheets, student ID, enrollment proof, graduation proof, language scores, or a portfolio.",
+          "ja": "面接前に履歴書・職務経歴書の紙、学生証、在学証明、卒業証明、語学スコア、ポートフォリオが必要か確認する。",
+          "ko": "면접 전에 종이 이력서, 직무경력서, 학생증, 재학증명서, 졸업증명서, 어학 성적, 포트폴리오가 필요한지 확인한다."
+        },
+        {
+          "zh-tw": "收到內定或條件通知時，確認雇用型態、工作地點、工時、薪資、交通費、試用期、加班與休假是否有書面資料。",
+          "en": "When receiving an offer or condition notice, confirm written details for employment type, workplace, hours, pay, commuting allowance, probation, overtime, and leave.",
+          "ja": "内定や条件通知を受けたら、雇用形態、勤務地、労働時間、給与、交通費、試用期間、残業、休暇が書面で確認できるか確認する。",
+          "ko": "내정이나 조건 통지를 받으면 고용 형태, 근무지, 근무 시간, 급여, 교통비, 수습기간, 잔업, 휴가가 서면으로 확인되는지 확인한다."
+        },
+        {
+          "zh-tw": "若文件只有日文且內容不確定，先請可信任的人、學校、勞動相談窗口或專業人士協助確認，不要急著簽名。",
+          "en": "If documents are only in Japanese and you are unsure, ask a trusted person, school, labor consultation desk, or professional before signing.",
+          "ja": "書類が日本語のみで内容が不安な場合は、署名前に信頼できる人、学校、労働相談窓口、専門家に確認してもらう。",
+          "ko": "서류가 일본어뿐이고 내용이 불확실하다면 서명하기 전에 신뢰할 수 있는 사람, 학교, 노동 상담 창구, 전문가에게 확인받는다."
+        },
+        {
+          "zh-tw": "保存招募頁、條件通知、Email、聊天紀錄與面試後確認事項，避免入社時條件認知不一致。",
+          "en": "Save the job posting, condition notice, emails, chat logs, and post-interview confirmations to reduce condition mismatches at onboarding.",
+          "ja": "募集要項、条件通知、メール、チャット履歴、面接後の確認事項を保存し、入社時の条件認識違いを減らす。",
+          "ko": "채용 공고, 조건 통지, 이메일, 채팅 기록, 면접 후 확인 내용을 보관해 입사 시 조건 오해를 줄인다."
+        }
+      ]
+    },
+    {
+      "id": "offer-and-onboarding",
+      "title": {
+        "zh-tw": "入社前與入社手續",
+        "en": "Offer and onboarding basics",
+        "ja": "内定後・入社手続き",
+        "ko": "내정 후 및 입사 절차"
+      },
+      "items": [
+        {
+          "zh-tw": "確認入社前是否需要住民票、在留卡影本、護照、銀行帳戶、年金手帳或基礎年金番号、雇用保險相關資料。",
+          "en": "Ask whether onboarding requires a resident record, residence-card copy, passport, bank account, pension number, or employment-insurance information.",
+          "ja": "入社手続きで住民票、在留カード写し、パスポート、銀行口座、基礎年金番号、雇用保険関連情報が必要か確認する。",
+          "ko": "입사 절차에 주민표, 재류카드 사본, 여권, 은행 계좌, 기초연금번호, 고용보험 관련 정보가 필요한지 확인한다."
+        },
+        {
+          "zh-tw": "My Number 通常屬於敏感資料，只在正式入社與稅務／社會保險手續需要時，透過正式方式提供。",
+          "en": "My Number is sensitive information. Provide it only when officially needed for onboarding, tax, or social-insurance procedures, through the designated method.",
+          "ja": "マイナンバーは機微な情報です。入社、税務、社会保険手続きで正式に必要な場合だけ、指定された方法で提出する。",
+          "ko": "마이넘버는 민감한 정보입니다. 입사, 세금, 사회보험 절차에 공식적으로 필요할 때만 지정된 방법으로 제출한다."
+        },
+        {
+          "zh-tw": "確認薪資支付日、銀行帳戶格式、交通費申請方式、制服或設備、出勤系統與入社日集合地點。",
+          "en": "Confirm payday, bank-account format, commuting-expense procedure, uniforms or equipment, attendance system, and where to go on the first day.",
+          "ja": "給与支払日、銀行口座形式、交通費申請、制服・備品、勤怠システム、入社日の集合場所を確認する。",
+          "ko": "급여 지급일, 은행 계좌 형식, 교통비 신청 방식, 유니폼이나 장비, 출퇴근 시스템, 입사일 집합 장소를 확인한다."
+        },
+        {
+          "zh-tw": "若從學校、打工轉正職或轉職，確認離職日、入社日、保險切換與在留手續時間是否互相衝突。",
+          "en": "If moving from school, part-time work, or another job, check that leaving date, start date, insurance transition, and residence procedures do not conflict.",
+          "ja": "学校、アルバイト、前職から移る場合は、退職日、入社日、保険切替、在留手続きの時期が衝突しないか確認する。",
+          "ko": "학교, 아르바이트, 이전 직장에서 이동한다면 퇴직일, 입사일, 보험 전환, 체류 절차 일정이 충돌하지 않는지 확인한다."
+        }
+      ]
+    },
+    {
+      "id": "safe-submission-hygiene",
+      "title": {
+        "zh-tw": "安全送件與個資保護",
+        "en": "Safe submission hygiene",
+        "ja": "安全な提出・個人情報保護",
+        "ko": "안전한 제출 및 개인정보 보호"
+      },
+      "items": [
+        {
+          "zh-tw": "文件檔名用清楚格式，例如 resume、career-history、residence-card-front；不要把不必要的頁面一起送出。",
+          "en": "Use clear filenames such as resume, career-history, and residence-card-front. Do not include pages that were not requested.",
+          "ja": "resume、career-history、residence-card-front のように分かりやすいファイル名にし、不要なページは送らない。",
+          "ko": "resume, career-history, residence-card-front처럼 파일명을 명확하게 하고 요청받지 않은 페이지는 보내지 않는다."
+        },
+        {
+          "zh-tw": "確認收件方式是公司網域 Email、正式招募系統、派遣公司系統或紙本面交，避免傳到私人帳號。",
+          "en": "Confirm whether submission should use a company-domain email, official recruiting system, staffing-agency system, or in-person paper handoff; avoid private accounts.",
+          "ja": "提出先が会社ドメインのメール、正式な採用システム、派遣会社システム、紙での手渡しのどれか確認し、個人アカウントへの送信を避ける。",
+          "ko": "제출 방식이 회사 도메인 이메일, 공식 채용 시스템, 파견회사 시스템, 종이 직접 제출 중 무엇인지 확인하고 개인 계정으로 보내는 것은 피한다."
+        },
+        {
+          "zh-tw": "掃描或拍照前確認姓名、有效期限、文件號碼沒有被裁掉；但也確認是否需要遮蔽不必要的敏感資訊。",
+          "en": "Before sending scans or photos, check that names, validity dates, and document numbers are visible, and ask whether unnecessary sensitive details should be masked.",
+          "ja": "スキャンや写真を送る前に、氏名、有効期限、番号が切れていないか確認し、不要な機微情報を隠すべきかも確認する。",
+          "ko": "스캔이나 사진을 보내기 전에 이름, 유효 기간, 번호가 잘리지 않았는지 확인하고 불필요한 민감 정보는 가려야 하는지도 확인한다."
+        },
+        {
+          "zh-tw": "保留送件紀錄與對方回覆；若對方要求過多個資或條件不清楚，先暫停並確認來源。",
+          "en": "Keep submission records and replies. If a contact asks for excessive personal data or unclear conditions, pause and verify the source.",
+          "ja": "提出記録と返信を保存する。相手が過度な個人情報や不明確な条件を求める場合は、いったん止めて送信元を確認する。",
+          "ko": "제출 기록과 답변을 보관한다. 상대가 과도한 개인정보나 불명확한 조건을 요구하면 잠시 멈추고 출처를 확인한다."
+        }
+      ]
+    }
+  ]
+}
