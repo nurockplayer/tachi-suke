@@ -202,7 +202,7 @@ All public pages should:
 
 **Rendering mode:** Static Astro pages through `SiteMapPage`.
 
-**SEO requirements:** Use localized title/description, canonical URL, Open Graph metadata, locale-aware `html lang`, visible breadcrumbs, conservative `WebPage`/`ItemList` JSON-LD, and locale alternates. Include in `sitemap.xml`. Do not link account placeholder pages.
+**SEO requirements:** Use localized title/description, canonical URL, Open Graph metadata, locale-aware `html lang`, visible breadcrumbs, conservative `WebPage`/`ItemList` JSON-LD, and locale alternates. `WebPage.inLanguage` should use the same BCP47 locale metadata as the rendered HTML `lang`. Include in `sitemap.xml`. Do not link account placeholder pages.
 
 **Current status:** Implemented for all four locales in Phase 1BB and linked from the footer.
 

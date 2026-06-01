@@ -7,6 +7,12 @@ const root = process.cwd();
 const dist = join(root, "dist");
 const contentRoot = join(root, "src/content");
 const locales = ["zh-tw", "en", "ja", "ko"];
+const htmlLangByLocale = {
+  "zh-tw": "zh-Hant-TW",
+  en: "en",
+  ja: "ja",
+  ko: "ko"
+};
 const searchEntryTypes = ["article", "place", "mobile_plan", "area", "tool"];
 const expectedSiteUrl = (process.env.SITE_URL ?? "https://tachi-suke.example.com").trim().replace(/\/$/, "");
 
@@ -562,6 +568,17 @@ describe("static SEO output", () => {
         const path = `/${locale}/${section}`;
         assert.match(lastmods.get(path) ?? "", /^\d{4}-\d{2}-\d{2}$/, `${path} should have a content-derived lastmod date`);
       }
+    }
+  });
+
+  it("renders human-readable site map JSON-LD with BCP47 language values", () => {
+    for (const locale of locales) {
+      const objects = jsonLdObjects(readHtml(`${locale}/site-map/index.html`));
+      const webPage = objects.find((object) => object["@type"] === "WebPage" && object.mainEntity?.["@type"] === "ItemList");
+
+      assert.ok(webPage, `${locale} site map should include WebPage JSON-LD`);
+      assert.equal(webPage?.inLanguage, htmlLangByLocale[locale], `${locale} site map WebPage should use the HTML language`);
+      assert.ok(webPage?.mainEntity?.numberOfItems > 0, `${locale} site map ItemList should describe public links`);
     }
   });
 

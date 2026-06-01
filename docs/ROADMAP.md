@@ -528,6 +528,25 @@ Rules:
 - Keep these labels assistive-only and locale-aware.
 - Do not change visible article category cards, place card content, routes, search behavior, account placeholders, or backend behavior in Phase 1CN.
 
+## Phase 1CO: Site Map JSON-LD Language Alignment
+
+Status: implemented.
+
+Goal:
+
+Align human-readable site map structured-data language values with the site's shared BCP47 locale metadata.
+
+Implemented:
+
+- Updated `SiteMapPage` `WebPage.inLanguage` to use `htmlLangByLocale[locale]`.
+- Added source-level coverage to keep site map JSON-LD tied to shared locale metadata.
+- Added build-output SEO coverage for `/[locale]/site-map` JSON-LD language values.
+
+Rules:
+
+- Keep site map structured data aligned with visible public links and local content.
+- Do not change visible site map layout, route structure, account placeholder exclusions, or backend behavior in Phase 1CO.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.

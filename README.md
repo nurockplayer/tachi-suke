@@ -78,8 +78,8 @@ Implemented:
 - Article detail pages can render structured official confirmation links from article frontmatter
 - Browser/PWA metadata for theme color, app name, Apple app title, and phone number format detection
 - System/light/dark theme support with a globe-icon language control, separate collapsed theme control, persisted browser preference, and no-JavaScript system dark theme fallback
-- Localized assistive labels for primary navigation, footer navigation, article tags, and global language controls
-- JSON-LD structured data for site identity, site search, locale homepages, public section indexes, article indexes, articles, places, mobile plan details, area details, tool details, trust/form pages, and breadcrumbs
+- Localized assistive labels for primary navigation, footer navigation, article tags, article category lists, place fact lists, and global language controls
+- JSON-LD structured data for site identity, site search, locale homepages, public section indexes, article indexes, human-readable site maps, articles, places, mobile plan details, area details, tool details, trust/form pages, and breadcrumbs
 - Breadcrumb JSON-LD on public collection index pages and nested public detail pages
 - Visible breadcrumbs on public collection index pages and nested public article, category, place, mobile plan, area, and tool pages
 - Detail-page correction prompts pass an encoded `relatedUrl` into the contact/corrections form across representative public content types
