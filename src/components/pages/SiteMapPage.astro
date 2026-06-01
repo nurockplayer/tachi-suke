@@ -4,7 +4,7 @@ import BaseLayout from "@/components/layout/BaseLayout.astro";
 import Breadcrumbs from "@/components/navigation/Breadcrumbs.astro";
 import { formatDate } from "@/lib/content";
 import { getArticleCategorySummaries } from "@/lib/content/article-categories";
-import { localizePath, sectionCopy, type Locale } from "@/lib/i18n";
+import { htmlLangByLocale, localizePath, sectionCopy, type Locale } from "@/lib/i18n";
 
 interface Props {
   locale: Locale;
@@ -114,7 +114,7 @@ const jsonLd = {
   "@type": "WebPage",
   name: copy.title,
   description: copy.description,
-  inLanguage: locale,
+  inLanguage: htmlLangByLocale[locale],
   mainEntity: {
     "@type": "ItemList",
     numberOfItems: coreLinks.length + categories.length + articles.length + mobilePlans.length + areas.length + places.length + tools.length + trustLinks.length,

@@ -305,6 +305,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Area detail pages should include conservative `WebPage` and `BreadcrumbList` JSON-LD.
 - Tool detail pages should include conservative `WebPage`, `ItemList`, and `BreadcrumbList` JSON-LD.
 - Public trust/form pages, including about, privacy, editorial policy, contact, and submit-place, should include conservative `WebPage` and two-level `BreadcrumbList` JSON-LD.
+- Human-readable site map pages should include `WebPage` JSON-LD whose `inLanguage` value matches the shared BCP47 HTML language metadata for the current locale.
 - JSON-LD must not invent ratings, review counts, opening hours, coordinates, offers, or exact addresses that are not in the content model.
 - Public article, area, place, mobile, and tool collection index pages should render visible breadcrumbs from locale home to the current section.
 - Nested public article, article category, place, mobile plan, area, and tool pages should render visible breadcrumbs.

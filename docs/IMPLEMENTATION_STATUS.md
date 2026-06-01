@@ -79,6 +79,7 @@ This document records the current MVP state after Phase 1CI source-backed setup 
 - Area detail `WebPage` and `BreadcrumbList` JSON-LD.
 - Tool detail `WebPage`, `ItemList`, and `BreadcrumbList` JSON-LD.
 - Public trust/form pages at `/[locale]/about`, `/[locale]/privacy`, `/[locale]/editorial-policy`, `/[locale]/contact`, and `/[locale]/submit-place` emit conservative `WebPage` and two-level `BreadcrumbList` JSON-LD.
+- Human-readable site map pages emit `WebPage` JSON-LD with BCP47 `inLanguage` values from shared locale metadata.
 - Visible breadcrumbs on article, area, place, mobile, and tool collection index pages, plus article detail, article category, place detail, mobile plan detail, area detail, and tool detail pages.
 - Generated `sitemap.xml` for public static routes and content collection detail pages.
 - Sitemap entries include conservative `hreflang` alternates for shared locale pages and translated article detail pages.

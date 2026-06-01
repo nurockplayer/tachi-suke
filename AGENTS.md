@@ -210,6 +210,12 @@ Phase 1CN extends localized assistive labels:
 - Article index category lists and place-card fact lists should also use `getUiCopy` instead of hard-coded English `aria-label` values.
 - Keep these labels as assistive text only; do not change visible category cards, place cards, route structure, search behavior, or account/auth functionality in Phase 1CN.
 
+Phase 1CO aligns site map structured-data language:
+
+- Human-readable site map `WebPage` JSON-LD should use `htmlLangByLocale[locale]` for BCP47 `inLanguage` values.
+- `pnpm check:seo` should verify generated `/[locale]/site-map` JSON-LD uses the same language metadata as the HTML `lang` value.
+- Do not change visible site map content, routes, sitemap entries, account placeholders, or backend behavior in Phase 1CO.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.

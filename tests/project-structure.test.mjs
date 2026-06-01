@@ -705,6 +705,8 @@ describe("TachiSuke project scaffold", () => {
     assert.match(siteMapPage, /getCollection\("places"[\s\S]*status === "published"/, "site map should list only published places");
     assert.match(siteMapPage, /getCollection\("tools"[\s\S]*status === "published"/, "site map should list only published tools");
     assert.match(siteMapPage, /getArticleCategorySummaries/, "site map should link article category pages");
+    assert.match(siteMapPage, /htmlLangByLocale/, "site map JSON-LD should use shared BCP47 language metadata");
+    assert.match(siteMapPage, /inLanguage:\s*htmlLangByLocale\[locale\]/, "site map WebPage JSON-LD should use the HTML language value");
     assert.match(siteMapPage, /localizePath\(locale,\s*"\/articles"\)/, "site map should link the articles index");
     assert.match(siteMapPage, /localizePath\(locale,\s*"\/mobile"\)/, "site map should link the mobile index");
     assert.match(siteMapPage, /localizePath\(locale,\s*"\/areas"\)/, "site map should link the areas index");
