@@ -629,13 +629,14 @@ describe("TachiSuke project scaffold", () => {
     }
 
     const publishedTools = listFiles("src/content/tools", [".json"]).map(readJson).filter((tool) => tool.status === "published");
-    assert.ok(publishedTools.length >= 6, "Phase 1AT should publish at least six static tools");
+    assert.ok(publishedTools.length >= 7, "Phase 1BN should publish at least seven static tools");
     assert.ok(publishedTools.some((tool) => tool.slug === "moving-to-japan-checklist"), "moving checklist should stay published");
     assert.ok(publishedTools.some((tool) => tool.slug === "japan-rent-initial-cost-checklist"), "rent initial cost checklist should be published");
     assert.ok(publishedTools.some((tool) => tool.slug === "ward-office-moving-in-checklist"), "ward office moving-in checklist should be published");
     assert.ok(publishedTools.some((tool) => tool.slug === "commuter-pass-ic-card-checklist"), "commuter pass and IC card checklist should be published");
     assert.ok(publishedTools.some((tool) => tool.slug === "apartment-viewing-japanese-phrases"), "apartment viewing Japanese phrases tool should be published");
     assert.ok(publishedTools.some((tool) => tool.slug === "moving-out-checklist"), "moving-out checklist should be published");
+    assert.ok(publishedTools.some((tool) => tool.slug === "japan-emergency-disaster-checklist"), "emergency and disaster checklist should be published");
 
     const tool = readJson("src/content/tools/moving-checklist.json");
     assert.equal(tool.slug, "moving-to-japan-checklist");
@@ -724,6 +725,24 @@ describe("TachiSuke project scaffold", () => {
       assert.ok(movingOutTool.title[locale], `moving-out tool should include ${locale} title`);
       assert.ok(movingOutTool.description[locale]?.length > 30, `moving-out tool should include ${locale} description`);
       assert.ok(movingOutTool.sourceNote[locale]?.length > 30, `moving-out tool should include ${locale} source note`);
+    }
+
+    const emergencyTool = readJson("src/content/tools/emergency-disaster-checklist.json");
+    assert.equal(emergencyTool.status, "published");
+    assert.equal(emergencyTool.slug, "japan-emergency-disaster-checklist");
+    assert.ok(emergencyTool.sections.length >= 4, "emergency checklist should include practical sections");
+    assert.ok(
+      emergencyTool.sourceLinks.some((source) => source.url.includes("jma.go.jp")),
+      "emergency checklist should include a Japan Meteorological Agency source link"
+    );
+    assert.ok(
+      emergencyTool.sourceLinks.some((source) => source.url.includes("fdma.go.jp")),
+      "emergency checklist should include a Fire and Disaster Management Agency source link"
+    );
+    for (const locale of locales) {
+      assert.ok(emergencyTool.title[locale], `emergency tool should include ${locale} title`);
+      assert.ok(emergencyTool.description[locale]?.length > 30, `emergency tool should include ${locale} description`);
+      assert.ok(emergencyTool.sourceNote[locale]?.length > 30, `emergency tool should include ${locale} source note`);
     }
   });
 

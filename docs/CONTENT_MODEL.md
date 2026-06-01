@@ -229,6 +229,9 @@ Current published tools:
 - `japan-rent-initial-cost-checklist`
 - `ward-office-moving-in-checklist`
 - `commuter-pass-ic-card-checklist`
+- `apartment-viewing-japanese-phrases`
+- `moving-out-checklist`
+- `japan-emergency-disaster-checklist`
 
 **Required fields:**
 
