@@ -149,8 +149,8 @@ The MVP includes:
 - Mobile index pages with comparison guidance and five mobile plan entries
 - Mobile plan detail pages generated from JSON content with official URLs, `lastCheckedAt`, source notes, caveats, pros, cons, and recommended fit
 - Tools index pages with published tool cards
-- Tool detail pages generated from JSON content with localized checklist sections, source notes, optional official source links, caveats, and `lastCheckedAt`, including moving, rent initial cost, ward-office moving-in, commuter pass, apartment viewing phrases, apartment application documents, job application documents, moving-out, and emergency/disaster checklists
-- Published tools: `moving-to-japan-checklist`, `japan-rent-initial-cost-checklist`, `ward-office-moving-in-checklist`, `commuter-pass-ic-card-checklist`, `apartment-viewing-japanese-phrases`, `apartment-application-documents-checklist`, `japan-job-application-documents-checklist`, `moving-out-checklist`, `japan-emergency-disaster-checklist`
+- Tool detail pages generated from JSON content with localized checklist sections, source notes, optional official source links, caveats, and `lastCheckedAt`, including moving, rent initial cost, ward-office moving-in, commuter pass, apartment viewing phrases, apartment application documents, job application documents, everyday shopping, moving-out, and emergency/disaster checklists
+- Published tools: `moving-to-japan-checklist`, `japan-rent-initial-cost-checklist`, `ward-office-moving-in-checklist`, `commuter-pass-ic-card-checklist`, `apartment-viewing-japanese-phrases`, `apartment-application-documents-checklist`, `japan-job-application-documents-checklist`, `japan-everyday-shopping-checklist`, `moving-out-checklist`, `japan-emergency-disaster-checklist`
 - Static search pages at `/[locale]/search`, including shareable `?q=` query behavior
 - Static search index JSON endpoints at `/[locale]/search-index.json`
 - Human-readable site map pages at `/[locale]/site-map` that list public content, section pages, article categories, tools, trust pages, and RSS links

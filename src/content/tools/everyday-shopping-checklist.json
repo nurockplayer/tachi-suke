@@ -1,0 +1,185 @@
+{
+  "id": "tool-everyday-shopping-checklist",
+  "slug": "japan-everyday-shopping-checklist",
+  "title": {
+    "zh-tw": "日本日常採買準備清單",
+    "en": "Everyday Shopping Checklist",
+    "ja": "日本の日常買い物チェックリスト",
+    "ko": "일본 일상 장보기 체크리스트"
+  },
+  "description": {
+    "zh-tw": "用超市、藥妝店、便利商店、百元店與日用品店的使用情境，整理剛開始在日本生活時的採買優先順序、付款方式、標籤確認與省錢習慣。",
+    "en": "A practical checklist for choosing supermarkets, drugstores, convenience stores, 100-yen shops, and daily-goods stores, with payment, labeling, and budgeting habits for settling into Japan.",
+    "ja": "スーパー、ドラッグストア、コンビニ、100円ショップ、日用品店の使い分け、支払い、表示確認、節約習慣を整理する生活向けチェックリストです。",
+    "ko": "슈퍼마켓, 드러그스토어, 편의점, 100엔 숍, 생활용품점을 어떻게 나눠 쓸지와 결제, 표시 확인, 예산 습관을 정리하는 체크리스트입니다."
+  },
+  "status": "published",
+  "lastCheckedAt": "2026-06-01",
+  "sourceNote": {
+    "zh-tw": "本站依日本日常生活採買流程與既有購物指南整理。店家規則、付款方式、點數活動、營業時間、商品標示與價格會依店鋪、地區與時期改變。",
+    "en": "Compiled from common daily shopping workflows in Japan and TachiSuke's shopping guidance. Store rules, payment methods, point campaigns, opening hours, labels, and prices can vary by chain, location, and timing.",
+    "ja": "日本での日常的な買い物の流れと TachiSuke の買い物ガイドをもとに整理しています。店舗ルール、支払い方法、ポイント施策、営業時間、表示、価格はチェーン、地域、時期によって変わります。",
+    "ko": "일본의 일상 장보기 흐름과 TachiSuke 쇼핑 가이드를 바탕으로 정리했습니다. 매장 규칙, 결제 방법, 포인트 행사, 영업시간, 상품 표시, 가격은 체인, 지역, 시기에 따라 달라질 수 있습니다."
+  },
+  "notes": [
+    {
+      "zh-tw": "這份清單是生活採買輔助，不保證特定店鋪、商品、折扣或付款方式一定可用。",
+      "en": "This checklist is a daily-life shopping aid. It does not guarantee a specific store, product, discount, or payment method is available.",
+      "ja": "このチェックリストは日常の買い物を助けるものであり、特定の店舗、商品、割引、支払い方法が必ず使えることを保証しません。",
+      "ko": "이 체크리스트는 일상 장보기를 돕기 위한 것이며 특정 매장, 상품, 할인, 결제 수단이 항상 가능하다는 보장은 아닙니다."
+    },
+    {
+      "zh-tw": "食品過敏、用藥、嬰幼兒用品或重要健康需求，請以包裝標示、藥師或官方／店家最新資訊為準。",
+      "en": "For food allergies, medicine, baby products, or important health needs, confirm package labels, pharmacists, and the latest official or store information.",
+      "ja": "食物アレルギー、医薬品、乳幼児用品、健康に関わる重要な買い物は、包装表示、薬剤師、公式または店舗の最新情報を確認してください。",
+      "ko": "식품 알레르기, 의약품, 영유아용품, 건강과 관련된 중요한 구매는 포장 표시, 약사, 공식 또는 매장 최신 정보를 확인하세요."
+    }
+  ],
+  "sections": [
+    {
+      "id": "store-choice",
+      "title": {
+        "zh-tw": "先決定去哪種店買",
+        "en": "Choose the right store type",
+        "ja": "店の種類を使い分ける",
+        "ko": "매장 종류 나누어 쓰기"
+      },
+      "items": [
+        {
+          "zh-tw": "生鮮、冷凍食品與一週食材先看超市，不要全部用便利商店解決。",
+          "en": "Use supermarkets first for fresh food, frozen items, and weekly groceries instead of relying only on convenience stores.",
+          "ja": "生鮮食品、冷凍食品、1週間分の食材は、コンビニだけでなくまずスーパーで確認する。",
+          "ko": "신선식품, 냉동식품, 일주일치 식재료는 편의점만 쓰지 말고 먼저 슈퍼마켓에서 확인한다."
+        },
+        {
+          "zh-tw": "洗衣精、清潔用品、簡單藥品與保養用品可先比較藥妝店。",
+          "en": "Compare drugstores for laundry detergent, cleaning supplies, basic over-the-counter medicine, and personal care items.",
+          "ja": "洗剤、掃除用品、一般用医薬品、日用品やケア用品はドラッグストアで比較する。",
+          "ko": "세제, 청소용품, 일반 의약품, 생활·케어용품은 드러그스토어에서 비교한다."
+        },
+        {
+          "zh-tw": "收納盒、文具、廚房小物與臨時生活用品可先看百元店或日用品店。",
+          "en": "Check 100-yen shops or daily-goods stores for storage boxes, stationery, kitchen basics, and temporary household items.",
+          "ja": "収納用品、文房具、キッチン小物、一時的な生活用品は100円ショップや日用品店で確認する。",
+          "ko": "수납함, 문구, 주방 소품, 임시 생활용품은 100엔 숍이나 생활용품점에서 확인한다."
+        }
+      ]
+    },
+    {
+      "id": "first-week-basket",
+      "title": {
+        "zh-tw": "抵日第一週先買什麼",
+        "en": "First-week shopping basket",
+        "ja": "到着後1週間で買うもの",
+        "ko": "첫 주 장보기 목록"
+      },
+      "items": [
+        {
+          "zh-tw": "先買能撐三到五天的主食、蛋白質、即食備品與飲用水，再慢慢補齊調味料。",
+          "en": "Buy three to five days of staples, protein, ready-to-eat backup food, and drinking water before building a full pantry.",
+          "ja": "まず3〜5日分の主食、たんぱく源、すぐ食べられる予備食、飲料水を買い、調味料は少しずつ揃える。",
+          "ko": "먼저 3~5일치 주식, 단백질, 바로 먹을 수 있는 비상식, 식수를 사고 조미료는 천천히 채운다."
+        },
+        {
+          "zh-tw": "補齊洗衣、垃圾袋、衛生紙、濕紙巾、毛巾、延長線與手機充電周邊。",
+          "en": "Cover laundry, trash bags, toilet paper, wet wipes, towels, extension cords, and phone-charging basics.",
+          "ja": "洗濯用品、ゴミ袋、トイレットペーパー、ウェットティッシュ、タオル、延長コード、充電用品を揃える。",
+          "ko": "세탁용품, 쓰레기봉투, 화장지, 물티슈, 수건, 멀티탭, 충전용품을 준비한다."
+        },
+        {
+          "zh-tw": "不要一開始買太多大型或重物；先確認住處收納、垃圾分類與搬運方式。",
+          "en": "Avoid buying too many large or heavy items at first; check storage space, garbage rules, and how you will carry items home.",
+          "ja": "最初から大きい物や重い物を買いすぎず、収納、ゴミ分別、持ち帰り方法を確認する。",
+          "ko": "처음부터 크거나 무거운 물건을 너무 많이 사지 말고 수납, 쓰레기 분리, 운반 방법을 확인한다."
+        }
+      ]
+    },
+    {
+      "id": "payments-and-points",
+      "title": {
+        "zh-tw": "付款方式與點數",
+        "en": "Payments and point cards",
+        "ja": "支払いとポイント",
+        "ko": "결제와 포인트"
+      },
+      "items": [
+        {
+          "zh-tw": "先準備現金與一種主要電子支付；不是每間小店都支援海外信用卡或 QR 付款。",
+          "en": "Keep cash plus one main cashless method ready; not every smaller shop accepts foreign cards or QR payments.",
+          "ja": "現金と主なキャッシュレス決済を1つ用意する。小さな店では海外カードやQR決済が使えない場合がある。",
+          "ko": "현금과 주 결제 수단 하나를 준비한다. 작은 가게는 해외 카드나 QR 결제를 받지 않을 수 있다."
+        },
+        {
+          "zh-tw": "常去的超市或藥妝店再辦點數卡，不要為了第一次購物辦太多帳號。",
+          "en": "Sign up for point cards only at stores you use often instead of creating many accounts on your first shopping trip.",
+          "ja": "よく使うスーパーやドラッグストアだけポイントカードを作り、初回から多くのアカウントを作りすぎない。",
+          "ko": "자주 가는 슈퍼나 드러그스토어만 포인트 카드를 만들고 첫 장보기부터 계정을 너무 많이 만들지 않는다."
+        },
+        {
+          "zh-tw": "結帳前確認是否需要購物袋、是否自助結帳、是否可以分開付款。",
+          "en": "Before checkout, confirm whether you need a bag, whether the register is self-checkout, and whether split payment is possible.",
+          "ja": "会計前にレジ袋が必要か、セルフレジか、支払いを分けられるか確認する。",
+          "ko": "계산 전 봉투가 필요한지, 셀프 계산대인지, 결제를 나눌 수 있는지 확인한다."
+        }
+      ]
+    },
+    {
+      "id": "labels-and-safety",
+      "title": {
+        "zh-tw": "標示、期限與安全",
+        "en": "Labels, dates, and safety",
+        "ja": "表示、期限、安全確認",
+        "ko": "표시, 기한, 안전 확인"
+      },
+      "items": [
+        {
+          "zh-tw": "學會分辨消費期限與賞味期限；即食食品、便當與生鮮要特別看期限與保存方式。",
+          "en": "Learn the difference between use-by and best-before dates; check dates and storage instructions carefully for ready meals and fresh food.",
+          "ja": "消費期限と賞味期限の違いを確認し、弁当、惣菜、生鮮食品は期限と保存方法をよく見る。",
+          "ko": "소비기한과 상미기한의 차이를 확인하고 도시락, 즉석식품, 신선식품은 기한과 보관 방법을 잘 본다."
+        },
+        {
+          "zh-tw": "有過敏、宗教飲食或特殊飲食限制時，先拍下常見成分字詞並逐步建立安全清單。",
+          "en": "If you have allergies, religious dietary needs, or other restrictions, save common ingredient terms and build a safe-item list gradually.",
+          "ja": "アレルギー、宗教上の食事制限、特別な制限がある場合は、よく見る成分名を保存し、安全な商品リストを少しずつ作る。",
+          "ko": "알레르기, 종교적 식단, 기타 제한이 있다면 자주 보는 성분 단어를 저장하고 안전한 상품 목록을 조금씩 만든다."
+        },
+        {
+          "zh-tw": "藥品、營養補充品、隱形眼鏡用品與嬰幼兒用品，不確定時先問店員或藥師。",
+          "en": "For medicine, supplements, contact-lens products, and baby items, ask store staff or a pharmacist when unsure.",
+          "ja": "医薬品、サプリ、コンタクト用品、乳幼児用品は、不明点があれば店員や薬剤師に確認する。",
+          "ko": "의약품, 영양제, 콘택트렌즈 용품, 영유아용품은 헷갈리면 직원이나 약사에게 확인한다."
+        }
+      ]
+    },
+    {
+      "id": "budget-and-routine",
+      "title": {
+        "zh-tw": "建立省時省錢的固定路線",
+        "en": "Build a budget routine",
+        "ja": "無理のない買い物ルーティン",
+        "ko": "예산에 맞는 장보기 루틴"
+      },
+      "items": [
+        {
+          "zh-tw": "記錄兩週常買商品價格，分辨哪些東西適合超市、藥妝店、百元店或網購。",
+          "en": "Track prices for two weeks so you know which items are better at supermarkets, drugstores, 100-yen shops, or online.",
+          "ja": "2週間ほどよく買う商品の価格を記録し、スーパー、ドラッグストア、100円ショップ、ネットのどこが向いているか把握する。",
+          "ko": "2주 정도 자주 사는 물건 가격을 기록해 슈퍼, 드러그스토어, 100엔 숍, 온라인 중 어디가 나은지 파악한다."
+        },
+        {
+          "zh-tw": "把大型採買排在有時間、有體力、可帶環保袋或推車的日子。",
+          "en": "Schedule larger shopping trips for days when you have time, energy, and a reusable bag or small cart.",
+          "ja": "まとめ買いは時間と体力があり、エコバッグや小さなカートを使える日にする。",
+          "ko": "대량 장보기는 시간과 체력이 있고 장바구니나 작은 카트를 쓸 수 있는 날에 한다."
+        },
+        {
+          "zh-tw": "把食品包裝、塑膠、寶特瓶、紙類與大型包材的丟棄方式和住處規則一起確認。",
+          "en": "Check how to dispose of food packaging, plastic, bottles, paper, and large packaging under your building and municipal rules.",
+          "ja": "食品包装、プラスチック、ペットボトル、紙、大きな梱包材の捨て方を、建物と自治体のルールで確認する。",
+          "ko": "식품 포장, 플라스틱, 페트병, 종이, 큰 포장재를 건물과 지자체 규칙에 맞게 어떻게 버리는지 확인한다."
+        }
+      ]
+    }
+  ]
+}

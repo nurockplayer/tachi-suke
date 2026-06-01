@@ -388,6 +388,27 @@ Rules:
 - Do not collect, upload, parse, store, or validate user documents in Phase 1.
 - Saved checklist state, job application tracking, and profile-based recommendations must wait for a separately scoped auth/database design.
 
+## Phase 1CH: Everyday Shopping Checklist Tool
+
+Status: implemented.
+
+Goal:
+
+Fill the everyday shopping workflow gap between shopping basics articles and a practical store-choice checklist for new residents.
+
+Implemented:
+
+- Added `japan-everyday-shopping-checklist` to the published tools collection.
+- Covered store-type selection, first-week essentials, payments and point cards, labels and safety, and budget routines in `zh-tw`, `en`, `ja`, and `ko`.
+- Kept source notes conservative because store rules, payment methods, point campaigns, labels, prices, and availability vary by chain, location, and timing.
+- Source-level and build-output tests verify the tool is public and appears in generated sitemap/search/tool detail output.
+
+Rules:
+
+- Keep this as practical shopping guidance, not price tracking, couponing, medicine advice, allergy advice, or consumer-rights advice.
+- Do not collect purchase data, save checklist state, personalize recommendations, or add affiliate/store database features in Phase 1.
+- Saved checklist state and personalized shopping routines must wait for a separately scoped auth/database design.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.

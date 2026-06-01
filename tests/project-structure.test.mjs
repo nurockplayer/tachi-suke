@@ -400,6 +400,7 @@ describe("TachiSuke project scaffold", () => {
     assert.ok(summaryMatch, "LocaleSwitcher should render a collapsed summary trigger");
     const collapsedSummary = summaryMatch[0];
 
+    assert.match(localeSwitcher, /data-locale-trigger-visual="globe"/, "LocaleSwitcher collapsed trigger should explicitly be a globe visual");
     assert.match(localeSwitcher, /data-locale-icon/, "LocaleSwitcher should expose a globe icon");
     assert.match(localeSwitcher, /control-summary-icon-only/, "collapsed language switcher should use icon-only styling");
     assert.match(localeSwitcher, /visually-hidden/, "LocaleSwitcher should keep an accessible non-visual label");
@@ -418,6 +419,7 @@ describe("TachiSuke project scaffold", () => {
     assert.doesNotMatch(i18n, /"layout\.languageNavigation":\s*"Language"/, "language navigation label must not be en only");
     assert.doesNotMatch(i18n, /"layout\.languageNavigation":\s*"言語メニュー"/, "language navigation label must not be ja only");
     assert.doesNotMatch(i18n, /"layout\.languageNavigation":\s*"언어 메뉴"/, "language navigation label must not be ko only");
+    assert.match(collapsedSummary, /data-locale-trigger-visual="globe"/, "collapsed language switcher trigger should identify the globe visual");
     assert.match(collapsedSummary, /data-locale-icon/, "collapsed language switcher trigger should include the globe icon");
     assert.match(collapsedSummary, /visually-hidden/, "collapsed language switcher trigger should include only non-visual text");
     assert.doesNotMatch(collapsedSummary, /localeNames/, "collapsed language switcher trigger must not show locale names");
@@ -427,6 +429,7 @@ describe("TachiSuke project scaffold", () => {
     assert.doesNotMatch(localeSwitcher, /data-locale-current/, "collapsed language switcher should not render the current locale code");
     assert.doesNotMatch(localeSwitcher, />Lang</, "collapsed language switcher should not depend on English visible text");
     assert.match(globalStyles, /\.control-summary-icon-only/, "global styles should define the icon-only control shape");
+    assert.match(globalStyles, /\.locale-icon-stack/, "global styles should make the language-neutral globe visually recognizable");
     assert.match(globalStyles, /\.visually-hidden/, "global styles should define accessible hidden text");
   });
 
@@ -632,6 +635,8 @@ describe("TachiSuke project scaffold", () => {
     assert.match(css, /\.control-disclosure/, "global CSS should style shared collapsed controls");
     assert.match(css, /\.control-menu/, "global CSS should style collapsed option menus");
     assert.match(css, /details\[open\]/, "global CSS should style open disclosure state");
+    assert.match(css, /\.header-nav a,\s*\n\.control-menu a \{[\s\S]*flex:\s*0 0 auto/, "header navigation items should wrap instead of clipping on mobile");
+    assert.match(css, /\.header-tools > \* \{[\s\S]*flex:\s*0 0 auto/, "header tool controls should wrap instead of clipping on mobile");
   });
 
   it("includes public launch trust pages in locale routes and footer navigation", () => {
@@ -785,7 +790,7 @@ describe("TachiSuke project scaffold", () => {
     }
 
     const publishedTools = listFiles("src/content/tools", [".json"]).map(readJson).filter((tool) => tool.status === "published");
-    assert.ok(publishedTools.length >= 9, "Phase 1CG should publish at least nine static tools");
+    assert.ok(publishedTools.length >= 10, "Phase 1CH should publish at least ten static tools");
     assert.ok(publishedTools.some((tool) => tool.slug === "moving-to-japan-checklist"), "moving checklist should stay published");
     assert.ok(publishedTools.some((tool) => tool.slug === "japan-rent-initial-cost-checklist"), "rent initial cost checklist should be published");
     assert.ok(publishedTools.some((tool) => tool.slug === "ward-office-moving-in-checklist"), "ward office moving-in checklist should be published");
@@ -795,6 +800,7 @@ describe("TachiSuke project scaffold", () => {
     assert.ok(publishedTools.some((tool) => tool.slug === "japan-job-application-documents-checklist"), "job application documents checklist should be published");
     assert.ok(publishedTools.some((tool) => tool.slug === "moving-out-checklist"), "moving-out checklist should be published");
     assert.ok(publishedTools.some((tool) => tool.slug === "japan-emergency-disaster-checklist"), "emergency and disaster checklist should be published");
+    assert.ok(publishedTools.some((tool) => tool.slug === "japan-everyday-shopping-checklist"), "everyday shopping checklist should be published");
 
     const tool = readJson("src/content/tools/moving-checklist.json");
     assert.equal(tool.slug, "moving-to-japan-checklist");
@@ -944,6 +950,19 @@ describe("TachiSuke project scaffold", () => {
       assert.ok(emergencyTool.title[locale], `emergency tool should include ${locale} title`);
       assert.ok(emergencyTool.description[locale]?.length > 30, `emergency tool should include ${locale} description`);
       assert.ok(emergencyTool.sourceNote[locale]?.length > 30, `emergency tool should include ${locale} source note`);
+    }
+
+    const shoppingTool = readJson("src/content/tools/everyday-shopping-checklist.json");
+    assert.equal(shoppingTool.status, "published");
+    assert.equal(shoppingTool.slug, "japan-everyday-shopping-checklist");
+    assert.ok(shoppingTool.sections.length >= 5, "everyday shopping checklist should include practical sections");
+    assert.ok(shoppingTool.sections.some((section) => section.id === "store-choice"), "shopping checklist should help choose store types");
+    assert.ok(shoppingTool.sections.some((section) => section.id === "payments-and-points"), "shopping checklist should cover payments and points");
+    assert.ok(shoppingTool.sections.some((section) => section.id === "labels-and-safety"), "shopping checklist should cover labels and safety");
+    for (const locale of locales) {
+      assert.ok(shoppingTool.title[locale], `shopping tool should include ${locale} title`);
+      assert.ok(shoppingTool.description[locale]?.length > 30, `shopping tool should include ${locale} description`);
+      assert.ok(shoppingTool.sourceNote[locale]?.length > 30, `shopping tool should include ${locale} source note`);
     }
   });
 

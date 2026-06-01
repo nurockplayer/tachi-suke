@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1CE compact global-control polish. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
+This document records the current MVP state after Phase 1CH everyday shopping checklist content. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
 
 ## Completed
 
@@ -31,7 +31,7 @@ This document records the current MVP state after Phase 1CE compact global-contr
 - Static search zero-result states include localized helper copy and a clear-search button that restores the full public result list.
 - Four locale static search index JSON endpoints at `/[locale]/search-index.json`.
 - Build-output tests verify all four locale search indexes contain only expected public content collection routes.
-- Published static checklist tools: `moving-to-japan-checklist`, `japan-rent-initial-cost-checklist`, `ward-office-moving-in-checklist`, `commuter-pass-ic-card-checklist`, `apartment-viewing-japanese-phrases`, `apartment-application-documents-checklist`, `japan-job-application-documents-checklist`, `moving-out-checklist`, and `japan-emergency-disaster-checklist`.
+- Published static checklist tools: `moving-to-japan-checklist`, `japan-rent-initial-cost-checklist`, `ward-office-moving-in-checklist`, `commuter-pass-ic-card-checklist`, `apartment-viewing-japanese-phrases`, `apartment-application-documents-checklist`, `japan-job-application-documents-checklist`, `japan-everyday-shopping-checklist`, `moving-out-checklist`, and `japan-emergency-disaster-checklist`.
 - Four locale submit-place form pages with provider-agnostic endpoint support.
 - Four locale submit-place thanks pages.
 - Four locale contact/corrections form pages with provider-agnostic endpoint support.
@@ -149,7 +149,7 @@ These are intentionally present but not functional:
 
 - Content volume is still early editorial sample-level, though Phase 1B now has enough pages for public preview.
 - Article category pages are useful for current high-intent categories, but richer category copy should wait until there are more articles per category.
-- Tools currently include nine static checklists and phrase tools. Checklist state is not saved and there is no user-specific progress tracking.
+- Tools currently include ten static checklists and phrase tools. Checklist state is not saved and there is no user-specific progress tracking.
 - Areas and mobile plans now have detail pages, but the content is still static editorial guidance rather than live data.
 - Mobile plan prices, campaigns, and conditions can change, so users must confirm official sites before applying.
 - Area rent feel, quietness, and commute notes can become stale and need periodic editorial review.
@@ -213,7 +213,7 @@ Browser QA covered:
 ## Next Recommended Tasks
 
 1. Add more real content for practical Japanese, everyday shopping, working life, and housing documents.
-2. Add more practical tools, starting with everyday shopping and moving-in neighborhood setup checklists.
+2. Add more practical tools, starting with moving-in neighborhood setup and public-service discovery checklists.
 3. Choose and configure an external form provider for `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT`.
 4. Choose and configure an external form provider for `PUBLIC_CONTACT_FORM_ENDPOINT`.
 5. Add a fuller external link checker or scheduled source-review workflow when route count grows.
