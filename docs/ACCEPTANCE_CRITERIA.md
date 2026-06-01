@@ -155,6 +155,7 @@ This document defines the acceptance criteria for the current static-first MVP.
   - current area guides
   - published tools
 - Search indexes must not include account placeholders, draft articles, non-published places, planned tools, form submissions, or private user data.
+- `pnpm check:seo` should verify representative published tool URLs are present in the built English search index and utility/form routes are absent.
 - Search should remain dependency-free in Phase 1 unless a future phase explicitly scopes a search service.
 
 ## Submit-Place Criteria

@@ -341,8 +341,25 @@ describe("static SEO output", () => {
       index.items.some((item) => item.url === "/en/places/dennys"),
       "search index should include published places"
     );
+    for (const toolPath of [
+      "/en/tools/apartment-viewing-japanese-phrases",
+      "/en/tools/commuter-pass-ic-card-checklist",
+      "/en/tools/japan-rent-initial-cost-checklist",
+      "/en/tools/moving-out-checklist",
+      "/en/tools/moving-to-japan-checklist",
+      "/en/tools/ward-office-moving-in-checklist"
+    ]) {
+      assert.ok(
+        index.items.some((item) => item.type === "tool" && item.url === toolPath),
+        `search index should include published tool ${toolPath}`
+      );
+    }
     assert.equal(index.items.some((item) => item.url.startsWith("/zh-tw/articles/")), false, "English search index should not include zh-tw article URLs");
     assert.equal(index.items.some((item) => item.url.includes("/account/")), false, "search index should not include account placeholders");
+    assert.equal(index.items.some((item) => item.url === "/en/search"), false, "search index should not include search utility pages");
+    assert.equal(index.items.some((item) => item.url === "/en/search-index.json"), false, "search index should not include search index endpoints");
+    assert.equal(index.items.some((item) => item.url.startsWith("/en/submit-place")), false, "search index should not include submit-place form routes");
+    assert.equal(index.items.some((item) => item.url.startsWith("/en/contact")), false, "search index should not include contact form routes");
     assert.equal(JSON.stringify(index).toLowerCase().includes("draft"), false, "search index should not expose draft metadata");
   });
 
