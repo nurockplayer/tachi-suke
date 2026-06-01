@@ -56,6 +56,10 @@ function newestDate(current: Date | undefined, next: Date): Date {
   return !current || next > current ? next : current;
 }
 
+function newestOptionalDate(...dates: Array<Date | undefined>): Date | undefined {
+  return dates.reduce<Date | undefined>((current, next) => next ? newestDate(current, next) : current, undefined);
+}
+
 function localizedAlternates(path: string): SitemapAlternates {
   return {
     ...Object.fromEntries(locales.map((locale) => [locale, localizePath(locale, path)])),
@@ -78,8 +82,16 @@ function renderAlternates(alternates: SitemapAlternates | undefined, siteUrl: UR
 export const GET: APIRoute = async ({ site }) => {
   const siteUrl = site ?? new URL("https://tachi-suke.example.com");
   const articles = await getCollection("articles", ({ data }) => !data.draft);
+  const areas = await getCollection("areas");
+  const mobilePlans = await getCollection("mobile-plans");
+  const places = await getCollection("places", ({ data }) => data.status === "published");
+  const tools = await getCollection("tools", ({ data }) => data.status === "published");
   let newestArticleUpdatedAt: Date | undefined;
   const newestArticleUpdatedAtByLocale = new Map<Locale, Date>();
+  let newestAreaLastCheckedAt: Date | undefined;
+  let newestMobileLastCheckedAt: Date | undefined;
+  let newestPlaceUpdatedAt: Date | undefined;
+  let newestToolLastCheckedAt: Date | undefined;
 
   for (const article of articles) {
     newestArticleUpdatedAt = newestDate(newestArticleUpdatedAt, article.data.updatedAt);
@@ -89,20 +101,54 @@ export const GET: APIRoute = async ({ site }) => {
     );
   }
 
+  for (const area of areas) {
+    newestAreaLastCheckedAt = newestDate(newestAreaLastCheckedAt, area.data.lastCheckedAt);
+  }
+
+  for (const plan of mobilePlans) {
+    newestMobileLastCheckedAt = newestDate(newestMobileLastCheckedAt, plan.data.lastCheckedAt);
+  }
+
+  for (const place of places) {
+    newestPlaceUpdatedAt = newestDate(newestPlaceUpdatedAt, place.data.updatedAt);
+  }
+
+  for (const tool of tools) {
+    newestToolLastCheckedAt = newestDate(newestToolLastCheckedAt, tool.data.lastCheckedAt);
+  }
+
   const entries: SitemapEntry[] = [
     { path: "/" },
     { path: "/feed.xml", lastmod: newestArticleUpdatedAt }
   ];
 
   for (const locale of locales) {
+    const newestLocaleArticleUpdatedAt = newestArticleUpdatedAtByLocale.get(locale);
+    const siteMapLastmod = newestOptionalDate(
+      newestLocaleArticleUpdatedAt,
+      newestAreaLastCheckedAt,
+      newestMobileLastCheckedAt,
+      newestPlaceUpdatedAt,
+      newestToolLastCheckedAt
+    );
+    const localeIndexLastmodByPath = new Map<string, Date | undefined>([
+      ["/articles", newestLocaleArticleUpdatedAt],
+      ["/areas", newestAreaLastCheckedAt],
+      ["/places", newestPlaceUpdatedAt],
+      ["/mobile", newestMobileLastCheckedAt],
+      ["/tools", newestToolLastCheckedAt],
+      ["/site-map", siteMapLastmod]
+    ]);
+
     entries.push({
       path: localizePath(locale, "/feed.xml"),
-      lastmod: newestArticleUpdatedAtByLocale.get(locale)
+      lastmod: newestLocaleArticleUpdatedAt
     });
 
     for (const path of localeIndexPaths) {
       entries.push({
         path: localizePath(locale, path),
+        lastmod: localeIndexLastmodByPath.get(path),
         alternates: localizedAlternates(path)
       });
     }
@@ -134,7 +180,6 @@ export const GET: APIRoute = async ({ site }) => {
     });
   }
 
-  const areas = await getCollection("areas");
   for (const area of areas) {
     for (const locale of locales) {
       entries.push({
@@ -145,7 +190,6 @@ export const GET: APIRoute = async ({ site }) => {
     }
   }
 
-  const mobilePlans = await getCollection("mobile-plans");
   for (const plan of mobilePlans) {
     for (const locale of locales) {
       entries.push({
@@ -156,7 +200,6 @@ export const GET: APIRoute = async ({ site }) => {
     }
   }
 
-  const places = await getCollection("places", ({ data }) => data.status === "published");
   for (const place of places) {
     for (const locale of locales as readonly Locale[]) {
       entries.push({
@@ -167,7 +210,6 @@ export const GET: APIRoute = async ({ site }) => {
     }
   }
 
-  const tools = await getCollection("tools", ({ data }) => data.status === "published");
   for (const tool of tools) {
     for (const locale of locales) {
       entries.push({

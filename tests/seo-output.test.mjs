@@ -345,6 +345,16 @@ describe("static SEO output", () => {
     }
   });
 
+  it("adds content-aware lastmod values for public section and site map pages", () => {
+    const lastmods = sitemapLastmodByPath(readDist("sitemap.xml"));
+    for (const locale of ["zh-tw", "en", "ja", "ko"]) {
+      for (const section of ["articles", "areas", "places", "mobile", "tools", "site-map"]) {
+        const path = `/${locale}/${section}`;
+        assert.match(lastmods.get(path) ?? "", /^\d{4}-\d{2}-\d{2}$/, `${path} should have a content-derived lastmod date`);
+      }
+    }
+  });
+
   it("generates noindex locale search pages and public search index JSON", () => {
     const html = readHtml("en/search/index.html");
     assert.match(html, /Search \| TachiSuke/, "search page should have an SEO title");

@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1BB human-readable site map work. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
+This document records the current MVP state after Phase 1BC sitemap section freshness work. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
 
 ## Completed
 
@@ -75,6 +75,7 @@ This document records the current MVP state after Phase 1BB human-readable site 
 - Generated `site.webmanifest`.
 - Generated global `feed.xml` for non-draft public articles, included in the sitemap with newest-public-article `lastmod`.
 - Generated locale RSS feeds at `/zh-tw/feed.xml`, `/en/feed.xml`, `/ja/feed.xml`, and `/ko/feed.xml` for same-locale non-draft public articles, included in the sitemap with same-locale newest-article `lastmod`.
+- XML sitemap public section and human-readable site map entries carry content-derived `lastmod` values from public articles, areas, places, mobile plans, and tools.
 - Cloudflare Pages `_headers` with conservative security and discovery cache defaults.
 - Cloudflare Pages CSP header for baseline static-site hardening while preserving current inline JSON-LD/search scripts and HTTPS external form endpoints.
 - Cloudflare Pages `_redirects` with temporary English fallbacks for common locale-less public paths and a legacy `/security.txt` fallback.

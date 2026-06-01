@@ -259,6 +259,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - `feed.xml` must be generated as an RSS 2.0 feed for non-draft public article detail pages.
 - `/[locale]/feed.xml` must be generated as an RSS 2.0 feed for same-locale non-draft public article detail pages.
 - Global and locale RSS feed sitemap entries should include `lastmod` derived from the newest matching public article `updatedAt`.
+- Public aggregate sitemap entries for `/[locale]/articles`, `/[locale]/areas`, `/[locale]/places`, `/[locale]/mobile`, `/[locale]/tools`, and `/[locale]/site-map` should include content-derived `lastmod` values.
 - Public pages should include an RSS alternate link to `/feed.xml` and a current-locale RSS alternate link to `/[locale]/feed.xml`.
 - `404.html` must be generated as a branded static recovery page.
 - `404.html` must use `noindex, nofollow` and must not appear in `sitemap.xml`.
