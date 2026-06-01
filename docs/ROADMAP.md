@@ -567,6 +567,27 @@ Rules:
 - Keep content frontmatter category keys and category route slugs stable.
 - Do not change search indexing, article routes, content schemas, account placeholders, or backend behavior in Phase 1CP.
 
+## Phase 1CQ: Localized Static 404 Recovery
+
+Status: implemented.
+
+Goal:
+
+Make the static noindex 404 page useful for visitors in every supported locale instead of routing all practical recovery links to English.
+
+Implemented:
+
+- Kept `404.html` static, branded, noindex, and excluded from the sitemap.
+- Added locale-specific recovery sections for `zh-tw`, `en`, `ja`, and `ko`.
+- Each locale recovery section links to the locale home, articles, mobile, and tools routes.
+- Marked locale-specific recovery sections with shared BCP47 language metadata.
+- Added source-level and build-output SEO coverage for the localized recovery links.
+
+Rules:
+
+- Do not add language-detection redirects, Cloudflare Functions, Workers, analytics, backend error tracking, auth, database, or route changes in Phase 1CQ.
+- Keep no-JavaScript and noindex fallback behavior intact.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.

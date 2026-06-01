@@ -42,7 +42,7 @@ This document records the current MVP state after Phase 1CI source-backed setup 
 - Four locale editorial policy pages.
 - Four locale human-readable site map pages at `/[locale]/site-map`, linked from the footer and generated from public content collections.
 - Static `llms.txt` discovery file for public AI/search-adjacent tooling, including locale site map links.
-- Custom static `404.html` recovery page with multilingual links and `noindex, nofollow`.
+- Custom static `404.html` recovery page with locale-specific recovery links, language-marked recovery sections, and `noindex, nofollow`.
 - Four locale account login placeholder pages.
 - Four locale account favorites placeholder pages.
 - Four locale account submissions placeholder pages.
@@ -174,7 +174,7 @@ These are intentionally present but not functional:
 - Build-output SEO tests verify every locale search index contains only expected public content collection routes and excludes account, search, trust, form, and other utility routes.
 - OpenSearch discovery points to `/en/search?q={searchTerms}` as the stable static fallback. It does not detect language preference or provide backend search.
 - WebSite `SearchAction` points to `/en/search?q={search_term_string}` and has the same limitations as static search.
-- `/404.html` is static and noindex. It does not perform language detection or redirects.
+- `/404.html` is static and noindex. It provides locale-specific recovery links, but it does not perform language detection or redirects.
 - Related article links are static and rule-based. They are not personalized and do not use analytics.
 - Article table of contents is static and does not include scroll spy, reading progress, or saved state.
 - Correction prompts pass an encoded absolute `relatedUrl` into `/[locale]/contact`; they still do not track reports, store messages, or guarantee individual replies.

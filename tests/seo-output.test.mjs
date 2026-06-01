@@ -354,6 +354,14 @@ describe("static SEO output", () => {
     assert.match(html, /name="robots" content="noindex, nofollow"/, "404 page should be noindex");
     assert.match(html, /href="\/zh-tw\/"/, "404 page should link to zh-tw home");
     assert.match(html, /href="\/en\/"/, "404 page should link to English home");
+    for (const locale of ["zh-tw", "en", "ja", "ko"]) {
+      for (const section of ["articles", "mobile", "tools"]) {
+        assert.match(html, new RegExp(`href="/${locale}/${section}/?"`), `404 page should link to /${locale}/${section}`);
+      }
+    }
+    assert.match(html, /lang="zh-Hant-TW"/, "404 page should mark zh-tw recovery copy with language metadata");
+    assert.match(html, /lang="ja"/, "404 page should mark Japanese recovery copy with language metadata");
+    assert.match(html, /lang="ko"/, "404 page should mark Korean recovery copy with language metadata");
 
     const paths = new Set(sitemapPaths(readDist("sitemap.xml")));
     assert.equal(paths.has("/404"), false, "sitemap should not include /404");

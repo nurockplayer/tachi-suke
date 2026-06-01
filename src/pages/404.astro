@@ -1,36 +1,88 @@
 ---
 import CategoryCard from "@/components/content/CategoryCard.astro";
 import BaseLayout from "@/components/layout/BaseLayout.astro";
-import { localeNames, locales, localizePath, type Locale } from "@/lib/i18n";
+import { htmlLangByLocale, localeNames, locales, localizePath, type Locale } from "@/lib/i18n";
 
 const localeCopy = {
   "zh-tw": {
     title: "找不到頁面",
-    description: "這個連結可能已移動、過期，或網址輸入錯誤。"
+    description: "這個連結可能已移動、過期，或網址輸入錯誤。",
+    recoveryTitle: "從繁體中文重新開始",
+    recoveryDescription: "回到達助日本生活的中文內容，快速找到文章、手機方案與實用工具。",
+    home: "繁體中文首頁",
+    homeDescription: "回到日本生活決策入口。",
+    articles: "生活文章",
+    articlesDescription: "閱讀日本生活、租屋、行政手續與工作指南。",
+    mobile: "手機門號",
+    mobileDescription: "比較日本手機方案與申請前注意事項。",
+    tools: "生活工具",
+    toolsDescription: "使用搬家、租屋、通勤與防災檢查清單。"
   },
   en: {
     title: "Page not found",
-    description: "This link may have moved, expired, or been typed incorrectly."
+    description: "This link may have moved, expired, or been typed incorrectly.",
+    recoveryTitle: "Restart in English",
+    recoveryDescription: "Return to TachiSuke's English guides for practical Japan life decisions.",
+    home: "English home",
+    homeDescription: "Go back to the main Japan life assistant.",
+    articles: "Life guides",
+    articlesDescription: "Read practical guides for setup, housing, procedures, and work.",
+    mobile: "Mobile plans",
+    mobileDescription: "Compare phone plan options and caveats before applying.",
+    tools: "Life tools",
+    toolsDescription: "Use static checklists for moving, renting, commuting, and emergencies."
   },
   ja: {
     title: "ページが見つかりません",
-    description: "このリンクは移動、期限切れ、または URL の入力間違いの可能性があります。"
+    description: "このリンクは移動、期限切れ、または URL の入力間違いの可能性があります。",
+    recoveryTitle: "日本語で探し直す",
+    recoveryDescription: "日本での生活判断に役立つ日本語ガイドへ戻れます。",
+    home: "日本語ホーム",
+    homeDescription: "日本生活ガイドの入口へ戻る。",
+    articles: "生活記事",
+    articlesDescription: "手続き、住まい、仕事、日常生活のガイドを読む。",
+    mobile: "携帯プラン",
+    mobileDescription: "申込前に確認したい携帯プランの比較を見る。",
+    tools: "生活ツール",
+    toolsDescription: "引越し、賃貸、通勤、防災のチェックリストを使う。"
   },
   ko: {
     title: "페이지를 찾을 수 없습니다",
-    description: "이 링크는 이동되었거나 만료되었거나 URL이 잘못 입력되었을 수 있습니다."
+    description: "이 링크는 이동되었거나 만료되었거나 URL이 잘못 입력되었을 수 있습니다.",
+    recoveryTitle: "한국어로 다시 시작",
+    recoveryDescription: "일본 생활 결정을 돕는 한국어 가이드로 돌아갈 수 있습니다.",
+    home: "한국어 홈",
+    homeDescription: "일본 생활 가이드 첫 화면으로 돌아가기.",
+    articles: "생활 글",
+    articlesDescription: "정착, 집 구하기, 행정 절차, 일 관련 가이드를 읽기.",
+    mobile: "휴대폰 요금제",
+    mobileDescription: "신청 전에 확인할 휴대폰 요금제 비교 보기.",
+    tools: "생활 도구",
+    toolsDescription: "이사, 임대, 통근, 방재 체크리스트 사용하기."
   }
-} satisfies Record<Locale, { title: string; description: string }>;
+} satisfies Record<Locale, {
+  title: string;
+  description: string;
+  recoveryTitle: string;
+  recoveryDescription: string;
+  home: string;
+  homeDescription: string;
+  articles: string;
+  articlesDescription: string;
+  mobile: string;
+  mobileDescription: string;
+  tools: string;
+  toolsDescription: string;
+}>;
 
-const recovery = {
-  title: "Start from a language home",
-  description: "Choose a language or jump to a practical section.",
-  articles: "Articles",
-  articlesDescription: "Read practical life guides for Japan.",
-  mobile: "Mobile plans",
-  mobileDescription: "Compare phone plan options and caveats.",
-  tools: "Life tools",
-  toolsDescription: "Use static checklists for common setup decisions."
+const hero = {
+  title: "Page not found",
+  description: "Choose a language below, then continue to the practical Japan life section you need."
+};
+
+const languageSelector = {
+  title: "Choose your language",
+  description: "TachiSuke is available in Traditional Chinese, English, Japanese, and Korean."
 };
 ---
 
@@ -43,24 +95,43 @@ const recovery = {
 >
   <section class="page-hero">
     <div class="container">
-      <h1>{recovery.title}</h1>
-      <p>{recovery.description}</p>
+      <h1>{hero.title}</h1>
+      <p>{hero.description}</p>
     </div>
   </section>
 
   <section class="section">
-    <div class="container grid grid-4">
-      {locales.map((locale) => (
-        <CategoryCard href={localizePath(locale)} title={localeCopy[locale].title} description={`${localeNames[locale]} - ${localeCopy[locale].description}`} />
-      ))}
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2>{languageSelector.title}</h2>
+          <p>{languageSelector.description}</p>
+        </div>
+      </div>
+      <div class="grid grid-4">
+        {locales.map((locale) => (
+          <CategoryCard href={localizePath(locale)} title={localeNames[locale]} description={`${localeCopy[locale].title} - ${localeCopy[locale].description}`} />
+        ))}
+      </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container grid grid-3">
-      <CategoryCard href={localizePath("en", "/articles")} title={recovery.articles} description={recovery.articlesDescription} />
-      <CategoryCard href={localizePath("en", "/mobile")} title={recovery.mobile} description={recovery.mobileDescription} />
-      <CategoryCard href={localizePath("en", "/tools")} title={recovery.tools} description={recovery.toolsDescription} />
-    </div>
-  </section>
+  {locales.map((locale) => (
+    <section class="section" lang={htmlLangByLocale[locale]}>
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2>{localeCopy[locale].recoveryTitle}</h2>
+            <p>{localeCopy[locale].recoveryDescription}</p>
+          </div>
+        </div>
+        <div class="grid grid-4">
+          <CategoryCard href={localizePath(locale)} title={localeCopy[locale].home} description={localeCopy[locale].homeDescription} />
+          <CategoryCard href={localizePath(locale, "/articles")} title={localeCopy[locale].articles} description={localeCopy[locale].articlesDescription} />
+          <CategoryCard href={localizePath(locale, "/mobile")} title={localeCopy[locale].mobile} description={localeCopy[locale].mobileDescription} />
+          <CategoryCard href={localizePath(locale, "/tools")} title={localeCopy[locale].tools} description={localeCopy[locale].toolsDescription} />
+        </div>
+      </div>
+    </section>
+  ))}
 </BaseLayout>
