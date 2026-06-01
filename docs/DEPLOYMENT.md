@@ -41,7 +41,8 @@ Do not commit Cloudflare API tokens, account IDs, form-provider secrets, or prod
 Use Wrangler only from a trusted local machine or CI environment where Cloudflare authentication is already configured.
 
 ```bash
-pnpm build
+SITE_URL=https://tachi-suke.pages.dev pnpm build
+SITE_URL=https://tachi-suke.pages.dev pnpm check:deploy
 pnpm dlx wrangler pages deploy dist --project-name tachi-suke
 ```
 
@@ -54,12 +55,15 @@ Run these before deploying:
 ```bash
 pnpm install
 pnpm test
-pnpm build
+pnpm check:content
+SITE_URL=https://tachi-suke.pages.dev pnpm build
 pnpm check:links
-pnpm check:seo
+SITE_URL=https://tachi-suke.pages.dev pnpm check:deploy
 ```
 
-`pnpm check:links` and `pnpm check:seo` require a fresh `pnpm build`.
+`pnpm check:links` requires a fresh build. `pnpm check:deploy` requires the same `SITE_URL` used for the deploy build and fails if generated output still references `https://tachi-suke.example.com`.
+
+`pnpm check:seo` is still useful during pull request validation, but it expects the default example-domain fallback. For manual production deploys, use `pnpm check:deploy` after building with the real production URL.
 
 ## Post-Deploy Checks
 

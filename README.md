@@ -203,6 +203,12 @@ Check generated SEO output after build:
 pnpm check:seo
 ```
 
+Check deploy output after building with the real production URL:
+
+```bash
+SITE_URL=https://tachi-suke.pages.dev pnpm check:deploy
+```
+
 Preview production build:
 
 ```bash
@@ -218,6 +224,8 @@ Recommended verification order:
 5. `pnpm check:seo`
 
 `pnpm test` checks source-level structure and content links. `pnpm check:content` checks content IDs, slugs, dates, review dates, and stored URL fields without fetching the network. `pnpm check:links` scans built `dist/**/*.html`. `pnpm check:seo` checks built `sitemap.xml`, `robots.txt`, `site.webmanifest`, `opensearch.xml`, global RSS feed, locale RSS feeds, and Cloudflare headers. Run `pnpm build` before both build-output checks.
+
+For deployment, build with the real `SITE_URL` and then run `pnpm check:deploy` with the same value. This guard fails if `dist` still contains `https://tachi-suke.example.com`.
 
 GitHub Actions runs the same verification order on pull requests and pushes to `main`, including forbidden lockfile rejection. Cloudflare Pages deployment is still configured separately.
 
@@ -266,7 +274,10 @@ Recommended production settings:
 - Environment variable: `SITE_URL=https://your-production-domain.example`
 - Optional environment variable: `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT=https://your-form-endpoint.example`
 - Optional environment variable: `PUBLIC_CONTACT_FORM_ENDPOINT=https://your-contact-endpoint.example`
-- Optional CLI deploy: `pnpm dlx wrangler pages deploy dist --project-name tachi-suke`
+- Optional CLI deploy:
+  - `SITE_URL=https://tachi-suke.pages.dev pnpm build`
+  - `SITE_URL=https://tachi-suke.pages.dev pnpm check:deploy`
+  - `pnpm dlx wrangler pages deploy dist --project-name tachi-suke`
 
 Astro remains the preferred frontend stack for the current content-first MVP. A Next.js migration should wait until the product has a concrete SSR requirement, such as authenticated account pages, personalized saved lists, or server-side workflows.
 

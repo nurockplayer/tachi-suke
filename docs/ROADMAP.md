@@ -1397,6 +1397,26 @@ Rules:
 - Do not add JSON-LD to noindex account placeholders.
 - Do not imply that forms are backed by this repo's database or support backend.
 
+## Phase 1BM: Deploy URL Guard
+
+Status: implemented.
+
+Goal:
+
+Prevent manual Cloudflare Pages deploys from shipping fallback example-domain SEO metadata.
+
+Implemented:
+
+- Added `pnpm check:deploy`.
+- Added a deployment output guard that requires `SITE_URL`, rejects the example fallback domain, scans deployable `dist` text assets, and verifies representative files reference the configured site URL.
+- Updated deployment documentation to build and verify with the real production URL before Wrangler deploy.
+
+Rules:
+
+- Run `SITE_URL=<production-url> pnpm build` before manual production deploys.
+- Run `SITE_URL=<production-url> pnpm check:deploy` before `wrangler pages deploy`.
+- Keep CI `pnpm check:seo` on the example-domain fallback unless a production deploy environment is explicitly configured.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.
