@@ -455,13 +455,22 @@ describe("static SEO output", () => {
   });
 
   it("prefills contact corrections from public detail-page prompts", () => {
-    const article = readHtml("en/articles/choose-mobile-plan-japan-foreigner/index.html");
-    const encodedArticleUrl = encodeURIComponent(absoluteUrl("/en/articles/choose-mobile-plan-japan-foreigner"));
-    assert.match(
-      article,
-      new RegExp(`href="\\/en\\/contact\\?relatedUrl=${escapeRegExp(encodedArticleUrl)}(?:%2F)?"`),
-      "article correction prompt should carry the encoded canonical URL into contact"
-    );
+    for (const [label, distPath, publicPath, contactPath] of [
+      ["article", "en/articles/choose-mobile-plan-japan-foreigner/index.html", "/en/articles/choose-mobile-plan-japan-foreigner", "/en/contact"],
+      ["place", "en/places/dennys/index.html", "/en/places/dennys", "/en/contact"],
+      ["mobile plan", "en/mobile/povo2/index.html", "/en/mobile/povo2", "/en/contact"],
+      ["area", "en/areas/ikebukuro/index.html", "/en/areas/ikebukuro", "/en/contact"],
+      ["tool", "en/tools/moving-to-japan-checklist/index.html", "/en/tools/moving-to-japan-checklist", "/en/contact"],
+      ["localized article", "zh-tw/articles/newcomer-first-week-japan-setup/index.html", "/zh-tw/articles/newcomer-first-week-japan-setup", "/zh-tw/contact"]
+    ]) {
+      const html = readHtml(distPath);
+      const encodedRelatedUrl = encodeURIComponent(absoluteUrl(publicPath));
+      assert.match(
+        html,
+        new RegExp(`href="${escapeRegExp(`${contactPath}?relatedUrl=${encodedRelatedUrl}`)}(?:%2F)?"`),
+        `${label} correction prompt should carry the encoded canonical URL into contact`
+      );
+    }
 
     const contact = readHtml("en/contact/index.html");
     assert.match(contact, /data-related-url-input/, "contact page should expose the related URL input hook");

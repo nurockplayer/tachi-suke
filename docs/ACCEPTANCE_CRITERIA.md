@@ -320,6 +320,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Public article, place, mobile plan, area, and tool detail pages should include a localized correction prompt.
 - The prompt should link to `/[locale]/contact`.
 - When the current public detail path is known, the prompt should append an encoded absolute `relatedUrl` query value for the current page.
+- Build-output SEO tests should verify the encoded `relatedUrl` behavior for representative article, place, mobile plan, area, tool, and non-English detail pages.
 - The contact/corrections page should prefill its related URL field from `relatedUrl` as progressive browser-side enhancement.
 - The prompt must not imply guaranteed individual replies or real-time verification.
 - The prompt must not add analytics, authentication, database storage, or provider-specific form behavior.
