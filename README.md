@@ -211,6 +211,8 @@ Check generated SEO output after build:
 pnpm check:seo
 ```
 
+When `SITE_URL` is unset, `pnpm check:seo` infers the expected origin from the built `dist/sitemap.xml` or `dist/robots.txt`. This keeps local checks aligned with the build output you already generated.
+
 Check generated SEO output and deploy output after building with the real production URL:
 
 ```bash
@@ -234,7 +236,7 @@ Recommended verification order:
 
 `pnpm test` checks source-level structure, content links, and static form contracts. `pnpm check:content` checks content IDs, slugs, dates, review dates, and stored URL fields without fetching the network. `pnpm check:links` scans built `dist/**/*.html`. `pnpm check:seo` checks built `sitemap.xml`, `robots.txt`, `site.webmanifest`, `opensearch.xml`, global RSS feed, locale RSS feeds, and Cloudflare headers. Run `pnpm build` before both build-output checks.
 
-For deployment, build with the real `SITE_URL`, then run `pnpm check:seo` and `pnpm check:deploy` with the same value. `pnpm check:seo` validates canonicals, feeds, sitemap, structured data, and search indexes against the configured site URL. `pnpm check:deploy` fails if `dist` still contains `https://tachi-suke.example.com`.
+For deployment, build with the real `SITE_URL`, then run `pnpm check:seo` and `pnpm check:deploy` with the same value. `pnpm check:seo` validates canonicals, feeds, sitemap, structured data, and search indexes against the configured site URL when it is provided. `pnpm check:deploy` fails if `dist` still contains `https://tachi-suke.example.com`.
 
 GitHub Actions runs the same verification order on pull requests and pushes to `main`, including forbidden lockfile rejection, fallback-domain SEO output checks, and production `SITE_URL=https://tachi-suke.pages.dev` SEO/deploy output checks. Cloudflare Pages deployment is still configured separately.
 

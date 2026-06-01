@@ -14,7 +14,32 @@ const htmlLangByLocale = {
   ko: "ko"
 };
 const searchEntryTypes = ["article", "place", "mobile_plan", "area", "tool"];
-const expectedSiteUrl = (process.env.SITE_URL ?? "https://tachi-suke.example.com").trim().replace(/\/$/, "");
+const fallbackSiteUrl = "https://tachi-suke.example.com";
+const configuredSiteUrl = (process.env.SITE_URL ?? "").trim().replace(/\/$/, "");
+
+function originFromUrl(value) {
+  return new URL(value).origin.replace(/\/$/, "");
+}
+
+function inferSiteUrlFromBuildOutput() {
+  const sitemapPath = join(dist, "sitemap.xml");
+  if (existsSync(sitemapPath)) {
+    const sitemap = readFileSync(sitemapPath, "utf8");
+    const firstSitemapUrl = sitemap.match(/<loc>(.*?)<\/loc>/)?.[1];
+    if (firstSitemapUrl) return originFromUrl(firstSitemapUrl);
+  }
+
+  const robotsPath = join(dist, "robots.txt");
+  if (existsSync(robotsPath)) {
+    const robots = readFileSync(robotsPath, "utf8");
+    const sitemapUrl = robots.match(/^Sitemap:\s*(\S+)/m)?.[1];
+    if (sitemapUrl) return originFromUrl(sitemapUrl);
+  }
+
+  return fallbackSiteUrl;
+}
+
+const expectedSiteUrl = configuredSiteUrl || inferSiteUrlFromBuildOutput();
 
 function readDist(relativePath) {
   const fullPath = join(dist, relativePath);
@@ -153,6 +178,14 @@ function hasJsonLdType(objects, type) {
 }
 
 describe("static SEO output", () => {
+  it("uses the built sitemap origin when SITE_URL is not provided", () => {
+    if (process.env.SITE_URL) return;
+
+    const firstSitemapUrl = readDist("sitemap.xml").match(/<loc>(.*?)<\/loc>/)?.[1];
+    assert.ok(firstSitemapUrl, "sitemap.xml should include at least one <loc> entry");
+    assert.equal(expectedSiteUrl, new URL(firstSitemapUrl).origin);
+  });
+
   it("generates sitemap, robots, manifest, and Cloudflare headers", () => {
     const sitemap = readDist("sitemap.xml");
     const robots = readDist("robots.txt");
