@@ -1056,6 +1056,25 @@ Rules:
 - Keep freshness signals derived from local content metadata only.
 - Do not add external crawling, network URL checks, analytics, or database-backed freshness tracking in Phase 1.
 
+## Phase 1BD: LLM Site Map Discovery
+
+Status: implemented.
+
+Goal:
+
+Expose human-readable content directory pages through `/llms.txt` so AI assistants and search-adjacent tools can find public content maps quickly.
+
+Implemented:
+
+- Added locale site map links to `/llms.txt`.
+- Added source-level and build-output SEO tests for site map discovery links.
+- Updated docs to keep `/llms.txt` aligned with Phase 1BB site map pages.
+
+Rules:
+
+- Keep `/llms.txt` plain text, static, and concise.
+- Do not include account placeholders, drafts, private data, submissions, AI runtime behavior, crawling, or analytics.
+
 ## Phase 1AI: Article Category Label Polish
 
 Status: implemented.

@@ -287,6 +287,7 @@ describe("TachiSuke project scaffold", () => {
     assert.match(llms, /TachiSuke/, "llms.txt should identify the site");
     assert.match(llms, /sitemap\.xml/, "llms.txt should link to the sitemap");
     assert.match(llms, /feed\.xml/, "llms.txt should link to RSS feeds");
+    assert.match(llms, /site-map/, "llms.txt should link to human-readable site map pages");
     assert.match(llms, /search-index\.json/, "llms.txt should link to static search index surfaces");
     assert.match(llms, /account/i, "llms.txt should document that account placeholders are not discovery targets");
 

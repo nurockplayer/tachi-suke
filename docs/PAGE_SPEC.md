@@ -76,7 +76,7 @@ All public pages should:
 
 **SEO requirements:** The file should remain plain text, use the configured canonical site URL, link only to public static discovery surfaces, and avoid private, draft, account, or placeholder data.
 
-**Current status:** Implemented in Phase 1AA. It includes locale roots, sitemap, global/locale RSS feeds, static search indexes, public section links, and freshness caveats.
+**Current status:** Implemented in Phase 1AA. It includes locale roots, human-readable site map links, XML sitemap, global/locale RSS feeds, static search indexes, public section links, and freshness caveats.
 
 **Future notes:** Keep this file concise and editorially accurate. Do not turn it into an AI runtime feature, analytics endpoint, or private content dump.
 

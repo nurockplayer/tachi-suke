@@ -180,6 +180,11 @@ Phase 1BC adds sitemap freshness depth:
 - Public aggregate sitemap entries should have content-derived `lastmod` values for `/[locale]/articles`, `/[locale]/areas`, `/[locale]/places`, `/[locale]/mobile`, `/[locale]/tools`, and `/[locale]/site-map`.
 - Derive freshness from local content metadata only; do not add external crawling or backend freshness tracking in Phase 1.
 
+Phase 1BD adds LLM discovery alignment:
+
+- `/llms.txt` should include locale site map links as public discovery surfaces.
+- Keep `/llms.txt` plain text and do not expose account placeholders, drafts, private data, or runtime AI behavior.
+
 Phase 1C adds submit-place workflow MVP:
 
 - `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` controls form activation.
