@@ -367,6 +367,27 @@ Rules:
 - Do not collect, upload, store, or validate user documents in Phase 1.
 - Saved checklist state must wait for a separately scoped auth/database design.
 
+## Phase 1CG: Job Application Documents Tool
+
+Status: implemented.
+
+Goal:
+
+Fill the working-life workflow gap between work contract basics articles and practical job application preparation with a static, multilingual checklist.
+
+Implemented:
+
+- Added `japan-job-application-documents-checklist` to the published tools collection.
+- Covered resume/career history, residence status and work permission, interview/offer documents, onboarding basics, and safe submission hygiene in `zh-tw`, `en`, `ja`, and `ko`.
+- Linked official Ministry of Health, Labour and Welfare and Immigration Services Agency public information as confirmation starting points.
+- Source-level and build-output tests verify the tool is public and appears in generated sitemap routes.
+
+Rules:
+
+- Keep this as preparation guidance, not resume writing, residence-status judgment, legal advice, or a hiring guarantee.
+- Do not collect, upload, parse, store, or validate user documents in Phase 1.
+- Saved checklist state, job application tracking, and profile-based recommendations must wait for a separately scoped auth/database design.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.

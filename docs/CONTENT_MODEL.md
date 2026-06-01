@@ -238,6 +238,7 @@ Current published tools:
 - `commuter-pass-ic-card-checklist`
 - `apartment-viewing-japanese-phrases`
 - `apartment-application-documents-checklist`
+- `japan-job-application-documents-checklist`
 - `moving-out-checklist`
 - `japan-emergency-disaster-checklist`
 
