@@ -74,6 +74,8 @@ describe("static SEO output", () => {
     assert.match(llms, /multilingual Japan life decision assistant/i);
     assert.match(llms, /https:\/\/tachi-suke\.example\.com\/sitemap\.xml/);
     assert.match(llms, /https:\/\/tachi-suke\.example\.com\/feed\.xml/);
+    assert.match(llms, /https:\/\/tachi-suke\.example\.com\/en\/site-map/);
+    assert.match(llms, /https:\/\/tachi-suke\.example\.com\/zh-tw\/site-map/);
     assert.match(llms, /https:\/\/tachi-suke\.example\.com\/en\/search-index\.json/);
     assert.match(llms, /Do not treat account placeholder pages as public content/i);
     assert.match(security, /^Contact:\s*https:\/\/tachi-suke\.example\.com\/en\/contact/m);

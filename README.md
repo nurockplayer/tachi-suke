@@ -64,7 +64,7 @@ Implemented:
 - SEO-oriented `BaseLayout`
 - Generated `sitemap.xml`, `robots.txt`, and `site.webmanifest`
 - Sitemap includes conservative `hreflang` alternates for shared locale pages and translated article details
-- Generated `llms.txt` discovery file for AI/search-adjacent tooling
+- Generated `llms.txt` discovery file for AI/search-adjacent tooling, including locale site map links
 - Generated `/.well-known/security.txt` pointing security reports to the public contact route
 - Generated `opensearch.xml` browser search discovery file linked from every public page
 - Generated global `feed.xml` for public articles, included in the sitemap with content-aware `lastmod`

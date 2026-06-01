@@ -10,6 +10,7 @@ function absoluteUrl(siteUrl: URL, path: string): string {
 export const GET: APIRoute = ({ site }) => {
   const siteUrl = site ?? new URL("https://tachi-suke.example.com");
   const localeRootLinks = locales.map((locale) => `- ${localeNames[locale]}: ${absoluteUrl(siteUrl, `/${locale}/`)}`);
+  const localeSiteMapLinks = locales.map((locale) => `- ${locale} site map: ${absoluteUrl(siteUrl, `/${locale}/site-map`)}`);
   const localeFeedLinks = locales.map((locale) => `- ${locale} RSS: ${absoluteUrl(siteUrl, `/${locale}/feed.xml`)}`);
   const localeSearchIndexLinks = locales.map((locale) => `- ${locale} search index: ${absoluteUrl(siteUrl, `/${locale}/search-index.json`)}`);
 
@@ -36,6 +37,9 @@ export const GET: APIRoute = ({ site }) => {
     `- Sitemap: ${absoluteUrl(siteUrl, "/sitemap.xml")}`,
     `- Global RSS feed: ${absoluteUrl(siteUrl, "/feed.xml")}`,
     ...localeFeedLinks,
+    "",
+    "## Human-Readable Content Directories",
+    ...localeSiteMapLinks,
     "",
     "## Static Search Indexes",
     ...localeSearchIndexLinks,

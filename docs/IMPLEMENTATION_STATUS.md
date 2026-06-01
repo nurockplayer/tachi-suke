@@ -37,7 +37,7 @@ This document records the current MVP state after Phase 1BC sitemap section fres
 - Four locale privacy pages.
 - Four locale editorial policy pages.
 - Four locale human-readable site map pages at `/[locale]/site-map`, linked from the footer and generated from public content collections.
-- Static `llms.txt` discovery file for public AI/search-adjacent tooling.
+- Static `llms.txt` discovery file for public AI/search-adjacent tooling, including locale site map links.
 - Custom static `404.html` recovery page with multilingual links and `noindex, nofollow`.
 - Four locale account login placeholder pages.
 - Four locale account favorites placeholder pages.
