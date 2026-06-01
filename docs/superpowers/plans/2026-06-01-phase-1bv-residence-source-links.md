@@ -10,7 +10,7 @@
 
 ---
 
-### Task 1: Tests
+## Task 1: Tests
 
 **Files:**
 - Modify: `tests/content-health.test.mjs`
@@ -19,7 +19,7 @@
 - [ ] Add a failing content-health assertion requiring `moj.go.jp` and `digital.go.jp` source links for all four residence/admin articles.
 - [ ] Add a failing build-output assertion for the English residence/admin page.
 
-### Task 2: Content
+## Task 2: Content
 
 **Files:**
 - Modify: `src/content/articles/zh-tw-residence-admin-basics.md`
@@ -31,7 +31,7 @@
 - [ ] Add Immigration Services Agency living/working guidebook source link.
 - [ ] Keep labels and notes localized and clear.
 
-### Task 3: Documentation
+## Task 3: Documentation
 
 **Files:**
 - Modify: `docs/IMPLEMENTATION_STATUS.md`
@@ -40,11 +40,11 @@
 - [ ] Record Phase 1BV source-link coverage for residence/admin articles.
 - [ ] Keep Phase 1 boundaries explicit.
 
-### Task 4: Validation And Shipping
+## Task 4: Validation And Handoff
 
 - [ ] Run `pnpm test`.
 - [ ] Run `pnpm check:content`.
 - [ ] Run `pnpm build`.
 - [ ] Run `pnpm check:links`.
 - [ ] Run `pnpm check:seo`.
-- [ ] Commit, push, open PR, merge after checks pass, and deploy production.
+- [ ] Hand off the validated branch for owner-approved commit, PR, merge, and deploy workflow according to `AGENTS.md`.
