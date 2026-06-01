@@ -81,6 +81,7 @@ Implemented:
 - JSON-LD structured data for site identity, site search, locale homepages, public section indexes, article indexes, articles, places, mobile plan details, area details, tool details, trust/form pages, and breadcrumbs
 - Breadcrumb JSON-LD on public collection index pages and nested public detail pages
 - Visible breadcrumbs on public collection index pages and nested public article, category, place, mobile plan, area, and tool pages
+- Detail-page correction prompts pass an encoded `relatedUrl` into the contact/corrections form across representative public content types
 - Generated article table of contents for long-form article pages
 - Cloudflare Pages `_headers` for conservative security and discovery cache defaults
 - Cloudflare Pages CSP blocks framing/object embeds while allowing current inline JSON-LD/search scripts and HTTPS external form endpoints
@@ -328,6 +329,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - WebSite JSON-LD exposes only the static English search fallback as `SearchAction`; do not imply backend or private-content search.
 - Visible breadcrumbs should stay locale-aware, link only to existing public routes, and mark the current page with `aria-current="page"`.
 - Submit-place and contact/corrections form contracts should stay provider-agnostic: env-controlled endpoint, preview-mode disabled submit, hidden classification fields, honeypot field, and no repository-side storage.
+- Detail-page correction prompts should keep passing an encoded absolute `relatedUrl` for article, place, mobile plan, area, and tool pages.
 - Mobile plan structured data must stay conservative. Do not add `Offer` price markup until pricing and campaign review workflows are mature.
 - `/feed.xml` is a global RSS feed for non-draft articles across all locales.
 - `/[locale]/feed.xml` is a locale-specific RSS feed for same-locale non-draft articles.

@@ -471,6 +471,24 @@ Rules:
 - Keep both forms static and endpoint-configured through environment variables.
 - Do not add repository-side submission/contact storage, provider-specific integrations, captcha dependencies, auth gating, or moderation dashboards in Phase 1CK.
 
+## Phase 1CL: Correction Related URL Coverage
+
+Status: implemented.
+
+Goal:
+
+Make the static contact/corrections workflow easier to maintain by verifying public detail pages pass their current URL into the contact page as `relatedUrl`.
+
+Implemented:
+
+- Expanded `tests/seo-output.test.mjs` to cover correction prompt `relatedUrl` links on representative article, place, mobile plan, area, tool, and zh-tw detail pages.
+- Kept the behavior static and progressive: the detail page link carries the URL, and the contact form script prefills the optional related URL field.
+
+Rules:
+
+- Keep `relatedUrl` absolute, encoded, and generated from the configured `SITE_URL`.
+- Do not add analytics, tracking, backend storage, provider-specific form handling, or guaranteed support response behavior in Phase 1CL.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.

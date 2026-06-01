@@ -112,6 +112,7 @@ This document records the current MVP state after Phase 1CI source-backed setup 
 - Contact/corrections form uses `PUBLIC_CONTACT_FORM_ENDPOINT`: unset means preview mode/disabled submit; set means a static `POST` to the external endpoint.
 - Contact/corrections includes provider-agnostic hidden fields and a visually hidden `company` honeypot field for basic spam reduction.
 - Correction prompt component with localized copy for reporting outdated details, broken links, or unclear information from detail pages.
+- Build-output SEO checks verify representative public detail correction prompts pass an encoded absolute `relatedUrl` into the contact/corrections form.
 - Tool detail pages are generated only for `status = published` tools and include localized notes, checklist sections, source note, and last checked date.
 - Footer navigation links to contact, privacy, editorial policy, and human-readable site map pages for all locales.
 

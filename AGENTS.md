@@ -193,6 +193,12 @@ Phase 1CK adds static form contract tests:
 - Contract tests should verify provider-agnostic endpoint env vars, preview-mode disabled submit, static `POST` action binding, hidden routing/moderation/privacy fields, honeypot fields, required fields, and URL/email input types.
 - Do not turn these forms into backend storage, provider-specific integrations, captcha flows, auth-gated flows, or database-backed workflows in Phase 1CK.
 
+Phase 1CL adds correction related URL coverage:
+
+- `pnpm check:seo` should verify representative public detail pages link to `/[locale]/contact` with an encoded absolute `relatedUrl`.
+- Coverage should include article, place, mobile plan, area, tool, and at least one non-English locale representative.
+- Keep this as a static correction workflow helper; do not add analytics, tracking, backend storage, or guaranteed support response behavior.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.
