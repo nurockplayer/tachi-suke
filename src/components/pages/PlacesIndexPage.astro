@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import PlaceCard from "@/components/places/PlaceCard.astro";
-import { localizePath, sectionCopy, type Locale } from "@/lib/i18n";
+import { htmlLangByLocale, localizePath, sectionCopy, type Locale } from "@/lib/i18n";
 
 interface Props {
   locale: Locale;
@@ -10,14 +10,51 @@ interface Props {
 
 const { locale } = Astro.props;
 const title = sectionCopy[locale].placesTitle;
+const description = locale === "zh-tw"
+  ? "收集外國居民友善、適合日常使用的餐廳、咖啡廳、商店與生活場所。"
+  : locale === "en"
+    ? "Resident-friendly restaurants, cafes, shops, and everyday places in Japan."
+    : locale === "ja"
+      ? "外国人にも使いやすい、日常利用向けのお店を整理します。"
+      : "외국인 거주자도 이용하기 쉬운 일상 장소를 정리합니다.";
 const places = (await getCollection("places")).filter((place) => place.data.status === "published");
+const site = Astro.site ?? new URL(Astro.url.origin);
+const canonicalUrl = new URL(Astro.url.pathname, site).href;
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${canonicalUrl}#webpage`,
+    name: title,
+    description,
+    url: canonicalUrl,
+    inLanguage: htmlLangByLocale[locale],
+    isPartOf: { "@id": new URL("/#website", site).href },
+    publisher: { "@id": new URL("/#organization", site).href }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${canonicalUrl}#place-list`,
+    name: title,
+    description,
+    numberOfItems: places.length,
+    itemListElement: places.map((place, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: new URL(localizePath(locale, `/places/${place.data.slug}`), site).href,
+      name: place.data.name,
+      description: `${place.data.category} · ${place.data.city} · ${place.data.area}`
+    }))
+  }
+];
 ---
 
-<BaseLayout locale={locale} title={title} description={`${title} | TachiSuke`}>
+<BaseLayout locale={locale} title={title} description={description} jsonLd={jsonLd}>
   <section class="page-hero">
     <div class="container">
       <h1>{title}</h1>
-      <p>{locale === "zh-tw" ? "收集外國居民友善、適合日常使用的餐廳、咖啡廳、商店與生活場所。" : locale === "en" ? "Resident-friendly restaurants, cafes, shops, and everyday places in Japan." : locale === "ja" ? "外国人にも使いやすい、日常利用向けのお店を整理します。" : "외국인 거주자도 이용하기 쉬운 일상 장소를 정리합니다."}</p>
+      <p>{description}</p>
       <div class="inline-actions">
         <a class="button-link" href={localizePath(locale, "/submit-place")}>{sectionCopy[locale].submitTitle}</a>
       </div>

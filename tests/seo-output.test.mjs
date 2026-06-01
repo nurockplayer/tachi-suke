@@ -534,6 +534,28 @@ describe("static SEO output", () => {
     }
   });
 
+  it("renders conservative JSON-LD on public section index pages", () => {
+    for (const [label, relativePath, expectedCount, expectedUrlPattern] of [
+      ["mobile", "en/mobile/index.html", 5, /^https:\/\/tachi-suke\.example\.com\/en\/mobile\//],
+      ["areas", "en/areas/index.html", 4, /^https:\/\/tachi-suke\.example\.com\/en\/areas\//],
+      ["places", "en/places/index.html", 3, /^https:\/\/tachi-suke\.example\.com\/en\/places\//],
+      ["tools", "en/tools/index.html", 6, /^https:\/\/tachi-suke\.example\.com\/en\/tools\//]
+    ]) {
+      const objects = jsonLdObjects(readHtml(relativePath));
+      const collectionPage = objects.find((object) => object["@type"] === "CollectionPage");
+      const itemList = objects.find((object) => object["@type"] === "ItemList");
+
+      assert.ok(collectionPage, `${label} index should include CollectionPage JSON-LD`);
+      assert.equal(collectionPage?.inLanguage, "en", `${label} index should use the page language`);
+      assert.ok(itemList, `${label} index should include ItemList JSON-LD`);
+      assert.equal(itemList?.numberOfItems, expectedCount, `${label} ItemList should match visible item count`);
+      assert.equal(itemList?.itemListElement?.length, expectedCount, `${label} ItemList entries should match visible item count`);
+      assert.equal(itemList.itemListElement[0]?.["@type"], "ListItem");
+      assert.equal(itemList.itemListElement[0]?.position, 1);
+      assert.match(itemList.itemListElement[0]?.url ?? "", expectedUrlPattern, `${label} ItemList should link to detail pages`);
+    }
+  });
+
   it("renders conservative JSON-LD on article category landing pages", () => {
     const objects = jsonLdObjects(readHtml("en/articles/category/mobile/index.html"));
     assert.ok(hasJsonLdType(objects, "Organization"), "category page should include Organization JSON-LD");

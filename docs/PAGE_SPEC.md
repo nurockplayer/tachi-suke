@@ -298,9 +298,9 @@ All public pages should:
 
 **Rendering mode:** Static Astro pages through `SimpleSectionPage`.
 
-**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, and locale alternates.
+**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, locale alternates, `CollectionPage` JSON-LD, and area `ItemList` JSON-LD backed by rendered area cards.
 
-**Current status:** Implemented as an index/entry page. Phase 1B shows area guide cards for Ikebukuro, Itabashi, Akabane, and Kagurazaka / Edogawabashi. Phase 1B.5 links each card to its detail page.
+**Current status:** Implemented as an index/entry page. Phase 1B shows area guide cards for Ikebukuro, Itabashi, Akabane, and Kagurazaka / Edogawabashi. Phase 1B.5 links each card to its detail page. Phase 1BJ exposes the rendered cards as conservative JSON-LD.
 
 **Future notes:** Add richer localized body content, source links, and related articles when area content becomes substantial.
 
@@ -330,9 +330,9 @@ All public pages should:
 
 **Rendering mode:** Static Astro pages through `PlacesIndexPage`.
 
-**SEO requirements:** Locale-specific title and description, canonical URL, Open Graph metadata, locale alternates, and readable links to place detail pages.
+**SEO requirements:** Locale-specific title and description, canonical URL, Open Graph metadata, locale alternates, readable links to place detail pages, `CollectionPage` JSON-LD, and published-place `ItemList` JSON-LD.
 
-**Current status:** Implemented for all four locales.
+**Current status:** Implemented for all four locales. Phase 1BJ exposes published place cards as conservative JSON-LD.
 
 **Future notes:** Add filters by area, category, station, smoking status, solo-friendly status, and payment method after data volume grows.
 
@@ -362,9 +362,9 @@ All public pages should:
 
 **Rendering mode:** Static Astro pages through `MobileIndexPage`.
 
-**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, and locale alternates.
+**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, locale alternates, `CollectionPage` JSON-LD, and mobile-plan `ItemList` JSON-LD backed by rendered plan cards.
 
-**Current status:** Implemented as an index page with comparison guidance and five mobile plan cards for povo, LINEMO, Rakuten Mobile, ahamo, and UQ mobile. Phase 1B.5 links each card to its detail page.
+**Current status:** Implemented as an index page with comparison guidance and five mobile plan cards for povo, LINEMO, Rakuten Mobile, ahamo, and UQ mobile. Phase 1B.5 links each card to its detail page. Phase 1BJ exposes the rendered plan cards as conservative JSON-LD.
 
 **Future notes:** Add stronger provider comparisons, localized caveats, next review scheduling, and source-backed update workflow. Prices and plan conditions must remain clearly marked as changeable.
 
@@ -394,9 +394,9 @@ All public pages should:
 
 **Rendering mode:** Static Astro pages through `SimpleSectionPage`.
 
-**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, and locale alternates.
+**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, locale alternates, `CollectionPage` JSON-LD, and published-tool `ItemList` JSON-LD backed by rendered tool cards.
 
-**Current status:** Implemented as an index/entry page with published tool cards. Phase 1H adds `moving-to-japan-checklist`; Phase 1N adds `japan-rent-initial-cost-checklist`; Phase 1AE adds `ward-office-moving-in-checklist`; Phase 1AF adds `commuter-pass-ic-card-checklist`.
+**Current status:** Implemented as an index/entry page with published tool cards. Phase 1H adds `moving-to-japan-checklist`; Phase 1N adds `japan-rent-initial-cost-checklist`; Phase 1AE adds `ward-office-moving-in-checklist`; Phase 1AF adds `commuter-pass-ic-card-checklist`. Phase 1BJ exposes published tool cards as conservative JSON-LD.
 
 **Future notes:** Add filters or groupings once there are enough published tools. Keep this page clear that account-based saved progress is not available in Phase 1.
 
