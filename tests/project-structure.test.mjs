@@ -389,6 +389,20 @@ describe("TachiSuke project scaffold", () => {
     }
   });
 
+  it("keeps the collapsed language switcher language-neutral", () => {
+    const localeSwitcher = readFileSync(join(root, "src/components/layout/LocaleSwitcher.astro"), "utf8");
+    const globalStyles = readFileSync(join(root, "src/styles/global.css"), "utf8");
+
+    assert.match(localeSwitcher, /data-locale-icon/, "LocaleSwitcher should expose a globe icon");
+    assert.match(localeSwitcher, /control-summary-icon-only/, "collapsed language switcher should use icon-only styling");
+    assert.match(localeSwitcher, /visually-hidden/, "LocaleSwitcher should keep an accessible non-visual label");
+    assert.doesNotMatch(localeSwitcher, /currentLocaleCode/, "collapsed language switcher should not show locale-specific shorthand");
+    assert.doesNotMatch(localeSwitcher, /data-locale-current/, "collapsed language switcher should not render the current locale code");
+    assert.doesNotMatch(localeSwitcher, />Lang</, "collapsed language switcher should not depend on English visible text");
+    assert.match(globalStyles, /\.control-summary-icon-only/, "global styles should define the icon-only control shape");
+    assert.match(globalStyles, /\.visually-hidden/, "global styles should define accessible hidden text");
+  });
+
   it("includes dependency-free static search routes and source filters", () => {
     const i18n = readFileSync(join(root, "src/lib/i18n/index.ts"), "utf8");
     assert.match(i18n, /href:\s*"\/search"/, "primary navigation should link to locale search");
@@ -547,8 +561,9 @@ describe("TachiSuke project scaffold", () => {
     assert.match(localeSwitcher, /<summary[\s\S]*data-locale-summary/, "LocaleSwitcher should expose a stable summary trigger");
     assert.match(localeSwitcher, /aria-label="Change language"/, "LocaleSwitcher summary should have a language-neutral accessible label");
     assert.match(localeSwitcher, /<svg[\s\S]*data-locale-icon/, "LocaleSwitcher summary should expose a globe icon");
-    assert.match(localeSwitcher, /data-locale-current/, "LocaleSwitcher summary may show a compact current-locale code");
-    assert.match(localeSwitcher, /currentLocaleCode/, "LocaleSwitcher should use locale codes instead of current-locale names in its summary");
+    assert.match(localeSwitcher, /control-summary-icon-only/, "LocaleSwitcher summary should stay visual-language neutral when collapsed");
+    assert.doesNotMatch(localeSwitcher, /data-locale-current/, "LocaleSwitcher summary should not show a compact current-locale code");
+    assert.doesNotMatch(localeSwitcher, /currentLocaleCode/, "LocaleSwitcher should avoid current-locale shorthand in its summary");
     assert.doesNotMatch(localeSwitcher, /<strong>\{localeNames\[locale\]\}<\/strong>/, "LocaleSwitcher summary must not rely on the current locale's native name");
     assert.match(localeSwitcher, /data-locale-menu/, "LocaleSwitcher should wrap language links in a stable menu");
     assert.match(localeSwitcher, /localeNames\[targetLocale\]/, "LocaleSwitcher menu should still show native language names");
