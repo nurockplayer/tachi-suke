@@ -3,7 +3,7 @@ import BaseLayout from "./BaseLayout.astro";
 import CorrectionPrompt from "@/components/content/CorrectionPrompt.astro";
 import Breadcrumbs from "@/components/navigation/Breadcrumbs.astro";
 import { formatDate } from "@/lib/content";
-import { slugifyArticleCategory } from "@/lib/content/article-categories";
+import { getArticleCategoryTitle, slugifyArticleCategory } from "@/lib/content/article-categories";
 import { getUiCopy, htmlLangByLocale, localizePath, type Locale } from "@/lib/i18n";
 import type { ArticleSourceLink } from "@/types/article";
 
@@ -52,6 +52,7 @@ const localeHomeUrl = new URL(localizePath(locale), site).href;
 const articlesUrl = new URL(localizePath(locale, "/articles"), site).href;
 const categoryHref = localizePath(locale, `/articles/category/${slugifyArticleCategory(category)}`);
 const categoryUrl = new URL(categoryHref, site).href;
+const categoryTitle = getArticleCategoryTitle(locale, category);
 const tagListLabel = getUiCopy(locale, "layout.tagList");
 const updatedLabel = {
   "zh-tw": "更新",
@@ -152,7 +153,7 @@ const jsonLd = [
     mainEntityOfPage: canonicalUrl,
     headline: title,
     description,
-    articleSection: category,
+    articleSection: categoryTitle,
     keywords: tags,
     datePublished: publishedAt.toISOString(),
     dateModified: updatedAt.toISOString(),
@@ -179,7 +180,7 @@ const jsonLd = [
       {
         "@type": "ListItem",
         position: 3,
-        name: category,
+        name: categoryTitle,
         item: categoryUrl
       },
       {
@@ -194,7 +195,7 @@ const jsonLd = [
 const articleOpenGraph = {
   publishedAt,
   updatedAt,
-  section: category,
+  section: categoryTitle,
   tags
 };
 ---
@@ -207,12 +208,12 @@ const articleOpenGraph = {
         items={[
           { label: "TachiSuke", href: localizePath(locale) },
           { label: articlesLabel, href: localizePath(locale, "/articles") },
-          { label: category, href: categoryHref },
+          { label: categoryTitle, href: categoryHref },
           { label: title }
         ]}
       />
       <p class="article-meta">
-        <a class="article-meta-link" href={categoryHref}>{category}</a>
+        <a class="article-meta-link" href={categoryHref}>{categoryTitle}</a>
         {" · "}
         <time datetime={publishedAt.toISOString()}>{formatDate(publishedAt, locale)}</time>
         {" · "}

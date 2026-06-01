@@ -362,6 +362,11 @@ describe("TachiSuke project scaffold", () => {
     assert.match(articleLayout, /sourceLinks\?:/, "ArticleLayout should accept article source links");
     assert.match(articleLayout, /data-article-source-links/, "ArticleLayout should render a stable source-links section");
     assert.match(articleLayout, /Official confirmation links/, "ArticleLayout should include localized source-link copy");
+    assert.match(articleLayout, /getArticleCategoryTitle\(locale,\s*category\)/, "ArticleLayout should derive localized article category labels");
+    assert.match(articleLayout, /articleSection:\s*categoryTitle/, "ArticleLayout Article JSON-LD should use localized category labels");
+    assert.match(articleLayout, /section:\s*categoryTitle/, "ArticleLayout Open Graph article section should use localized category labels");
+    assert.match(articleLayout, /\{ label:\s*categoryTitle,\s*href:\s*categoryHref \}/, "ArticleLayout breadcrumbs should use localized category labels");
+    assert.match(articleLayout, /<a class="article-meta-link" href=\{categoryHref\}>\{categoryTitle\}<\/a>/, "ArticleLayout visible article meta should use localized category labels");
     assert.match(articleLayout, /"@type":\s*"Article"/, "ArticleLayout should define Article JSON-LD");
     assert.match(articleLayout, /"@type":\s*"BreadcrumbList"/, "ArticleLayout should define BreadcrumbList JSON-LD");
     assert.match(articleLayout, /articleOpenGraph=\{/, "ArticleLayout should pass Open Graph article metadata into BaseLayout");

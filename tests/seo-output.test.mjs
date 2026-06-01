@@ -775,8 +775,18 @@ describe("static SEO output", () => {
     assert.ok(hasJsonLdType(objects, "BreadcrumbList"), "article page should include BreadcrumbList JSON-LD");
     assert.match(html, /<meta property="article:published_time" content="2026-05-31T00:00:00\.000Z">/, "article detail should include published time Open Graph metadata");
     assert.match(html, /<meta property="article:modified_time" content="2026-05-31T00:00:00\.000Z">/, "article detail should include modified time Open Graph metadata");
-    assert.match(html, /<meta property="article:section" content="mobile">/, "article detail should include section Open Graph metadata");
+    assert.match(html, /<meta property="article:section" content="Mobile guides">/, "article detail should include localized section Open Graph metadata");
     assert.match(html, /<meta property="article:tag" content="mobile plans">/, "article detail should include tag Open Graph metadata");
+    const articleJsonLd = objects.find((object) => object["@type"] === "Article");
+    assert.equal(articleJsonLd?.articleSection, "Mobile guides", "article detail Article JSON-LD should use localized category labels");
+    const breadcrumb = objects.find((object) => object["@type"] === "BreadcrumbList");
+    const categoryCrumb = breadcrumb?.itemListElement?.[2];
+    assert.equal(categoryCrumb?.name, "Mobile guides", "article detail breadcrumb JSON-LD should use localized category labels");
+    assert.match(html, /<a class="article-meta-link" href="\/en\/articles\/category\/mobile">Mobile guides<\/a>/, "article visible meta should use localized category labels");
+
+    const zhArticle = readHtml("zh-tw/articles/residence-card-resident-record-my-number/index.html");
+    assert.match(zhArticle, /<meta property="article:section" content="行政手續文章">/, "zh-tw article detail should localize section Open Graph metadata");
+    assert.match(zhArticle, /<a class="article-meta-link" href="\/zh-tw\/articles\/category\/procedures">行政手續文章<\/a>/, "zh-tw article visible meta should use localized category labels");
   });
 
   it("renders conservative JSON-LD on article index pages", () => {

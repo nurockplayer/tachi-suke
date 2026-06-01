@@ -229,6 +229,12 @@ Phase 1CQ improves static 404 recovery localization:
 - Mark locale-specific recovery sections with shared BCP47 language metadata.
 - Do not add language-detection redirects, Cloudflare Functions, Workers, analytics, backend error tracking, auth, database, or route changes in Phase 1CQ.
 
+Phase 1CR localizes article detail category labels:
+
+- Article detail pages should display `getArticleCategoryTitle(locale, category)` for visible category links, visible breadcrumbs, `Article` JSON-LD `articleSection`, breadcrumb JSON-LD category names, and Open Graph `article:section`.
+- Keep article frontmatter category keys and category route slugs unchanged; raw keys remain content-model identifiers only.
+- Do not change article routes, category slugs, content schemas, search indexing, account placeholders, or backend behavior in Phase 1CR.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.
