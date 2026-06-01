@@ -684,6 +684,8 @@ describe("static SEO output", () => {
     assert.match(mobile, /Mobile guides \| TachiSuke/, "English mobile category page should have an SEO title");
     assert.match(mobile, /href="\/en\/articles\/choose-mobile-plan-japan-foreigner"/, "mobile category should link to English mobile articles");
     assert.match(mobile, /href="\/en\/articles\/povo-linemo-rakuten-ahamo-comparison"/, "mobile category should include all matching English articles");
+    assert.match(mobile, />Mobile guides · /, "mobile category article rows should display localized category labels");
+    assert.doesNotMatch(mobile, />mobile · /, "mobile category article rows should not display raw category keys");
     assert.doesNotMatch(mobile, /<a href="\/zh-tw\/articles\/[^"]+">\s*<span class="article-meta"/, "English category page should not list zh-tw articles");
     assert.doesNotMatch(mobile, /draft/i, "category page should not expose draft article data");
 
@@ -698,6 +700,8 @@ describe("static SEO output", () => {
     const procedures = readHtml("zh-tw/articles/category/procedures/index.html");
     assert.match(procedures, /行政手續文章 \| TachiSuke/, "zh-tw procedures category should have a localized SEO title");
     assert.match(procedures, /href="\/zh-tw\/articles\/residence-card-resident-record-my-number"/, "procedures category should link to zh-tw residence admin article");
+    assert.match(procedures, />行政手續文章 · /, "zh-tw category article rows should display localized category labels");
+    assert.doesNotMatch(procedures, />procedures · /, "zh-tw category article rows should not display raw category keys");
 
     const work = readHtml("en/articles/category/work/index.html");
     assert.match(work, /Work guides \| TachiSuke/, "English work category should have a localized SEO title");

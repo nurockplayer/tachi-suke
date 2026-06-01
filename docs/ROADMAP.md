@@ -547,6 +547,26 @@ Rules:
 - Keep site map structured data aligned with visible public links and local content.
 - Do not change visible site map layout, route structure, account placeholder exclusions, or backend behavior in Phase 1CO.
 
+## Phase 1CP: Localized Article Category Display
+
+Status: implemented.
+
+Goal:
+
+Avoid exposing raw content category keys on public article discovery surfaces.
+
+Implemented:
+
+- Updated article index rows to display `getArticleCategoryTitle(locale, article.data.category)`.
+- Updated article category page rows to display localized category labels.
+- Updated locale homepage latest-article cards to display localized category labels.
+- Added source and build-output tests that prevent raw keys such as `mobile` and `procedures` from returning in article-row metadata.
+
+Rules:
+
+- Keep content frontmatter category keys and category route slugs stable.
+- Do not change search indexing, article routes, content schemas, account placeholders, or backend behavior in Phase 1CP.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.

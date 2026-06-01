@@ -6,6 +6,7 @@ import PlaceCard from "@/components/places/PlaceCard.astro";
 import MobilePlanCard from "@/components/mobile/MobilePlanCard.astro";
 import FavoriteButtonPlaceholder from "@/components/favorites/FavoriteButtonPlaceholder.astro";
 import { categoryEntries, formatDate } from "@/lib/content";
+import { getArticleCategoryTitle } from "@/lib/content/article-categories";
 import { homeCopy, htmlLangByLocale, localizePath, type Locale } from "@/lib/i18n";
 
 interface Props {
@@ -293,7 +294,7 @@ const homeJsonLd = [
       <div class="article-list">
         {articles.map((article) => (
           <a class="article-row" href={localizePath(locale, `/articles/${article.data.slug}`)}>
-            <span class="article-meta">{article.data.category} · {formatDate(article.data.publishedAt, locale)}</span>
+            <span class="article-meta">{getArticleCategoryTitle(locale, article.data.category)} · {formatDate(article.data.publishedAt, locale)}</span>
             <h3>{article.data.title}</h3>
             <p>{article.data.description}</p>
           </a>

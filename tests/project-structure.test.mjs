@@ -597,6 +597,20 @@ describe("TachiSuke project scaffold", () => {
     assert.doesNotMatch(accessibilityPlan, /^### Task/m, "accessibility plan should not skip heading levels");
   });
 
+  it("localizes public article category display labels", () => {
+    const articlesIndex = readFileSync(join(root, "src/components/pages/ArticlesIndexPage.astro"), "utf8");
+    assert.match(articlesIndex, /getArticleCategoryTitle\(locale,\s*article\.data\.category\)/, "articles index should localize article category labels");
+    assert.doesNotMatch(articlesIndex, /\{article\.data\.category\}\s*·/, "articles index should not render raw category keys");
+
+    const articleCategoryPage = readFileSync(join(root, "src/components/pages/ArticleCategoryPage.astro"), "utf8");
+    assert.match(articleCategoryPage, /getArticleCategoryTitle\(locale,\s*article\.data\.category\)/, "article category page should localize article row category labels");
+    assert.doesNotMatch(articleCategoryPage, /\{article\.data\.category\}\s*·/, "article category page should not render raw category keys");
+
+    const localeHomePage = readFileSync(join(root, "src/components/pages/LocaleHomePage.astro"), "utf8");
+    assert.match(localeHomePage, /getArticleCategoryTitle\(locale,\s*article\.data\.category\)/, "locale home page should localize latest-article category labels");
+    assert.doesNotMatch(localeHomePage, /\{article\.data\.category\}\s*·/, "locale home page should not render raw category keys");
+  });
+
   it("includes a persistent locale-aware dark theme switcher", () => {
     const baseLayout = readFileSync(join(root, "src/components/layout/BaseLayout.astro"), "utf8");
     assert.match(baseLayout, /media="\(prefers-color-scheme:\s*light\)"/, "BaseLayout should expose a light browser theme color");
