@@ -219,10 +219,13 @@ describe("TachiSuke project scaffold", () => {
       "pnpm check:content",
       "pnpm build",
       "pnpm check:links",
-      "pnpm check:seo"
+      "pnpm check:seo",
+      "pnpm check:deploy"
     ]) {
       assert.match(workflow, new RegExp(command.replaceAll(" ", "\\s+")), `CI should run ${command}`);
     }
+
+    assert.match(workflow, /SITE_URL:\s*https:\/\/tachi-suke\.pages\.dev/, "CI should verify deploy output with the production Pages URL");
 
     for (const forbiddenLockfile of ["package-lock.json", "yarn.lock", "bun.lock", "bun.lockb"]) {
       assert.match(workflow, new RegExp(forbiddenLockfile.replace(".", "\\.")), `CI should reject ${forbiddenLockfile}`);

@@ -42,6 +42,7 @@ Use Wrangler only from a trusted local machine or CI environment where Cloudflar
 
 ```bash
 SITE_URL=https://tachi-suke.pages.dev pnpm build
+SITE_URL=https://tachi-suke.pages.dev pnpm check:seo
 SITE_URL=https://tachi-suke.pages.dev pnpm check:deploy
 pnpm dlx wrangler pages deploy dist --project-name tachi-suke
 ```
@@ -58,12 +59,11 @@ pnpm test
 pnpm check:content
 SITE_URL=https://tachi-suke.pages.dev pnpm build
 pnpm check:links
+SITE_URL=https://tachi-suke.pages.dev pnpm check:seo
 SITE_URL=https://tachi-suke.pages.dev pnpm check:deploy
 ```
 
-`pnpm check:links` requires a fresh build. `pnpm check:deploy` requires the same `SITE_URL` used for the deploy build and fails if generated output still references `https://tachi-suke.example.com`.
-
-`pnpm check:seo` is still useful during pull request validation, but it expects the default example-domain fallback. For manual production deploys, use `pnpm check:deploy` after building with the real production URL.
+`pnpm check:links` requires a fresh build. `pnpm check:seo` should use the same `SITE_URL` as the deploy build so canonical URLs, feeds, sitemap entries, OpenSearch discovery, structured data, and search indexes are checked against the production domain. `pnpm check:deploy` also requires the same `SITE_URL` and fails if generated output still references `https://tachi-suke.example.com`.
 
 ## Post-Deploy Checks
 
