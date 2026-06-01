@@ -403,6 +403,10 @@ describe("TachiSuke project scaffold", () => {
     const articlesIndex = readFileSync(join(root, "src/components/pages/ArticlesIndexPage.astro"), "utf8");
     assert.match(articlesIndex, /getArticleCategorySummaries/, "articles index should show category entry links");
     assert.match(articlesIndex, /`\/articles\/category\/\$\{category\.slug\}`/, "articles index should link to category pages");
+    assert.match(articlesIndex, /"@type":\s*"CollectionPage"/, "articles index should define CollectionPage JSON-LD");
+    assert.match(articlesIndex, /"@type":\s*"ItemList"/, "articles index should define ItemList JSON-LD");
+    assert.match(articlesIndex, /numberOfItems:\s*articles\.length/, "articles index should set ItemList numberOfItems from rendered articles");
+    assert.match(articlesIndex, /jsonLd=\{jsonLd\}/, "articles index should pass JSON-LD to BaseLayout");
 
     const articleLayout = readFileSync(join(root, "src/components/layout/ArticleLayout.astro"), "utf8");
     assert.match(articleLayout, /slugifyArticleCategory/, "article detail layout should compute category href");
