@@ -1356,6 +1356,25 @@ Rules:
 - Keep JSON-LD aligned with rendered public cards.
 - Do not invent ratings, review counts, live availability, exact prices, coordinates, or offers.
 
+## Phase 1BK: Collection Index Breadcrumb JSON-LD
+
+Status: implemented.
+
+Goal:
+
+Make top-level collection index pages expose their relationship to the locale homepage in structured data.
+
+Implemented:
+
+- Added two-level `BreadcrumbList` JSON-LD to article index pages.
+- Added two-level `BreadcrumbList` JSON-LD to mobile, area, place, and tool index pages.
+- Added source-level and build-output SEO tests.
+
+Rules:
+
+- Keep breadcrumb JSON-LD limited to locale home and current section.
+- Do not add visible breadcrumbs to top-level collection index pages unless a UI task explicitly scopes it.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.

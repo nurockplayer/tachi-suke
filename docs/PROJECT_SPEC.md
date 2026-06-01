@@ -179,6 +179,7 @@ The MVP includes:
 - Locale homepages emit conservative `WebPage` and start-here `ItemList` JSON-LD backed by rendered homepage copy and links
 - Article index pages emit conservative `CollectionPage` and public-article `ItemList` JSON-LD backed by rendered same-locale article lists
 - Mobile, area, place, and tool index pages emit conservative `CollectionPage` and `ItemList` JSON-LD backed by rendered public cards
+- Public collection index pages emit conservative two-level `BreadcrumbList` JSON-LD from locale home to current section
 - Visible breadcrumbs for nested public article, category, place, mobile plan, area, and tool pages
 - Static article table of contents generated from Markdown/MDX headings
 - Cloudflare Pages `_headers` for conservative security and discovery cache defaults

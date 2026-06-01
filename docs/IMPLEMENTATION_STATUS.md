@@ -64,6 +64,7 @@ This document records the current MVP state after Phase 1BJ section index JSON-L
 - Locale homepage `WebPage` and start-here `ItemList` JSON-LD.
 - Article index `CollectionPage` and public-article `ItemList` JSON-LD.
 - Mobile, area, place, and tool index `CollectionPage` and public-card `ItemList` JSON-LD.
+- Collection index `BreadcrumbList` JSON-LD for articles, mobile, areas, places, and tools.
 - Article detail `Article` and `BreadcrumbList` JSON-LD.
 - Article category `WebPage` and `BreadcrumbList` JSON-LD.
 - Place detail `LocalBusiness` and `BreadcrumbList` JSON-LD.
