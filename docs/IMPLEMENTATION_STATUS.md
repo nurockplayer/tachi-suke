@@ -32,6 +32,7 @@ This document records the current MVP state after Phase 1CI source-backed setup 
 - Four locale static search pages at `/[locale]/search`, marked `noindex, follow`, with shareable `?q=` query support.
 - Static search zero-result states include localized helper copy and a clear-search button that restores the full public result list.
 - Four locale static search index JSON endpoints at `/[locale]/search-index.json`.
+- Build-output SEO checks verify all four static search pages keep the noindex, GET `q`, locale search-index, empty-state, and clear-search contracts.
 - Build-output tests verify all four locale search indexes contain only expected public content collection routes.
 - Published static checklist tools: `moving-to-japan-checklist`, `japan-rent-initial-cost-checklist`, `ward-office-moving-in-checklist`, `commuter-pass-ic-card-checklist`, `apartment-viewing-japanese-phrases`, `apartment-application-documents-checklist`, `japan-job-application-documents-checklist`, `japan-everyday-shopping-checklist`, `moving-out-checklist`, and `japan-emergency-disaster-checklist`.
 - Four locale submit-place form pages with provider-agnostic endpoint support.

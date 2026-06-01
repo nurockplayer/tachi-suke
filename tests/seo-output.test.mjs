@@ -632,22 +632,39 @@ describe("static SEO output", () => {
   });
 
   it("generates noindex locale search pages and public search index JSON", () => {
-    const html = readHtml("en/search/index.html");
-    assert.match(html, /Search \| TachiSuke/, "search page should have an SEO title");
-    assert.match(html, /name="robots" content="noindex, follow"/, "search page should be noindex but follow links");
-    assert.match(html, /<form class="search-panel" role="search" method="get" action="\/en\/search" data-search-form>/, "search page should render a shareable GET form");
-    assert.match(html, /data-search-input/, "search page should include the client-side search input");
-    assert.match(html, /name="q"/, "search input should submit q query values");
-    assert.match(html, /new URLSearchParams\(window\.location\.search\)/, "search script should read q from the URL");
-    assert.match(html, /history\.replaceState/, "search script should sync q back to the URL");
-    assert.match(html, /data-search-empty-help/, "search empty state should include a helper text hook");
-    assert.match(html, /data-search-clear/, "search empty state should include a clear-search action");
-    assert.match(html, /data-search-empty[^>]+aria-live="polite"[^>]+aria-atomic="true"/, "search empty state should announce recoverable zero-result changes politely");
-    assert.match(html, /search-result-type/, "search result type labels should render as badge-like elements");
-    assert.match(html, /function clearSearch\(\)/, "search script should expose a clearSearch helper");
-    assert.match(html, /url\.searchParams\.delete\("q"\)/, "clear search should remove q from the URL");
-    assert.match(html, /href="\/en\/articles\/choose-mobile-plan-japan-foreigner"/, "search page should render static article results");
-    assert.doesNotMatch(html, /<h2><a href="\/en\/account\//, "search page should not render account placeholder results");
+    for (const locale of locales) {
+      const html = readHtml(`${locale}/search/index.html`);
+
+      assert.match(html, /\| TachiSuke<\/title>/, `${locale} search page should have an SEO title`);
+      assert.match(html, /name="robots" content="noindex, follow"/, `${locale} search page should be noindex but follow links`);
+      assert.match(
+        html,
+        new RegExp(`<form class="search-panel" role="search" method="get" action="${escapeRegExp(`/${locale}/search`)}" data-search-form>`),
+        `${locale} search page should render a locale-aware shareable GET form`
+      );
+      assert.match(
+        html,
+        new RegExp(`data-search-index-url="${escapeRegExp(`/${locale}/search-index.json`)}"`),
+        `${locale} search page should point at its own locale search index`
+      );
+      assert.match(html, /data-search-root/, `${locale} search page should include the search root hook`);
+      assert.match(html, /data-search-input/, `${locale} search page should include the client-side search input`);
+      assert.match(html, /name="q"/, `${locale} search input should submit q query values`);
+      assert.match(html, /new URLSearchParams\(window\.location\.search\)/, `${locale} search script should read q from the URL`);
+      assert.match(html, /history\.replaceState/, `${locale} search script should sync q back to the URL`);
+      assert.match(html, /data-search-empty-help/, `${locale} search empty state should include a helper text hook`);
+      assert.match(html, /data-search-clear/, `${locale} search empty state should include a clear-search action`);
+      assert.match(
+        html,
+        /data-search-empty[^>]+aria-live="polite"[^>]+aria-atomic="true"/,
+        `${locale} search empty state should announce recoverable zero-result changes politely`
+      );
+      assert.match(html, /search-result-type/, `${locale} search result type labels should render as badge-like elements`);
+      assert.match(html, /function clearSearch\(\)/, `${locale} search script should expose a clearSearch helper`);
+      assert.match(html, /url\.searchParams\.delete\("q"\)/, `${locale} clear search should remove q from the URL`);
+      assert.match(html, new RegExp(`href="/${escapeRegExp(locale)}/articles/`), `${locale} search page should render static article results`);
+      assert.doesNotMatch(html, new RegExp(`<h2><a href="/${escapeRegExp(locale)}/account/`), `${locale} search page should not render account placeholder results`);
+    }
 
     const index = JSON.parse(readDist("en/search-index.json"));
     assert.equal(index.locale, "en");

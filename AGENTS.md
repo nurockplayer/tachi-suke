@@ -249,6 +249,12 @@ Phase 1CT improves SEO check URL inference:
 - Production/deploy verification should still build with the real `SITE_URL` and run `SITE_URL=<production-url> pnpm check:seo` plus `SITE_URL=<production-url> pnpm check:deploy`.
 - Do not change Astro `site` runtime behavior, canonical URL generation, deployment domains, routes, auth, database, or backend behavior in Phase 1CT.
 
+Phase 1CU expands locale search page SEO coverage:
+
+- Build-output SEO checks should verify all four `/[locale]/search` pages keep `noindex, follow`, locale-aware GET form actions, `q` query support, locale search-index references, empty-state hooks, clear-search behavior, and no account placeholder results.
+- Keep `/[locale]/search` static, dependency-free, and backed by `/[locale]/search-index.json`.
+- Do not change search ranking, index generation, routes, analytics, hosted search, auth, database, or backend behavior in Phase 1CU.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.

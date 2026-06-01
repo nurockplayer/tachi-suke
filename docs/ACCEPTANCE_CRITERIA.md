@@ -173,6 +173,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Search pages must support shareable GET query URLs with `q`, such as `/en/search?q=Denny`.
 - Search pages should read the initial `q` value, prefill the input, filter client-side results, and keep the URL query in sync.
 - Search pages should show a localized recoverable empty state for zero-result queries, including helper copy and a clear-search action that removes `q` and restores all results.
+- Build-output SEO tests should verify the same noindex, locale-aware GET action, `q` query, locale search-index, empty-state, clear-search, and public-result contracts for all four locale search pages.
 - Search pages and search index JSON endpoints must not appear in `sitemap.xml`.
 - Search indexes must include only public content:
   - matching-locale non-draft articles

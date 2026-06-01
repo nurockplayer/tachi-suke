@@ -650,6 +650,25 @@ Rules:
 - Do not loosen production deployment checks; `pnpm check:deploy` still requires an HTTPS non-example `SITE_URL`.
 - Do not change Astro `site` runtime behavior, canonical URL generation, deployment domains, routes, auth, database, or backend behavior in Phase 1CT.
 
+## Phase 1CU: Locale Search Page SEO Coverage
+
+Status: implemented.
+
+Goal:
+
+Prevent search-page regressions where `/en/search` remains healthy but another locale loses noindex metadata, the shareable GET form, query syncing hooks, or recoverable empty-state behavior.
+
+Implemented:
+
+- Expanded build-output SEO checks to loop over `zh-tw`, `en`, `ja`, and `ko` search pages.
+- Each locale search page is checked for `noindex, follow`, a locale-aware GET action, `q` query support, its own search-index URL, client-side query sync, empty-state hooks, clear-search behavior, result type labels, static public article results, and no account placeholder results.
+- Kept the existing deeper English search index content assertions and all-locale public-index checks.
+
+Rules:
+
+- Keep Phase 1 search dependency-free, static, and `noindex, follow`.
+- Do not change search ranking, index generation, routes, analytics, hosted search, auth, database, or backend behavior in Phase 1CU.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.
