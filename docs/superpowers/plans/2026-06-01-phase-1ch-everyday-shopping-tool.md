@@ -10,7 +10,7 @@
 
 ---
 
-### Task 1: Add Failing Tests
+## Task 1: Add Failing Tests
 
 **Files:**
 - Modify: `tests/project-structure.test.mjs`
@@ -30,7 +30,7 @@ Run: `pnpm test`
 
 Expected: fail because `src/content/tools/everyday-shopping-checklist.json` is missing.
 
-### Task 2: Add Tool Content
+## Task 2: Add Tool Content
 
 **Files:**
 - Create: `src/content/tools/everyday-shopping-checklist.json`
@@ -43,7 +43,7 @@ Create a published tool with stable `id`, `slug`, `title`, `description`, `lastC
 
 Include sections for store choice, first-week essentials, payments and points, labels and safety, and budget routines.
 
-### Task 3: Update Public Docs
+## Task 3: Update Public Docs
 
 **Files:**
 - Modify: `README.md`
@@ -62,7 +62,7 @@ Mention the everyday shopping checklist wherever current published tool lists ar
 
 Add a roadmap entry describing the static tool and its non-goals.
 
-### Task 4: Validate and Ship
+## Task 4: Validate and Ship
 
 **Files:**
 - No additional file edits expected.
