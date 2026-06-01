@@ -1,0 +1,251 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import Breadcrumbs from "@/components/navigation/Breadcrumbs.astro";
+import { formatDate } from "@/lib/content";
+import { getArticleCategorySummaries } from "@/lib/content/article-categories";
+import { localizePath, sectionCopy, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const site = Astro.site ?? new URL(Astro.url.origin);
+const copy = {
+  "zh-tw": {
+    title: "網站內容目錄",
+    description: "TachiSuke 的公開內容總覽：文章、分類、手機方案、地區指南、店家、工具與重要說明頁。",
+    intro: "從這裡快速找到目前已公開的日本生活決策內容。這頁只列出公開資訊，不列登入、收藏與投稿紀錄等 placeholder 頁面。",
+    core: "主要入口",
+    categories: "文章分類",
+    articles: "文章",
+    mobile: "手機方案",
+    areas: "地區指南",
+    places: "店家與生活場所",
+    tools: "生活工具",
+    trust: "說明與回報",
+    updated: "更新",
+    feed: "RSS 訂閱",
+    search: "站內搜尋",
+    empty: "目前尚無公開內容。"
+  },
+  en: {
+    title: "Site Map",
+    description: "A public content directory for TachiSuke: articles, categories, mobile plans, area guides, places, tools, and trust pages.",
+    intro: "Use this page to browse currently published Japan life decision content. It does not list login, favorites, or submission-history placeholder pages.",
+    core: "Main Entry Points",
+    categories: "Article Categories",
+    articles: "Articles",
+    mobile: "Mobile Plans",
+    areas: "Area Guides",
+    places: "Places",
+    tools: "Life Tools",
+    trust: "Trust and Feedback",
+    updated: "Updated",
+    feed: "RSS feed",
+    search: "Site search",
+    empty: "No public content yet."
+  },
+  ja: {
+    title: "サイトマップ",
+    description: "TachiSuke の公開コンテンツ一覧です。記事、カテゴリ、携帯プラン、エリアガイド、お店、ツール、重要ページをまとめています。",
+    intro: "現在公開されている日本生活の判断に役立つ情報を一覧できます。ログイン、保存、投稿履歴などの placeholder ページは掲載しません。",
+    core: "主な入口",
+    categories: "記事カテゴリ",
+    articles: "記事",
+    mobile: "携帯プラン",
+    areas: "エリアガイド",
+    places: "お店・生活スポット",
+    tools: "生活ツール",
+    trust: "方針・連絡",
+    updated: "更新",
+    feed: "RSS フィード",
+    search: "サイト内検索",
+    empty: "公開コンテンツはまだありません。"
+  },
+  ko: {
+    title: "사이트맵",
+    description: "TachiSuke의 공개 콘텐츠 목록입니다. 글, 카테고리, 휴대폰 요금제, 지역 가이드, 장소, 도구, 주요 안내 페이지를 정리했습니다.",
+    intro: "현재 공개된 일본 생활 결정 콘텐츠를 빠르게 둘러볼 수 있습니다. 로그인, 저장, 추천 내역 같은 placeholder 페이지는 표시하지 않습니다.",
+    core: "주요 입구",
+    categories: "글 카테고리",
+    articles: "글",
+    mobile: "휴대폰 요금제",
+    areas: "지역 가이드",
+    places: "장소",
+    tools: "생활 도구",
+    trust: "정책과 문의",
+    updated: "업데이트",
+    feed: "RSS 피드",
+    search: "사이트 검색",
+    empty: "아직 공개 콘텐츠가 없습니다."
+  }
+}[locale];
+
+const articles = (await getCollection("articles"))
+  .filter((article) => article.data.locale === locale && !article.data.draft)
+  .sort((a, b) => b.data.updatedAt.valueOf() - a.data.updatedAt.valueOf());
+const categories = await getArticleCategorySummaries(locale);
+const mobilePlans = (await getCollection("mobile-plans")).sort((a, b) => a.data.provider.localeCompare(b.data.provider));
+const areas = (await getCollection("areas")).sort((a, b) => a.data.title.localeCompare(b.data.title));
+const places = (await getCollection("places", ({ data }) => data.status === "published")).sort((a, b) => a.data.name.localeCompare(b.data.name));
+const tools = (await getCollection("tools", ({ data }) => data.status === "published")).sort((a, b) => a.data.title[locale].localeCompare(b.data.title[locale]));
+
+const coreLinks = [
+  { href: localizePath(locale, "/articles"), label: sectionCopy[locale].articlesTitle },
+  { href: localizePath(locale, "/mobile"), label: sectionCopy[locale].mobileTitle },
+  { href: localizePath(locale, "/areas"), label: sectionCopy[locale].areasTitle },
+  { href: localizePath(locale, "/places"), label: sectionCopy[locale].placesTitle },
+  { href: localizePath(locale, "/tools"), label: sectionCopy[locale].toolsTitle },
+  { href: localizePath(locale, "/search"), label: copy.search },
+  { href: localizePath(locale, "/submit-place"), label: sectionCopy[locale].submitTitle }
+];
+const trustLinks = [
+  { href: localizePath(locale, "/about"), label: sectionCopy[locale].aboutTitle },
+  { href: localizePath(locale, "/editorial-policy"), label: locale === "zh-tw" ? "編輯政策" : locale === "en" ? "Editorial policy" : locale === "ja" ? "編集方針" : "편집 정책" },
+  { href: localizePath(locale, "/privacy"), label: locale === "zh-tw" ? "隱私權" : locale === "en" ? "Privacy" : locale === "ja" ? "プライバシー" : "개인정보" },
+  { href: localizePath(locale, "/contact"), label: locale === "zh-tw" ? "聯絡與回報" : locale === "en" ? "Contact and corrections" : locale === "ja" ? "お問い合わせ・修正依頼" : "문의와 수정 요청" },
+  { href: localizePath(locale, "/feed.xml"), label: copy.feed }
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: copy.title,
+  description: copy.description,
+  inLanguage: locale,
+  mainEntity: {
+    "@type": "ItemList",
+    numberOfItems: coreLinks.length + categories.length + articles.length + mobilePlans.length + areas.length + places.length + tools.length + trustLinks.length,
+    itemListElement: [
+      ...coreLinks,
+      ...categories.map((category) => ({ href: localizePath(locale, `/articles/category/${category.slug}`), label: category.category })),
+      ...articles.map((article) => ({ href: localizePath(locale, `/articles/${article.data.slug}`), label: article.data.title })),
+      ...mobilePlans.map((plan) => ({ href: localizePath(locale, `/mobile/${plan.data.slug}`), label: `${plan.data.provider} ${plan.data.planName}` })),
+      ...areas.map((area) => ({ href: localizePath(locale, `/areas/${area.data.slug}`), label: area.data.title })),
+      ...places.map((place) => ({ href: localizePath(locale, `/places/${place.data.slug}`), label: place.data.name })),
+      ...tools.map((tool) => ({ href: localizePath(locale, `/tools/${tool.data.slug}`), label: tool.data.title[locale] })),
+      ...trustLinks
+    ].map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.label,
+      url: new URL(item.href, site).href
+    }))
+  }
+};
+---
+
+<BaseLayout locale={locale} title={copy.title} description={copy.description} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs
+        locale={locale}
+        items={[
+          { label: "TachiSuke", href: localizePath(locale) },
+          { label: copy.title }
+        ]}
+      />
+      <h1>{copy.title}</h1>
+      <p>{copy.intro}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2">
+      <article class="notice">
+        <h2>{copy.core}</h2>
+        <ul class="check-list">
+          {coreLinks.map((item) => <li><a class="text-link" href={item.href}>{item.label}</a></li>)}
+        </ul>
+      </article>
+      <article class="notice">
+        <h2>{copy.trust}</h2>
+        <ul class="check-list">
+          {trustLinks.map((item) => <li><a class="text-link" href={item.href}>{item.label}</a></li>)}
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2">
+      <article class="notice">
+        <h2>{copy.categories}</h2>
+        <ul class="check-list">
+          {categories.length ? categories.map((category) => (
+            <li>
+              <a class="text-link" href={localizePath(locale, `/articles/category/${category.slug}`)}>{category.category}</a>
+              <span class="article-meta"> · {category.count}</span>
+            </li>
+          )) : <li>{copy.empty}</li>}
+        </ul>
+      </article>
+      <article class="notice">
+        <h2>{copy.mobile}</h2>
+        <ul class="check-list">
+          {mobilePlans.map((plan) => (
+            <li>
+              <a class="text-link" href={localizePath(locale, `/mobile/${plan.data.slug}`)}>{plan.data.provider} {plan.data.planName}</a>
+              <span class="article-meta"> · {copy.updated} {formatDate(plan.data.lastCheckedAt, locale)}</span>
+            </li>
+          ))}
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2">
+      <article class="notice">
+        <h2>{copy.areas}</h2>
+        <ul class="check-list">
+          {areas.map((area) => (
+            <li>
+              <a class="text-link" href={localizePath(locale, `/areas/${area.data.slug}`)}>{area.data.title}</a>
+              <span class="article-meta"> · {area.data.prefecture}</span>
+            </li>
+          ))}
+        </ul>
+      </article>
+      <article class="notice">
+        <h2>{copy.places}</h2>
+        <ul class="check-list">
+          {places.map((place) => (
+            <li>
+              <a class="text-link" href={localizePath(locale, `/places/${place.data.slug}`)}>{place.data.name}</a>
+              <span class="article-meta"> · {place.data.category}</span>
+            </li>
+          ))}
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2">
+      <article class="notice">
+        <h2>{copy.tools}</h2>
+        <ul class="check-list">
+          {tools.map((tool) => (
+            <li>
+              <a class="text-link" href={localizePath(locale, `/tools/${tool.data.slug}`)}>{tool.data.title[locale]}</a>
+            </li>
+          ))}
+        </ul>
+      </article>
+      <article class="notice">
+        <h2>{copy.articles}</h2>
+        <ul class="check-list">
+          {articles.map((article) => (
+            <li>
+              <a class="text-link" href={localizePath(locale, `/articles/${article.data.slug}`)}>{article.data.title}</a>
+              <span class="article-meta"> · {formatDate(article.data.updatedAt, locale)}</span>
+            </li>
+          ))}
+        </ul>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

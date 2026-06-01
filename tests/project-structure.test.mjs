@@ -104,6 +104,7 @@ const requiredFiles = [
   "src/components/pages/ContactThanksPage.astro",
   "src/components/pages/PolicyPage.astro",
   "src/components/pages/SearchPage.astro",
+  "src/components/pages/SiteMapPage.astro",
   "src/components/mobile/MobilePlanCard.astro",
   "src/components/favorites/FavoriteButtonPlaceholder.astro",
   "src/components/auth/LoginPrompt.astro",
@@ -165,6 +166,7 @@ const localePages = [
   "editorial-policy.astro",
   "feed.xml.ts",
   "search.astro",
+  "site-map.astro",
   "search-index.json.ts",
   "account/login.astro",
   "account/favorites.astro",
@@ -424,12 +426,14 @@ describe("TachiSuke project scaffold", () => {
     assert.match(footer, /localizePath\(locale,\s*"\/privacy"\)/, "Footer should link to privacy pages");
     assert.match(footer, /localizePath\(locale,\s*"\/editorial-policy"\)/, "Footer should link to editorial policy pages");
     assert.match(footer, /localizePath\(locale,\s*"\/contact"\)/, "Footer should link to contact/corrections pages");
+    assert.match(footer, /localizePath\(locale,\s*"\/site-map"\)/, "Footer should link to human-readable site map pages");
 
     const sitemap = readFileSync(join(root, "src/pages/sitemap.xml.ts"), "utf8");
     assert.match(sitemap, /"\/privacy"/, "sitemap should include privacy pages");
     assert.match(sitemap, /"\/editorial-policy"/, "sitemap should include editorial policy pages");
     assert.match(sitemap, /"\/contact"/, "sitemap should include contact/corrections pages");
     assert.match(sitemap, /"\/contact\/thanks"/, "sitemap should include contact thanks pages");
+    assert.match(sitemap, /"\/site-map"/, "sitemap should include human-readable site map pages");
     assert.match(sitemap, /path:\s*"\/feed\.xml"/, "sitemap should include the global RSS feed");
     assert.match(sitemap, /newestArticleUpdatedAt/, "sitemap should compute a global feed lastmod from public articles");
     assert.match(sitemap, /newestArticleUpdatedAtByLocale/, "sitemap should compute locale feed lastmod from same-locale public articles");
@@ -437,6 +441,27 @@ describe("TachiSuke project scaffold", () => {
     const policyPage = readFileSync(join(root, "src/components/pages/PolicyPage.astro"), "utf8");
     assert.match(policyPage, /kind:\s*"privacy"\s*\|\s*"editorial-policy"/, "PolicyPage should support both trust page types");
     assert.match(policyPage, /submit-place/, "PolicyPage should explain submission-related privacy or moderation");
+  });
+
+  it("includes a multilingual human-readable site map content directory", () => {
+    const siteMapPage = readFileSync(join(root, "src/components/pages/SiteMapPage.astro"), "utf8");
+    assert.match(siteMapPage, /getCollection\("articles"[\s\S]*!article\.data\.draft/, "site map should list only non-draft articles");
+    assert.match(siteMapPage, /getCollection\("places"[\s\S]*status === "published"/, "site map should list only published places");
+    assert.match(siteMapPage, /getCollection\("tools"[\s\S]*status === "published"/, "site map should list only published tools");
+    assert.match(siteMapPage, /getArticleCategorySummaries/, "site map should link article category pages");
+    assert.match(siteMapPage, /localizePath\(locale,\s*"\/articles"\)/, "site map should link the articles index");
+    assert.match(siteMapPage, /localizePath\(locale,\s*"\/mobile"\)/, "site map should link the mobile index");
+    assert.match(siteMapPage, /localizePath\(locale,\s*"\/areas"\)/, "site map should link the areas index");
+    assert.match(siteMapPage, /localizePath\(locale,\s*"\/places"\)/, "site map should link the places index");
+    assert.match(siteMapPage, /localizePath\(locale,\s*"\/tools"\)/, "site map should link the tools index");
+    assert.match(siteMapPage, /localizePath\(locale,\s*"\/contact"\)/, "site map should link the contact/corrections page");
+    assert.doesNotMatch(siteMapPage, /account\/login|account\/favorites|account\/submissions/, "site map should not expose account placeholder routes");
+
+    const pageSpec = readFileSync(join(root, "docs/PAGE_SPEC.md"), "utf8");
+    assert.match(pageSpec, /\/\[locale\]\/site-map/, "PAGE_SPEC should document the site-map route");
+
+    const implementationStatus = readFileSync(join(root, "docs/IMPLEMENTATION_STATUS.md"), "utf8");
+    assert.match(implementationStatus, /site map/i, "IMPLEMENTATION_STATUS should mention the human-readable site map");
   });
 
   it("configures contact/corrections as a provider-agnostic static form", () => {

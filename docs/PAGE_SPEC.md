@@ -42,7 +42,7 @@ All public pages should:
 
 **Rendering mode:** Static Astro endpoint.
 
-**SEO requirements:** Include public locale roots, section pages, global and locale RSS feeds, non-draft article detail pages, published place detail pages, area detail pages, mobile plan detail pages, published tool detail pages, submit-place thanks pages, and contact/corrections pages. Exclude account placeholder routes, draft articles, non-published places, non-published tools, search pages, and search index JSON endpoints. Feed entries should include `lastmod` from the newest matching public article. Shared locale entries should include conservative `xhtml:link` hreflang alternates, and article alternates should only point to non-draft generated translations sharing the same `translationKey`.
+**SEO requirements:** Include public locale roots, section pages, human-readable site map pages, global and locale RSS feeds, non-draft article detail pages, published place detail pages, area detail pages, mobile plan detail pages, published tool detail pages, submit-place thanks pages, and contact/corrections pages. Exclude account placeholder routes, draft articles, non-published places, non-published tools, search pages, and search index JSON endpoints. Feed entries should include `lastmod` from the newest matching public article. Shared locale entries should include conservative `xhtml:link` hreflang alternates, and article alternates should only point to non-draft generated translations sharing the same `translationKey`.
 
 **Current status:** Implemented.
 
@@ -191,6 +191,22 @@ All public pages should:
 **Current status:** Implemented for all four locales in Phase 1S.
 
 **Future notes:** If index size grows substantially, consider splitting by type or moving to a dedicated search service in a separately scoped phase.
+
+## `/[locale]/site-map`
+
+**Purpose:** Human-readable public content directory for one locale.
+
+**User goal:** Quickly browse TachiSuke's public sections, article categories, articles, mobile plans, area guides, places, tools, trust pages, and RSS feed without using search.
+
+**Data source:** `articles`, `places`, `mobile-plans`, `areas`, and `tools` content collections plus shared locale route metadata. Articles are filtered to matching locale and `draft = false`. Places and tools are filtered to public/published status.
+
+**Rendering mode:** Static Astro pages through `SiteMapPage`.
+
+**SEO requirements:** Use localized title/description, canonical URL, Open Graph metadata, locale-aware `html lang`, visible breadcrumbs, conservative `WebPage`/`ItemList` JSON-LD, and locale alternates. Include in `sitemap.xml`. Do not link account placeholder pages.
+
+**Current status:** Implemented for all four locales in Phase 1BB and linked from the footer.
+
+**Future notes:** Add pagination or split by content type only when the public content count becomes too large for one readable page.
 
 ## `/404.html`
 

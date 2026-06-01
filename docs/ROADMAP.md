@@ -1016,6 +1016,27 @@ Rules:
 - Remind readers that prices, payment methods, coupons, product availability, and opening hours vary by branch and time.
 - Do not add affiliate links, product scraping, carts, saved shopping lists, or backend storage in Phase 1.
 
+## Phase 1BB: Human-Readable Site Map
+
+Status: implemented.
+
+Goal:
+
+Make TachiSuke easier to browse and audit by adding a public content directory for each locale, separate from the XML sitemap.
+
+Implemented:
+
+- Added `/[locale]/site-map` for `zh-tw`, `en`, `ja`, and `ko`.
+- Generated each page from public content collections: non-draft same-locale articles, article categories, mobile plans, area guides, published places, published tools, trust pages, and RSS links.
+- Linked site map pages from the footer.
+- Added site map pages to `sitemap.xml` with locale alternates.
+- Added source-level and SEO-output tests for route files, footer links, public-only filtering, docs, and sitemap output.
+
+Rules:
+
+- Do not link account placeholder pages from the public site map.
+- Keep the page static and collection-driven; do not add crawling, backend search, analytics, or database-backed discovery in Phase 1.
+
 ## Phase 1AI: Article Category Label Polish
 
 Status: implemented.

@@ -10,7 +10,7 @@ Repo name: `tachi-suke`
 
 The product helps foreign residents make practical daily-life decisions in Japan. It focuses on topics such as mobile plans, renting, transportation, food, shopping, administrative procedures, practical Japanese, work, and resident-friendly places.
 
-The current MVP is an Astro static site with locale-prefixed routing, content collections, article detail pages, place detail pages, mobile plan detail pages, area detail pages, static tool detail pages, static public-content search, global and locale-specific RSS feeds, placeholder account pages, placeholder favorite UI, a submit-place form, and a contact/corrections form. Both forms can post to provider-agnostic external endpoints when configured.
+The current MVP is an Astro static site with locale-prefixed routing, content collections, article detail pages, place detail pages, mobile plan detail pages, area detail pages, static tool detail pages, human-readable site map pages, static public-content search, global and locale-specific RSS feeds, placeholder account pages, placeholder favorite UI, a submit-place form, and a contact/corrections form. Both forms can post to provider-agnostic external endpoints when configured.
 
 ## 2. Brand Concept
 
@@ -152,6 +152,7 @@ The MVP includes:
 - Published tools: `moving-to-japan-checklist`, `japan-rent-initial-cost-checklist`, `ward-office-moving-in-checklist`, `commuter-pass-ic-card-checklist`, `apartment-viewing-japanese-phrases`, `moving-out-checklist`
 - Static search pages at `/[locale]/search`, including shareable `?q=` query behavior
 - Static search index JSON endpoints at `/[locale]/search-index.json`
+- Human-readable site map pages at `/[locale]/site-map` that list public content, section pages, article categories, tools, trust pages, and RSS links
 - Submit-place form with preview mode, external endpoint support, hidden moderation metadata, and thanks pages
 - Contact/corrections form with preview mode, external endpoint support, hidden provider metadata, honeypot, and thanks pages
 - About pages
@@ -237,6 +238,7 @@ Content and section pages:
 - `/[locale]/about`
 - `/[locale]/privacy`
 - `/[locale]/editorial-policy`
+- `/[locale]/site-map`
 - `/[locale]/feed.xml`
 
 Account placeholder pages:
@@ -367,6 +369,7 @@ Engineering metrics:
 - `sitemap.xml` includes public article category landing pages.
 - `sitemap.xml` includes public privacy and editorial policy pages.
 - `sitemap.xml` includes public contact/corrections pages.
+- `sitemap.xml` includes human-readable site map pages.
 - `sitemap.xml` includes the global RSS feed and locale RSS feeds with article-derived `lastmod`.
 - `sitemap.xml` excludes noindex search pages and search index JSON endpoints.
 - `robots.txt` references the sitemap and disallows placeholder account routes.
