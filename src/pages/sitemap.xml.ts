@@ -132,6 +132,7 @@ export const GET: APIRoute = async ({ site }) => {
       newestToolLastCheckedAt
     );
     const localeIndexLastmodByPath = new Map<string, Date | undefined>([
+      ["/", siteMapLastmod],
       ["/articles", newestLocaleArticleUpdatedAt],
       ["/areas", newestAreaLastCheckedAt],
       ["/places", newestPlaceUpdatedAt],

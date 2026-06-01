@@ -1114,6 +1114,25 @@ Rules:
 - Keep article metadata derived from existing frontmatter.
 - Do not add social SDKs, comments, analytics, tracking, or category taxonomy changes in this phase.
 
+## Phase 1BG: Homepage Sitemap Lastmod
+
+Status: implemented.
+
+Goal:
+
+Keep XML sitemap freshness signals aligned for locale homepages, which surface latest public content and main section entry points.
+
+Implemented:
+
+- Added content-derived `lastmod` values to `/zh-tw/`, `/en/`, `/ja/`, and `/ko/` sitemap entries.
+- Reused the existing per-locale public content freshness calculation from the sitemap generator.
+- Added build-output SEO tests.
+
+Rules:
+
+- Keep homepage freshness derived from local public content metadata.
+- Do not add crawling, analytics, backend state, or homepage UI changes in this phase.
+
 ## Phase 1AI: Article Category Label Polish
 
 Status: implemented.

@@ -70,6 +70,7 @@ Implemented:
 - Generated global `feed.xml` for public articles, included in the sitemap with content-aware `lastmod`
 - Generated locale RSS feeds at `/[locale]/feed.xml` for same-locale public articles, included in the sitemap with same-locale `lastmod`
 - XML sitemap section and site-map entries use content-derived `lastmod` dates for public aggregate pages
+- Locale homepage sitemap entries use content-derived `lastmod` dates
 - Default Open Graph image and Twitter summary metadata
 - Open Graph locale metadata for multilingual sharing
 - Article Open Graph metadata for published/modified dates, sections, and tags
