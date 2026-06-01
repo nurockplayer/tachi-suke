@@ -46,4 +46,4 @@ draft: false
 
 ## 次の行動
 
-まず「毎月払える家賃」と「一度に払える初期費用」の上限を分けて書き出します。そのうえで [賃貸初期費用チェックリスト](/ja/tools/japan-rent-initial-cost-checklist) と [エリアガイド](/ja/areas) を照らし合わせて、無理のない候補を絞り込みましょう。
+まず「毎月払える家賃」と「一度に払える初期費用」の上限を分けて書き出します。そのうえで [賃貸初期費用チェックリスト](/ja/tools/japan-rent-initial-cost-checklist)、[内見で使う日本語フレーズ](/ja/tools/apartment-viewing-japanese-phrases)、[エリアガイド](/ja/areas) を照らし合わせて、無理のない候補を絞り込みましょう。

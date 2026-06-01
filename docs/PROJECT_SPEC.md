@@ -149,7 +149,7 @@ The MVP includes:
 - Mobile plan detail pages generated from JSON content with official URLs, `lastCheckedAt`, source notes, caveats, pros, cons, and recommended fit
 - Tools index pages with published tool cards
 - Tool detail pages generated from JSON content with localized checklist sections, source notes, optional official source links, caveats, and `lastCheckedAt`
-- Published tools: `moving-to-japan-checklist`, `japan-rent-initial-cost-checklist`, `ward-office-moving-in-checklist`, `commuter-pass-ic-card-checklist`
+- Published tools: `moving-to-japan-checklist`, `japan-rent-initial-cost-checklist`, `ward-office-moving-in-checklist`, `commuter-pass-ic-card-checklist`, `apartment-viewing-japanese-phrases`
 - Static search pages at `/[locale]/search`, including shareable `?q=` query behavior
 - Static search index JSON endpoints at `/[locale]/search-index.json`
 - Submit-place form with preview mode, external endpoint support, hidden moderation metadata, and thanks pages

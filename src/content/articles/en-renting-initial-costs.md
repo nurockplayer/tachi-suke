@@ -46,4 +46,4 @@ If cash is tight, prioritize listings with no key money, clear move-in estimates
 
 ## Next step
 
-Write down two numbers: the monthly rent you can sustain and the maximum upfront amount you can pay without draining your emergency cash. Then use the [rent initial cost checklist](/en/tools/japan-rent-initial-cost-checklist) and compare it with your preferred [area guides](/en/areas).
+Write down two numbers: the monthly rent you can sustain and the maximum upfront amount you can pay without draining your emergency cash. Then use the [rent initial cost checklist](/en/tools/japan-rent-initial-cost-checklist), prepare [apartment viewing Japanese phrases](/en/tools/apartment-viewing-japanese-phrases), and compare the room with your preferred [area guides](/en/areas).
