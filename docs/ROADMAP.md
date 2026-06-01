@@ -1037,6 +1037,25 @@ Rules:
 - Do not link account placeholder pages from the public site map.
 - Keep the page static and collection-driven; do not add crawling, backend search, analytics, or database-backed discovery in Phase 1.
 
+## Phase 1BC: Sitemap Section Lastmod
+
+Status: implemented.
+
+Goal:
+
+Improve machine-readable freshness signals for public aggregate pages without adding runtime crawling or backend state.
+
+Implemented:
+
+- Added content-derived `lastmod` values to `/[locale]/articles`, `/[locale]/areas`, `/[locale]/places`, `/[locale]/mobile`, `/[locale]/tools`, and `/[locale]/site-map` sitemap entries.
+- Derived section dates from public content collections: non-draft same-locale articles, area `lastCheckedAt`, published place `updatedAt`, mobile plan `lastCheckedAt`, and published tool `lastCheckedAt`.
+- Added build-output SEO tests for section and site-map `lastmod` coverage.
+
+Rules:
+
+- Keep freshness signals derived from local content metadata only.
+- Do not add external crawling, network URL checks, analytics, or database-backed freshness tracking in Phase 1.
+
 ## Phase 1AI: Article Category Label Polish
 
 Status: implemented.

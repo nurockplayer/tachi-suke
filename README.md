@@ -69,6 +69,7 @@ Implemented:
 - Generated `opensearch.xml` browser search discovery file linked from every public page
 - Generated global `feed.xml` for public articles, included in the sitemap with content-aware `lastmod`
 - Generated locale RSS feeds at `/[locale]/feed.xml` for same-locale public articles, included in the sitemap with same-locale `lastmod`
+- XML sitemap section and site-map entries use content-derived `lastmod` dates for public aggregate pages
 - Default Open Graph image and Twitter summary metadata
 - Browser/PWA metadata for theme color, app name, Apple app title, and phone number format detection
 - JSON-LD structured data for site identity, site search, articles, places, mobile plan details, area details, tool details, and breadcrumbs

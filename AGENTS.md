@@ -175,6 +175,11 @@ Phase 1BB adds public content directory depth:
 - Pages list public content only: non-draft articles, article categories, mobile plans, area guides, published places, published tools, trust pages, and RSS links.
 - Do not link account placeholder routes from public site map pages.
 
+Phase 1BC adds sitemap freshness depth:
+
+- Public aggregate sitemap entries should have content-derived `lastmod` values for `/[locale]/articles`, `/[locale]/areas`, `/[locale]/places`, `/[locale]/mobile`, `/[locale]/tools`, and `/[locale]/site-map`.
+- Derive freshness from local content metadata only; do not add external crawling or backend freshness tracking in Phase 1.
+
 Phase 1C adds submit-place workflow MVP:
 
 - `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` controls form activation.
