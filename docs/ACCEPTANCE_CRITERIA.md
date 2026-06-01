@@ -32,10 +32,10 @@ This document defines the acceptance criteria for the current static-first MVP.
 - `pnpm check:seo` must pass after `pnpm build` when verifying generated SEO output.
 - `pnpm check:deploy` must pass after building with the real `SITE_URL` before manual Cloudflare Pages deployment.
 - CI must run the same verification chain for pull requests and pushes to `main`.
-- `pnpm check:content` should verify content IDs, slugs, dates, review dates, and stored URL fields without fetching the network.
+- `pnpm check:content` should verify content IDs, slugs, dates, review dates, stored URL fields, and Markdown/MDX root-relative internal links without fetching the network.
 - Structure tests should verify required files, required locale routes, pnpm-only lockfile policy, content collections, `SITE_URL` fallback strategy, and finalized Place enum values.
 - Phase 1B/1B.5 tests should verify minimum content depth for articles, mobile plans, and area guides.
-- Phase 1B/1B.5/1H tests should scan Markdown/MDX article links that point to internal absolute paths and verify they match known static routes or generated article/place/mobile/area/tool detail routes.
+- Source content tests should scan Markdown/MDX article links that point to internal absolute paths and verify they match known public static routes or generated article/category/place/mobile/area/tool detail routes.
 - `pnpm check:links` should scan built `dist/**/*.html` for root-relative `href="/..."` links and verify the matching file exists in `dist/`.
 - `pnpm check:seo` should verify built `sitemap.xml`, `robots.txt`, `site.webmanifest`, `opensearch.xml`, global RSS feed, locale RSS feeds, Cloudflare `_headers`, and Cloudflare `_redirects`.
 - `pnpm check:deploy` should require an HTTPS `SITE_URL`, reject the example fallback domain, scan deployable `dist` text assets, and fail if `https://tachi-suke.example.com` remains in deployment output.

@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1BZ language switcher accessibility polish. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
+This document records the current MVP state after Phase 1CA source content internal-link health checks. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
 
 ## Completed
 
@@ -97,8 +97,8 @@ This document records the current MVP state after Phase 1BZ language switcher ac
 - Baseline keyboard accessibility hooks: skip link, stable main content target, active primary nav state, and visible focus styles.
 - Dark theme surface tokens for global layout, hero overlays, cards, forms, search, article reading surfaces, collapsed global controls, and placeholders.
 - Structure tests in `tests/project-structure.test.mjs`.
-- Source content health checks in `tests/content-health.test.mjs`, run with `pnpm check:content`.
-- Conservative article internal-link checks for locale-prefixed static/generated routes.
+- Source content health checks in `tests/content-health.test.mjs`, run with `pnpm check:content`, including article metadata, stored URL fields, and Markdown/MDX root-relative internal links.
+- Conservative article internal-link checks for locale-prefixed static/generated public routes.
 - Static HTML internal link crawler in `tests/static-html-links.test.mjs`, run after `pnpm build` with `pnpm check:links`.
 - Static SEO output check in `tests/seo-output.test.mjs`, run after `pnpm build` with `pnpm check:seo`.
 - Deployment URL guard in `tests/deploy-output.test.mjs`, run after `SITE_URL=<production-url> pnpm build` with `SITE_URL=<production-url> pnpm check:deploy`.
@@ -160,7 +160,7 @@ These are intentionally present but not functional:
 - `hreflang` is conservative, but full translation coverage is not complete.
 - Sitemap article alternates are limited to non-draft articles sharing a `translationKey`; untranslated articles do not get invented alternates.
 - `pnpm test` scans Markdown article links and generated/static source routes.
-- `pnpm check:content` checks source content metadata and stored URL fields, but it does not fetch external URLs or validate live business/provider data.
+- `pnpm check:content` checks source content metadata, stored URL fields, and Markdown/MDX root-relative internal links, but it does not fetch external URLs, validate anchors, or validate live business/provider data.
 - `pnpm check:links` scans built static HTML root-relative links in `dist/`, but it does not validate external links, anchors, JavaScript behavior, form submission behavior, or visual rendering.
 - RSS feeds are static and article-only. They do not include category feeds, pagination, places, tools, mobile plans, or area guides.
 - Static search is substring-based client-side filtering with shareable `?q=` URLs. It does not provide typo tolerance, semantic search, pagination, analytics, or personalization.

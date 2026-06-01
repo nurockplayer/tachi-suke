@@ -246,6 +246,26 @@ Rules:
 - Keep the closed language control understandable to users who cannot read the current page language.
 - Do not add an icon dependency for this control.
 
+## Phase 1CA: Content Internal Link Health
+
+Status: implemented.
+
+Goal:
+
+Catch broken source-content internal links before static build and deployment.
+
+Implemented:
+
+- `pnpm check:content` now scans article Markdown/MDX body content for root-relative internal links.
+- The route set includes static locale pages, article category pages, non-draft article detail pages, generated mobile/area detail pages, and published place/tool detail pages.
+- The check strips frontmatter before scanning and stays network-free.
+
+Rules:
+
+- Keep the check conservative and dependency-free.
+- Do not fetch external URLs or validate anchors in this phase.
+- Respect public visibility rules: drafts and non-published places/tools are not public detail route targets.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.
