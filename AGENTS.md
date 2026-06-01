@@ -20,6 +20,8 @@ rtk gh pr view
 
 Do not commit, push, open PRs, merge, rebase, switch branches, or write public GitHub comments unless the user explicitly asks or approves it.
 
+An active autonomous goal prompt that grants commit, push, PR, and merge authority counts as explicit approval only for narrow PR cycles whose validation, review-feedback, clean-scope, and merge safety gates pass.
+
 Never use destructive git commands such as `git reset --hard` or `git checkout --` unless the user explicitly requests that exact operation.
 
 ## AWP-lite
