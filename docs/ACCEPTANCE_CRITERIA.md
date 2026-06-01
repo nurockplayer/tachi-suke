@@ -102,6 +102,8 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Related article links must not point to the current article, drafts, or other locales.
 - Article detail pages should render a static table of contents from Markdown/MDX H2/H3 headings when enough headings exist.
 - Article TOC links must point to generated same-page heading anchors.
+- Article detail pages should render published and updated dates with semantic `<time datetime>` elements.
+- Article detail pages should show localized freshness/trust copy reminding readers that life information can change and should be verified before acting.
 
 ## Place Criteria
 

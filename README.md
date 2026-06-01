@@ -74,6 +74,7 @@ Implemented:
 - Default Open Graph image and Twitter summary metadata
 - Open Graph locale metadata for multilingual sharing
 - Article Open Graph metadata for published/modified dates, sections, and tags
+- Article detail pages with semantic published/updated dates and localized freshness/trust notices
 - Browser/PWA metadata for theme color, app name, Apple app title, and phone number format detection
 - System/light/dark theme support with a globe-icon language control, separate collapsed theme control, persisted browser preference, and no-JavaScript system dark theme fallback
 - JSON-LD structured data for site identity, site search, locale homepages, public section indexes, article indexes, articles, places, mobile plan details, area details, tool details, trust/form pages, and breadcrumbs

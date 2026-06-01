@@ -44,6 +44,28 @@ const updatedLabel = {
   ja: "更新",
   ko: "업데이트"
 }[locale];
+const trustCopy = {
+  "zh-tw": {
+    title: "資訊可能會變動",
+    body: "本文是生活決策用的整理。手機方案、行政手續、租屋與工作規則可能更新，申請或辦理前請再確認官方網站、窗口或店家最新資訊。",
+    ariaLabel: "文章更新與查證提醒"
+  },
+  en: {
+    title: "Information can change",
+    body: "This guide is editorial decision support. Mobile plans, procedures, housing terms, and work rules may change, so confirm the latest official, counter, or store information before applying or acting.",
+    ariaLabel: "Article freshness and verification notice"
+  },
+  ja: {
+    title: "情報は変わることがあります",
+    body: "この記事は生活判断のための編集ガイドです。携帯プラン、行政手続き、住まい、仕事に関する条件は変わることがあるため、申し込みや手続きの前に公式サイト、窓口、店舗の最新情報を確認してください。",
+    ariaLabel: "記事の更新と確認に関する注意"
+  },
+  ko: {
+    title: "정보는 바뀔 수 있습니다",
+    body: "이 글은 생활 결정을 돕기 위한 편집 가이드입니다. 휴대폰 요금제, 행정 절차, 주거 조건, 근무 관련 규칙은 바뀔 수 있으니 신청하거나 진행하기 전에 공식 사이트, 창구, 매장의 최신 정보를 확인하세요.",
+    ariaLabel: "글 업데이트 및 확인 안내"
+  }
+}[locale];
 const articlesLabel = {
   "zh-tw": "文章",
   en: "Articles",
@@ -156,13 +178,23 @@ const articleOpenGraph = {
           { label: title }
         ]}
       />
-      <p class="article-meta"><a class="article-meta-link" href={categoryHref}>{category}</a> · {formatDate(publishedAt, locale)} · {updatedLabel} {formatDate(updatedAt, locale)}</p>
+      <p class="article-meta">
+        <a class="article-meta-link" href={categoryHref}>{category}</a>
+        {" · "}
+        <time datetime={publishedAt.toISOString()}>{formatDate(publishedAt, locale)}</time>
+        {" · "}
+        {updatedLabel} <time datetime={updatedAt.toISOString()}>{formatDate(updatedAt, locale)}</time>
+      </p>
       <h1>{title}</h1>
       <p>{description}</p>
       <ul class="tag-list" aria-label="Tags">
         {tags.map((tag) => <li>{tag}</li>)}
       </ul>
     </header>
+    <aside class="article-trust-notice" data-article-trust-notice aria-label={trustCopy.ariaLabel}>
+      <strong>{trustCopy.title}</strong>
+      <p>{trustCopy.body}</p>
+    </aside>
     {tocHeadings.length >= 2 && (
       <nav class="article-toc" aria-labelledby="article-toc-title">
         <div>

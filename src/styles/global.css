@@ -775,6 +775,24 @@ details[open].control-disclosure .control-summary::after {
   margin-bottom: 32px;
 }
 
+.article-trust-notice {
+  border-left: 4px solid var(--color-green);
+  background: var(--color-mist);
+  color: var(--color-ink-soft);
+  display: grid;
+  gap: 6px;
+  margin: 0 0 28px;
+  padding: 14px 16px;
+}
+
+.article-trust-notice strong {
+  color: var(--color-ink);
+}
+
+.article-trust-notice p {
+  margin: 0;
+}
+
 .article-toc {
   background: var(--color-mist);
   border: 1px solid var(--color-border);
