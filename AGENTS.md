@@ -200,6 +200,11 @@ Phase 1BG adds homepage sitemap freshness:
 - Locale homepage sitemap entries should have content-derived `lastmod` values.
 - Reuse local public content metadata; do not add crawling, analytics, or backend freshness tracking.
 
+Phase 1BH adds homepage structured data:
+
+- Locale homepages should emit conservative `WebPage` and start-here `ItemList` JSON-LD from existing homepage copy and links.
+- Do not invent ratings, pricing, review counts, or external claims in homepage structured data.
+
 Phase 1C adds submit-place workflow MVP:
 
 - `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` controls form activation.

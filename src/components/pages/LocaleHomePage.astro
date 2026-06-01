@@ -6,7 +6,7 @@ import PlaceCard from "@/components/places/PlaceCard.astro";
 import MobilePlanCard from "@/components/mobile/MobilePlanCard.astro";
 import FavoriteButtonPlaceholder from "@/components/favorites/FavoriteButtonPlaceholder.astro";
 import { categoryEntries, formatDate } from "@/lib/content";
-import { homeCopy, localizePath, type Locale } from "@/lib/i18n";
+import { homeCopy, htmlLangByLocale, localizePath, type Locale } from "@/lib/i18n";
 
 interface Props {
   locale: Locale;
@@ -124,9 +124,42 @@ const startLinks = [
     }
   }
 ];
+const site = Astro.site ?? new URL(Astro.url.origin);
+const homepagePath = localizePath(locale, "/");
+const homepageUrl = new URL(homepagePath, site).href;
+const startHereItemListId = new URL(`${homepagePath}#start-here`, site).href;
+const homeJsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": new URL(`${homepagePath}#webpage`, site).href,
+    url: homepageUrl,
+    name: `TachiSuke - ${copy.title}`,
+    description: copy.description,
+    inLanguage: htmlLangByLocale[locale],
+    isPartOf: { "@id": new URL("/#website", site).href },
+    publisher: { "@id": new URL("/#organization", site).href },
+    mainEntity: { "@id": startHereItemListId }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": startHereItemListId,
+    name: startHereTitle,
+    description: copy.decisionNote,
+    inLanguage: htmlLangByLocale[locale],
+    itemListElement: startLinks.map((entry, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: entry.title[locale],
+      description: entry.description[locale],
+      url: new URL(localizePath(locale, entry.href), site).href
+    }))
+  }
+];
 ---
 
-<BaseLayout locale={locale} title="Japan Life Assistant" description={copy.description}>
+<BaseLayout locale={locale} title="Japan Life Assistant" description={copy.description} jsonLd={homeJsonLd}>
   <section class="hero">
     <div class="container hero-grid">
       <div>

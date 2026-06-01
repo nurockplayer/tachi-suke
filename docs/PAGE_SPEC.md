@@ -234,9 +234,9 @@ All public pages should:
 
 **Rendering mode:** Static Astro pages through `LocaleHomePage`.
 
-**SEO requirements:** Locale-aware title and description, canonical URL, Open Graph metadata, `html lang`, and locale alternates.
+**SEO requirements:** Locale-aware title and description, canonical URL, Open Graph metadata, `html lang`, locale alternates, `WebPage` JSON-LD, and start-here `ItemList` JSON-LD backed by existing homepage links.
 
-**Current status:** Implemented for all four locales. Phase 1B adds a start-here section with internal links to articles, mobile, areas, places, submit-place, tools, and favorites placeholder.
+**Current status:** Implemented for all four locales. Phase 1B adds a start-here section with internal links to articles, mobile, areas, places, submit-place, tools, and favorites placeholder. Phase 1BH exposes the localized homepage and start-here links as conservative JSON-LD.
 
 **Future notes:** Add more real content and improve internal links once article, area, and tool inventories grow.
 

@@ -281,6 +281,11 @@ describe("TachiSuke project scaffold", () => {
     assert.match(baseLayout, /name="twitter:image"/, "BaseLayout should include a Twitter image");
     assert.match(baseLayout, /application\/ld\+json/, "BaseLayout should render JSON-LD scripts");
 
+    const localeHomePage = readFileSync(join(root, "src/components/pages/LocaleHomePage.astro"), "utf8");
+    assert.match(localeHomePage, /"@type":\s*"WebPage"/, "LocaleHomePage should emit page-specific WebPage JSON-LD");
+    assert.match(localeHomePage, /"@type":\s*"ItemList"/, "LocaleHomePage should emit start-here ItemList JSON-LD");
+    assert.match(localeHomePage, /jsonLd=\{homeJsonLd\}/, "LocaleHomePage should pass homepage JSON-LD to BaseLayout");
+
     const localeTypes = readFileSync(join(root, "src/types/locale.ts"), "utf8");
     assert.match(localeTypes, /ogLocaleByLocale/, "locale metadata should define Open Graph locale values");
     for (const ogLocale of ["zh_TW", "en_US", "ja_JP", "ko_KR"]) {

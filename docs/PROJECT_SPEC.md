@@ -176,6 +176,7 @@ The MVP includes:
 - Article Open Graph metadata for published/modified dates, sections, and tags
 - Browser/PWA metadata for theme color, app name, Apple app title, and phone number format detection
 - JSON-LD structured data for `Organization`, `WebSite`, `SearchAction`, `Article`, `LocalBusiness`, `Service`, `WebPage`, `ItemList`, and `BreadcrumbList`
+- Locale homepages emit conservative `WebPage` and start-here `ItemList` JSON-LD backed by rendered homepage copy and links
 - Visible breadcrumbs for nested public article, category, place, mobile plan, area, and tool pages
 - Static article table of contents generated from Markdown/MDX headings
 - Cloudflare Pages `_headers` for conservative security and discovery cache defaults
@@ -385,7 +386,7 @@ Engineering metrics:
 - `404.html` is generated, marked `noindex, nofollow`, and excluded from `sitemap.xml`.
 - `feed.xml` includes non-draft public article detail pages across supported locales.
 - `/[locale]/feed.xml` includes only same-locale non-draft public article detail pages.
-- Built representative pages include parseable JSON-LD for site identity, article detail pages, place detail pages, mobile plan detail pages, area detail pages, tool detail pages, and breadcrumbs.
+- Built representative pages include parseable JSON-LD for site identity, locale homepages, article detail pages, place detail pages, mobile plan detail pages, area detail pages, tool detail pages, and breadcrumbs.
 - Site identity JSON-LD includes a conservative `SearchAction` for `/en/search?q={search_term_string}`.
 - Structured data must not claim unavailable ratings, review counts, opening hours, coordinates, offers, or exact addresses.
 - Nested public pages render visible breadcrumbs that link to existing parent routes and mark the current page with `aria-current="page"`.

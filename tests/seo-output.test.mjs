@@ -275,6 +275,33 @@ describe("static SEO output", () => {
     assert.match(html, /rel="search"[^>]+type="application\/opensearchdescription\+xml"[^>]+href="https:\/\/tachi-suke\.example\.com\/opensearch\.xml"/);
   });
 
+  it("renders localized homepage WebPage and ItemList JSON-LD", () => {
+    for (const [locale, relativePath, language] of [
+      ["zh-tw", "zh-tw/index.html", "zh-Hant-TW"],
+      ["en", "en/index.html", "en"],
+      ["ja", "ja/index.html", "ja"],
+      ["ko", "ko/index.html", "ko"]
+    ]) {
+      const objects = jsonLdObjects(readHtml(relativePath));
+      const webPage = objects.find((object) => object["@type"] === "WebPage");
+      const itemList = objects.find((object) => object["@type"] === "ItemList");
+
+      assert.ok(webPage, `${locale} homepage should include WebPage JSON-LD`);
+      assert.equal(webPage?.inLanguage, language, `${locale} homepage WebPage should use the HTML language`);
+      assert.equal(webPage?.url, `https://tachi-suke.example.com/${locale}/`, `${locale} homepage WebPage should use its canonical URL`);
+      assert.equal(webPage?.isPartOf?.["@id"], "https://tachi-suke.example.com/#website");
+      assert.equal(webPage?.publisher?.["@id"], "https://tachi-suke.example.com/#organization");
+
+      assert.ok(itemList, `${locale} homepage should include ItemList JSON-LD`);
+      assert.equal(itemList?.inLanguage, language, `${locale} homepage ItemList should use the HTML language`);
+      assert.ok(Array.isArray(itemList?.itemListElement), `${locale} homepage ItemList should contain entries`);
+      assert.ok(itemList.itemListElement.length >= 6, `${locale} homepage ItemList should describe the start-here links`);
+      assert.equal(itemList.itemListElement[0]?.["@type"], "ListItem");
+      assert.equal(itemList.itemListElement[0]?.position, 1);
+      assert.match(itemList.itemListElement[0]?.url ?? "", new RegExp(`^https:\\/\\/tachi-suke\\.example\\.com\\/${locale}\\/(articles|mobile|areas|places|submit-place|tools)`));
+    }
+  });
+
   it("renders launch trust pages as public static HTML", () => {
     const privacy = readHtml("en/privacy/index.html");
     assert.match(privacy, /Privacy \| TachiSuke/, "privacy page should have an SEO title");
