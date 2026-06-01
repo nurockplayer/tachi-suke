@@ -34,6 +34,23 @@ AWP-lite's preferred routing is GPT-5.5 Extra High as controller with Spark 5.3 
 
 Use AWP-lite only when it reduces risk: cross-module work, Phase 2 auth/database/favorites/submission planning, route or content-model changes, or tasks that explicitly ask for autonomous execution. For small docs, copy, or single-surface edits, proceed normally and keep the final report concise.
 
+### Required Worker Routing Readback
+
+For every non-trivial autonomous work cycle, the controller must explicitly report worker routing before implementation.
+
+The routing readback must include one of:
+
+- `spark_worker_delegated`: Spark 5.3 or an equivalent low-cost worker was used.
+- `controller_fallback_reason=worker_unavailable`: no Spark/equivalent worker was available in the runtime.
+- `controller_fallback_reason=trivial_self_only`: the task is small enough that worker delegation would add overhead.
+- `controller_fallback_reason=high_risk_controller_only`: the task touches auth, database, RLS, secrets, permissions, moderation, or other high-risk areas requiring controller ownership.
+
+For non-trivial repo-wide scans, repetitive edits, docs/content transforms, route/link inventories, and first-pass validation summaries, Spark 5.3 is the preferred worker. If Spark 5.3 is available and the task matches one of those categories, the controller should delegate that portion to Spark before implementation.
+
+The controller remains responsible for final scope control, reviewing worker output, validating changes, PR quality, and merge safety.
+
+Worker unavailability must not block autonomous progress. If the worker is unavailable, record the fallback reason and continue as controller.
+
 ## Project
 
 Repo name: `tachi-suke`  
