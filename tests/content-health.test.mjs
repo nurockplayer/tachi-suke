@@ -127,6 +127,62 @@ function markdownExternalLinks(fullPath) {
   return [...file.matchAll(/\]\((https?:\/\/[^)\s]+)\)/g)].map((match) => match[1]);
 }
 
+function readArticleSourceLinks(fullPath) {
+  const file = readFileSync(fullPath, "utf8");
+  const match = file.match(/^---\n([\s\S]*?)\n---/);
+  assert.ok(match, `${relative(fullPath)} should include frontmatter`);
+
+  const lines = match[1].split("\n");
+  const sourceLinksIndex = lines.findIndex((line) => line === "sourceLinks:");
+  if (sourceLinksIndex === -1) return [];
+
+  const links = [];
+  let current;
+  for (const line of lines.slice(sourceLinksIndex + 1)) {
+    if (/^[A-Za-z0-9_-]+:/.test(line)) break;
+    const item = line.match(/^\s+-\s+label:\s*"?(.*?)"?\s*$/);
+    if (item) {
+      current = { label: item[1] };
+      links.push(current);
+      continue;
+    }
+
+    const property = line.match(/^\s+([A-Za-z0-9_-]+):\s*"?(.*?)"?\s*$/);
+    if (property && current) {
+      const [, key, value] = property;
+      current[key] = value;
+    }
+  }
+
+  return links;
+}
+
+function assertArticleSourceLinks(articles, translationKey, expectedUrlFragments) {
+  const matchingArticles = articles
+    .filter((article) => article.data.translationKey === translationKey)
+    .filter((article) => article.data.draft !== true);
+
+  for (const locale of ["zh-tw", "en", "ja", "ko"]) {
+    const article = matchingArticles.find((entry) => entry.data.locale === locale);
+    assert.ok(article, `${translationKey} should include a public ${locale} article`);
+
+    const sourceLinks = readArticleSourceLinks(article.fullPath);
+    assert.ok(sourceLinks.length >= expectedUrlFragments.length, `${article.path} should include official sourceLinks`);
+
+    for (const [index, link] of sourceLinks.entries()) {
+      assert.ok(link.label, `${article.path} sourceLinks[${index}] should include a label`);
+      assertHttpsUrl(link.url, `${article.path} sourceLinks[${index}].url`);
+    }
+
+    for (const fragment of expectedUrlFragments) {
+      assert.ok(
+        sourceLinks.some((link) => link.url?.includes(fragment)),
+        `${article.path} should include a source link containing ${fragment}`
+      );
+    }
+  }
+}
+
 describe("content health", () => {
   it("keeps article ids, slugs, dates, and external links healthy", () => {
     const articles = listFiles(join(contentRoot, "articles"), [".md", ".mdx"]).map((fullPath) => ({
@@ -191,6 +247,9 @@ describe("content health", () => {
         `japan-work-contract-basics should include a public ${locale} article`
       );
     }
+
+    assertArticleSourceLinks(articles, "japan-emergency-disaster-basics", ["fdma.go.jp", "jma.go.jp"]);
+    assertArticleSourceLinks(articles, "japan-work-contract-basics", ["studyinjapan.go.jp", "check-roudou.mhlw.go.jp"]);
   });
 
   it("keeps JSON collection ids, slugs, review dates, and URL fields healthy", () => {

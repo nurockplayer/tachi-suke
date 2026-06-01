@@ -139,6 +139,7 @@ The MVP includes:
 - Article detail pages generated from Markdown/MDX content
 - Article category landing pages generated from non-draft article frontmatter
 - Related article links generated at build time for article detail pages
+- Structured article `sourceLinks` rendered as localized official confirmation links on high-risk article detail pages
 - Correction prompts on public detail pages that link readers to the contact/corrections route with related page URL prefill
 - Fifty-four public article pages across the supported locales, including transportation commuter pass, residence administration, rental initial-cost, apartment-viewing practical Japanese, ward-office moving-in procedure, apartment moving-out, garbage sorting, family restaurant comparison, everyday shopping, emergency/disaster basics, and work contract basics content
 - Areas index pages with Tokyo area guide cards

@@ -68,6 +68,7 @@ This document records the current MVP state after Phase 1BT article freshness an
 - Mobile, area, place, and tool index `CollectionPage` and public-card `ItemList` JSON-LD.
 - Collection index `BreadcrumbList` JSON-LD for articles, mobile, areas, places, and tools.
 - Article detail `Article` and `BreadcrumbList` JSON-LD.
+- Article detail pages can render structured official confirmation links from article frontmatter; current emergency/disaster and work-contract articles include first official source links.
 - Article category `WebPage` and `BreadcrumbList` JSON-LD.
 - Place detail `LocalBusiness` and `BreadcrumbList` JSON-LD.
 - Mobile plan detail `Service` and `BreadcrumbList` JSON-LD.

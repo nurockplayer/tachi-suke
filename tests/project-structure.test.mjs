@@ -330,12 +330,25 @@ describe("TachiSuke project scaffold", () => {
     assert.match(opensearch, /OpenSearchDescription/, "opensearch.xml should generate an OpenSearchDescription document");
     assert.match(opensearch, /\/en\/search\?q=\{searchTerms\}/, "opensearch.xml should point at the stable English search route");
 
+    const contentConfig = readFileSync(join(root, "src/content.config.ts"), "utf8");
+    assert.match(contentConfig, /sourceLinks:\s*z\.array\(z\.object\(/, "articles schema should define structured sourceLinks");
+    assert.match(contentConfig, /label:\s*z\.string\(\)/, "article sourceLinks should require a label");
+    assert.match(contentConfig, /url:\s*z\.url\(\)/, "article sourceLinks should require a URL");
+    assert.match(contentConfig, /note:\s*z\.string\(\)\.optional\(\)/, "article sourceLinks should support an optional note");
+
+    const articleType = readFileSync(join(root, "src/types/article.ts"), "utf8");
+    assert.match(articleType, /export interface ArticleSourceLink/, "article type should export ArticleSourceLink");
+    assert.match(articleType, /sourceLinks:\s*ArticleSourceLink\[\]/, "Article should include sourceLinks");
+
     const articleLayout = readFileSync(join(root, "src/components/layout/ArticleLayout.astro"), "utf8");
     assert.match(articleLayout, /Breadcrumbs/, "ArticleLayout should render visible breadcrumbs");
     assert.match(articleLayout, /headings\?:/, "ArticleLayout should accept rendered article headings");
     assert.match(articleLayout, /class="article-toc"/, "ArticleLayout should render an article table of contents");
     assert.match(articleLayout, /relatedArticles\?:/, "ArticleLayout should accept related article links");
     assert.match(articleLayout, /class="related-articles"/, "ArticleLayout should render a related articles section");
+    assert.match(articleLayout, /sourceLinks\?:/, "ArticleLayout should accept article source links");
+    assert.match(articleLayout, /data-article-source-links/, "ArticleLayout should render a stable source-links section");
+    assert.match(articleLayout, /Official confirmation links/, "ArticleLayout should include localized source-link copy");
     assert.match(articleLayout, /"@type":\s*"Article"/, "ArticleLayout should define Article JSON-LD");
     assert.match(articleLayout, /"@type":\s*"BreadcrumbList"/, "ArticleLayout should define BreadcrumbList JSON-LD");
     assert.match(articleLayout, /articleOpenGraph=\{/, "ArticleLayout should pass Open Graph article metadata into BaseLayout");
@@ -352,6 +365,7 @@ describe("TachiSuke project scaffold", () => {
     assert.match(articleDetailPage, /headings=\{headings\}/, "ArticleDetailPage should pass headings into ArticleLayout");
     assert.match(articleDetailPage, /const relatedArticles/, "ArticleDetailPage should compute related articles");
     assert.match(articleDetailPage, /relatedArticles=\{relatedArticles\}/, "ArticleDetailPage should pass related articles into ArticleLayout");
+    assert.match(articleDetailPage, /sourceLinks=\{article\.data\.sourceLinks\}/, "ArticleDetailPage should pass source links into ArticleLayout");
 
     const placeDetailPage = readFileSync(join(root, "src/components/pages/PlaceDetailPage.astro"), "utf8");
     assert.match(placeDetailPage, /Breadcrumbs/, "PlaceDetailPage should render visible breadcrumbs");

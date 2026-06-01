@@ -13,6 +13,13 @@ tags:
   - "在留資格"
 publishedAt: "2026-06-01"
 updatedAt: "2026-06-01"
+sourceLinks:
+  - label: "Study in Japan Part-Time Work"
+    url: "https://www.studyinjapan.go.jp/en/work-in-japan/part-time-jobs/"
+    note: "留学生のアルバイト基本情報を確認する公式入口です。"
+  - label: "厚生労働省 外国人向け労働相談"
+    url: "https://www.check-roudou.mhlw.go.jp/soudan/foreigner.html"
+    note: "外国人労働者向けの相談先を探す公式入口です。"
 draft: false
 ---
 

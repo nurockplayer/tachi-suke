@@ -13,6 +13,13 @@ tags:
   - "evacuation"
 publishedAt: "2026-06-01"
 updatedAt: "2026-06-01"
+sourceLinks:
+  - label: "Fire and Disaster Management Agency ambulance service guide"
+    url: "https://www.fdma.go.jp/publication/portal/post1.html"
+    note: "Official starting point for confirming how 119 ambulance service works."
+  - label: "Japan Meteorological Agency emergency warnings"
+    url: "https://www.jma.go.jp/jma/en/Emergency_Warning/ew_index.html"
+    note: "Use together with your municipality's current evacuation guidance."
 draft: false
 ---
 

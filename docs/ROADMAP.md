@@ -224,6 +224,27 @@ Rules:
 - Keep the copy editorial and practical; do not imply live verification or legal advice.
 - Use correction prompts for reader reports, not a database-backed review workflow in Phase 1.
 
+## Phase 1BU: Article Official Source Links
+
+Status: implemented.
+
+Goal:
+
+Make high-risk practical articles easier to verify by surfacing official confirmation links as structured article metadata.
+
+Implemented:
+
+- Article frontmatter supports optional `sourceLinks` with `label`, `url`, and optional `note`.
+- Article detail pages render a localized official confirmation section when source links exist.
+- Emergency/disaster and work-contract basics articles include first official source links in all four supported locales.
+- Source-level, content-health, and build-output SEO checks cover the source-link model and representative rendered output.
+
+Rules:
+
+- Treat source links as editorial starting points, not live-validated guarantees.
+- Keep source labels localized in the article file.
+- Do not introduce a crawler, database, CMS, or backend review workflow for Phase 1 source links.
+
 ## Phase 1E: Structured Data
 
 Status: implemented.

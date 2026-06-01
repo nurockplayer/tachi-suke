@@ -1,5 +1,11 @@
 import type { Locale } from "./locale";
 
+export interface ArticleSourceLink {
+  label: string;
+  url: string;
+  note?: string;
+}
+
 export interface Article {
   id: string;
   slug: string;
@@ -11,5 +17,6 @@ export interface Article {
   tags: string[];
   publishedAt: string;
   updatedAt: string;
+  sourceLinks: ArticleSourceLink[];
   draft: boolean;
 }

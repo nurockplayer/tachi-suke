@@ -22,7 +22,12 @@ This document records the current content collections and TypeScript model bound
 - `updatedAt`
 - `draft`
 
-**Optional fields:** None in the current schema.
+**Optional fields:**
+
+- `sourceLinks`: editorial confirmation links for official or high-trust sources
+  - `label`: source label in the article locale
+  - `url`: HTTPS source URL
+  - `note`: optional short note explaining how to use the source
 
 **Enum values:**
 
@@ -37,11 +42,13 @@ This document records the current content collections and TypeScript model bound
 - The global `/feed.xml` RSS feed includes only articles where `draft = false`.
 - Locale RSS feeds at `/[locale]/feed.xml` include only matching-locale articles where `draft = false`.
 - Locale search indexes include only matching-locale articles where `draft = false`.
+- `sourceLinks` are rendered only on public article detail pages and are intended as official confirmation starting points, not live-validated guarantees.
 
 **Future database mapping notes:**
 
 - If articles move to Postgres or a CMS later, preserve `translationKey`, `locale`, and stable `slug`.
 - Keep a separate draft/publish workflow and avoid exposing draft content through public routes or APIs.
+- Store source links as ordered child records or JSON with `label`, `url`, and optional `note`, and keep external-link validation separate from the publishing workflow.
 
 ## Place
 
