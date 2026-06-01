@@ -5,6 +5,7 @@ import { join } from "node:path";
 
 const root = process.cwd();
 const contentRoot = join(root, "src/content");
+const locales = ["zh-tw", "en", "ja", "ko"];
 const tomorrow = new Date();
 tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
 
@@ -125,6 +126,118 @@ function assertUrlFieldsAreHttps(value, label) {
 function markdownExternalLinks(fullPath) {
   const file = readFileSync(fullPath, "utf8");
   return [...file.matchAll(/\]\((https?:\/\/[^)\s]+)\)/g)].map((match) => match[1]);
+}
+
+function markdownBody(fullPath) {
+  return readFileSync(fullPath, "utf8").replace(/^---\n[\s\S]*?\n---\n?/, "");
+}
+
+function normalizePath(path) {
+  const withoutQuery = path.split("#")[0].split("?")[0];
+  return withoutQuery.length > 1 ? withoutQuery.replace(/\/$/, "") : withoutQuery;
+}
+
+function isDraft(data) {
+  return data.draft === true || data.draft === "true";
+}
+
+function slugifyArticleCategory(category) {
+  return category
+    .trim()
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[^\p{Letter}\p{Number}]+/gu, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function collectInternalLinks(fullPath) {
+  const body = markdownBody(fullPath);
+  const candidates = [
+    ...body.matchAll(/(?<!!)\[[^\]]*]\((\/[^)\s]+)(?:\s+["'][^)]*["'])?\)/g),
+    ...body.matchAll(/\shref=["'](\/[^"']+)["']/g)
+  ].map((match) => match[1]);
+
+  return candidates
+    .filter((link) => !link.startsWith("//"))
+    .map(normalizePath);
+}
+
+function buildPublicRouteSet(articles) {
+  const routeSet = new Set([
+    "/",
+    "/404.html",
+    "/feed.xml",
+    "/llms.txt",
+    "/opensearch.xml",
+    "/robots.txt",
+    "/site.webmanifest",
+    "/sitemap.xml",
+    "/.well-known/security.txt",
+    "/favicon.svg",
+    "/images/life-map.svg",
+    "/images/og-default.svg"
+  ]);
+
+  for (const locale of locales) {
+    for (const route of [
+      "",
+      "/about",
+      "/account/favorites",
+      "/account/login",
+      "/account/submissions",
+      "/areas",
+      "/articles",
+      "/contact",
+      "/contact/thanks",
+      "/editorial-policy",
+      "/feed.xml",
+      "/mobile",
+      "/places",
+      "/privacy",
+      "/search",
+      "/search-index.json",
+      "/site-map",
+      "/submit-place",
+      "/submit-place/thanks",
+      "/tools"
+    ]) {
+      routeSet.add(normalizePath(`/${locale}${route}/`));
+    }
+  }
+
+  for (const article of articles) {
+    if (isDraft(article.data)) continue;
+    routeSet.add(normalizePath(`/${article.data.locale}/articles/${article.data.slug}`));
+    routeSet.add(normalizePath(`/${article.data.locale}/articles/category/${slugifyArticleCategory(article.data.category)}`));
+  }
+
+  for (const place of listFiles(join(contentRoot, "places"), [".json"]).map(readJson)) {
+    if (place.status !== "published") continue;
+    for (const locale of locales) {
+      routeSet.add(normalizePath(`/${locale}/places/${place.slug}`));
+    }
+  }
+
+  for (const mobilePlan of listFiles(join(contentRoot, "mobile-plans"), [".json"]).map(readJson)) {
+    for (const locale of locales) {
+      routeSet.add(normalizePath(`/${locale}/mobile/${mobilePlan.slug}`));
+    }
+  }
+
+  for (const area of listFiles(join(contentRoot, "areas"), [".json"]).map(readJson)) {
+    for (const locale of locales) {
+      routeSet.add(normalizePath(`/${locale}/areas/${area.slug}`));
+    }
+  }
+
+  for (const tool of listFiles(join(contentRoot, "tools"), [".json"]).map(readJson)) {
+    if (tool.status !== "published") continue;
+    for (const locale of locales) {
+      routeSet.add(normalizePath(`/${locale}/tools/${tool.slug}`));
+    }
+  }
+
+  return routeSet;
 }
 
 function readArticleSourceLinks(fullPath) {
@@ -251,6 +364,21 @@ describe("content health", () => {
     assertArticleSourceLinks(articles, "japan-emergency-disaster-basics", ["fdma.go.jp", "jma.go.jp"]);
     assertArticleSourceLinks(articles, "japan-work-contract-basics", ["studyinjapan.go.jp", "check-roudou.mhlw.go.jp"]);
     assertArticleSourceLinks(articles, "residence-card-resident-record-my-number", ["digital.go.jp", "moj.go.jp"]);
+  });
+
+  it("keeps Markdown and MDX internal links pointed at generated public routes", () => {
+    const articles = listFiles(join(contentRoot, "articles"), [".md", ".mdx"]).map((fullPath) => ({
+      path: relative(fullPath),
+      data: readFrontmatter(fullPath),
+      fullPath
+    }));
+    const routeSet = buildPublicRouteSet(articles);
+
+    for (const article of articles) {
+      for (const link of collectInternalLinks(article.fullPath)) {
+        assert.ok(routeSet.has(link), `${article.path} links to missing internal route ${link}`);
+      }
+    }
   });
 
   it("keeps JSON collection ids, slugs, review dates, and URL fields healthy", () => {
