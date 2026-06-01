@@ -140,7 +140,7 @@ The MVP includes:
 - Article category landing pages generated from non-draft article frontmatter
 - Related article links generated at build time for article detail pages
 - Correction prompts on public detail pages that link readers to the contact/corrections route with related page URL prefill
-- Forty-six public article pages across the supported locales, including transportation commuter pass, residence administration, rental initial-cost, apartment-viewing practical Japanese, ward-office moving-in procedure, apartment moving-out, garbage sorting, family restaurant comparison, and everyday shopping content
+- Fifty public article pages across the supported locales, including transportation commuter pass, residence administration, rental initial-cost, apartment-viewing practical Japanese, ward-office moving-in procedure, apartment moving-out, garbage sorting, family restaurant comparison, everyday shopping, and emergency/disaster basics content
 - Areas index pages with Tokyo area guide cards
 - Area detail pages generated from JSON content with decision notes, warnings, `lastCheckedAt`, and maintenance notes
 - Places index pages

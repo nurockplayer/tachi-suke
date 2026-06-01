@@ -1439,6 +1439,30 @@ Rules:
 - Remind readers that actual evacuation locations, warnings, medical contacts, and response instructions vary by municipality, disaster type, and current official announcements.
 - Do not add saved checklist state, alert subscriptions, location tracking, emergency dispatch behavior, backend storage, or database features in Phase 1.
 
+## Phase 1BO: Emergency and Disaster Articles
+
+Status: implemented.
+
+Goal:
+
+Turn the emergency/disaster checklist into an indexable four-locale daily-life content cluster that helps foreign residents prepare before stressful situations.
+
+Implemented:
+
+- Added zh-tw article `japan-emergency-disaster-basics-zh-tw`.
+- Added en article `japan-emergency-disaster-basics-en`.
+- Added ja article `japan-emergency-disaster-basics-ja`.
+- Added ko article `japan-emergency-disaster-basics-ko`.
+- Reused `translationKey = japan-emergency-disaster-basics` so sitemap, RSS, search, and hreflang behavior stay aligned.
+- Linked the articles to the emergency/disaster checklist, first-week setup, ward-office moving-in guides, area guides, and official JMA/FDMA confirmation pages.
+- Added source-level and content-health tests for article count, locale coverage, and the four-locale translation key.
+
+Rules:
+
+- Keep emergency/disaster articles as practical preparation guidance, not emergency dispatch, medical advice, or official disaster instructions.
+- Direct readers to official JMA, FDMA, municipal, school, employer, and building-management sources where appropriate.
+- Do not add alert subscriptions, location tracking, saved preparedness state, backend storage, or emergency-response workflows in Phase 1.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.
