@@ -324,6 +324,27 @@ Rules:
 - Keep the production CI URL aligned with the active Cloudflare Pages production alias until a custom domain is decided.
 - If the final domain changes, update Cloudflare Pages `SITE_URL`, CI, README, and deployment docs in the same PR.
 
+## Phase 1CE: Compact Theme Toggle
+
+Status: implemented.
+
+Goal:
+
+Keep both global header controls compact and recognizable after the language switcher became globe-only.
+
+Implemented:
+
+- Collapsed language switcher remains globe-only and does not show the current locale name or code.
+- Collapsed theme switcher uses an icon plus short current system/light/dark state.
+- Full localized theme labels remain in the expanded menu, with pressed-state semantics preserved.
+- Source-level tests cover the language-neutral trigger and compact theme trigger hooks.
+
+Rules:
+
+- Keep language and theme as separate controls.
+- Keep the language control visually language-neutral before the visitor understands the current page language.
+- Do not add a component or icon dependency for these small global controls.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.
