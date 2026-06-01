@@ -102,6 +102,18 @@ a {
   outline-offset: 3px;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 ::selection {
   background: color-mix(in srgb, var(--color-green) 34%, transparent);
 }
@@ -256,6 +268,14 @@ textarea {
   list-style: none;
 }
 
+.control-summary-icon-only {
+  position: relative;
+  justify-content: center;
+  width: 40px;
+  min-width: 40px;
+  padding: 5px;
+}
+
 .control-summary::-webkit-details-marker {
   display: none;
 }
@@ -277,6 +297,15 @@ details[open].control-disclosure .control-summary {
 
 details[open].control-disclosure .control-summary::after {
   transform: rotate(225deg) translate(-1px, -1px);
+}
+
+.control-summary-icon-only::after {
+  position: absolute;
+  right: 6px;
+  bottom: 7px;
+  width: 0.32rem;
+  height: 0.32rem;
+  border-width: 1.5px;
 }
 
 .control-summary-label {
