@@ -35,6 +35,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - CI must run the same verification chain for pull requests and pushes to `main`, including a production `SITE_URL=https://tachi-suke.pages.dev` SEO/deploy output check.
 - `pnpm check:content` should verify content IDs, slugs, dates, review dates, stored URL fields, and Markdown/MDX root-relative internal links without fetching the network.
 - Structure tests should verify required files, required locale routes, pnpm-only lockfile policy, content collections, `SITE_URL` fallback strategy, and finalized Place enum values.
+- Form contract tests should verify submit-place and contact/corrections stay provider-agnostic, env-controlled, preview-safe when endpoints are unset, and include required hidden fields, honeypot fields, required user fields, and URL/email input types.
 - Phase 1B/1B.5 tests should verify minimum content depth for articles, mobile plans, and area guides.
 - Source content tests should scan Markdown/MDX article links that point to internal absolute paths and verify they match known public static routes or generated article/category/place/mobile/area/tool detail routes.
 - `pnpm check:links` should scan built `dist/**/*.html` for root-relative `href="/..."` links and verify the matching file exists in `dist/`.
@@ -331,6 +332,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Submit-place must not publish or store user recommendations.
 - Submit-place can post to an external endpoint when configured, but account pages and favorite buttons remain placeholder-only.
 - Contact/corrections can post to an external endpoint when configured, but the repo must not store contact messages or imply a support backend exists.
+- Submit-place and contact/corrections must not hard-code external form provider URLs.
 - No Supabase client, database client, or auth implementation should be added in Phase 1.
 
 ## Future Auth/Database Readiness Criteria

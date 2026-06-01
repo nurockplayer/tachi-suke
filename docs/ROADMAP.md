@@ -451,6 +451,26 @@ Rules:
 - Keep breadcrumb links limited to existing public routes.
 - Do not add breadcrumbs to noindex utility/account pages unless separately scoped.
 
+## Phase 1CK: Static Form Contract Tests
+
+Status: implemented.
+
+Goal:
+
+Protect the static submit-place and contact/corrections workflows from accidental regressions while they remain provider-agnostic Phase 1 forms.
+
+Implemented:
+
+- Added `tests/form-contract.test.mjs`.
+- `pnpm test` now runs both source structure tests and form contract tests.
+- Contract coverage verifies endpoint env vars, static `POST` action binding, preview-mode disabled submit behavior, hidden fields, honeypot fields, required fields, and URL/email input types.
+- Contract coverage rejects hard-coded external form provider URLs in the form components.
+
+Rules:
+
+- Keep both forms static and endpoint-configured through environment variables.
+- Do not add repository-side submission/contact storage, provider-specific integrations, captcha dependencies, auth gating, or moderation dashboards in Phase 1CK.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.

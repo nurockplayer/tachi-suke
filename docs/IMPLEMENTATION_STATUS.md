@@ -99,6 +99,7 @@ This document records the current MVP state after Phase 1CI source-backed setup 
 - Baseline keyboard accessibility hooks: skip link, stable main content target, active primary nav state, and visible focus styles.
 - Dark theme surface tokens for global layout, hero overlays, cards, forms, search, article reading surfaces, collapsed global controls, and placeholders.
 - Structure tests in `tests/project-structure.test.mjs`.
+- Static submit-place and contact/corrections form contract tests in `tests/form-contract.test.mjs`, run with `pnpm test`.
 - Source content health checks in `tests/content-health.test.mjs`, run with `pnpm check:content`, including article metadata, stored URL fields, and Markdown/MDX root-relative internal links.
 - Conservative article internal-link checks for locale-prefixed static/generated public routes.
 - Static HTML internal link crawler in `tests/static-html-links.test.mjs`, run after `pnpm build` with `pnpm check:links`.
