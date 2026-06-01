@@ -47,3 +47,34 @@ const navLinks = navItems[locale].map((item) => {
     </div>
   </div>
 </header>
+
+<script is:inline>
+  (() => {
+    if (window.__tachiSukeHeaderControlsReady) return;
+    window.__tachiSukeHeaderControlsReady = true;
+
+    const getOpenControls = () => document.querySelectorAll("details[data-global-control][open]");
+
+    document.addEventListener("toggle", (event) => {
+      const current = event.target instanceof HTMLDetailsElement ? event.target : null;
+      if (!current?.matches("[data-global-control]") || !current.open) return;
+
+      getOpenControls().forEach((control) => {
+        if (control !== current) {
+          control.removeAttribute("open");
+        }
+      });
+    }, true);
+
+    document.addEventListener("click", (event) => {
+      const target = event.target instanceof Element ? event.target : null;
+      if (target?.closest("[data-global-control]")) return;
+      getOpenControls().forEach((control) => control.removeAttribute("open"));
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      getOpenControls().forEach((control) => control.removeAttribute("open"));
+    });
+  })();
+</script>

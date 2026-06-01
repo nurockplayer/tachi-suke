@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1BQ dark theme and visual polish work. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
+This document records the current MVP state after Phase 1BR collapsible global controls work. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
 
 ## Completed
 
@@ -58,7 +58,7 @@ This document records the current MVP state after Phase 1BQ dark theme and visua
 - Open Graph locale and alternate locale metadata in `BaseLayout`.
 - Article Open Graph metadata for public article detail pages.
 - Browser/PWA metadata in `BaseLayout`: `theme-color`, `application-name`, `apple-mobile-web-app-title`, and `format-detection`.
-- System/light/dark theme support with media-aware browser `theme-color` metadata, an early persisted-theme initializer, locale-aware header controls, and a no-JavaScript `prefers-color-scheme: dark` fallback.
+- System/light/dark theme support with media-aware browser `theme-color` metadata, an early persisted-theme initializer, separate collapsed locale and theme header controls, and a no-JavaScript `prefers-color-scheme: dark` fallback.
 - JSON-LD structured data support in `BaseLayout`.
 - Site-wide `Organization` and `WebSite` JSON-LD.
 - Site-wide `WebSite` JSON-LD includes a conservative `SearchAction` for the static English search fallback.
@@ -91,7 +91,7 @@ This document records the current MVP state after Phase 1BQ dark theme and visua
 - Cloudflare Pages `wrangler.toml` with project name, compatibility date, and `dist` output directory.
 - Deployment guide at `docs/DEPLOYMENT.md`.
 - Baseline keyboard accessibility hooks: skip link, stable main content target, active primary nav state, and visible focus styles.
-- Dark theme surface tokens for global layout, hero overlays, cards, forms, search, article reading surfaces, and placeholders.
+- Dark theme surface tokens for global layout, hero overlays, cards, forms, search, article reading surfaces, collapsed global controls, and placeholders.
 - Structure tests in `tests/project-structure.test.mjs`.
 - Source content health checks in `tests/content-health.test.mjs`, run with `pnpm check:content`.
 - Conservative article internal-link checks for locale-prefixed static/generated routes.
