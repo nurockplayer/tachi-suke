@@ -405,6 +405,7 @@ describe("TachiSuke project scaffold", () => {
     assert.match(categoryHelper, /language/, "category helper should include localized practical language category copy");
     assert.match(categoryHelper, /daily-life/, "category helper should include localized daily-life category copy");
     assert.match(categoryHelper, /shopping/, "category helper should include localized shopping category copy");
+    assert.match(categoryHelper, /work/, "category helper should include localized work category copy");
 
     const categoryPage = readFileSync(join(root, "src/components/pages/ArticleCategoryPage.astro"), "utf8");
     assert.match(categoryPage, /slugifyArticleCategory/, "ArticleCategoryPage should use category slugs");
@@ -763,13 +764,13 @@ describe("TachiSuke project scaffold", () => {
   it("includes Phase 1B content depth for articles, mobile plans, and area guides", () => {
     const articleFiles = listFiles("src/content/articles", [".md", ".mdx"]);
     const articles = articleFiles.map(readFrontmatter);
-    assert.ok(articles.length >= 50, "Phase 1BO should include multilingual emergency/disaster guide coverage");
+    assert.ok(articles.length >= 54, "Phase 1BP should include multilingual work basics coverage");
 
     const localeCounts = Object.fromEntries(locales.map((locale) => [locale, articles.filter((article) => article.locale === locale).length]));
-    assert.ok(localeCounts["zh-tw"] >= 13, "Phase 1BO should include at least 13 zh-tw articles");
-    assert.ok(localeCounts.en >= 13, "Phase 1BO should include at least 13 en articles");
-    assert.ok(localeCounts.ja >= 12, "Phase 1BO should include at least 12 ja articles");
-    assert.ok(localeCounts.ko >= 12, "Phase 1BO should include at least 12 ko articles");
+    assert.ok(localeCounts["zh-tw"] >= 14, "Phase 1BP should include at least 14 zh-tw articles");
+    assert.ok(localeCounts.en >= 14, "Phase 1BP should include at least 14 en articles");
+    assert.ok(localeCounts.ja >= 13, "Phase 1BP should include at least 13 ja articles");
+    assert.ok(localeCounts.ko >= 13, "Phase 1BP should include at least 13 ko articles");
     assert.ok(articles.some((article) => article.slug === "japan-commuter-pass-ic-card-guide"), "zh-tw commuter pass article should exist");
     assert.ok(articles.some((article) => article.slug === "japan-commuter-pass-ic-card-guide-en"), "English commuter pass article should exist");
     assert.ok(articles.some((article) => article.slug === "japan-commuter-pass-ic-card-guide-ja"), "Japanese commuter pass article should exist");
@@ -809,6 +810,10 @@ describe("TachiSuke project scaffold", () => {
     assert.ok(articles.some((article) => article.slug === "japan-emergency-disaster-basics-en"), "English emergency/disaster article should exist");
     assert.ok(articles.some((article) => article.slug === "japan-emergency-disaster-basics-ja"), "Japanese emergency/disaster article should exist");
     assert.ok(articles.some((article) => article.slug === "japan-emergency-disaster-basics-ko"), "Korean emergency/disaster article should exist");
+    assert.ok(articles.some((article) => article.slug === "japan-work-contract-basics-zh-tw"), "zh-tw work contract basics article should exist");
+    assert.ok(articles.some((article) => article.slug === "japan-work-contract-basics-en"), "English work contract basics article should exist");
+    assert.ok(articles.some((article) => article.slug === "japan-work-contract-basics-ja"), "Japanese work contract basics article should exist");
+    assert.ok(articles.some((article) => article.slug === "japan-work-contract-basics-ko"), "Korean work contract basics article should exist");
 
     assert.equal(new Set(articles.map((article) => article.id)).size, articles.length, "article ids should be unique");
     assert.equal(new Set(articles.map((article) => article.slug)).size, articles.length, "article slugs should be globally unique for Astro content ids");

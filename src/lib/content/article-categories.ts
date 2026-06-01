@@ -62,6 +62,12 @@ const categoryTitles: Record<string, Record<Locale, string>> = {
     en: "Shopping guides",
     ja: "買い物ガイド",
     ko: "생활 쇼핑 글"
+  },
+  work: {
+    "zh-tw": "工作與打工文章",
+    en: "Work guides",
+    ja: "仕事・アルバイトガイド",
+    ko: "일과 아르바이트 글"
   }
 };
 
@@ -119,6 +125,12 @@ const categoryDescriptions: Record<string, Record<Locale, string>> = {
     en: "Compare convenience stores, supermarkets, drugstores, 100-yen shops, and online shopping for daily life in Japan.",
     ja: "コンビニ、スーパー、ドラッグストア、100円ショップ、オンライン購入など、日本の日常の買い物先を比較します。",
     ko: "편의점, 슈퍼, 드럭스토어, 100엔 숍, 온라인 쇼핑 등 일본의 일상 쇼핑 선택지를 비교합니다."
+  },
+  work: {
+    "zh-tw": "整理在日本打工、求職、上工前確認勞動條件、薪資、班表、在留資格與文件的重點。",
+    en: "Guides for checking work conditions, wages, schedules, residence-status fit, and documents before working in Japan.",
+    ja: "日本で働く前に確認したい労働条件、賃金、シフト、在留資格、書類のポイントを整理します。",
+    ko: "일본에서 일하기 전 근로 조건, 임금, 시프트, 체류 자격, 서류를 확인하는 포인트를 정리합니다."
   }
 };
 

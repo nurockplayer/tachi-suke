@@ -483,6 +483,10 @@ describe("static SEO output", () => {
     const procedures = readHtml("zh-tw/articles/category/procedures/index.html");
     assert.match(procedures, /行政手續文章 \| TachiSuke/, "zh-tw procedures category should have a localized SEO title");
     assert.match(procedures, /href="\/zh-tw\/articles\/residence-card-resident-record-my-number"/, "procedures category should link to zh-tw residence admin article");
+
+    const work = readHtml("en/articles/category/work/index.html");
+    assert.match(work, /Work guides \| TachiSuke/, "English work category should have a localized SEO title");
+    assert.match(work, /href="\/en\/articles\/japan-work-contract-basics-en"/, "work category should link to English work article");
   });
 
   it("renders visible breadcrumbs on nested public pages", () => {
