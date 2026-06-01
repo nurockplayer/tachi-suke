@@ -563,7 +563,7 @@ describe("static SEO output", () => {
       ["mobile", "en/mobile/index.html", 5, /^https:\/\/tachi-suke\.example\.com\/en\/mobile\//],
       ["areas", "en/areas/index.html", 4, /^https:\/\/tachi-suke\.example\.com\/en\/areas\//],
       ["places", "en/places/index.html", 3, /^https:\/\/tachi-suke\.example\.com\/en\/places\//],
-      ["tools", "en/tools/index.html", 6, /^https:\/\/tachi-suke\.example\.com\/en\/tools\//]
+      ["tools", "en/tools/index.html", 7, /^https:\/\/tachi-suke\.example\.com\/en\/tools\//]
     ]) {
       const objects = jsonLdObjects(readHtml(relativePath));
       const collectionPage = objects.find((object) => object["@type"] === "CollectionPage");

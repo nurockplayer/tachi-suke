@@ -139,7 +139,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Tool detail pages must show localized sections, notes, source note, and last checked date.
 - Tool detail pages must show official source links when `sourceLinks` are present.
 - Phase 1 tool pages must stay static and must not imply that checklist progress is saved.
-- Phase 1AT must keep at least six published static tools, including `moving-to-japan-checklist`, `japan-rent-initial-cost-checklist`, `ward-office-moving-in-checklist`, `commuter-pass-ic-card-checklist`, `apartment-viewing-japanese-phrases`, and `moving-out-checklist`.
+- Phase 1BN must keep at least seven published static tools, including `moving-to-japan-checklist`, `japan-rent-initial-cost-checklist`, `ward-office-moving-in-checklist`, `commuter-pass-ic-card-checklist`, `apartment-viewing-japanese-phrases`, `moving-out-checklist`, and `japan-emergency-disaster-checklist`.
 
 ## Static Search Criteria
 

@@ -1,0 +1,182 @@
+{
+  "id": "tool-emergency-disaster-checklist",
+  "slug": "japan-emergency-disaster-checklist",
+  "title": {
+    "zh-tw": "日本緊急與防災準備清單",
+    "en": "Japan Emergency and Disaster Checklist",
+    "ja": "日本の緊急時・防災チェックリスト",
+    "ko": "일본 긴급 상황 및 방재 체크리스트"
+  },
+  "description": {
+    "zh-tw": "在日本生活時，先整理地震、颱風、大雨、火災、急病與避難時需要知道的號碼、通知來源、備品與聯絡流程。",
+    "en": "A practical checklist for emergency numbers, alerts, supplies, communication, and evacuation basics for earthquakes, typhoons, heavy rain, fire, illness, and other urgent situations in Japan.",
+    "ja": "日本で暮らすうえで、地震、台風、大雨、火災、急病、避難時に確認したい番号、情報源、備蓄、連絡手順を整理するチェックリストです。",
+    "ko": "일본 생활 중 지진, 태풍, 폭우, 화재, 급병, 대피 상황에 대비해 번호, 알림 출처, 비상용품, 연락 절차를 정리하는 체크리스트입니다."
+  },
+  "status": "published",
+  "lastCheckedAt": "2026-06-01",
+  "sourceNote": {
+    "zh-tw": "本站依日本氣象廳、消防廳與日本生活常見防災準備整理。實際避難資訊、警報、醫療窗口與災害應對方式會依所在地、災害類型與當下公告改變。",
+    "en": "Compiled from Japan Meteorological Agency, Fire and Disaster Management Agency, and common daily-life disaster-preparedness guidance. Actual evacuation information, warnings, medical contacts, and response steps vary by location, disaster type, and current official announcements.",
+    "ja": "気象庁、消防庁、日常生活で一般的に確認される防災準備をもとに整理しています。実際の避難情報、警報、医療窓口、災害対応は地域、災害の種類、その時点の公式発表によって変わります。",
+    "ko": "일본 기상청, 소방청, 생활 속 방재 준비에서 자주 확인하는 내용을 바탕으로 정리했습니다. 실제 대피 정보, 경보, 의료 창구, 재난 대응은 지역, 재난 종류, 당시 공식 발표에 따라 달라집니다."
+  },
+  "sourceLinks": [
+    {
+      "label": {
+        "zh-tw": "日本氣象廳：特別警報",
+        "en": "Japan Meteorological Agency: Emergency Warnings",
+        "ja": "気象庁：特別警報",
+        "ko": "일본 기상청: 특별 경보"
+      },
+      "url": "https://www.jma.go.jp/jma/en/Emergency_Warning/ew_index.html"
+    },
+    {
+      "label": {
+        "zh-tw": "總務省消防廳：訪日外國人救護車利用指南",
+        "en": "FDMA: Guide for Ambulance Services",
+        "ja": "総務省消防庁：救急車利用ガイド",
+        "ko": "총무성 소방청: 구급차 이용 가이드"
+      },
+      "url": "https://www.fdma.go.jp/publication/portal/post1.html"
+    }
+  ],
+  "notes": [
+    {
+      "zh-tw": "這份清單是生活準備輔助，不取代官方警報、醫療建議、消防指示或自治體避難公告。",
+      "en": "This checklist is a life-preparation aid. It does not replace official warnings, medical advice, fire department instructions, or municipal evacuation announcements.",
+      "ja": "このチェックリストは生活準備の補助であり、公式警報、医療助言、消防の指示、自治体の避難情報の代わりではありません。",
+      "ko": "이 체크리스트는 생활 준비를 돕기 위한 것이며 공식 경보, 의료 조언, 소방 지시, 지자체 대피 안내를 대신하지 않습니다."
+    },
+    {
+      "zh-tw": "避難場所、災害廣播、垃圾／供水／避難所資訊通常由居住地自治體公告，搬家後請先確認所在地官方頁面。",
+      "en": "Evacuation sites, disaster radio, water distribution, shelter, and local recovery information are usually announced by your municipality. Confirm local official pages after moving.",
+      "ja": "避難場所、防災無線、給水、避難所、復旧情報は多くの場合、居住地の自治体が発表します。引っ越し後は地域の公式ページを確認してください。",
+      "ko": "대피 장소, 방재 방송, 급수, 대피소, 복구 정보는 대개 거주지 지자체가 공지합니다. 이사 후 지역 공식 페이지를 확인하세요."
+    },
+    {
+      "zh-tw": "急病、事故、火災或生命危險時，請優先撥打當地緊急電話並依現場人員指示行動。",
+      "en": "For serious illness, accidents, fire, or life-threatening danger, call local emergency services first and follow on-site instructions.",
+      "ja": "急病、事故、火災、生命に関わる危険がある場合は、まず緊急通報を行い、現場の指示に従ってください。",
+      "ko": "급병, 사고, 화재, 생명에 위협이 되는 위험이 있다면 먼저 긴급 신고를 하고 현장 지시에 따르세요."
+    }
+  ],
+  "sections": [
+    {
+      "id": "numbers-and-phrases",
+      "title": {
+        "zh-tw": "先記住緊急號碼與說法",
+        "en": "Know emergency numbers and phrases",
+        "ja": "緊急番号と言い方を確認する",
+        "ko": "긴급 번호와 표현 확인"
+      },
+      "items": [
+        {
+          "zh-tw": "把 119（火災、救護車）與 110（警察）存在手機與紙本備忘錄。",
+          "en": "Save 119 for fire or ambulance and 110 for police in your phone and on a paper note.",
+          "ja": "119（火災・救急）と110（警察）をスマホと紙のメモに保存する。",
+          "ko": "119(화재·구급차)와 110(경찰)을 휴대폰과 종이 메모에 저장한다."
+        },
+        {
+          "zh-tw": "準備可直接照念的日文：住所、最近車站、症狀、是否有人受傷、是否需要救護車。",
+          "en": "Prepare Japanese you can read aloud: address, nearest station, symptoms, whether someone is injured, and whether an ambulance is needed.",
+          "ja": "住所、最寄り駅、症状、けが人の有無、救急車が必要かを読み上げられる日本語で準備する。",
+          "ko": "주소, 가까운 역, 증상, 다친 사람이 있는지, 구급차가 필요한지를 읽을 수 있는 일본어로 준비한다."
+        },
+        {
+          "zh-tw": "在手機緊急資訊中設定姓名、血型、過敏、服藥、緊急聯絡人與可用語言。",
+          "en": "Add name, blood type, allergies, medications, emergency contacts, and usable languages to your phone emergency information.",
+          "ja": "スマホの緊急情報に氏名、血液型、アレルギー、服薬、緊急連絡先、対応できる言語を入れる。",
+          "ko": "휴대폰 긴급 정보에 이름, 혈액형, 알레르기, 복용 약, 긴급 연락처, 가능한 언어를 등록한다."
+        }
+      ]
+    },
+    {
+      "id": "alerts-and-local-info",
+      "title": {
+        "zh-tw": "確認警報與地方資訊來源",
+        "en": "Confirm alert and local information sources",
+        "ja": "警報と地域情報の確認先",
+        "ko": "경보와 지역 정보 출처 확인"
+      },
+      "items": [
+        {
+          "zh-tw": "確認手機是否能收到緊急速報、地震速報、避難通知與地方防災 app 推播。",
+          "en": "Confirm your phone can receive emergency alerts, earthquake alerts, evacuation notices, and local disaster app notifications.",
+          "ja": "スマホで緊急速報、緊急地震速報、避難情報、地域の防災アプリ通知を受け取れるか確認する。",
+          "ko": "휴대폰에서 긴급 속보, 긴급 지진 속보, 대피 정보, 지역 방재 앱 알림을 받을 수 있는지 확인한다."
+        },
+        {
+          "zh-tw": "收藏居住地自治體的防災頁面、避難所地圖、洪水／土砂災害 hazard map。",
+          "en": "Bookmark your municipality's disaster page, shelter map, and flood or landslide hazard maps.",
+          "ja": "居住地自治体の防災ページ、避難所マップ、洪水・土砂災害ハザードマップを保存する。",
+          "ko": "거주지 지자체의 방재 페이지, 대피소 지도, 홍수·토사재해 해저드맵을 저장한다."
+        },
+        {
+          "zh-tw": "把日本氣象廳、自治體、防災 app、學校／公司通知視為主要來源，不只依賴社群轉傳。",
+          "en": "Use JMA, municipal notices, disaster apps, and school or employer messages as primary sources instead of relying only on social media reposts.",
+          "ja": "気象庁、自治体、防災アプリ、学校・勤務先の通知を主な情報源にし、SNSの拡散だけに頼らない。",
+          "ko": "기상청, 지자체, 방재 앱, 학교·회사 알림을 주요 출처로 삼고 SNS 공유에만 의존하지 않는다."
+        }
+      ]
+    },
+    {
+      "id": "home-and-go-bag",
+      "title": {
+        "zh-tw": "準備家中與外出防災包",
+        "en": "Prepare home and go-bag supplies",
+        "ja": "家と非常用持ち出し袋を準備する",
+        "ko": "집과 비상가방 준비"
+      },
+      "items": [
+        {
+          "zh-tw": "準備飲用水、可常溫保存食物、行動電源、手電筒、電池、藥品、口罩與濕紙巾。",
+          "en": "Prepare drinking water, shelf-stable food, power banks, flashlight, batteries, medicine, masks, and wet wipes.",
+          "ja": "飲料水、常温保存できる食品、モバイルバッテリー、懐中電灯、電池、薬、マスク、ウェットティッシュを準備する。",
+          "ko": "식수, 상온 보관 식품, 보조배터리, 손전등, 건전지, 약, 마스크, 물티슈를 준비한다."
+        },
+        {
+          "zh-tw": "把護照、在留卡影本、保險證、現金、常用藥與緊急聯絡資料放在容易拿的位置。",
+          "en": "Keep passport and residence-card copies, insurance card, cash, regular medicine, and emergency contacts where you can grab them quickly.",
+          "ja": "パスポート・在留カードのコピー、保険証、現金、常用薬、緊急連絡先をすぐ取れる場所に置く。",
+          "ko": "여권·재류카드 사본, 보험증, 현금, 상비약, 긴급 연락처를 바로 가져갈 수 있는 곳에 둔다."
+        },
+        {
+          "zh-tw": "固定家具、確認瓦斯／電源開關、準備室內鞋，地震後避免踩到玻璃。",
+          "en": "Secure furniture, know gas and power shutoff points, and keep indoor shoes ready so you do not step on glass after an earthquake.",
+          "ja": "家具を固定し、ガス・電気の止め方を確認し、地震後にガラスを踏まないよう室内履きを用意する。",
+          "ko": "가구를 고정하고 가스·전기 차단 위치를 확인하며 지진 후 유리를 밟지 않도록 실내화를 준비한다."
+        }
+      ]
+    },
+    {
+      "id": "evacuation-and-communication",
+      "title": {
+        "zh-tw": "決定避難與聯絡流程",
+        "en": "Decide evacuation and communication steps",
+        "ja": "避難と連絡手順を決める",
+        "ko": "대피와 연락 절차 정하기"
+      },
+      "items": [
+        {
+          "zh-tw": "實際走一次到最近避難所、廣域避難場所或臨時集合點的路線。",
+          "en": "Walk the route to the nearest shelter, wide-area evacuation site, or temporary meeting point at least once.",
+          "ja": "最寄りの避難所、広域避難場所、一時集合場所までの道を一度歩いて確認する。",
+          "ko": "가까운 대피소, 광역 대피 장소, 임시 집합 장소까지의 길을 한 번 걸어 확인한다."
+        },
+        {
+          "zh-tw": "和同住者、家人、朋友或公司約定聯絡順序、集合地點與無法上網時的備案。",
+          "en": "Agree with housemates, family, friends, or your employer on contact order, meeting points, and offline backup plans.",
+          "ja": "同居人、家族、友人、勤務先と連絡順、集合場所、ネットが使えない時の代替手段を決める。",
+          "ko": "동거인, 가족, 친구, 회사와 연락 순서, 만날 장소, 인터넷이 안 될 때의 대안을 정한다."
+        },
+        {
+          "zh-tw": "災害發生時先保護生命安全，再確認官方避難資訊；不要為了拿物品回到危險建築。",
+          "en": "Protect life first, then check official evacuation information. Do not return to a dangerous building just to retrieve belongings.",
+          "ja": "災害時はまず命を守り、その後に公式の避難情報を確認する。物を取りに危険な建物へ戻らない。",
+          "ko": "재난 시에는 먼저 생명을 보호하고 공식 대피 정보를 확인한다. 물건을 가지러 위험한 건물로 돌아가지 않는다."
+        }
+      ]
+    }
+  ]
+}

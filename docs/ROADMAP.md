@@ -1417,6 +1417,28 @@ Rules:
 - Run `SITE_URL=<production-url> pnpm check:deploy` before `wrangler pages deploy`.
 - Keep CI `pnpm check:seo` on the example-domain fallback unless a production deploy environment is explicitly configured.
 
+## Phase 1BN: Emergency and Disaster Checklist
+
+Status: implemented.
+
+Goal:
+
+Add a high-intent safety-preparation tool for foreign residents in Japan, covering emergency numbers, alerts, go-bag basics, local hazard information, and evacuation/communication planning.
+
+Implemented:
+
+- Added published tool `japan-emergency-disaster-checklist`.
+- Localized title, description, source note, caveats, and checklist sections for `zh-tw`, `en`, `ja`, and `ko`.
+- Included official confirmation links for the Japan Meteorological Agency and the Fire and Disaster Management Agency.
+- Added source-level tests requiring the emergency checklist, official source links, and localized copy.
+- Kept the tool static and account-free, consistent with existing Phase 1 tool pages.
+
+Rules:
+
+- Treat emergency/disaster content as preparation support, not a replacement for official warnings, medical advice, fire department instructions, or municipal evacuation announcements.
+- Remind readers that actual evacuation locations, warnings, medical contacts, and response instructions vary by municipality, disaster type, and current official announcements.
+- Do not add saved checklist state, alert subscriptions, location tracking, emergency dispatch behavior, backend storage, or database features in Phase 1.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.
