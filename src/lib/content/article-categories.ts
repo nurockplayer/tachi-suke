@@ -44,6 +44,12 @@ const categoryTitles: Record<string, Record<Locale, string>> = {
     en: "Procedure guides",
     ja: "行政手続きガイド",
     ko: "행정 절차 글"
+  },
+  language: {
+    "zh-tw": "生活日文文章",
+    en: "Practical Japanese guides",
+    ja: "生活日本語ガイド",
+    ko: "생활 일본어 글"
   }
 };
 
@@ -83,6 +89,12 @@ const categoryDescriptions: Record<string, Record<Locale, string>> = {
     en: "Practical guides for address, residence, My Number, and municipal procedures for foreign residents in Japan.",
     ja: "外国人住民向けに、住所、在留、マイナンバー、自治体手続きの確認点を整理します。",
     ko: "외국인 주민을 위한 주소, 체류, 마이넘버, 지자체 절차 확인 포인트를 정리합니다."
+  },
+  language: {
+    "zh-tw": "整理在日本生活、租屋、行政手續與日常溝通時會用到的實用日文。",
+    en: "Practical Japanese phrases and communication guides for renting, procedures, and everyday life in Japan.",
+    ja: "日本での生活、賃貸、手続き、日常コミュニケーションで使う実用的な日本語を整理します。",
+    ko: "일본 생활, 임대, 행정 절차, 일상 소통에서 쓰는 실용 일본어를 정리합니다."
   }
 };
 

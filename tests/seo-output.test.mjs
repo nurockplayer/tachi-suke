@@ -121,16 +121,20 @@ describe("static SEO output", () => {
       "/zh-tw/articles/taiwanese-newcomer-mobile-plan-japan",
       "/zh-tw/articles/japan-commuter-pass-ic-card-guide",
       "/zh-tw/articles/residence-card-resident-record-my-number",
+      "/zh-tw/articles/apartment-viewing-japanese-phrases-zh-tw",
       "/en/articles/japan-renting-initial-costs-en",
       "/en/articles/choose-mobile-plan-japan-foreigner",
+      "/en/articles/apartment-viewing-japanese-phrases-en",
       "/en/articles/japan-commuter-pass-ic-card-guide-en",
       "/en/articles/residence-card-resident-record-my-number-en",
       "/ja/articles/japan-commuter-pass-ic-card-guide-ja",
       "/ja/articles/japan-renting-initial-costs-ja",
+      "/ja/articles/apartment-viewing-japanese-phrases-ja",
       "/ja/articles/residence-card-resident-record-my-number-ja",
       "/ja/articles/foreign-resident-mobile-plan-basics-japan",
       "/ko/articles/japan-commuter-pass-ic-card-guide-ko",
       "/ko/articles/japan-renting-initial-costs-ko",
+      "/ko/articles/apartment-viewing-japanese-phrases-ko",
       "/ko/articles/residence-card-resident-record-my-number-ko",
       "/ko/articles/foreigner-mobile-plan-basics-japan",
       "/en/articles/category/mobile",
@@ -281,6 +285,7 @@ describe("static SEO output", () => {
     assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/en\/articles\/choose-mobile-plan-japan-foreigner<\/link>/);
     assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/en\/articles\/japan-commuter-pass-ic-card-guide-en<\/link>/);
     assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/en\/articles\/residence-card-resident-record-my-number-en<\/link>/);
+    assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/en\/articles\/apartment-viewing-japanese-phrases-en<\/link>/);
     assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/ja\/articles\/japan-commuter-pass-ic-card-guide-ja<\/link>/);
     assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/ja\/articles\/residence-card-resident-record-my-number-ja<\/link>/);
     assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/ko\/articles\/japan-commuter-pass-ic-card-guide-ko<\/link>/);

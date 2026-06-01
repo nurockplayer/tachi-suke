@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1AR rental initial-cost guide work. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
+This document records the current MVP state after Phase 1AV apartment-viewing practical Japanese article work. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
 
 ## Completed
 
@@ -17,7 +17,7 @@ This document records the current MVP state after Phase 1AR rental initial-cost 
 - Static article table of contents generated from Markdown/MDX H2/H3 headings.
 - Build-time related article links on article detail pages, limited to non-draft same-locale articles.
 - Public detail-page correction prompts that link article, place, mobile plan, area, and tool details to contact/corrections with related page URL prefill.
-- Twenty-three public article pages across `zh-tw`, `en`, `ja`, and `ko`, including Phase 1B decision-oriented content, Phase 1AG/1AP commuter pass articles, Phase 1AH/1AP residence administration articles, and Phase 1AR rental initial-cost articles.
+- Twenty-seven public article pages across `zh-tw`, `en`, `ja`, and `ko`, including Phase 1B decision-oriented content, Phase 1AG/1AP commuter pass articles, Phase 1AH/1AP residence administration articles, Phase 1AR rental initial-cost articles, and Phase 1AV apartment-viewing practical Japanese articles.
 - Four locale area index pages showing area guide cards.
 - Four locale area detail routes at `/[locale]/areas/[slug]`.
 - Four locale place index pages.
