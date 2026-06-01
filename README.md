@@ -44,7 +44,7 @@ Implemented:
 - Four locale tool detail routes
 - Four locale noindex search pages with dependency-free client-side filtering and shareable `?q=` URLs
 - Four locale static search index JSON endpoints for public content
-- Published static checklist tools: Moving to Japan checklist, Japan rent initial cost checklist, ward office moving-in checklist, commuter pass / IC card checklist, apartment viewing Japanese phrases, moving-out checklist, and Japan emergency/disaster checklist
+- Published static checklist tools: Moving to Japan checklist, Japan rent initial cost checklist, ward office moving-in checklist, commuter pass / IC card checklist, apartment viewing Japanese phrases, apartment application documents checklist, moving-out checklist, and Japan emergency/disaster checklist
 - Four locale submit-place form pages with provider-agnostic external endpoint support
 - Four locale submit-place thanks pages
 - Four locale contact/corrections form pages with provider-agnostic external endpoint support

@@ -154,23 +154,23 @@ type UiCopyKey = "layout.skipMain" | "layout.languageNavigation" | "layout.chang
 const uiCopy = {
   "zh-tw": {
     "layout.skipMain": "跳到主要內容",
-    "layout.languageNavigation": "語言選單",
-    "layout.changeLanguage": "切換語言"
+    "layout.languageNavigation": "Language / 語言 / 言語 / 언어",
+    "layout.changeLanguage": "Change language / 切換語言 / 言語を切り替える / 언어 변경"
   },
   en: {
     "layout.skipMain": "Skip to main content",
-    "layout.languageNavigation": "Language",
-    "layout.changeLanguage": "Change language"
+    "layout.languageNavigation": "Language / 語言 / 言語 / 언어",
+    "layout.changeLanguage": "Change language / 切換語言 / 言語を切り替える / 언어 변경"
   },
   ja: {
     "layout.skipMain": "本文へスキップ",
-    "layout.languageNavigation": "言語メニュー",
-    "layout.changeLanguage": "言語を切り替える"
+    "layout.languageNavigation": "Language / 語言 / 言語 / 언어",
+    "layout.changeLanguage": "Change language / 切換語言 / 言語を切り替える / 언어 변경"
   },
   ko: {
     "layout.skipMain": "본문으로 건너뛰기",
-    "layout.languageNavigation": "언어 메뉴",
-    "layout.changeLanguage": "언어 변경"
+    "layout.languageNavigation": "Language / 語言 / 言語 / 언어",
+    "layout.changeLanguage": "Change language / 切換語言 / 言語を切り替える / 언어 변경"
   }
 } satisfies Record<Locale, Record<UiCopyKey, string>>;
 

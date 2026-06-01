@@ -73,7 +73,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Public pages should support system, light, and dark theme preferences without adding runtime dependencies.
 - The header should expose a locale-aware theme switcher with accessible pressed state.
 - Language choices and theme choices should be collapsed into separate header disclosure controls rather than always showing every option.
-- The closed language switcher should use a language-neutral globe icon and must not require understanding the current locale name to find language switching.
+- The closed language switcher should use a language-neutral globe icon, plus multilingual non-visual labels, and must not require understanding the current locale name to find language switching.
 - The closed theme switcher should use a compact icon plus short current state, with the full localized label available through accessible text and the expanded menu.
 - Opening a global language or theme disclosure should not leave overlapping peer controls open; outside click and Escape should close open controls.
 - The selected theme should persist in `localStorage` using the `tachi-suke-theme` key.
@@ -310,6 +310,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Detail pages should avoid `hreflang` links to missing detail pages.
 - Locale switcher links on detail pages should also avoid missing generated detail pages.
 - The site should stay mobile-first and comfortable for long-form reading.
+- Published static tools should include practical housing and procedure checklists without requiring login or saved state in Phase 1.
 - Mobile plan pages must clearly remind users that prices, campaigns, eligibility, and application rules can change and must be checked on official sites.
 
 ## Content Maintenance Criteria

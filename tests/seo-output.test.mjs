@@ -278,8 +278,10 @@ describe("static SEO output", () => {
       "/zh-tw/tools/ward-office-moving-in-checklist",
       "/en/tools/commuter-pass-ic-card-checklist",
       "/en/tools/apartment-viewing-japanese-phrases",
+      "/en/tools/apartment-application-documents-checklist",
       "/en/tools/moving-out-checklist",
       "/zh-tw/tools/commuter-pass-ic-card-checklist",
+      "/zh-tw/tools/apartment-application-documents-checklist",
       "/zh-tw/tools/moving-out-checklist",
       "/ja/tools/apartment-viewing-japanese-phrases",
       "/zh-tw/submit-place/thanks",
@@ -732,11 +734,18 @@ describe("static SEO output", () => {
   });
 
   it("renders conservative JSON-LD on public section index pages", () => {
+    const expectedSectionCounts = {
+      mobile: listFiles(join(contentRoot, "mobile-plans"), [".json"]).length,
+      areas: listFiles(join(contentRoot, "areas"), [".json"]).length,
+      places: listFiles(join(contentRoot, "places"), [".json"]).map(readJson).filter((place) => place.status === "published").length,
+      tools: listFiles(join(contentRoot, "tools"), [".json"]).map(readJson).filter((tool) => tool.status === "published").length
+    };
+
     for (const [label, relativePath, expectedCount, expectedUrlPattern] of [
-      ["mobile", "en/mobile/index.html", 5, urlPrefixRegExp("/en/mobile/")],
-      ["areas", "en/areas/index.html", 4, urlPrefixRegExp("/en/areas/")],
-      ["places", "en/places/index.html", 3, urlPrefixRegExp("/en/places/")],
-      ["tools", "en/tools/index.html", 7, urlPrefixRegExp("/en/tools/")]
+      ["mobile", "en/mobile/index.html", expectedSectionCounts.mobile, urlPrefixRegExp("/en/mobile/")],
+      ["areas", "en/areas/index.html", expectedSectionCounts.areas, urlPrefixRegExp("/en/areas/")],
+      ["places", "en/places/index.html", expectedSectionCounts.places, urlPrefixRegExp("/en/places/")],
+      ["tools", "en/tools/index.html", expectedSectionCounts.tools, urlPrefixRegExp("/en/tools/")]
     ]) {
       const objects = jsonLdObjects(readHtml(relativePath));
       const collectionPage = objects.find((object) => object["@type"] === "CollectionPage");
