@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1BT article freshness and trust work. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
+This document records the current MVP state after Phase 1BY static search usability work. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
 
 ## Completed
 
@@ -28,6 +28,7 @@ This document records the current MVP state after Phase 1BT article freshness an
 - Four locale tools index pages showing published tool cards.
 - Four locale tool detail routes at `/[locale]/tools/[slug]`.
 - Four locale static search pages at `/[locale]/search`, marked `noindex, follow`, with shareable `?q=` query support.
+- Static search zero-result states include localized helper copy and a clear-search button that restores the full public result list.
 - Four locale static search index JSON endpoints at `/[locale]/search-index.json`.
 - Published static checklist tools: `moving-to-japan-checklist`, `japan-rent-initial-cost-checklist`, `ward-office-moving-in-checklist`, `commuter-pass-ic-card-checklist`, `apartment-viewing-japanese-phrases`, `moving-out-checklist`, and `japan-emergency-disaster-checklist`.
 - Four locale submit-place form pages with provider-agnostic endpoint support.
@@ -162,7 +163,7 @@ These are intentionally present but not functional:
 - `pnpm check:links` scans built static HTML root-relative links in `dist/`, but it does not validate external links, anchors, JavaScript behavior, form submission behavior, or visual rendering.
 - RSS feeds are static and article-only. They do not include category feeds, pagination, places, tools, mobile plans, or area guides.
 - Static search is substring-based client-side filtering with shareable `?q=` URLs. It does not provide typo tolerance, semantic search, pagination, analytics, or personalization.
-- Search pages are noindex utility pages and are intentionally excluded from `sitemap.xml`.
+- Search pages are noindex utility pages and are intentionally excluded from `sitemap.xml`. Their zero-result state is recoverable, but it is still client-side substring search.
 - Build-output SEO tests verify the English search index includes current published tool routes and excludes account, search, submit-place, and contact utility routes.
 - OpenSearch discovery points to `/en/search?q={searchTerms}` as the stable static fallback. It does not detect language preference or provide backend search.
 - WebSite `SearchAction` points to `/en/search?q={search_term_string}` and has the same limitations as static search.
@@ -179,7 +180,7 @@ These are intentionally present but not functional:
 - Locale-less redirects are convenience fallbacks only. Canonical URLs and navigation remain locale-prefixed.
 - CI verifies the static site but does not deploy it. Cloudflare Pages deployment remains separate.
 - Deployment credentials and Cloudflare account-specific secrets are intentionally not committed.
-- Browser QA currently covers basic route/card/form/search checks, not a full accessibility or visual regression suite.
+- Browser QA currently covers basic route/card/form/search checks, including the static search empty-state recovery flow, not a full accessibility or visual regression suite.
 - Dark theme QA covers representative pages and the header switcher, but it is not yet a full automated visual regression suite across every page template.
 - Accessibility work currently covers baseline keyboard navigation only, not a complete WCAG audit.
 - Privacy and editorial policy pages are launch-readiness guidance for the current static MVP, not a final legal review for future auth, analytics, or database-backed personal data.
