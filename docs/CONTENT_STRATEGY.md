@@ -14,6 +14,7 @@ Avoid generic sightseeing articles, vague lifestyle writing, unmoderated public 
 - Food, restaurants, and everyday shopping
 - Transportation and commuting
 - Administrative procedures
+- Emergency and disaster preparedness
 - Practical Japanese phrases
 - Job hunting and working in Japan
 - Community-recommended places
@@ -44,7 +45,7 @@ Avoid generic sightseeing articles, vague lifestyle writing, unmoderated public 
 13. 住民票、在留卡、My Number 的基本差異
 14. 日本外食預算怎麼抓：連鎖店、食堂、家庭餐廳
 
-Phase 1AG now includes zh-tw/en commuter pass decision articles for topic 8 and links them to the commuter pass / IC card checklist. Phase 1AH includes zh-tw/en residence card, resident record, and My Number articles for topic 13, Phase 1AP extends both topics to ja/ko, Phase 1AR extends the rental initial-cost guide across en/ja/ko, Phase 1AV adds zh-tw/en/ja/ko apartment-viewing practical Japanese articles for topic 15, Phase 1AW adds zh-tw/en/ja/ko ward-office moving-in procedure articles for the administrative setup cluster, Phase 1AX adds zh-tw/en/ja/ko apartment moving-out articles for the rental lifecycle cluster, Phase 1AY adds zh-tw/en/ja/ko garbage sorting articles for daily-life rules, Phase 1AZ extends the family restaurant comparison to en/ja/ko, and Phase 1BA adds zh-tw/en/ja/ko everyday shopping guides.
+Phase 1AG now includes zh-tw/en commuter pass decision articles for topic 8 and links them to the commuter pass / IC card checklist. Phase 1AH includes zh-tw/en residence card, resident record, and My Number articles for topic 13, Phase 1AP extends both topics to ja/ko, Phase 1AR extends the rental initial-cost guide across en/ja/ko, Phase 1AV adds zh-tw/en/ja/ko apartment-viewing practical Japanese articles for topic 15, Phase 1AW adds zh-tw/en/ja/ko ward-office moving-in procedure articles for the administrative setup cluster, Phase 1AX adds zh-tw/en/ja/ko apartment moving-out articles for the rental lifecycle cluster, Phase 1AY adds zh-tw/en/ja/ko garbage sorting articles for daily-life rules, Phase 1AZ extends the family restaurant comparison to en/ja/ko, Phase 1BA adds zh-tw/en/ja/ko everyday shopping guides, and Phase 1BO adds zh-tw/en/ja/ko emergency/disaster basics linked to the new preparedness checklist.
 15. Practical Japanese Phrases for Renting an Apartment
 16. 日本打工與正職求職前要知道的用語
 17. Osaka Area Guide for New Residents
@@ -75,6 +76,7 @@ Phase 1B adds a public-preview content baseline:
 - `zh-tw` / `en` / `ja` / `ko`: now include garbage sorting and oversized trash content under the `daily-life` category
 - `zh-tw` / `en` / `ja` / `ko`: now include family restaurant comparison content linked to Denny's, Gusto, Royal Host, places index, and submit-place
 - `zh-tw` / `en` / `ja` / `ko`: now include shopping guides for convenience stores, supermarkets, drugstores, 100-yen shops, and online shopping under the `shopping` category
+- `zh-tw` / `en` / `ja` / `ko`: now include emergency/disaster basics under the `daily-life` category, linked to the emergency/disaster checklist and official JMA/FDMA confirmation pages
 - `en` / `ja` / `ko`: now include mobile basics, first-week setup, commuter pass / IC card, residence administration, and renting initial-cost decision content
 
 Translations should continue to use explicit `locale` and `translationKey` metadata. Missing translations should follow the documented fallback rules: English, then Traditional Chinese, or a clear missing-content state instead of silently showing the wrong locale.

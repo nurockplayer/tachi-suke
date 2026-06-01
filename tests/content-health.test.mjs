@@ -163,6 +163,20 @@ describe("content health", () => {
         `renting-initial-costs-japan should include a public ${locale} article`
       );
     }
+
+    const emergencyDisasterLocales = new Set(
+      articles
+        .filter((article) => article.data.translationKey === "japan-emergency-disaster-basics")
+        .filter((article) => article.data.draft !== true)
+        .map((article) => article.data.locale)
+    );
+    for (const locale of ["zh-tw", "en", "ja", "ko"]) {
+      assert.equal(
+        emergencyDisasterLocales.has(locale),
+        true,
+        `japan-emergency-disaster-basics should include a public ${locale} article`
+      );
+    }
   });
 
   it("keeps JSON collection ids, slugs, review dates, and URL fields healthy", () => {
