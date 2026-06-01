@@ -48,8 +48,18 @@ const copy = {
 ---
 
 <details class="control-disclosure theme-toggle" data-global-control data-theme-switcher aria-label={copy.label}>
-  <summary class="control-summary" data-theme-summary>
-    <span class="control-summary-label">{copy.label}</span>
+  <summary class="control-summary control-summary-compact" data-theme-summary aria-label={copy.label} title={copy.label}>
+    <svg
+      class="control-icon"
+      data-theme-icon
+      aria-hidden="true"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <circle cx="12" cy="12" r="4.5"></circle>
+      <path d="M12 2.8v2.1M12 19.1v2.1M4.4 4.4l1.5 1.5M18.1 18.1l1.5 1.5M2.8 12h2.1M19.1 12h2.1M4.4 19.6l1.5-1.5M18.1 5.9l1.5-1.5"></path>
+    </svg>
+    <span class="visually-hidden">{copy.label}</span>
     <strong data-theme-current-label>{copy.shortSystem}</strong>
   </summary>
   <div class="control-menu theme-menu" data-theme-menu>
@@ -113,7 +123,9 @@ const copy = {
         const isActive = button.getAttribute("data-theme-option") === preference;
         button.setAttribute("aria-pressed", isActive ? "true" : "false");
         if (isActive) {
-          const currentLabel = button.closest("[data-theme-switcher]")?.querySelector("[data-theme-current-label]");
+          const switcher = button.closest("[data-theme-switcher]");
+          const currentLabel = switcher?.querySelector("[data-theme-current-label]");
+          switcher?.setAttribute("data-theme-preference", button.getAttribute("data-theme-option") || "system");
           if (currentLabel && button instanceof HTMLElement) {
             currentLabel.textContent = button.dataset.themeSummaryLabel || button.textContent?.trim() || "";
           }

@@ -396,6 +396,9 @@ describe("TachiSuke project scaffold", () => {
     const localeSwitcher = readFileSync(join(root, "src/components/layout/LocaleSwitcher.astro"), "utf8");
     const globalStyles = readFileSync(join(root, "src/styles/global.css"), "utf8");
     const i18n = readFileSync(join(root, "src/lib/i18n/index.ts"), "utf8");
+    const summaryMatch = localeSwitcher.match(/<summary[\s\S]*?<\/summary>/);
+    assert.ok(summaryMatch, "LocaleSwitcher should render a collapsed summary trigger");
+    const collapsedSummary = summaryMatch[0];
 
     assert.match(localeSwitcher, /data-locale-icon/, "LocaleSwitcher should expose a globe icon");
     assert.match(localeSwitcher, /control-summary-icon-only/, "collapsed language switcher should use icon-only styling");
@@ -414,6 +417,11 @@ describe("TachiSuke project scaffold", () => {
     for (const label of ["切換語言", "Change language", "言語を切り替える", "언어 변경"]) {
       assert.match(i18n, new RegExp(label), `i18n copy should include localized language switch label: ${label}`);
     }
+    assert.match(collapsedSummary, /data-locale-icon/, "collapsed language switcher trigger should include the globe icon");
+    assert.match(collapsedSummary, /visually-hidden/, "collapsed language switcher trigger should include only non-visual text");
+    assert.doesNotMatch(collapsedSummary, /localeNames/, "collapsed language switcher trigger must not show locale names");
+    assert.doesNotMatch(collapsedSummary, /data-locale-current/, "collapsed language switcher trigger must not show current locale shorthand");
+    assert.doesNotMatch(collapsedSummary, /currentLocaleCode/, "collapsed language switcher trigger must not depend on current locale code");
     assert.doesNotMatch(localeSwitcher, /currentLocaleCode/, "collapsed language switcher should not show locale-specific shorthand");
     assert.doesNotMatch(localeSwitcher, /data-locale-current/, "collapsed language switcher should not render the current locale code");
     assert.doesNotMatch(localeSwitcher, />Lang</, "collapsed language switcher should not depend on English visible text");
@@ -568,6 +576,11 @@ describe("TachiSuke project scaffold", () => {
     assert.match(themeToggle, /data-theme-option="dark"/, "ThemeToggle should offer dark mode");
     assert.match(themeToggle, /aria-pressed/, "ThemeToggle should expose pressed state for assistive tech");
     assert.match(themeToggle, /localStorage/, "ThemeToggle should persist the selected theme");
+    assert.match(themeToggle, /data-theme-icon/, "collapsed theme switcher should expose a theme icon");
+    assert.match(themeToggle, /aria-label=\{copy\.label\}/, "collapsed theme switcher should keep a localized accessible label");
+    assert.match(themeToggle, /title=\{copy\.label\}/, "collapsed theme switcher should expose the localized label as a tooltip");
+    assert.match(themeToggle, /<span class="visually-hidden">\{copy\.label\}<\/span>/, "collapsed theme switcher should keep a non-visual label");
+    assert.doesNotMatch(themeToggle, /control-summary-label/, "collapsed theme switcher should not render the long visible Theme label");
     for (const label of ["系統", "System", "システム", "시스템"]) {
       assert.match(themeToggle, new RegExp(label), `ThemeToggle should include localized ${label} label`);
     }
@@ -577,6 +590,7 @@ describe("TachiSuke project scaffold", () => {
     assert.match(css, /html\[data-theme="dark"\]/, "global CSS should define explicit dark theme tokens");
     assert.match(css, /prefers-color-scheme:\s*dark/, "global CSS should support system dark mode without JavaScript");
     assert.match(css, /\.theme-toggle/, "global CSS should style the theme switcher");
+    assert.match(css, /\.control-summary-compact/, "global CSS should define a compact icon-plus-value control shape");
 
     const readme = readFileSync(join(root, "README.md"), "utf8");
     assert.match(readme, /dark theme/i, "README should document dark theme support");

@@ -276,6 +276,12 @@ textarea {
   padding: 5px;
 }
 
+.control-summary-compact {
+  justify-content: center;
+  min-width: 74px;
+  padding: 5px 10px;
+}
+
 .control-summary::-webkit-details-marker {
   display: none;
 }
@@ -314,6 +320,10 @@ details[open].control-disclosure .control-summary::after {
   letter-spacing: 0;
 }
 
+.theme-toggle .control-summary-compact {
+  gap: 7px;
+}
+
 .control-icon {
   display: block;
   flex: 0 0 auto;
@@ -328,6 +338,11 @@ details[open].control-disclosure .control-summary::after {
 
 .control-summary strong {
   white-space: nowrap;
+}
+
+.theme-toggle .control-summary strong {
+  min-width: 2.1em;
+  text-align: left;
 }
 
 .control-menu {
