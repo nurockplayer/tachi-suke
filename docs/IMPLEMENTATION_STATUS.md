@@ -148,6 +148,7 @@ These are intentionally present but not functional:
 - RSS feeds are static and article-only. They do not include category feeds, pagination, places, tools, mobile plans, or area guides.
 - Static search is substring-based client-side filtering with shareable `?q=` URLs. It does not provide typo tolerance, semantic search, pagination, analytics, or personalization.
 - Search pages are noindex utility pages and are intentionally excluded from `sitemap.xml`.
+- Build-output SEO tests verify the English search index includes current published tool routes and excludes account, search, submit-place, and contact utility routes.
 - OpenSearch discovery points to `/en/search?q={searchTerms}` as the stable static fallback. It does not detect language preference or provide backend search.
 - WebSite `SearchAction` points to `/en/search?q={search_term_string}` and has the same limitations as static search.
 - `/404.html` is static and noindex. It does not perform language detection or redirects.

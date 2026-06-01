@@ -469,6 +469,7 @@ Implemented:
 - Search pages are `noindex, follow` and excluded from `sitemap.xml`.
 - Search pages support shareable GET query URLs with `q`, such as `/en/search?q=Denny`.
 - Source-level and build-output SEO tests verify route presence, public-only filtering, and sitemap exclusion.
+- Phase 1AU added build-output coverage for current published tool URLs and utility/form route exclusion in the English search index.
 
 Rules:
 
