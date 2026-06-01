@@ -50,6 +50,12 @@ const categoryTitles: Record<string, Record<Locale, string>> = {
     en: "Practical Japanese guides",
     ja: "生活日本語ガイド",
     ko: "생활 일본어 글"
+  },
+  "daily-life": {
+    "zh-tw": "日常生活文章",
+    en: "Daily life guides",
+    ja: "日常生活ガイド",
+    ko: "일상생활 글"
   }
 };
 
@@ -95,6 +101,12 @@ const categoryDescriptions: Record<string, Record<Locale, string>> = {
     en: "Practical Japanese phrases and communication guides for renting, procedures, and everyday life in Japan.",
     ja: "日本での生活、賃貸、手続き、日常コミュニケーションで使う実用的な日本語を整理します。",
     ko: "일본 생활, 임대, 행정 절차, 일상 소통에서 쓰는 실용 일본어를 정리합니다."
+  },
+  "daily-life": {
+    "zh-tw": "整理垃圾分類、購物、生活規則與日常住居維護等在日本每天會遇到的生活問題。",
+    en: "Guides for everyday life in Japan, including garbage sorting, shopping, house rules, and practical routines.",
+    ja: "ごみ分別、買い物、生活ルール、住まいの日常管理など、日本で毎日出会う生活課題を整理します。",
+    ko: "쓰레기 분리, 쇼핑, 생활 규칙, 주거 관리처럼 일본에서 매일 만나는 생활 문제를 정리합니다."
   }
 };
 

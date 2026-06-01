@@ -945,6 +945,30 @@ Rules:
 - Remind readers that notice periods, fees, trash rules, handover flow, and service cancellation steps vary by contract, municipality, management company, and provider.
 - Do not add saved checklist state, moving-company quotes, backend storage, or dispute workflows in Phase 1.
 
+## Phase 1AY: Garbage Sorting And Oversized Trash Articles
+
+Status: implemented.
+
+Goal:
+
+Add a daily-life content cluster for Japanese garbage sorting, pickup rules, building collection points, and oversized trash preparation.
+
+Implemented:
+
+- Added localized article category copy for `daily-life`.
+- Added zh-tw article `japan-garbage-sorting-oversized-trash-zh-tw`.
+- Added en article `japan-garbage-sorting-oversized-trash-en`.
+- Added ja article `japan-garbage-sorting-oversized-trash-ja`.
+- Added ko article `japan-garbage-sorting-oversized-trash-ko`.
+- Linked the articles to moving-out, ward-office moving-in, area guides, and moving-out checklist surfaces.
+- Added source-level and SEO-output checks for article count, locale coverage, category copy, sitemap entries, and RSS inclusion.
+
+Rules:
+
+- Keep garbage content municipality-aware; do not present one national calendar or universal sorting rule.
+- Remind readers that collection days, designated bags, recycling categories, and oversized trash reservation rules vary by municipality, building, and management company.
+- Do not add reminders, calendar sync, saved state, or backend storage in Phase 1.
+
 ## Phase 1AI: Article Category Label Polish
 
 Status: implemented.
