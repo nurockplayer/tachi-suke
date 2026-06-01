@@ -104,7 +104,7 @@ const jsonLd = [
       {articles.map((article) => (
         <article class="article-row">
           <a href={localizePath(locale, `/articles/${article.data.slug}`)}>
-            <span class="article-meta">{article.data.category} · {formatDate(article.data.publishedAt, locale)}</span>
+            <span class="article-meta">{getArticleCategoryTitle(locale, article.data.category)} · {formatDate(article.data.publishedAt, locale)}</span>
             <h2>{article.data.title}</h2>
             <p>{article.data.description}</p>
           </a>

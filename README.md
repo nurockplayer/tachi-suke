@@ -31,6 +31,7 @@ Implemented:
 - Four locale article index pages
 - Four locale article detail routes
 - Four locale article category landing page routes
+- Public article list, category, and homepage article cards display localized category labels instead of raw category keys
 - Build-time related article links on article detail pages
 - Detail-page correction prompts linking public content to contact/corrections with related page URL prefill
 - Fifty-four public article pages across four locales, including commuter pass, residence administration, rental initial-cost, apartment-viewing practical Japanese, ward-office moving-in procedure, apartment moving-out, garbage sorting, family restaurant comparison, everyday shopping, emergency/disaster basics, and work contract basics articles

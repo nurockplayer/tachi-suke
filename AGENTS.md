@@ -216,6 +216,12 @@ Phase 1CO aligns site map structured-data language:
 - `pnpm check:seo` should verify generated `/[locale]/site-map` JSON-LD uses the same language metadata as the HTML `lang` value.
 - Do not change visible site map content, routes, sitemap entries, account placeholders, or backend behavior in Phase 1CO.
 
+Phase 1CP localizes article category display labels:
+
+- Public article lists, article category pages, and locale homepage latest-article cards should display `getArticleCategoryTitle(locale, article.data.category)` instead of raw category keys like `mobile` or `housing`.
+- Route slugs and content frontmatter category keys stay unchanged; only visible/meta display labels are localized.
+- Do not change article routes, category slugs, content schemas, search indexing, account placeholders, or backend behavior in Phase 1CP.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.
