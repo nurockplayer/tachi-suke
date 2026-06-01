@@ -521,6 +521,7 @@ describe("static SEO output", () => {
       const itemList = objects.find((object) => object["@type"] === "ItemList");
 
       assert.ok(collectionPage, `${locale} article index should include CollectionPage JSON-LD`);
+      assert.ok(hasJsonLdType(objects, "BreadcrumbList"), `${locale} article index should include BreadcrumbList JSON-LD`);
       assert.equal(collectionPage?.inLanguage, language, `${locale} article index should use the HTML language`);
       assert.equal(collectionPage?.url, `https://tachi-suke.example.com/${locale}/articles/`, `${locale} CollectionPage should use its canonical URL`);
       assert.equal(collectionPage?.isPartOf?.["@id"], "https://tachi-suke.example.com/#website");
@@ -544,10 +545,14 @@ describe("static SEO output", () => {
       const objects = jsonLdObjects(readHtml(relativePath));
       const collectionPage = objects.find((object) => object["@type"] === "CollectionPage");
       const itemList = objects.find((object) => object["@type"] === "ItemList");
+      const breadcrumb = objects.find((object) => object["@type"] === "BreadcrumbList");
 
       assert.ok(collectionPage, `${label} index should include CollectionPage JSON-LD`);
       assert.equal(collectionPage?.inLanguage, "en", `${label} index should use the page language`);
       assert.ok(itemList, `${label} index should include ItemList JSON-LD`);
+      assert.ok(breadcrumb, `${label} index should include BreadcrumbList JSON-LD`);
+      assert.equal(breadcrumb?.itemListElement?.length, 2, `${label} breadcrumb should include home and current section`);
+      assert.equal(breadcrumb?.itemListElement?.[0]?.item, "https://tachi-suke.example.com/en/");
       assert.equal(itemList?.numberOfItems, expectedCount, `${label} ItemList should match visible item count`);
       assert.equal(itemList?.itemListElement?.length, expectedCount, `${label} ItemList entries should match visible item count`);
       assert.equal(itemList.itemListElement[0]?.["@type"], "ListItem");

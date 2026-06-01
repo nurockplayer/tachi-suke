@@ -405,6 +405,7 @@ describe("TachiSuke project scaffold", () => {
     assert.match(articlesIndex, /`\/articles\/category\/\$\{category\.slug\}`/, "articles index should link to category pages");
     assert.match(articlesIndex, /"@type":\s*"CollectionPage"/, "articles index should define CollectionPage JSON-LD");
     assert.match(articlesIndex, /"@type":\s*"ItemList"/, "articles index should define ItemList JSON-LD");
+    assert.match(articlesIndex, /"@type":\s*"BreadcrumbList"/, "articles index should define BreadcrumbList JSON-LD");
     assert.match(articlesIndex, /numberOfItems:\s*articles\.length/, "articles index should set ItemList numberOfItems from rendered articles");
     assert.match(articlesIndex, /jsonLd=\{jsonLd\}/, "articles index should pass JSON-LD to BaseLayout");
 
@@ -415,16 +416,19 @@ describe("TachiSuke project scaffold", () => {
     const mobileIndex = readFileSync(join(root, "src/components/pages/MobileIndexPage.astro"), "utf8");
     assert.match(mobileIndex, /"@type":\s*"CollectionPage"/, "mobile index should define CollectionPage JSON-LD");
     assert.match(mobileIndex, /"@type":\s*"ItemList"/, "mobile index should define ItemList JSON-LD");
+    assert.match(mobileIndex, /"@type":\s*"BreadcrumbList"/, "mobile index should define BreadcrumbList JSON-LD");
     assert.match(mobileIndex, /numberOfItems:\s*plans\.length/, "mobile index should count rendered plans in ItemList");
 
     const placesIndex = readFileSync(join(root, "src/components/pages/PlacesIndexPage.astro"), "utf8");
     assert.match(placesIndex, /"@type":\s*"CollectionPage"/, "places index should define CollectionPage JSON-LD");
     assert.match(placesIndex, /"@type":\s*"ItemList"/, "places index should define ItemList JSON-LD");
+    assert.match(placesIndex, /"@type":\s*"BreadcrumbList"/, "places index should define BreadcrumbList JSON-LD");
     assert.match(placesIndex, /status\s*===\s*"published"/, "places index should keep public filtering to published places");
 
     const simpleSectionPage = readFileSync(join(root, "src/components/pages/SimpleSectionPage.astro"), "utf8");
     assert.match(simpleSectionPage, /"@type":\s*"CollectionPage"/, "area/tool index component should define CollectionPage JSON-LD");
     assert.match(simpleSectionPage, /"@type":\s*"ItemList"/, "area/tool index component should define ItemList JSON-LD");
+    assert.match(simpleSectionPage, /"@type":\s*"BreadcrumbList"/, "area/tool index component should define BreadcrumbList JSON-LD");
     assert.match(simpleSectionPage, /jsonLd=\{jsonLd\}/, "area/tool index component should pass JSON-LD to BaseLayout");
 
     const sitemap = readFileSync(join(root, "src/pages/sitemap.xml.ts"), "utf8");

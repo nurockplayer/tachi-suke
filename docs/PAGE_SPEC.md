@@ -250,7 +250,7 @@ All public pages should:
 
 **Rendering mode:** Static Astro pages through `ArticlesIndexPage`.
 
-**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, locale alternates, category links, `CollectionPage` JSON-LD, and public-article `ItemList` JSON-LD.
+**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, locale alternates, category links, `CollectionPage` JSON-LD, public-article `ItemList` JSON-LD, and two-level `BreadcrumbList` JSON-LD.
 
 **Current status:** Implemented for all four locales. Phase 1BI exposes the same-locale public article list as conservative JSON-LD.
 
@@ -298,7 +298,7 @@ All public pages should:
 
 **Rendering mode:** Static Astro pages through `SimpleSectionPage`.
 
-**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, locale alternates, `CollectionPage` JSON-LD, and area `ItemList` JSON-LD backed by rendered area cards.
+**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, locale alternates, `CollectionPage` JSON-LD, area `ItemList` JSON-LD backed by rendered area cards, and two-level `BreadcrumbList` JSON-LD.
 
 **Current status:** Implemented as an index/entry page. Phase 1B shows area guide cards for Ikebukuro, Itabashi, Akabane, and Kagurazaka / Edogawabashi. Phase 1B.5 links each card to its detail page. Phase 1BJ exposes the rendered cards as conservative JSON-LD.
 
@@ -330,7 +330,7 @@ All public pages should:
 
 **Rendering mode:** Static Astro pages through `PlacesIndexPage`.
 
-**SEO requirements:** Locale-specific title and description, canonical URL, Open Graph metadata, locale alternates, readable links to place detail pages, `CollectionPage` JSON-LD, and published-place `ItemList` JSON-LD.
+**SEO requirements:** Locale-specific title and description, canonical URL, Open Graph metadata, locale alternates, readable links to place detail pages, `CollectionPage` JSON-LD, published-place `ItemList` JSON-LD, and two-level `BreadcrumbList` JSON-LD.
 
 **Current status:** Implemented for all four locales. Phase 1BJ exposes published place cards as conservative JSON-LD.
 
@@ -362,7 +362,7 @@ All public pages should:
 
 **Rendering mode:** Static Astro pages through `MobileIndexPage`.
 
-**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, locale alternates, `CollectionPage` JSON-LD, and mobile-plan `ItemList` JSON-LD backed by rendered plan cards.
+**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, locale alternates, `CollectionPage` JSON-LD, mobile-plan `ItemList` JSON-LD backed by rendered plan cards, and two-level `BreadcrumbList` JSON-LD.
 
 **Current status:** Implemented as an index page with comparison guidance and five mobile plan cards for povo, LINEMO, Rakuten Mobile, ahamo, and UQ mobile. Phase 1B.5 links each card to its detail page. Phase 1BJ exposes the rendered plan cards as conservative JSON-LD.
 
@@ -394,7 +394,7 @@ All public pages should:
 
 **Rendering mode:** Static Astro pages through `SimpleSectionPage`.
 
-**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, locale alternates, `CollectionPage` JSON-LD, and published-tool `ItemList` JSON-LD backed by rendered tool cards.
+**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, locale alternates, `CollectionPage` JSON-LD, published-tool `ItemList` JSON-LD backed by rendered tool cards, and two-level `BreadcrumbList` JSON-LD.
 
 **Current status:** Implemented as an index/entry page with published tool cards. Phase 1H adds `moving-to-japan-checklist`; Phase 1N adds `japan-rent-initial-cost-checklist`; Phase 1AE adds `ward-office-moving-in-checklist`; Phase 1AF adds `commuter-pass-ic-card-checklist`. Phase 1BJ exposes published tool cards as conservative JSON-LD.
 

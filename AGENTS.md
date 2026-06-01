@@ -215,6 +215,11 @@ Phase 1BJ adds section index structured data:
 - Mobile, area, place, and tool index pages should emit conservative `CollectionPage` and `ItemList` JSON-LD from rendered public cards.
 - Keep section index JSON-LD static and editorial; do not invent ratings, exact prices, live availability, or external claims.
 
+Phase 1BK adds collection index breadcrumb structured data:
+
+- Article, mobile, area, place, and tool index pages should emit two-level `BreadcrumbList` JSON-LD from locale home to current section.
+- This does not require visible breadcrumbs on top-level collection index pages unless separately scoped.
+
 Phase 1C adds submit-place workflow MVP:
 
 - `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` controls form activation.
