@@ -81,9 +81,30 @@ function serializeJsonLd(item: JsonLdObject): string {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    <script is:inline>
+      (() => {
+        const storageKey = "tachi-suke-theme";
+        const validPreferences = new Set(["system", "light", "dark"]);
+        let preference = "system";
+
+        try {
+          const stored = window.localStorage.getItem(storageKey);
+          preference = validPreferences.has(stored) ? stored : "system";
+        } catch {
+          preference = "system";
+        }
+
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const resolvedTheme = preference === "system" ? prefersDark ? "dark" : "light" : preference;
+        document.documentElement.dataset.theme = resolvedTheme;
+        document.documentElement.dataset.themePreference = preference;
+        document.documentElement.style.colorScheme = resolvedTheme;
+      })();
+    </script>
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f5f8f7" />
+    <meta name="theme-color" content="#f5f8f7" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#101819" media="(prefers-color-scheme: dark)" />
     <meta name="application-name" content="TachiSuke" />
     <meta name="apple-mobile-web-app-title" content="TachiSuke" />
     <meta name="format-detection" content="telephone=no" />

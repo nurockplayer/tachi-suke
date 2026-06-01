@@ -141,6 +141,30 @@ Rules:
 - Set `SITE_URL` to the production domain before launch.
 - Do not migrate to Next.js until SSR/account/personalization requirements are concrete.
 
+## Phase 1BQ: Dark Theme and Visual Polish
+
+Status: implemented.
+
+Goal:
+
+Make the public static site more comfortable for long-form reading and evening use without changing the route structure or adding a UI dependency.
+
+Implemented:
+
+- System/light/dark theme support.
+- Locale-aware header theme switcher.
+- Persisted browser preference through `localStorage`.
+- Early theme initialization in `BaseLayout` to reduce first-paint theme flash.
+- Light and dark browser `theme-color` metadata.
+- No-JavaScript system dark theme fallback through `prefers-color-scheme: dark`.
+- Dark theme tokens for layout, header, hero overlay, cards, article body, forms, search, correction prompts, and placeholders.
+
+Rules:
+
+- Keep the visual language calm, practical, and readable for a Japan life information site.
+- Do not add a large component or animation dependency for theme switching.
+- Future visual work should keep both light and dark theme surfaces in sync.
+
 ## Phase 1E: Structured Data
 
 Status: implemented.

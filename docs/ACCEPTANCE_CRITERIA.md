@@ -67,6 +67,16 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Keyboard focus must be visible with `:focus-visible` styles.
 - These baseline criteria do not replace a full accessibility audit.
 
+## Theme Criteria
+
+- Public pages should support system, light, and dark theme preferences without adding runtime dependencies.
+- The header should expose a locale-aware theme switcher with accessible pressed state.
+- The selected theme should persist in `localStorage` using the `tachi-suke-theme` key.
+- BaseLayout should initialize the saved or system theme before first paint to reduce theme flash.
+- Browser `theme-color` metadata should include light and dark media variants.
+- CSS should use shared theme tokens for body, header, cards, forms, article reading surfaces, and utility panels instead of hard-coded light-only surfaces.
+- No-JavaScript visitors should still receive the system dark theme through `prefers-color-scheme: dark`.
+
 ## Article Criteria
 
 - Article content must come from `src/content/articles`.
