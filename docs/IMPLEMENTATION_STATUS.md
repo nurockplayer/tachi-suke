@@ -28,7 +28,7 @@ This document records the current MVP state after Phase 1AR rental initial-cost 
 - Four locale tool detail routes at `/[locale]/tools/[slug]`.
 - Four locale static search pages at `/[locale]/search`, marked `noindex, follow`, with shareable `?q=` query support.
 - Four locale static search index JSON endpoints at `/[locale]/search-index.json`.
-- Published static checklist tools: `moving-to-japan-checklist`, `japan-rent-initial-cost-checklist`, `ward-office-moving-in-checklist`, `commuter-pass-ic-card-checklist`, and `apartment-viewing-japanese-phrases`.
+- Published static checklist tools: `moving-to-japan-checklist`, `japan-rent-initial-cost-checklist`, `ward-office-moving-in-checklist`, `commuter-pass-ic-card-checklist`, `apartment-viewing-japanese-phrases`, and `moving-out-checklist`.
 - Four locale submit-place form pages with provider-agnostic endpoint support.
 - Four locale submit-place thanks pages.
 - Four locale contact/corrections form pages with provider-agnostic endpoint support.
@@ -131,7 +131,7 @@ These are intentionally present but not functional:
 
 - Content volume is still early editorial sample-level, though Phase 1B now has enough pages for public preview.
 - Article category pages are useful for current high-intent categories, but richer category copy should wait until there are more articles per category.
-- Tools currently include five static checklists and phrase tools. Checklist state is not saved and there is no user-specific progress tracking.
+- Tools currently include six static checklists and phrase tools. Checklist state is not saved and there is no user-specific progress tracking.
 - Areas and mobile plans now have detail pages, but the content is still static editorial guidance rather than live data.
 - Mobile plan prices, campaigns, and conditions can change, so users must confirm official sites before applying.
 - Area rent feel, quietness, and commute notes can become stale and need periodic editorial review.
@@ -190,8 +190,8 @@ Browser QA covered:
 
 ## Next Recommended Tasks
 
-1. Add more real content for practical Japanese, everyday shopping, working life, and moving-out procedures.
-2. Add more practical tools, starting with moving-out, housing document, job search, and everyday shopping checklists.
+1. Add more real content for practical Japanese, everyday shopping, working life, and housing documents.
+2. Add more practical tools, starting with housing document, job search, everyday shopping, and moving-in neighborhood setup checklists.
 3. Choose and configure an external form provider for `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT`.
 4. Choose and configure an external form provider for `PUBLIC_CONTACT_FORM_ENDPOINT`.
 5. Add a fuller external link checker or scheduled source-review workflow when route count grows.

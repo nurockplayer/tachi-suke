@@ -544,12 +544,13 @@ describe("TachiSuke project scaffold", () => {
     }
 
     const publishedTools = listFiles("src/content/tools", [".json"]).map(readJson).filter((tool) => tool.status === "published");
-    assert.ok(publishedTools.length >= 5, "Phase 1AS should publish at least five static tools");
+    assert.ok(publishedTools.length >= 6, "Phase 1AT should publish at least six static tools");
     assert.ok(publishedTools.some((tool) => tool.slug === "moving-to-japan-checklist"), "moving checklist should stay published");
     assert.ok(publishedTools.some((tool) => tool.slug === "japan-rent-initial-cost-checklist"), "rent initial cost checklist should be published");
     assert.ok(publishedTools.some((tool) => tool.slug === "ward-office-moving-in-checklist"), "ward office moving-in checklist should be published");
     assert.ok(publishedTools.some((tool) => tool.slug === "commuter-pass-ic-card-checklist"), "commuter pass and IC card checklist should be published");
     assert.ok(publishedTools.some((tool) => tool.slug === "apartment-viewing-japanese-phrases"), "apartment viewing Japanese phrases tool should be published");
+    assert.ok(publishedTools.some((tool) => tool.slug === "moving-out-checklist"), "moving-out checklist should be published");
 
     const tool = readJson("src/content/tools/moving-checklist.json");
     assert.equal(tool.slug, "moving-to-japan-checklist");
@@ -628,6 +629,16 @@ describe("TachiSuke project scaffold", () => {
       assert.ok(apartmentViewingTool.title[locale], `apartment viewing tool should include ${locale} title`);
       assert.ok(apartmentViewingTool.description[locale]?.length > 30, `apartment viewing tool should include ${locale} description`);
       assert.ok(apartmentViewingTool.sourceNote[locale]?.length > 30, `apartment viewing tool should include ${locale} source note`);
+    }
+
+    const movingOutTool = readJson("src/content/tools/moving-out-checklist.json");
+    assert.equal(movingOutTool.status, "published");
+    assert.equal(movingOutTool.slug, "moving-out-checklist");
+    assert.ok(movingOutTool.sections.length >= 4, "moving-out checklist should include practical sections");
+    for (const locale of locales) {
+      assert.ok(movingOutTool.title[locale], `moving-out tool should include ${locale} title`);
+      assert.ok(movingOutTool.description[locale]?.length > 30, `moving-out tool should include ${locale} description`);
+      assert.ok(movingOutTool.sourceNote[locale]?.length > 30, `moving-out tool should include ${locale} source note`);
     }
   });
 

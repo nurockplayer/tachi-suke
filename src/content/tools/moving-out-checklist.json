@@ -1,0 +1,162 @@
+{
+  "id": "tool-moving-out-checklist",
+  "slug": "moving-out-checklist",
+  "title": {
+    "zh-tw": "日本退租與搬家前檢查清單",
+    "en": "Japan Moving-Out Checklist",
+    "ja": "日本の退去・引っ越し前チェックリスト",
+    "ko": "일본 퇴거 및 이사 전 체크리스트"
+  },
+  "description": {
+    "zh-tw": "退租日本租屋前，用通知期限、水電瓦斯網路、垃圾處理、郵件轉送、地址手續與退房確認來降低漏做風險。",
+    "en": "A practical checklist for moving out of a Japan apartment, covering notice periods, utilities, internet, trash, mail forwarding, address procedures, and handover checks.",
+    "ja": "日本の賃貸を退去する前に、解約通知、ライフライン、インターネット、ごみ、郵便転送、住所手続き、退去立会いを確認するチェックリストです。",
+    "ko": "일본 임대 주택에서 퇴거하기 전 해지 통보, 공과금, 인터넷, 쓰레기, 우편 전송, 주소 절차, 퇴거 확인을 점검하는 체크리스트입니다."
+  },
+  "status": "published",
+  "lastCheckedAt": "2026-06-01",
+  "sourceNote": {
+    "zh-tw": "本站依日本租屋退租、搬家與生活手續常見情境整理。實際期限、費用與必要手續會依合約、自治體、管理公司與服務業者不同。",
+    "en": "Compiled from common moving-out, rental handover, and daily-life procedure scenarios in Japan. Actual deadlines, fees, and required steps vary by contract, municipality, management company, and service provider.",
+    "ja": "日本の賃貸退去、引っ越し、生活手続きでよくある場面をもとに整理しています。実際の期限、費用、必要手続きは契約、自治体、管理会社、サービス事業者によって異なります。",
+    "ko": "일본 임대 퇴거, 이사, 생활 절차에서 자주 나오는 상황을 기준으로 정리했습니다. 실제 기한, 비용, 필요 절차는 계약, 지자체, 관리회사, 서비스 업체에 따라 다릅니다."
+  },
+  "notes": [
+    {
+      "zh-tw": "這份清單是搬家準備輔助，不是法律意見或費用保證。",
+      "en": "This checklist supports moving preparation. It is not legal advice or a cost guarantee.",
+      "ja": "このチェックリストは引っ越し準備の補助であり、法律上の助言や費用保証ではありません。",
+      "ko": "이 체크리스트는 이사 준비를 돕기 위한 것이며 법률 조언이나 비용 보장이 아닙니다."
+    },
+    {
+      "zh-tw": "退租通知、違約金、清潔費與原狀回復請以合約和管理公司正式說明為準。",
+      "en": "Confirm notice periods, penalties, cleaning fees, and restoration rules from the contract and official management company guidance.",
+      "ja": "解約通知、違約金、清掃費、原状回復は契約書と管理会社の正式説明を確認してください。",
+      "ko": "해지 통보, 위약금, 청소비, 원상회복은 계약서와 관리회사의 공식 안내를 확인하세요."
+    },
+    {
+      "zh-tw": "搬家前把重要聯絡與付款紀錄保留下來，退房後若有費用爭議會更容易確認。",
+      "en": "Keep important messages and payment records before moving so later fee questions are easier to verify.",
+      "ja": "退去後の費用確認に備えて、重要な連絡や支払い記録を残しておきましょう。",
+      "ko": "퇴거 후 비용 확인에 대비해 중요한 연락 내용과 결제 기록을 보관하세요."
+    }
+  ],
+  "sections": [
+    {
+      "id": "notice-and-contract",
+      "title": {
+        "zh-tw": "先確認退租通知與合約",
+        "en": "Check notice and contract terms first",
+        "ja": "解約通知と契約条件を先に確認",
+        "ko": "해지 통보와 계약 조건 먼저 확인"
+      },
+      "items": [
+        {
+          "zh-tw": "確認退租通知期限，例如一個月前或兩個月前，並用合約指定方式通知。",
+          "en": "Confirm the notice period, such as one or two months, and notify through the method required by the contract.",
+          "ja": "解約通知期限が1か月前か2か月前か確認し、契約で指定された方法で連絡する。",
+          "ko": "해지 통보 기한이 1개월 전인지 2개월 전인지 확인하고 계약서에 정해진 방식으로 연락한다."
+        },
+        {
+          "zh-tw": "確認是否有短期解約違約金、更新月、清潔費或原狀回復費用。",
+          "en": "Check short-term cancellation penalties, renewal timing, cleaning fees, and restoration costs.",
+          "ja": "短期解約違約金、更新月、清掃費、原状回復費用の有無を確認する。",
+          "ko": "단기 해지 위약금, 갱신월, 청소비, 원상회복 비용이 있는지 확인한다."
+        },
+        {
+          "zh-tw": "把退房立會日期、鑰匙歸還方式與最後付款日期記在行事曆。",
+          "en": "Put the handover inspection date, key return method, and final payment date on your calendar.",
+          "ja": "退去立会日、鍵の返却方法、最終支払日をカレンダーに入れる。",
+          "ko": "퇴거 입회일, 열쇠 반납 방법, 마지막 결제일을 캘린더에 기록한다."
+        }
+      ]
+    },
+    {
+      "id": "utilities-and-services",
+      "title": {
+        "zh-tw": "停止水電瓦斯、網路與訂閱",
+        "en": "Stop utilities, internet, and subscriptions",
+        "ja": "ライフライン・ネット・契約サービスを止める",
+        "ko": "공과금, 인터넷, 구독 서비스 정리"
+      },
+      "items": [
+        {
+          "zh-tw": "安排電力、瓦斯、自來水的停止日期，並確認最後帳單付款方式。",
+          "en": "Schedule electricity, gas, and water stop dates, and confirm how the final bills will be paid.",
+          "ja": "電気、ガス、水道の停止日を決め、最終請求の支払い方法を確認する。",
+          "ko": "전기, 가스, 수도 중지일을 정하고 마지막 요금 결제 방법을 확인한다."
+        },
+        {
+          "zh-tw": "確認網路或手機家用網路是否需要提前解約、歸還設備或支付違約金。",
+          "en": "Check whether internet or home mobile router contracts need early cancellation, equipment return, or penalty payment.",
+          "ja": "インターネットやホームルーターの解約、機器返却、違約金の有無を確認する。",
+          "ko": "인터넷이나 홈 라우터 해지, 장비 반납, 위약금 여부를 확인한다."
+        },
+        {
+          "zh-tw": "更新信用卡、銀行、保險、學校、公司與常用服務的地址。",
+          "en": "Update your address with credit cards, banks, insurance, school, employer, and frequently used services.",
+          "ja": "クレジットカード、銀行、保険、学校、勤務先、よく使うサービスの住所を更新する。",
+          "ko": "신용카드, 은행, 보험, 학교, 회사, 자주 쓰는 서비스의 주소를 변경한다."
+        }
+      ]
+    },
+    {
+      "id": "trash-cleaning-handover",
+      "title": {
+        "zh-tw": "垃圾、清潔與退房立會",
+        "en": "Trash, cleaning, and handover",
+        "ja": "ごみ・清掃・退去立会い",
+        "ko": "쓰레기, 청소, 퇴거 확인"
+      },
+      "items": [
+        {
+          "zh-tw": "提早查大型垃圾預約方式，家具家電不要拖到退房前一天才處理。",
+          "en": "Check oversized garbage reservation rules early; do not leave furniture and appliances until the day before moving out.",
+          "ja": "粗大ごみの予約方法を早めに確認し、家具家電を退去前日に残さない。",
+          "ko": "대형 쓰레기 예약 방법을 미리 확인하고 가구와 가전을 퇴거 전날까지 미루지 않는다."
+        },
+        {
+          "zh-tw": "退房前拍照記錄房間、牆面、地板、設備與清潔狀態。",
+          "en": "Before handover, photograph the room, walls, floor, equipment, and cleaning condition.",
+          "ja": "退去前に部屋、壁、床、設備、清掃状態を写真で記録する。",
+          "ko": "퇴거 전 방, 벽, 바닥, 설비, 청소 상태를 사진으로 남긴다."
+        },
+        {
+          "zh-tw": "立會時確認追加費用的理由，若不清楚請要求書面明細。",
+          "en": "During handover, ask why any additional fees are charged and request written itemization if unclear.",
+          "ja": "立会い時に追加費用の理由を確認し、不明な場合は書面明細を依頼する。",
+          "ko": "퇴거 확인 시 추가 비용 사유를 묻고 불명확하면 서면 명세를 요청한다."
+        }
+      ]
+    },
+    {
+      "id": "address-and-after-move",
+      "title": {
+        "zh-tw": "地址、郵件與搬出後確認",
+        "en": "Address, mail, and after-move checks",
+        "ja": "住所・郵便・退去後の確認",
+        "ko": "주소, 우편, 이사 후 확인"
+      },
+      "items": [
+        {
+          "zh-tw": "設定郵件轉送，避免信用卡、銀行、保險或行政信件寄到舊地址。",
+          "en": "Set up mail forwarding so card, bank, insurance, or government mail does not keep going to the old address.",
+          "ja": "クレジットカード、銀行、保険、行政書類が旧住所に届かないよう郵便転送を設定する。",
+          "ko": "카드, 은행, 보험, 행정 우편이 이전 주소로 가지 않도록 우편 전송을 신청한다."
+        },
+        {
+          "zh-tw": "如果跨市區町村搬家，確認轉出、轉入與在留卡地址更新的順序。",
+          "en": "If moving between municipalities, confirm the order for moving-out notice, moving-in notice, and residence card address update.",
+          "ja": "市区町村をまたぐ引っ越しの場合、転出、転入、在留カード住所変更の順番を確認する。",
+          "ko": "시구정촌을 옮기는 경우 전출, 전입, 재류카드 주소 변경 순서를 확인한다."
+        },
+        {
+          "zh-tw": "退房後保留最後帳單、押金精算與管理公司聯絡紀錄。",
+          "en": "After moving out, keep final bills, deposit settlement records, and management company messages.",
+          "ja": "退去後は最終請求、敷金精算、管理会社との連絡記録を保管する。",
+          "ko": "퇴거 후 마지막 요금, 보증금 정산, 관리회사와의 연락 기록을 보관한다."
+        }
+      ]
+    }
+  ]
+}
