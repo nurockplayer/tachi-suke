@@ -197,6 +197,7 @@ Most recent recorded verification:
 - `pnpm build`: passed
 - `pnpm check:links`: passed
 - `pnpm check:seo`: passed
+- `SITE_URL=https://tachi-suke.pages.dev pnpm check:seo`: passed
 - `SITE_URL=https://tachi-suke.pages.dev pnpm check:deploy`: passed
 - Browser QA: basic route/card/form/search check passed
 

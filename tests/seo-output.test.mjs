@@ -8,6 +8,7 @@ const dist = join(root, "dist");
 const contentRoot = join(root, "src/content");
 const locales = ["zh-tw", "en", "ja", "ko"];
 const searchEntryTypes = ["article", "place", "mobile_plan", "area", "tool"];
+const expectedSiteUrl = (process.env.SITE_URL ?? "https://tachi-suke.example.com").trim().replace(/\/$/, "");
 
 function readDist(relativePath) {
   const fullPath = join(dist, relativePath);
@@ -17,6 +18,22 @@ function readDist(relativePath) {
 
 function normalizePath(pathname) {
   return pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+}
+
+function absoluteUrl(pathname) {
+  return `${expectedSiteUrl}${pathname}`;
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function urlRegExp(pathname) {
+  return new RegExp(escapeRegExp(absoluteUrl(pathname)));
+}
+
+function urlPrefixRegExp(pathname) {
+  return new RegExp(`^${escapeRegExp(absoluteUrl(pathname))}`);
 }
 
 function sitemapPaths(xml) {
@@ -33,7 +50,7 @@ function sitemapLastmodByPath(xml) {
 }
 
 function sitemapBlock(xml, pathname) {
-  const loc = `<loc>https://tachi-suke.example.com${pathname}</loc>`;
+  const loc = `<loc>${absoluteUrl(pathname)}</loc>`;
   const block = [...xml.matchAll(/<url>[\s\S]*?<\/url>/g)]
     .map((match) => match[0])
     .find((entry) => entry.includes(loc));
@@ -43,6 +60,10 @@ function sitemapBlock(xml, pathname) {
 
 function readHtml(relativePath) {
   return readDist(relativePath);
+}
+
+function assertFeedLink(feed, pathname) {
+  assert.match(feed, new RegExp(`<link>${escapeRegExp(absoluteUrl(pathname))}<\\/link>`));
 }
 
 function listFiles(dir, extensions) {
@@ -140,22 +161,25 @@ describe("static SEO output", () => {
 
     assert.match(sitemap, /<urlset/);
     assert.match(sitemap, /xmlns:xhtml="http:\/\/www\.w3\.org\/1999\/xhtml"/, "sitemap should declare XHTML alternates");
-    assert.match(robots, /Sitemap:\s*https:\/\/tachi-suke\.example\.com\/sitemap\.xml/);
+    assert.match(robots, new RegExp(`Sitemap:\\s*${escapeRegExp(absoluteUrl("/sitemap.xml"))}`));
     assert.match(llms, /# TachiSuke/);
     assert.match(llms, /multilingual Japan life decision assistant/i);
-    assert.match(llms, /https:\/\/tachi-suke\.example\.com\/sitemap\.xml/);
-    assert.match(llms, /https:\/\/tachi-suke\.example\.com\/feed\.xml/);
-    assert.match(llms, /https:\/\/tachi-suke\.example\.com\/en\/site-map/);
-    assert.match(llms, /https:\/\/tachi-suke\.example\.com\/zh-tw\/site-map/);
-    assert.match(llms, /https:\/\/tachi-suke\.example\.com\/en\/search-index\.json/);
+    assert.match(llms, urlRegExp("/sitemap.xml"));
+    assert.match(llms, urlRegExp("/feed.xml"));
+    assert.match(llms, urlRegExp("/en/site-map"));
+    assert.match(llms, urlRegExp("/zh-tw/site-map"));
+    assert.match(llms, urlRegExp("/en/search-index.json"));
     assert.match(llms, /Do not treat account placeholder pages as public content/i);
-    assert.match(security, /^Contact:\s*https:\/\/tachi-suke\.example\.com\/en\/contact/m);
-    assert.match(security, /^Canonical:\s*https:\/\/tachi-suke\.example\.com\/\.well-known\/security\.txt/m);
+    assert.match(security, new RegExp(`^Contact:\\s*${escapeRegExp(absoluteUrl("/en/contact"))}`, "m"));
+    assert.match(security, new RegExp(`^Canonical:\\s*${escapeRegExp(absoluteUrl("/.well-known/security.txt"))}`, "m"));
     assert.match(security, /^Preferred-Languages:\s*en,\s*zh-tw,\s*ja,\s*ko/m);
     assert.match(security, /^Expires:\s*\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.000Z/m);
     assert.match(opensearch, /<OpenSearchDescription[^>]+xmlns="http:\/\/a9\.com\/-\/spec\/opensearch\/1\.1\/">/);
     assert.match(opensearch, /<ShortName>TachiSuke<\/ShortName>/);
-    assert.match(opensearch, /<Url type="text\/html" template="https:\/\/tachi-suke\.example\.com\/en\/search\?q=\{searchTerms\}" \/>/);
+    assert.match(
+      opensearch,
+      new RegExp(`<Url type="text\\/html" template="${escapeRegExp(absoluteUrl("/en/search"))}\\?q=\\{searchTerms\\}" \\/>`)
+    );
     assert.equal(manifest.name, "TachiSuke - Japan Life Assistant");
     assert.equal(manifest.short_name, "TachiSuke");
     assert.equal(manifest.start_url, "/");
@@ -179,7 +203,10 @@ describe("static SEO output", () => {
     assert.match(feed, /<rss[^>]+version="2\.0"/, "feed.xml should be an RSS 2.0 feed");
     assert.match(feed, /<title>TachiSuke - Japan Life Assistant<\/title>/);
     assert.match(englishFeed, /<rss[^>]+version="2\.0"/, "locale feed should be an RSS 2.0 feed");
-    assert.match(englishFeed, /<atom:link href="https:\/\/tachi-suke\.example\.com\/en\/feed\.xml" rel="self" type="application\/rss\+xml" \/>/);
+    assert.match(
+      englishFeed,
+      new RegExp(`<atom:link href="${escapeRegExp(absoluteUrl("/en/feed.xml"))}" rel="self" type="application\\/rss\\+xml" \\/>`)
+    );
   });
 
   it("includes public multilingual content and excludes account placeholders in sitemap", () => {
@@ -285,21 +312,21 @@ describe("static SEO output", () => {
     const sitemap = readDist("sitemap.xml");
     const mobile = sitemapBlock(sitemap, "/en/mobile/povo2");
     for (const [hreflang, href] of [
-      ["zh-Hant-TW", "https://tachi-suke.example.com/zh-tw/mobile/povo2"],
-      ["en", "https://tachi-suke.example.com/en/mobile/povo2"],
-      ["ja", "https://tachi-suke.example.com/ja/mobile/povo2"],
-      ["ko", "https://tachi-suke.example.com/ko/mobile/povo2"],
-      ["x-default", "https://tachi-suke.example.com/en/mobile/povo2"]
+      ["zh-Hant-TW", absoluteUrl("/zh-tw/mobile/povo2")],
+      ["en", absoluteUrl("/en/mobile/povo2")],
+      ["ja", absoluteUrl("/ja/mobile/povo2")],
+      ["ko", absoluteUrl("/ko/mobile/povo2")],
+      ["x-default", absoluteUrl("/en/mobile/povo2")]
     ]) {
-      assert.match(mobile, new RegExp(`<xhtml:link rel="alternate" hreflang="${hreflang}" href="${href.replaceAll("/", "\\/")}" \\/>`));
+      assert.match(mobile, new RegExp(`<xhtml:link rel="alternate" hreflang="${hreflang}" href="${escapeRegExp(href)}" \\/>`));
     }
 
     const article = sitemapBlock(sitemap, "/en/articles/choose-mobile-plan-japan-foreigner");
-    assert.match(article, /hreflang="zh-Hant-TW" href="https:\/\/tachi-suke\.example\.com\/zh-tw\/articles\/taiwanese-newcomer-mobile-plan-japan"/);
-    assert.match(article, /hreflang="en" href="https:\/\/tachi-suke\.example\.com\/en\/articles\/choose-mobile-plan-japan-foreigner"/);
-    assert.match(article, /hreflang="ja" href="https:\/\/tachi-suke\.example\.com\/ja\/articles\/foreign-resident-mobile-plan-basics-japan"/);
-    assert.match(article, /hreflang="ko" href="https:\/\/tachi-suke\.example\.com\/ko\/articles\/foreigner-mobile-plan-basics-japan"/);
-    assert.match(article, /hreflang="x-default" href="https:\/\/tachi-suke\.example\.com\/en\/articles\/choose-mobile-plan-japan-foreigner"/);
+    assert.match(article, new RegExp(`hreflang="zh-Hant-TW" href="${escapeRegExp(absoluteUrl("/zh-tw/articles/taiwanese-newcomer-mobile-plan-japan"))}"`));
+    assert.match(article, new RegExp(`hreflang="en" href="${escapeRegExp(absoluteUrl("/en/articles/choose-mobile-plan-japan-foreigner"))}"`));
+    assert.match(article, new RegExp(`hreflang="ja" href="${escapeRegExp(absoluteUrl("/ja/articles/foreign-resident-mobile-plan-basics-japan"))}"`));
+    assert.match(article, new RegExp(`hreflang="ko" href="${escapeRegExp(absoluteUrl("/ko/articles/foreigner-mobile-plan-basics-japan"))}"`));
+    assert.match(article, new RegExp(`hreflang="x-default" href="${escapeRegExp(absoluteUrl("/en/articles/choose-mobile-plan-japan-foreigner"))}"`));
   });
 
   it("keeps robots directives aligned with placeholder account routes", () => {
@@ -330,7 +357,7 @@ describe("static SEO output", () => {
     assert.equal(website?.potentialAction?.["@type"], "SearchAction", "WebSite JSON-LD should expose site search");
     assert.equal(
       website?.potentialAction?.target,
-      "https://tachi-suke.example.com/en/search?q={search_term_string}",
+      absoluteUrl("/en/search?q={search_term_string}"),
       "WebSite SearchAction should target the stable English search route"
     );
     assert.equal(website?.potentialAction?.["query-input"], "required name=search_term_string");
@@ -346,8 +373,8 @@ describe("static SEO output", () => {
     assert.match(html, /<meta property="og:locale:alternate" content="zh_TW">/, "root page should include zh-tw Open Graph alternate locale");
     assert.match(html, /<meta property="og:locale:alternate" content="ja_JP">/, "root page should include ja Open Graph alternate locale");
     assert.match(html, /<meta property="og:locale:alternate" content="ko_KR">/, "root page should include ko Open Graph alternate locale");
-    assert.match(html, /rel="alternate"[^>]+type="application\/rss\+xml"[^>]+href="https:\/\/tachi-suke\.example\.com\/feed\.xml"/);
-    assert.match(html, /rel="search"[^>]+type="application\/opensearchdescription\+xml"[^>]+href="https:\/\/tachi-suke\.example\.com\/opensearch\.xml"/);
+    assert.match(html, new RegExp(`rel="alternate"[^>]+type="application\\/rss\\+xml"[^>]+href="${escapeRegExp(absoluteUrl("/feed.xml"))}"`));
+    assert.match(html, new RegExp(`rel="search"[^>]+type="application\\/opensearchdescription\\+xml"[^>]+href="${escapeRegExp(absoluteUrl("/opensearch.xml"))}"`));
   });
 
   it("renders localized homepage WebPage and ItemList JSON-LD", () => {
@@ -363,9 +390,9 @@ describe("static SEO output", () => {
 
       assert.ok(webPage, `${locale} homepage should include WebPage JSON-LD`);
       assert.equal(webPage?.inLanguage, language, `${locale} homepage WebPage should use the HTML language`);
-      assert.equal(webPage?.url, `https://tachi-suke.example.com/${locale}/`, `${locale} homepage WebPage should use its canonical URL`);
-      assert.equal(webPage?.isPartOf?.["@id"], "https://tachi-suke.example.com/#website");
-      assert.equal(webPage?.publisher?.["@id"], "https://tachi-suke.example.com/#organization");
+      assert.equal(webPage?.url, absoluteUrl(`/${locale}/`), `${locale} homepage WebPage should use its canonical URL`);
+      assert.equal(webPage?.isPartOf?.["@id"], absoluteUrl("/#website"));
+      assert.equal(webPage?.publisher?.["@id"], absoluteUrl("/#organization"));
 
       assert.ok(itemList, `${locale} homepage should include ItemList JSON-LD`);
       assert.equal(itemList?.inLanguage, language, `${locale} homepage ItemList should use the HTML language`);
@@ -373,7 +400,10 @@ describe("static SEO output", () => {
       assert.ok(itemList.itemListElement.length >= 6, `${locale} homepage ItemList should describe the start-here links`);
       assert.equal(itemList.itemListElement[0]?.["@type"], "ListItem");
       assert.equal(itemList.itemListElement[0]?.position, 1);
-      assert.match(itemList.itemListElement[0]?.url ?? "", new RegExp(`^https:\\/\\/tachi-suke\\.example\\.com\\/${locale}\\/(articles|mobile|areas|places|submit-place|tools)`));
+      assert.match(
+        itemList.itemListElement[0]?.url ?? "",
+        new RegExp(`^${escapeRegExp(absoluteUrl(`/${locale}/`))}(articles|mobile|areas|places|submit-place|tools)`)
+      );
     }
   });
 
@@ -395,11 +425,11 @@ describe("static SEO output", () => {
     assert.match(thanks, /不會公開你的 Email/, "contact thanks page should explain private email handling");
 
     for (const [label, relativePath, expectedLanguage, expectedUrl] of [
-      ["about", "en/about/index.html", "en", "https://tachi-suke.example.com/en/about/"],
-      ["privacy", "en/privacy/index.html", "en", "https://tachi-suke.example.com/en/privacy/"],
-      ["editorial policy", "zh-tw/editorial-policy/index.html", "zh-Hant-TW", "https://tachi-suke.example.com/zh-tw/editorial-policy/"],
-      ["contact", "en/contact/index.html", "en", "https://tachi-suke.example.com/en/contact/"],
-      ["submit place", "en/submit-place/index.html", "en", "https://tachi-suke.example.com/en/submit-place/"]
+      ["about", "en/about/index.html", "en", absoluteUrl("/en/about/")],
+      ["privacy", "en/privacy/index.html", "en", absoluteUrl("/en/privacy/")],
+      ["editorial policy", "zh-tw/editorial-policy/index.html", "zh-Hant-TW", absoluteUrl("/zh-tw/editorial-policy/")],
+      ["contact", "en/contact/index.html", "en", absoluteUrl("/en/contact/")],
+      ["submit place", "en/submit-place/index.html", "en", absoluteUrl("/en/submit-place/")]
     ]) {
       const objects = jsonLdObjects(readHtml(relativePath));
       const webPage = objects.find((object) => object["@type"] === "WebPage");
@@ -408,21 +438,22 @@ describe("static SEO output", () => {
       assert.ok(webPage, `${label} page should include WebPage JSON-LD`);
       assert.equal(webPage?.url, expectedUrl, `${label} WebPage should use the canonical URL`);
       assert.equal(webPage?.inLanguage, expectedLanguage, `${label} WebPage should use the HTML language`);
-      assert.equal(webPage?.isPartOf?.["@id"], "https://tachi-suke.example.com/#website");
-      assert.equal(webPage?.publisher?.["@id"], "https://tachi-suke.example.com/#organization");
+      assert.equal(webPage?.isPartOf?.["@id"], absoluteUrl("/#website"));
+      assert.equal(webPage?.publisher?.["@id"], absoluteUrl("/#organization"));
 
       assert.ok(breadcrumb, `${label} page should include BreadcrumbList JSON-LD`);
       assert.equal(breadcrumb?.itemListElement?.length, 2, `${label} breadcrumb should include home and current page`);
-      assert.equal(breadcrumb?.itemListElement?.[0]?.item, `https://tachi-suke.example.com/${expectedUrl.includes("/zh-tw/") ? "zh-tw" : "en"}/`);
+      assert.equal(breadcrumb?.itemListElement?.[0]?.item, absoluteUrl(`/${expectedUrl.includes("/zh-tw/") ? "zh-tw" : "en"}/`));
       assert.equal(breadcrumb?.itemListElement?.[1]?.item, expectedUrl);
     }
   });
 
   it("prefills contact corrections from public detail-page prompts", () => {
     const article = readHtml("en/articles/choose-mobile-plan-japan-foreigner/index.html");
+    const encodedArticleUrl = encodeURIComponent(absoluteUrl("/en/articles/choose-mobile-plan-japan-foreigner"));
     assert.match(
       article,
-      /href="\/en\/contact\?relatedUrl=https%3A%2F%2Ftachi-suke\.example\.com%2Fen%2Farticles%2Fchoose-mobile-plan-japan-foreigner(?:%2F)?"/,
+      new RegExp(`href="\\/en\\/contact\\?relatedUrl=${escapeRegExp(encodedArticleUrl)}(?:%2F)?"`),
       "article correction prompt should carry the encoded canonical URL into contact"
     );
 
@@ -453,22 +484,22 @@ describe("static SEO output", () => {
 
   it("generates an RSS feed for public article detail pages", () => {
     const feed = readDist("feed.xml");
-    assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/zh-tw\/articles\/taiwanese-newcomer-mobile-plan-japan<\/link>/);
-    assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/zh-tw\/articles\/japan-commuter-pass-ic-card-guide<\/link>/);
-    assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/zh-tw\/articles\/residence-card-resident-record-my-number<\/link>/);
-    assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/en\/articles\/choose-mobile-plan-japan-foreigner<\/link>/);
-    assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/en\/articles\/japan-commuter-pass-ic-card-guide-en<\/link>/);
-    assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/en\/articles\/residence-card-resident-record-my-number-en<\/link>/);
-    assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/en\/articles\/apartment-viewing-japanese-phrases-en<\/link>/);
-    assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/en\/articles\/ward-office-moving-in-procedures-en<\/link>/);
-    assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/en\/articles\/japan-apartment-moving-out-checklist-en<\/link>/);
-    assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/en\/articles\/japan-garbage-sorting-oversized-trash-en<\/link>/);
-    assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/en\/articles\/japan-family-restaurants-dennys-gusto-royal-host-en<\/link>/);
-    assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/en\/articles\/japan-convenience-store-supermarket-drugstore-guide-en<\/link>/);
-    assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/ja\/articles\/japan-commuter-pass-ic-card-guide-ja<\/link>/);
-    assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/ja\/articles\/residence-card-resident-record-my-number-ja<\/link>/);
-    assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/ko\/articles\/japan-commuter-pass-ic-card-guide-ko<\/link>/);
-    assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/ko\/articles\/residence-card-resident-record-my-number-ko<\/link>/);
+    assertFeedLink(feed, "/zh-tw/articles/taiwanese-newcomer-mobile-plan-japan");
+    assertFeedLink(feed, "/zh-tw/articles/japan-commuter-pass-ic-card-guide");
+    assertFeedLink(feed, "/zh-tw/articles/residence-card-resident-record-my-number");
+    assertFeedLink(feed, "/en/articles/choose-mobile-plan-japan-foreigner");
+    assertFeedLink(feed, "/en/articles/japan-commuter-pass-ic-card-guide-en");
+    assertFeedLink(feed, "/en/articles/residence-card-resident-record-my-number-en");
+    assertFeedLink(feed, "/en/articles/apartment-viewing-japanese-phrases-en");
+    assertFeedLink(feed, "/en/articles/ward-office-moving-in-procedures-en");
+    assertFeedLink(feed, "/en/articles/japan-apartment-moving-out-checklist-en");
+    assertFeedLink(feed, "/en/articles/japan-garbage-sorting-oversized-trash-en");
+    assertFeedLink(feed, "/en/articles/japan-family-restaurants-dennys-gusto-royal-host-en");
+    assertFeedLink(feed, "/en/articles/japan-convenience-store-supermarket-drugstore-guide-en");
+    assertFeedLink(feed, "/ja/articles/japan-commuter-pass-ic-card-guide-ja");
+    assertFeedLink(feed, "/ja/articles/residence-card-resident-record-my-number-ja");
+    assertFeedLink(feed, "/ko/articles/japan-commuter-pass-ic-card-guide-ko");
+    assertFeedLink(feed, "/ko/articles/residence-card-resident-record-my-number-ko");
     assert.doesNotMatch(feed, /draft/i, "feed should not expose draft article data");
   });
 
@@ -476,7 +507,7 @@ describe("static SEO output", () => {
     const englishFeed = readDist("en/feed.xml");
     assert.match(englishFeed, /<title>TachiSuke English Articles<\/title>/);
     assert.match(englishFeed, /<dc:language>en<\/dc:language>/);
-    assert.match(englishFeed, /<link>https:\/\/tachi-suke\.example\.com\/en\/articles\/choose-mobile-plan-japan-foreigner<\/link>/);
+    assertFeedLink(englishFeed, "/en/articles/choose-mobile-plan-japan-foreigner");
     assert.doesNotMatch(englishFeed, /\/zh-tw\/articles\//, "English feed should not include zh-tw article URLs");
     assert.doesNotMatch(englishFeed, /\/ja\/articles\//, "English feed should not include ja article URLs");
     assert.doesNotMatch(englishFeed, /draft/i, "English feed should not expose draft article data");
@@ -484,7 +515,7 @@ describe("static SEO output", () => {
     const zhTwFeed = readDist("zh-tw/feed.xml");
     assert.match(zhTwFeed, /<title>TachiSuke 繁體中文文章<\/title>/);
     assert.match(zhTwFeed, /<dc:language>zh-Hant-TW<\/dc:language>/);
-    assert.match(zhTwFeed, /<link>https:\/\/tachi-suke\.example\.com\/zh-tw\/articles\/taiwanese-newcomer-mobile-plan-japan<\/link>/);
+    assertFeedLink(zhTwFeed, "/zh-tw/articles/taiwanese-newcomer-mobile-plan-japan");
     assert.doesNotMatch(zhTwFeed, /\/en\/articles\//, "zh-tw feed should not include English article URLs");
   });
 
@@ -688,24 +719,24 @@ describe("static SEO output", () => {
       assert.ok(collectionPage, `${locale} article index should include CollectionPage JSON-LD`);
       assert.ok(hasJsonLdType(objects, "BreadcrumbList"), `${locale} article index should include BreadcrumbList JSON-LD`);
       assert.equal(collectionPage?.inLanguage, language, `${locale} article index should use the HTML language`);
-      assert.equal(collectionPage?.url, `https://tachi-suke.example.com/${locale}/articles/`, `${locale} CollectionPage should use its canonical URL`);
-      assert.equal(collectionPage?.isPartOf?.["@id"], "https://tachi-suke.example.com/#website");
+      assert.equal(collectionPage?.url, absoluteUrl(`/${locale}/articles/`), `${locale} CollectionPage should use its canonical URL`);
+      assert.equal(collectionPage?.isPartOf?.["@id"], absoluteUrl("/#website"));
 
       assert.ok(itemList, `${locale} article index should include ItemList JSON-LD`);
       assert.equal(itemList?.numberOfItems, itemList?.itemListElement?.length, `${locale} ItemList count should match its entries`);
       assert.ok(itemList.numberOfItems >= 10, `${locale} article index should expose the public article list`);
       assert.equal(itemList.itemListElement[0]?.["@type"], "ListItem");
       assert.equal(itemList.itemListElement[0]?.position, 1);
-      assert.match(itemList.itemListElement[0]?.url ?? "", new RegExp(`^https:\\/\\/tachi-suke\\.example\\.com\\/${locale}\\/articles\\/`));
+      assert.match(itemList.itemListElement[0]?.url ?? "", urlPrefixRegExp(`/${locale}/articles/`));
     }
   });
 
   it("renders conservative JSON-LD on public section index pages", () => {
     for (const [label, relativePath, expectedCount, expectedUrlPattern] of [
-      ["mobile", "en/mobile/index.html", 5, /^https:\/\/tachi-suke\.example\.com\/en\/mobile\//],
-      ["areas", "en/areas/index.html", 4, /^https:\/\/tachi-suke\.example\.com\/en\/areas\//],
-      ["places", "en/places/index.html", 3, /^https:\/\/tachi-suke\.example\.com\/en\/places\//],
-      ["tools", "en/tools/index.html", 7, /^https:\/\/tachi-suke\.example\.com\/en\/tools\//]
+      ["mobile", "en/mobile/index.html", 5, urlPrefixRegExp("/en/mobile/")],
+      ["areas", "en/areas/index.html", 4, urlPrefixRegExp("/en/areas/")],
+      ["places", "en/places/index.html", 3, urlPrefixRegExp("/en/places/")],
+      ["tools", "en/tools/index.html", 7, urlPrefixRegExp("/en/tools/")]
     ]) {
       const objects = jsonLdObjects(readHtml(relativePath));
       const collectionPage = objects.find((object) => object["@type"] === "CollectionPage");
@@ -717,7 +748,7 @@ describe("static SEO output", () => {
       assert.ok(itemList, `${label} index should include ItemList JSON-LD`);
       assert.ok(breadcrumb, `${label} index should include BreadcrumbList JSON-LD`);
       assert.equal(breadcrumb?.itemListElement?.length, 2, `${label} breadcrumb should include home and current section`);
-      assert.equal(breadcrumb?.itemListElement?.[0]?.item, "https://tachi-suke.example.com/en/");
+      assert.equal(breadcrumb?.itemListElement?.[0]?.item, absoluteUrl("/en/"));
       assert.equal(itemList?.numberOfItems, expectedCount, `${label} ItemList should match visible item count`);
       assert.equal(itemList?.itemListElement?.length, expectedCount, `${label} ItemList entries should match visible item count`);
       assert.equal(itemList.itemListElement[0]?.["@type"], "ListItem");
@@ -737,7 +768,7 @@ describe("static SEO output", () => {
     const itemList = objects.find((object) => object["@type"] === "ItemList");
     assert.equal(itemList.numberOfItems, 2, "English mobile category ItemList should match visible article count");
     assert.ok(
-      itemList.itemListElement.some((item) => item.url === "https://tachi-suke.example.com/en/articles/choose-mobile-plan-japan-foreigner"),
+      itemList.itemListElement.some((item) => item.url === absoluteUrl("/en/articles/choose-mobile-plan-japan-foreigner")),
       "category ItemList should include article canonical URLs"
     );
   });

@@ -286,6 +286,25 @@ Rules:
 - Keep Phase 1 search static, dependency-free, and `noindex, follow`.
 - Do not add backend search, analytics, personalization, saved search state, or hosted search services in this phase.
 
+## Phase 1CC: Site URL Aware SEO Checks
+
+Status: implemented.
+
+Goal:
+
+Make deployable production URL builds verifiable by the same SEO output test suite used for local fallback builds.
+
+Implemented:
+
+- `tests/seo-output.test.mjs` reads `SITE_URL` and falls back to `https://tachi-suke.example.com`.
+- `SITE_URL=<production-url> pnpm check:seo` validates canonicals, feeds, sitemap entries, OpenSearch discovery, structured data, related URL prefill behavior, and locale search indexes against the configured production URL.
+- `pnpm check:deploy` remains the stricter deployment guard that rejects example-domain output before manual Cloudflare Pages deploys.
+
+Rules:
+
+- Build and SEO verification must use the same `SITE_URL` value for production deployment checks.
+- Do not use `pnpm check:deploy` as a replacement for SEO checks; it is a narrow fallback-domain guard.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.

@@ -452,6 +452,11 @@ describe("TachiSuke project scaffold", () => {
       /keeps locale search indexes limited to public content collections/,
       "SEO output tests should verify generated search indexes expose only public content"
     );
+    assert.match(
+      seoOutputTest,
+      /process\.env\.SITE_URL/,
+      "SEO output tests should read SITE_URL so production builds can be validated directly"
+    );
   });
 
   it("includes static article category pages linked from article surfaces", () => {
