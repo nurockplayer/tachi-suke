@@ -46,4 +46,4 @@ draft: false
 
 ## 다음 단계
 
-먼저 매달 감당 가능한 월세와 한 번에 낼 수 있는 초기 비용의 상한을 따로 적으세요. 그다음 [임대 초기 비용 체크리스트](/ko/tools/japan-rent-initial-cost-checklist)와 [지역 가이드](/ko/areas)를 함께 보며 무리 없는 후보를 좁히면 됩니다.
+먼저 매달 감당 가능한 월세와 한 번에 낼 수 있는 초기 비용의 상한을 따로 적으세요. 그다음 [임대 초기 비용 체크리스트](/ko/tools/japan-rent-initial-cost-checklist), [집 보러 갈 때 쓰는 일본어 표현](/ko/tools/apartment-viewing-japanese-phrases), [지역 가이드](/ko/areas)를 함께 보며 무리 없는 후보를 좁히면 됩니다.

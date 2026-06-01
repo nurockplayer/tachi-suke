@@ -833,6 +833,27 @@ Rules:
 - Avoid exact fee promises because costs vary by property, region, agency, and contract.
 - Do not add a rent calculator or backend storage in this phase.
 
+## Phase 1AS: Apartment Viewing Japanese Phrases Tool
+
+Status: implemented.
+
+Goal:
+
+Give foreign residents a practical, static phrase tool for Japanese apartment viewings and rental inquiries, connected to the housing content cluster.
+
+Implemented:
+
+- Added published tool `apartment-viewing-japanese-phrases`.
+- Covered viewing appointments, fees and contract terms, room/equipment checks, and follow-up communication.
+- Linked rental initial-cost articles to the phrase tool.
+- Added source-level and SEO-output tests for the fifth published tool and sitemap entries.
+
+Rules:
+
+- Keep the tool as communication support, not legal advice or contract translation.
+- Confirm important rental terms in writing or email.
+- Do not add saved state, audio playback, or backend storage in Phase 1.
+
 ## Phase 1AI: Article Category Label Polish
 
 Status: implemented.

@@ -544,11 +544,12 @@ describe("TachiSuke project scaffold", () => {
     }
 
     const publishedTools = listFiles("src/content/tools", [".json"]).map(readJson).filter((tool) => tool.status === "published");
-    assert.ok(publishedTools.length >= 4, "Phase 1AF should publish at least four static tools");
+    assert.ok(publishedTools.length >= 5, "Phase 1AS should publish at least five static tools");
     assert.ok(publishedTools.some((tool) => tool.slug === "moving-to-japan-checklist"), "moving checklist should stay published");
     assert.ok(publishedTools.some((tool) => tool.slug === "japan-rent-initial-cost-checklist"), "rent initial cost checklist should be published");
     assert.ok(publishedTools.some((tool) => tool.slug === "ward-office-moving-in-checklist"), "ward office moving-in checklist should be published");
     assert.ok(publishedTools.some((tool) => tool.slug === "commuter-pass-ic-card-checklist"), "commuter pass and IC card checklist should be published");
+    assert.ok(publishedTools.some((tool) => tool.slug === "apartment-viewing-japanese-phrases"), "apartment viewing Japanese phrases tool should be published");
 
     const tool = readJson("src/content/tools/moving-checklist.json");
     assert.equal(tool.slug, "moving-to-japan-checklist");
@@ -618,6 +619,16 @@ describe("TachiSuke project scaffold", () => {
       commuterTool.sourceLinks.some((source) => source.url.includes("pasmo.co.jp")),
       "commuter tool should include a PASMO source link"
     );
+
+    const apartmentViewingTool = readJson("src/content/tools/apartment-viewing-japanese-phrases.json");
+    assert.equal(apartmentViewingTool.status, "published");
+    assert.equal(apartmentViewingTool.slug, "apartment-viewing-japanese-phrases");
+    assert.ok(apartmentViewingTool.sections.length >= 4, "apartment viewing phrases tool should include practical phrase sections");
+    for (const locale of locales) {
+      assert.ok(apartmentViewingTool.title[locale], `apartment viewing tool should include ${locale} title`);
+      assert.ok(apartmentViewingTool.description[locale]?.length > 30, `apartment viewing tool should include ${locale} description`);
+      assert.ok(apartmentViewingTool.sourceNote[locale]?.length > 30, `apartment viewing tool should include ${locale} source note`);
+    }
   });
 
   it("uses the finalized Place enum names across schema and types", () => {

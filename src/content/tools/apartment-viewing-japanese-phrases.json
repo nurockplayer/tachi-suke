@@ -1,0 +1,162 @@
+{
+  "id": "tool-apartment-viewing-japanese-phrases",
+  "slug": "apartment-viewing-japanese-phrases",
+  "title": {
+    "zh-tw": "日本看房實用日文句子",
+    "en": "Apartment Viewing Japanese Phrases",
+    "ja": "内見・賃貸問い合わせの日本語フレーズ",
+    "ko": "일본 집 보러 갈 때 쓰는 일본어 표현"
+  },
+  "description": {
+    "zh-tw": "整理在日本看房、詢問初期費用、確認設備與申請條件時可用的實用日文句子，適合外國居民與剛到日本的人。",
+    "en": "Practical Japanese phrases for apartment viewings, move-in cost questions, equipment checks, and rental application follow-up in Japan.",
+    "ja": "日本で内見、初期費用の確認、設備確認、賃貸申込の連絡をするときに使える実用的な日本語フレーズ集です。",
+    "ko": "일본에서 집을 보러 갈 때 초기 비용, 설비, 신청 조건, 후속 연락을 확인하는 데 쓸 수 있는 실용 일본어 표현입니다."
+  },
+  "status": "published",
+  "lastCheckedAt": "2026-06-01",
+  "sourceNote": {
+    "zh-tw": "本站依日本租屋看房與不動產聯絡常見情境整理。實際用語會依仲介、地區、物件與契約階段不同而改變。",
+    "en": "Compiled from common apartment viewing and rental inquiry situations in Japan. Exact wording can vary by agency, area, property, and contract stage.",
+    "ja": "日本の内見や賃貸問い合わせでよくある場面をもとに整理しています。実際の表現は仲介会社、地域、物件、契約段階によって変わります。",
+    "ko": "일본의 집 보기와 임대 문의에서 자주 나오는 상황을 기준으로 정리했습니다. 실제 표현은 중개사, 지역, 매물, 계약 단계에 따라 달라질 수 있습니다."
+  },
+  "notes": [
+    {
+      "zh-tw": "這份工具是溝通輔助，不是契約翻譯或法律建議。",
+      "en": "This tool supports communication. It is not contract translation or legal advice.",
+      "ja": "このツールはコミュニケーション補助であり、契約翻訳や法律上の助言ではありません。",
+      "ko": "이 도구는 의사소통을 돕기 위한 것이며 계약 번역이나 법률 조언이 아닙니다."
+    },
+    {
+      "zh-tw": "重要費用、退租條件與付款要求請務必以書面或 email 確認。",
+      "en": "Important fees, move-out terms, and payment requirements should be confirmed in writing or by email.",
+      "ja": "重要な費用、退去条件、支払い条件は必ず書面またはメールで確認してください。",
+      "ko": "중요한 비용, 퇴거 조건, 결제 조건은 반드시 서면이나 이메일로 확인하세요."
+    },
+    {
+      "zh-tw": "如果聽不懂，請直接請對方慢慢說或用文字補充，不要假裝理解。",
+      "en": "If you do not understand, ask the person to speak slowly or write it down instead of pretending you understood.",
+      "ja": "分からない場合は、分かったふりをせず、ゆっくり話すか文字で送ってもらいましょう。",
+      "ko": "이해하지 못했다면 아는 척하지 말고 천천히 말해 달라거나 글로 보내 달라고 요청하세요."
+    }
+  ],
+  "sections": [
+    {
+      "id": "viewing-appointment",
+      "title": {
+        "zh-tw": "預約與看房基本句",
+        "en": "Viewing appointment basics",
+        "ja": "内見予約の基本",
+        "ko": "방문 예약 기본 표현"
+      },
+      "items": [
+        {
+          "zh-tw": "「この物件はまだ募集中ですか。」詢問這間房是否還能申請。",
+          "en": "「この物件はまだ募集中ですか。」Ask whether the listing is still available.",
+          "ja": "「この物件はまだ募集中ですか。」募集状況を確認する。",
+          "ko": "「この物件はまだ募集中ですか。」이 매물이 아직 신청 가능한지 묻는다."
+        },
+        {
+          "zh-tw": "「内見できますか。」詢問是否可以看房。",
+          "en": "「内見できますか。」Ask whether you can view the apartment.",
+          "ja": "「内見できますか。」内見できるか確認する。",
+          "ko": "「内見できますか。」방을 보러 갈 수 있는지 묻는다."
+        },
+        {
+          "zh-tw": "「外国籍でも申し込みできますか。」先確認外國籍是否可申請。",
+          "en": "「外国籍でも申し込みできますか。」Check whether foreign residents can apply.",
+          "ja": "「外国籍でも申し込みできますか。」外国籍で申し込めるか確認する。",
+          "ko": "「外国籍でも申し込みできますか。」외국 국적자도 신청 가능한지 확인한다."
+        }
+      ]
+    },
+    {
+      "id": "fees-and-contract",
+      "title": {
+        "zh-tw": "費用與契約條件",
+        "en": "Fees and contract terms",
+        "ja": "費用と契約条件",
+        "ko": "비용과 계약 조건"
+      },
+      "items": [
+        {
+          "zh-tw": "「初期費用の総額を教えてください。」請對方告知初期費用總額。",
+          "en": "「初期費用の総額を教えてください。」Ask for the total move-in cost.",
+          "ja": "「初期費用の総額を教えてください。」初期費用の総額を確認する。",
+          "ko": "「初期費用の総額を教えてください。」초기 비용 총액을 확인한다."
+        },
+        {
+          "zh-tw": "「礼金は返金されますか。」確認禮金是否不退還。",
+          "en": "「礼金は返金されますか。」Confirm whether key money is refundable.",
+          "ja": "「礼金は返金されますか。」礼金の扱いを確認する。",
+          "ko": "「礼金は返金されますか。」사례금 환불 여부를 확인한다."
+        },
+        {
+          "zh-tw": "「保証会社の利用は必須ですか。」確認是否一定要使用保證公司。",
+          "en": "「保証会社の利用は必須ですか。」Ask whether a guarantor company is required.",
+          "ja": "「保証会社の利用は必須ですか。」保証会社が必須か確認する。",
+          "ko": "「保証会社の利用は必須ですか。」보증회사 이용이 필수인지 묻는다."
+        }
+      ]
+    },
+    {
+      "id": "room-and-equipment",
+      "title": {
+        "zh-tw": "房間與設備確認",
+        "en": "Room and equipment checks",
+        "ja": "部屋と設備の確認",
+        "ko": "방과 설비 확인"
+      },
+      "items": [
+        {
+          "zh-tw": "「インターネットは使えますか。」確認是否有網路或需要自行申請。",
+          "en": "「インターネットは使えますか。」Ask whether internet is available or must be arranged separately.",
+          "ja": "「インターネットは使えますか。」インターネット環境を確認する。",
+          "ko": "「インターネットは使えますか。」인터넷 사용 가능 여부를 확인한다."
+        },
+        {
+          "zh-tw": "「エアコンは設備ですか、残置物ですか。」確認冷氣是正式設備還是前住戶留下。",
+          "en": "「エアコンは設備ですか、残置物ですか。」Check whether the air conditioner is contract equipment or left by a previous tenant.",
+          "ja": "「エアコンは設備ですか、残置物ですか。」エアコンの扱いを確認する。",
+          "ko": "「エアコンは設備ですか、残置物ですか。」에어컨이 설비인지 이전 입주자의 잔치물인지 확인한다."
+        },
+        {
+          "zh-tw": "「騒音や周辺環境で注意点はありますか。」詢問噪音與周邊環境注意事項。",
+          "en": "「騒音や周辺環境で注意点はありますか。」Ask about noise and neighborhood caveats.",
+          "ja": "「騒音や周辺環境で注意点はありますか。」騒音や周辺環境の注意点を確認する。",
+          "ko": "「騒音や周辺環境で注意点はありますか。」소음이나 주변 환경 주의점을 묻는다."
+        }
+      ]
+    },
+    {
+      "id": "follow-up",
+      "title": {
+        "zh-tw": "申請與後續聯絡",
+        "en": "Application and follow-up",
+        "ja": "申込とその後の連絡",
+        "ko": "신청과 후속 연락"
+      },
+      "items": [
+        {
+          "zh-tw": "「必要書類をメールで送っていただけますか。」請對方用 email 寄必要文件清單。",
+          "en": "「必要書類をメールで送っていただけますか。」Ask them to email the required document list.",
+          "ja": "「必要書類をメールで送っていただけますか。」必要書類をメールで送ってもらう。",
+          "ko": "「必要書類をメールで送っていただけますか。」필요 서류 목록을 이메일로 보내 달라고 요청한다."
+        },
+        {
+          "zh-tw": "「分からないところを文字で送ってください。」請對方把不懂的地方用文字補充。",
+          "en": "「分からないところを文字で送ってください。」Ask for unclear parts in writing.",
+          "ja": "「分からないところを文字で送ってください。」不明点を文字で送ってもらう。",
+          "ko": "「分からないところを文字で送ってください。」이해하지 못한 부분을 글로 보내 달라고 요청한다."
+        },
+        {
+          "zh-tw": "「検討してから連絡します。」表示想先考慮，不要當場決定。",
+          "en": "「検討してから連絡します。」Say that you will think about it before deciding.",
+          "ja": "「検討してから連絡します。」その場で決めずに持ち帰る。",
+          "ko": "「検討してから連絡します。」그 자리에서 결정하지 않고 검토 후 연락하겠다고 말한다."
+        }
+      ]
+    }
+  ]
+}
