@@ -54,7 +54,7 @@ Implemented:
 - Four locale privacy pages
 - Four locale editorial policy pages
 - Four locale human-readable site map pages for public content discovery
-- Custom static `404.html` recovery page for static hosting
+- Custom static `404.html` recovery page for static hosting, with locale-specific recovery links
 - Four locale account placeholder pages
 - Favorite placeholder button
 - Content collections for articles, areas, places, mobile plans, and tools

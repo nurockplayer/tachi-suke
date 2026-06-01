@@ -222,6 +222,13 @@ Phase 1CP localizes article category display labels:
 - Route slugs and content frontmatter category keys stay unchanged; only visible/meta display labels are localized.
 - Do not change article routes, category slugs, content schemas, search indexing, account placeholders, or backend behavior in Phase 1CP.
 
+Phase 1CQ improves static 404 recovery localization:
+
+- `src/pages/404.astro` stays static, noindex, and excluded from `sitemap.xml`.
+- The page should provide locale-specific recovery sections for `zh-tw`, `en`, `ja`, and `ko`, with links to each locale home, articles, mobile, and tools routes.
+- Mark locale-specific recovery sections with shared BCP47 language metadata.
+- Do not add language-detection redirects, Cloudflare Functions, Workers, analytics, backend error tracking, auth, database, or route changes in Phase 1CQ.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.
