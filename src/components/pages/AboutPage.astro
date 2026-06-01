@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
-import { sectionCopy, type Locale } from "@/lib/i18n";
+import { htmlLangByLocale, localizePath, sectionCopy, type Locale } from "@/lib/i18n";
 
 interface Props {
   locale: Locale;
@@ -8,13 +8,55 @@ interface Props {
 
 const { locale } = Astro.props;
 const title = sectionCopy[locale].aboutTitle;
+const description = locale === "zh-tw"
+  ? "TachiSuke 是幫助外國居民在日本做生活決策的多語系資訊站。"
+  : locale === "en"
+    ? "TachiSuke helps foreign residents make practical daily-life decisions in Japan."
+    : locale === "ja"
+      ? "TachiSuke は、日本で暮らす外国人の実用的な判断を支える多言語情報サイトです。"
+      : "TachiSuke는 일본에 사는 외국인의 실질적인 생활 결정을 돕는 다국어 정보 사이트입니다.";
+const site = Astro.site ?? new URL(Astro.url.origin);
+const canonicalUrl = new URL(Astro.url.pathname, site).href;
+const localeHomeUrl = new URL(localizePath(locale), site).href;
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${canonicalUrl}#webpage`,
+    name: title,
+    description,
+    url: canonicalUrl,
+    inLanguage: htmlLangByLocale[locale],
+    isPartOf: { "@id": new URL("/#website", site).href },
+    publisher: { "@id": new URL("/#organization", site).href }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": `${canonicalUrl}#breadcrumb`,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "TachiSuke",
+        item: localeHomeUrl
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: title,
+        item: canonicalUrl
+      }
+    ]
+  }
+];
 ---
 
-<BaseLayout locale={locale} title={title} description={title}>
+<BaseLayout locale={locale} title={title} description={description} jsonLd={jsonLd}>
   <section class="page-hero">
     <div class="container">
       <h1>{title}</h1>
-      <p>{locale === "zh-tw" ? "TachiSuke 是幫助外國居民在日本做生活決策的多語系資訊站。" : locale === "en" ? "TachiSuke helps foreign residents make practical daily-life decisions in Japan." : locale === "ja" ? "TachiSuke は、日本で暮らす外国人の実用的な判断を支える多言語情報サイトです。" : "TachiSuke는 일본에 사는 외국인의 실질적인 생활 결정을 돕는 다국어 정보 사이트입니다."}</p>
+      <p>{description}</p>
     </div>
   </section>
   <section class="section">

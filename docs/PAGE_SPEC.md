@@ -426,9 +426,9 @@ All public pages should:
 
 **Rendering mode:** Static Astro pages through `SubmitPlacePage`.
 
-**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, and locale alternates. The page must clearly state that submissions do not publish directly.
+**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, locale alternates, conservative `WebPage` JSON-LD, and two-level `BreadcrumbList` JSON-LD. The page must clearly state that submissions do not publish directly.
 
-**Current status:** Implemented for all four locales in Phase 1C. If `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` is unset, the page stays in preview mode and the submit button is disabled. If the endpoint is set, the form posts with `method="POST"` to that endpoint. The form includes provider-agnostic hidden fields: `formName`, `source`, `locale`, `moderationRequired`, `publishDirectly`, and `redirectUrl`. It also includes a visually hidden `website` honeypot field for basic spam reduction.
+**Current status:** Implemented for all four locales in Phase 1C. If `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` is unset, the page stays in preview mode and the submit button is disabled. If the endpoint is set, the form posts with `method="POST"` to that endpoint. The form includes provider-agnostic hidden fields: `formName`, `source`, `locale`, `moderationRequired`, `publishDirectly`, and `redirectUrl`. It also includes a visually hidden `website` honeypot field for basic spam reduction. Phase 1BL adds conservative `WebPage` and `BreadcrumbList` JSON-LD.
 
 **Future notes:** External form providers may require a provider-specific redirect field instead of `redirectUrl`. Submissions must still require moderation before publication. Phase 3 should add a real `place_submissions` table and moderation dashboard if the project moves beyond static endpoint handling.
 
@@ -458,9 +458,9 @@ All public pages should:
 
 **Rendering mode:** Static Astro pages through `ContactPage`.
 
-**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, and locale alternates. The page must clearly state that email is optional/private, sensitive information should not be sent, and the repo does not provide a built-in support backend.
+**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, locale alternates, conservative `WebPage` JSON-LD, and two-level `BreadcrumbList` JSON-LD. The page must clearly state that email is optional/private, sensitive information should not be sent, and the repo does not provide a built-in support backend.
 
-**Current status:** Implemented for all four locales in Phase 1O. If `PUBLIC_CONTACT_FORM_ENDPOINT` is unset, the page stays in preview mode and the submit button is disabled. If the endpoint is set, the form posts with `method="POST"` to that endpoint. The form includes provider-agnostic hidden fields: `formName`, `source`, `locale`, `redirectUrl`, and `publicResponse`. It also includes a visually hidden `company` honeypot field for basic spam reduction. Phase 1Z adds browser-side prefill for the optional `relatedUrl` field when detail-page correction prompts link to `/[locale]/contact?relatedUrl=...`.
+**Current status:** Implemented for all four locales in Phase 1O. If `PUBLIC_CONTACT_FORM_ENDPOINT` is unset, the page stays in preview mode and the submit button is disabled. If the endpoint is set, the form posts with `method="POST"` to that endpoint. The form includes provider-agnostic hidden fields: `formName`, `source`, `locale`, `redirectUrl`, and `publicResponse`. It also includes a visually hidden `company` honeypot field for basic spam reduction. Phase 1Z adds browser-side prefill for the optional `relatedUrl` field when detail-page correction prompts link to `/[locale]/contact?relatedUrl=...`. Phase 1BL adds conservative `WebPage` and `BreadcrumbList` JSON-LD.
 
 **Future notes:** External form providers may require a provider-specific redirect field instead of `redirectUrl`. Do not add database-backed support, analytics, or CRM behavior without a separate privacy/security review.
 
@@ -490,9 +490,9 @@ All public pages should:
 
 **Rendering mode:** Static Astro pages through `AboutPage`.
 
-**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, and locale alternates.
+**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, locale alternates, conservative `WebPage` JSON-LD, and two-level `BreadcrumbList` JSON-LD.
 
-**Current status:** Implemented for all four locales.
+**Current status:** Implemented for all four locales. Phase 1BL adds conservative `WebPage` and `BreadcrumbList` JSON-LD.
 
 **Future notes:** Add contributor guidelines once the static contact/corrections workflow has enough real usage.
 
@@ -506,9 +506,9 @@ All public pages should:
 
 **Rendering mode:** Static Astro pages through `PolicyPage`.
 
-**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, locale alternates, and footer links from all public pages.
+**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, locale alternates, footer links from all public pages, conservative `WebPage` JSON-LD, and two-level `BreadcrumbList` JSON-LD.
 
-**Current status:** Implemented for all four locales in Phase 1M. The page states that account/favorites/submissions are placeholders, submit-place and contact/corrections only post to external endpoints when configured, email is optional/private, and future auth/database features require a fuller privacy review.
+**Current status:** Implemented for all four locales in Phase 1M. The page states that account/favorites/submissions are placeholders, submit-place and contact/corrections only post to external endpoints when configured, email is optional/private, and future auth/database features require a fuller privacy review. Phase 1BL adds conservative `WebPage` and `BreadcrumbList` JSON-LD.
 
 **Future notes:** Replace this with a reviewed production privacy policy before collecting personal account data, adding analytics, or storing database-backed submissions.
 
@@ -522,9 +522,9 @@ All public pages should:
 
 **Rendering mode:** Static Astro pages through `PolicyPage`.
 
-**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, locale alternates, and footer links from all public pages.
+**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, locale alternates, footer links from all public pages, conservative `WebPage` JSON-LD, and two-level `BreadcrumbList` JSON-LD.
 
-**Current status:** Implemented for all four locales in Phase 1M. The page explains that user-submitted places are not published directly, editors may normalize content, and mobile/place/area information can change.
+**Current status:** Implemented for all four locales in Phase 1M. The page explains that user-submitted places are not published directly, editors may normalize content, and mobile/place/area information can change. Phase 1BL adds conservative `WebPage` and `BreadcrumbList` JSON-LD.
 
 **Future notes:** Add source-review and contributor guidelines once the editorial workflow is more mature.
 

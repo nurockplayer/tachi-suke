@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1BJ section index JSON-LD work. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
+This document records the current MVP state after Phase 1BL trust page JSON-LD work. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
 
 ## Completed
 
@@ -71,6 +71,7 @@ This document records the current MVP state after Phase 1BJ section index JSON-L
 - Mobile plan detail `Service` and `BreadcrumbList` JSON-LD.
 - Area detail `WebPage` and `BreadcrumbList` JSON-LD.
 - Tool detail `WebPage`, `ItemList`, and `BreadcrumbList` JSON-LD.
+- Public trust/form pages at `/[locale]/about`, `/[locale]/privacy`, `/[locale]/editorial-policy`, `/[locale]/contact`, and `/[locale]/submit-place` emit conservative `WebPage` and two-level `BreadcrumbList` JSON-LD.
 - Visible breadcrumbs on article detail, article category, place detail, mobile plan detail, area detail, and tool detail pages.
 - Generated `sitemap.xml` for public static routes and content collection detail pages.
 - Sitemap entries include conservative `hreflang` alternates for shared locale pages and translated article detail pages.

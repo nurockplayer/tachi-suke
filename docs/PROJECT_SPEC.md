@@ -180,6 +180,7 @@ The MVP includes:
 - Article index pages emit conservative `CollectionPage` and public-article `ItemList` JSON-LD backed by rendered same-locale article lists
 - Mobile, area, place, and tool index pages emit conservative `CollectionPage` and `ItemList` JSON-LD backed by rendered public cards
 - Public collection index pages emit conservative two-level `BreadcrumbList` JSON-LD from locale home to current section
+- About, privacy, editorial policy, contact, and submit-place pages emit conservative `WebPage` and two-level `BreadcrumbList` JSON-LD
 - Visible breadcrumbs for nested public article, category, place, mobile plan, area, and tool pages
 - Static article table of contents generated from Markdown/MDX headings
 - Cloudflare Pages `_headers` for conservative security and discovery cache defaults
@@ -389,7 +390,7 @@ Engineering metrics:
 - `404.html` is generated, marked `noindex, nofollow`, and excluded from `sitemap.xml`.
 - `feed.xml` includes non-draft public article detail pages across supported locales.
 - `/[locale]/feed.xml` includes only same-locale non-draft public article detail pages.
-- Built representative pages include parseable JSON-LD for site identity, locale homepages, public section indexes, article index pages, article detail pages, place detail pages, mobile plan detail pages, area detail pages, tool detail pages, and breadcrumbs.
+- Built representative pages include parseable JSON-LD for site identity, locale homepages, public section indexes, article index pages, article detail pages, place detail pages, mobile plan detail pages, area detail pages, tool detail pages, trust/form pages, and breadcrumbs.
 - Site identity JSON-LD includes a conservative `SearchAction` for `/en/search?q={search_term_string}`.
 - Structured data must not claim unavailable ratings, review counts, opening hours, coordinates, offers, or exact addresses.
 - Nested public pages render visible breadcrumbs that link to existing parent routes and mark the current page with `aria-current="page"`.

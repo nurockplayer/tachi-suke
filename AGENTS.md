@@ -220,6 +220,12 @@ Phase 1BK adds collection index breadcrumb structured data:
 - Article, mobile, area, place, and tool index pages should emit two-level `BreadcrumbList` JSON-LD from locale home to current section.
 - This does not require visible breadcrumbs on top-level collection index pages unless separately scoped.
 
+Phase 1BL adds trust/form page structured data:
+
+- About, privacy, editorial policy, contact, and submit-place pages should emit conservative `WebPage` and two-level `BreadcrumbList` JSON-LD.
+- Keep this metadata backed by visible page copy and configured static routes.
+- Do not add structured data to noindex account placeholders.
+
 Phase 1C adds submit-place workflow MVP:
 
 - `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` controls form activation.
