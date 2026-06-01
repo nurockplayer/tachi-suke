@@ -12,7 +12,14 @@ tags:
   - "搬入手續"
   - "日本生活"
 publishedAt: "2026-06-01"
-updatedAt: "2026-06-01"
+updatedAt: "2026-06-02"
+sourceLinks:
+  - label: "出入國在留管理廳：外國人生活支援入口"
+    url: "https://www.moj.go.jp/isa/support/portal/guidebook_all.html?hl=ja"
+    note: "日本政府整理的外國人生活與工作基本資訊，可作為區役所／市役所手續前的官方確認入口。"
+  - label: "Digital Agency：My Number FAQ"
+    url: "https://www.digital.go.jp/en/policies/mynumber_faq_02"
+    note: "My Number 通知、住民登錄與地址相關問題的官方說明；實際窗口流程仍以自治體為準。"
 draft: false
 ---
 

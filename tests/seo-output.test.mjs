@@ -488,6 +488,19 @@ describe("static SEO output", () => {
     assert.match(article, /https:\/\/www\.moj\.go\.jp\/content\/001297615\.pdf/, "residence admin article should include Immigration Services Agency URL");
   });
 
+  it("renders official source links on setup and ward-office article pages", () => {
+    const firstWeek = readHtml("en/articles/first-week-japan-setup/index.html");
+    assert.match(firstWeek, /data-article-source-links/, "first-week setup article should render official source links");
+    assert.match(firstWeek, /Immigration Services Agency: Daily Life Support Portal/, "first-week setup article should link the ISA portal source");
+    assert.match(firstWeek, /https:\/\/www\.moj\.go\.jp\/isa\/support\/portal\/guidebook_all\.html\?hl=ja/, "first-week setup article should include the ISA guidebook portal URL");
+    assert.match(firstWeek, /Digital Agency: My Number FAQ/, "first-week setup article should link the Digital Agency source");
+
+    const wardOffice = readHtml("en/articles/ward-office-moving-in-procedures-en/index.html");
+    assert.match(wardOffice, /data-article-source-links/, "ward-office article should render official source links");
+    assert.match(wardOffice, /Immigration Services Agency: Daily Life Support Portal/, "ward-office article should link the ISA portal source");
+    assert.match(wardOffice, /https:\/\/www\.digital\.go\.jp\/en\/policies\/mynumber_faq_02/, "ward-office article should include Digital Agency URL");
+  });
+
   it("generates an RSS feed for public article detail pages", () => {
     const feed = readDist("feed.xml");
     assertFeedLink(feed, "/zh-tw/articles/taiwanese-newcomer-mobile-plan-japan");

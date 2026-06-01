@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1CH everyday shopping checklist content. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
+This document records the current MVP state after Phase 1CI source-backed setup guide content. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
 
 ## Completed
 
@@ -18,7 +18,7 @@ This document records the current MVP state after Phase 1CH everyday shopping ch
 - Article detail pages render semantic published/updated `<time>` metadata and a localized freshness/trust notice before the article body.
 - Build-time related article links on article detail pages, limited to non-draft same-locale articles.
 - Public detail-page correction prompts that link article, place, mobile plan, area, and tool details to contact/corrections with related page URL prefill.
-- Fifty-four public article pages across `zh-tw`, `en`, `ja`, and `ko`, including Phase 1B decision-oriented content, Phase 1AG/1AP commuter pass articles, Phase 1AH/1AP residence administration articles, Phase 1AR rental initial-cost articles, Phase 1AV apartment-viewing practical Japanese articles, Phase 1AW ward-office moving-in procedure articles, Phase 1AX apartment moving-out articles, Phase 1AY garbage sorting articles, Phase 1AZ family restaurant comparison articles, Phase 1BA everyday shopping articles, Phase 1BO emergency/disaster basics articles, and Phase 1BP work contract basics articles.
+- Fifty-four public article pages across `zh-tw`, `en`, `ja`, and `ko`, including Phase 1B decision-oriented content, Phase 1AG/1AP commuter pass articles, Phase 1AH/1AP residence administration articles, Phase 1AR rental initial-cost articles, Phase 1AV apartment-viewing practical Japanese articles, Phase 1AW/1CI ward-office moving-in procedure articles, Phase 1AX apartment moving-out articles, Phase 1AY garbage sorting articles, Phase 1AZ family restaurant comparison articles, Phase 1BA everyday shopping articles, Phase 1BO emergency/disaster basics articles, and Phase 1BP work contract basics articles.
 - Four locale area index pages showing area guide cards.
 - Four locale area detail routes at `/[locale]/areas/[slug]`.
 - Four locale place index pages.
@@ -72,7 +72,7 @@ This document records the current MVP state after Phase 1CH everyday shopping ch
 - Mobile, area, place, and tool index `CollectionPage` and public-card `ItemList` JSON-LD.
 - Collection index `BreadcrumbList` JSON-LD for articles, mobile, areas, places, and tools.
 - Article detail `Article` and `BreadcrumbList` JSON-LD.
-- Article detail pages can render structured official confirmation links from article frontmatter; current emergency/disaster, work-contract, and residence administration articles include first official source links.
+- Article detail pages can render structured official confirmation links from article frontmatter; current emergency/disaster, work-contract, residence administration, first-week setup, and ward-office moving-in procedure articles include first official source links.
 - Article category `WebPage` and `BreadcrumbList` JSON-LD.
 - Place detail `LocalBusiness` and `BreadcrumbList` JSON-LD.
 - Mobile plan detail `Service` and `BreadcrumbList` JSON-LD.

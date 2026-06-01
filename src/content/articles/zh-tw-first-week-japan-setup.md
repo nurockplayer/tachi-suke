@@ -11,7 +11,14 @@ tags:
   - "生活設定"
   - "日本生活"
 publishedAt: "2026-05-31"
-updatedAt: "2026-05-31"
+updatedAt: "2026-06-02"
+sourceLinks:
+  - label: "出入國在留管理廳：外國人生活支援入口"
+    url: "https://www.moj.go.jp/isa/support/portal/guidebook_all.html?hl=ja"
+    note: "日本政府整理的外國人生活與工作基本資訊，適合用來確認來日初期常見手續。"
+  - label: "Digital Agency：My Number FAQ"
+    url: "https://www.digital.go.jp/en/policies/mynumber_faq_02"
+    note: "My Number 通知與住民登錄相關的官方說明，申辦前仍需確認居住地自治體規則。"
 draft: false
 ---
 

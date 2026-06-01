@@ -12,7 +12,14 @@ tags:
   - "moving in"
   - "Japan life"
 publishedAt: "2026-06-01"
-updatedAt: "2026-06-01"
+updatedAt: "2026-06-02"
+sourceLinks:
+  - label: "Immigration Services Agency: Daily Life Support Portal"
+    url: "https://www.moj.go.jp/isa/support/portal/guidebook_all.html?hl=ja"
+    note: "Official Japan government guidance for foreign residents, useful before checking municipal moving-in procedures."
+  - label: "Digital Agency: My Number FAQ"
+    url: "https://www.digital.go.jp/en/policies/mynumber_faq_02"
+    note: "Official guidance for My Number notification and resident-registration-related questions; local office rules still apply."
 draft: false
 ---
 
