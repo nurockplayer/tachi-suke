@@ -661,13 +661,13 @@ describe("TachiSuke project scaffold", () => {
   it("includes Phase 1B content depth for articles, mobile plans, and area guides", () => {
     const articleFiles = listFiles("src/content/articles", [".md", ".mdx"]);
     const articles = articleFiles.map(readFrontmatter);
-    assert.ok(articles.length >= 39, "Phase 1AY should include multilingual garbage sorting article coverage");
+    assert.ok(articles.length >= 42, "Phase 1AZ should include family restaurant translation coverage");
 
     const localeCounts = Object.fromEntries(locales.map((locale) => [locale, articles.filter((article) => article.locale === locale).length]));
-    assert.ok(localeCounts["zh-tw"] >= 11, "Phase 1AY should include at least 11 zh-tw articles");
-    assert.ok(localeCounts.en >= 10, "Phase 1AY should include at least 10 en articles");
-    assert.ok(localeCounts.ja >= 9, "Phase 1AY should include at least 9 ja articles");
-    assert.ok(localeCounts.ko >= 9, "Phase 1AY should include at least 9 ko articles");
+    assert.ok(localeCounts["zh-tw"] >= 11, "Phase 1AZ should include at least 11 zh-tw articles");
+    assert.ok(localeCounts.en >= 11, "Phase 1AZ should include at least 11 en articles");
+    assert.ok(localeCounts.ja >= 10, "Phase 1AZ should include at least 10 ja articles");
+    assert.ok(localeCounts.ko >= 10, "Phase 1AZ should include at least 10 ko articles");
     assert.ok(articles.some((article) => article.slug === "japan-commuter-pass-ic-card-guide"), "zh-tw commuter pass article should exist");
     assert.ok(articles.some((article) => article.slug === "japan-commuter-pass-ic-card-guide-en"), "English commuter pass article should exist");
     assert.ok(articles.some((article) => article.slug === "japan-commuter-pass-ic-card-guide-ja"), "Japanese commuter pass article should exist");
@@ -695,6 +695,10 @@ describe("TachiSuke project scaffold", () => {
     assert.ok(articles.some((article) => article.slug === "japan-garbage-sorting-oversized-trash-en"), "English garbage sorting article should exist");
     assert.ok(articles.some((article) => article.slug === "japan-garbage-sorting-oversized-trash-ja"), "Japanese garbage sorting article should exist");
     assert.ok(articles.some((article) => article.slug === "japan-garbage-sorting-oversized-trash-ko"), "Korean garbage sorting article should exist");
+    assert.ok(articles.some((article) => article.slug === "japan-family-restaurants-dennys-gusto-royal-host"), "zh-tw family restaurant article should exist");
+    assert.ok(articles.some((article) => article.slug === "japan-family-restaurants-dennys-gusto-royal-host-en"), "English family restaurant article should exist");
+    assert.ok(articles.some((article) => article.slug === "japan-family-restaurants-dennys-gusto-royal-host-ja"), "Japanese family restaurant article should exist");
+    assert.ok(articles.some((article) => article.slug === "japan-family-restaurants-dennys-gusto-royal-host-ko"), "Korean family restaurant article should exist");
 
     assert.equal(new Set(articles.map((article) => article.id)).size, articles.length, "article ids should be unique");
     assert.equal(new Set(articles.map((article) => article.slug)).size, articles.length, "article slugs should be globally unique for Astro content ids");
