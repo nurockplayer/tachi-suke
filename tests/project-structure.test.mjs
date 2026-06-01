@@ -445,6 +445,13 @@ describe("TachiSuke project scaffold", () => {
     for (const type of ["article", "place", "mobile_plan", "area", "tool"]) {
       assert.match(searchHelper, new RegExp(`["']${type}["']`), `search index should support ${type} entries`);
     }
+
+    const seoOutputTest = readFileSync(join(root, "tests/seo-output.test.mjs"), "utf8");
+    assert.match(
+      seoOutputTest,
+      /keeps locale search indexes limited to public content collections/,
+      "SEO output tests should verify generated search indexes expose only public content"
+    );
   });
 
   it("includes static article category pages linked from article surfaces", () => {

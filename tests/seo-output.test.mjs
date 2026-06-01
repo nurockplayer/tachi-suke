@@ -1,10 +1,13 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
 const root = process.cwd();
 const dist = join(root, "dist");
+const contentRoot = join(root, "src/content");
+const locales = ["zh-tw", "en", "ja", "ko"];
+const searchEntryTypes = ["article", "place", "mobile_plan", "area", "tool"];
 
 function readDist(relativePath) {
   const fullPath = join(dist, relativePath);
@@ -40,6 +43,74 @@ function sitemapBlock(xml, pathname) {
 
 function readHtml(relativePath) {
   return readDist(relativePath);
+}
+
+function listFiles(dir, extensions) {
+  return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const fullPath = join(dir, entry.name);
+    if (entry.isDirectory()) {
+      return listFiles(fullPath, extensions);
+    }
+
+    return extensions.some((extension) => entry.name.endsWith(extension)) ? [fullPath] : [];
+  });
+}
+
+function readJson(fullPath) {
+  return JSON.parse(readFileSync(fullPath, "utf8"));
+}
+
+function readFrontmatter(fullPath) {
+  const file = readFileSync(fullPath, "utf8");
+  const match = file.match(/^---\n([\s\S]*?)\n---/);
+  assert.ok(match, `${fullPath} should include frontmatter`);
+
+  const data = {};
+  for (const line of match[1].split("\n")) {
+    const property = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+    if (!property) continue;
+
+    const [, key, rawValue] = property;
+    data[key] = rawValue.replace(/^"|"$/g, "");
+  }
+
+  return data;
+}
+
+function isDraft(data) {
+  return data.draft === true || data.draft === "true";
+}
+
+function expectedSearchUrlsByType(locale) {
+  const urls = Object.fromEntries(searchEntryTypes.map((type) => [type, new Set()]));
+
+  for (const article of listFiles(join(contentRoot, "articles"), [".md", ".mdx"]).map(readFrontmatter)) {
+    if (article.locale === locale && !isDraft(article)) {
+      urls.article.add(`/${locale}/articles/${article.slug}`);
+    }
+  }
+
+  for (const place of listFiles(join(contentRoot, "places"), [".json"]).map(readJson)) {
+    if (place.status === "published") {
+      urls.place.add(`/${locale}/places/${place.slug}`);
+    }
+  }
+
+  for (const mobilePlan of listFiles(join(contentRoot, "mobile-plans"), [".json"]).map(readJson)) {
+    urls.mobile_plan.add(`/${locale}/mobile/${mobilePlan.slug}`);
+  }
+
+  for (const area of listFiles(join(contentRoot, "areas"), [".json"]).map(readJson)) {
+    urls.area.add(`/${locale}/areas/${area.slug}`);
+  }
+
+  for (const tool of listFiles(join(contentRoot, "tools"), [".json"]).map(readJson)) {
+    if (tool.status === "published") {
+      urls.tool.add(`/${locale}/tools/${tool.slug}`);
+    }
+  }
+
+  return urls;
 }
 
 function jsonLdObjects(html) {
@@ -491,6 +562,44 @@ describe("static SEO output", () => {
     assert.equal(index.items.some((item) => item.url.startsWith("/en/submit-place")), false, "search index should not include submit-place form routes");
     assert.equal(index.items.some((item) => item.url.startsWith("/en/contact")), false, "search index should not include contact form routes");
     assert.equal(JSON.stringify(index).toLowerCase().includes("draft"), false, "search index should not expose draft metadata");
+  });
+
+  it("keeps locale search indexes limited to public content collections", () => {
+    for (const locale of locales) {
+      const index = JSON.parse(readDist(`${locale}/search-index.json`));
+      const expectedByType = expectedSearchUrlsByType(locale);
+      const expectedUrls = new Set(Object.values(expectedByType).flatMap((urls) => [...urls]));
+      const seenIds = new Set();
+      const seenUrls = new Set();
+
+      assert.equal(index.locale, locale, `${locale} search index should declare its locale`);
+      assert.equal(index.count, index.items.length, `${locale} search index count should match item length`);
+
+      for (const item of index.items) {
+        assert.ok(searchEntryTypes.includes(item.type), `${locale} search entry ${item.id} should use a known type`);
+        assert.equal(seenIds.has(item.id), false, `${locale} search entry id ${item.id} should be unique`);
+        assert.match(item.id, new RegExp(`^${item.type}:`), `${locale} search entry ${item.id} should prefix its type`);
+        assert.equal(item.url, normalizePath(item.url), `${locale} search entry ${item.id} should use normalized URLs`);
+        assert.ok(item.url.startsWith(`/${locale}/`), `${locale} search entry ${item.id} should stay in the locale route tree`);
+        assert.ok(
+          expectedByType[item.type].has(item.url),
+          `${locale} search entry ${item.id} points to non-public or unexpected URL ${item.url}`
+        );
+        assert.doesNotMatch(
+          item.url,
+          /\/(?:account|contact|editorial-policy|privacy|search|site-map|submit-place)(?:\/|$)/,
+          `${locale} search entry ${item.id} should not point to utility, form, trust, or account routes`
+        );
+
+        seenIds.add(item.id);
+        seenUrls.add(item.url);
+      }
+
+      for (const expectedUrl of expectedUrls) {
+        assert.ok(seenUrls.has(expectedUrl), `${locale} search index should include public content URL ${expectedUrl}`);
+      }
+      assert.equal(seenUrls.size, expectedUrls.size, `${locale} search index should not include extra public-looking URLs`);
+    }
   });
 
   it("generates article category landing pages for public same-locale articles", () => {

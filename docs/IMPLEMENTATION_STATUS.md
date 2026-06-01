@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1CA source content internal-link health checks. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
+This document records the current MVP state after Phase 1CB static search index public-health checks. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
 
 ## Completed
 
@@ -30,6 +30,7 @@ This document records the current MVP state after Phase 1CA source content inter
 - Four locale static search pages at `/[locale]/search`, marked `noindex, follow`, with shareable `?q=` query support.
 - Static search zero-result states include localized helper copy and a clear-search button that restores the full public result list.
 - Four locale static search index JSON endpoints at `/[locale]/search-index.json`.
+- Build-output tests verify all four locale search indexes contain only expected public content collection routes.
 - Published static checklist tools: `moving-to-japan-checklist`, `japan-rent-initial-cost-checklist`, `ward-office-moving-in-checklist`, `commuter-pass-ic-card-checklist`, `apartment-viewing-japanese-phrases`, `moving-out-checklist`, and `japan-emergency-disaster-checklist`.
 - Four locale submit-place form pages with provider-agnostic endpoint support.
 - Four locale submit-place thanks pages.
@@ -165,7 +166,7 @@ These are intentionally present but not functional:
 - RSS feeds are static and article-only. They do not include category feeds, pagination, places, tools, mobile plans, or area guides.
 - Static search is substring-based client-side filtering with shareable `?q=` URLs. It does not provide typo tolerance, semantic search, pagination, analytics, or personalization.
 - Search pages are noindex utility pages and are intentionally excluded from `sitemap.xml`. Their zero-result state is recoverable, but it is still client-side substring search.
-- Build-output SEO tests verify the English search index includes current published tool routes and excludes account, search, submit-place, and contact utility routes.
+- Build-output SEO tests verify every locale search index contains only expected public content collection routes and excludes account, search, trust, form, and other utility routes.
 - OpenSearch discovery points to `/en/search?q={searchTerms}` as the stable static fallback. It does not detect language preference or provide backend search.
 - WebSite `SearchAction` points to `/en/search?q={search_term_string}` and has the same limitations as static search.
 - `/404.html` is static and noindex. It does not perform language detection or redirects.
