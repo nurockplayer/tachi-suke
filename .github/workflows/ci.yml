@@ -51,3 +51,18 @@ jobs:
 
       - name: Check built SEO output
         run: pnpm check:seo
+
+      - name: Build static site with production URL
+        env:
+          SITE_URL: https://tachi-suke.pages.dev
+        run: pnpm build
+
+      - name: Check production SEO output
+        env:
+          SITE_URL: https://tachi-suke.pages.dev
+        run: pnpm check:seo
+
+      - name: Check deploy output
+        env:
+          SITE_URL: https://tachi-suke.pages.dev
+        run: pnpm check:deploy

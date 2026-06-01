@@ -231,7 +231,7 @@ Recommended verification order:
 
 For deployment, build with the real `SITE_URL`, then run `pnpm check:seo` and `pnpm check:deploy` with the same value. `pnpm check:seo` validates canonicals, feeds, sitemap, structured data, and search indexes against the configured site URL. `pnpm check:deploy` fails if `dist` still contains `https://tachi-suke.example.com`.
 
-GitHub Actions runs the same verification order on pull requests and pushes to `main`, including forbidden lockfile rejection. Cloudflare Pages deployment is still configured separately.
+GitHub Actions runs the same verification order on pull requests and pushes to `main`, including forbidden lockfile rejection, fallback-domain SEO output checks, and production `SITE_URL=https://tachi-suke.pages.dev` SEO/deploy output checks. Cloudflare Pages deployment is still configured separately.
 
 ## Environment Variables
 

@@ -305,6 +305,25 @@ Rules:
 - Build and SEO verification must use the same `SITE_URL` value for production deployment checks.
 - Do not use `pnpm check:deploy` as a replacement for SEO checks; it is a narrow fallback-domain guard.
 
+## Phase 1CD: CI Production SEO Gate
+
+Status: implemented.
+
+Goal:
+
+Move production URL SEO/deploy output verification from a manual-only step into the pull request and `main` CI gate.
+
+Implemented:
+
+- CI still runs the fallback-domain build and `pnpm check:seo` to protect local default output.
+- CI also builds with `SITE_URL=https://tachi-suke.pages.dev`.
+- CI runs `SITE_URL=https://tachi-suke.pages.dev pnpm check:seo` and `SITE_URL=https://tachi-suke.pages.dev pnpm check:deploy` against deployable output.
+
+Rules:
+
+- Keep the production CI URL aligned with the active Cloudflare Pages production alias until a custom domain is decided.
+- If the final domain changes, update Cloudflare Pages `SITE_URL`, CI, README, and deployment docs in the same PR.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.

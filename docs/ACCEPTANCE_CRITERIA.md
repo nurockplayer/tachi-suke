@@ -32,7 +32,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - `pnpm check:seo` must pass after `pnpm build` when verifying generated SEO output.
 - `SITE_URL=<production-url> pnpm check:seo` must pass after a production-URL build when verifying deployable SEO output.
 - `pnpm check:deploy` must pass after building with the real `SITE_URL` before manual Cloudflare Pages deployment.
-- CI must run the same verification chain for pull requests and pushes to `main`.
+- CI must run the same verification chain for pull requests and pushes to `main`, including a production `SITE_URL=https://tachi-suke.pages.dev` SEO/deploy output check.
 - `pnpm check:content` should verify content IDs, slugs, dates, review dates, stored URL fields, and Markdown/MDX root-relative internal links without fetching the network.
 - Structure tests should verify required files, required locale routes, pnpm-only lockfile policy, content collections, `SITE_URL` fallback strategy, and finalized Place enum values.
 - Phase 1B/1B.5 tests should verify minimum content depth for articles, mobile plans, and area guides.
