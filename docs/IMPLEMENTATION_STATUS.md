@@ -15,6 +15,7 @@ This document records the current MVP state after Phase 1CI source-backed setup 
 - Four locale article detail routes at `/[locale]/articles/[slug]`.
 - Four locale article category routes at `/[locale]/articles/category/[category]`.
 - Localized article category display labels on public article index rows, category-page rows, and homepage latest-article cards.
+- Localized article detail category labels in visible metadata, breadcrumbs, Open Graph, and JSON-LD.
 - Static article table of contents generated from Markdown/MDX H2/H3 headings.
 - Article detail pages render semantic published/updated `<time>` metadata and a localized freshness/trust notice before the article body.
 - Build-time related article links on article detail pages, limited to non-draft same-locale articles.

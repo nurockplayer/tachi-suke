@@ -588,6 +588,27 @@ Rules:
 - Do not add language-detection redirects, Cloudflare Functions, Workers, analytics, backend error tracking, auth, database, or route changes in Phase 1CQ.
 - Keep no-JavaScript and noindex fallback behavior intact.
 
+## Phase 1CR: Localized Article Detail Category Labels
+
+Status: implemented.
+
+Goal:
+
+Finish article category localization on article detail pages so readers and crawlers do not see raw content category keys such as `mobile` or `procedures`.
+
+Implemented:
+
+- Article detail visible metadata uses `getArticleCategoryTitle(locale, category)`.
+- Article detail visible breadcrumbs use localized category labels while preserving category route slugs.
+- Article detail Open Graph `article:section` uses the localized category label.
+- Article JSON-LD `articleSection` and breadcrumb JSON-LD category names use localized category labels.
+- Added source-level and build-output SEO coverage for English and Traditional Chinese examples.
+
+Rules:
+
+- Keep content frontmatter category keys and category route slugs stable.
+- Do not change search indexing, article routes, content schemas, account placeholders, or backend behavior in Phase 1CR.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.
