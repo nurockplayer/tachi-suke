@@ -1297,6 +1297,25 @@ Rules:
 - Do not duplicate the security file at root.
 - Keep `/.well-known/security.txt` as the canonical URL.
 
+## Phase 1BH: Homepage JSON-LD
+
+Status: implemented.
+
+Goal:
+
+Help search engines understand each locale homepage as a localized Japan-life decision entry page.
+
+Implemented:
+
+- Added conservative `WebPage` JSON-LD to `LocaleHomePage.astro`.
+- Added start-here `ItemList` JSON-LD using the existing homepage entry links.
+- Added source-level and build-output SEO tests for all four locale homepages.
+
+Rules:
+
+- Keep homepage JSON-LD backed by rendered page copy and existing links.
+- Do not invent ratings, review counts, pricing, analytics, or external claims.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.
