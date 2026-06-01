@@ -2,7 +2,7 @@
 
 ## Startup Readback
 
-- `cwd`: `/Users/tachikoma/Developer/tachi-suke`
+- `cwd`: `<repo-root>`
 - `branch`: `codex/phase-1ct-seo-url-inference`
 - `source_of_truth`: `AGENTS.md`, `docs/ai/autonomous-bootstrap.md`, and autonomous PR instructions
 - `phase`: Phase 1-safe maintenance
