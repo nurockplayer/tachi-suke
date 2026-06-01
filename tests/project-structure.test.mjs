@@ -392,10 +392,25 @@ describe("TachiSuke project scaffold", () => {
   it("keeps the collapsed language switcher language-neutral", () => {
     const localeSwitcher = readFileSync(join(root, "src/components/layout/LocaleSwitcher.astro"), "utf8");
     const globalStyles = readFileSync(join(root, "src/styles/global.css"), "utf8");
+    const i18n = readFileSync(join(root, "src/lib/i18n/index.ts"), "utf8");
 
     assert.match(localeSwitcher, /data-locale-icon/, "LocaleSwitcher should expose a globe icon");
     assert.match(localeSwitcher, /control-summary-icon-only/, "collapsed language switcher should use icon-only styling");
     assert.match(localeSwitcher, /visually-hidden/, "LocaleSwitcher should keep an accessible non-visual label");
+    assert.match(localeSwitcher, /getUiCopy\(locale,\s*"layout\.languageNavigation"\)/, "LocaleSwitcher nav label should come from shared i18n copy");
+    assert.match(localeSwitcher, /getUiCopy\(locale,\s*"layout\.changeLanguage"\)/, "LocaleSwitcher accessible label should come from shared i18n copy");
+    assert.match(localeSwitcher, /aria-label=\{languageNavigationLabel\}/, "LocaleSwitcher nav should use the localized language navigation label");
+    assert.match(localeSwitcher, /aria-label=\{languageSwitchLabel\}/, "LocaleSwitcher summary should use the localized language switch label");
+    assert.match(localeSwitcher, /title=\{languageSwitchLabel\}/, "LocaleSwitcher title should use the localized language switch label");
+    assert.match(localeSwitcher, /\{languageSwitchLabel\}/, "LocaleSwitcher hidden label should use the localized language switch label");
+    assert.match(i18n, /"layout\.languageNavigation"/, "i18n copy should define a language-navigation key");
+    assert.match(i18n, /"layout\.changeLanguage"/, "i18n copy should define a change-language key");
+    for (const label of ["語言選單", "Language", "言語メニュー", "언어 메뉴"]) {
+      assert.match(i18n, new RegExp(label), `i18n copy should include localized language navigation label: ${label}`);
+    }
+    for (const label of ["切換語言", "Change language", "言語を切り替える", "언어 변경"]) {
+      assert.match(i18n, new RegExp(label), `i18n copy should include localized language switch label: ${label}`);
+    }
     assert.doesNotMatch(localeSwitcher, /currentLocaleCode/, "collapsed language switcher should not show locale-specific shorthand");
     assert.doesNotMatch(localeSwitcher, /data-locale-current/, "collapsed language switcher should not render the current locale code");
     assert.doesNotMatch(localeSwitcher, />Lang</, "collapsed language switcher should not depend on English visible text");
@@ -561,7 +576,7 @@ describe("TachiSuke project scaffold", () => {
     assert.match(localeSwitcher, /data-global-control/, "LocaleSwitcher should participate in shared header disclosure behavior");
     assert.match(localeSwitcher, /<details[\s\S]*data-locale-switcher/, "LocaleSwitcher should use a details disclosure");
     assert.match(localeSwitcher, /<summary[\s\S]*data-locale-summary/, "LocaleSwitcher should expose a stable summary trigger");
-    assert.match(localeSwitcher, /aria-label="Change language"/, "LocaleSwitcher summary should have a language-neutral accessible label");
+    assert.match(localeSwitcher, /aria-label=\{languageSwitchLabel\}/, "LocaleSwitcher summary should have a localized accessible label");
     assert.match(localeSwitcher, /<svg[\s\S]*data-locale-icon/, "LocaleSwitcher summary should expose a globe icon");
     assert.match(localeSwitcher, /control-summary-icon-only/, "LocaleSwitcher summary should stay visual-language neutral when collapsed");
     assert.doesNotMatch(localeSwitcher, /data-locale-current/, "LocaleSwitcher summary should not show a compact current-locale code");

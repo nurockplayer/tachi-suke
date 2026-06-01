@@ -1,5 +1,5 @@
 ---
-import { localeNames, locales, localizePath, type Locale } from "@/lib/i18n";
+import { getUiCopy, localeNames, locales, localizePath, type Locale } from "@/lib/i18n";
 
 interface Props {
   locale: Locale;
@@ -14,12 +14,14 @@ const switcherPaths = alternatePaths ?? Object.fromEntries(locales.map((targetLo
   localizePath(targetLocale, pathWithoutLocale)
 ])) as Partial<Record<Locale, string>>;
 const availableLocales = locales.filter((targetLocale) => switcherPaths[targetLocale]);
+const languageNavigationLabel = getUiCopy(locale, "layout.languageNavigation");
+const languageSwitchLabel = getUiCopy(locale, "layout.changeLanguage");
 ---
 
 {availableLocales.length > 0 && (
-  <nav aria-label="Language">
+  <nav aria-label={languageNavigationLabel}>
     <details class="control-disclosure locale-switcher" data-global-control data-locale-switcher>
-      <summary class="control-summary control-summary-icon-only" data-locale-summary aria-label="Change language" title="Change language">
+      <summary class="control-summary control-summary-icon-only" data-locale-summary aria-label={languageSwitchLabel} title={languageSwitchLabel}>
         <svg
           class="control-icon"
           data-locale-icon
@@ -30,7 +32,7 @@ const availableLocales = locales.filter((targetLocale) => switcherPaths[targetLo
           <circle cx="12" cy="12" r="9"></circle>
           <path d="M3.6 9h16.8M3.6 15h16.8M12 3c2.2 2.5 3.2 5.5 3.2 9s-1 6.5-3.2 9M12 3C9.8 5.5 8.8 8.5 8.8 12s1 6.5 3.2 9"></path>
         </svg>
-        <span class="visually-hidden">Change language</span>
+        <span class="visually-hidden">{languageSwitchLabel}</span>
       </summary>
       <div class="control-menu locale-menu" data-locale-menu>
         {availableLocales.map((targetLocale) => (

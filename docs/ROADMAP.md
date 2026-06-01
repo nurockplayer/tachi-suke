@@ -225,6 +225,27 @@ Rules:
 - Keep search dependency-free, static, and `noindex, follow` in Phase 1.
 - Do not add backend search, analytics, personalization, typo tolerance, auth, or saved search state in this phase.
 
+## Phase 1BZ: Locale Switcher Accessibility Labels
+
+Status: implemented.
+
+Goal:
+
+Keep the collapsed language switcher visually language-neutral while making the assistive labels natural in the active locale.
+
+Implemented:
+
+- The collapsed language switcher remains globe-icon only and does not show the current locale code or native locale name.
+- The language navigation landmark uses locale-aware copy.
+- The language switcher trigger `aria-label`, `title`, and visually hidden text use locale-aware copy.
+- Source-level tests cover the shared i18n keys and stable switcher hooks.
+
+Rules:
+
+- Keep language choices and theme choices as separate controls.
+- Keep the closed language control understandable to users who cannot read the current page language.
+- Do not add an icon dependency for this control.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.

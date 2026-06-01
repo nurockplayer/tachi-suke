@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1BY static search usability work. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
+This document records the current MVP state after Phase 1BZ language switcher accessibility polish. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
 
 ## Completed
 
@@ -61,6 +61,7 @@ This document records the current MVP state after Phase 1BY static search usabil
 - Article Open Graph metadata for public article detail pages.
 - Browser/PWA metadata in `BaseLayout`: `theme-color`, `application-name`, `apple-mobile-web-app-title`, and `format-detection`.
 - System/light/dark theme support with media-aware browser `theme-color` metadata, an early persisted-theme initializer, a globe-icon collapsed language control, a separate collapsed theme control, and a no-JavaScript `prefers-color-scheme: dark` fallback.
+- The collapsed language switcher stays visually language-neutral with a globe icon while its navigation, trigger, title, and visually hidden labels use the active locale.
 - JSON-LD structured data support in `BaseLayout`.
 - Site-wide `Organization` and `WebSite` JSON-LD.
 - Site-wide `WebSite` JSON-LD includes a conservative `SearchAction` for the static English search fallback.
