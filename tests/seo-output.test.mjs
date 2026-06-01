@@ -703,6 +703,22 @@ describe("static SEO output", () => {
     }
   });
 
+  it("renders visible breadcrumbs on collection index pages", () => {
+    for (const [locale, ariaLabel, sections] of [
+      ["zh-tw", "麵包屑導覽", [["articles", "生活文章"], ["areas", "地區生活圈"], ["places", "店家推薦"], ["mobile", "手機門號"], ["tools", "生活工具"]]],
+      ["en", "Breadcrumb", [["articles", "Life Articles"], ["areas", "Area Guides"], ["places", "Useful Places"], ["mobile", "Mobile Plans"], ["tools", "Life Tools"]]],
+      ["ja", "パンくずリスト", [["articles", "生活記事"], ["areas", "エリアガイド"], ["places", "おすすめのお店"], ["mobile", "携帯プラン"], ["tools", "生活ツール"]]],
+      ["ko", "이동 경로", [["articles", "생활 글"], ["areas", "지역 가이드"], ["places", "유용한 장소"], ["mobile", "휴대폰 요금제"], ["tools", "생활 도구"]]]
+    ]) {
+      for (const [section, currentText] of sections) {
+        const html = readHtml(`${locale}/${section}/index.html`);
+        assert.match(html, new RegExp(`<nav class="breadcrumbs" aria-label="${escapeRegExp(ariaLabel)}">`), `${locale}/${section} should render breadcrumb navigation`);
+        assert.match(html, new RegExp(`href="\\/${locale}\\/"`), `${locale}/${section} breadcrumb should link to locale home`);
+        assert.match(html, new RegExp(`aria-current="page"[^>]*>${escapeRegExp(currentText)}`), `${locale}/${section} breadcrumb should mark the current collection`);
+      }
+    }
+  });
+
   it("renders article table of contents links to generated heading anchors", () => {
     const html = readHtml("en/articles/choose-mobile-plan-japan-foreigner/index.html");
     assert.match(html, /<nav class="article-toc" aria-labelledby="article-toc-title">/, "article detail should render a table of contents");

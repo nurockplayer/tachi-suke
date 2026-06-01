@@ -495,6 +495,8 @@ describe("TachiSuke project scaffold", () => {
     assert.match(categoryPage, /itemListElement:\s*articles\.map/, "ArticleCategoryPage should map visible articles into ItemList entries");
 
     const articlesIndex = readFileSync(join(root, "src/components/pages/ArticlesIndexPage.astro"), "utf8");
+    assert.match(articlesIndex, /import Breadcrumbs from "@\/components\/navigation\/Breadcrumbs\.astro"/, "articles index should import visible breadcrumbs");
+    assert.match(articlesIndex, /<Breadcrumbs[\s\S]*items=\{breadcrumbItems\}/, "articles index should render visible breadcrumbs");
     assert.match(articlesIndex, /getArticleCategorySummaries/, "articles index should show category entry links");
     assert.match(articlesIndex, /`\/articles\/category\/\$\{category\.slug\}`/, "articles index should link to category pages");
     assert.match(articlesIndex, /"@type":\s*"CollectionPage"/, "articles index should define CollectionPage JSON-LD");
@@ -508,18 +510,24 @@ describe("TachiSuke project scaffold", () => {
     assert.match(articleLayout, /`\/articles\/category\/\$\{slugifyArticleCategory\(category\)\}`/, "article detail category should link to category page");
 
     const mobileIndex = readFileSync(join(root, "src/components/pages/MobileIndexPage.astro"), "utf8");
+    assert.match(mobileIndex, /import Breadcrumbs from "@\/components\/navigation\/Breadcrumbs\.astro"/, "mobile index should import visible breadcrumbs");
+    assert.match(mobileIndex, /<Breadcrumbs[\s\S]*items=\{breadcrumbItems\}/, "mobile index should render visible breadcrumbs");
     assert.match(mobileIndex, /"@type":\s*"CollectionPage"/, "mobile index should define CollectionPage JSON-LD");
     assert.match(mobileIndex, /"@type":\s*"ItemList"/, "mobile index should define ItemList JSON-LD");
     assert.match(mobileIndex, /"@type":\s*"BreadcrumbList"/, "mobile index should define BreadcrumbList JSON-LD");
     assert.match(mobileIndex, /numberOfItems:\s*plans\.length/, "mobile index should count rendered plans in ItemList");
 
     const placesIndex = readFileSync(join(root, "src/components/pages/PlacesIndexPage.astro"), "utf8");
+    assert.match(placesIndex, /import Breadcrumbs from "@\/components\/navigation\/Breadcrumbs\.astro"/, "places index should import visible breadcrumbs");
+    assert.match(placesIndex, /<Breadcrumbs[\s\S]*items=\{breadcrumbItems\}/, "places index should render visible breadcrumbs");
     assert.match(placesIndex, /"@type":\s*"CollectionPage"/, "places index should define CollectionPage JSON-LD");
     assert.match(placesIndex, /"@type":\s*"ItemList"/, "places index should define ItemList JSON-LD");
     assert.match(placesIndex, /"@type":\s*"BreadcrumbList"/, "places index should define BreadcrumbList JSON-LD");
     assert.match(placesIndex, /status\s*===\s*"published"/, "places index should keep public filtering to published places");
 
     const simpleSectionPage = readFileSync(join(root, "src/components/pages/SimpleSectionPage.astro"), "utf8");
+    assert.match(simpleSectionPage, /import Breadcrumbs from "@\/components\/navigation\/Breadcrumbs\.astro"/, "area/tool index component should import visible breadcrumbs");
+    assert.match(simpleSectionPage, /<Breadcrumbs[\s\S]*items=\{breadcrumbItems\}/, "area/tool index component should render visible breadcrumbs");
     assert.match(simpleSectionPage, /"@type":\s*"CollectionPage"/, "area/tool index component should define CollectionPage JSON-LD");
     assert.match(simpleSectionPage, /"@type":\s*"ItemList"/, "area/tool index component should define ItemList JSON-LD");
     assert.match(simpleSectionPage, /"@type":\s*"BreadcrumbList"/, "area/tool index component should define BreadcrumbList JSON-LD");
