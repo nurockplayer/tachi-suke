@@ -152,7 +152,7 @@ Do not use Simplified Chinese unless explicitly requested.
 
 Phase 1 is content-first, SEO-friendly, i18n-ready, auth-ready, database-ready, and favorites-ready.
 
-Current MVP includes static pages, article publishing, place detail pages, mobile/area/tool detail pages, human-readable site map pages, static submit-place and contact/corrections external endpoint support, placeholder account pages, placeholder favorites, content collections, SEO metadata, RSS feeds, static search indexes, `llms.txt` discovery, browser OpenSearch discovery, and system/light/dark theme support with separate collapsed language and theme header controls.
+Current MVP includes static pages, article publishing, place detail pages, mobile/area/tool detail pages, human-readable site map pages, static submit-place and contact/corrections external endpoint support, placeholder account pages, placeholder favorites, content collections, SEO metadata, RSS feeds, static search indexes, `llms.txt` discovery, browser OpenSearch discovery, and system/light/dark theme support with a globe-icon collapsed language control and separate collapsed theme control.
 
 Phase 1B adds public-preview content depth:
 

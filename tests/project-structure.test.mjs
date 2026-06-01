@@ -524,11 +524,13 @@ describe("TachiSuke project scaffold", () => {
     assert.match(localeSwitcher, /data-global-control/, "LocaleSwitcher should participate in shared header disclosure behavior");
     assert.match(localeSwitcher, /<details[\s\S]*data-locale-switcher/, "LocaleSwitcher should use a details disclosure");
     assert.match(localeSwitcher, /<summary[\s\S]*data-locale-summary/, "LocaleSwitcher should expose a stable summary trigger");
+    assert.match(localeSwitcher, /aria-label="Change language"/, "LocaleSwitcher summary should have a language-neutral accessible label");
+    assert.match(localeSwitcher, /<svg[\s\S]*data-locale-icon/, "LocaleSwitcher summary should expose a globe icon");
+    assert.match(localeSwitcher, /data-locale-current/, "LocaleSwitcher summary may show a compact current-locale code");
+    assert.match(localeSwitcher, /currentLocaleCode/, "LocaleSwitcher should use locale codes instead of current-locale names in its summary");
+    assert.doesNotMatch(localeSwitcher, /<strong>\{localeNames\[locale\]\}<\/strong>/, "LocaleSwitcher summary must not rely on the current locale's native name");
     assert.match(localeSwitcher, /data-locale-menu/, "LocaleSwitcher should wrap language links in a stable menu");
-    assert.match(localeSwitcher, /localeNames\[locale\]/, "LocaleSwitcher summary should show the current locale name");
-    for (const label of ["語言", "Language", "言語", "언어"]) {
-      assert.match(localeSwitcher, new RegExp(label), `LocaleSwitcher should include localized ${label} label`);
-    }
+    assert.match(localeSwitcher, /localeNames\[targetLocale\]/, "LocaleSwitcher menu should still show native language names");
 
     const themeToggle = readFileSync(join(root, "src/components/layout/ThemeToggle.astro"), "utf8");
     assert.match(themeToggle, /data-global-control/, "ThemeToggle should participate in shared header disclosure behavior");

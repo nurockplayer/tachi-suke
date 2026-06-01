@@ -58,7 +58,7 @@ This document records the current MVP state after Phase 1BR collapsible global c
 - Open Graph locale and alternate locale metadata in `BaseLayout`.
 - Article Open Graph metadata for public article detail pages.
 - Browser/PWA metadata in `BaseLayout`: `theme-color`, `application-name`, `apple-mobile-web-app-title`, and `format-detection`.
-- System/light/dark theme support with media-aware browser `theme-color` metadata, an early persisted-theme initializer, separate collapsed locale and theme header controls, and a no-JavaScript `prefers-color-scheme: dark` fallback.
+- System/light/dark theme support with media-aware browser `theme-color` metadata, an early persisted-theme initializer, a globe-icon collapsed language control, a separate collapsed theme control, and a no-JavaScript `prefers-color-scheme: dark` fallback.
 - JSON-LD structured data support in `BaseLayout`.
 - Site-wide `Organization` and `WebSite` JSON-LD.
 - Site-wide `WebSite` JSON-LD includes a conservative `SearchAction` for the static English search fallback.

@@ -186,6 +186,25 @@ Rules:
 - Keep the controls usable without introducing a custom menu library.
 - Do not mix future account, favorites, or personalization settings into these Phase 1 header controls.
 
+## Phase 1BS: Globe Language Switcher
+
+Status: implemented.
+
+Goal:
+
+Make the collapsed language control recognizable before the visitor understands the current page language.
+
+Implemented:
+
+- Closed language switcher uses a globe SVG icon, neutral `Lang` label, and compact current-locale code.
+- Expanded language menu still shows native language names.
+- Source-level tests assert that the closed language switcher does not rely on `{localeNames[locale]}`.
+
+Rules:
+
+- Keep the language control visually language-neutral in the closed state.
+- Do not add an icon dependency for this small header control.
+
 ## Phase 1E: Structured Data
 
 Status: implemented.
