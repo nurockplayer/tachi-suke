@@ -8,7 +8,7 @@
     "dev": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "test": "node --test tests/project-structure.test.mjs",
+    "test": "node --test tests/project-structure.test.mjs tests/form-contract.test.mjs",
     "check:content": "node --test tests/content-health.test.mjs",
     "check:links": "node tests/static-html-links.test.mjs",
     "check:seo": "node --test tests/seo-output.test.mjs",

@@ -201,6 +201,8 @@ describe("TachiSuke project scaffold", () => {
     const packageJson = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));
     assert.match(packageJson.packageManager, /^pnpm@10/);
     assert.equal(packageJson.scripts.preinstall, undefined);
+    assert.match(packageJson.scripts.test, /tests\/project-structure\.test\.mjs/);
+    assert.match(packageJson.scripts.test, /tests\/form-contract\.test\.mjs/);
     assert.equal(packageJson.scripts["check:content"], "node --test tests/content-health.test.mjs");
     assert.equal(packageJson.scripts["check:links"], "node tests/static-html-links.test.mjs");
     assert.equal(packageJson.scripts["check:seo"], "node --test tests/seo-output.test.mjs");

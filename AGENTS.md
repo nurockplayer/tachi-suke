@@ -187,6 +187,12 @@ Phase 1CI adds source-backed setup guide coverage:
 - Use source links as confirmation starting points, not exhaustive procedure guarantees.
 - Do not add live external crawling, CMS workflows, database-backed source review, or Phase 2 behavior in Phase 1CI.
 
+Phase 1CK adds static form contract tests:
+
+- `pnpm test` should cover submit-place and contact/corrections form contracts.
+- Contract tests should verify provider-agnostic endpoint env vars, preview-mode disabled submit, static `POST` action binding, hidden routing/moderation/privacy fields, honeypot fields, required fields, and URL/email input types.
+- Do not turn these forms into backend storage, provider-specific integrations, captcha flows, auth-gated flows, or database-backed workflows in Phase 1CK.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.

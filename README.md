@@ -89,6 +89,7 @@ Implemented:
 - Conservative locale switcher behavior for detail pages with missing translations
 - `SITE_URL` environment variable fallback
 - Structure and conservative internal-link tests in `tests/project-structure.test.mjs`
+- Static submit-place and contact/corrections form contract tests in `tests/form-contract.test.mjs`
 - Build-output static HTML internal link crawler in `tests/static-html-links.test.mjs`
 - Build-output SEO check in `tests/seo-output.test.mjs`
 - GitHub Actions CI quality gate for pull requests and pushes to `main`
@@ -227,7 +228,7 @@ Recommended verification order:
 4. `pnpm check:links`
 5. `pnpm check:seo`
 
-`pnpm test` checks source-level structure and content links. `pnpm check:content` checks content IDs, slugs, dates, review dates, and stored URL fields without fetching the network. `pnpm check:links` scans built `dist/**/*.html`. `pnpm check:seo` checks built `sitemap.xml`, `robots.txt`, `site.webmanifest`, `opensearch.xml`, global RSS feed, locale RSS feeds, and Cloudflare headers. Run `pnpm build` before both build-output checks.
+`pnpm test` checks source-level structure, content links, and static form contracts. `pnpm check:content` checks content IDs, slugs, dates, review dates, and stored URL fields without fetching the network. `pnpm check:links` scans built `dist/**/*.html`. `pnpm check:seo` checks built `sitemap.xml`, `robots.txt`, `site.webmanifest`, `opensearch.xml`, global RSS feed, locale RSS feeds, and Cloudflare headers. Run `pnpm build` before both build-output checks.
 
 For deployment, build with the real `SITE_URL`, then run `pnpm check:seo` and `pnpm check:deploy` with the same value. `pnpm check:seo` validates canonicals, feeds, sitemap, structured data, and search indexes against the configured site URL. `pnpm check:deploy` fails if `dist` still contains `https://tachi-suke.example.com`.
 
@@ -326,6 +327,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - Structured data must be backed by current static content. Do not invent ratings, review counts, opening hours, or exact addresses.
 - WebSite JSON-LD exposes only the static English search fallback as `SearchAction`; do not imply backend or private-content search.
 - Visible breadcrumbs should stay locale-aware, link only to existing public routes, and mark the current page with `aria-current="page"`.
+- Submit-place and contact/corrections form contracts should stay provider-agnostic: env-controlled endpoint, preview-mode disabled submit, hidden classification fields, honeypot field, and no repository-side storage.
 - Mobile plan structured data must stay conservative. Do not add `Offer` price markup until pricing and campaign review workflows are mature.
 - `/feed.xml` is a global RSS feed for non-draft articles across all locales.
 - `/[locale]/feed.xml` is a locale-specific RSS feed for same-locale non-draft articles.
