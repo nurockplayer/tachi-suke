@@ -250,9 +250,9 @@ All public pages should:
 
 **Rendering mode:** Static Astro pages through `ArticlesIndexPage`.
 
-**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, and locale alternates.
+**SEO requirements:** Locale-specific title, description, canonical URL, Open Graph metadata, locale alternates, category links, `CollectionPage` JSON-LD, and public-article `ItemList` JSON-LD.
 
-**Current status:** Implemented for all four locales.
+**Current status:** Implemented for all four locales. Phase 1BI exposes the same-locale public article list as conservative JSON-LD.
 
 **Future notes:** Add category filters, richer article taxonomy, and stronger related-content navigation after content volume increases.
 

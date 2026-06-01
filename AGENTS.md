@@ -205,6 +205,11 @@ Phase 1BH adds homepage structured data:
 - Locale homepages should emit conservative `WebPage` and start-here `ItemList` JSON-LD from existing homepage copy and links.
 - Do not invent ratings, pricing, review counts, or external claims in homepage structured data.
 
+Phase 1BI adds article index structured data:
+
+- Article index pages should emit conservative `CollectionPage` and `ItemList` JSON-LD from same-locale, non-draft public articles.
+- Keep article index JSON-LD aligned with rendered article lists; do not add engagement metrics or unsupported authorship claims.
+
 Phase 1C adds submit-place workflow MVP:
 
 - `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` controls form activation.

@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1BH homepage JSON-LD work. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
+This document records the current MVP state after Phase 1BI article index JSON-LD work. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
 
 ## Completed
 
@@ -62,6 +62,7 @@ This document records the current MVP state after Phase 1BH homepage JSON-LD wor
 - Site-wide `Organization` and `WebSite` JSON-LD.
 - Site-wide `WebSite` JSON-LD includes a conservative `SearchAction` for the static English search fallback.
 - Locale homepage `WebPage` and start-here `ItemList` JSON-LD.
+- Article index `CollectionPage` and public-article `ItemList` JSON-LD.
 - Article detail `Article` and `BreadcrumbList` JSON-LD.
 - Article category `WebPage` and `BreadcrumbList` JSON-LD.
 - Place detail `LocalBusiness` and `BreadcrumbList` JSON-LD.

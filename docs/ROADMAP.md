@@ -1316,6 +1316,25 @@ Rules:
 - Keep homepage JSON-LD backed by rendered page copy and existing links.
 - Do not invent ratings, review counts, pricing, analytics, or external claims.
 
+## Phase 1BI: Article Index JSON-LD
+
+Status: implemented.
+
+Goal:
+
+Make `/[locale]/articles` clearer as a localized public article hub.
+
+Implemented:
+
+- Added conservative `CollectionPage` JSON-LD to `ArticlesIndexPage.astro`.
+- Added public-article `ItemList` JSON-LD from the same-locale, non-draft rendered article list.
+- Added source-level and build-output SEO tests for all four locale article index pages.
+
+Rules:
+
+- Keep article index JSON-LD aligned with the rendered article list.
+- Do not add engagement metrics, unsupported authorship claims, or dynamic content assumptions.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.

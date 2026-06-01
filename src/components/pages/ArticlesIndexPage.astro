@@ -4,7 +4,7 @@ import BaseLayout from "@/components/layout/BaseLayout.astro";
 import FavoriteButtonPlaceholder from "@/components/favorites/FavoriteButtonPlaceholder.astro";
 import { formatDate } from "@/lib/content";
 import { getArticleCategorySummaries, getArticleCategoryTitle } from "@/lib/content/article-categories";
-import { localizePath, sectionCopy, type Locale } from "@/lib/i18n";
+import { htmlLangByLocale, localizePath, sectionCopy, type Locale } from "@/lib/i18n";
 
 interface Props {
   locale: Locale;
@@ -12,17 +12,54 @@ interface Props {
 
 const { locale } = Astro.props;
 const title = sectionCopy[locale].articlesTitle;
+const description = locale === "zh-tw"
+  ? "用比較、清單與實際提醒協助你做日本生活決策。"
+  : locale === "en"
+    ? "Practical comparisons, checklists, and notes for life decisions in Japan."
+    : locale === "ja"
+      ? "比較、チェックリスト、実用的な注意点で日本生活の判断を支えます。"
+      : "비교, 체크리스트, 실용적인 메모로 일본 생활 결정을 돕습니다.";
 const articles = (await getCollection("articles"))
   .filter((article) => article.data.locale === locale && !article.data.draft)
   .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
 const categories = await getArticleCategorySummaries(locale);
+const site = Astro.site ?? new URL(Astro.url.origin);
+const canonicalUrl = new URL(Astro.url.pathname, site).href;
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${canonicalUrl}#webpage`,
+    name: title,
+    description,
+    url: canonicalUrl,
+    inLanguage: htmlLangByLocale[locale],
+    isPartOf: { "@id": new URL("/#website", site).href },
+    publisher: { "@id": new URL("/#organization", site).href }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${canonicalUrl}#article-list`,
+    name: title,
+    description,
+    numberOfItems: articles.length,
+    itemListElement: articles.map((article, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: new URL(localizePath(locale, `/articles/${article.data.slug}`), site).href,
+      name: article.data.title,
+      description: article.data.description
+    }))
+  }
+];
 ---
 
-<BaseLayout locale={locale} title={title} description={`${title} | TachiSuke`}>
+<BaseLayout locale={locale} title={title} description={description} jsonLd={jsonLd}>
   <section class="page-hero">
     <div class="container">
       <h1>{title}</h1>
-      <p>{locale === "zh-tw" ? "用比較、清單與實際提醒協助你做日本生活決策。" : locale === "en" ? "Practical comparisons, checklists, and notes for life decisions in Japan." : locale === "ja" ? "比較、チェックリスト、実用的な注意点で日本生活の判断を支えます。" : "비교, 체크리스트, 실용적인 메모로 일본 생활 결정을 돕습니다."}</p>
+      <p>{description}</p>
     </div>
   </section>
   <section class="section">

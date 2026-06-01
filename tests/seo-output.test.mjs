@@ -509,6 +509,31 @@ describe("static SEO output", () => {
     assert.match(html, /<meta property="article:tag" content="mobile plans">/, "article detail should include tag Open Graph metadata");
   });
 
+  it("renders conservative JSON-LD on article index pages", () => {
+    for (const [locale, relativePath, language] of [
+      ["zh-tw", "zh-tw/articles/index.html", "zh-Hant-TW"],
+      ["en", "en/articles/index.html", "en"],
+      ["ja", "ja/articles/index.html", "ja"],
+      ["ko", "ko/articles/index.html", "ko"]
+    ]) {
+      const objects = jsonLdObjects(readHtml(relativePath));
+      const collectionPage = objects.find((object) => object["@type"] === "CollectionPage");
+      const itemList = objects.find((object) => object["@type"] === "ItemList");
+
+      assert.ok(collectionPage, `${locale} article index should include CollectionPage JSON-LD`);
+      assert.equal(collectionPage?.inLanguage, language, `${locale} article index should use the HTML language`);
+      assert.equal(collectionPage?.url, `https://tachi-suke.example.com/${locale}/articles/`, `${locale} CollectionPage should use its canonical URL`);
+      assert.equal(collectionPage?.isPartOf?.["@id"], "https://tachi-suke.example.com/#website");
+
+      assert.ok(itemList, `${locale} article index should include ItemList JSON-LD`);
+      assert.equal(itemList?.numberOfItems, itemList?.itemListElement?.length, `${locale} ItemList count should match its entries`);
+      assert.ok(itemList.numberOfItems >= 10, `${locale} article index should expose the public article list`);
+      assert.equal(itemList.itemListElement[0]?.["@type"], "ListItem");
+      assert.equal(itemList.itemListElement[0]?.position, 1);
+      assert.match(itemList.itemListElement[0]?.url ?? "", new RegExp(`^https:\\/\\/tachi-suke\\.example\\.com\\/${locale}\\/articles\\/`));
+    }
+  });
+
   it("renders conservative JSON-LD on article category landing pages", () => {
     const objects = jsonLdObjects(readHtml("en/articles/category/mobile/index.html"));
     assert.ok(hasJsonLdType(objects, "Organization"), "category page should include Organization JSON-LD");
