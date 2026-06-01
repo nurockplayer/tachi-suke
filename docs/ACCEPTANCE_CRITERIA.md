@@ -291,6 +291,8 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Public pages should include an RSS alternate link to `/feed.xml` and a current-locale RSS alternate link to `/[locale]/feed.xml`.
 - `404.html` must be generated as a branded static recovery page.
 - `404.html` must use `noindex, nofollow` and must not appear in `sitemap.xml`.
+- `404.html` should use a language-neutral visible heading and include top recovery explanations in all supported locales.
+- `404.html` language selector guidance should be multilingual, not fixed English-only copy.
 - `404.html` should include locale-specific recovery links for each supported locale home, articles, mobile, and tools route.
 - Locale-specific recovery sections on `404.html` should carry appropriate BCP47 language metadata.
 - Account placeholder pages must use `noindex, nofollow`.

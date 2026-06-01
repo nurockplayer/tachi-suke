@@ -7,6 +7,8 @@ const localeCopy = {
   "zh-tw": {
     title: "找不到頁面",
     description: "這個連結可能已移動、過期，或網址輸入錯誤。",
+    selectorTitle: "選擇語言",
+    selectorDescription: "TachiSuke 支援繁體中文、英文、日文與韓文。",
     recoveryTitle: "從繁體中文重新開始",
     recoveryDescription: "回到達助日本生活的中文內容，快速找到文章、手機方案與實用工具。",
     home: "繁體中文首頁",
@@ -21,6 +23,8 @@ const localeCopy = {
   en: {
     title: "Page not found",
     description: "This link may have moved, expired, or been typed incorrectly.",
+    selectorTitle: "Choose your language",
+    selectorDescription: "TachiSuke is available in Traditional Chinese, English, Japanese, and Korean.",
     recoveryTitle: "Restart in English",
     recoveryDescription: "Return to TachiSuke's English guides for practical Japan life decisions.",
     home: "English home",
@@ -35,6 +39,8 @@ const localeCopy = {
   ja: {
     title: "ページが見つかりません",
     description: "このリンクは移動、期限切れ、または URL の入力間違いの可能性があります。",
+    selectorTitle: "言語を選択",
+    selectorDescription: "TachiSuke は繁体字中国語、英語、日本語、韓国語に対応しています。",
     recoveryTitle: "日本語で探し直す",
     recoveryDescription: "日本での生活判断に役立つ日本語ガイドへ戻れます。",
     home: "日本語ホーム",
@@ -49,6 +55,8 @@ const localeCopy = {
   ko: {
     title: "페이지를 찾을 수 없습니다",
     description: "이 링크는 이동되었거나 만료되었거나 URL이 잘못 입력되었을 수 있습니다.",
+    selectorTitle: "언어 선택",
+    selectorDescription: "TachiSuke는 번체 중국어, 영어, 일본어, 한국어를 지원합니다.",
     recoveryTitle: "한국어로 다시 시작",
     recoveryDescription: "일본 생활 결정을 돕는 한국어 가이드로 돌아갈 수 있습니다.",
     home: "한국어 홈",
@@ -63,6 +71,8 @@ const localeCopy = {
 } satisfies Record<Locale, {
   title: string;
   description: string;
+  selectorTitle: string;
+  selectorDescription: string;
   recoveryTitle: string;
   recoveryDescription: string;
   home: string;
@@ -75,15 +85,7 @@ const localeCopy = {
   toolsDescription: string;
 }>;
 
-const hero = {
-  title: "Page not found",
-  description: "Choose a language below, then continue to the practical Japan life section you need."
-};
-
-const languageSelector = {
-  title: "Choose your language",
-  description: "TachiSuke is available in Traditional Chinese, English, Japanese, and Korean."
-};
+const languageSelectorTitle = "Language / 語言 / 言語 / 언어";
 ---
 
 <BaseLayout
@@ -95,8 +97,12 @@ const languageSelector = {
 >
   <section class="page-hero">
     <div class="container">
-      <h1>{hero.title}</h1>
-      <p>{hero.description}</p>
+      <h1>404</h1>
+      <div class="not-found-intro-list">
+        {locales.map((locale) => (
+          <p lang={htmlLangByLocale[locale]}><strong>{localeCopy[locale].title}</strong> {localeCopy[locale].description}</p>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -104,8 +110,12 @@ const languageSelector = {
     <div class="container">
       <div class="section-header">
         <div>
-          <h2>{languageSelector.title}</h2>
-          <p>{languageSelector.description}</p>
+          <h2>{languageSelectorTitle}</h2>
+          <div class="not-found-intro-list not-found-intro-list-compact">
+            {locales.map((locale) => (
+              <p lang={htmlLangByLocale[locale]}><strong>{localeCopy[locale].selectorTitle}</strong> {localeCopy[locale].selectorDescription}</p>
+            ))}
+          </div>
         </div>
       </div>
       <div class="grid grid-4">

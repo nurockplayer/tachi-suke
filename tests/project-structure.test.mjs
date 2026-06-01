@@ -319,6 +319,9 @@ describe("TachiSuke project scaffold", () => {
     assert.match(notFoundPage, /robots="noindex,\s*nofollow"/, "custom 404 page should be noindex");
     assert.match(notFoundPage, /localizePath\(locale\)/, "custom 404 page should link to locale home pages");
     assert.match(notFoundPage, /htmlLangByLocale\[locale\]/, "custom 404 page should mark locale-specific recovery sections with language metadata");
+    assert.match(notFoundPage, /class="not-found-intro-list"/, "custom 404 page should render multilingual intro copy");
+    assert.match(notFoundPage, /localeCopy\[locale\]\.selectorTitle/, "custom 404 page should localize language selector guidance");
+    assert.doesNotMatch(notFoundPage, /const hero =/, "custom 404 page should not use fixed English hero copy");
     for (const sectionPath of ["/articles", "/mobile", "/tools"]) {
       assert.match(
         notFoundPage,
