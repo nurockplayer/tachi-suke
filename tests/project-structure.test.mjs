@@ -412,6 +412,8 @@ describe("TachiSuke project scaffold", () => {
     assert.match(searchPage, /data-search-root/, "SearchPage should expose a stable client-side root");
     assert.match(searchPage, /data-search-input/, "SearchPage should expose a query input");
     assert.match(searchPage, /data-search-results/, "SearchPage should expose a result container");
+    assert.match(searchPage, /data-search-empty-help/, "SearchPage should expose empty-state helper text");
+    assert.match(searchPage, /data-search-clear/, "SearchPage should expose a clear-search action");
     assert.match(searchPage, /search-index\.json/, "SearchPage should point to the static locale search index");
     assert.match(searchPage, /type="search"/, "SearchPage query field should use search input behavior");
     assert.match(searchPage, /role="search"/, "SearchPage should render a search form landmark");

@@ -19,6 +19,8 @@ const copy = {
     submit: "搜尋",
     count: "目前可搜尋 {count} 筆公開內容",
     empty: "沒有找到符合的公開內容。",
+    emptyHelp: "請試著換成較短的關鍵字，或清除搜尋後從全部公開內容重新瀏覽。",
+    clear: "清除搜尋",
     updated: "更新",
     noscript: "未啟用 JavaScript 時，你仍可以瀏覽下方全部公開內容。"
   },
@@ -30,6 +32,8 @@ const copy = {
     submit: "Search",
     count: "{count} public items searchable",
     empty: "No matching public content found.",
+    emptyHelp: "Try a shorter keyword, or clear the search to browse all public content again.",
+    clear: "Clear search",
     updated: "Updated",
     noscript: "Without JavaScript, you can still browse all public content below."
   },
@@ -41,6 +45,8 @@ const copy = {
     submit: "検索",
     count: "{count} 件の公開コンテンツを検索できます",
     empty: "一致する公開コンテンツはありません。",
+    emptyHelp: "短いキーワードに変えるか、検索をクリアして公開コンテンツ全体を見直してください。",
+    clear: "検索をクリア",
     updated: "更新",
     noscript: "JavaScript が無効でも、下の公開コンテンツ一覧は閲覧できます。"
   },
@@ -52,6 +58,8 @@ const copy = {
     submit: "검색",
     count: "검색 가능한 공개 콘텐츠 {count}개",
     empty: "일치하는 공개 콘텐츠가 없습니다.",
+    emptyHelp: "더 짧은 검색어로 바꾸거나 검색을 지우고 공개 콘텐츠 전체를 다시 둘러보세요.",
+    clear: "검색 지우기",
     updated: "업데이트",
     noscript: "JavaScript가 꺼져 있어도 아래 공개 콘텐츠 목록은 볼 수 있습니다."
   }
@@ -131,13 +139,19 @@ function serializeJson(value: unknown): string {
         <p class="notice search-noscript">{copy.noscript}</p>
       </noscript>
 
-      <p class="notice search-empty" data-search-empty hidden>{copy.empty}</p>
+      <div class="notice search-empty" data-search-empty aria-live="polite" aria-atomic="true" hidden>
+        <p><strong data-search-empty-message>{copy.empty}</strong></p>
+        <p data-search-empty-help>{copy.emptyHelp}</p>
+        <div class="search-empty-actions">
+          <button class="button-secondary" type="button" data-search-clear>{copy.clear}</button>
+        </div>
+      </div>
 
       <div class="search-results" data-search-results>
         {entries.map((entry: SearchEntry) => (
           <article class="search-result-card" data-search-card data-search-text={entry.searchText}>
             <div class="search-result-meta">
-              <span>{typeLabels[entry.type]}</span>
+              <span class="search-result-type">{typeLabels[entry.type]}</span>
               <span>{copy.updated}: {entry.updatedAt}</span>
             </div>
             <h2><a href={entry.url}>{entry.title}</a></h2>
@@ -161,6 +175,8 @@ function serializeJson(value: unknown): string {
         const results = root.querySelector("[data-search-results]");
         const count = root.querySelector("[data-search-count]");
         const empty = root.querySelector("[data-search-empty]");
+        const emptyMessageNode = root.querySelector("[data-search-empty-message]");
+        const clearButton = root.querySelector("[data-search-clear]");
         const dataScript = document.getElementById(`search-data-${document.documentElement.lang.startsWith("zh") ? "zh-tw" : document.documentElement.lang}`);
         const countTemplate = root.dataset.countTemplate || "{count}";
         const emptyMessage = root.dataset.emptyMessage || "";
@@ -204,6 +220,7 @@ function serializeJson(value: unknown): string {
           const meta = document.createElement("div");
           meta.className = "search-result-meta";
           const type = document.createElement("span");
+          type.className = "search-result-type";
           type.textContent = typeLabels[entry.type] || entry.type;
           const updated = document.createElement("span");
           updated.textContent = `${updatedLabel}: ${entry.updatedAt}`;
@@ -236,14 +253,24 @@ function serializeJson(value: unknown): string {
           const filtered = entries.filter((entry) => matchEntry(entry, query));
           results.replaceChildren(...filtered.map(createCard));
           count.textContent = countTemplate.replace("{count}", String(filtered.length));
-          empty.textContent = emptyMessage;
+          if (emptyMessageNode) {
+            emptyMessageNode.textContent = emptyMessage;
+          }
           empty.hidden = filtered.length > 0;
           if (options.syncUrl) {
             syncQueryUrl(query);
           }
         }
 
+        function clearSearch() {
+          if (!input) return;
+          input.value = "";
+          render({ syncUrl: true });
+          input.focus();
+        }
+
         input?.addEventListener("input", () => render({ syncUrl: true }));
+        clearButton?.addEventListener("click", clearSearch);
         form?.addEventListener("submit", (event) => {
           event.preventDefault();
           render({ syncUrl: true });

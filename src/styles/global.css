@@ -663,6 +663,7 @@ details[open].control-disclosure .control-summary::after {
 
 .search-result-meta {
   display: flex;
+  align-items: center;
   gap: 8px;
   flex-wrap: wrap;
   color: var(--color-muted);
@@ -670,9 +671,39 @@ details[open].control-disclosure .control-summary::after {
   font-weight: 800;
 }
 
+.search-result-type {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 2px 8px;
+  border: 1px solid color-mix(in srgb, var(--color-green) 42%, var(--color-border));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-green) 14%, transparent);
+  color: var(--color-ink);
+}
+
 .search-empty,
 .search-noscript {
   margin-bottom: 18px;
+}
+
+.search-empty {
+  display: grid;
+  gap: 10px;
+}
+
+.search-empty[hidden] {
+  display: none;
+}
+
+.search-empty p {
+  margin: 0;
+}
+
+.search-empty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .card-arrow {

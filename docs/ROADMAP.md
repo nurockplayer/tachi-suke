@@ -196,14 +196,34 @@ Make the collapsed language control recognizable before the visitor understands 
 
 Implemented:
 
-- Closed language switcher uses a globe SVG icon, neutral `Lang` label, and compact current-locale code.
+- Closed language switcher uses a globe SVG icon-only summary so visitors can find language options before understanding the current page language.
 - Expanded language menu still shows native language names.
-- Source-level tests assert that the closed language switcher does not rely on `{localeNames[locale]}`.
+- Source-level tests assert that the closed language switcher does not rely on `{localeNames[locale]}`, visible `Lang` text, or current-locale shorthand.
 
 Rules:
 
 - Keep the language control visually language-neutral in the closed state.
 - Do not add an icon dependency for this small header control.
+
+## Phase 1BY: Static Search Empty-State Recovery
+
+Status: implemented.
+
+Goal:
+
+Make locale search pages less of a dead end when a query has no matching public content.
+
+Implemented:
+
+- Search empty states now include localized helper copy.
+- Search empty states include a clear-search button that clears the input, removes `q` from the URL, and restores all public search results.
+- Search result type labels render as compact badge-like metadata for easier scanning.
+- Source-level and build-output tests cover the stable empty-state and clear-search hooks.
+
+Rules:
+
+- Keep search dependency-free, static, and `noindex, follow` in Phase 1.
+- Do not add backend search, analytics, personalization, typo tolerance, auth, or saved search state in this phase.
 
 ## Phase 1BT: Article Freshness and Trust
 

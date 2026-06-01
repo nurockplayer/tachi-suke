@@ -444,6 +444,12 @@ describe("static SEO output", () => {
     assert.match(html, /name="q"/, "search input should submit q query values");
     assert.match(html, /new URLSearchParams\(window\.location\.search\)/, "search script should read q from the URL");
     assert.match(html, /history\.replaceState/, "search script should sync q back to the URL");
+    assert.match(html, /data-search-empty-help/, "search empty state should include a helper text hook");
+    assert.match(html, /data-search-clear/, "search empty state should include a clear-search action");
+    assert.match(html, /data-search-empty[^>]+aria-live="polite"[^>]+aria-atomic="true"/, "search empty state should announce recoverable zero-result changes politely");
+    assert.match(html, /search-result-type/, "search result type labels should render as badge-like elements");
+    assert.match(html, /function clearSearch\(\)/, "search script should expose a clearSearch helper");
+    assert.match(html, /url\.searchParams\.delete\("q"\)/, "clear search should remove q from the URL");
     assert.match(html, /href="\/en\/articles\/choose-mobile-plan-japan-foreigner"/, "search page should render static article results");
     assert.doesNotMatch(html, /<h2><a href="\/en\/account\//, "search page should not render account placeholder results");
 
