@@ -992,6 +992,30 @@ Rules:
 - Remind readers that hours, payment, smoking rules, menus, and crowding can vary by branch.
 - Do not add ratings, comments, reservations, maps, or place schema changes in Phase 1.
 
+## Phase 1BA: Everyday Shopping Guides
+
+Status: implemented.
+
+Goal:
+
+Add a shopping content cluster that helps new residents choose between convenience stores, supermarkets, drugstores, 100-yen shops, and online shopping without relying on one expensive default.
+
+Implemented:
+
+- Added localized article category copy for `shopping`.
+- Added zh-tw article `japan-convenience-store-supermarket-drugstore-guide-zh-tw`.
+- Added en article `japan-convenience-store-supermarket-drugstore-guide-en`.
+- Added ja article `japan-convenience-store-supermarket-drugstore-guide-ja`.
+- Added ko article `japan-convenience-store-supermarket-drugstore-guide-ko`.
+- Linked the articles to area guides, places index, mobile setup, and submit-place routes.
+- Added source-level and SEO-output checks for article count, locale coverage, category copy, sitemap entries, and RSS inclusion.
+
+Rules:
+
+- Keep shopping content as practical decision guidance, not affiliate content or price promises.
+- Remind readers that prices, payment methods, coupons, product availability, and opening hours vary by branch and time.
+- Do not add affiliate links, product scraping, carts, saved shopping lists, or backend storage in Phase 1.
+
 ## Phase 1AI: Article Category Label Polish
 
 Status: implemented.

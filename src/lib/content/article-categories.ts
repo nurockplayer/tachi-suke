@@ -56,6 +56,12 @@ const categoryTitles: Record<string, Record<Locale, string>> = {
     en: "Daily life guides",
     ja: "日常生活ガイド",
     ko: "일상생활 글"
+  },
+  shopping: {
+    "zh-tw": "生活採買文章",
+    en: "Shopping guides",
+    ja: "買い物ガイド",
+    ko: "생활 쇼핑 글"
   }
 };
 
@@ -107,6 +113,12 @@ const categoryDescriptions: Record<string, Record<Locale, string>> = {
     en: "Guides for everyday life in Japan, including garbage sorting, shopping, house rules, and practical routines.",
     ja: "ごみ分別、買い物、生活ルール、住まいの日常管理など、日本で毎日出会う生活課題を整理します。",
     ko: "쓰레기 분리, 쇼핑, 생활 규칙, 주거 관리처럼 일본에서 매일 만나는 생활 문제를 정리합니다."
+  },
+  shopping: {
+    "zh-tw": "比較便利商店、超市、藥妝店、百元店與線上購物等日本日常採買選擇。",
+    en: "Compare convenience stores, supermarkets, drugstores, 100-yen shops, and online shopping for daily life in Japan.",
+    ja: "コンビニ、スーパー、ドラッグストア、100円ショップ、オンライン購入など、日本の日常の買い物先を比較します。",
+    ko: "편의점, 슈퍼, 드럭스토어, 100엔 숍, 온라인 쇼핑 등 일본의 일상 쇼핑 선택지를 비교합니다."
   }
 };
 

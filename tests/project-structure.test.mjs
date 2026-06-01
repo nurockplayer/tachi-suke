@@ -368,6 +368,7 @@ describe("TachiSuke project scaffold", () => {
     assert.match(categoryHelper, /procedures/, "category helper should include localized procedures category copy");
     assert.match(categoryHelper, /language/, "category helper should include localized practical language category copy");
     assert.match(categoryHelper, /daily-life/, "category helper should include localized daily-life category copy");
+    assert.match(categoryHelper, /shopping/, "category helper should include localized shopping category copy");
 
     const categoryPage = readFileSync(join(root, "src/components/pages/ArticleCategoryPage.astro"), "utf8");
     assert.match(categoryPage, /slugifyArticleCategory/, "ArticleCategoryPage should use category slugs");
@@ -661,13 +662,13 @@ describe("TachiSuke project scaffold", () => {
   it("includes Phase 1B content depth for articles, mobile plans, and area guides", () => {
     const articleFiles = listFiles("src/content/articles", [".md", ".mdx"]);
     const articles = articleFiles.map(readFrontmatter);
-    assert.ok(articles.length >= 42, "Phase 1AZ should include family restaurant translation coverage");
+    assert.ok(articles.length >= 46, "Phase 1BA should include multilingual shopping guide coverage");
 
     const localeCounts = Object.fromEntries(locales.map((locale) => [locale, articles.filter((article) => article.locale === locale).length]));
-    assert.ok(localeCounts["zh-tw"] >= 11, "Phase 1AZ should include at least 11 zh-tw articles");
-    assert.ok(localeCounts.en >= 11, "Phase 1AZ should include at least 11 en articles");
-    assert.ok(localeCounts.ja >= 10, "Phase 1AZ should include at least 10 ja articles");
-    assert.ok(localeCounts.ko >= 10, "Phase 1AZ should include at least 10 ko articles");
+    assert.ok(localeCounts["zh-tw"] >= 12, "Phase 1BA should include at least 12 zh-tw articles");
+    assert.ok(localeCounts.en >= 12, "Phase 1BA should include at least 12 en articles");
+    assert.ok(localeCounts.ja >= 11, "Phase 1BA should include at least 11 ja articles");
+    assert.ok(localeCounts.ko >= 11, "Phase 1BA should include at least 11 ko articles");
     assert.ok(articles.some((article) => article.slug === "japan-commuter-pass-ic-card-guide"), "zh-tw commuter pass article should exist");
     assert.ok(articles.some((article) => article.slug === "japan-commuter-pass-ic-card-guide-en"), "English commuter pass article should exist");
     assert.ok(articles.some((article) => article.slug === "japan-commuter-pass-ic-card-guide-ja"), "Japanese commuter pass article should exist");
@@ -699,6 +700,10 @@ describe("TachiSuke project scaffold", () => {
     assert.ok(articles.some((article) => article.slug === "japan-family-restaurants-dennys-gusto-royal-host-en"), "English family restaurant article should exist");
     assert.ok(articles.some((article) => article.slug === "japan-family-restaurants-dennys-gusto-royal-host-ja"), "Japanese family restaurant article should exist");
     assert.ok(articles.some((article) => article.slug === "japan-family-restaurants-dennys-gusto-royal-host-ko"), "Korean family restaurant article should exist");
+    assert.ok(articles.some((article) => article.slug === "japan-convenience-store-supermarket-drugstore-guide-zh-tw"), "zh-tw shopping guide article should exist");
+    assert.ok(articles.some((article) => article.slug === "japan-convenience-store-supermarket-drugstore-guide-en"), "English shopping guide article should exist");
+    assert.ok(articles.some((article) => article.slug === "japan-convenience-store-supermarket-drugstore-guide-ja"), "Japanese shopping guide article should exist");
+    assert.ok(articles.some((article) => article.slug === "japan-convenience-store-supermarket-drugstore-guide-ko"), "Korean shopping guide article should exist");
 
     assert.equal(new Set(articles.map((article) => article.id)).size, articles.length, "article ids should be unique");
     assert.equal(new Set(articles.map((article) => article.slug)).size, articles.length, "article slugs should be globally unique for Astro content ids");
