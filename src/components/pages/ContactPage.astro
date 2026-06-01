@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
-import { localeNames, locales, localizePath, type Locale } from "@/lib/i18n";
+import { htmlLangByLocale, localeNames, locales, localizePath, type Locale } from "@/lib/i18n";
 
 interface Props {
   locale: Locale;
@@ -131,9 +131,44 @@ const topicOptions = {
     ["other", "기타"]
   ]
 }[locale];
+const site = Astro.site ?? new URL(Astro.url.origin);
+const canonicalUrl = new URL(Astro.url.pathname, site).href;
+const localeHomeUrl = new URL(localizePath(locale), site).href;
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${canonicalUrl}#webpage`,
+    name: copy.title,
+    description: copy.description,
+    url: canonicalUrl,
+    inLanguage: htmlLangByLocale[locale],
+    isPartOf: { "@id": new URL("/#website", site).href },
+    publisher: { "@id": new URL("/#organization", site).href }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": `${canonicalUrl}#breadcrumb`,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "TachiSuke",
+        item: localeHomeUrl
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: copy.title,
+        item: canonicalUrl
+      }
+    ]
+  }
+];
 ---
 
-<BaseLayout locale={locale} title={copy.title} description={copy.description}>
+<BaseLayout locale={locale} title={copy.title} description={copy.description} jsonLd={jsonLd}>
   <section class="page-hero">
     <div class="container">
       <h1>{copy.title}</h1>

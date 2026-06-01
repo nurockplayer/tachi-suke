@@ -1375,6 +1375,28 @@ Rules:
 - Keep breadcrumb JSON-LD limited to locale home and current section.
 - Do not add visible breadcrumbs to top-level collection index pages unless a UI task explicitly scopes it.
 
+## Phase 1BL: Trust Page JSON-LD
+
+Status: implemented.
+
+Goal:
+
+Make public trust and form-entry pages easier for crawlers to understand before launch.
+
+Implemented:
+
+- Added conservative `WebPage` and two-level `BreadcrumbList` JSON-LD to about pages.
+- Added conservative `WebPage` and two-level `BreadcrumbList` JSON-LD to privacy and editorial policy pages.
+- Added conservative `WebPage` and two-level `BreadcrumbList` JSON-LD to contact/corrections pages.
+- Added conservative `WebPage` and two-level `BreadcrumbList` JSON-LD to submit-place pages.
+- Added source-level and build-output SEO tests.
+
+Rules:
+
+- Keep trust/form page JSON-LD backed by static visible copy and canonical URLs.
+- Do not add JSON-LD to noindex account placeholders.
+- Do not imply that forms are backed by this repo's database or support backend.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.

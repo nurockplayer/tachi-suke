@@ -318,6 +318,29 @@ describe("static SEO output", () => {
     const thanks = readHtml("zh-tw/contact/thanks/index.html");
     assert.match(thanks, /謝謝你的回報 \| TachiSuke/, "contact thanks page should have an SEO title");
     assert.match(thanks, /不會公開你的 Email/, "contact thanks page should explain private email handling");
+
+    for (const [label, relativePath, expectedLanguage, expectedUrl] of [
+      ["about", "en/about/index.html", "en", "https://tachi-suke.example.com/en/about/"],
+      ["privacy", "en/privacy/index.html", "en", "https://tachi-suke.example.com/en/privacy/"],
+      ["editorial policy", "zh-tw/editorial-policy/index.html", "zh-Hant-TW", "https://tachi-suke.example.com/zh-tw/editorial-policy/"],
+      ["contact", "en/contact/index.html", "en", "https://tachi-suke.example.com/en/contact/"],
+      ["submit place", "en/submit-place/index.html", "en", "https://tachi-suke.example.com/en/submit-place/"]
+    ]) {
+      const objects = jsonLdObjects(readHtml(relativePath));
+      const webPage = objects.find((object) => object["@type"] === "WebPage");
+      const breadcrumb = objects.find((object) => object["@type"] === "BreadcrumbList");
+
+      assert.ok(webPage, `${label} page should include WebPage JSON-LD`);
+      assert.equal(webPage?.url, expectedUrl, `${label} WebPage should use the canonical URL`);
+      assert.equal(webPage?.inLanguage, expectedLanguage, `${label} WebPage should use the HTML language`);
+      assert.equal(webPage?.isPartOf?.["@id"], "https://tachi-suke.example.com/#website");
+      assert.equal(webPage?.publisher?.["@id"], "https://tachi-suke.example.com/#organization");
+
+      assert.ok(breadcrumb, `${label} page should include BreadcrumbList JSON-LD`);
+      assert.equal(breadcrumb?.itemListElement?.length, 2, `${label} breadcrumb should include home and current page`);
+      assert.equal(breadcrumb?.itemListElement?.[0]?.item, `https://tachi-suke.example.com/${expectedUrl.includes("/zh-tw/") ? "zh-tw" : "en"}/`);
+      assert.equal(breadcrumb?.itemListElement?.[1]?.item, expectedUrl);
+    }
   });
 
   it("prefills contact corrections from public detail-page prompts", () => {

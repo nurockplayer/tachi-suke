@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
-import { localeNames, locales, localizePath, sectionCopy, type Locale } from "@/lib/i18n";
+import { htmlLangByLocale, localeNames, locales, localizePath, sectionCopy, type Locale } from "@/lib/i18n";
 import { japaneseDifficultyLabels, nonSmokingStatusLabels, soloFriendlyLabels } from "@/lib/places";
 
 interface Props {
@@ -11,6 +11,12 @@ const { locale } = Astro.props;
 const title = sectionCopy[locale].submitTitle;
 const formEndpoint = import.meta.env.PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT?.trim() ?? "";
 const thanksUrl = new URL(localizePath(locale, "/submit-place/thanks"), Astro.site ?? new URL(Astro.url.origin)).href;
+const description = {
+  "zh-tw": "推薦日本生活中實用的店家給 TachiSuke，投稿會先人工審核與整理，不會直接公開。",
+  en: "Recommend a useful everyday place to TachiSuke. Submissions are manually reviewed and normalized before publication.",
+  ja: "日本での生活に役立つお店を TachiSuke に推薦できます。投稿は確認と整理の後に掲載されます。",
+  ko: "일본 생활에 유용한 장소를 TachiSuke에 추천할 수 있습니다. 추천은 검토와 정리 후 게시됩니다."
+}[locale];
 const labels = {
   "zh-tw": {
     intro: formEndpoint ? "你可以推薦日常生活中實用的店家。投稿會先人工審核，不會直接公開。" : "投稿表單目前是 preview mode。站長設定外部表單 endpoint 後才會開放送出。",
@@ -69,9 +75,44 @@ const field = {
   nickname: locale === "zh-tw" ? "投稿者暱稱" : locale === "en" ? "Submitter nickname" : locale === "ja" ? "投稿者ニックネーム" : "추천자 닉네임",
   email: locale === "zh-tw" ? "Email（選填）" : locale === "en" ? "Email (optional)" : locale === "ja" ? "メール（任意）" : "이메일 (선택)"
 };
+const site = Astro.site ?? new URL(Astro.url.origin);
+const canonicalUrl = new URL(Astro.url.pathname, site).href;
+const localeHomeUrl = new URL(localizePath(locale), site).href;
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${canonicalUrl}#webpage`,
+    name: title,
+    description,
+    url: canonicalUrl,
+    inLanguage: htmlLangByLocale[locale],
+    isPartOf: { "@id": new URL("/#website", site).href },
+    publisher: { "@id": new URL("/#organization", site).href }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": `${canonicalUrl}#breadcrumb`,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "TachiSuke",
+        item: localeHomeUrl
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: title,
+        item: canonicalUrl
+      }
+    ]
+  }
+];
 ---
 
-<BaseLayout locale={locale} title={title} description={labels.intro}>
+<BaseLayout locale={locale} title={title} description={description} jsonLd={jsonLd}>
   <section class="page-hero">
     <div class="container">
       <h1>{title}</h1>

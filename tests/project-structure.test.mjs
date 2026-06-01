@@ -286,6 +286,18 @@ describe("TachiSuke project scaffold", () => {
     assert.match(localeHomePage, /"@type":\s*"ItemList"/, "LocaleHomePage should emit start-here ItemList JSON-LD");
     assert.match(localeHomePage, /jsonLd=\{homeJsonLd\}/, "LocaleHomePage should pass homepage JSON-LD to BaseLayout");
 
+    for (const [file, label] of [
+      ["src/components/pages/AboutPage.astro", "AboutPage"],
+      ["src/components/pages/PolicyPage.astro", "PolicyPage"],
+      ["src/components/pages/ContactPage.astro", "ContactPage"],
+      ["src/components/pages/SubmitPlacePage.astro", "SubmitPlacePage"]
+    ]) {
+      const source = readFileSync(join(root, file), "utf8");
+      assert.match(source, /"@type":\s*"WebPage"/, `${label} should emit page-specific WebPage JSON-LD`);
+      assert.match(source, /"@type":\s*"BreadcrumbList"/, `${label} should emit BreadcrumbList JSON-LD`);
+      assert.match(source, /jsonLd=\{jsonLd\}/, `${label} should pass JSON-LD to BaseLayout`);
+    }
+
     const localeTypes = readFileSync(join(root, "src/types/locale.ts"), "utf8");
     assert.match(localeTypes, /ogLocaleByLocale/, "locale metadata should define Open Graph locale values");
     for (const ogLocale of ["zh_TW", "en_US", "ja_JP", "ko_KR"]) {
