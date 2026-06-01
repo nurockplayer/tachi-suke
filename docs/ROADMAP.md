@@ -969,6 +969,29 @@ Rules:
 - Remind readers that collection days, designated bags, recycling categories, and oversized trash reservation rules vary by municipality, building, and management company.
 - Do not add reminders, calendar sync, saved state, or backend storage in Phase 1.
 
+## Phase 1AZ: Family Restaurant Translation Articles
+
+Status: implemented.
+
+Goal:
+
+Extend the family restaurant comparison from Traditional Chinese to English, Japanese, and Korean so food and places discovery works across supported locales.
+
+Implemented:
+
+- Added en article `japan-family-restaurants-dennys-gusto-royal-host-en`.
+- Added ja article `japan-family-restaurants-dennys-gusto-royal-host-ja`.
+- Added ko article `japan-family-restaurants-dennys-gusto-royal-host-ko`.
+- Reused `translationKey = family-restaurants-japan-basics` to connect the existing zh-tw article with translated details.
+- Linked the articles to Denny's, Gusto, Royal Host, the places index, and submit-place routes.
+- Added source-level and SEO-output checks for article count, locale coverage, sitemap entries, and RSS inclusion.
+
+Rules:
+
+- Keep restaurant content as practical chain/branch decision guidance, not unmoderated reviews.
+- Remind readers that hours, payment, smoking rules, menus, and crowding can vary by branch.
+- Do not add ratings, comments, reservations, maps, or place schema changes in Phase 1.
+
 ## Phase 1AI: Article Category Label Polish
 
 Status: implemented.

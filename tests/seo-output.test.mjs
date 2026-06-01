@@ -125,12 +125,14 @@ describe("static SEO output", () => {
       "/zh-tw/articles/ward-office-moving-in-procedures-zh-tw",
       "/zh-tw/articles/japan-apartment-moving-out-checklist-zh-tw",
       "/zh-tw/articles/japan-garbage-sorting-oversized-trash-zh-tw",
+      "/zh-tw/articles/japan-family-restaurants-dennys-gusto-royal-host",
       "/en/articles/japan-renting-initial-costs-en",
       "/en/articles/choose-mobile-plan-japan-foreigner",
       "/en/articles/apartment-viewing-japanese-phrases-en",
       "/en/articles/ward-office-moving-in-procedures-en",
       "/en/articles/japan-apartment-moving-out-checklist-en",
       "/en/articles/japan-garbage-sorting-oversized-trash-en",
+      "/en/articles/japan-family-restaurants-dennys-gusto-royal-host-en",
       "/en/articles/japan-commuter-pass-ic-card-guide-en",
       "/en/articles/residence-card-resident-record-my-number-en",
       "/ja/articles/japan-commuter-pass-ic-card-guide-ja",
@@ -139,6 +141,7 @@ describe("static SEO output", () => {
       "/ja/articles/ward-office-moving-in-procedures-ja",
       "/ja/articles/japan-apartment-moving-out-checklist-ja",
       "/ja/articles/japan-garbage-sorting-oversized-trash-ja",
+      "/ja/articles/japan-family-restaurants-dennys-gusto-royal-host-ja",
       "/ja/articles/residence-card-resident-record-my-number-ja",
       "/ja/articles/foreign-resident-mobile-plan-basics-japan",
       "/ko/articles/japan-commuter-pass-ic-card-guide-ko",
@@ -147,6 +150,7 @@ describe("static SEO output", () => {
       "/ko/articles/ward-office-moving-in-procedures-ko",
       "/ko/articles/japan-apartment-moving-out-checklist-ko",
       "/ko/articles/japan-garbage-sorting-oversized-trash-ko",
+      "/ko/articles/japan-family-restaurants-dennys-gusto-royal-host-ko",
       "/ko/articles/residence-card-resident-record-my-number-ko",
       "/ko/articles/foreigner-mobile-plan-basics-japan",
       "/en/articles/category/mobile",
@@ -301,6 +305,7 @@ describe("static SEO output", () => {
     assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/en\/articles\/ward-office-moving-in-procedures-en<\/link>/);
     assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/en\/articles\/japan-apartment-moving-out-checklist-en<\/link>/);
     assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/en\/articles\/japan-garbage-sorting-oversized-trash-en<\/link>/);
+    assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/en\/articles\/japan-family-restaurants-dennys-gusto-royal-host-en<\/link>/);
     assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/ja\/articles\/japan-commuter-pass-ic-card-guide-ja<\/link>/);
     assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/ja\/articles\/residence-card-resident-record-my-number-ja<\/link>/);
     assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/ko\/articles\/japan-commuter-pass-ic-card-guide-ko<\/link>/);
