@@ -244,6 +244,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Open Graph metadata must include `og:url` and `og:site_name = TachiSuke`.
 - Open Graph metadata must include a default `og:image`.
 - Open Graph metadata should include current `og:locale` and supported `og:locale:alternate` values when alternates exist.
+- Article detail pages should include `article:published_time`, `article:modified_time`, `article:section`, and `article:tag` Open Graph metadata.
 - Twitter metadata should use `summary_large_image`.
 - Pages should link `/site.webmanifest`.
 - Pages should include browser app metadata: `theme-color`, `application-name`, `apple-mobile-web-app-title`, and `format-detection`.

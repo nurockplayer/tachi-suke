@@ -272,6 +272,11 @@ describe("TachiSuke project scaffold", () => {
     assert.match(baseLayout, /property="og:image"/, "BaseLayout should include an Open Graph image");
     assert.match(baseLayout, /property="og:locale"/, "BaseLayout should include Open Graph locale metadata");
     assert.match(baseLayout, /property="og:locale:alternate"/, "BaseLayout should include Open Graph locale alternates");
+    assert.match(baseLayout, /articleOpenGraph\?:/, "BaseLayout should accept optional article Open Graph metadata");
+    assert.match(baseLayout, /property="article:published_time"/, "BaseLayout should render article published time metadata");
+    assert.match(baseLayout, /property="article:modified_time"/, "BaseLayout should render article modified time metadata");
+    assert.match(baseLayout, /property="article:section"/, "BaseLayout should render article section metadata");
+    assert.match(baseLayout, /property="article:tag"/, "BaseLayout should render article tag metadata");
     assert.match(baseLayout, /name="twitter:card"\s+content="summary_large_image"/, "BaseLayout should include a summary_large_image card");
     assert.match(baseLayout, /name="twitter:image"/, "BaseLayout should include a Twitter image");
     assert.match(baseLayout, /application\/ld\+json/, "BaseLayout should render JSON-LD scripts");
@@ -313,6 +318,7 @@ describe("TachiSuke project scaffold", () => {
     assert.match(articleLayout, /class="related-articles"/, "ArticleLayout should render a related articles section");
     assert.match(articleLayout, /"@type":\s*"Article"/, "ArticleLayout should define Article JSON-LD");
     assert.match(articleLayout, /"@type":\s*"BreadcrumbList"/, "ArticleLayout should define BreadcrumbList JSON-LD");
+    assert.match(articleLayout, /articleOpenGraph=\{/, "ArticleLayout should pass Open Graph article metadata into BaseLayout");
     assert.match(articleLayout, /jsonLd=\{jsonLd\}/, "ArticleLayout should pass JSON-LD into BaseLayout");
 
     const articleDetailPage = readFileSync(join(root, "src/components/pages/ArticleDetailPage.astro"), "utf8");

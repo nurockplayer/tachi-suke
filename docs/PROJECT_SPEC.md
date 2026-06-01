@@ -172,6 +172,7 @@ The MVP includes:
 - Custom static `404.html` recovery page with `noindex, nofollow`
 - Default Open Graph image and Twitter summary metadata
 - Open Graph locale metadata for multilingual sharing
+- Article Open Graph metadata for published/modified dates, sections, and tags
 - Browser/PWA metadata for theme color, app name, Apple app title, and phone number format detection
 - JSON-LD structured data for `Organization`, `WebSite`, `SearchAction`, `Article`, `LocalBusiness`, `Service`, `WebPage`, `ItemList`, and `BreadcrumbList`
 - Visible breadcrumbs for nested public article, category, place, mobile plan, area, and tool pages
@@ -364,7 +365,7 @@ Engineering metrics:
 - No forbidden lockfiles are present.
 - Draft articles do not generate public article detail pages.
 - Non-published places do not appear in public lists or detail pages.
-- SEO metadata includes title, description, canonical URL, Open Graph URL, Open Graph site name, Open Graph image, Open Graph locale metadata, Twitter card metadata, locale-aware `html lang`, manifest link, OpenSearch discovery link, and conservative `hreflang`.
+- SEO metadata includes title, description, canonical URL, Open Graph URL, Open Graph site name, Open Graph image, Open Graph locale metadata, article Open Graph metadata, Twitter card metadata, locale-aware `html lang`, manifest link, OpenSearch discovery link, and conservative `hreflang`.
 - Browser metadata includes `theme-color`, `application-name`, `apple-mobile-web-app-title`, and `format-detection`.
 - `sitemap.xml` includes public content and excludes account placeholders.
 - `sitemap.xml` includes conservative `hreflang` alternates only for generated public URLs.

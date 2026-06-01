@@ -72,6 +72,7 @@ Implemented:
 - XML sitemap section and site-map entries use content-derived `lastmod` dates for public aggregate pages
 - Default Open Graph image and Twitter summary metadata
 - Open Graph locale metadata for multilingual sharing
+- Article Open Graph metadata for published/modified dates, sections, and tags
 - Browser/PWA metadata for theme color, app name, Apple app title, and phone number format detection
 - JSON-LD structured data for site identity, site search, articles, places, mobile plan details, area details, tool details, and breadcrumbs
 - Visible breadcrumbs on nested public article, category, place, mobile plan, area, and tool pages

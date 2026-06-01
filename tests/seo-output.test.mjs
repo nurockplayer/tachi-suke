@@ -469,11 +469,16 @@ describe("static SEO output", () => {
   });
 
   it("renders article and breadcrumb JSON-LD on article detail pages", () => {
-    const objects = jsonLdObjects(readHtml("en/articles/choose-mobile-plan-japan-foreigner/index.html"));
+    const html = readHtml("en/articles/choose-mobile-plan-japan-foreigner/index.html");
+    const objects = jsonLdObjects(html);
     assert.ok(hasJsonLdType(objects, "Organization"), "article page should include Organization JSON-LD");
     assert.ok(hasJsonLdType(objects, "WebSite"), "article page should include WebSite JSON-LD");
     assert.ok(hasJsonLdType(objects, "Article"), "article page should include Article JSON-LD");
     assert.ok(hasJsonLdType(objects, "BreadcrumbList"), "article page should include BreadcrumbList JSON-LD");
+    assert.match(html, /<meta property="article:published_time" content="2026-05-31T00:00:00\.000Z">/, "article detail should include published time Open Graph metadata");
+    assert.match(html, /<meta property="article:modified_time" content="2026-05-31T00:00:00\.000Z">/, "article detail should include modified time Open Graph metadata");
+    assert.match(html, /<meta property="article:section" content="mobile">/, "article detail should include section Open Graph metadata");
+    assert.match(html, /<meta property="article:tag" content="mobile plans">/, "article detail should include tag Open Graph metadata");
   });
 
   it("renders conservative JSON-LD on article category landing pages", () => {

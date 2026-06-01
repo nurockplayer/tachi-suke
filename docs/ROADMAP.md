@@ -1094,6 +1094,26 @@ Rules:
 - Keep locale metadata centralized with other locale constants.
 - Do not add social SDKs, analytics, language detection, or route changes in this phase.
 
+## Phase 1BF: Article Open Graph Metadata
+
+Status: implemented.
+
+Goal:
+
+Improve article sharing and crawler interpretation by adding article-specific Open Graph metadata.
+
+Implemented:
+
+- Added optional article Open Graph metadata support to `BaseLayout`.
+- Passed article `publishedAt`, `updatedAt`, `category`, and `tags` from `ArticleLayout`.
+- Rendered `article:published_time`, `article:modified_time`, `article:section`, and `article:tag` on article detail pages.
+- Added source-level and build-output SEO tests.
+
+Rules:
+
+- Keep article metadata derived from existing frontmatter.
+- Do not add social SDKs, comments, analytics, tracking, or category taxonomy changes in this phase.
+
 ## Phase 1AI: Article Category Label Polish
 
 Status: implemented.

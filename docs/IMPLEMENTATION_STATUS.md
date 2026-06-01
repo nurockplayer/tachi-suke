@@ -56,6 +56,7 @@ This document records the current MVP state after Phase 1BC sitemap section fres
 - SEO base layout with title, description, canonical URL, Open Graph URL, Open Graph site name, locale-aware `html lang`, and conservative `hreflang`.
 - Default Open Graph image, Twitter summary metadata, and manifest link in `BaseLayout`.
 - Open Graph locale and alternate locale metadata in `BaseLayout`.
+- Article Open Graph metadata for public article detail pages.
 - Browser/PWA metadata in `BaseLayout`: `theme-color`, `application-name`, `apple-mobile-web-app-title`, and `format-detection`.
 - JSON-LD structured data support in `BaseLayout`.
 - Site-wide `Organization` and `WebSite` JSON-LD.
