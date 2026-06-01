@@ -239,6 +239,7 @@ Current published tools:
 - `apartment-viewing-japanese-phrases`
 - `apartment-application-documents-checklist`
 - `japan-job-application-documents-checklist`
+- `japan-everyday-shopping-checklist`
 - `moving-out-checklist`
 - `japan-emergency-disaster-checklist`
 

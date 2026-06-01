@@ -280,10 +280,12 @@ describe("static SEO output", () => {
       "/en/tools/apartment-viewing-japanese-phrases",
       "/en/tools/apartment-application-documents-checklist",
       "/en/tools/japan-job-application-documents-checklist",
+      "/en/tools/japan-everyday-shopping-checklist",
       "/en/tools/moving-out-checklist",
       "/zh-tw/tools/commuter-pass-ic-card-checklist",
       "/zh-tw/tools/apartment-application-documents-checklist",
       "/zh-tw/tools/japan-job-application-documents-checklist",
+      "/zh-tw/tools/japan-everyday-shopping-checklist",
       "/zh-tw/tools/moving-out-checklist",
       "/ja/tools/apartment-viewing-japanese-phrases",
       "/zh-tw/submit-place/thanks",
@@ -580,6 +582,7 @@ describe("static SEO output", () => {
     for (const toolPath of [
       "/en/tools/apartment-viewing-japanese-phrases",
       "/en/tools/commuter-pass-ic-card-checklist",
+      "/en/tools/japan-everyday-shopping-checklist",
       "/en/tools/japan-rent-initial-cost-checklist",
       "/en/tools/moving-out-checklist",
       "/en/tools/moving-to-japan-checklist",
@@ -841,5 +844,10 @@ describe("static SEO output", () => {
     assert.match(commuterTool, /Tokyo Metro/, "commuter pass tool should show official source labels");
     assert.match(commuterTool, /tokyometro\.jp/, "commuter pass tool should link the Tokyo Metro source");
     assert.match(commuterTool, /pasmo\.co\.jp/, "commuter pass tool should link the PASMO source");
+
+    const shoppingTool = readHtml("en/tools/japan-everyday-shopping-checklist/index.html");
+    assert.match(shoppingTool, /Everyday Shopping Checklist/, "everyday shopping tool should build a detail page");
+    assert.match(shoppingTool, /supermarket/i, "everyday shopping tool should include store-choice guidance");
+    assert.match(shoppingTool, /point card/i, "everyday shopping tool should include payment and point guidance");
   });
 });
