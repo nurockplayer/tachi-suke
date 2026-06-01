@@ -266,6 +266,26 @@ Rules:
 - Do not fetch external URLs or validate anchors in this phase.
 - Respect public visibility rules: drafts and non-published places/tools are not public detail route targets.
 
+## Phase 1CB: Search Index Public Health
+
+Status: implemented.
+
+Goal:
+
+Ensure static search indexes remain a public-content-only discovery surface.
+
+Implemented:
+
+- Build-output SEO tests validate every locale `search-index.json`.
+- Expected search URLs are derived from source content collection visibility rules.
+- Search indexes must include matching-locale non-draft articles, published places, current mobile plans, current area guides, and published tools.
+- Search indexes must exclude account placeholders, form routes, trust pages, search utility pages, site-map pages, draft articles, and non-published places/tools.
+
+Rules:
+
+- Keep Phase 1 search static, dependency-free, and `noindex, follow`.
+- Do not add backend search, analytics, personalization, saved search state, or hosted search services in this phase.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.
