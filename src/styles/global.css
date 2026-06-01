@@ -271,8 +271,8 @@ textarea {
 .control-summary-icon-only {
   position: relative;
   justify-content: center;
-  width: 40px;
-  min-width: 40px;
+  width: 44px;
+  min-width: 44px;
   padding: 5px;
 }
 
@@ -361,6 +361,16 @@ details[open].control-disclosure .control-summary::after {
 
 .locale-switcher .control-menu {
   left: 0;
+}
+
+.locale-switcher .control-summary-icon-only {
+  color: var(--color-primary);
+}
+
+.locale-switcher .control-icon {
+  width: 1.18rem;
+  height: 1.18rem;
+  stroke-width: 2.15;
 }
 
 .theme-toggle .control-menu {
