@@ -190,6 +190,11 @@ Phase 1BE adds Open Graph locale metadata:
 - Keep `ogLocaleByLocale` centralized in locale metadata.
 - `BaseLayout` should emit `og:locale` and supported `og:locale:alternate` values for multilingual sharing.
 
+Phase 1BF adds article Open Graph metadata:
+
+- Article detail pages should emit `article:published_time`, `article:modified_time`, `article:section`, and `article:tag` from existing article frontmatter.
+- Do not add social SDKs, tracking, comments, or analytics in this phase.
+
 Phase 1C adds submit-place workflow MVP:
 
 - `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` controls form activation.

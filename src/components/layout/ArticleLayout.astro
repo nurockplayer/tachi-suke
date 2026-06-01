@@ -136,9 +136,15 @@ const jsonLd = [
     ]
   }
 ];
+const articleOpenGraph = {
+  publishedAt,
+  updatedAt,
+  section: category,
+  tags
+};
 ---
 
-<BaseLayout locale={locale} title={title} description={description} alternatePaths={alternatePaths} ogType="article" jsonLd={jsonLd}>
+<BaseLayout locale={locale} title={title} description={description} alternatePaths={alternatePaths} ogType="article" articleOpenGraph={articleOpenGraph} jsonLd={jsonLd}>
   <article class="article-shell narrow">
     <header class="article-header">
       <Breadcrumbs
