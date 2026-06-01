@@ -1463,6 +1463,31 @@ Rules:
 - Direct readers to official JMA, FDMA, municipal, school, employer, and building-management sources where appropriate.
 - Do not add alert subscriptions, location tracking, saved preparedness state, backend storage, or emergency-response workflows in Phase 1.
 
+## Phase 1BP: Work Contract Basics Articles
+
+Status: implemented.
+
+Goal:
+
+Add the first four-locale work-life content cluster so foreign residents can check residence-status fit and written working conditions before accepting part-time or full-time work in Japan.
+
+Implemented:
+
+- Added localized `work` article category titles and descriptions.
+- Added zh-tw article `japan-work-contract-basics-zh-tw`.
+- Added en article `japan-work-contract-basics-en`.
+- Added ja article `japan-work-contract-basics-ja`.
+- Added ko article `japan-work-contract-basics-ko`.
+- Reused `translationKey = japan-work-contract-basics` so sitemap, RSS, search, category pages, and hreflang behavior stay aligned.
+- Linked articles to first-week setup, residence administration basics, area guides, MHLW labor consultation, and Study in Japan part-time work guidance.
+- Added source-level and content-health tests for article count, `work` category copy, slug coverage, and four-locale translation-key coverage.
+
+Rules:
+
+- Keep work content as practical pre-work preparation, not legal, immigration, tax, labor-dispute, or visa advice.
+- Direct users to official sources, schools, employers, labor consultation counters, immigration offices, or qualified professionals when decisions depend on personal status.
+- Do not add job boards, employer reviews, resume builders, work-permission applications, backend storage, or personalized legal guidance in Phase 1.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.

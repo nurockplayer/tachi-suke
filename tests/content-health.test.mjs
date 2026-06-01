@@ -177,6 +177,20 @@ describe("content health", () => {
         `japan-emergency-disaster-basics should include a public ${locale} article`
       );
     }
+
+    const workContractLocales = new Set(
+      articles
+        .filter((article) => article.data.translationKey === "japan-work-contract-basics")
+        .filter((article) => article.data.draft !== true)
+        .map((article) => article.data.locale)
+    );
+    for (const locale of ["zh-tw", "en", "ja", "ko"]) {
+      assert.equal(
+        workContractLocales.has(locale),
+        true,
+        `japan-work-contract-basics should include a public ${locale} article`
+      );
+    }
   });
 
   it("keeps JSON collection ids, slugs, review dates, and URL fields healthy", () => {
