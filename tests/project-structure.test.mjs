@@ -340,6 +340,12 @@ describe("TachiSuke project scaffold", () => {
     assert.match(articleLayout, /"@type":\s*"BreadcrumbList"/, "ArticleLayout should define BreadcrumbList JSON-LD");
     assert.match(articleLayout, /articleOpenGraph=\{/, "ArticleLayout should pass Open Graph article metadata into BaseLayout");
     assert.match(articleLayout, /jsonLd=\{jsonLd\}/, "ArticleLayout should pass JSON-LD into BaseLayout");
+    assert.match(articleLayout, /datetime=\{publishedAt\.toISOString\(\)\}/, "ArticleLayout should render machine-readable published dates");
+    assert.match(articleLayout, /datetime=\{updatedAt\.toISOString\(\)\}/, "ArticleLayout should render machine-readable updated dates");
+    assert.match(articleLayout, /data-article-trust-notice/, "ArticleLayout should render an article freshness and trust notice");
+    for (const phrase of ["資訊可能會變動", "Information can change", "情報は変わることがあります", "정보는 바뀔 수 있습니다"]) {
+      assert.match(articleLayout, new RegExp(phrase), `ArticleLayout should include localized trust copy: ${phrase}`);
+    }
 
     const articleDetailPage = readFileSync(join(root, "src/components/pages/ArticleDetailPage.astro"), "utf8");
     assert.match(articleDetailPage, /const\s+\{\s*Content,\s*headings\s*\}\s*=\s*await render\(article\)/, "ArticleDetailPage should read rendered headings");
@@ -472,6 +478,7 @@ describe("TachiSuke project scaffold", () => {
     const css = readFileSync(join(root, "src/styles/global.css"), "utf8");
     assert.match(css, /\.skip-link/, "global CSS should style the skip link");
     assert.match(css, /:focus-visible/, "global CSS should define visible focus styles");
+    assert.match(css, /\.article-trust-notice/, "global CSS should style article freshness and trust notices");
 
     const accessibilityPlan = readFileSync(
       join(root, "docs/superpowers/plans/2026-06-01-phase-1l-accessibility-polish.md"),

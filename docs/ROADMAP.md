@@ -205,6 +205,25 @@ Rules:
 - Keep the language control visually language-neutral in the closed state.
 - Do not add an icon dependency for this small header control.
 
+## Phase 1BT: Article Freshness and Trust
+
+Status: implemented.
+
+Goal:
+
+Make article detail pages safer for practical decision-making by exposing semantic update dates and a localized information-change reminder.
+
+Implemented:
+
+- Article published and updated dates render with machine-readable `<time datetime>` elements.
+- Article detail pages show a four-locale freshness/trust notice before the article body.
+- The notice reminds readers that mobile plans, procedures, housing terms, and work rules can change.
+
+Rules:
+
+- Keep the copy editorial and practical; do not imply live verification or legal advice.
+- Use correction prompts for reader reports, not a database-backed review workflow in Phase 1.
+
 ## Phase 1E: Structured Data
 
 Status: implemented.
