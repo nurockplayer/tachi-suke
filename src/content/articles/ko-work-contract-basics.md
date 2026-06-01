@@ -13,6 +13,13 @@ tags:
   - "체류 자격"
 publishedAt: "2026-06-01"
 updatedAt: "2026-06-01"
+sourceLinks:
+  - label: "Study in Japan Part-Time Work"
+    url: "https://www.studyinjapan.go.jp/en/work-in-japan/part-time-jobs/"
+    note: "유학생 아르바이트 기본 정보를 확인하는 공식 출발점입니다."
+  - label: "후생노동성 외국인 노동 상담"
+    url: "https://www.check-roudou.mhlw.go.jp/soudan/foreigner.html"
+    note: "외국인 노동자를 위한 상담처를 찾는 공식 출발점입니다."
 draft: false
 ---
 

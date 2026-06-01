@@ -5,6 +5,7 @@ import Breadcrumbs from "@/components/navigation/Breadcrumbs.astro";
 import { formatDate } from "@/lib/content";
 import { slugifyArticleCategory } from "@/lib/content/article-categories";
 import { htmlLangByLocale, localizePath, type Locale } from "@/lib/i18n";
+import type { ArticleSourceLink } from "@/types/article";
 
 interface RelatedArticleLink {
   title: string;
@@ -29,9 +30,22 @@ interface Props {
   alternatePaths?: Partial<Record<Locale, string>>;
   headings?: ArticleHeading[];
   relatedArticles?: RelatedArticleLink[];
+  sourceLinks?: ArticleSourceLink[];
 }
 
-const { locale, title, description, category, tags, publishedAt, updatedAt, alternatePaths, headings = [], relatedArticles = [] } = Astro.props;
+const {
+  locale,
+  title,
+  description,
+  category,
+  tags,
+  publishedAt,
+  updatedAt,
+  alternatePaths,
+  headings = [],
+  relatedArticles = [],
+  sourceLinks = []
+} = Astro.props;
 const site = Astro.site ?? new URL(Astro.url.origin);
 const canonicalUrl = new URL(Astro.url.pathname, site).href;
 const localeHomeUrl = new URL(localizePath(locale), site).href;
@@ -106,6 +120,24 @@ const tocCopy = {
   ko: {
     title: "이 글의 목차",
     description: "필요한 부분으로 바로 이동하세요."
+  }
+}[locale];
+const sourceCopy = {
+  "zh-tw": {
+    title: "官方確認入口",
+    description: "行動前請以官方網站、窗口或店家最新資訊為準。"
+  },
+  en: {
+    title: "Official confirmation links",
+    description: "Use these as starting points, then confirm the latest official, counter, or store information before acting."
+  },
+  ja: {
+    title: "公式確認リンク",
+    description: "行動する前に、公式サイト、窓口、店舗の最新情報を確認してください。"
+  },
+  ko: {
+    title: "공식 확인 링크",
+    description: "진행하기 전에 공식 사이트, 창구, 매장의 최신 정보를 확인하세요."
   }
 }[locale];
 const tocHeadings = headings
@@ -195,6 +227,22 @@ const articleOpenGraph = {
       <strong>{trustCopy.title}</strong>
       <p>{trustCopy.body}</p>
     </aside>
+    {sourceLinks.length > 0 && (
+      <aside class="article-source-links" data-article-source-links aria-labelledby="article-source-links-title">
+        <div>
+          <h2 id="article-source-links-title">{sourceCopy.title}</h2>
+          <p>{sourceCopy.description}</p>
+        </div>
+        <ul>
+          {sourceLinks.map((sourceLink) => (
+            <li>
+              <a href={sourceLink.url} target="_blank" rel="noreferrer">{sourceLink.label}</a>
+              {sourceLink.note && <span>{sourceLink.note}</span>}
+            </li>
+          ))}
+        </ul>
+      </aside>
+    )}
     {tocHeadings.length >= 2 && (
       <nav class="article-toc" aria-labelledby="article-toc-title">
         <div>

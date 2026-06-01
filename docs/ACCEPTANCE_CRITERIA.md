@@ -104,6 +104,9 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Article TOC links must point to generated same-page heading anchors.
 - Article detail pages should render published and updated dates with semantic `<time datetime>` elements.
 - Article detail pages should show localized freshness/trust copy reminding readers that life information can change and should be verified before acting.
+- Article detail pages with frontmatter `sourceLinks` should render a localized official confirmation section before the article body.
+- Article `sourceLinks` must include `label` and HTTPS `url`; optional `note` may explain how to use the source.
+- Emergency/disaster and work-contract basics articles should keep official source links in all four locales because the information can affect safety, legal status, or work decisions.
 
 ## Place Criteria
 

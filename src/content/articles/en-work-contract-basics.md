@@ -13,6 +13,13 @@ tags:
   - "residence status"
 publishedAt: "2026-06-01"
 updatedAt: "2026-06-01"
+sourceLinks:
+  - label: "Study in Japan part-time work guidance"
+    url: "https://www.studyinjapan.go.jp/en/work-in-japan/part-time-jobs/"
+    note: "Official starting point for student part-time work basics."
+  - label: "MHLW foreign worker consultation resources"
+    url: "https://www.check-roudou.mhlw.go.jp/soudan/foreigner.html"
+    note: "Use to find official labor consultation resources for foreign workers."
 draft: false
 ---
 

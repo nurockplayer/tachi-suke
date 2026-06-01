@@ -23,6 +23,11 @@ const articles = defineCollection({
     tags: z.array(z.string()),
     publishedAt: z.coerce.date(),
     updatedAt: z.coerce.date(),
+    sourceLinks: z.array(z.object({
+      label: z.string(),
+      url: z.url(),
+      note: z.string().optional()
+    })).default([]),
     draft: z.boolean().default(false)
   })
 });

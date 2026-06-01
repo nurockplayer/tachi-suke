@@ -793,6 +793,55 @@ details[open].control-disclosure .control-summary::after {
   margin: 0;
 }
 
+.article-source-links {
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  display: grid;
+  gap: 14px;
+  margin: 0 0 30px;
+  padding: 18px;
+}
+
+.article-source-links h2,
+.article-source-links p {
+  margin: 0;
+}
+
+.article-source-links h2 {
+  font-size: 1rem;
+}
+
+.article-source-links p {
+  color: var(--color-muted);
+  font-size: 0.92rem;
+}
+
+.article-source-links ul {
+  display: grid;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.article-source-links li {
+  display: grid;
+  gap: 3px;
+}
+
+.article-source-links a {
+  color: var(--color-link);
+  font-weight: 800;
+  text-decoration-color: var(--color-green);
+  text-underline-offset: 3px;
+}
+
+.article-source-links span {
+  color: var(--color-muted);
+  font-size: 0.92rem;
+}
+
 .article-toc {
   background: var(--color-mist);
   border: 1px solid var(--color-border);

@@ -13,6 +13,13 @@ tags:
   - "대피"
 publishedAt: "2026-06-01"
 updatedAt: "2026-06-01"
+sourceLinks:
+  - label: "소방청 구급차 이용 가이드"
+    url: "https://www.fdma.go.jp/publication/portal/post1.html"
+    note: "119와 구급차 이용 흐름을 확인하는 공식 출발점입니다."
+  - label: "일본 기상청 Emergency Warnings"
+    url: "https://www.jma.go.jp/jma/en/Emergency_Warning/ew_index.html"
+    note: "거주지 지자체의 최신 대피 정보와 함께 확인하세요."
 draft: false
 ---
 

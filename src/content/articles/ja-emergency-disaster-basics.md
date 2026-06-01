@@ -13,6 +13,13 @@ tags:
   - "避難"
 publishedAt: "2026-06-01"
 updatedAt: "2026-06-01"
+sourceLinks:
+  - label: "消防庁 救急車利用ガイド"
+    url: "https://www.fdma.go.jp/publication/portal/post1.html"
+    note: "119 と救急車利用の流れを確認する公式入口です。"
+  - label: "気象庁 Emergency Warnings"
+    url: "https://www.jma.go.jp/jma/en/Emergency_Warning/ew_index.html"
+    note: "住んでいる自治体の最新避難情報とあわせて確認してください。"
 draft: false
 ---
 

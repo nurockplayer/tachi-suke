@@ -361,6 +361,16 @@ describe("static SEO output", () => {
     assert.match(contact, /\.get\("relatedUrl"\)/, "contact page should read relatedUrl from the query string");
   });
 
+  it("renders official source links on high-risk article pages", () => {
+    const article = readHtml("en/articles/japan-emergency-disaster-basics-en/index.html");
+    assert.match(article, /data-article-source-links/, "article page should render official source links");
+    assert.match(article, /Official confirmation links/, "article source section should use localized English copy");
+    assert.match(article, /https:\/\/www\.fdma\.go\.jp\/publication\/portal\/post1\.html/, "emergency article should link to FDMA");
+    assert.match(article, /https:\/\/www\.jma\.go\.jp\/jma\/en\/Emergency_Warning\/ew_index\.html/, "emergency article should link to JMA");
+    assert.match(article, /target="_blank"/, "official source links should open external pages separately");
+    assert.match(article, /rel="noreferrer"/, "official source links should avoid leaking referrer context");
+  });
+
   it("generates an RSS feed for public article detail pages", () => {
     const feed = readDist("feed.xml");
     assert.match(feed, /<link>https:\/\/tachi-suke\.example\.com\/zh-tw\/articles\/taiwanese-newcomer-mobile-plan-japan<\/link>/);
