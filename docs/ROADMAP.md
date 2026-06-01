@@ -854,6 +854,26 @@ Rules:
 - Confirm important rental terms in writing or email.
 - Do not add saved state, audio playback, or backend storage in Phase 1.
 
+## Phase 1AT: Moving-Out Checklist Tool
+
+Status: implemented.
+
+Goal:
+
+Extend the housing content lifecycle beyond move-in by helping Japan apartment residents prepare for退去, moving logistics, utility shutdown, mail forwarding, and address follow-up.
+
+Implemented:
+
+- Added published tool `moving-out-checklist`.
+- Covered notice and contract checks, utilities/services, trash and handover, and post-move address/mail procedures.
+- Added source-level and SEO-output tests for the sixth published tool and sitemap entries.
+
+Rules:
+
+- Keep moving-out content as practical preparation guidance, not legal advice about deposit or restoration disputes.
+- Remind users that deadlines and fees vary by contract, municipality, management company, and provider.
+- Do not add saved state, quote workflows, or backend storage in Phase 1.
+
 ## Phase 1AI: Article Category Label Polish
 
 Status: implemented.
