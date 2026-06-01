@@ -195,6 +195,11 @@ Phase 1BF adds article Open Graph metadata:
 - Article detail pages should emit `article:published_time`, `article:modified_time`, `article:section`, and `article:tag` from existing article frontmatter.
 - Do not add social SDKs, tracking, comments, or analytics in this phase.
 
+Phase 1BG adds homepage sitemap freshness:
+
+- Locale homepage sitemap entries should have content-derived `lastmod` values.
+- Reuse local public content metadata; do not add crawling, analytics, or backend freshness tracking.
+
 Phase 1C adds submit-place workflow MVP:
 
 - `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` controls form activation.

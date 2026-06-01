@@ -354,6 +354,7 @@ describe("static SEO output", () => {
   it("adds content-aware lastmod values for public section and site map pages", () => {
     const lastmods = sitemapLastmodByPath(readDist("sitemap.xml"));
     for (const locale of ["zh-tw", "en", "ja", "ko"]) {
+      assert.match(lastmods.get(`/${locale}`) ?? "", /^\d{4}-\d{2}-\d{2}$/, `/${locale} should have a content-derived lastmod date`);
       for (const section of ["articles", "areas", "places", "mobile", "tools", "site-map"]) {
         const path = `/${locale}/${section}`;
         assert.match(lastmods.get(path) ?? "", /^\d{4}-\d{2}-\d{2}$/, `${path} should have a content-derived lastmod date`);

@@ -169,6 +169,7 @@ The MVP includes:
 - Generated global `feed.xml` for public articles, included in the sitemap with content-aware `lastmod`
 - Generated locale RSS feeds at `/[locale]/feed.xml` for same-locale public articles, included in the sitemap with same-locale `lastmod`
 - XML sitemap section and site-map entries with content-derived `lastmod` values for public aggregate pages
+- Locale homepage sitemap entries with content-derived `lastmod` values
 - Custom static `404.html` recovery page with `noindex, nofollow`
 - Default Open Graph image and Twitter summary metadata
 - Open Graph locale metadata for multilingual sharing
@@ -375,6 +376,7 @@ Engineering metrics:
 - `sitemap.xml` includes human-readable site map pages.
 - `sitemap.xml` includes the global RSS feed and locale RSS feeds with article-derived `lastmod`.
 - `sitemap.xml` includes content-derived `lastmod` on public aggregate section pages and human-readable site map pages.
+- `sitemap.xml` includes content-derived `lastmod` on locale homepage entries.
 - `sitemap.xml` excludes noindex search pages and search index JSON endpoints.
 - `robots.txt` references the sitemap and disallows placeholder account routes.
 - `llms.txt` summarizes public discovery surfaces, including locale site map pages, and excludes private, draft, account, and placeholder data.
