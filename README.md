@@ -75,7 +75,7 @@ Implemented:
 - Open Graph locale metadata for multilingual sharing
 - Article Open Graph metadata for published/modified dates, sections, and tags
 - Browser/PWA metadata for theme color, app name, Apple app title, and phone number format detection
-- System/light/dark theme support with a locale-aware header switcher, persisted browser preference, and no-JavaScript system dark theme fallback
+- System/light/dark theme support with separate collapsed locale and theme header controls, persisted browser preference, and no-JavaScript system dark theme fallback
 - JSON-LD structured data for site identity, site search, locale homepages, public section indexes, article indexes, articles, places, mobile plan details, area details, tool details, trust/form pages, and breadcrumbs
 - Breadcrumb JSON-LD on public collection index pages and nested public detail pages
 - Visible breadcrumbs on nested public article, category, place, mobile plan, area, and tool pages

@@ -152,7 +152,7 @@ Make the public static site more comfortable for long-form reading and evening u
 Implemented:
 
 - System/light/dark theme support.
-- Locale-aware header theme switcher.
+- Locale-aware theme switcher foundation in the global header.
 - Persisted browser preference through `localStorage`.
 - Early theme initialization in `BaseLayout` to reduce first-paint theme flash.
 - Light and dark browser `theme-color` metadata.
@@ -164,6 +164,27 @@ Rules:
 - Keep the visual language calm, practical, and readable for a Japan life information site.
 - Do not add a large component or animation dependency for theme switching.
 - Future visual work should keep both light and dark theme surfaces in sync.
+
+## Phase 1BR: Collapsible Global Controls
+
+Status: implemented.
+
+Goal:
+
+Keep the global header compact by folding language choices and theme choices into two separate controls.
+
+Implemented:
+
+- Locale switcher uses a native disclosure menu and shows the active locale while closed.
+- Theme switcher uses a separate native disclosure menu and shows the active system/light/dark preference while closed.
+- Opening one global control closes the other; outside click and Escape close open controls.
+- Shared header control styling works in both light and dark themes without adding a dependency.
+
+Rules:
+
+- Keep language choices and theme choices separate.
+- Keep the controls usable without introducing a custom menu library.
+- Do not mix future account, favorites, or personalization settings into these Phase 1 header controls.
 
 ## Phase 1E: Structured Data
 

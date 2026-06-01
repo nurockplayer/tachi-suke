@@ -492,6 +492,9 @@ describe("TachiSuke project scaffold", () => {
     assert.match(header, /<ThemeToggle\s+locale=\{locale\}/, "Header should pass the current locale to ThemeToggle");
 
     const themeToggle = readFileSync(join(root, "src/components/layout/ThemeToggle.astro"), "utf8");
+    assert.match(themeToggle, /<details[\s\S]*data-theme-switcher/, "ThemeToggle should collapse its options behind a details control");
+    assert.match(themeToggle, /<summary[\s\S]*data-theme-summary/, "ThemeToggle should expose a stable summary trigger");
+    assert.match(themeToggle, /data-theme-menu/, "ThemeToggle should wrap options in a stable menu surface");
     assert.match(themeToggle, /data-theme-switcher/, "ThemeToggle should expose a stable switcher root");
     assert.match(themeToggle, /data-theme-option="system"/, "ThemeToggle should offer system mode");
     assert.match(themeToggle, /data-theme-option="light"/, "ThemeToggle should offer light mode");
@@ -513,6 +516,36 @@ describe("TachiSuke project scaffold", () => {
 
     const status = readFileSync(join(root, "docs/IMPLEMENTATION_STATUS.md"), "utf8");
     assert.match(status, /dark theme/i, "implementation status should record dark theme support");
+  });
+
+  it("collapses global language and theme choices into separate header controls", () => {
+    const localeSwitcher = readFileSync(join(root, "src/components/layout/LocaleSwitcher.astro"), "utf8");
+    assert.match(localeSwitcher, /data-locale-switcher/, "LocaleSwitcher should expose a stable root");
+    assert.match(localeSwitcher, /data-global-control/, "LocaleSwitcher should participate in shared header disclosure behavior");
+    assert.match(localeSwitcher, /<details[\s\S]*data-locale-switcher/, "LocaleSwitcher should use a details disclosure");
+    assert.match(localeSwitcher, /<summary[\s\S]*data-locale-summary/, "LocaleSwitcher should expose a stable summary trigger");
+    assert.match(localeSwitcher, /data-locale-menu/, "LocaleSwitcher should wrap language links in a stable menu");
+    assert.match(localeSwitcher, /localeNames\[locale\]/, "LocaleSwitcher summary should show the current locale name");
+    for (const label of ["語言", "Language", "言語", "언어"]) {
+      assert.match(localeSwitcher, new RegExp(label), `LocaleSwitcher should include localized ${label} label`);
+    }
+
+    const themeToggle = readFileSync(join(root, "src/components/layout/ThemeToggle.astro"), "utf8");
+    assert.match(themeToggle, /data-global-control/, "ThemeToggle should participate in shared header disclosure behavior");
+    assert.match(themeToggle, /<details[\s\S]*data-theme-switcher/, "ThemeToggle should use its own details disclosure");
+    assert.match(themeToggle, /<summary[\s\S]*data-theme-summary/, "ThemeToggle should expose a stable summary trigger");
+    assert.match(themeToggle, /data-theme-current-label/, "ThemeToggle summary should show the active preference label");
+    assert.match(themeToggle, /data-theme-menu/, "ThemeToggle should wrap theme choices in a stable menu");
+
+    const header = readFileSync(join(root, "src/components/layout/Header.astro"), "utf8");
+    assert.match(header, /__tachiSukeHeaderControlsReady/, "Header should register disclosure behavior once");
+    assert.match(header, /details\[data-global-control\]\[open\]/, "Header should manage open global controls");
+    assert.match(header, /event\.key !== "Escape"/, "Header should close global controls on Escape");
+
+    const css = readFileSync(join(root, "src/styles/global.css"), "utf8");
+    assert.match(css, /\.control-disclosure/, "global CSS should style shared collapsed controls");
+    assert.match(css, /\.control-menu/, "global CSS should style collapsed option menus");
+    assert.match(css, /details\[open\]/, "global CSS should style open disclosure state");
   });
 
   it("includes public launch trust pages in locale routes and footer navigation", () => {

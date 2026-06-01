@@ -47,38 +47,47 @@ const copy = {
 
 ---
 
-<div class="theme-toggle" data-theme-switcher aria-label={copy.label}>
-  <button
-    type="button"
-    class="theme-toggle-option"
-    data-theme-option="system"
-    aria-label={`${copy.label}: ${copy.system}`}
-    aria-pressed="true"
-    title={`${copy.label}: ${copy.system}`}
-  >
-    {copy.shortSystem}
-  </button>
-  <button
-    type="button"
-    class="theme-toggle-option"
-    data-theme-option="light"
-    aria-label={`${copy.label}: ${copy.light}`}
-    aria-pressed="false"
-    title={`${copy.label}: ${copy.light}`}
-  >
-    {copy.shortLight}
-  </button>
-  <button
-    type="button"
-    class="theme-toggle-option"
-    data-theme-option="dark"
-    aria-label={`${copy.label}: ${copy.dark}`}
-    aria-pressed="false"
-    title={`${copy.label}: ${copy.dark}`}
-  >
-    {copy.shortDark}
-  </button>
-</div>
+<details class="control-disclosure theme-toggle" data-global-control data-theme-switcher aria-label={copy.label}>
+  <summary class="control-summary" data-theme-summary>
+    <span class="control-summary-label">{copy.label}</span>
+    <strong data-theme-current-label>{copy.shortSystem}</strong>
+  </summary>
+  <div class="control-menu theme-menu" data-theme-menu>
+    <button
+      type="button"
+      class="theme-toggle-option"
+      data-theme-option="system"
+      data-theme-summary-label={copy.shortSystem}
+      aria-label={`${copy.label}: ${copy.system}`}
+      aria-pressed="true"
+      title={`${copy.label}: ${copy.system}`}
+    >
+      {copy.system}
+    </button>
+    <button
+      type="button"
+      class="theme-toggle-option"
+      data-theme-option="light"
+      data-theme-summary-label={copy.shortLight}
+      aria-label={`${copy.label}: ${copy.light}`}
+      aria-pressed="false"
+      title={`${copy.label}: ${copy.light}`}
+    >
+      {copy.light}
+    </button>
+    <button
+      type="button"
+      class="theme-toggle-option"
+      data-theme-option="dark"
+      data-theme-summary-label={copy.shortDark}
+      aria-label={`${copy.label}: ${copy.dark}`}
+      aria-pressed="false"
+      title={`${copy.label}: ${copy.dark}`}
+    >
+      {copy.dark}
+    </button>
+  </div>
+</details>
 
 <script is:inline>
   (() => {
@@ -101,7 +110,14 @@ const copy = {
 
     const syncPressedState = (preference) => {
       document.querySelectorAll("[data-theme-option]").forEach((button) => {
-        button.setAttribute("aria-pressed", button.getAttribute("data-theme-option") === preference ? "true" : "false");
+        const isActive = button.getAttribute("data-theme-option") === preference;
+        button.setAttribute("aria-pressed", isActive ? "true" : "false");
+        if (isActive) {
+          const currentLabel = button.closest("[data-theme-switcher]")?.querySelector("[data-theme-current-label]");
+          if (currentLabel && button instanceof HTMLElement) {
+            currentLabel.textContent = button.dataset.themeSummaryLabel || button.textContent?.trim() || "";
+          }
+        }
       });
     };
 
@@ -129,6 +145,7 @@ const copy = {
         const button = target?.closest("[data-theme-option]");
         if (!button) return;
         applyTheme(button.getAttribute("data-theme-option"), true);
+        button.closest("details")?.removeAttribute("open");
       });
 
       mediaQuery.addEventListener("change", () => {

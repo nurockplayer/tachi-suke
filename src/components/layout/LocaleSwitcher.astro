@@ -14,17 +14,31 @@ const switcherPaths = alternatePaths ?? Object.fromEntries(locales.map((targetLo
   localizePath(targetLocale, pathWithoutLocale)
 ])) as Partial<Record<Locale, string>>;
 const availableLocales = locales.filter((targetLocale) => switcherPaths[targetLocale]);
+const languageLabel = {
+  "zh-tw": "語言",
+  en: "Language",
+  ja: "言語",
+  ko: "언어"
+}[locale];
 ---
 
 {availableLocales.length > 0 && (
-  <nav class="locale-switcher" aria-label="Language">
-    {availableLocales.map((targetLocale) => (
-    <a
-      href={switcherPaths[targetLocale]}
-      aria-current={targetLocale === locale ? "true" : undefined}
-    >
-      {localeNames[targetLocale]}
-    </a>
-    ))}
+  <nav aria-label="Language">
+    <details class="control-disclosure locale-switcher" data-global-control data-locale-switcher>
+      <summary class="control-summary" data-locale-summary>
+        <span class="control-summary-label">{languageLabel}</span>
+        <strong>{localeNames[locale]}</strong>
+      </summary>
+      <div class="control-menu locale-menu" data-locale-menu>
+        {availableLocales.map((targetLocale) => (
+          <a
+            href={switcherPaths[targetLocale]}
+            aria-current={targetLocale === locale ? "true" : undefined}
+          >
+            {localeNames[targetLocale]}
+          </a>
+        ))}
+      </div>
+    </details>
   </nav>
 )}
