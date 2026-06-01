@@ -149,28 +149,46 @@ export const sectionCopy = {
   }
 } satisfies Record<Locale, Record<string, string>>;
 
-type UiCopyKey = "layout.skipMain" | "layout.languageNavigation" | "layout.changeLanguage";
+type UiCopyKey =
+  | "layout.skipMain"
+  | "layout.primaryNavigation"
+  | "layout.footerNavigation"
+  | "layout.languageNavigation"
+  | "layout.changeLanguage"
+  | "layout.tagList";
 
 const uiCopy = {
   "zh-tw": {
     "layout.skipMain": "跳到主要內容",
+    "layout.primaryNavigation": "主要導覽",
+    "layout.footerNavigation": "頁尾導覽",
     "layout.languageNavigation": "Language / 語言 / 言語 / 언어",
-    "layout.changeLanguage": "Change language / 切換語言 / 言語を切り替える / 언어 변경"
+    "layout.changeLanguage": "Change language / 切換語言 / 言語を切り替える / 언어 변경",
+    "layout.tagList": "文章標籤"
   },
   en: {
     "layout.skipMain": "Skip to main content",
+    "layout.primaryNavigation": "Primary navigation",
+    "layout.footerNavigation": "Footer navigation",
     "layout.languageNavigation": "Language / 語言 / 言語 / 언어",
-    "layout.changeLanguage": "Change language / 切換語言 / 言語を切り替える / 언어 변경"
+    "layout.changeLanguage": "Change language / 切換語言 / 言語を切り替える / 언어 변경",
+    "layout.tagList": "Tags"
   },
   ja: {
     "layout.skipMain": "本文へスキップ",
+    "layout.primaryNavigation": "主要ナビゲーション",
+    "layout.footerNavigation": "フッターナビゲーション",
     "layout.languageNavigation": "Language / 語言 / 言語 / 언어",
-    "layout.changeLanguage": "Change language / 切換語言 / 言語を切り替える / 언어 변경"
+    "layout.changeLanguage": "Change language / 切換語言 / 言語を切り替える / 언어 변경",
+    "layout.tagList": "タグ"
   },
   ko: {
     "layout.skipMain": "본문으로 건너뛰기",
+    "layout.primaryNavigation": "주요 내비게이션",
+    "layout.footerNavigation": "푸터 내비게이션",
     "layout.languageNavigation": "Language / 語言 / 言語 / 언어",
-    "layout.changeLanguage": "Change language / 切換語言 / 言語を切り替える / 언어 변경"
+    "layout.changeLanguage": "Change language / 切換語言 / 言語を切り替える / 언어 변경",
+    "layout.tagList": "태그"
   }
 } satisfies Record<Locale, Record<UiCopyKey, string>>;
 

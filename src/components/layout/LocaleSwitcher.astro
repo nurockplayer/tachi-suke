@@ -1,5 +1,5 @@
 ---
-import { localeNames, locales, localizePath, type Locale } from "@/lib/i18n";
+import { getUiCopy, localeNames, locales, localizePath, type Locale } from "@/lib/i18n";
 
 interface Props {
   locale: Locale;
@@ -14,8 +14,8 @@ const switcherPaths = alternatePaths ?? Object.fromEntries(locales.map((targetLo
   localizePath(targetLocale, pathWithoutLocale)
 ])) as Partial<Record<Locale, string>>;
 const availableLocales = locales.filter((targetLocale) => switcherPaths[targetLocale]);
-const languageNavigationLabel = "Language / 語言 / 言語 / 언어";
-const languageSwitchLabel = "Language / 語言 / 言語 / 언어";
+const languageNavigationLabel = getUiCopy(locale, "layout.languageNavigation");
+const languageSwitchLabel = getUiCopy(locale, "layout.changeLanguage");
 ---
 
 {availableLocales.length > 0 && (

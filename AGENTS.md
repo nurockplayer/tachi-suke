@@ -199,6 +199,12 @@ Phase 1CL adds correction related URL coverage:
 - Coverage should include article, place, mobile plan, area, tool, and at least one non-English locale representative.
 - Keep this as a static correction workflow helper; do not add analytics, tracking, backend storage, or guaranteed support response behavior.
 
+Phase 1CM adds localized assistive labels:
+
+- Shared layout assistive labels should use `getUiCopy` instead of hard-coded English strings.
+- Primary navigation, footer navigation, article tag lists, and language switcher labels should stay locale-aware or explicitly multilingual where language-neutral discovery matters.
+- Do not change route structure, visible navigation, theme behavior, or account/auth functionality in Phase 1CM.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.

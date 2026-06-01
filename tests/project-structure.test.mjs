@@ -406,13 +406,13 @@ describe("TachiSuke project scaffold", () => {
     assert.match(localeSwitcher, /data-locale-icon/, "LocaleSwitcher should expose a globe icon");
     assert.match(localeSwitcher, /control-summary-icon-only/, "collapsed language switcher should use icon-only styling");
     assert.match(localeSwitcher, /visually-hidden/, "LocaleSwitcher should keep an accessible non-visual label");
-    assert.match(localeSwitcher, /const languageNavigationLabel = "Language \/ 語言 \/ 言語 \/ 언어"/, "LocaleSwitcher nav label should be a locale-independent multilingual label");
-    assert.match(localeSwitcher, /const languageSwitchLabel = "Language \/ 語言 \/ 言語 \/ 언어"/, "LocaleSwitcher accessible label should be locale-independent and multilingual");
+    assert.match(localeSwitcher, /getUiCopy\(locale,\s*"layout\.languageNavigation"\)/, "LocaleSwitcher nav label should reuse shared multilingual copy");
+    assert.match(localeSwitcher, /getUiCopy\(locale,\s*"layout\.changeLanguage"\)/, "LocaleSwitcher accessible label should reuse shared multilingual copy");
     assert.match(localeSwitcher, /aria-label=\{languageNavigationLabel\}/, "LocaleSwitcher nav should use the language-neutral navigation label");
     assert.match(localeSwitcher, /aria-label=\{languageSwitchLabel\}/, "LocaleSwitcher summary should use the language-neutral switch label");
     assert.match(localeSwitcher, /title=\{languageSwitchLabel\}/, "LocaleSwitcher title should use the language-neutral switch label");
     assert.match(localeSwitcher, /\{languageSwitchLabel\}/, "LocaleSwitcher hidden label should use the language-neutral switch label");
-    assert.doesNotMatch(collapsedSummary, /getUiCopy\(locale/, "collapsed language switcher trigger must not derive its label from the active locale");
+    assert.doesNotMatch(collapsedSummary, /localeNames\[locale\]/, "collapsed language switcher trigger must not display the active locale's native name");
     assert.match(i18n, /"layout\.languageNavigation"/, "i18n copy should define a language-navigation key");
     assert.match(i18n, /"layout\.changeLanguage"/, "i18n copy should define a change-language key");
     assert.match(i18n, /Language \/ 語言 \/ 言語 \/ 언어/, "language navigation label should be multilingual and not depend on the current locale");
@@ -552,10 +552,28 @@ describe("TachiSuke project scaffold", () => {
     const header = readFileSync(join(root, "src/components/layout/Header.astro"), "utf8");
     assert.match(header, /aria-current=\{[^}]*isActive/, "Header nav should mark the active section");
     assert.match(header, /localizePath\(locale,\s*item\.href\)/, "Header nav should keep locale-aware hrefs");
+    assert.match(header, /getUiCopy\(locale,\s*"layout\.primaryNavigation"\)/, "Header should localize primary navigation assistive text");
+    assert.doesNotMatch(header, /aria-label="Primary"/, "Header should not hard-code English primary navigation aria labels");
+
+    const footer = readFileSync(join(root, "src/components/layout/Footer.astro"), "utf8");
+    assert.match(footer, /getUiCopy\(locale,\s*"layout\.footerNavigation"\)/, "Footer should localize footer navigation assistive text");
+    assert.doesNotMatch(footer, /aria-label="Footer"/, "Footer should not hard-code English footer navigation aria labels");
+
+    const articleLayout = readFileSync(join(root, "src/components/layout/ArticleLayout.astro"), "utf8");
+    assert.match(articleLayout, /getUiCopy\(locale,\s*"layout\.tagList"\)/, "ArticleLayout should localize tag-list assistive text");
+    assert.doesNotMatch(articleLayout, /aria-label="Tags"/, "ArticleLayout should not hard-code English tag list aria labels");
+
+    const localeSwitcher = readFileSync(join(root, "src/components/layout/LocaleSwitcher.astro"), "utf8");
+    assert.match(localeSwitcher, /getUiCopy\(locale,\s*"layout\.languageNavigation"\)/, "LocaleSwitcher should reuse shared language navigation copy");
+    assert.match(localeSwitcher, /getUiCopy\(locale,\s*"layout\.changeLanguage"\)/, "LocaleSwitcher should reuse shared language switch copy");
+    assert.doesNotMatch(localeSwitcher, /const languageNavigationLabel = "Language \/ 語言 \/ 言語 \/ 언어"/, "LocaleSwitcher should not duplicate shared language navigation copy");
 
     const i18n = readFileSync(join(root, "src/lib/i18n/index.ts"), "utf8");
     assert.match(i18n, /export function getUiCopy/, "i18n helper should expose fallback-aware UI copy lookup");
     assert.match(i18n, /"layout\.skipMain"/, "skip link translation key should live in i18n copy");
+    assert.match(i18n, /"layout\.primaryNavigation"/, "primary navigation assistive text should live in i18n copy");
+    assert.match(i18n, /"layout\.footerNavigation"/, "footer navigation assistive text should live in i18n copy");
+    assert.match(i18n, /"layout\.tagList"/, "tag-list assistive text should live in i18n copy");
 
     const css = readFileSync(join(root, "src/styles/global.css"), "utf8");
     assert.match(css, /\.skip-link/, "global CSS should style the skip link");
@@ -620,7 +638,7 @@ describe("TachiSuke project scaffold", () => {
     assert.match(localeSwitcher, /<details[\s\S]*data-locale-switcher/, "LocaleSwitcher should use a details disclosure");
     assert.match(localeSwitcher, /<summary[\s\S]*data-locale-summary/, "LocaleSwitcher should expose a stable summary trigger");
     assert.match(localeSwitcher, /aria-label=\{languageSwitchLabel\}/, "LocaleSwitcher summary should have a language-neutral accessible label");
-    assert.doesNotMatch(localeSwitcher, /getUiCopy\(locale,\s*"layout\.changeLanguage"\)/, "LocaleSwitcher summary label should not be keyed by the active locale");
+    assert.match(localeSwitcher, /getUiCopy\(locale,\s*"layout\.changeLanguage"\)/, "LocaleSwitcher summary label should use the shared multilingual copy key");
     assert.match(localeSwitcher, /<svg[\s\S]*data-locale-icon/, "LocaleSwitcher summary should expose a globe icon");
     assert.match(localeSwitcher, /control-summary-icon-only/, "LocaleSwitcher summary should stay visual-language neutral when collapsed");
     assert.doesNotMatch(localeSwitcher, /data-locale-current/, "LocaleSwitcher summary should not show a compact current-locale code");
