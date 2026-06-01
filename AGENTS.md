@@ -235,6 +235,13 @@ Phase 1CR localizes article detail category labels:
 - Keep article frontmatter category keys and category route slugs unchanged; raw keys remain content-model identifiers only.
 - Do not change article routes, category slugs, content schemas, search indexing, account placeholders, or backend behavior in Phase 1CR.
 
+Phase 1CS completes static 404 multilingual copy:
+
+- `404.html` should keep a language-neutral visible heading and show top recovery explanations in all supported locales.
+- The 404 language selector guidance should also be multilingual, not fixed English-only copy.
+- Keep `404.html` static, noindex, nofollow, and excluded from `sitemap.xml`.
+- Do not add language-detection redirects, client-side locale switching, Cloudflare Functions, Workers, analytics, backend error tracking, auth, database, or route changes in Phase 1CS.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.

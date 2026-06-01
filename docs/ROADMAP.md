@@ -609,6 +609,27 @@ Rules:
 - Keep content frontmatter category keys and category route slugs stable.
 - Do not change search indexing, article routes, content schemas, account placeholders, or backend behavior in Phase 1CR.
 
+## Phase 1CS: Multilingual Static 404 Hero Copy
+
+Status: implemented.
+
+Goal:
+
+Finish the static 404 recovery experience so the top explanation and language selector are multilingual instead of fixed English-only copy.
+
+Implemented:
+
+- Replaced the visible 404 hero title with a language-neutral `404` heading.
+- Added top recovery explanations in `zh-tw`, `en`, `ja`, and `ko`.
+- Added multilingual language-selector guidance above the locale cards.
+- Added small reusable styles for compact multilingual 404 intro copy.
+- Added source-level and build-output SEO coverage to prevent fixed English-only 404 hero copy from returning.
+
+Rules:
+
+- Keep `404.html` static, noindex, nofollow, and excluded from `sitemap.xml`.
+- Do not add language-detection redirects, client-side locale switching, Cloudflare Functions, Workers, analytics, backend error tracking, auth, database, or route changes in Phase 1CS.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.

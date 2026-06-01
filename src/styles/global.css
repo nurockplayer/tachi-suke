@@ -617,6 +617,26 @@ details[open].control-disclosure .control-summary::after {
   margin-top: 16px;
 }
 
+.not-found-intro-list {
+  display: grid;
+  gap: 10px;
+  max-width: 760px;
+  margin-top: 22px;
+}
+
+.not-found-intro-list p {
+  margin: 0;
+  color: var(--color-ink-soft);
+}
+
+.not-found-intro-list strong {
+  color: var(--color-ink);
+}
+
+.not-found-intro-list-compact {
+  margin-top: 10px;
+}
+
 .check-list {
   display: grid;
   gap: 10px;

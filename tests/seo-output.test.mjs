@@ -352,6 +352,14 @@ describe("static SEO output", () => {
     const html = readHtml("404.html");
     assert.match(html, /Page not found \| TachiSuke/, "404 page should have a branded SEO title");
     assert.match(html, /name="robots" content="noindex, nofollow"/, "404 page should be noindex");
+    assert.match(html, /<h1>404<\/h1>/, "404 page hero should use a language-neutral heading");
+    assert.match(html, /<strong>找不到頁面<\/strong>/, "404 page hero should include zh-tw copy");
+    assert.match(html, /<strong>Page not found<\/strong>/, "404 page hero should include English copy");
+    assert.match(html, /<strong>ページが見つかりません<\/strong>/, "404 page hero should include Japanese copy");
+    assert.match(html, /<strong>페이지를 찾을 수 없습니다<\/strong>/, "404 page hero should include Korean copy");
+    assert.match(html, /<h2>Language \/ 語言 \/ 言語 \/ 언어<\/h2>/, "404 page language selector heading should be multilingual");
+    assert.match(html, /<strong>選擇語言<\/strong>/, "404 page language selector should include zh-tw guidance");
+    assert.match(html, /<strong>언어 선택<\/strong>/, "404 page language selector should include Korean guidance");
     assert.match(html, /href="\/zh-tw\/"/, "404 page should link to zh-tw home");
     assert.match(html, /href="\/en\/"/, "404 page should link to English home");
     for (const locale of ["zh-tw", "en", "ja", "ko"]) {
