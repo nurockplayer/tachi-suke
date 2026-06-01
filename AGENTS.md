@@ -28,6 +28,8 @@ When the user mentions Autonomous, AWP, Hybrid AWP, Codex autonomous workflow, o
 
 TachiSuke uses AWP-lite, not tachigo's full autonomous PR governance. The workflow keeps startup readback, explicit scope, routing decisions, controller fallback reasons, and validation evidence, but it does not require Scope Police, spec-injector gates, or issue-first ceremony for every small change.
 
+AWP-lite's preferred routing is GPT-5.5 Extra High as controller with Spark 5.3 as the default low-cost worker for repo scans, repetitive edits, docs/content transforms, route/link inventory, and first-pass test/build summaries. If Spark 5.3 or equivalent worker tooling is unavailable, record `controller_fallback_reason=worker_unavailable`.
+
 Use AWP-lite only when it reduces risk: cross-module work, Phase 2 auth/database/favorites/submission planning, route or content-model changes, or tasks that explicitly ask for autonomous execution. For small docs, copy, or single-surface edits, proceed normally and keep the final report concise.
 
 ## Project

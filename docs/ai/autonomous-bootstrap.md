@@ -62,17 +62,32 @@ For AWP-lite work, produce a short routing plan before implementation:
 - `planned_validation`
 - `controller_fallback_reason`, only when no worker or subagent is used
 
+## Worker Profiles
+
+AWP-lite uses a controller-worker model when multi-agent tooling is available. This is a routing policy, not a guarantee that the runtime can always select the exact model.
+
+| Profile | Preferred model | Reasoning | Owns |
+| --- | --- | --- | --- |
+| `controller` | GPT-5.5 | Extra High | scope, architecture, Phase 1/Phase 2 boundaries, worker task definition, final review, validation, git/PR/merge decisions |
+| `spark_worker` | Spark 5.3 | low / medium | repo-wide search, impact mapping, repetitive edits, docs/content transforms, route/link inventory, first-pass test or build failure summaries |
+| `high_risk_reviewer` | GPT-5.5 | high / Extra High | auth, database, persistence, moderation, permissions, security, schema, and any decision that could move work into Phase 2 |
+
+The controller may delegate execution to Spark 5.3, but the controller remains responsible for reading back the actual diff, checking scope, and running final validation. Do not treat a worker summary as completion evidence.
+
+If Spark 5.3 is unavailable, use the closest low-cost worker if one exists. If no suitable worker is available, continue with controller fallback and record `controller_fallback_reason=worker_unavailable`.
+
 Default routing:
 
 | Work type | Default route |
 | --- | --- |
 | Small docs or single-surface content changes | controller with `controller_fallback_reason=trivial_self_only` |
-| Repo-wide search, impact mapping, or duplicated pattern checks | repo scout / low-cost worker if available |
-| Astro route, layout, i18n, content collection, or UI behavior changes | implementation worker if available, controller review |
-| Tests, build failures, and regression investigation | test/debug worker if available, controller review |
+| Repo-wide search, impact mapping, or duplicated pattern checks | Spark 5.3 `spark_worker` if available |
+| Repetitive docs/content transforms | Spark 5.3 `spark_worker` if available, controller review |
+| Astro route, layout, i18n, content collection, or UI behavior changes | Spark 5.3 `spark_worker` for bounded implementation if available, controller review |
+| Tests, build failures, and regression investigation | Spark 5.3 `spark_worker` for first-pass summary if available, controller review |
 | Phase 2 auth, database, favorites, submissions, moderation, or permissions | controller or high-reasoning review required |
 
-If worker tooling is unavailable, continue with controller fallback and record `controller_fallback_reason=worker_unavailable`.
+For any non-trivial AWP-lite task, first consider Spark 5.3. If the controller does not delegate to Spark or another worker, it must include `controller_fallback_reason` in the routing plan.
 
 ## Implementation Rules
 
