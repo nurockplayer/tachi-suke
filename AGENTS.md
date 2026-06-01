@@ -185,6 +185,11 @@ Phase 1BD adds LLM discovery alignment:
 - `/llms.txt` should include locale site map links as public discovery surfaces.
 - Keep `/llms.txt` plain text and do not expose account placeholders, drafts, private data, or runtime AI behavior.
 
+Phase 1BE adds Open Graph locale metadata:
+
+- Keep `ogLocaleByLocale` centralized in locale metadata.
+- `BaseLayout` should emit `og:locale` and supported `og:locale:alternate` values for multilingual sharing.
+
 Phase 1C adds submit-place workflow MVP:
 
 - `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` controls form activation.

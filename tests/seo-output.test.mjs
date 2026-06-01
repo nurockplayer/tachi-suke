@@ -267,6 +267,10 @@ describe("static SEO output", () => {
     assert.match(html, /<meta name="application-name" content="TachiSuke">/, "root page should include application name metadata");
     assert.match(html, /<meta name="apple-mobile-web-app-title" content="TachiSuke">/, "root page should include Apple app title metadata");
     assert.match(html, /<meta name="format-detection" content="telephone=no">/, "root page should disable automatic phone formatting");
+    assert.match(html, /<meta property="og:locale" content="en_US">/, "root page should include the current Open Graph locale");
+    assert.match(html, /<meta property="og:locale:alternate" content="zh_TW">/, "root page should include zh-tw Open Graph alternate locale");
+    assert.match(html, /<meta property="og:locale:alternate" content="ja_JP">/, "root page should include ja Open Graph alternate locale");
+    assert.match(html, /<meta property="og:locale:alternate" content="ko_KR">/, "root page should include ko Open Graph alternate locale");
     assert.match(html, /rel="alternate"[^>]+type="application\/rss\+xml"[^>]+href="https:\/\/tachi-suke\.example\.com\/feed\.xml"/);
     assert.match(html, /rel="search"[^>]+type="application\/opensearchdescription\+xml"[^>]+href="https:\/\/tachi-suke\.example\.com\/opensearch\.xml"/);
   });

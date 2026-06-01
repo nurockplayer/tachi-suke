@@ -4,10 +4,11 @@ import {
   htmlLangByLocale,
   localeNames,
   locales,
+  ogLocaleByLocale,
   type Locale
 } from "@/types/locale";
 
-export { defaultLocale, fallbackLocales, htmlLangByLocale, localeNames, locales };
+export { defaultLocale, fallbackLocales, htmlLangByLocale, localeNames, locales, ogLocaleByLocale };
 export type { Locale };
 
 export function isLocale(value: string | undefined): value is Locale {
