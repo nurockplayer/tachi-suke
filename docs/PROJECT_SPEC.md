@@ -175,6 +175,7 @@ The MVP includes:
 - Open Graph locale metadata for multilingual sharing
 - Article Open Graph metadata for published/modified dates, sections, and tags
 - Browser/PWA metadata for theme color, app name, Apple app title, and phone number format detection
+- System/light/dark theme support with a locale-aware header switcher, persisted browser preference, and no-JavaScript system dark theme fallback
 - JSON-LD structured data for `Organization`, `WebSite`, `SearchAction`, `Article`, `LocalBusiness`, `Service`, `WebPage`, `ItemList`, and `BreadcrumbList`
 - Locale homepages emit conservative `WebPage` and start-here `ItemList` JSON-LD backed by rendered homepage copy and links
 - Article index pages emit conservative `CollectionPage` and public-article `ItemList` JSON-LD backed by rendered same-locale article lists

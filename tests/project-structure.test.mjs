@@ -89,6 +89,7 @@ const requiredFiles = [
   "src/components/layout/Footer.astro",
   "src/components/layout/ArticleLayout.astro",
   "src/components/layout/LocaleSwitcher.astro",
+  "src/components/layout/ThemeToggle.astro",
   "src/components/navigation/Breadcrumbs.astro",
   "src/components/content/CategoryCard.astro",
   "src/components/content/CorrectionPrompt.astro",
@@ -477,6 +478,41 @@ describe("TachiSuke project scaffold", () => {
       "utf8"
     );
     assert.doesNotMatch(accessibilityPlan, /^### Task/m, "accessibility plan should not skip heading levels");
+  });
+
+  it("includes a persistent locale-aware dark theme switcher", () => {
+    const baseLayout = readFileSync(join(root, "src/components/layout/BaseLayout.astro"), "utf8");
+    assert.match(baseLayout, /media="\(prefers-color-scheme:\s*light\)"/, "BaseLayout should expose a light browser theme color");
+    assert.match(baseLayout, /media="\(prefers-color-scheme:\s*dark\)"/, "BaseLayout should expose a dark browser theme color");
+    assert.match(baseLayout, /tachi-suke-theme/, "BaseLayout should initialize the persisted theme before first paint");
+    assert.match(baseLayout, /document\.documentElement\.dataset\.theme/, "BaseLayout should set the document theme dataset");
+
+    const header = readFileSync(join(root, "src/components/layout/Header.astro"), "utf8");
+    assert.match(header, /ThemeToggle/, "Header should render the theme switcher near global controls");
+    assert.match(header, /<ThemeToggle\s+locale=\{locale\}/, "Header should pass the current locale to ThemeToggle");
+
+    const themeToggle = readFileSync(join(root, "src/components/layout/ThemeToggle.astro"), "utf8");
+    assert.match(themeToggle, /data-theme-switcher/, "ThemeToggle should expose a stable switcher root");
+    assert.match(themeToggle, /data-theme-option="system"/, "ThemeToggle should offer system mode");
+    assert.match(themeToggle, /data-theme-option="light"/, "ThemeToggle should offer light mode");
+    assert.match(themeToggle, /data-theme-option="dark"/, "ThemeToggle should offer dark mode");
+    assert.match(themeToggle, /aria-pressed/, "ThemeToggle should expose pressed state for assistive tech");
+    assert.match(themeToggle, /localStorage/, "ThemeToggle should persist the selected theme");
+    for (const label of ["系統", "System", "システム", "시스템"]) {
+      assert.match(themeToggle, new RegExp(label), `ThemeToggle should include localized ${label} label`);
+    }
+
+    const css = readFileSync(join(root, "src/styles/global.css"), "utf8");
+    assert.match(css, /color-scheme:\s*light dark/, "global CSS should advertise light and dark color support");
+    assert.match(css, /html\[data-theme="dark"\]/, "global CSS should define explicit dark theme tokens");
+    assert.match(css, /prefers-color-scheme:\s*dark/, "global CSS should support system dark mode without JavaScript");
+    assert.match(css, /\.theme-toggle/, "global CSS should style the theme switcher");
+
+    const readme = readFileSync(join(root, "README.md"), "utf8");
+    assert.match(readme, /dark theme/i, "README should document dark theme support");
+
+    const status = readFileSync(join(root, "docs/IMPLEMENTATION_STATUS.md"), "utf8");
+    assert.match(status, /dark theme/i, "implementation status should record dark theme support");
   });
 
   it("includes public launch trust pages in locale routes and footer navigation", () => {

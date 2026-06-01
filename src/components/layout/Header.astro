@@ -1,5 +1,6 @@
 ---
 import LocaleSwitcher from "./LocaleSwitcher.astro";
+import ThemeToggle from "./ThemeToggle.astro";
 import { localizePath, navItems, type Locale } from "@/lib/i18n";
 
 interface Props {
@@ -41,6 +42,7 @@ const navLinks = navItems[locale].map((item) => {
     </nav>
     <div class="header-tools">
       <LocaleSwitcher locale={locale} currentPath={currentPath} alternatePaths={alternatePaths} />
+      <ThemeToggle locale={locale} />
       <a class="button-secondary" href={localizePath(locale, "/account/login")}>{accountLabel}</a>
     </div>
   </div>

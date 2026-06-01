@@ -263,7 +263,11 @@ describe("static SEO output", () => {
       "WebSite SearchAction should target the stable English search route"
     );
     assert.equal(website?.potentialAction?.["query-input"], "required name=search_term_string");
-    assert.match(html, /<meta name="theme-color" content="#f5f8f7">/, "root page should include browser theme color");
+    assert.match(html, /<meta name="theme-color" content="#f5f8f7" media="\(prefers-color-scheme: light\)">/, "root page should include light browser theme color");
+    assert.match(html, /<meta name="theme-color" content="#101819" media="\(prefers-color-scheme: dark\)">/, "root page should include dark browser theme color");
+    assert.match(html, /tachi-suke-theme/, "root page should initialize the persisted theme preference");
+    assert.match(html, /data-theme-switcher/, "root page should render the theme switcher");
+    assert.match(html, /data-theme-option="dark"/, "root page should offer a dark theme option");
     assert.match(html, /<meta name="application-name" content="TachiSuke">/, "root page should include application name metadata");
     assert.match(html, /<meta name="apple-mobile-web-app-title" content="TachiSuke">/, "root page should include Apple app title metadata");
     assert.match(html, /<meta name="format-detection" content="telephone=no">/, "root page should disable automatic phone formatting");

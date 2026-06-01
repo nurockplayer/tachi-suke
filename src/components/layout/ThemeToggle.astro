@@ -1,0 +1,143 @@
+---
+import type { Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = {
+  "zh-tw": {
+    label: "外觀主題",
+    system: "系統",
+    light: "淺色",
+    dark: "深色",
+    shortSystem: "自動",
+    shortLight: "亮",
+    shortDark: "暗"
+  },
+  en: {
+    label: "Theme",
+    system: "System",
+    light: "Light",
+    dark: "Dark",
+    shortSystem: "Auto",
+    shortLight: "Light",
+    shortDark: "Dark"
+  },
+  ja: {
+    label: "テーマ",
+    system: "システム",
+    light: "ライト",
+    dark: "ダーク",
+    shortSystem: "自動",
+    shortLight: "明",
+    shortDark: "暗"
+  },
+  ko: {
+    label: "테마",
+    system: "시스템",
+    light: "라이트",
+    dark: "다크",
+    shortSystem: "자동",
+    shortLight: "밝게",
+    shortDark: "어둡게"
+  }
+}[locale];
+
+---
+
+<div class="theme-toggle" data-theme-switcher aria-label={copy.label}>
+  <button
+    type="button"
+    class="theme-toggle-option"
+    data-theme-option="system"
+    aria-label={`${copy.label}: ${copy.system}`}
+    aria-pressed="true"
+    title={`${copy.label}: ${copy.system}`}
+  >
+    {copy.shortSystem}
+  </button>
+  <button
+    type="button"
+    class="theme-toggle-option"
+    data-theme-option="light"
+    aria-label={`${copy.label}: ${copy.light}`}
+    aria-pressed="false"
+    title={`${copy.label}: ${copy.light}`}
+  >
+    {copy.shortLight}
+  </button>
+  <button
+    type="button"
+    class="theme-toggle-option"
+    data-theme-option="dark"
+    aria-label={`${copy.label}: ${copy.dark}`}
+    aria-pressed="false"
+    title={`${copy.label}: ${copy.dark}`}
+  >
+    {copy.shortDark}
+  </button>
+</div>
+
+<script is:inline>
+  (() => {
+    const storageKey = "tachi-suke-theme";
+    const validPreferences = new Set(["system", "light", "dark"]);
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+    const getStoredPreference = () => {
+      try {
+        const stored = window.localStorage.getItem(storageKey);
+        return validPreferences.has(stored) ? stored : "system";
+      } catch {
+        return "system";
+      }
+    };
+
+    const resolvePreference = (preference) => preference === "system"
+      ? mediaQuery.matches ? "dark" : "light"
+      : preference;
+
+    const syncPressedState = (preference) => {
+      document.querySelectorAll("[data-theme-option]").forEach((button) => {
+        button.setAttribute("aria-pressed", button.getAttribute("data-theme-option") === preference ? "true" : "false");
+      });
+    };
+
+    const applyTheme = (preference, persist = false) => {
+      const nextPreference = validPreferences.has(preference) ? preference : "system";
+      const resolvedTheme = resolvePreference(nextPreference);
+      document.documentElement.dataset.theme = resolvedTheme;
+      document.documentElement.dataset.themePreference = nextPreference;
+      document.documentElement.style.colorScheme = resolvedTheme;
+      syncPressedState(nextPreference);
+
+      if (persist) {
+        try {
+          window.localStorage.setItem(storageKey, nextPreference);
+        } catch {
+          // localStorage can be unavailable in private or locked-down browser contexts.
+        }
+      }
+    };
+
+    if (!window.__tachiSukeThemeSwitcherReady) {
+      window.__tachiSukeThemeSwitcherReady = true;
+      document.addEventListener("click", (event) => {
+        const target = event.target instanceof Element ? event.target : null;
+        const button = target?.closest("[data-theme-option]");
+        if (!button) return;
+        applyTheme(button.getAttribute("data-theme-option"), true);
+      });
+
+      mediaQuery.addEventListener("change", () => {
+        if (document.documentElement.dataset.themePreference === "system") {
+          applyTheme("system");
+        }
+      });
+    }
+
+    applyTheme(getStoredPreference());
+  })();
+</script>
