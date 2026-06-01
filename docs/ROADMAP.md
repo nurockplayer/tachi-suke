@@ -922,6 +922,29 @@ Rules:
 - Remind readers that deadlines, documents, counters, and language support vary by municipality and personal situation.
 - Do not add appointment booking, backend storage, account features, or official-form replacement flows in Phase 1.
 
+## Phase 1AX: Apartment Moving-Out Articles
+
+Status: implemented.
+
+Goal:
+
+Complete the first rental lifecycle content loop by adding indexable four-locale guidance for moving out of a Japan apartment.
+
+Implemented:
+
+- Added zh-tw article `japan-apartment-moving-out-checklist-zh-tw`.
+- Added en article `japan-apartment-moving-out-checklist-en`.
+- Added ja article `japan-apartment-moving-out-checklist-ja`.
+- Added ko article `japan-apartment-moving-out-checklist-ko`.
+- Linked the articles to the moving-out checklist, rental initial-cost articles, mobile setup entry pages, and ward-office moving-in procedure content for the next address.
+- Added source-level and SEO-output checks for article count, locale coverage, sitemap entries, and RSS inclusion.
+
+Rules:
+
+- Keep moving-out content as practical preparation guidance, not legal advice about deposit disputes or restoration obligations.
+- Remind readers that notice periods, fees, trash rules, handover flow, and service cancellation steps vary by contract, municipality, management company, and provider.
+- Do not add saved checklist state, moving-company quotes, backend storage, or dispute workflows in Phase 1.
+
 ## Phase 1AI: Article Category Label Polish
 
 Status: implemented.
