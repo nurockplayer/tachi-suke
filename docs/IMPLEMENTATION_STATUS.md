@@ -95,6 +95,7 @@ This document records the current MVP state after Phase 1BL trust page JSON-LD w
 - Conservative article internal-link checks for locale-prefixed static/generated routes.
 - Static HTML internal link crawler in `tests/static-html-links.test.mjs`, run after `pnpm build` with `pnpm check:links`.
 - Static SEO output check in `tests/seo-output.test.mjs`, run after `pnpm build` with `pnpm check:seo`.
+- Deployment URL guard in `tests/deploy-output.test.mjs`, run after `SITE_URL=<production-url> pnpm build` with `SITE_URL=<production-url> pnpm check:deploy`.
 - GitHub Actions CI workflow that rejects forbidden lockfiles and runs `pnpm install --frozen-lockfile`, `pnpm test`, `pnpm build`, `pnpm check:links`, and `pnpm check:seo`.
 - GitHub Actions CI runs `pnpm check:content` before static build.
 - Locale switcher links for detail pages use conservative alternate paths so missing article translations do not create dead links.
@@ -188,6 +189,7 @@ Most recent recorded verification:
 - `pnpm build`: passed
 - `pnpm check:links`: passed
 - `pnpm check:seo`: passed
+- `SITE_URL=https://tachi-suke.pages.dev pnpm check:deploy`: passed
 - Browser QA: basic route/card/form/search check passed
 
 Browser QA covered:

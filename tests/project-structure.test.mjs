@@ -203,9 +203,11 @@ describe("TachiSuke project scaffold", () => {
     assert.equal(packageJson.scripts["check:content"], "node --test tests/content-health.test.mjs");
     assert.equal(packageJson.scripts["check:links"], "node tests/static-html-links.test.mjs");
     assert.equal(packageJson.scripts["check:seo"], "node --test tests/seo-output.test.mjs");
+    assert.equal(packageJson.scripts["check:deploy"], "node tests/deploy-output.test.mjs");
     assert.equal(existsSync(join(root, "tests/content-health.test.mjs")), true, "content health check should exist");
     assert.equal(existsSync(join(root, "tests/static-html-links.test.mjs")), true, "static HTML link crawler should exist");
     assert.equal(existsSync(join(root, "tests/seo-output.test.mjs")), true, "static SEO output check should exist");
+    assert.equal(existsSync(join(root, "tests/deploy-output.test.mjs")), true, "deployment URL guard should exist");
   });
 
   it("runs a pnpm-only CI quality gate", () => {
