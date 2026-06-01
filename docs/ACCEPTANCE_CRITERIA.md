@@ -271,6 +271,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Site-wide `WebSite` JSON-LD should include a conservative `SearchAction` targeting `/en/search?q={search_term_string}`.
 - Locale homepages should include conservative `WebPage` and start-here `ItemList` JSON-LD backed by rendered homepage copy and links.
 - Article index pages should include conservative `CollectionPage` and `ItemList` JSON-LD backed by rendered same-locale public article lists.
+- Mobile, area, place, and tool index pages should include conservative `CollectionPage` and `ItemList` JSON-LD backed by rendered public cards.
 - Article detail pages should include `Article` and `BreadcrumbList` JSON-LD.
 - Article category pages should include conservative `WebPage` and `BreadcrumbList` JSON-LD.
 - Place detail pages should include `LocalBusiness` and `BreadcrumbList` JSON-LD.

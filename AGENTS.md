@@ -210,6 +210,11 @@ Phase 1BI adds article index structured data:
 - Article index pages should emit conservative `CollectionPage` and `ItemList` JSON-LD from same-locale, non-draft public articles.
 - Keep article index JSON-LD aligned with rendered article lists; do not add engagement metrics or unsupported authorship claims.
 
+Phase 1BJ adds section index structured data:
+
+- Mobile, area, place, and tool index pages should emit conservative `CollectionPage` and `ItemList` JSON-LD from rendered public cards.
+- Keep section index JSON-LD static and editorial; do not invent ratings, exact prices, live availability, or external claims.
+
 Phase 1C adds submit-place workflow MVP:
 
 - `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT` controls form activation.

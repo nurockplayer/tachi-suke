@@ -1335,6 +1335,27 @@ Rules:
 - Keep article index JSON-LD aligned with the rendered article list.
 - Do not add engagement metrics, unsupported authorship claims, or dynamic content assumptions.
 
+## Phase 1BJ: Section Index JSON-LD
+
+Status: implemented.
+
+Goal:
+
+Make the remaining public content hubs understandable as static collections.
+
+Implemented:
+
+- Added conservative `CollectionPage` and `ItemList` JSON-LD to mobile index pages.
+- Added conservative `CollectionPage` and `ItemList` JSON-LD to area index pages.
+- Added conservative `CollectionPage` and `ItemList` JSON-LD to place index pages, limited to published places.
+- Added conservative `CollectionPage` and `ItemList` JSON-LD to tool index pages, limited to published tools.
+- Added source-level and build-output SEO tests for representative section index pages.
+
+Rules:
+
+- Keep JSON-LD aligned with rendered public cards.
+- Do not invent ratings, review counts, live availability, exact prices, coordinates, or offers.
+
 ## Phase 2: Auth and Favorites
 
 Status: future phase.

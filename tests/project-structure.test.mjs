@@ -412,6 +412,21 @@ describe("TachiSuke project scaffold", () => {
     assert.match(articleLayout, /slugifyArticleCategory/, "article detail layout should compute category href");
     assert.match(articleLayout, /`\/articles\/category\/\$\{slugifyArticleCategory\(category\)\}`/, "article detail category should link to category page");
 
+    const mobileIndex = readFileSync(join(root, "src/components/pages/MobileIndexPage.astro"), "utf8");
+    assert.match(mobileIndex, /"@type":\s*"CollectionPage"/, "mobile index should define CollectionPage JSON-LD");
+    assert.match(mobileIndex, /"@type":\s*"ItemList"/, "mobile index should define ItemList JSON-LD");
+    assert.match(mobileIndex, /numberOfItems:\s*plans\.length/, "mobile index should count rendered plans in ItemList");
+
+    const placesIndex = readFileSync(join(root, "src/components/pages/PlacesIndexPage.astro"), "utf8");
+    assert.match(placesIndex, /"@type":\s*"CollectionPage"/, "places index should define CollectionPage JSON-LD");
+    assert.match(placesIndex, /"@type":\s*"ItemList"/, "places index should define ItemList JSON-LD");
+    assert.match(placesIndex, /status\s*===\s*"published"/, "places index should keep public filtering to published places");
+
+    const simpleSectionPage = readFileSync(join(root, "src/components/pages/SimpleSectionPage.astro"), "utf8");
+    assert.match(simpleSectionPage, /"@type":\s*"CollectionPage"/, "area/tool index component should define CollectionPage JSON-LD");
+    assert.match(simpleSectionPage, /"@type":\s*"ItemList"/, "area/tool index component should define ItemList JSON-LD");
+    assert.match(simpleSectionPage, /jsonLd=\{jsonLd\}/, "area/tool index component should pass JSON-LD to BaseLayout");
+
     const sitemap = readFileSync(join(root, "src/pages/sitemap.xml.ts"), "utf8");
     assert.match(sitemap, /getArticleCategorySummaries/, "sitemap should include article category pages");
     assert.match(sitemap, /xmlns:xhtml/, "sitemap should declare the XHTML namespace for hreflang alternates");

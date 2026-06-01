@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import MobilePlanCard from "@/components/mobile/MobilePlanCard.astro";
-import { sectionCopy, type Locale } from "@/lib/i18n";
+import { htmlLangByLocale, localizePath, sectionCopy, type Locale } from "@/lib/i18n";
 
 interface Props {
   locale: Locale;
@@ -63,9 +63,39 @@ const checks = {
     "eSIM 또는 듀얼 SIM이 필요한지"
   ]
 }[locale];
+const site = Astro.site ?? new URL(Astro.url.origin);
+const canonicalUrl = new URL(Astro.url.pathname, site).href;
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${canonicalUrl}#webpage`,
+    name: title,
+    description,
+    url: canonicalUrl,
+    inLanguage: htmlLangByLocale[locale],
+    isPartOf: { "@id": new URL("/#website", site).href },
+    publisher: { "@id": new URL("/#organization", site).href }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${canonicalUrl}#mobile-plan-list`,
+    name: title,
+    description,
+    numberOfItems: plans.length,
+    itemListElement: plans.map((plan, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: new URL(localizePath(locale, `/mobile/${plan.data.slug}`), site).href,
+      name: `${plan.data.provider} ${plan.data.planName}`,
+      description: plan.data.recommendedFor
+    }))
+  }
+];
 ---
 
-<BaseLayout locale={locale} title={title} description={description}>
+<BaseLayout locale={locale} title={title} description={description} jsonLd={jsonLd}>
   <section class="page-hero">
     <div class="container">
       <h1>{title}</h1>

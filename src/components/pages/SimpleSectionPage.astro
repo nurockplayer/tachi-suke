@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import CategoryCard from "@/components/content/CategoryCard.astro";
-import { localizePath, sectionCopy, type Locale } from "@/lib/i18n";
+import { htmlLangByLocale, localizePath, sectionCopy, type Locale } from "@/lib/i18n";
 
 interface Props {
   locale: Locale;
@@ -27,6 +27,47 @@ const description = isAreas
     }[locale];
 const areas = isAreas ? await getCollection("areas") : [];
 const tools = isAreas ? [] : await getCollection("tools", ({ data }) => data.status === "published");
+const site = Astro.site ?? new URL(Astro.url.origin);
+const canonicalUrl = new URL(Astro.url.pathname, site).href;
+const collectionItems = isAreas
+  ? areas.map((area) => ({
+      url: new URL(localizePath(locale, `/areas/${area.data.slug}`), site).href,
+      name: area.data.title,
+      description: area.data.summary
+    }))
+  : tools.map((tool) => ({
+      url: new URL(localizePath(locale, `/tools/${tool.data.slug}`), site).href,
+      name: tool.data.title[locale],
+      description: tool.data.description[locale]
+    }));
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${canonicalUrl}#webpage`,
+    name: title,
+    description,
+    url: canonicalUrl,
+    inLanguage: htmlLangByLocale[locale],
+    isPartOf: { "@id": new URL("/#website", site).href },
+    publisher: { "@id": new URL("/#organization", site).href }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${canonicalUrl}#${section}-list`,
+    name: title,
+    description,
+    numberOfItems: collectionItems.length,
+    itemListElement: collectionItems.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: item.url,
+      name: item.name,
+      description: item.description
+    }))
+  }
+];
 const areaLabels = {
   "zh-tw": {
     stations: "主要車站",
@@ -67,7 +108,7 @@ const areaLabels = {
 }[locale];
 ---
 
-<BaseLayout locale={locale} title={title} description={description}>
+<BaseLayout locale={locale} title={title} description={description} jsonLd={jsonLd}>
   <section class="page-hero">
     <div class="container">
       <h1>{title}</h1>
