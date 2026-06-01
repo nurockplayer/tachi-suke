@@ -13,6 +13,13 @@ tags:
   - "行政手續"
 publishedAt: "2026-06-01"
 updatedAt: "2026-06-01"
+sourceLinks:
+  - label: "日本數位廳：My Number FAQ"
+    url: "https://www.digital.go.jp/en/policies/mynumber_faq_02"
+    note: "確認 My Number 與 My Number Card 基本資訊的官方入口。"
+  - label: "出入國在留管理廳：外國人生活與就業指南"
+    url: "https://www.moj.go.jp/content/001297615.pdf"
+    note: "整理外國居民生活與在留相關基礎資訊的官方指南。"
 draft: false
 ---
 

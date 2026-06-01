@@ -13,6 +13,13 @@ tags:
   - "procedures"
 publishedAt: "2026-06-01"
 updatedAt: "2026-06-01"
+sourceLinks:
+  - label: "Digital Agency: My Number FAQ"
+    url: "https://www.digital.go.jp/en/policies/mynumber_faq_02"
+    note: "Official starting point for My Number and My Number Card basics."
+  - label: "Immigration Services Agency: Guidebook on Living and Working"
+    url: "https://www.moj.go.jp/content/001297615.pdf"
+    note: "Official guidebook covering daily-life and residence-related basics for foreign residents."
 draft: false
 ---
 
