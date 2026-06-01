@@ -899,6 +899,29 @@ Rules:
 - Encourage users to confirm important fees and conditions in writing.
 - Do not add audio playback, flashcards, saved progress, or backend storage in Phase 1.
 
+## Phase 1AW: Ward Office Moving-In Procedure Articles
+
+Status: implemented.
+
+Goal:
+
+Turn the ward-office moving-in checklist into an indexable four-locale administrative setup content cluster for residents preparing to visit a municipal office after arriving or moving.
+
+Implemented:
+
+- Added zh-tw article `ward-office-moving-in-procedures-zh-tw`.
+- Added en article `ward-office-moving-in-procedures-en`.
+- Added ja article `ward-office-moving-in-procedures-ja`.
+- Added ko article `ward-office-moving-in-procedures-ko`.
+- Linked the articles to the ward office moving-in checklist, first-week setup articles, residence administration basics, and mobile setup entry pages.
+- Added source-level and SEO-output checks for article count, locale coverage, sitemap entries, and RSS inclusion.
+
+Rules:
+
+- Keep municipal-office content as practical preparation guidance, not legal, immigration, tax, pension, or administrative advice.
+- Remind readers that deadlines, documents, counters, and language support vary by municipality and personal situation.
+- Do not add appointment booking, backend storage, account features, or official-form replacement flows in Phase 1.
+
 ## Phase 1AI: Article Category Label Polish
 
 Status: implemented.
