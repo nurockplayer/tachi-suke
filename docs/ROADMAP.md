@@ -1075,6 +1075,25 @@ Rules:
 - Keep `/llms.txt` plain text, static, and concise.
 - Do not include account placeholders, drafts, private data, submissions, AI runtime behavior, crawling, or analytics.
 
+## Phase 1BE: Open Graph Locale Metadata
+
+Status: implemented.
+
+Goal:
+
+Improve multilingual social sharing and crawler interpretation by adding Open Graph locale metadata to the shared layout.
+
+Implemented:
+
+- Added shared `ogLocaleByLocale` values for `zh-tw`, `en`, `ja`, and `ko`.
+- Added `og:locale` and `og:locale:alternate` tags in `BaseLayout`.
+- Added source-level and build-output SEO tests.
+
+Rules:
+
+- Keep locale metadata centralized with other locale constants.
+- Do not add social SDKs, analytics, language detection, or route changes in this phase.
+
 ## Phase 1AI: Article Category Label Polish
 
 Status: implemented.

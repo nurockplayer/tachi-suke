@@ -270,9 +270,17 @@ describe("TachiSuke project scaffold", () => {
     assert.match(baseLayout, /name="format-detection"/, "BaseLayout should include format-detection metadata");
     assert.match(baseLayout, /href=\{new URL\(localizePath\(locale,\s*"\/feed\.xml"\),\s*site\)\.href\}/, "BaseLayout should link the current locale RSS feed");
     assert.match(baseLayout, /property="og:image"/, "BaseLayout should include an Open Graph image");
+    assert.match(baseLayout, /property="og:locale"/, "BaseLayout should include Open Graph locale metadata");
+    assert.match(baseLayout, /property="og:locale:alternate"/, "BaseLayout should include Open Graph locale alternates");
     assert.match(baseLayout, /name="twitter:card"\s+content="summary_large_image"/, "BaseLayout should include a summary_large_image card");
     assert.match(baseLayout, /name="twitter:image"/, "BaseLayout should include a Twitter image");
     assert.match(baseLayout, /application\/ld\+json/, "BaseLayout should render JSON-LD scripts");
+
+    const localeTypes = readFileSync(join(root, "src/types/locale.ts"), "utf8");
+    assert.match(localeTypes, /ogLocaleByLocale/, "locale metadata should define Open Graph locale values");
+    for (const ogLocale of ["zh_TW", "en_US", "ja_JP", "ko_KR"]) {
+      assert.match(localeTypes, new RegExp(ogLocale), `Open Graph locale metadata should include ${ogLocale}`);
+    }
 
     const accountPage = readFileSync(join(root, "src/components/pages/AccountPlaceholderPage.astro"), "utf8");
     assert.match(accountPage, /robots="noindex,\s*nofollow"/, "account placeholder pages should be noindex");

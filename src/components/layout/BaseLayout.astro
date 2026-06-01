@@ -1,7 +1,7 @@
 ---
 import Header from "./Header.astro";
 import Footer from "./Footer.astro";
-import { getPageTitle, getUiCopy, htmlLangByLocale, locales, localizePath, type Locale } from "@/lib/i18n";
+import { getPageTitle, getUiCopy, htmlLangByLocale, locales, localizePath, ogLocaleByLocale, type Locale } from "@/lib/i18n";
 import "@/styles/global.css";
 
 type JsonLdObject = Record<string, unknown>;
@@ -27,6 +27,7 @@ const alternates = alternatePaths ?? Object.fromEntries(locales.map((alternateLo
   alternateLocale,
   localizePath(alternateLocale, pathWithoutLocale)
 ])) as Partial<Record<Locale, string>>;
+const alternateOgLocales = locales.filter((alternateLocale) => alternateLocale !== locale && alternates[alternateLocale]);
 const searchActionTargetPath = "/en/search?q={search_term_string}";
 const searchActionTarget = `${new URL("/", site).href.replace(/\/$/, "")}${searchActionTargetPath}`;
 const organizationId = new URL("/#organization", site).href;
@@ -98,6 +99,8 @@ function serializeJsonLd(item: JsonLdObject): string {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical.href} />
     <meta property="og:site_name" content="TachiSuke" />
+    <meta property="og:locale" content={ogLocaleByLocale[locale]} />
+    {alternateOgLocales.map((alternateLocale) => <meta property="og:locale:alternate" content={ogLocaleByLocale[alternateLocale]} />)}
     <meta property="og:image" content={ogImageUrl.href} />
     <meta property="og:image:alt" content="TachiSuke - Japan Life Assistant" />
     <meta name="twitter:card" content="summary_large_image" />

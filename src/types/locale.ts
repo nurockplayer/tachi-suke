@@ -19,3 +19,10 @@ export const htmlLangByLocale: Record<Locale, string> = {
   ja: "ja",
   ko: "ko"
 };
+
+export const ogLocaleByLocale: Record<Locale, string> = {
+  "zh-tw": "zh_TW",
+  en: "en_US",
+  ja: "ja_JP",
+  ko: "ko_KR"
+};
