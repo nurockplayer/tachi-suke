@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "@/components/layout/BaseLayout.astro";
+import Breadcrumbs from "@/components/navigation/Breadcrumbs.astro";
 import MobilePlanCard from "@/components/mobile/MobilePlanCard.astro";
 import { htmlLangByLocale, localizePath, sectionCopy, type Locale } from "@/lib/i18n";
 
@@ -66,6 +67,10 @@ const checks = {
 const site = Astro.site ?? new URL(Astro.url.origin);
 const canonicalUrl = new URL(Astro.url.pathname, site).href;
 const localeHomeUrl = new URL(localizePath(locale), site).href;
+const breadcrumbItems = [
+  { label: "TachiSuke", href: localizePath(locale) },
+  { label: title }
+];
 const jsonLd = [
   {
     "@context": "https://schema.org",
@@ -118,6 +123,7 @@ const jsonLd = [
 <BaseLayout locale={locale} title={title} description={description} jsonLd={jsonLd}>
   <section class="page-hero">
     <div class="container">
+      <Breadcrumbs locale={locale} items={breadcrumbItems} />
       <h1>{title}</h1>
       <p>{description}</p>
     </div>

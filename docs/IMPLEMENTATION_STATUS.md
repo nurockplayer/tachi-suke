@@ -79,7 +79,7 @@ This document records the current MVP state after Phase 1CI source-backed setup 
 - Area detail `WebPage` and `BreadcrumbList` JSON-LD.
 - Tool detail `WebPage`, `ItemList`, and `BreadcrumbList` JSON-LD.
 - Public trust/form pages at `/[locale]/about`, `/[locale]/privacy`, `/[locale]/editorial-policy`, `/[locale]/contact`, and `/[locale]/submit-place` emit conservative `WebPage` and two-level `BreadcrumbList` JSON-LD.
-- Visible breadcrumbs on article detail, article category, place detail, mobile plan detail, area detail, and tool detail pages.
+- Visible breadcrumbs on article, area, place, mobile, and tool collection index pages, plus article detail, article category, place detail, mobile plan detail, area detail, and tool detail pages.
 - Generated `sitemap.xml` for public static routes and content collection detail pages.
 - Sitemap entries include conservative `hreflang` alternates for shared locale pages and translated article detail pages.
 - Generated `robots.txt` with sitemap reference and account placeholder disallow rules.
@@ -176,7 +176,7 @@ These are intentionally present but not functional:
 - Account pages are static placeholders and do not protect user data because no user data exists yet.
 - Account placeholder pages are marked `noindex, nofollow` and excluded from the sitemap.
 - Structured data is intentionally conservative and does not claim ratings, reviews, opening hours, coordinates, offers, or exact street addresses.
-- Visible breadcrumbs currently focus on nested public pages and do not appear on top-level section pages.
+- Visible breadcrumbs cover public collection index pages and nested public detail/category pages.
 - Cloudflare Pages is the preferred static deployment target for Phase 1. Set `SITE_URL` to the production domain before launch.
 - The Phase 1 CSP still allows `'unsafe-inline'` because the current Astro output uses inline JSON-LD and small inline progressive enhancement scripts. A nonce/hash CSP can be revisited later.
 - Locale-less redirects are convenience fallbacks only. Canonical URLs and navigation remain locale-prefixed.

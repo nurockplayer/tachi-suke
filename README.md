@@ -80,7 +80,7 @@ Implemented:
 - System/light/dark theme support with a globe-icon language control, separate collapsed theme control, persisted browser preference, and no-JavaScript system dark theme fallback
 - JSON-LD structured data for site identity, site search, locale homepages, public section indexes, article indexes, articles, places, mobile plan details, area details, tool details, trust/form pages, and breadcrumbs
 - Breadcrumb JSON-LD on public collection index pages and nested public detail pages
-- Visible breadcrumbs on nested public article, category, place, mobile plan, area, and tool pages
+- Visible breadcrumbs on public collection index pages and nested public article, category, place, mobile plan, area, and tool pages
 - Generated article table of contents for long-form article pages
 - Cloudflare Pages `_headers` for conservative security and discovery cache defaults
 - Cloudflare Pages CSP blocks framing/object embeds while allowing current inline JSON-LD/search scripts and HTTPS external form endpoints

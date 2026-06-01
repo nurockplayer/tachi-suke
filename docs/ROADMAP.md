@@ -430,6 +430,27 @@ Rules:
 - Keep municipality, school, employer, and immigration counter confirmation in the article copy.
 - Do not add a crawler, CMS, database, or backend review workflow in Phase 1.
 
+## Phase 1CJ: Collection Visible Breadcrumbs
+
+Status: implemented.
+
+Goal:
+
+Make public collection index pages expose their location in the site visually, not only through JSON-LD.
+
+Implemented:
+
+- Added visible breadcrumbs to article, area, place, mobile, and tool collection index pages.
+- Breadcrumbs are locale-aware and two-level: locale home to current collection.
+- Source-level tests require collection page components to render the shared `Breadcrumbs` component.
+- Build-output SEO tests verify visible breadcrumbs on all five collection pages across all supported locales.
+
+Rules:
+
+- Keep collection breadcrumbs aligned with existing `BreadcrumbList` JSON-LD.
+- Keep breadcrumb links limited to existing public routes.
+- Do not add breadcrumbs to noindex utility/account pages unless separately scoped.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.
@@ -1721,7 +1742,7 @@ Implemented:
 Rules:
 
 - Keep breadcrumb JSON-LD limited to locale home and current section.
-- Do not add visible breadcrumbs to top-level collection index pages unless a UI task explicitly scopes it.
+- Phase 1CJ adds the matching visible breadcrumbs for public collection index pages.
 
 ## Phase 1BL: Trust Page JSON-LD
 

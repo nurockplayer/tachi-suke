@@ -245,7 +245,13 @@ Phase 1BJ adds section index structured data:
 Phase 1BK adds collection index breadcrumb structured data:
 
 - Article, mobile, area, place, and tool index pages should emit two-level `BreadcrumbList` JSON-LD from locale home to current section.
-- This does not require visible breadcrumbs on top-level collection index pages unless separately scoped.
+- Phase 1CJ adds matching visible breadcrumbs for public collection index pages.
+
+Phase 1CJ adds collection visible breadcrumbs:
+
+- Article, mobile, area, place, and tool index pages should render locale-aware visible breadcrumbs from locale home to current section.
+- Breadcrumb links must point to existing public routes only.
+- Do not add breadcrumbs to noindex utility/account pages unless separately scoped.
 
 Phase 1BL adds trust/form page structured data:
 
@@ -314,6 +320,7 @@ Phase 1I adds conservative detail-page structured data:
 Phase 1U adds visible breadcrumbs:
 
 - Nested public article, article category, place, mobile plan, area, and tool pages should render locale-aware visible breadcrumbs.
+- Public collection index pages should also render two-level visible breadcrumbs after Phase 1CJ.
 - Breadcrumb parent links must point to existing public routes only.
 - The current breadcrumb item should use `aria-current="page"` and should not be a link.
 - Keep visible breadcrumbs aligned with JSON-LD breadcrumbs when both exist.
