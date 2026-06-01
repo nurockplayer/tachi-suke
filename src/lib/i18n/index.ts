@@ -155,7 +155,9 @@ type UiCopyKey =
   | "layout.footerNavigation"
   | "layout.languageNavigation"
   | "layout.changeLanguage"
-  | "layout.tagList";
+  | "layout.tagList"
+  | "layout.articleCategories"
+  | "layout.placeFacts";
 
 const uiCopy = {
   "zh-tw": {
@@ -164,7 +166,9 @@ const uiCopy = {
     "layout.footerNavigation": "頁尾導覽",
     "layout.languageNavigation": "Language / 語言 / 言語 / 언어",
     "layout.changeLanguage": "Change language / 切換語言 / 言語を切り替える / 언어 변경",
-    "layout.tagList": "文章標籤"
+    "layout.tagList": "文章標籤",
+    "layout.articleCategories": "文章分類",
+    "layout.placeFacts": "店家資訊"
   },
   en: {
     "layout.skipMain": "Skip to main content",
@@ -172,7 +176,9 @@ const uiCopy = {
     "layout.footerNavigation": "Footer navigation",
     "layout.languageNavigation": "Language / 語言 / 言語 / 언어",
     "layout.changeLanguage": "Change language / 切換語言 / 言語を切り替える / 언어 변경",
-    "layout.tagList": "Tags"
+    "layout.tagList": "Tags",
+    "layout.articleCategories": "Article categories",
+    "layout.placeFacts": "Place facts"
   },
   ja: {
     "layout.skipMain": "本文へスキップ",
@@ -180,7 +186,9 @@ const uiCopy = {
     "layout.footerNavigation": "フッターナビゲーション",
     "layout.languageNavigation": "Language / 語言 / 言語 / 언어",
     "layout.changeLanguage": "Change language / 切換語言 / 言語を切り替える / 언어 변경",
-    "layout.tagList": "タグ"
+    "layout.tagList": "タグ",
+    "layout.articleCategories": "記事カテゴリー",
+    "layout.placeFacts": "お店の基本情報"
   },
   ko: {
     "layout.skipMain": "본문으로 건너뛰기",
@@ -188,7 +196,9 @@ const uiCopy = {
     "layout.footerNavigation": "푸터 내비게이션",
     "layout.languageNavigation": "Language / 語言 / 言語 / 언어",
     "layout.changeLanguage": "Change language / 切換語言 / 言語を切り替える / 언어 변경",
-    "layout.tagList": "태그"
+    "layout.tagList": "태그",
+    "layout.articleCategories": "글 분류",
+    "layout.placeFacts": "장소 정보"
   }
 } satisfies Record<Locale, Record<UiCopyKey, string>>;
 

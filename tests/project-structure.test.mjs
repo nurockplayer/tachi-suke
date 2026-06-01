@@ -563,6 +563,14 @@ describe("TachiSuke project scaffold", () => {
     assert.match(articleLayout, /getUiCopy\(locale,\s*"layout\.tagList"\)/, "ArticleLayout should localize tag-list assistive text");
     assert.doesNotMatch(articleLayout, /aria-label="Tags"/, "ArticleLayout should not hard-code English tag list aria labels");
 
+    const articlesIndex = readFileSync(join(root, "src/components/pages/ArticlesIndexPage.astro"), "utf8");
+    assert.match(articlesIndex, /getUiCopy\(locale,\s*"layout\.articleCategories"\)/, "articles index should localize category-list assistive text");
+    assert.doesNotMatch(articlesIndex, /aria-label="Article categories"/, "articles index should not hard-code English category-list aria labels");
+
+    const placeCard = readFileSync(join(root, "src/components/places/PlaceCard.astro"), "utf8");
+    assert.match(placeCard, /getUiCopy\(locale,\s*"layout\.placeFacts"\)/, "PlaceCard should localize fact-list assistive text");
+    assert.doesNotMatch(placeCard, /aria-label="Place facts"/, "PlaceCard should not hard-code English place-facts aria labels");
+
     const localeSwitcher = readFileSync(join(root, "src/components/layout/LocaleSwitcher.astro"), "utf8");
     assert.match(localeSwitcher, /getUiCopy\(locale,\s*"layout\.languageNavigation"\)/, "LocaleSwitcher should reuse shared language navigation copy");
     assert.match(localeSwitcher, /getUiCopy\(locale,\s*"layout\.changeLanguage"\)/, "LocaleSwitcher should reuse shared language switch copy");
@@ -574,6 +582,8 @@ describe("TachiSuke project scaffold", () => {
     assert.match(i18n, /"layout\.primaryNavigation"/, "primary navigation assistive text should live in i18n copy");
     assert.match(i18n, /"layout\.footerNavigation"/, "footer navigation assistive text should live in i18n copy");
     assert.match(i18n, /"layout\.tagList"/, "tag-list assistive text should live in i18n copy");
+    assert.match(i18n, /"layout\.articleCategories"/, "article category-list assistive text should live in i18n copy");
+    assert.match(i18n, /"layout\.placeFacts"/, "place facts assistive text should live in i18n copy");
 
     const css = readFileSync(join(root, "src/styles/global.css"), "utf8");
     assert.match(css, /\.skip-link/, "global CSS should style the skip link");
