@@ -405,18 +405,18 @@ describe("TachiSuke project scaffold", () => {
     assert.match(localeSwitcher, /visually-hidden/, "LocaleSwitcher should keep an accessible non-visual label");
     assert.match(localeSwitcher, /getUiCopy\(locale,\s*"layout\.languageNavigation"\)/, "LocaleSwitcher nav label should come from shared i18n copy");
     assert.match(localeSwitcher, /getUiCopy\(locale,\s*"layout\.changeLanguage"\)/, "LocaleSwitcher accessible label should come from shared i18n copy");
-    assert.match(localeSwitcher, /aria-label=\{languageNavigationLabel\}/, "LocaleSwitcher nav should use the localized language navigation label");
-    assert.match(localeSwitcher, /aria-label=\{languageSwitchLabel\}/, "LocaleSwitcher summary should use the localized language switch label");
-    assert.match(localeSwitcher, /title=\{languageSwitchLabel\}/, "LocaleSwitcher title should use the localized language switch label");
-    assert.match(localeSwitcher, /\{languageSwitchLabel\}/, "LocaleSwitcher hidden label should use the localized language switch label");
+    assert.match(localeSwitcher, /aria-label=\{languageNavigationLabel\}/, "LocaleSwitcher nav should use the language-neutral navigation label");
+    assert.match(localeSwitcher, /aria-label=\{languageSwitchLabel\}/, "LocaleSwitcher summary should use the language-neutral switch label");
+    assert.match(localeSwitcher, /title=\{languageSwitchLabel\}/, "LocaleSwitcher title should use the language-neutral switch label");
+    assert.match(localeSwitcher, /\{languageSwitchLabel\}/, "LocaleSwitcher hidden label should use the language-neutral switch label");
     assert.match(i18n, /"layout\.languageNavigation"/, "i18n copy should define a language-navigation key");
     assert.match(i18n, /"layout\.changeLanguage"/, "i18n copy should define a change-language key");
-    for (const label of ["語言選單", "Language", "言語メニュー", "언어 메뉴"]) {
-      assert.match(i18n, new RegExp(label), `i18n copy should include localized language navigation label: ${label}`);
-    }
-    for (const label of ["切換語言", "Change language", "言語を切り替える", "언어 변경"]) {
-      assert.match(i18n, new RegExp(label), `i18n copy should include localized language switch label: ${label}`);
-    }
+    assert.match(i18n, /Language \/ 語言 \/ 言語 \/ 언어/, "language navigation label should be multilingual and not depend on the current locale");
+    assert.match(i18n, /Change language \/ 切換語言 \/ 言語を切り替える \/ 언어 변경/, "language switch label should be multilingual and not depend on the current locale");
+    assert.doesNotMatch(i18n, /"layout\.languageNavigation":\s*"語言選單"/, "language navigation label must not be zh-tw only");
+    assert.doesNotMatch(i18n, /"layout\.languageNavigation":\s*"Language"/, "language navigation label must not be en only");
+    assert.doesNotMatch(i18n, /"layout\.languageNavigation":\s*"言語メニュー"/, "language navigation label must not be ja only");
+    assert.doesNotMatch(i18n, /"layout\.languageNavigation":\s*"언어 메뉴"/, "language navigation label must not be ko only");
     assert.match(collapsedSummary, /data-locale-icon/, "collapsed language switcher trigger should include the globe icon");
     assert.match(collapsedSummary, /visually-hidden/, "collapsed language switcher trigger should include only non-visual text");
     assert.doesNotMatch(collapsedSummary, /localeNames/, "collapsed language switcher trigger must not show locale names");
@@ -605,7 +605,7 @@ describe("TachiSuke project scaffold", () => {
     assert.match(localeSwitcher, /data-global-control/, "LocaleSwitcher should participate in shared header disclosure behavior");
     assert.match(localeSwitcher, /<details[\s\S]*data-locale-switcher/, "LocaleSwitcher should use a details disclosure");
     assert.match(localeSwitcher, /<summary[\s\S]*data-locale-summary/, "LocaleSwitcher should expose a stable summary trigger");
-    assert.match(localeSwitcher, /aria-label=\{languageSwitchLabel\}/, "LocaleSwitcher summary should have a localized accessible label");
+    assert.match(localeSwitcher, /aria-label=\{languageSwitchLabel\}/, "LocaleSwitcher summary should have a language-neutral accessible label");
     assert.match(localeSwitcher, /<svg[\s\S]*data-locale-icon/, "LocaleSwitcher summary should expose a globe icon");
     assert.match(localeSwitcher, /control-summary-icon-only/, "LocaleSwitcher summary should stay visual-language neutral when collapsed");
     assert.doesNotMatch(localeSwitcher, /data-locale-current/, "LocaleSwitcher summary should not show a compact current-locale code");
@@ -783,12 +783,13 @@ describe("TachiSuke project scaffold", () => {
     }
 
     const publishedTools = listFiles("src/content/tools", [".json"]).map(readJson).filter((tool) => tool.status === "published");
-    assert.ok(publishedTools.length >= 7, "Phase 1BN should publish at least seven static tools");
+    assert.ok(publishedTools.length >= 8, "Phase 1CF should publish at least eight static tools");
     assert.ok(publishedTools.some((tool) => tool.slug === "moving-to-japan-checklist"), "moving checklist should stay published");
     assert.ok(publishedTools.some((tool) => tool.slug === "japan-rent-initial-cost-checklist"), "rent initial cost checklist should be published");
     assert.ok(publishedTools.some((tool) => tool.slug === "ward-office-moving-in-checklist"), "ward office moving-in checklist should be published");
     assert.ok(publishedTools.some((tool) => tool.slug === "commuter-pass-ic-card-checklist"), "commuter pass and IC card checklist should be published");
     assert.ok(publishedTools.some((tool) => tool.slug === "apartment-viewing-japanese-phrases"), "apartment viewing Japanese phrases tool should be published");
+    assert.ok(publishedTools.some((tool) => tool.slug === "apartment-application-documents-checklist"), "apartment application documents checklist should be published");
     assert.ok(publishedTools.some((tool) => tool.slug === "moving-out-checklist"), "moving-out checklist should be published");
     assert.ok(publishedTools.some((tool) => tool.slug === "japan-emergency-disaster-checklist"), "emergency and disaster checklist should be published");
 
@@ -869,6 +870,27 @@ describe("TachiSuke project scaffold", () => {
       assert.ok(apartmentViewingTool.title[locale], `apartment viewing tool should include ${locale} title`);
       assert.ok(apartmentViewingTool.description[locale]?.length > 30, `apartment viewing tool should include ${locale} description`);
       assert.ok(apartmentViewingTool.sourceNote[locale]?.length > 30, `apartment viewing tool should include ${locale} source note`);
+    }
+
+    const apartmentDocumentsTool = readJson("src/content/tools/apartment-application-documents-checklist.json");
+    assert.equal(apartmentDocumentsTool.status, "published");
+    assert.equal(apartmentDocumentsTool.slug, "apartment-application-documents-checklist");
+    assert.ok(apartmentDocumentsTool.sections.length >= 4, "apartment documents checklist should include practical sections");
+    assert.ok(Array.isArray(apartmentDocumentsTool.sourceLinks) && apartmentDocumentsTool.sourceLinks.length >= 2, "apartment documents checklist should link official source material");
+    assert.ok(
+      apartmentDocumentsTool.sourceLinks.some((source) => source.url.includes("juutakuseisaku.metro.tokyo.lg.jp")),
+      "apartment documents checklist should include a Tokyo housing policy source link"
+    );
+    assert.ok(
+      apartmentDocumentsTool.sourceLinks.some((source) => source.url.includes("moj.go.jp")),
+      "apartment documents checklist should include an Immigration Services Agency source link"
+    );
+    assert.ok(apartmentDocumentsTool.sections.some((section) => section.id === "identity-and-address"), "apartment documents checklist should include identity/address checks");
+    assert.ok(apartmentDocumentsTool.sections.some((section) => section.id === "income-and-affiliation"), "apartment documents checklist should include income/affiliation checks");
+    for (const locale of locales) {
+      assert.ok(apartmentDocumentsTool.title[locale], `apartment documents tool should include ${locale} title`);
+      assert.ok(apartmentDocumentsTool.description[locale]?.length > 30, `apartment documents tool should include ${locale} description`);
+      assert.ok(apartmentDocumentsTool.sourceNote[locale]?.length > 30, `apartment documents tool should include ${locale} source note`);
     }
 
     const movingOutTool = readJson("src/content/tools/moving-out-checklist.json");

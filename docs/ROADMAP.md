@@ -175,7 +175,7 @@ Keep the global header compact by folding language choices and theme choices int
 
 Implemented:
 
-- Locale switcher uses a native disclosure menu and shows the active locale while closed.
+- Locale switcher uses a native disclosure menu; later phases replaced the closed active-locale label with a language-neutral globe trigger.
 - Theme switcher uses a separate native disclosure menu and shows the active system/light/dark preference while closed.
 - Opening one global control closes the other; outside click and Escape close open controls.
 - Shared header control styling works in both light and dark themes without adding a dependency.
@@ -231,18 +231,19 @@ Status: implemented.
 
 Goal:
 
-Keep the collapsed language switcher visually language-neutral while making the assistive labels natural in the active locale.
+Keep the collapsed language switcher visually language-neutral while making the assistive labels understandable even before the visitor understands the active locale.
 
 Implemented:
 
 - The collapsed language switcher remains globe-icon only and does not show the current locale code or native locale name.
-- The language navigation landmark uses locale-aware copy.
-- The language switcher trigger `aria-label`, `title`, and visually hidden text use locale-aware copy.
+- The language navigation landmark uses multilingual language-neutral copy.
+- The language switcher trigger `aria-label`, `title`, and visually hidden text use multilingual language-neutral copy.
 - Source-level tests cover the shared i18n keys and stable switcher hooks.
 
 Rules:
 
 - Keep language choices and theme choices as separate controls.
+- Do not make the collapsed trigger depend on a single locale's visible or non-visual text.
 - Keep the closed language control understandable to users who cannot read the current page language.
 - Do not add an icon dependency for this control.
 
@@ -344,6 +345,27 @@ Rules:
 - Keep language and theme as separate controls.
 - Keep the language control visually language-neutral before the visitor understands the current page language.
 - Do not add a component or icon dependency for these small global controls.
+
+## Phase 1CF: Apartment Application Documents Tool
+
+Status: implemented.
+
+Goal:
+
+Fill the rental workflow gap between apartment viewing and application submission with a static, multilingual document-preparation checklist.
+
+Implemented:
+
+- Added `apartment-application-documents-checklist` to the published tools collection.
+- Covered identity/address, income or affiliation, emergency contact/guarantor, and submission hygiene checks in `zh-tw`, `en`, `ja`, and `ko`.
+- Linked official Tokyo housing policy and Immigration Services Agency public information as confirmation starting points.
+- Source-level and build-output tests verify the tool is public and appears in generated sitemap routes.
+
+Rules:
+
+- Keep this as preparation guidance, not contract translation, legal advice, or screening-result guarantees.
+- Do not collect, upload, store, or validate user documents in Phase 1.
+- Saved checklist state must wait for a separately scoped auth/database design.
 
 ## Phase 1BT: Article Freshness and Trust
 

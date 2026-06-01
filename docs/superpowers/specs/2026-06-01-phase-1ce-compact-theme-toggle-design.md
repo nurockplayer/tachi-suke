@@ -10,7 +10,7 @@ TachiSuke serves people who may not understand the page language yet. The langua
 
 ## Scope
 
-- Keep the collapsed language switcher as a globe icon-only control with localized accessible labels.
+- Keep the collapsed language switcher as a globe icon-only control with multilingual language-neutral accessible labels.
 - Change the collapsed theme switcher from a long localized label plus state to a compact icon plus short state.
 - Keep the full localized system/light/dark labels inside the expanded theme menu.
 - Preserve the native `details` disclosure behavior and existing localStorage theme persistence.

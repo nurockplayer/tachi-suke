@@ -1,0 +1,206 @@
+{
+  "id": "tool-apartment-application-documents-checklist",
+  "slug": "apartment-application-documents-checklist",
+  "title": {
+    "zh-tw": "日本租屋申請文件清單",
+    "en": "Japan Apartment Application Documents Checklist",
+    "ja": "日本の賃貸申込書類チェックリスト",
+    "ko": "일본 임대 신청 서류 체크리스트"
+  },
+  "description": {
+    "zh-tw": "在日本看好房子準備申請前，用這份清單整理身分文件、收入或在學證明、緊急聯絡人、保證公司與送件前確認事項。",
+    "en": "A practical checklist for identity documents, income or school proof, emergency contacts, guarantor-company checks, and submission hygiene before applying for an apartment in Japan.",
+    "ja": "日本で賃貸物件に申し込む前に、本人確認書類、収入・在学証明、緊急連絡先、保証会社、提出前の確認事項を整理するチェックリストです。",
+    "ko": "일본에서 임대 매물 신청 전에 신분 서류, 소득 또는 재학 증명, 긴급 연락처, 보증회사, 제출 전 확인 사항을 정리하는 체크리스트입니다."
+  },
+  "status": "published",
+  "lastCheckedAt": "2026-06-01",
+  "sourceNote": {
+    "zh-tw": "本站依外國人在日本租屋申請常見流程整理，並連到東京都與出入國在留管理廳相關公開資料作為確認入口。實際必要文件會依房東、管理公司、仲介、保證公司、在留資格、收入型態與學校或公司條件不同而變動。",
+    "en": "Compiled from common rental application flows for foreign residents in Japan, with Tokyo Metropolitan Government and Immigration Services Agency public materials linked as confirmation starting points. Actual required documents vary by landlord, management company, agency, guarantor company, residence status, income type, school, and employer.",
+    "ja": "外国人住民が日本で賃貸物件に申し込む際によく確認する流れをもとに整理し、東京都と出入国在留管理庁の公開情報への確認リンクを掲載しています。実際の必要書類は貸主、管理会社、仲介会社、保証会社、在留資格、収入形態、学校、勤務先によって異なります。",
+    "ko": "일본에서 외국인 주민이 임대 매물을 신청할 때 자주 확인하는 흐름을 기준으로 정리하고, 도쿄도와 출입국재류관리청 공개 자료 확인 링크를 제공합니다. 실제 필요 서류는 임대인, 관리회사, 중개사, 보증회사, 체류 자격, 소득 형태, 학교, 회사에 따라 달라집니다."
+  },
+  "sourceLinks": [
+    {
+      "label": {
+        "zh-tw": "東京都：外國人入住民間租賃住宅資訊",
+        "en": "Tokyo Metropolitan Government: Private rental housing information for foreigners",
+        "ja": "東京都：外国人の民間賃貸住宅入居に関する情報",
+        "ko": "도쿄도: 외국인의 민간 임대주택 입주 정보"
+      },
+      "url": "https://www.juutakuseisaku.metro.tokyo.lg.jp/fudosan/torihiki/gaikoku_nyuukyo"
+    },
+    {
+      "label": {
+        "zh-tw": "出入國在留管理廳：外國人生活與就業指南",
+        "en": "Immigration Services Agency: Guidebook on Living and Working",
+        "ja": "出入国在留管理庁：生活・就労ガイドブック",
+        "ko": "출입국재류관리청: 생활·취업 가이드북"
+      },
+      "url": "https://www.moj.go.jp/isa/support/fresc/01_00265.html"
+    }
+  ],
+  "notes": [
+    {
+      "zh-tw": "這份清單是申請前準備輔助，不是契約翻譯、法律建議或保證審查結果。",
+      "en": "This checklist supports application preparation. It is not contract translation, legal advice, or a guarantee that screening will pass.",
+      "ja": "このチェックリストは申込前準備の補助であり、契約翻訳、法律上の助言、審査通過の保証ではありません。",
+      "ko": "이 체크리스트는 신청 전 준비를 돕기 위한 것이며 계약 번역, 법률 조언, 심사 통과 보장이 아닙니다."
+    },
+    {
+      "zh-tw": "請不要把護照、在留卡、收入證明等敏感文件傳給不明對象；送件前先確認仲介或管理公司的正式收件方式。",
+      "en": "Do not send passport, residence card, income proof, or other sensitive files to unknown contacts. Confirm the agency or management company's official submission method first.",
+      "ja": "パスポート、在留カード、収入証明などの機微な書類を不明な相手に送らないでください。提出前に仲介会社や管理会社の正式な提出方法を確認しましょう。",
+      "ko": "여권, 재류카드, 소득 증명 등 민감한 파일을 확인되지 않은 상대에게 보내지 마세요. 제출 전 중개사나 관리회사의 공식 제출 방법을 확인하세요."
+    },
+    {
+      "zh-tw": "必要文件、緊急聯絡人條件、保證公司審查與付款方式會因物件而不同，請以實際申請窗口最新說明為準。",
+      "en": "Required documents, emergency-contact rules, guarantor-company screening, and payment methods vary by property. Use the latest instructions from the actual application contact.",
+      "ja": "必要書類、緊急連絡先の条件、保証会社の審査、支払い方法は物件によって異なります。実際の申込窓口の最新案内を確認してください。",
+      "ko": "필요 서류, 긴급 연락처 조건, 보증회사 심사, 결제 방법은 매물마다 다릅니다. 실제 신청 창구의 최신 안내를 확인하세요."
+    }
+  ],
+  "sections": [
+    {
+      "id": "identity-and-address",
+      "title": {
+        "zh-tw": "身分與住址文件",
+        "en": "Identity and address documents",
+        "ja": "本人確認・住所関連書類",
+        "ko": "신분 및 주소 서류"
+      },
+      "items": [
+        {
+          "zh-tw": "準備在留卡正反面、護照、可確認在留期限與姓名拼寫的資料；送出影本前確認對方是正式仲介或管理公司。",
+          "en": "Prepare both sides of your residence card, passport, and details that confirm your name spelling and period of stay; verify the recipient before sending copies.",
+          "ja": "在留カード両面、パスポート、氏名表記と在留期間を確認できる情報を準備し、写しを送る前に正式な仲介会社・管理会社か確認する。",
+          "ko": "재류카드 앞뒤면, 여권, 이름 표기와 체류 기간을 확인할 수 있는 정보를 준비하고, 사본을 보내기 전 공식 중개사나 관리회사인지 확인한다."
+        },
+        {
+          "zh-tw": "如果剛到日本還沒有現住址，先問清楚是否可用學校、公司宿舍、臨時住址或入住預定資料補充。",
+          "en": "If you recently arrived and do not yet have a current address, ask whether school, company dormitory, temporary address, or planned move-in details can be used.",
+          "ja": "来日直後で現住所がまだない場合は、学校、会社寮、仮住所、入居予定情報で補足できるか確認する。",
+          "ko": "입국 직후라 현재 주소가 아직 없다면 학교, 회사 기숙사, 임시 주소, 입주 예정 정보로 보완할 수 있는지 확인한다."
+        },
+        {
+          "zh-tw": "確認申請表上的姓名順序、英文字母、片假名、生日與國籍是否和文件一致。",
+          "en": "Check that name order, roman letters, katakana, date of birth, and nationality on the application form match your documents.",
+          "ja": "申込書の氏名順、ローマ字、カタカナ、生年月日、国籍が書類と一致しているか確認する。",
+          "ko": "신청서의 이름 순서, 로마자, 가타카나, 생년월일, 국적이 서류와 일치하는지 확인한다."
+        },
+        {
+          "zh-tw": "若被要求印章、簽名或住民票，先確認是否真的必要、可否用簽名替代，以及取得期限。",
+          "en": "If asked for a seal, signature, or resident record, confirm whether it is truly required, whether a signature is acceptable, and how recent the document must be.",
+          "ja": "印鑑、署名、住民票を求められた場合、本当に必要か、署名で代替できるか、発行期限の条件を確認する。",
+          "ko": "도장, 서명, 주민표를 요구받으면 실제로 필요한지, 서명으로 대체 가능한지, 발급일 조건을 확인한다."
+        }
+      ]
+    },
+    {
+      "id": "income-and-affiliation",
+      "title": {
+        "zh-tw": "收入、在學或在職證明",
+        "en": "Income, school, or employment proof",
+        "ja": "収入・在学・在職の確認",
+        "ko": "소득, 재학 또는 재직 증명"
+      },
+      "items": [
+        {
+          "zh-tw": "上班族先準備在職證明、雇用契約、薪資明細或源泉徵收票；剛就職者可詢問是否能用內定通知或雇用條件通知書。",
+          "en": "Employees can prepare employment proof, employment contract, payslips, or withholding statement; new hires should ask whether an offer letter or employment-condition notice is acceptable.",
+          "ja": "会社員は在職証明、雇用契約書、給与明細、源泉徴収票を準備し、就職直後なら内定通知や雇用条件通知書でよいか確認する。",
+          "ko": "직장인은 재직증명서, 고용계약서, 급여명세서, 원천징수표를 준비하고, 막 취업했다면 내정 통지나 고용조건 통지서로 가능한지 확인한다."
+        },
+        {
+          "zh-tw": "學生先確認學生證、在學證明、入學許可書、獎學金證明、匯款來源或存款餘額是否需要。",
+          "en": "Students should confirm whether student ID, enrollment certificate, admission letter, scholarship proof, remittance source, or bank balance proof is needed.",
+          "ja": "学生は学生証、在学証明、入学許可書、奨学金証明、送金元、預金残高証明が必要か確認する。",
+          "ko": "학생은 학생증, 재학증명서, 입학허가서, 장학금 증명, 송금 출처, 잔고 증명이 필요한지 확인한다."
+        },
+        {
+          "zh-tw": "自由工作者或自營業者要先問收入證明格式，例如確定申告、銀行入出金紀錄、合約或請款資料是否可接受。",
+          "en": "Freelancers or self-employed applicants should ask what income proof format is acceptable, such as tax filing, bank transaction history, contracts, or invoices.",
+          "ja": "フリーランスや自営業の場合、確定申告、銀行入出金履歴、契約書、請求書など、受け付けられる収入証明の形式を確認する。",
+          "ko": "프리랜서나 자영업자는 확정신고, 은행 입출금 내역, 계약서, 청구서 등 어떤 소득 증명 형식이 가능한지 확인한다."
+        },
+        {
+          "zh-tw": "若收入資料不是日文，先問是否需要翻譯、補充說明或由學校／公司提供日文文件。",
+          "en": "If income documents are not in Japanese, ask whether translation, an explanation note, or a Japanese document from your school or employer is needed.",
+          "ja": "収入書類が日本語でない場合、翻訳、補足説明、学校・勤務先からの日本語書類が必要か確認する。",
+          "ko": "소득 서류가 일본어가 아니라면 번역, 보충 설명, 학교나 회사의 일본어 서류가 필요한지 확인한다."
+        }
+      ]
+    },
+    {
+      "id": "contacts-and-guarantor",
+      "title": {
+        "zh-tw": "緊急聯絡人與保證相關",
+        "en": "Emergency contact and guarantor checks",
+        "ja": "緊急連絡先・保証関連",
+        "ko": "긴급 연락처 및 보증 관련"
+      },
+      "items": [
+        {
+          "zh-tw": "先確認緊急聯絡人是否必須在日本、是否能使用海外家人，以及需要姓名、關係、電話與地址到什麼程度。",
+          "en": "Confirm whether the emergency contact must be in Japan, whether overseas family is acceptable, and how much name, relationship, phone, and address detail is required.",
+          "ja": "緊急連絡先が日本国内である必要があるか、海外の家族でよいか、氏名、続柄、電話、住所のどこまで必要か確認する。",
+          "ko": "긴급 연락처가 일본 내에 있어야 하는지, 해외 가족도 가능한지, 이름, 관계, 전화번호, 주소를 어느 정도까지 적어야 하는지 확인한다."
+        },
+        {
+          "zh-tw": "如果使用保證公司，確認審查會不會聯絡本人、公司、學校或緊急聯絡人，並提前告知相關對象。",
+          "en": "If a guarantor company is used, ask whether screening may contact you, your employer, school, or emergency contact, then warn those people in advance.",
+          "ja": "保証会社を利用する場合、本人、勤務先、学校、緊急連絡先に連絡が入る可能性があるか確認し、関係者に事前共有する。",
+          "ko": "보증회사를 이용한다면 심사 과정에서 본인, 회사, 학교, 긴급 연락처에 연락할 수 있는지 확인하고 관련자에게 미리 알린다."
+        },
+        {
+          "zh-tw": "若被要求連帶保證人，先確認是否可用保證公司替代，以及保證人的責任與所需文件。",
+          "en": "If a joint guarantor is requested, confirm whether a guarantor company can substitute and what responsibility and documents the guarantor would carry.",
+          "ja": "連帯保証人を求められた場合、保証会社で代替できるか、保証人の責任と必要書類を確認する。",
+          "ko": "연대보증인을 요구받으면 보증회사로 대체 가능한지, 보증인의 책임과 필요 서류를 확인한다."
+        },
+        {
+          "zh-tw": "不要未經同意填寫他人的電話、地址或職場資訊；緊急聯絡人資料也屬於個資。",
+          "en": "Do not enter another person's phone number, address, or workplace without consent. Emergency-contact details are also personal information.",
+          "ja": "同意なく他人の電話番号、住所、勤務先情報を記入しないでください。緊急連絡先の情報も個人情報です。",
+          "ko": "동의 없이 타인의 전화번호, 주소, 직장 정보를 적지 마세요. 긴급 연락처 정보도 개인정보입니다."
+        }
+      ]
+    },
+    {
+      "id": "submission-hygiene",
+      "title": {
+        "zh-tw": "送件前最後確認",
+        "en": "Before submitting",
+        "ja": "提出前の最終確認",
+        "ko": "제출 전 마지막 확인"
+      },
+      "items": [
+        {
+          "zh-tw": "把文件檔名改成清楚格式，例如 residence-card-front、passport、employment-proof，避免對方搞混。",
+          "en": "Rename files clearly, such as residence-card-front, passport, and employment-proof, so the recipient can identify them.",
+          "ja": "ファイル名を residence-card-front、passport、employment-proof のように分かりやすくし、提出先が判別しやすいようにする。",
+          "ko": "파일명을 residence-card-front, passport, employment-proof처럼 명확하게 바꿔 수신자가 구분하기 쉽게 한다."
+        },
+        {
+          "zh-tw": "確認照片或掃描檔沒有裁掉姓名、有效期限、文件號碼或地址，也不要把不該提交的頁面一起送出。",
+          "en": "Check that photos or scans do not cut off names, validity dates, document numbers, or addresses, and do not include pages that were not requested.",
+          "ja": "写真やスキャンで氏名、有効期限、番号、住所が切れていないか確認し、不要なページを一緒に送らない。",
+          "ko": "사진이나 스캔에서 이름, 유효 기간, 번호, 주소가 잘리지 않았는지 확인하고 요청받지 않은 페이지는 함께 보내지 않는다."
+        },
+        {
+          "zh-tw": "確認送件方式是官方 email、指定表單、仲介系統或面交，並保留寄送紀錄與對方回覆。",
+          "en": "Confirm whether submission should use official email, a designated form, the agency system, or in-person handoff, then keep submission records and replies.",
+          "ja": "提出方法が公式メール、指定フォーム、仲介システム、手渡しのどれか確認し、送信記録と返信を保存する。",
+          "ko": "제출 방법이 공식 이메일, 지정 양식, 중개 시스템, 직접 전달 중 무엇인지 확인하고 제출 기록과 답변을 보관한다."
+        },
+        {
+          "zh-tw": "送出前再確認初期費用、入住日、取消條件與申請金是否可退，避免文件送出後才發現條件不合。",
+          "en": "Before submitting, re-check move-in cost, move-in date, cancellation terms, and whether application money is refundable.",
+          "ja": "提出前に初期費用、入居日、キャンセル条件、申込金の返金可否を再確認する。",
+          "ko": "제출 전에 초기 비용, 입주일, 취소 조건, 신청금 환불 가능 여부를 다시 확인한다."
+        }
+      ]
+    }
+  ]
+}

@@ -237,6 +237,7 @@ Current published tools:
 - `ward-office-moving-in-checklist`
 - `commuter-pass-ic-card-checklist`
 - `apartment-viewing-japanese-phrases`
+- `apartment-application-documents-checklist`
 - `moving-out-checklist`
 - `japan-emergency-disaster-checklist`
 
