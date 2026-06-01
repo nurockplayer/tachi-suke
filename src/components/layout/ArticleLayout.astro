@@ -4,7 +4,7 @@ import CorrectionPrompt from "@/components/content/CorrectionPrompt.astro";
 import Breadcrumbs from "@/components/navigation/Breadcrumbs.astro";
 import { formatDate } from "@/lib/content";
 import { slugifyArticleCategory } from "@/lib/content/article-categories";
-import { htmlLangByLocale, localizePath, type Locale } from "@/lib/i18n";
+import { getUiCopy, htmlLangByLocale, localizePath, type Locale } from "@/lib/i18n";
 import type { ArticleSourceLink } from "@/types/article";
 
 interface RelatedArticleLink {
@@ -52,6 +52,7 @@ const localeHomeUrl = new URL(localizePath(locale), site).href;
 const articlesUrl = new URL(localizePath(locale, "/articles"), site).href;
 const categoryHref = localizePath(locale, `/articles/category/${slugifyArticleCategory(category)}`);
 const categoryUrl = new URL(categoryHref, site).href;
+const tagListLabel = getUiCopy(locale, "layout.tagList");
 const updatedLabel = {
   "zh-tw": "更新",
   en: "Updated",
@@ -219,7 +220,7 @@ const articleOpenGraph = {
       </p>
       <h1>{title}</h1>
       <p>{description}</p>
-      <ul class="tag-list" aria-label="Tags">
+      <ul class="tag-list" aria-label={tagListLabel}>
         {tags.map((tag) => <li>{tag}</li>)}
       </ul>
     </header>

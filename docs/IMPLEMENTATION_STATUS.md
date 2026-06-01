@@ -97,6 +97,7 @@ This document records the current MVP state after Phase 1CI source-backed setup 
 - Cloudflare Pages `wrangler.toml` with project name, compatibility date, and `dist` output directory.
 - Deployment guide at `docs/DEPLOYMENT.md`.
 - Baseline keyboard accessibility hooks: skip link, stable main content target, active primary nav state, and visible focus styles.
+- Localized shared assistive labels for primary navigation, footer navigation, article tag lists, and language switcher controls.
 - Dark theme surface tokens for global layout, hero overlays, cards, forms, search, article reading surfaces, collapsed global controls, and placeholders.
 - Structure tests in `tests/project-structure.test.mjs`.
 - Static submit-place and contact/corrections form contract tests in `tests/form-contract.test.mjs`, run with `pnpm test`.

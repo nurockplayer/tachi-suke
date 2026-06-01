@@ -67,6 +67,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - The main landmark should have a stable `id="main-content"` target.
 - Primary navigation should mark the active section with `aria-current`.
 - Keyboard focus must be visible with `:focus-visible` styles.
+- Reusable layout assistive labels, including primary navigation, footer navigation, article tags, and language switch controls, should use shared i18n copy instead of hard-coded English strings.
 - These baseline criteria do not replace a full accessibility audit.
 
 ## Theme Criteria

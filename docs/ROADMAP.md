@@ -489,6 +489,26 @@ Rules:
 - Keep `relatedUrl` absolute, encoded, and generated from the configured `SITE_URL`.
 - Do not add analytics, tracking, backend storage, provider-specific form handling, or guaranteed support response behavior in Phase 1CL.
 
+## Phase 1CM: Localized Assistive Labels
+
+Status: implemented.
+
+Goal:
+
+Reduce hard-coded English assistive text in reusable layout components and keep screen-reader labels aligned with TachiSuke's i18n strategy.
+
+Implemented:
+
+- Added shared `getUiCopy` keys for primary navigation, footer navigation, and article tag list labels.
+- Updated Header, Footer, ArticleLayout, and LocaleSwitcher to use shared UI copy for assistive labels.
+- Preserved the globe language switcher's language-neutral multilingual label so users can discover language switching regardless of the active locale.
+- Expanded source-level tests to prevent hard-coded English `Primary`, `Footer`, and `Tags` aria labels from returning.
+
+Rules:
+
+- Keep reusable layout assistive labels in shared i18n copy.
+- Do not change visual navigation, theme behavior, routes, account placeholders, or backend behavior in Phase 1CM.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.

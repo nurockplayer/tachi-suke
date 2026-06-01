@@ -78,6 +78,7 @@ Implemented:
 - Article detail pages can render structured official confirmation links from article frontmatter
 - Browser/PWA metadata for theme color, app name, Apple app title, and phone number format detection
 - System/light/dark theme support with a globe-icon language control, separate collapsed theme control, persisted browser preference, and no-JavaScript system dark theme fallback
+- Localized assistive labels for primary navigation, footer navigation, article tags, and global language controls
 - JSON-LD structured data for site identity, site search, locale homepages, public section indexes, article indexes, articles, places, mobile plan details, area details, tool details, trust/form pages, and breadcrumbs
 - Breadcrumb JSON-LD on public collection index pages and nested public detail pages
 - Visible breadcrumbs on public collection index pages and nested public article, category, place, mobile plan, area, and tool pages
@@ -330,6 +331,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - Visible breadcrumbs should stay locale-aware, link only to existing public routes, and mark the current page with `aria-current="page"`.
 - Submit-place and contact/corrections form contracts should stay provider-agnostic: env-controlled endpoint, preview-mode disabled submit, hidden classification fields, honeypot field, and no repository-side storage.
 - Detail-page correction prompts should keep passing an encoded absolute `relatedUrl` for article, place, mobile plan, area, and tool pages.
+- Shared layout assistive labels should stay in `getUiCopy`; avoid hard-coded English `aria-label` values in reusable layout components.
 - Mobile plan structured data must stay conservative. Do not add `Offer` price markup until pricing and campaign review workflows are mature.
 - `/feed.xml` is a global RSS feed for non-draft articles across all locales.
 - `/[locale]/feed.xml` is a locale-specific RSS feed for same-locale non-draft articles.

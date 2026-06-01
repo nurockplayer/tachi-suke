@@ -1,7 +1,7 @@
 ---
 import LocaleSwitcher from "./LocaleSwitcher.astro";
 import ThemeToggle from "./ThemeToggle.astro";
-import { localizePath, navItems, type Locale } from "@/lib/i18n";
+import { getUiCopy, localizePath, navItems, type Locale } from "@/lib/i18n";
 
 interface Props {
   locale: Locale;
@@ -10,6 +10,7 @@ interface Props {
 }
 
 const { locale, currentPath, alternatePaths } = Astro.props;
+const primaryNavigationLabel = getUiCopy(locale, "layout.primaryNavigation");
 const accountLabel = {
   "zh-tw": "帳號",
   en: "Account",
@@ -35,7 +36,7 @@ const navLinks = navItems[locale].map((item) => {
         <span class="brand-subtitle">Japan Life Assistant</span>
       </span>
     </a>
-    <nav class="header-nav" aria-label="Primary">
+    <nav class="header-nav" aria-label={primaryNavigationLabel}>
       {navLinks.map((item) => (
         <a href={item.href} aria-current={item.isActive ? "page" : undefined}>{item.label}</a>
       ))}

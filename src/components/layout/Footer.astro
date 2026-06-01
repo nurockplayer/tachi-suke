@@ -1,11 +1,12 @@
 ---
-import { localizePath, type Locale } from "@/lib/i18n";
+import { getUiCopy, localizePath, type Locale } from "@/lib/i18n";
 
 interface Props {
   locale: Locale;
 }
 
 const { locale } = Astro.props;
+const footerNavigationLabel = getUiCopy(locale, "layout.footerNavigation");
 const copy = {
   "zh-tw": {
     line: "幫你在日本站穩生活的多語系決策助手。",
@@ -56,7 +57,7 @@ const copy = {
       <strong>TachiSuke</strong>
       <p>{copy.line}</p>
     </div>
-    <nav class="footer-links" aria-label="Footer">
+    <nav class="footer-links" aria-label={footerNavigationLabel}>
       <a href={localizePath(locale, "/about")}>{copy.about}</a>
       <a href={localizePath(locale, "/submit-place")}>{copy.submit}</a>
       <a href={localizePath(locale, "/account/favorites")}>{copy.favorites}</a>
