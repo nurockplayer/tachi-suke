@@ -309,6 +309,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Public article, area, place, mobile, and tool collection index pages should render visible breadcrumbs from locale home to the current section.
 - Nested public article, article category, place, mobile plan, area, and tool pages should render visible breadcrumbs.
 - Visible breadcrumbs must be locale-aware, link only to existing public parent routes, and mark the current page with `aria-current="page"`.
+- Reusable assistive labels should come from shared `getUiCopy` keys, including primary/footer navigation, article tag lists, article category lists, and place fact lists.
 - Public pages should use semantic HTML.
 - Detail pages should avoid `hreflang` links to missing detail pages.
 - Locale switcher links on detail pages should also avoid missing generated detail pages.

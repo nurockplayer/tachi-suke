@@ -1,5 +1,5 @@
 ---
-import { localizePath, type Locale } from "@/lib/i18n";
+import { getUiCopy, localizePath, type Locale } from "@/lib/i18n";
 import {
   japaneseDifficultyLabels,
   nonSmokingStatusLabels,
@@ -48,6 +48,7 @@ interface Props {
 const { place, locale } = Astro.props;
 const data = place.data ?? place;
 const labels = placeFieldLabels[locale];
+const placeFactsLabel = getUiCopy(locale, "layout.placeFacts");
 const slug = data.slug ?? place.id;
 const detailHref = slug ? localizePath(locale, `/places/${slug}`) : undefined;
 const soloFriendly = data.soloFriendly ? soloFriendlyLabels[locale][data.soloFriendly] : soloFriendlyLabels[locale].unknown;
@@ -62,7 +63,7 @@ const japaneseDifficulty = data.japaneseDifficulty
 <article class="place-card">
   <h3>{detailHref ? <a href={detailHref}>{data.name}</a> : data.name}</h3>
   <p>{[data.category, data.area, data.station].filter(Boolean).join(" · ")}</p>
-  <div class="place-tags" aria-label="Place facts">
+  <div class="place-tags" aria-label={placeFactsLabel}>
     {data.priceRange && <span>{data.priceRange}</span>}
     <span>{labels.soloFriendly}: {soloFriendly}</span>
     <span>{labels.nonSmokingStatus}: {nonSmokingStatus}</span>

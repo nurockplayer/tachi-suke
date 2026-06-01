@@ -205,6 +205,11 @@ Phase 1CM adds localized assistive labels:
 - Primary navigation, footer navigation, article tag lists, and language switcher labels should stay locale-aware or explicitly multilingual where language-neutral discovery matters.
 - Do not change route structure, visible navigation, theme behavior, or account/auth functionality in Phase 1CM.
 
+Phase 1CN extends localized assistive labels:
+
+- Article index category lists and place-card fact lists should also use `getUiCopy` instead of hard-coded English `aria-label` values.
+- Keep these labels as assistive text only; do not change visible category cards, place cards, route structure, search behavior, or account/auth functionality in Phase 1CN.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.

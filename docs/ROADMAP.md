@@ -509,6 +509,25 @@ Rules:
 - Keep reusable layout assistive labels in shared i18n copy.
 - Do not change visual navigation, theme behavior, routes, account placeholders, or backend behavior in Phase 1CM.
 
+## Phase 1CN: Remaining Assistive Label Localization
+
+Status: implemented.
+
+Goal:
+
+Close the next set of small hard-coded English `aria-label` gaps on public content surfaces.
+
+Implemented:
+
+- Moved article index category-list assistive text into shared `getUiCopy`.
+- Moved place-card fact-list assistive text into shared `getUiCopy`.
+- Expanded source-level accessibility tests so these labels cannot regress to hard-coded English strings.
+
+Rules:
+
+- Keep these labels assistive-only and locale-aware.
+- Do not change visible article category cards, place card content, routes, search behavior, account placeholders, or backend behavior in Phase 1CN.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.
