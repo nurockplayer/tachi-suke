@@ -52,6 +52,7 @@ Implemented:
 - Four locale about pages
 - Four locale privacy pages
 - Four locale editorial policy pages
+- Four locale human-readable site map pages for public content discovery
 - Custom static `404.html` recovery page for static hosting
 - Four locale account placeholder pages
 - Favorite placeholder button
@@ -134,6 +135,7 @@ Locale routes:
 - `/[locale]/about`
 - `/[locale]/privacy`
 - `/[locale]/editorial-policy`
+- `/[locale]/site-map`
 - `/[locale]/account/login`
 - `/[locale]/account/favorites`
 - `/[locale]/account/submissions`
@@ -287,6 +289,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - Search pages are static, noindex utility pages backed by `/[locale]/search-index.json`, and `/[locale]/search?q=...` can be shared to prefill/filter results.
 - Search indexes include public content only and do not include account placeholders, drafts, or non-published items.
 - Article category pages are generated from public non-draft articles and are included in the sitemap.
+- Human-readable `/[locale]/site-map` pages list public content only and avoid account placeholder routes.
 - Sitemap `hreflang` alternates must only point to generated public URLs; article alternates are grouped by `translationKey`.
 - Tool checklist pages are static content pages. They do not save progress, require login, or write to a database in Phase 1.
 - Submit-place can post to an externally configured endpoint, but the repo does not store submissions or include a moderation backend.

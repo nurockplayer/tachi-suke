@@ -132,6 +132,9 @@ Current public route pattern:
 - `/[locale]/contact`
 - `/[locale]/contact/thanks`
 - `/[locale]/about`
+- `/[locale]/privacy`
+- `/[locale]/editorial-policy`
+- `/[locale]/site-map`
 - `/[locale]/account/login`
 - `/[locale]/account/favorites`
 - `/[locale]/account/submissions`
@@ -147,7 +150,7 @@ Do not use Simplified Chinese unless explicitly requested.
 
 Phase 1 is content-first, SEO-friendly, i18n-ready, auth-ready, database-ready, and favorites-ready.
 
-Current MVP includes static pages, article publishing, place detail pages, mobile/area/tool detail pages, static submit-place and contact/corrections external endpoint support, placeholder account pages, placeholder favorites, content collections, SEO metadata, RSS feeds, static search indexes, `llms.txt` discovery, and browser OpenSearch discovery.
+Current MVP includes static pages, article publishing, place detail pages, mobile/area/tool detail pages, human-readable site map pages, static submit-place and contact/corrections external endpoint support, placeholder account pages, placeholder favorites, content collections, SEO metadata, RSS feeds, static search indexes, `llms.txt` discovery, and browser OpenSearch discovery.
 
 Phase 1B adds public-preview content depth:
 
@@ -165,6 +168,12 @@ Phase 1B.5 adds maintainability/detail depth:
 - Area fields: `title`, `summary`, `lastCheckedAt`, `notes`.
 - Post-build static HTML link checking with `pnpm check:links`.
 - Conservative detail-page locale switcher links that avoid missing generated pages.
+
+Phase 1BB adds public content directory depth:
+
+- Human-readable site map pages at `/[locale]/site-map`.
+- Pages list public content only: non-draft articles, article categories, mobile plans, area guides, published places, published tools, trust pages, and RSS links.
+- Do not link account placeholder routes from public site map pages.
 
 Phase 1C adds submit-place workflow MVP:
 

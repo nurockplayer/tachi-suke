@@ -26,7 +26,8 @@ const localeIndexPaths = [
   "/contact/thanks",
   "/about",
   "/privacy",
-  "/editorial-policy"
+  "/editorial-policy",
+  "/site-map"
 ];
 
 function formatDate(date: Date): string {

@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1BA everyday shopping guide work. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
+This document records the current MVP state after Phase 1BB human-readable site map work. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
 
 ## Completed
 
@@ -36,6 +36,7 @@ This document records the current MVP state after Phase 1BA everyday shopping gu
 - Four locale about pages.
 - Four locale privacy pages.
 - Four locale editorial policy pages.
+- Four locale human-readable site map pages at `/[locale]/site-map`, linked from the footer and generated from public content collections.
 - Static `llms.txt` discovery file for public AI/search-adjacent tooling.
 - Custom static `404.html` recovery page with multilingual links and `noindex, nofollow`.
 - Four locale account login placeholder pages.
@@ -94,7 +95,7 @@ This document records the current MVP state after Phase 1BA everyday shopping gu
 - Contact/corrections includes provider-agnostic hidden fields and a visually hidden `company` honeypot field for basic spam reduction.
 - Correction prompt component with localized copy for reporting outdated details, broken links, or unclear information from detail pages.
 - Tool detail pages are generated only for `status = published` tools and include localized notes, checklist sections, source note, and last checked date.
-- Footer navigation links to contact, privacy, and editorial policy pages for all locales.
+- Footer navigation links to contact, privacy, editorial policy, and human-readable site map pages for all locales.
 
 ## Placeholder
 
