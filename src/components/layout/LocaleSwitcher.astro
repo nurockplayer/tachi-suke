@@ -14,20 +14,30 @@ const switcherPaths = alternatePaths ?? Object.fromEntries(locales.map((targetLo
   localizePath(targetLocale, pathWithoutLocale)
 ])) as Partial<Record<Locale, string>>;
 const availableLocales = locales.filter((targetLocale) => switcherPaths[targetLocale]);
-const languageLabel = {
-  "zh-tw": "語言",
-  en: "Language",
-  ja: "言語",
-  ko: "언어"
+const currentLocaleCode = {
+  "zh-tw": "繁",
+  en: "EN",
+  ja: "日",
+  ko: "한"
 }[locale];
 ---
 
 {availableLocales.length > 0 && (
   <nav aria-label="Language">
     <details class="control-disclosure locale-switcher" data-global-control data-locale-switcher>
-      <summary class="control-summary" data-locale-summary>
-        <span class="control-summary-label">{languageLabel}</span>
-        <strong>{localeNames[locale]}</strong>
+      <summary class="control-summary" data-locale-summary aria-label="Change language" title="Change language">
+        <svg
+          class="control-icon"
+          data-locale-icon
+          aria-hidden="true"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <circle cx="12" cy="12" r="9"></circle>
+          <path d="M3.6 9h16.8M3.6 15h16.8M12 3c2.2 2.5 3.2 5.5 3.2 9s-1 6.5-3.2 9M12 3C9.8 5.5 8.8 8.5 8.8 12s1 6.5 3.2 9"></path>
+        </svg>
+        <span class="control-summary-label" aria-hidden="true">Lang</span>
+        <strong data-locale-current aria-hidden="true">{currentLocaleCode}</strong>
       </summary>
       <div class="control-menu locale-menu" data-locale-menu>
         {availableLocales.map((targetLocale) => (

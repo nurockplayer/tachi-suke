@@ -72,6 +72,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Public pages should support system, light, and dark theme preferences without adding runtime dependencies.
 - The header should expose a locale-aware theme switcher with accessible pressed state.
 - Language choices and theme choices should be collapsed into separate header disclosure controls rather than always showing every option.
+- The closed language switcher should use a language-neutral globe icon and must not require understanding the current locale name to find language switching.
 - Opening a global language or theme disclosure should not leave overlapping peer controls open; outside click and Escape should close open controls.
 - The selected theme should persist in `localStorage` using the `tachi-suke-theme` key.
 - BaseLayout should initialize the saved or system theme before first paint to reduce theme flash.
