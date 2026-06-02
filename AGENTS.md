@@ -262,6 +262,13 @@ Phase 1CV adds article translation group health:
 - Any intentionally partial public article group must be documented in the content-health partial-locale allowlist.
 - Do not auto-generate translations, change article routes, introduce machine translation, or add backend/CMS behavior in Phase 1CV.
 
+Phase 1CW adds content-driven sitemap checks:
+
+- `pnpm check:seo` should derive expected public sitemap paths from current content collections instead of a hand-maintained sample list.
+- The sitemap check should cover non-draft article details, generated article categories, area details, mobile plan details, published place details, published tool details, locale roots, public section pages, trust/form pages, and RSS feeds.
+- The sitemap check should continue excluding account placeholders, search pages, search indexes, drafts, non-published places, and non-published tools.
+- Do not change sitemap generation, routes, auth, database, forms, deployment configuration, or runtime behavior in Phase 1CW.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.

@@ -689,6 +689,26 @@ Rules:
 - Keep public article translations explicit and reviewable.
 - Do not auto-generate translations, introduce machine translation, change article routes, or add backend/CMS behavior in Phase 1CV.
 
+## Phase 1CW: Content-Driven Sitemap Check
+
+Status: implemented.
+
+Goal:
+
+Reduce sitemap SEO regression risk by making build-output sitemap checks derive expected public content paths from the current content collections.
+
+Implemented:
+
+- Replaced the long hand-maintained sitemap sample list in `tests/seo-output.test.mjs` with a content-driven expected path set.
+- Public non-draft article details, generated article category pages, area details, mobile plan details, published place details, and published tool details are now checked from `src/content`.
+- The check still verifies locale roots, public section pages, form/trust pages, RSS feed paths, and exclusions for account placeholders, search utility routes, search indexes, drafts, and non-published content.
+
+Rules:
+
+- Keep sitemap checks static and build-output based.
+- Do not fetch external URLs or validate live provider data.
+- Do not change sitemap generation, routes, auth, database, forms, deployment configuration, or runtime behavior in Phase 1CW.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.
