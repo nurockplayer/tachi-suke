@@ -165,7 +165,7 @@ These are intentionally present but not functional:
 - `/.well-known/security.txt` points to the existing contact route. It does not create a private vulnerability tracker, personal email commitment, or guaranteed response SLA.
 - The honeypot field is basic spam reduction only. It is not a full anti-spam or abuse-prevention system.
 - Place body data is locale-neutral; only UI labels are localized.
-- `hreflang` is conservative, but full translation coverage is not complete.
+- `hreflang` remains conservative for non-article surfaces and future partial translation groups; missing alternates are not invented.
 - Sitemap article alternates are limited to non-draft articles sharing a `translationKey`; untranslated articles do not get invented alternates.
 - `pnpm test` scans Markdown article links and generated/static source routes.
 - `pnpm check:content` checks source content metadata, stored URL fields, and Markdown/MDX root-relative internal links, but it does not fetch external URLs, validate anchors, or validate live business/provider data.

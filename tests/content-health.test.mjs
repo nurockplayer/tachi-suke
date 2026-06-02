@@ -290,7 +290,7 @@ function readArticleSourceLinks(fullPath) {
 function assertArticleSourceLinks(articles, translationKey, expectedUrlFragments) {
   const matchingArticles = articles
     .filter((article) => article.data.translationKey === translationKey)
-    .filter((article) => article.data.draft !== true);
+    .filter((article) => !isDraft(article.data));
 
   for (const locale of ["zh-tw", "en", "ja", "ko"]) {
     const article = matchingArticles.find((entry) => entry.data.locale === locale);
@@ -378,8 +378,22 @@ describe("content health", () => {
       );
     }
 
-    for (const translationKey of allowedPartialArticleTranslationLocales.keys()) {
+    for (const [translationKey, partialLocales] of allowedPartialArticleTranslationLocales.entries()) {
       assert.ok(groups.has(translationKey), `${translationKey} should exist as a public partial article translation group`);
+
+      const normalizedPartialLocales = [...new Set(partialLocales)].sort();
+      assert.deepEqual(
+        normalizedPartialLocales,
+        [...partialLocales].sort(),
+        `${translationKey} partial article locale policy should not duplicate locales`
+      );
+      assert.ok(
+        normalizedPartialLocales.length > 0 && normalizedPartialLocales.length < locales.length,
+        `${translationKey} partial article locale policy should be a strict subset of supported locales`
+      );
+      for (const locale of normalizedPartialLocales) {
+        assert.ok(locales.includes(locale), `${translationKey} partial article locale policy uses unsupported locale ${locale}`);
+      }
     }
 
     for (const [translationKey, entries] of groups) {

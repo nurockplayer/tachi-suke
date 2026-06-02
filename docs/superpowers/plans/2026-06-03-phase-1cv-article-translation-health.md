@@ -23,5 +23,4 @@
 - [x] Add a failing source-level content-health test for unmanaged translation groups.
 - [x] Fill the current fully localized translation-key policy and refactor old duplicate checks.
 - [x] Update docs for Phase 1CV.
-- [ ] Run final validation.
-- [ ] Open PR, wait for checks, merge if clean, and deploy main.
+- [x] Run final validation.
