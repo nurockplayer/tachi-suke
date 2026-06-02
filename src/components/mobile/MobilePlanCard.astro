@@ -1,40 +1,33 @@
 ---
+import type { CollectionEntry } from "astro:content";
+import { getMobilePlanDisplayCopy, joinMobilePlanCopyList } from "@/lib/content/mobile-plan-copy";
 import { localizePath, type Locale } from "@/lib/i18n";
 
+type SampleMobilePlan = {
+  id?: string;
+  provider: string;
+  slug?: string;
+  planName: string;
+  monthlyPrice?: string;
+  price?: string;
+  dataAmount?: string;
+  paymentRequirements?: string[];
+  residenceCardRequired?: boolean;
+  creditCardRequired?: boolean;
+  pros?: string[];
+  cons?: string[];
+  recommendedFor?: string[];
+  officialUrl?: string;
+};
+
 interface Props {
-  plan: {
-    id?: string;
-    data?: {
-      provider: string;
-      slug: string;
-      planName: string;
-      monthlyPrice: string;
-      dataAmount: string;
-      paymentRequirements?: string[];
-      residenceCardRequired?: boolean;
-      creditCardRequired?: boolean;
-      pros?: string[];
-      cons?: string[];
-      recommendedFor: string[];
-    };
-    provider?: string;
-    slug?: string;
-    planName?: string;
-    monthlyPrice?: string;
-    dataAmount?: string;
-    paymentRequirements?: string[];
-    residenceCardRequired?: boolean;
-    creditCardRequired?: boolean;
-    pros?: string[];
-    cons?: string[];
-    recommendedFor?: string[];
-    officialUrl?: string;
-  };
+  plan: CollectionEntry<"mobile-plans"> | SampleMobilePlan;
   locale?: Locale;
 }
 
 const { plan, locale = "en" } = Astro.props;
-const data = plan.data ?? plan;
+const isCollectionPlan = "data" in plan;
+const data = isCollectionPlan ? plan.data : plan;
 const labels = {
   "zh-tw": {
     price: "月費",
@@ -48,6 +41,7 @@ const labels = {
     details: "查看方案詳情",
     required: "通常需要確認本人文件",
     notRequired: "不一定只限信用卡，仍需看官方條件",
+    creditCardRequired: "通常需要",
     official: "價格與條件可能變動，申請前請確認官方最新資訊。"
   },
   en: {
@@ -62,6 +56,7 @@ const labels = {
     details: "View plan details",
     required: "Identity documents usually need confirmation",
     notRequired: "Not necessarily credit-card-only; confirm official conditions",
+    creditCardRequired: "Usually required",
     official: "Prices and conditions can change. Check the official site before applying."
   },
   ja: {
@@ -76,6 +71,7 @@ const labels = {
     details: "プラン詳細を見る",
     required: "本人確認書類の確認が必要です",
     notRequired: "クレジットカード限定とは限りませんが、公式条件を確認してください",
+    creditCardRequired: "通常必要",
     official: "料金や条件は変わる場合があります。申し込み前に公式サイトを確認してください。"
   },
   ko: {
@@ -90,38 +86,46 @@ const labels = {
     details: "요금제 자세히 보기",
     required: "본인 확인 서류 확인이 필요할 수 있습니다",
     notRequired: "신용카드만 가능한 것은 아닐 수 있으나 공식 조건을 확인하세요",
+    creditCardRequired: "보통 필요",
     official: "요금과 조건은 바뀔 수 있습니다. 신청 전 공식 사이트를 확인하세요."
   }
 }[locale];
 
-function formatToken(value: string): string {
-  return value.replaceAll("_", " ");
-}
-
 const slug = data.slug ?? plan.id;
 const detailHref = slug ? localizePath(locale, `/mobile/${slug}`) : undefined;
+const copy = isCollectionPlan ? getMobilePlanDisplayCopy(plan.data, locale) : {
+  planName: data.planName,
+  monthlyPrice: plan.monthlyPrice ?? plan.price ?? "",
+  dataAmount: data.dataAmount ?? "",
+  paymentRequirements: data.paymentRequirements?.map((item) => item.replaceAll("_", " ")) ?? [],
+  pros: data.pros ?? [],
+  cons: data.cons ?? [],
+  recommendedFor: data.recommendedFor ?? [],
+  sourceNote: "",
+  notes: []
+};
 ---
 
 <article class="mobile-card">
   <h3>{detailHref ? <a href={detailHref}>{data.provider}</a> : data.provider}</h3>
-  <p><strong>{data.planName}</strong></p>
+  <p><strong>{copy.planName}</strong></p>
   <ul class="facts">
-    <li><span>{labels.price}: {data.monthlyPrice}</span></li>
-    <li><span>{labels.data}: {data.dataAmount}</span></li>
+    <li><span>{labels.price}: {copy.monthlyPrice}</span></li>
+    <li><span>{labels.data}: {copy.dataAmount}</span></li>
     {typeof data.residenceCardRequired === "boolean" && <li><span>{labels.docs}: {data.residenceCardRequired ? labels.required : "-"}</span></li>}
-    {typeof data.creditCardRequired === "boolean" && <li><span>{labels.creditCard}: {data.creditCardRequired ? "required" : labels.notRequired}</span></li>}
+    {typeof data.creditCardRequired === "boolean" && <li><span>{labels.creditCard}: {data.creditCardRequired ? labels.creditCardRequired : labels.notRequired}</span></li>}
   </ul>
-  {data.paymentRequirements && data.paymentRequirements.length > 0 && (
-    <p><strong>{labels.payment}:</strong> {data.paymentRequirements.map(formatToken).join(", ")}</p>
+  {copy.paymentRequirements.length > 0 && (
+    <p><strong>{labels.payment}:</strong> {joinMobilePlanCopyList(locale, copy.paymentRequirements)}</p>
   )}
-  {data.recommendedFor && data.recommendedFor.length > 0 && (
-    <p><strong>{labels.recommendedFor}:</strong> {data.recommendedFor.join(", ")}</p>
+  {copy.recommendedFor.length > 0 && (
+    <p><strong>{labels.recommendedFor}:</strong> {joinMobilePlanCopyList(locale, copy.recommendedFor)}</p>
   )}
-  {data.pros && data.pros.length > 0 && (
-    <p><strong>{labels.pros}:</strong> {data.pros.slice(0, 2).join(", ")}</p>
+  {copy.pros.length > 0 && (
+    <p><strong>{labels.pros}:</strong> {joinMobilePlanCopyList(locale, copy.pros.slice(0, 2))}</p>
   )}
-  {data.cons && data.cons.length > 0 && (
-    <p><strong>{labels.cons}:</strong> {data.cons.slice(0, 2).join(", ")}</p>
+  {copy.cons.length > 0 && (
+    <p><strong>{labels.cons}:</strong> {joinMobilePlanCopyList(locale, copy.cons.slice(0, 2))}</p>
   )}
   <p class="help-text">{labels.official}</p>
   {detailHref && <p><a class="text-link" href={detailHref}>{labels.details}</a></p>}

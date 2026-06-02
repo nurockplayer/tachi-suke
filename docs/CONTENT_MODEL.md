@@ -217,6 +217,8 @@ This document records the current content collections and TypeScript model bound
 - Phase 1B.5 adds mobile detail pages at `/[locale]/mobile/[slug]`.
 - Mobile plan prices, campaigns, data allowances, payment conditions, and identity checks can change. Users must confirm official sites before applying.
 - Mobile plan detail pages must show `officialUrl`, `lastCheckedAt`, `sourceNote`, and `notes`.
+- Carrier names must use the convention documented in `docs/I18N_COMPLETENESS.md`: povo, LINEMO, Rakuten Mobile, ahamo, and UQ mobile.
+- Phase 1 keeps the mobile JSON schema locale-neutral, while localized visible copy is provided by `src/lib/content/mobile-plan-copy.ts`.
 
 **Future database mapping notes:**
 

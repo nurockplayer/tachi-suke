@@ -4,6 +4,7 @@ import CorrectionPrompt from "@/components/content/CorrectionPrompt.astro";
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import Breadcrumbs from "@/components/navigation/Breadcrumbs.astro";
 import { formatDate } from "@/lib/content";
+import { getMobilePlanDisplayCopy, getMobilePlanDisplayName, joinMobilePlanCopyList } from "@/lib/content/mobile-plan-copy";
 import { locales, localizePath, type Locale } from "@/lib/i18n";
 
 interface Props {
@@ -13,7 +14,9 @@ interface Props {
 
 const { locale, plan } = Astro.props;
 const data = plan.data;
-const description = `${data.provider} ${data.planName}: ${data.dataAmount}, ${data.monthlyPrice}. ${data.recommendedFor.slice(0, 2).join(", ")}.`;
+const displayCopy = getMobilePlanDisplayCopy(data, locale);
+const displayName = getMobilePlanDisplayName(data, displayCopy);
+const description = `${displayName}: ${displayCopy.dataAmount}, ${displayCopy.monthlyPrice}. ${joinMobilePlanCopyList(locale, displayCopy.recommendedFor.slice(0, 2))}.`;
 const site = Astro.site ?? new URL(Astro.url.origin);
 const canonicalUrl = new URL(Astro.url.pathname, site).href;
 const localeHomeUrl = new URL(localizePath(locale), site).href;
@@ -100,14 +103,10 @@ const labels = {
   }
 }[locale];
 
-function formatToken(value: string): string {
-  return value.replaceAll("_", " ");
-}
-
 const facts = [
-  [labels.price, data.monthlyPrice],
-  [labels.data, data.dataAmount],
-  [labels.payment, data.paymentRequirements.map(formatToken).join(", ")],
+  [labels.price, displayCopy.monthlyPrice],
+  [labels.data, displayCopy.dataAmount],
+  [labels.payment, joinMobilePlanCopyList(locale, displayCopy.paymentRequirements)],
   [labels.documents, data.residenceCardRequired ? labels.yes : labels.no],
   [labels.creditCard, data.creditCardRequired ? labels.yes : labels.no],
   [labels.lastCheckedAt, formatDate(data.lastCheckedAt, locale)]
@@ -123,7 +122,7 @@ const jsonLd = [
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": `${canonicalUrl}#service`,
-    name: `${data.provider} ${data.planName}`,
+    name: displayName,
     description,
     url: canonicalUrl,
     sameAs: data.officialUrl,
@@ -157,7 +156,7 @@ const jsonLd = [
       {
         "@type": "ListItem",
         position: 3,
-        name: `${data.provider} ${data.planName}`,
+        name: displayName,
         item: canonicalUrl
       }
     ]
@@ -165,7 +164,7 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout locale={locale} title={`${data.provider} ${data.planName}`} description={description} alternatePaths={alternatePaths} jsonLd={jsonLd}>
+<BaseLayout locale={locale} title={displayName} description={description} alternatePaths={alternatePaths} jsonLd={jsonLd}>
   <section class="page-hero">
     <div class="container">
       <Breadcrumbs
@@ -173,11 +172,11 @@ const jsonLd = [
         items={[
           { label: "TachiSuke", href: localizePath(locale) },
           { label: mobileLabel, href: localizePath(locale, "/mobile") },
-          { label: `${data.provider} ${data.planName}` }
+          { label: displayName }
         ]}
       />
       <p class="article-meta">{labels.lastCheckedAt} {formatDate(data.lastCheckedAt, locale)}</p>
-      <h1>{data.provider} {data.planName}</h1>
+      <h1>{displayName}</h1>
       <p>{description}</p>
     </div>
   </section>
@@ -210,30 +209,30 @@ const jsonLd = [
       <article class="notice">
         <h2>{labels.recommendedFor}</h2>
         <ul class="check-list">
-          {data.recommendedFor.map((item) => <li>{item}</li>)}
+          {displayCopy.recommendedFor.map((item) => <li>{item}</li>)}
         </ul>
       </article>
       <article class="notice">
         <h2>{labels.pros}</h2>
         <ul class="check-list">
-          {data.pros.map((item) => <li>{item}</li>)}
+          {displayCopy.pros.map((item) => <li>{item}</li>)}
         </ul>
       </article>
       <article class="notice">
         <h2>{labels.cons}</h2>
         <ul class="check-list">
-          {data.cons.map((item) => <li>{item}</li>)}
+          {displayCopy.cons.map((item) => <li>{item}</li>)}
         </ul>
       </article>
       <article class="notice">
         <h2>{labels.notes}</h2>
         <ul class="check-list">
-          {data.notes.map((item) => <li>{item}</li>)}
+          {displayCopy.notes.map((item) => <li>{item}</li>)}
         </ul>
       </article>
       <article class="notice field-full">
         <h2>{labels.source}</h2>
-        <p>{data.sourceNote}</p>
+        <p>{displayCopy.sourceNote}</p>
       </article>
     </div>
   </section>

@@ -39,4 +39,4 @@ draft: false
 
 ## 다음 단계
 
-월 데이터 사용량, 결제 방법, 통화 필요 여부를 먼저 적어보세요. 후보는 [povo](/ko/mobile/povo2), [LINEMO](/ko/mobile/linemo-best-plan), [Rakuten Mobile](/ko/mobile/rakuten-saikyo-plan), [ahamo](/ko/mobile/ahamo), [UQ mobile](/ko/mobile/uq-mobile) 상세 페이지에서 비교할 수 있습니다. 도착 첫 주에 무엇을 먼저 해야 할지 고민된다면 [일본 생활 첫 주 가이드](/ko/articles/japan-life-first-week-setup-ko)를 함께 확인하세요.
+월 데이터 사용량, 결제 방법, 통화 필요 여부를 먼저 적어보세요. 후보는 [povo](/ko/mobile/povo2), [LINEMO](/ko/mobile/linemo-best-plan), [Rakuten Mobile](/ko/mobile/rakuten-saikyo-plan), [ahamo](/ko/mobile/ahamo), [UQ mobile](/ko/mobile/uq-mobile) 상세 페이지에서 비교할 수 있습니다. 고민된다면 [povo, LINEMO, Rakuten Mobile, ahamo 비교 기준](/ko/articles/povo-linemo-rakuten-ahamo-comparison-ko)으로 후보를 좁히고, 도착 첫 주 순서는 [일본 생활 첫 주 가이드](/ko/articles/japan-life-first-week-setup-ko)를 함께 확인하세요.

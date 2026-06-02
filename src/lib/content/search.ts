@@ -1,4 +1,6 @@
 import { getCollection } from "astro:content";
+import { getArticleCategoryTitle } from "@/lib/content/article-categories";
+import { getMobilePlanDisplayCopy, getMobilePlanDisplayName, joinMobilePlanCopyList } from "@/lib/content/mobile-plan-copy";
 import { localizePath, type Locale } from "@/lib/i18n";
 
 export type SearchEntryType = "article" | "place" | "mobile_plan" | "area" | "tool";
@@ -41,7 +43,7 @@ function compact(values: Array<string | string[] | undefined>): string[] {
 }
 
 function buildSearchText(parts: Array<string | string[] | undefined>): string {
-  return compact(parts).join(" ").toLocaleLowerCase();
+  return compact(parts).join(" ");
 }
 
 function sortSearchEntries(entries: SearchEntry[]): SearchEntry[] {
@@ -57,7 +59,8 @@ export async function getSearchEntries(locale: Locale): Promise<SearchEntry[]> {
 
   const articles = await getCollection("articles", ({ data }) => data.locale === locale && !data.draft);
   for (const article of articles) {
-    const tags = [article.data.category, ...article.data.tags];
+    const categoryTag = article.data.category === "mobile" ? getArticleCategoryTitle(locale, article.data.category) : article.data.category;
+    const tags = [categoryTag, ...article.data.tags];
     entries.push({
       id: `article:${article.id}`,
       type: "article",
@@ -97,17 +100,18 @@ export async function getSearchEntries(locale: Locale): Promise<SearchEntry[]> {
 
   const mobilePlans = await getCollection("mobile-plans");
   for (const plan of mobilePlans) {
-    const tags = compact([plan.data.provider, plan.data.planName, plan.data.dataAmount, plan.data.paymentRequirements, plan.data.recommendedFor]);
+    const displayCopy = getMobilePlanDisplayCopy(plan.data, locale);
+    const tags = compact([plan.data.provider, displayCopy.planName, displayCopy.dataAmount, displayCopy.paymentRequirements, displayCopy.recommendedFor]);
     entries.push({
       id: `mobile_plan:${plan.id}`,
       type: "mobile_plan",
-      title: `${plan.data.provider} ${plan.data.planName}`,
-      description: `${plan.data.dataAmount} · ${plan.data.monthlyPrice} · ${plan.data.recommendedFor.join(", ")}`,
+      title: getMobilePlanDisplayName(plan.data, displayCopy),
+      description: `${displayCopy.dataAmount} · ${displayCopy.monthlyPrice} · ${joinMobilePlanCopyList(locale, displayCopy.recommendedFor)}`,
       url: localizePath(locale, `/mobile/${plan.data.slug}`),
       category: "mobile",
       tags,
       updatedAt: dateOnly(plan.data.lastCheckedAt),
-      searchText: buildSearchText([plan.data.provider, plan.data.planName, plan.data.monthlyPrice, plan.data.dataAmount, plan.data.paymentRequirements, plan.data.pros, plan.data.cons, plan.data.recommendedFor, plan.data.notes])
+      searchText: buildSearchText([plan.data.provider, displayCopy.planName, displayCopy.monthlyPrice, displayCopy.dataAmount, displayCopy.paymentRequirements, displayCopy.pros, displayCopy.cons, displayCopy.recommendedFor, displayCopy.notes])
     });
   }
 

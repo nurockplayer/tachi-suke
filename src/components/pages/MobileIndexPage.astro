@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import Breadcrumbs from "@/components/navigation/Breadcrumbs.astro";
 import MobilePlanCard from "@/components/mobile/MobilePlanCard.astro";
+import { getMobilePlanDisplayCopy, getMobilePlanDisplayName, joinMobilePlanCopyList } from "@/lib/content/mobile-plan-copy";
 import { htmlLangByLocale, localizePath, sectionCopy, type Locale } from "@/lib/i18n";
 
 interface Props {
@@ -12,6 +13,10 @@ interface Props {
 const { locale } = Astro.props;
 const title = sectionCopy[locale].mobileTitle;
 const plans = await getCollection("mobile-plans");
+const displayPlans = plans.map((plan) => ({
+  plan,
+  copy: getMobilePlanDisplayCopy(plan.data, locale)
+}));
 const description = {
   "zh-tw": "比較日本手機門號時，先確認本人文件、付款方式、資料量、通話需求、收訊穩定性與 eSIM，再回官方網站確認最新價格與條件。",
   en: "Compare Japanese mobile plans by identity documents, payment method, data needs, calling, coverage stability, and eSIM support before checking official conditions.",
@@ -90,12 +95,12 @@ const jsonLd = [
     name: title,
     description,
     numberOfItems: plans.length,
-    itemListElement: plans.map((plan, index) => ({
+    itemListElement: displayPlans.map(({ plan, copy }, index) => ({
       "@type": "ListItem",
       position: index + 1,
       url: new URL(localizePath(locale, `/mobile/${plan.data.slug}`), site).href,
-      name: `${plan.data.provider} ${plan.data.planName}`,
-      description: plan.data.recommendedFor
+      name: getMobilePlanDisplayName(plan.data, copy),
+      description: joinMobilePlanCopyList(locale, copy.recommendedFor)
     }))
   },
   {

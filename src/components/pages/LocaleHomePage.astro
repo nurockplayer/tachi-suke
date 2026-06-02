@@ -21,6 +21,12 @@ const articles = (await getCollection("articles"))
   .slice(0, 4);
 const places = (await getCollection("places")).filter((place) => place.data.status === "published").slice(0, 3);
 const mobilePlans = (await getCollection("mobile-plans")).slice(0, 2);
+const mobileEntryLinkLabel = {
+  "zh-tw": "查看手機方案",
+  en: "View",
+  ja: "携帯プランを見る",
+  ko: "요금제 보기"
+}[locale];
 const startHereTitle = {
   "zh-tw": "熱門入口",
   en: "Start here",
@@ -226,7 +232,7 @@ const homeJsonLd = [
           <h2>{locale === "zh-tw" ? "手機門號入口" : locale === "en" ? "Mobile plan entry" : locale === "ja" ? "携帯プラン入口" : "휴대폰 요금제 입구"}</h2>
           <p>{locale === "zh-tw" ? "先用文件、付款方式、資料量與收訊需求排除不適合的方案。" : locale === "en" ? "Start by filtering plans by documents, payment method, data needs, and coverage." : locale === "ja" ? "本人確認、支払い方法、データ容量、通信エリアから候補を絞ります。" : "서류, 결제 방법, 데이터 사용량, 통신 품질로 후보를 좁힙니다."}</p>
         </div>
-        <a class="text-link" href={localizePath(locale, "/mobile")}>View</a>
+        <a class="text-link" href={localizePath(locale, "/mobile")}>{mobileEntryLinkLabel}</a>
       </div>
       <div class="grid grid-2">
         {mobilePlans.map((plan) => <MobilePlanCard plan={plan} locale={locale} />)}
