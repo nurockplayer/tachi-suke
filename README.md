@@ -234,7 +234,7 @@ Recommended verification order:
 4. `pnpm check:links`
 5. `pnpm check:seo`
 
-`pnpm test` checks source-level structure, content links, and static form contracts. `pnpm check:content` checks content IDs, slugs, dates, review dates, and stored URL fields without fetching the network. `pnpm check:links` scans built `dist/**/*.html`. `pnpm check:seo` checks built `sitemap.xml`, `robots.txt`, `site.webmanifest`, `opensearch.xml`, global RSS feed, locale RSS feeds, Cloudflare headers, and multilingual section index JSON-LD. Its sitemap coverage is content-driven, so public article, category, area, mobile plan, published place, and published tool routes are derived from `src/content` instead of a hand-maintained sample list. Run `pnpm build` before both build-output checks.
+`pnpm test` checks source-level structure, content links, and static form contracts. `pnpm check:content` checks content IDs, slugs, dates, review dates, and stored URL fields without fetching the network. `pnpm check:links` scans built `dist/**/*.html`. `pnpm check:seo` checks built `sitemap.xml`, `robots.txt`, `site.webmanifest`, `opensearch.xml`, global RSS feed, locale RSS feeds, Cloudflare headers, discovery cache header contracts, and multilingual section index JSON-LD. Its sitemap coverage is content-driven, so public article, category, area, mobile plan, published place, and published tool routes are derived from `src/content` instead of a hand-maintained sample path list. Run `pnpm build` before both build-output checks.
 
 For deployment, build with the real `SITE_URL`, then run `pnpm check:seo` and `pnpm check:deploy` with the same value. `pnpm check:seo` validates canonicals, feeds, sitemap, structured data, and search indexes against the configured site URL when it is provided. `pnpm check:deploy` fails if `dist` still contains `https://tachi-suke.example.com`.
 
@@ -345,7 +345,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - `/security.txt` redirects to `/.well-known/security.txt` for legacy scanner compatibility.
 - `/404.html` is a static noindex recovery page for missing routes on Cloudflare Pages or other static hosts.
 - Cloudflare Pages `_redirects` sends common locale-less paths such as `/articles`, `/mobile/povo2`, and `/contact` to English `302` fallbacks. It also redirects `/security.txt` to `/.well-known/security.txt`. Canonical routes remain locale-prefixed.
-- Cloudflare Pages `_headers` caches sitemap, robots, manifest, RSS feeds, `llms.txt`, `opensearch.xml`, and search indexes conservatively for one hour while keeping HTML revalidated.
+- Cloudflare Pages `_headers` caches sitemap, robots, manifest, RSS feeds, `llms.txt`, `security.txt`, `opensearch.xml`, and search indexes conservatively for one hour while keeping HTML revalidated; `pnpm check:seo` verifies these discovery cache blocks.
 - Cloudflare Pages CSP is intentionally conservative for Phase 1 and still allows `'unsafe-inline'` because the current static site uses inline JSON-LD and small inline enhancement scripts.
 
 ## Documentation Map

@@ -275,6 +275,12 @@ Phase 1CX expands multilingual section JSON-LD checks:
 - Section index JSON-LD checks should verify BCP47 `inLanguage`, canonical URL, locale-home breadcrumb, public item count, and detail URL prefixes.
 - Do not change section page output, routes, content, schemas, auth, database, forms, deployment configuration, or backend behavior in Phase 1CX.
 
+Phase 1CY expands discovery cache header checks:
+
+- `pnpm check:seo` should verify one-hour Cloudflare Pages cache rules for `sitemap.xml`, `robots.txt`, `llms.txt`, `security.txt`, `opensearch.xml`, `site.webmanifest`, the global RSS feed, all locale RSS feeds, and all locale search indexes.
+- Checked `_headers` blocks should define exactly one `Cache-Control` line.
+- Do not change Cloudflare runtime behavior, routes, generated HTML, auth, database, forms, deployment configuration, or backend behavior in Phase 1CY.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.

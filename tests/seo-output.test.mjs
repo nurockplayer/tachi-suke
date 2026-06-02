@@ -16,6 +16,17 @@ const htmlLangByLocale = {
 const searchEntryTypes = ["article", "place", "mobile_plan", "area", "tool"];
 const fallbackSiteUrl = "https://tachi-suke.example.com";
 const configuredSiteUrl = (process.env.SITE_URL ?? "").trim().replace(/\/$/, "");
+const oneHourDiscoveryCachePaths = [
+  "/sitemap.xml",
+  "/robots.txt",
+  "/llms.txt",
+  "/.well-known/security.txt",
+  "/opensearch.xml",
+  "/site.webmanifest",
+  "/feed.xml",
+  ...locales.map((locale) => `/${locale}/feed.xml`),
+  ...locales.map((locale) => `/${locale}/search-index.json`)
+];
 
 function originFromUrl(value) {
   return new URL(value).origin.replace(/\/$/, "");
@@ -65,6 +76,20 @@ function urlRegExp(pathname) {
 
 function urlPrefixRegExp(pathname) {
   return new RegExp(`^${escapeRegExp(absoluteUrl(pathname))}`);
+}
+
+function headerBlock(headers, pathname) {
+  return headers
+    .split(/\n(?=\/)/)
+    .find((block) => block.startsWith(`${pathname}\n`));
+}
+
+function assertCacheHeaderRule(headers, pathname, expectedValue) {
+  const block = headerBlock(headers, pathname);
+  assert.ok(block, `_headers should include a rule for ${pathname}`);
+
+  const cacheHeaderValues = [...block.matchAll(/^  Cache-Control:\s*(.*?)$/gm)].map((match) => match[1]);
+  assert.deepEqual(cacheHeaderValues, [expectedValue], `_headers should define exactly one Cache-Control rule for ${pathname}`);
 }
 
 function sitemapPaths(xml) {
@@ -340,12 +365,9 @@ describe("static SEO output", () => {
     assert.match(headers, /form-action 'self' https:/, "CSP should allow provider-agnostic HTTPS form endpoints");
     assert.match(headers, /frame-ancestors 'none'/, "CSP should block framing");
     assert.match(headers, /object-src 'none'/, "CSP should block object embeds");
-    assert.match(headers, /\/feed\.xml\s+Cache-Control:\s*public,\s*max-age=3600/m, "_headers should cache the global RSS feed conservatively");
-    assert.match(headers, /\/en\/feed\.xml\s+Cache-Control:\s*public,\s*max-age=3600/m, "_headers should cache locale RSS feeds conservatively");
-    assert.match(headers, /\/llms\.txt\s+Cache-Control:\s*public,\s*max-age=3600/m, "_headers should cache llms.txt conservatively");
-    assert.match(headers, /\/\.well-known\/security\.txt\s+Cache-Control:\s*public,\s*max-age=3600/m, "_headers should cache security.txt conservatively");
-    assert.match(headers, /\/opensearch\.xml\s+Cache-Control:\s*public,\s*max-age=3600/m, "_headers should cache OpenSearch discovery conservatively");
-    assert.match(headers, /\/en\/search-index\.json\s+Cache-Control:\s*public,\s*max-age=3600/m, "_headers should cache locale search indexes conservatively");
+    for (const pathname of oneHourDiscoveryCachePaths) {
+      assertCacheHeaderRule(headers, pathname, "public, max-age=3600");
+    }
     assert.match(redirects, /^\/articles\s+\/en\/articles\s+302/m, "Cloudflare redirects should include locale-less article fallback");
     assert.match(redirects, /^\/mobile\/\*\s+\/en\/mobile\/:splat\s+302/m, "Cloudflare redirects should preserve mobile slugs");
     assert.match(redirects, /^\/security\.txt\s+\/\.well-known\/security\.txt\s+302/m, "Cloudflare redirects should include legacy security.txt fallback");
