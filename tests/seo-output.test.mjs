@@ -156,12 +156,50 @@ function canonicalHref(html) {
   );
 }
 
+function decodeHtmlEntities(value) {
+  return value.replace(/&(?:#x([0-9a-f]+)|#([0-9]+)|amp|lt|gt|quot|apos|#39);/gi, (entity, hex, decimal) => {
+    if (hex) return String.fromCodePoint(Number.parseInt(hex, 16));
+    if (decimal) return String.fromCodePoint(Number.parseInt(decimal, 10));
+
+    const namedEntities = {
+      "&amp;": "&",
+      "&lt;": "<",
+      "&gt;": ">",
+      "&quot;": '"',
+      "&apos;": "'",
+      "&#39;": "'"
+    };
+    return namedEntities[entity.toLowerCase()] ?? entity;
+  });
+}
+
+function pageTitle(html) {
+  const value = html.match(/<title>([^<]+)<\/title>/)?.[1];
+  return value ? decodeHtmlEntities(value) : value;
+}
+
+function metaNameContent(html, name) {
+  const namePattern = escapeRegExp(name);
+  const value = (
+    html.match(new RegExp(`<meta\\b[^>]*\\bname="${namePattern}"[^>]*\\bcontent="([^"]+)"[^>]*>`))?.[1] ??
+    html.match(new RegExp(`<meta\\b[^>]*\\bcontent="([^"]+)"[^>]*\\bname="${namePattern}"[^>]*>`))?.[1]
+  );
+  return value ? decodeHtmlEntities(value) : value;
+}
+
 function metaPropertyContent(html, property) {
   const propertyPattern = escapeRegExp(property);
-  return (
+  const value = (
     html.match(new RegExp(`<meta\\b[^>]*\\bproperty="${propertyPattern}"[^>]*\\bcontent="([^"]+)"[^>]*>`))?.[1] ??
     html.match(new RegExp(`<meta\\b[^>]*\\bcontent="([^"]+)"[^>]*\\bproperty="${propertyPattern}"[^>]*>`))?.[1]
   );
+  return value ? decodeHtmlEntities(value) : value;
+}
+
+function assertPresentText(value, label) {
+  assert.ok(value, `${label} should exist`);
+  assert.ok(value.trim(), `${label} should not be blank`);
+  assert.doesNotMatch(value, /^(?:undefined|null)$/i, `${label} should not serialize placeholder values`);
 }
 
 function feedItemLinks(feed) {
@@ -479,7 +517,7 @@ describe("static SEO output", () => {
     }
   });
 
-  it("renders canonical and Open Graph URL metadata on every sitemap HTML page", () => {
+  it("renders complete head metadata on every sitemap HTML page", () => {
     const htmlPaths = sitemapPaths(readDist("sitemap.xml")).filter(isHtmlSitemapPath);
     assert.ok(htmlPaths.length > 100, "sitemap should expose public HTML pages for the metadata sweep");
 
@@ -488,6 +526,12 @@ describe("static SEO output", () => {
       const expectedUrl = absoluteUrl(htmlCanonicalPath(pathname));
       const canonical = canonicalHref(html);
       const ogUrl = metaPropertyContent(html, "og:url");
+      const title = pageTitle(html);
+      const description = metaNameContent(html, "description");
+      const ogTitle = metaPropertyContent(html, "og:title");
+      const ogDescription = metaPropertyContent(html, "og:description");
+      const twitterTitle = metaNameContent(html, "twitter:title");
+      const twitterDescription = metaNameContent(html, "twitter:description");
 
       assert.doesNotMatch(html, /name="robots" content="noindex/, `${pathname} is in the sitemap and should stay indexable`);
       assert.ok(canonical, `${pathname} should include a canonical link`);
@@ -495,6 +539,18 @@ describe("static SEO output", () => {
       assert.equal(canonical, expectedUrl, `${pathname} canonical should match the generated page URL`);
       assert.equal(ogUrl, expectedUrl, `${pathname} og:url should match the generated page URL`);
       assert.equal(ogUrl, canonical, `${pathname} canonical and og:url should agree`);
+
+      assertPresentText(title, `${pathname} title`);
+      assertPresentText(description, `${pathname} description`);
+      assertPresentText(ogTitle, `${pathname} og:title`);
+      assertPresentText(ogDescription, `${pathname} og:description`);
+      assertPresentText(twitterTitle, `${pathname} twitter:title`);
+      assertPresentText(twitterDescription, `${pathname} twitter:description`);
+      assert.match(title, /TachiSuke/, `${pathname} title should include the site name`);
+      assert.equal(ogTitle, title, `${pathname} og:title should match the page title`);
+      assert.equal(twitterTitle, title, `${pathname} twitter:title should match the page title`);
+      assert.equal(ogDescription, description, `${pathname} og:description should match the meta description`);
+      assert.equal(twitterDescription, description, `${pathname} twitter:description should match the meta description`);
     }
   });
 

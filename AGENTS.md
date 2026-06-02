@@ -307,6 +307,13 @@ Phase 1DC adds a public HTML head metadata guard:
 - Noindex utility pages such as search, account placeholders, and `404.html` stay outside this sitemap-derived guard.
 - Do not change runtime SEO generation, routes, UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DC unless the guard exposes a real metadata defect.
 
+Phase 1DD expands public HTML title and description guards:
+
+- `pnpm check:seo` should verify every sitemap-derived public HTML page has non-empty title, meta description, Open Graph title/description, and Twitter title/description metadata.
+- Open Graph and Twitter title/description should match the regular page title/description after HTML entity decoding.
+- Avoid English-centric length thresholds because supported locales have different natural description lengths.
+- Do not change runtime SEO generation, routes, UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DD unless the guard exposes a real metadata defect.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.
