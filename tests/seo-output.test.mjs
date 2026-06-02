@@ -13,6 +13,12 @@ const htmlLangByLocale = {
   ja: "ja",
   ko: "ko"
 };
+const localeFeedTitles = {
+  "zh-tw": "TachiSuke 繁體中文文章",
+  en: "TachiSuke English Articles",
+  ja: "TachiSuke 日本語記事",
+  ko: "TachiSuke 한국어 글"
+};
 const searchEntryTypes = ["article", "place", "mobile_plan", "area", "tool"];
 const fallbackSiteUrl = "https://tachi-suke.example.com";
 const configuredSiteUrl = (process.env.SITE_URL ?? "").trim().replace(/\/$/, "");
@@ -130,8 +136,20 @@ function readHtml(relativePath) {
   return readDist(relativePath);
 }
 
-function assertFeedLink(feed, pathname) {
-  assert.match(feed, new RegExp(`<link>${escapeRegExp(absoluteUrl(pathname))}<\\/link>`));
+function feedItemLinks(feed) {
+  return new Set(
+    [...feed.matchAll(/<item>[\s\S]*?<link>(.*?)<\/link>[\s\S]*?<\/item>/g)].map((match) =>
+      normalizePath(new URL(match[1]).pathname)
+    )
+  );
+}
+
+function assertFeedItemLinks(feed, expectedPaths, label) {
+  assert.deepEqual(
+    [...feedItemLinks(feed)].sort(),
+    [...expectedPaths].sort(),
+    `${label} feed should include exactly the expected public article URLs`
+  );
 }
 
 function listFiles(dir, extensions) {
@@ -200,6 +218,22 @@ function expectedSearchUrlsByType(locale) {
   }
 
   return urls;
+}
+
+function expectedPublicArticlePathsByLocale() {
+  const pathsByLocale = new Map(locales.map((locale) => [locale, new Set()]));
+
+  for (const article of listFiles(join(contentRoot, "articles"), [".md", ".mdx"]).map(readFrontmatter)) {
+    if (isDraft(article)) continue;
+    assert.ok(pathsByLocale.has(article.locale), `article ${article.slug} should use a supported locale`);
+    pathsByLocale.get(article.locale).add(`/${article.locale}/articles/${article.slug}`);
+  }
+
+  return pathsByLocale;
+}
+
+function expectedPublicArticlePaths() {
+  return new Set([...expectedPublicArticlePathsByLocale().values()].flatMap((paths) => [...paths]));
 }
 
 function slugifyArticleCategory(category) {
@@ -631,39 +665,25 @@ describe("static SEO output", () => {
 
   it("generates an RSS feed for public article detail pages", () => {
     const feed = readDist("feed.xml");
-    assertFeedLink(feed, "/zh-tw/articles/taiwanese-newcomer-mobile-plan-japan");
-    assertFeedLink(feed, "/zh-tw/articles/japan-commuter-pass-ic-card-guide");
-    assertFeedLink(feed, "/zh-tw/articles/residence-card-resident-record-my-number");
-    assertFeedLink(feed, "/en/articles/choose-mobile-plan-japan-foreigner");
-    assertFeedLink(feed, "/en/articles/japan-commuter-pass-ic-card-guide-en");
-    assertFeedLink(feed, "/en/articles/residence-card-resident-record-my-number-en");
-    assertFeedLink(feed, "/en/articles/apartment-viewing-japanese-phrases-en");
-    assertFeedLink(feed, "/en/articles/ward-office-moving-in-procedures-en");
-    assertFeedLink(feed, "/en/articles/japan-apartment-moving-out-checklist-en");
-    assertFeedLink(feed, "/en/articles/japan-garbage-sorting-oversized-trash-en");
-    assertFeedLink(feed, "/en/articles/japan-family-restaurants-dennys-gusto-royal-host-en");
-    assertFeedLink(feed, "/en/articles/japan-convenience-store-supermarket-drugstore-guide-en");
-    assertFeedLink(feed, "/ja/articles/japan-commuter-pass-ic-card-guide-ja");
-    assertFeedLink(feed, "/ja/articles/residence-card-resident-record-my-number-ja");
-    assertFeedLink(feed, "/ko/articles/japan-commuter-pass-ic-card-guide-ko");
-    assertFeedLink(feed, "/ko/articles/residence-card-resident-record-my-number-ko");
+    assert.match(feed, /<rss[^>]+version="2\.0"/, "feed.xml should be an RSS 2.0 feed");
+    assertFeedItemLinks(feed, expectedPublicArticlePaths(), "global");
     assert.doesNotMatch(feed, /draft/i, "feed should not expose draft article data");
   });
 
   it("generates locale-specific RSS feeds for same-locale public articles", () => {
-    const englishFeed = readDist("en/feed.xml");
-    assert.match(englishFeed, /<title>TachiSuke English Articles<\/title>/);
-    assert.match(englishFeed, /<dc:language>en<\/dc:language>/);
-    assertFeedLink(englishFeed, "/en/articles/choose-mobile-plan-japan-foreigner");
-    assert.doesNotMatch(englishFeed, /\/zh-tw\/articles\//, "English feed should not include zh-tw article URLs");
-    assert.doesNotMatch(englishFeed, /\/ja\/articles\//, "English feed should not include ja article URLs");
-    assert.doesNotMatch(englishFeed, /draft/i, "English feed should not expose draft article data");
+    const pathsByLocale = expectedPublicArticlePathsByLocale();
 
-    const zhTwFeed = readDist("zh-tw/feed.xml");
-    assert.match(zhTwFeed, /<title>TachiSuke 繁體中文文章<\/title>/);
-    assert.match(zhTwFeed, /<dc:language>zh-Hant-TW<\/dc:language>/);
-    assertFeedLink(zhTwFeed, "/zh-tw/articles/taiwanese-newcomer-mobile-plan-japan");
-    assert.doesNotMatch(zhTwFeed, /\/en\/articles\//, "zh-tw feed should not include English article URLs");
+    for (const locale of locales) {
+      const feed = readDist(`${locale}/feed.xml`);
+      assert.match(feed, new RegExp(`<title>${escapeRegExp(localeFeedTitles[locale])}<\\/title>`), `${locale} feed should use the localized feed title`);
+      assert.match(feed, new RegExp(`<dc:language>${escapeRegExp(htmlLangByLocale[locale])}<\\/dc:language>`), `${locale} feed items should use localized dc:language metadata`);
+      assertFeedItemLinks(feed, pathsByLocale.get(locale), locale);
+      assert.doesNotMatch(feed, /draft/i, `${locale} feed should not expose draft article data`);
+
+      for (const otherLocale of locales.filter((candidate) => candidate !== locale)) {
+        assert.doesNotMatch(feed, new RegExp(`/${escapeRegExp(otherLocale)}/articles/`), `${locale} feed should not include ${otherLocale} article URLs`);
+      }
+    }
   });
 
   it("adds content-aware lastmod values for RSS feeds in sitemap", () => {

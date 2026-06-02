@@ -294,6 +294,12 @@ Phase 1DA expands deployment URL guards:
 - Relative-only deploy artifacts such as `site.webmanifest` and search index JSON should not be forced to contain `SITE_URL`.
 - Do not change runtime SEO generation, routes, Cloudflare headers, UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DA.
 
+Phase 1DB expands RSS feed coverage checks:
+
+- `pnpm check:seo` should derive expected global and locale RSS item URLs from current non-draft article content.
+- Global `/feed.xml` should exactly match all public article URLs; locale feeds should exactly match same-locale public article URLs and exclude other locales.
+- Do not change RSS runtime generation, routes, content, schemas, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DB.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.
