@@ -727,6 +727,25 @@ Rules:
 - Keep this as a static build-output quality gate.
 - Do not change section page output, routes, content, schemas, auth, database, forms, deployment configuration, or backend behavior in Phase 1CX.
 
+## Phase 1CY: Discovery Cache Header Checks
+
+Status: implemented.
+
+Goal:
+
+Make crawler-facing discovery cache rules explicit in build-output SEO checks.
+
+Implemented:
+
+- Added a data-driven discovery cache path list to `tests/seo-output.test.mjs`.
+- `pnpm check:seo` now verifies one-hour Cloudflare Pages cache rules for `sitemap.xml`, `robots.txt`, `llms.txt`, `security.txt`, `opensearch.xml`, `site.webmanifest`, the global RSS feed, all locale RSS feeds, and all locale search indexes.
+- Checked `_headers` blocks must define exactly one `Cache-Control` line.
+
+Rules:
+
+- Keep this as a static build-output quality gate.
+- Do not fetch live headers, change Cloudflare runtime behavior, change routes, or add Workers/Functions in Phase 1CY.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.
