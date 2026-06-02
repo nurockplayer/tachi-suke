@@ -154,11 +154,26 @@ function expectedHtmlLangForPath(pathname) {
   return htmlLangByLocale[locales.includes(locale) ? locale : "en"];
 }
 
+function expectedLocaleForPath(pathname) {
+  const locale = pathname.split("/")[1];
+  return locales.includes(locale) ? locale : "en";
+}
+
 function canonicalHref(html) {
   return (
     html.match(/<link\b[^>]*\brel="canonical"[^>]*\bhref="([^"]+)"[^>]*>/)?.[1] ??
     html.match(/<link\b[^>]*\bhref="([^"]+)"[^>]*\brel="canonical"[^>]*>/)?.[1]
   );
+}
+
+function linkAttributes(tag) {
+  return Object.fromEntries([...tag.matchAll(/\s([:\w-]+)="([^"]*)"/g)].map((match) => [match[1], decodeHtmlEntities(match[2])]));
+}
+
+function findLink(html, predicate) {
+  return [...html.matchAll(/<link\b[^>]*>/g)]
+    .map((match) => linkAttributes(match[0]))
+    .find(predicate);
 }
 
 function htmlLang(html) {
@@ -585,6 +600,59 @@ describe("static SEO output", () => {
         html,
         /<main id="main-content" class="site-main" tabindex="-1">/,
         `${pathname} should include the stable main content landmark`
+      );
+    }
+  });
+
+  it("renders discovery links on every sitemap HTML page", () => {
+    const htmlPaths = sitemapPaths(readDist("sitemap.xml")).filter(isHtmlSitemapPath);
+    assert.ok(htmlPaths.length > 100, "sitemap should expose public HTML pages for the discovery metadata sweep");
+
+    for (const pathname of htmlPaths) {
+      const html = readHtml(htmlDistRelativePath(pathname));
+      const locale = expectedLocaleForPath(pathname);
+      const expectedLocaleFeedUrl = absoluteUrl(`/${locale}/feed.xml`);
+
+      assert.ok(
+        findLink(html, (link) => link.rel === "icon" && link.href === "/favicon.svg" && link.type === "image/svg+xml"),
+        `${pathname} should link the SVG favicon`
+      );
+      assert.ok(
+        findLink(html, (link) => link.rel === "manifest" && link.href === "/site.webmanifest"),
+        `${pathname} should link the web manifest`
+      );
+      assert.ok(
+        findLink(
+          html,
+          (link) =>
+            link.rel === "search" &&
+            link.type === "application/opensearchdescription+xml" &&
+            link.title === "TachiSuke Search" &&
+            link.href === absoluteUrl("/opensearch.xml")
+        ),
+        `${pathname} should link OpenSearch discovery`
+      );
+      assert.ok(
+        findLink(
+          html,
+          (link) =>
+            link.rel === "alternate" &&
+            link.type === "application/rss+xml" &&
+            link.title === "TachiSuke RSS" &&
+            link.href === absoluteUrl("/feed.xml")
+        ),
+        `${pathname} should link the global RSS feed`
+      );
+      assert.ok(
+        findLink(
+          html,
+          (link) =>
+            link.rel === "alternate" &&
+            link.type === "application/rss+xml" &&
+            link.title === `TachiSuke ${locale} RSS` &&
+            link.href === expectedLocaleFeedUrl
+        ),
+        `${pathname} should link the current-locale RSS feed`
       );
     }
   });
