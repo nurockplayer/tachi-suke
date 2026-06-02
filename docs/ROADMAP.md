@@ -1153,6 +1153,25 @@ Rules:
 - Do not include draft articles.
 - Do not add per-category feeds, pagination, or runtime feed generation until article volume makes it useful.
 
+## Phase 1DB: Content-Driven RSS Checks
+
+Status: implemented.
+
+Goal:
+
+Keep RSS SEO-output checks aligned with current public article content as the content library grows.
+
+Implemented:
+
+- Replaced hand-maintained RSS sample URL checks with content-derived exact-set assertions in `tests/seo-output.test.mjs`.
+- Global `/feed.xml` is checked against every non-draft public article path.
+- Each locale RSS feed is checked against same-locale non-draft article paths and against cross-locale leakage.
+
+Rules:
+
+- Keep RSS generation static and article-only in Phase 1DB.
+- Do not add category feeds, pagination, analytics, external URL fetching, runtime feed generation, auth, database, or backend behavior.
+
 ## Phase 1S: Static Search
 
 Status: implemented.

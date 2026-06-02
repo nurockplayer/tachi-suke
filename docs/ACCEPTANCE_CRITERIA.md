@@ -296,6 +296,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Public pages should include a `rel="search"` link to `/opensearch.xml`.
 - `feed.xml` must be generated as an RSS 2.0 feed for non-draft public article detail pages.
 - `/[locale]/feed.xml` must be generated as an RSS 2.0 feed for same-locale non-draft public article detail pages.
+- `pnpm check:seo` should verify global and locale RSS item URLs against the current non-draft article content collection, not a hand-maintained sample slug list.
 - Global and locale RSS feed sitemap entries should include `lastmod` derived from the newest matching public article `updatedAt`.
 - Public aggregate sitemap entries for `/[locale]/articles`, `/[locale]/areas`, `/[locale]/places`, `/[locale]/mobile`, `/[locale]/tools`, and `/[locale]/site-map` should include content-derived `lastmod` values.
 - Locale homepage sitemap entries at `/[locale]/` should include content-derived `lastmod` values.
