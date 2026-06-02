@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1CI source-backed setup guide content. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
+This document records the current MVP state after Phase 1CV article translation health checks. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
 
 ## Completed
 
@@ -20,7 +20,7 @@ This document records the current MVP state after Phase 1CI source-backed setup 
 - Article detail pages render semantic published/updated `<time>` metadata and a localized freshness/trust notice before the article body.
 - Build-time related article links on article detail pages, limited to non-draft same-locale articles.
 - Public detail-page correction prompts that link article, place, mobile plan, area, and tool details to contact/corrections with related page URL prefill.
-- Fifty-four public article pages across `zh-tw`, `en`, `ja`, and `ko`, including Phase 1B decision-oriented content, Phase 1AG/1AP commuter pass articles, Phase 1AH/1AP residence administration articles, Phase 1AR rental initial-cost articles, Phase 1AV apartment-viewing practical Japanese articles, Phase 1AW/1CI ward-office moving-in procedure articles, Phase 1AX apartment moving-out articles, Phase 1AY garbage sorting articles, Phase 1AZ family restaurant comparison articles, Phase 1BA everyday shopping articles, Phase 1BO emergency/disaster basics articles, and Phase 1BP work contract basics articles.
+- Fifty-six public article pages across `zh-tw`, `en`, `ja`, and `ko`, organized into fourteen fully localized public article `translationKey` groups.
 - Four locale area index pages showing area guide cards.
 - Four locale area detail routes at `/[locale]/areas/[slug]`.
 - Four locale place index pages.
@@ -105,7 +105,7 @@ This document records the current MVP state after Phase 1CI source-backed setup 
 - Dark theme surface tokens for global layout, hero overlays, cards, forms, search, article reading surfaces, collapsed global controls, and placeholders.
 - Structure tests in `tests/project-structure.test.mjs`.
 - Static submit-place and contact/corrections form contract tests in `tests/form-contract.test.mjs`, run with `pnpm test`.
-- Source content health checks in `tests/content-health.test.mjs`, run with `pnpm check:content`, including article metadata, stored URL fields, and Markdown/MDX root-relative internal links.
+- Source content health checks in `tests/content-health.test.mjs`, run with `pnpm check:content`, including article metadata, explicit public article translation-group locale policy, stored URL fields, and Markdown/MDX root-relative internal links.
 - Conservative article internal-link checks for locale-prefixed static/generated public routes.
 - Static HTML internal link crawler in `tests/static-html-links.test.mjs`, run after `pnpm build` with `pnpm check:links`.
 - Static SEO output check in `tests/seo-output.test.mjs`, run after `pnpm build` with `pnpm check:seo`; when `SITE_URL` is unset, it infers the expected origin from the current built sitemap or robots output.
@@ -165,10 +165,11 @@ These are intentionally present but not functional:
 - `/.well-known/security.txt` points to the existing contact route. It does not create a private vulnerability tracker, personal email commitment, or guaranteed response SLA.
 - The honeypot field is basic spam reduction only. It is not a full anti-spam or abuse-prevention system.
 - Place body data is locale-neutral; only UI labels are localized.
-- `hreflang` is conservative, but full translation coverage is not complete.
+- `hreflang` remains conservative for non-article surfaces and future partial translation groups; missing alternates are not invented.
 - Sitemap article alternates are limited to non-draft articles sharing a `translationKey`; untranslated articles do not get invented alternates.
 - `pnpm test` scans Markdown article links and generated/static source routes.
 - `pnpm check:content` checks source content metadata, stored URL fields, and Markdown/MDX root-relative internal links, but it does not fetch external URLs, validate anchors, or validate live business/provider data.
+- Public article translation groups are currently expected to be fully localized across `zh-tw`, `en`, `ja`, and `ko`; intentionally partial future groups must be added to the content-health partial-locale allowlist.
 - `pnpm check:links` scans built static HTML root-relative links in `dist/`, but it does not validate external links, anchors, JavaScript behavior, form submission behavior, or visual rendering.
 - RSS feeds are static and article-only. They do not include category feeds, pagination, places, tools, mobile plans, or area guides.
 - Static search is substring-based client-side filtering with shareable `?q=` URLs. It does not provide typo tolerance, semantic search, pagination, analytics, or personalization.

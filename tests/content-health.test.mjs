@@ -6,6 +6,23 @@ import { join } from "node:path";
 const root = process.cwd();
 const contentRoot = join(root, "src/content");
 const locales = ["zh-tw", "en", "ja", "ko"];
+const fullyLocalizedArticleTranslationKeys = new Set([
+  "apartment-viewing-japanese-phrases",
+  "commuter-pass-ic-card-guide",
+  "family-restaurants-japan-basics",
+  "first-week-japan-setup",
+  "japan-apartment-moving-out-checklist",
+  "japan-emergency-disaster-basics",
+  "japan-garbage-sorting-oversized-trash",
+  "japan-shopping-basics",
+  "japan-work-contract-basics",
+  "mobile-plan-basics-foreign-residents",
+  "mobile-plan-brand-comparison",
+  "renting-initial-costs-japan",
+  "residence-card-resident-record-my-number",
+  "ward-office-moving-in-procedures"
+]);
+const allowedPartialArticleTranslationLocales = new Map([]);
 const tomorrow = new Date();
 tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
 
@@ -273,7 +290,7 @@ function readArticleSourceLinks(fullPath) {
 function assertArticleSourceLinks(articles, translationKey, expectedUrlFragments) {
   const matchingArticles = articles
     .filter((article) => article.data.translationKey === translationKey)
-    .filter((article) => article.data.draft !== true);
+    .filter((article) => !isDraft(article.data));
 
   for (const locale of ["zh-tw", "en", "ja", "ko"]) {
     const article = matchingArticles.find((entry) => entry.data.locale === locale);
@@ -294,6 +311,23 @@ function assertArticleSourceLinks(articles, translationKey, expectedUrlFragments
       );
     }
   }
+}
+
+function collectArticleTranslationGroups(articles) {
+  const groups = new Map();
+
+  for (const article of articles) {
+    if (isDraft(article.data)) continue;
+
+    const translationKey = article.data.translationKey;
+    assert.ok(translationKey, `${article.path} should include translationKey`);
+
+    const entries = groups.get(translationKey) ?? [];
+    entries.push(article);
+    groups.set(translationKey, entries);
+  }
+
+  return groups;
 }
 
 describe("content health", () => {
@@ -319,53 +353,75 @@ describe("content health", () => {
       }
     }
 
-    const rentInitialCostLocales = new Set(
-      articles
-        .filter((article) => article.data.translationKey === "renting-initial-costs-japan")
-        .filter((article) => article.data.draft !== true)
-        .map((article) => article.data.locale)
-    );
-    for (const locale of ["zh-tw", "en", "ja", "ko"]) {
-      assert.equal(
-        rentInitialCostLocales.has(locale),
-        true,
-        `renting-initial-costs-japan should include a public ${locale} article`
-      );
-    }
-
-    const emergencyDisasterLocales = new Set(
-      articles
-        .filter((article) => article.data.translationKey === "japan-emergency-disaster-basics")
-        .filter((article) => article.data.draft !== true)
-        .map((article) => article.data.locale)
-    );
-    for (const locale of ["zh-tw", "en", "ja", "ko"]) {
-      assert.equal(
-        emergencyDisasterLocales.has(locale),
-        true,
-        `japan-emergency-disaster-basics should include a public ${locale} article`
-      );
-    }
-
-    const workContractLocales = new Set(
-      articles
-        .filter((article) => article.data.translationKey === "japan-work-contract-basics")
-        .filter((article) => article.data.draft !== true)
-        .map((article) => article.data.locale)
-    );
-    for (const locale of ["zh-tw", "en", "ja", "ko"]) {
-      assert.equal(
-        workContractLocales.has(locale),
-        true,
-        `japan-work-contract-basics should include a public ${locale} article`
-      );
-    }
-
     assertArticleSourceLinks(articles, "japan-emergency-disaster-basics", ["fdma.go.jp", "jma.go.jp"]);
     assertArticleSourceLinks(articles, "japan-work-contract-basics", ["studyinjapan.go.jp", "check-roudou.mhlw.go.jp"]);
     assertArticleSourceLinks(articles, "residence-card-resident-record-my-number", ["digital.go.jp", "moj.go.jp"]);
     assertArticleSourceLinks(articles, "first-week-japan-setup", ["moj.go.jp/isa/support/portal/guidebook_all", "digital.go.jp"]);
     assertArticleSourceLinks(articles, "ward-office-moving-in-procedures", ["moj.go.jp/isa/support/portal/guidebook_all", "digital.go.jp"]);
+  });
+
+  it("keeps public article translation groups explicitly covered by locale policy", () => {
+    const articles = listFiles(join(contentRoot, "articles"), [".md", ".mdx"]).map((fullPath) => ({
+      path: relative(fullPath),
+      data: readFrontmatter(fullPath),
+      fullPath
+    }));
+    const groups = collectArticleTranslationGroups(articles);
+    const requiredLocales = [...locales].sort();
+
+    for (const translationKey of fullyLocalizedArticleTranslationKeys) {
+      assert.ok(groups.has(translationKey), `${translationKey} should exist as a public article translation group`);
+      assert.equal(
+        allowedPartialArticleTranslationLocales.has(translationKey),
+        false,
+        `${translationKey} should not be marked as both fully localized and partially localized`
+      );
+    }
+
+    for (const [translationKey, partialLocales] of allowedPartialArticleTranslationLocales.entries()) {
+      assert.ok(groups.has(translationKey), `${translationKey} should exist as a public partial article translation group`);
+
+      const normalizedPartialLocales = [...new Set(partialLocales)].sort();
+      assert.deepEqual(
+        normalizedPartialLocales,
+        [...partialLocales].sort(),
+        `${translationKey} partial article locale policy should not duplicate locales`
+      );
+      assert.ok(
+        normalizedPartialLocales.length > 0 && normalizedPartialLocales.length < locales.length,
+        `${translationKey} partial article locale policy should be a strict subset of supported locales`
+      );
+      for (const locale of normalizedPartialLocales) {
+        assert.ok(locales.includes(locale), `${translationKey} partial article locale policy uses unsupported locale ${locale}`);
+      }
+    }
+
+    for (const [translationKey, entries] of groups) {
+      const actualLocales = entries.map((entry) => entry.data.locale).sort();
+      const uniqueLocales = new Set(actualLocales);
+      assert.equal(uniqueLocales.size, actualLocales.length, `${translationKey} should not duplicate article locales`);
+      for (const locale of actualLocales) {
+        assert.ok(locales.includes(locale), `${translationKey} uses unsupported article locale ${locale}`);
+      }
+
+      const isFullyLocalized = fullyLocalizedArticleTranslationKeys.has(translationKey);
+      const allowedPartialLocales = allowedPartialArticleTranslationLocales.get(translationKey);
+      assert.ok(
+        isFullyLocalized || allowedPartialLocales,
+        `${translationKey} should be listed in fullyLocalizedArticleTranslationKeys or allowedPartialArticleTranslationLocales`
+      );
+
+      if (isFullyLocalized) {
+        assert.deepEqual(actualLocales, requiredLocales, `${translationKey} should include every supported article locale`);
+        continue;
+      }
+
+      assert.deepEqual(
+        actualLocales,
+        [...allowedPartialLocales].sort(),
+        `${translationKey} should match its documented partial article locale set`
+      );
+    }
   });
 
   it("keeps Markdown and MDX internal links pointed at generated public routes", () => {

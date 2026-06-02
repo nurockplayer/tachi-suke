@@ -669,6 +669,26 @@ Rules:
 - Keep Phase 1 search dependency-free, static, and `noindex, follow`.
 - Do not change search ranking, index generation, routes, analytics, hosted search, auth, database, or backend behavior in Phase 1CU.
 
+## Phase 1CV: Article Translation Group Health
+
+Status: implemented.
+
+Goal:
+
+Prevent public article translation regressions by requiring each public article `translationKey` to be covered by an explicit locale policy.
+
+Implemented:
+
+- Added a policy-driven source content-health check for public article translation groups.
+- Current fully localized article groups must contain exactly `zh-tw`, `en`, `ja`, and `ko`.
+- Future intentionally partial public article groups must be listed in the partial-locale allowlist before `pnpm check:content` passes.
+- Refactored older scattered translation completeness checks into the new shared rule.
+
+Rules:
+
+- Keep public article translations explicit and reviewable.
+- Do not auto-generate translations, introduce machine translation, change article routes, or add backend/CMS behavior in Phase 1CV.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.

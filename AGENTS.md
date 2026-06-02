@@ -255,6 +255,13 @@ Phase 1CU expands locale search page SEO coverage:
 - Keep `/[locale]/search` static, dependency-free, and backed by `/[locale]/search-index.json`.
 - Do not change search ranking, index generation, routes, analytics, hosted search, auth, database, or backend behavior in Phase 1CU.
 
+Phase 1CV adds article translation group health:
+
+- `pnpm check:content` should verify every public article `translationKey` is covered by an explicit locale policy.
+- Fully localized public article groups should contain exactly `zh-tw`, `en`, `ja`, and `ko`.
+- Any intentionally partial public article group must be documented in the content-health partial-locale allowlist.
+- Do not auto-generate translations, change article routes, introduce machine translation, or add backend/CMS behavior in Phase 1CV.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.
