@@ -804,6 +804,26 @@ Rules:
 - Keep this as a static build-output SEO quality gate.
 - Do not add crawling, browser automation, analytics, route changes, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DC.
 
+## Phase 1DD: Public HTML Title and Description Guard
+
+Status: implemented.
+
+Goal:
+
+Catch title, description, Open Graph, and Twitter metadata regressions on any public indexable HTML page before deployment.
+
+Implemented:
+
+- Expanded the sitemap-derived sweep in `tests/seo-output.test.mjs`.
+- `pnpm check:seo` now verifies every sitemap HTML path has a non-empty `<title>`, meta description, `og:title`, `og:description`, `twitter:title`, and `twitter:description`.
+- Social title/description metadata must match the regular page title/description after HTML entity decoding.
+- The guard avoids English-centric length thresholds because the site is multilingual.
+
+Rules:
+
+- Keep this as a static build-output SEO quality gate.
+- Do not add crawling, browser automation, analytics, route changes, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DD.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.
