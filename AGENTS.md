@@ -334,6 +334,13 @@ Phase 1DG expands public HTML JSON-LD guards:
 - Parsed JSON-LD should not contain string values exactly equal to `undefined` or `null`.
 - Keep this as a static build-output structured-data guard; do not change runtime structured data generation, routes, UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DG unless the guard exposes a real JSON-LD defect.
 
+Phase 1DH expands noindex utility page guards:
+
+- `pnpm check:seo` should verify account placeholders, search pages, search index JSON endpoints, and `404.html` stay outside `sitemap.xml`.
+- Built account placeholder pages should keep `noindex, nofollow`.
+- Built search pages should keep `noindex, follow`.
+- Keep this as a static build-output utility-page guard; do not change route structure, visible UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DH unless the guard exposes a real noindex defect.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.

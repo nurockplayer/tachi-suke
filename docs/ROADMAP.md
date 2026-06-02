@@ -890,6 +890,28 @@ Rules:
 - Do not scan noindex account/search/404 utility pages through this sitemap-derived guard.
 - Do not add crawling, browser automation, analytics, route changes, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DG.
 
+## Phase 1DH: Noindex Utility Page Guard
+
+Status: implemented.
+
+Goal:
+
+Catch accidental sitemap exposure or indexing metadata regressions for utility pages before deployment.
+
+Implemented:
+
+- Added utility-page sitemap exclusion helpers to `tests/seo-output.test.mjs`.
+- `pnpm check:seo` now verifies all locale account placeholder routes stay out of `sitemap.xml`.
+- `pnpm check:seo` verifies built account placeholder pages keep `noindex, nofollow`.
+- `pnpm check:seo` verifies locale search pages and search index JSON endpoints stay out of `sitemap.xml`.
+- `pnpm check:seo` verifies built search pages keep `noindex, follow`.
+- Existing 404 checks continue to verify `404.html` stays `noindex, nofollow` and outside the sitemap.
+
+Rules:
+
+- Keep this as a static build-output utility-page quality gate.
+- Do not change account placeholder behavior, search behavior, routes, visible UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DH.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.

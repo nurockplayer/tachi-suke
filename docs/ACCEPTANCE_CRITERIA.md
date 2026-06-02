@@ -312,6 +312,9 @@ This document defines the acceptance criteria for the current static-first MVP.
 - `404.html` should include locale-specific recovery links for each supported locale home, articles, mobile, and tools route.
 - Locale-specific recovery sections on `404.html` should carry appropriate BCP47 language metadata.
 - Account placeholder pages must use `noindex, nofollow`.
+- `pnpm check:seo` should verify all four locale account placeholder pages render built `noindex, nofollow` metadata.
+- `pnpm check:seo` should verify all four locale search pages render built `noindex, follow` metadata.
+- `pnpm check:seo` should verify account placeholders, search pages, search index JSON endpoints, and `404.html` stay outside `sitemap.xml`.
 - Every sitemap-derived indexable public HTML page should include at least one parseable JSON-LD script.
 - Parsed JSON-LD should not contain string values exactly equal to `undefined` or `null`.
 - Site-wide `WebSite` JSON-LD should include a conservative `SearchAction` targeting `/en/search?q={search_term_string}`.
