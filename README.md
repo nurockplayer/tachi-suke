@@ -345,7 +345,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - `/security.txt` redirects to `/.well-known/security.txt` for legacy scanner compatibility.
 - `/404.html` is a static noindex recovery page for missing routes on Cloudflare Pages or other static hosts.
 - Cloudflare Pages `_redirects` sends common locale-less paths such as `/articles`, `/mobile/povo2`, and `/contact` to English `302` fallbacks. It also redirects `/security.txt` to `/.well-known/security.txt`. Canonical routes remain locale-prefixed.
-- Cloudflare Pages `_headers` caches sitemap, robots, manifest, RSS feeds, `llms.txt`, `security.txt`, `opensearch.xml`, and search indexes conservatively for one hour while keeping HTML revalidated; `pnpm check:seo` verifies these discovery cache blocks.
+- Cloudflare Pages `_headers` keeps HTML revalidated while detaching inherited `Cache-Control` on more specific asset and discovery cache blocks; `pnpm check:seo` verifies the detach markers and exact cache values.
 - Cloudflare Pages CSP is intentionally conservative for Phase 1 and still allows `'unsafe-inline'` because the current static site uses inline JSON-LD and small inline enhancement scripts.
 
 ## Documentation Map

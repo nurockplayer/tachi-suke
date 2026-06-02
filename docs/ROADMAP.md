@@ -746,6 +746,25 @@ Rules:
 - Keep this as a static build-output quality gate.
 - Do not fetch live headers, change Cloudflare runtime behavior, change routes, or add Workers/Functions in Phase 1CY.
 
+## Phase 1CZ: Cache-Control Detach
+
+Status: implemented.
+
+Goal:
+
+Prevent Cloudflare Pages from comma-joining the global HTML revalidation `Cache-Control` value with more specific static-asset and discovery cache policies.
+
+Implemented:
+
+- Added `! Cache-Control` before every specific `_headers` block that sets its own cache policy.
+- Covered `/_astro/*`, `/images/*`, sitemap, robots, manifest, RSS feeds, `llms.txt`, `security.txt`, `opensearch.xml`, and locale search indexes.
+- Expanded `pnpm check:seo` so it verifies both the detach marker and exact cache value for every specific cache block.
+
+Rules:
+
+- Keep this as a static Cloudflare Pages header configuration fix.
+- Do not add Workers, Functions, live header crawling, route changes, or backend behavior in Phase 1CZ.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.

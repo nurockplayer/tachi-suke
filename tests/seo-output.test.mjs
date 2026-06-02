@@ -27,6 +27,11 @@ const oneHourDiscoveryCachePaths = [
   ...locales.map((locale) => `/${locale}/feed.xml`),
   ...locales.map((locale) => `/${locale}/search-index.json`)
 ];
+const specificCacheHeaderRules = [
+  { pathname: "/_astro/*", value: "public, max-age=31536000, immutable" },
+  { pathname: "/images/*", value: "public, max-age=604800" },
+  ...oneHourDiscoveryCachePaths.map((pathname) => ({ pathname, value: "public, max-age=3600" }))
+];
 
 function originFromUrl(value) {
   return new URL(value).origin.replace(/\/$/, "");
@@ -90,6 +95,13 @@ function assertCacheHeaderRule(headers, pathname, expectedValue) {
 
   const cacheHeaderValues = [...block.matchAll(/^  Cache-Control:\s*(.*?)$/gm)].map((match) => match[1]);
   assert.deepEqual(cacheHeaderValues, [expectedValue], `_headers should define exactly one Cache-Control rule for ${pathname}`);
+}
+
+function assertDetachedCacheHeaderRule(headers, pathname, expectedValue) {
+  const block = headerBlock(headers, pathname);
+  assert.ok(block, `_headers should include a rule for ${pathname}`);
+  assert.match(block, /^  ! Cache-Control$/m, `_headers should detach inherited Cache-Control before setting ${pathname}`);
+  assertCacheHeaderRule(headers, pathname, expectedValue);
 }
 
 function sitemapPaths(xml) {
@@ -365,8 +377,8 @@ describe("static SEO output", () => {
     assert.match(headers, /form-action 'self' https:/, "CSP should allow provider-agnostic HTTPS form endpoints");
     assert.match(headers, /frame-ancestors 'none'/, "CSP should block framing");
     assert.match(headers, /object-src 'none'/, "CSP should block object embeds");
-    for (const pathname of oneHourDiscoveryCachePaths) {
-      assertCacheHeaderRule(headers, pathname, "public, max-age=3600");
+    for (const { pathname, value } of specificCacheHeaderRules) {
+      assertDetachedCacheHeaderRule(headers, pathname, value);
     }
     assert.match(redirects, /^\/articles\s+\/en\/articles\s+302/m, "Cloudflare redirects should include locale-less article fallback");
     assert.match(redirects, /^\/mobile\/\*\s+\/en\/mobile\/:splat\s+302/m, "Cloudflare redirects should preserve mobile slugs");
