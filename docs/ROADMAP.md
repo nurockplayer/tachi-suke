@@ -824,6 +824,27 @@ Rules:
 - Keep this as a static build-output SEO quality gate.
 - Do not add crawling, browser automation, analytics, route changes, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DD.
 
+## Phase 1DE: Public HTML Shell Guard
+
+Status: implemented.
+
+Goal:
+
+Catch document language, viewport, skip-link, and main-landmark regressions on any public indexable HTML page before deployment.
+
+Implemented:
+
+- Added a sitemap-derived shell sweep to `tests/seo-output.test.mjs`.
+- `pnpm check:seo` now verifies every sitemap HTML path has the expected BCP47 `html lang`.
+- `pnpm check:seo` also verifies mobile viewport metadata, a skip link to `#main-content`, and the stable `main#main-content` landmark.
+- Root `/` uses the English fallback language, and locale-prefixed paths use shared locale metadata.
+
+Rules:
+
+- Keep this as a static build-output SEO and baseline accessibility quality gate.
+- Do not treat this as a complete accessibility audit.
+- Do not add crawling, browser automation, analytics, route changes, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DE.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.
