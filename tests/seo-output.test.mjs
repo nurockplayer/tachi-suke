@@ -149,11 +149,20 @@ function htmlCanonicalPath(pathname) {
   return pathname === "/" ? "/" : `${normalizePath(pathname)}/`;
 }
 
+function expectedHtmlLangForPath(pathname) {
+  const locale = pathname.split("/")[1];
+  return htmlLangByLocale[locales.includes(locale) ? locale : "en"];
+}
+
 function canonicalHref(html) {
   return (
     html.match(/<link\b[^>]*\brel="canonical"[^>]*\bhref="([^"]+)"[^>]*>/)?.[1] ??
     html.match(/<link\b[^>]*\bhref="([^"]+)"[^>]*\brel="canonical"[^>]*>/)?.[1]
   );
+}
+
+function htmlLang(html) {
+  return html.match(/<html\b[^>]*\blang="([^"]+)"/)?.[1];
 }
 
 function decodeHtmlEntities(value) {
@@ -551,6 +560,32 @@ describe("static SEO output", () => {
       assert.equal(twitterTitle, title, `${pathname} twitter:title should match the page title`);
       assert.equal(ogDescription, description, `${pathname} og:description should match the meta description`);
       assert.equal(twitterDescription, description, `${pathname} twitter:description should match the meta description`);
+    }
+  });
+
+  it("renders locale-aware document shell metadata on every sitemap HTML page", () => {
+    const htmlPaths = sitemapPaths(readDist("sitemap.xml")).filter(isHtmlSitemapPath);
+    assert.ok(htmlPaths.length > 100, "sitemap should expose public HTML pages for the shell metadata sweep");
+
+    for (const pathname of htmlPaths) {
+      const html = readHtml(htmlDistRelativePath(pathname));
+
+      assert.equal(htmlLang(html), expectedHtmlLangForPath(pathname), `${pathname} html lang should match its route locale`);
+      assert.match(
+        html,
+        /<meta name="viewport" content="width=device-width, initial-scale=1">/,
+        `${pathname} should include mobile viewport metadata`
+      );
+      assert.match(
+        html,
+        /<a class="skip-link" href="#main-content">/,
+        `${pathname} should include a skip link to the main content`
+      );
+      assert.match(
+        html,
+        /<main id="main-content" class="site-main" tabindex="-1">/,
+        `${pathname} should include the stable main content landmark`
+      );
     }
   });
 

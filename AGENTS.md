@@ -314,6 +314,13 @@ Phase 1DD expands public HTML title and description guards:
 - Avoid English-centric length thresholds because supported locales have different natural description lengths.
 - Do not change runtime SEO generation, routes, UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DD unless the guard exposes a real metadata defect.
 
+Phase 1DE expands public HTML shell guards:
+
+- `pnpm check:seo` should verify every sitemap-derived public HTML page has the expected BCP47 `html lang`, mobile viewport metadata, skip link to `#main-content`, and stable `main#main-content` landmark.
+- Root `/` should use the English fallback language; locale-prefixed paths should use shared locale metadata.
+- Treat this as a baseline shell guard, not a full accessibility audit.
+- Do not change runtime SEO generation, routes, UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DE unless the guard exposes a real shell defect.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.
