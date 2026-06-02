@@ -396,6 +396,20 @@ function expectedPublicSitemapPaths() {
   return paths;
 }
 
+function utilitySitemapExcludedPaths() {
+  return [
+    ...locales.flatMap((locale) => [
+      `/${locale}/account/login`,
+      `/${locale}/account/favorites`,
+      `/${locale}/account/submissions`,
+      `/${locale}/search`,
+      `/${locale}/search-index.json`
+    ]),
+    "/404",
+    "/404.html"
+  ];
+}
+
 function sectionIndexJsonLdCases(expectedSectionCounts) {
   return locales.flatMap((locale) => [
     {
@@ -552,14 +566,7 @@ describe("static SEO output", () => {
       assert.ok(contentDrivenExpectedPaths.has(actualPath), `sitemap should not include unexpected path ${actualPath}`);
     }
 
-    for (const excludedPath of [
-      "/en/search",
-      "/en/search-index.json",
-      "/zh-tw/account/login",
-      "/en/account/favorites",
-      "/ja/account/submissions",
-      "/ko/account/login"
-    ]) {
+    for (const excludedPath of utilitySitemapExcludedPaths()) {
       assert.equal(paths.has(excludedPath), false, `sitemap should not include ${excludedPath}`);
     }
   });
@@ -723,6 +730,25 @@ describe("static SEO output", () => {
     const robots = readDist("robots.txt");
     for (const locale of ["zh-tw", "en", "ja", "ko"]) {
       assert.match(robots, new RegExp(`Disallow:\\s*/${locale}/account/`), `robots should disallow /${locale}/account/`);
+    }
+  });
+
+  it("keeps noindex utility pages out of the public sitemap", () => {
+    const sitemapPathSet = new Set(sitemapPaths(readDist("sitemap.xml")));
+
+    for (const pathname of utilitySitemapExcludedPaths()) {
+      assert.equal(sitemapPathSet.has(pathname), false, `sitemap should exclude utility path ${pathname}`);
+    }
+
+    for (const locale of locales) {
+      for (const accountPath of ["login", "favorites", "submissions"]) {
+        const pathname = `/${locale}/account/${accountPath}`;
+        const robots = metaNameContent(readHtml(htmlDistRelativePath(pathname)), "robots");
+        assert.match(robots ?? "", /^noindex\s*,\s*nofollow$/, `${pathname} should stay noindex, nofollow`);
+      }
+
+      const searchRobots = metaNameContent(readHtml(`${locale}/search/index.html`), "robots");
+      assert.match(searchRobots ?? "", /^noindex\s*,\s*follow$/, `/${locale}/search should stay noindex, follow`);
     }
   });
 
