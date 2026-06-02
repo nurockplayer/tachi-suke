@@ -280,6 +280,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Pages should include browser app metadata: `theme-color`, `application-name`, `apple-mobile-web-app-title`, and `format-detection`.
 - `sitemap.xml` must include public locale roots, section pages, human-readable site map pages, the global RSS feed, locale RSS feeds, non-draft article details, article category pages, published place details, area details, mobile plan details, published tool details, submit-place thanks pages, contact/corrections pages, and launch trust pages.
 - `sitemap.xml` must exclude account placeholder routes, draft articles, non-published places, non-published tools, search pages, and search index JSON endpoints.
+- `pnpm check:seo` should derive expected public sitemap paths from current content collections so newly added public articles, categories, areas, mobile plans, published places, and published tools are checked without manually extending a sample path list.
 - Human-readable `/[locale]/site-map` pages must list public content only and must not expose account placeholder routes.
 - `sitemap.xml` should include conservative `xhtml:link` hreflang alternates for generated shared locale pages and translated article detail pages.
 - Article sitemap alternates must be grouped by `translationKey` and must not point to missing or draft translations.

@@ -165,6 +165,76 @@ function expectedSearchUrlsByType(locale) {
   return urls;
 }
 
+function slugifyArticleCategory(category) {
+  return category
+    .trim()
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[^\p{Letter}\p{Number}]+/gu, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function expectedPublicSitemapPaths() {
+  const paths = new Set(["/", "/feed.xml"]);
+  const localeIndexPaths = [
+    "",
+    "/articles",
+    "/areas",
+    "/places",
+    "/mobile",
+    "/tools",
+    "/submit-place",
+    "/submit-place/thanks",
+    "/contact",
+    "/contact/thanks",
+    "/about",
+    "/privacy",
+    "/editorial-policy",
+    "/site-map"
+  ];
+
+  for (const locale of locales) {
+    paths.add(`/${locale}/feed.xml`);
+    for (const indexPath of localeIndexPaths) {
+      paths.add(normalizePath(`/${locale}${indexPath}/`));
+    }
+  }
+
+  for (const article of listFiles(join(contentRoot, "articles"), [".md", ".mdx"]).map(readFrontmatter)) {
+    if (isDraft(article)) continue;
+    paths.add(`/${article.locale}/articles/${article.slug}`);
+    paths.add(`/${article.locale}/articles/category/${slugifyArticleCategory(article.category)}`);
+  }
+
+  for (const area of listFiles(join(contentRoot, "areas"), [".json"]).map(readJson)) {
+    for (const locale of locales) {
+      paths.add(`/${locale}/areas/${area.slug}`);
+    }
+  }
+
+  for (const mobilePlan of listFiles(join(contentRoot, "mobile-plans"), [".json"]).map(readJson)) {
+    for (const locale of locales) {
+      paths.add(`/${locale}/mobile/${mobilePlan.slug}`);
+    }
+  }
+
+  for (const place of listFiles(join(contentRoot, "places"), [".json"]).map(readJson)) {
+    if (place.status !== "published") continue;
+    for (const locale of locales) {
+      paths.add(`/${locale}/places/${place.slug}`);
+    }
+  }
+
+  for (const tool of listFiles(join(contentRoot, "tools"), [".json"]).map(readJson)) {
+    if (tool.status !== "published") continue;
+    for (const locale of locales) {
+      paths.add(`/${locale}/tools/${tool.slug}`);
+    }
+  }
+
+  return paths;
+}
+
 function jsonLdObjects(html) {
   const scripts = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
   return scripts.flatMap((match) => {
@@ -250,95 +320,14 @@ describe("static SEO output", () => {
 
   it("includes public multilingual content and excludes account placeholders in sitemap", () => {
     const paths = new Set(sitemapPaths(readDist("sitemap.xml")));
+    const contentDrivenExpectedPaths = expectedPublicSitemapPaths();
 
-    for (const expectedPath of [
-      "/",
-      "/zh-tw",
-      "/en",
-      "/ja",
-      "/ko",
-      "/zh-tw/site-map",
-      "/en/site-map",
-      "/ja/site-map",
-      "/ko/site-map",
-      "/zh-tw/articles/taiwanese-newcomer-mobile-plan-japan",
-      "/zh-tw/articles/japan-commuter-pass-ic-card-guide",
-      "/zh-tw/articles/residence-card-resident-record-my-number",
-      "/zh-tw/articles/apartment-viewing-japanese-phrases-zh-tw",
-      "/zh-tw/articles/ward-office-moving-in-procedures-zh-tw",
-      "/zh-tw/articles/japan-apartment-moving-out-checklist-zh-tw",
-      "/zh-tw/articles/japan-garbage-sorting-oversized-trash-zh-tw",
-      "/zh-tw/articles/japan-family-restaurants-dennys-gusto-royal-host",
-      "/zh-tw/articles/japan-convenience-store-supermarket-drugstore-guide-zh-tw",
-      "/en/articles/japan-renting-initial-costs-en",
-      "/en/articles/choose-mobile-plan-japan-foreigner",
-      "/en/articles/apartment-viewing-japanese-phrases-en",
-      "/en/articles/ward-office-moving-in-procedures-en",
-      "/en/articles/japan-apartment-moving-out-checklist-en",
-      "/en/articles/japan-garbage-sorting-oversized-trash-en",
-      "/en/articles/japan-family-restaurants-dennys-gusto-royal-host-en",
-      "/en/articles/japan-convenience-store-supermarket-drugstore-guide-en",
-      "/en/articles/japan-commuter-pass-ic-card-guide-en",
-      "/en/articles/residence-card-resident-record-my-number-en",
-      "/ja/articles/japan-commuter-pass-ic-card-guide-ja",
-      "/ja/articles/japan-renting-initial-costs-ja",
-      "/ja/articles/apartment-viewing-japanese-phrases-ja",
-      "/ja/articles/ward-office-moving-in-procedures-ja",
-      "/ja/articles/japan-apartment-moving-out-checklist-ja",
-      "/ja/articles/japan-garbage-sorting-oversized-trash-ja",
-      "/ja/articles/japan-family-restaurants-dennys-gusto-royal-host-ja",
-      "/ja/articles/japan-convenience-store-supermarket-drugstore-guide-ja",
-      "/ja/articles/residence-card-resident-record-my-number-ja",
-      "/ja/articles/foreign-resident-mobile-plan-basics-japan",
-      "/ko/articles/japan-commuter-pass-ic-card-guide-ko",
-      "/ko/articles/japan-renting-initial-costs-ko",
-      "/ko/articles/apartment-viewing-japanese-phrases-ko",
-      "/ko/articles/ward-office-moving-in-procedures-ko",
-      "/ko/articles/japan-apartment-moving-out-checklist-ko",
-      "/ko/articles/japan-garbage-sorting-oversized-trash-ko",
-      "/ko/articles/japan-family-restaurants-dennys-gusto-royal-host-ko",
-      "/ko/articles/japan-convenience-store-supermarket-drugstore-guide-ko",
-      "/ko/articles/residence-card-resident-record-my-number-ko",
-      "/ko/articles/foreigner-mobile-plan-basics-japan",
-      "/en/articles/category/mobile",
-      "/en/articles/category/transportation",
-      "/en/articles/category/procedures",
-      "/zh-tw/articles/category/transportation",
-      "/zh-tw/articles/category/procedures",
-      "/zh-tw/articles/category/housing",
-      "/zh-tw/mobile/povo2",
-      "/en/mobile/ahamo",
-      "/ja/areas/ikebukuro",
-      "/ko/places/dennys",
-      "/en/tools/moving-to-japan-checklist",
-      "/zh-tw/tools/moving-to-japan-checklist",
-      "/en/tools/japan-rent-initial-cost-checklist",
-      "/en/tools/ward-office-moving-in-checklist",
-      "/zh-tw/tools/ward-office-moving-in-checklist",
-      "/en/tools/commuter-pass-ic-card-checklist",
-      "/en/tools/apartment-viewing-japanese-phrases",
-      "/en/tools/apartment-application-documents-checklist",
-      "/en/tools/japan-job-application-documents-checklist",
-      "/en/tools/japan-everyday-shopping-checklist",
-      "/en/tools/moving-out-checklist",
-      "/zh-tw/tools/commuter-pass-ic-card-checklist",
-      "/zh-tw/tools/apartment-application-documents-checklist",
-      "/zh-tw/tools/japan-job-application-documents-checklist",
-      "/zh-tw/tools/japan-everyday-shopping-checklist",
-      "/zh-tw/tools/moving-out-checklist",
-      "/ja/tools/apartment-viewing-japanese-phrases",
-      "/zh-tw/submit-place/thanks",
-      "/en/contact",
-      "/ja/contact/thanks",
-      "/feed.xml",
-      "/zh-tw/feed.xml",
-      "/en/feed.xml",
-      "/ja/feed.xml",
-      "/ko/feed.xml",
-      "/en/privacy",
-      "/zh-tw/editorial-policy"
-    ]) {
-      assert.ok(paths.has(expectedPath), `sitemap should include ${expectedPath}`);
+    for (const expectedPath of contentDrivenExpectedPaths) {
+      assert.ok(paths.has(expectedPath), `sitemap should include content-driven public path ${expectedPath}`);
+    }
+
+    for (const actualPath of paths) {
+      assert.ok(contentDrivenExpectedPaths.has(actualPath), `sitemap should not include unexpected path ${actualPath}`);
     }
 
     for (const excludedPath of [
