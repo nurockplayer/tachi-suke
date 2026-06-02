@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1CX multilingual section JSON-LD checks. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
+This document records the current MVP state after Phase 1DA deploy discovery URL guard checks. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
 
 ## Completed
 
@@ -109,7 +109,7 @@ This document records the current MVP state after Phase 1CX multilingual section
 - Conservative article internal-link checks for locale-prefixed static/generated public routes.
 - Static HTML internal link crawler in `tests/static-html-links.test.mjs`, run after `pnpm build` with `pnpm check:links`.
 - Static SEO output check in `tests/seo-output.test.mjs`, run after `pnpm build` with `pnpm check:seo`; when `SITE_URL` is unset, it infers the expected origin from the current built sitemap or robots output, sitemap public-content coverage is derived from current content collections, mobile/area/place/tool section JSON-LD is checked across all supported locales, discovery cache header rules are checked for all current discovery endpoints, and specific cache blocks must detach inherited global `Cache-Control`.
-- Deployment URL guard in `tests/deploy-output.test.mjs`, run after `SITE_URL=<production-url> pnpm build` with `SITE_URL=<production-url> pnpm check:deploy`.
+- Deployment URL guard in `tests/deploy-output.test.mjs`, run after `SITE_URL=<production-url> pnpm build` with `SITE_URL=<production-url> pnpm check:deploy`; it rejects fallback-domain output and requires configured production URLs in key discovery and representative HTML files.
 - GitHub Actions CI workflow rejects forbidden lockfiles and runs source/content checks, fallback-domain build-output checks, and production `SITE_URL=https://tachi-suke.pages.dev` SEO/deploy output checks.
 - Locale switcher links for detail pages use conservative alternate paths so missing article translations do not create dead links.
 - Submit-place form uses `PUBLIC_SUBMIT_PLACE_FORM_ENDPOINT`: unset means preview mode/disabled submit; set means a static `POST` to the external endpoint.

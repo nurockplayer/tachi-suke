@@ -45,6 +45,8 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Specific Cloudflare `_headers` blocks that set their own `Cache-Control` must detach the inherited global cache header with `! Cache-Control` before setting the specific value.
 - If `SITE_URL` is unset, `pnpm check:seo` should infer the expected origin from the current built sitemap or robots output instead of assuming a different fallback domain.
 - `pnpm check:deploy` should require an HTTPS `SITE_URL`, reject the example fallback domain, scan deployable `dist` text assets, and fail if `https://tachi-suke.example.com` remains in deployment output.
+- `pnpm check:deploy` should also require the configured `SITE_URL` in public files that should contain production absolute URLs: sitemap, robots, OpenSearch, `llms.txt`, `security.txt`, global and locale RSS feeds, the root homepage, locale homepages, and a representative public HTML page.
+- Relative-only deploy artifacts such as `site.webmanifest` and search index JSON should not be forced to contain `SITE_URL`.
 - Cloudflare Pages `_redirects` should provide temporary English fallbacks for common locale-less public section paths and must not add account placeholder fallbacks.
 - Cloudflare Pages `_headers` should keep HTML revalidated while applying conservative one-hour cache headers to sitemap, robots, manifest, RSS feeds, `llms.txt`, `security.txt`, `opensearch.xml`, and search indexes.
 - Cloudflare Pages `_headers` should define a conservative CSP that blocks framing/object embeds while allowing current inline JSON-LD/search scripts and HTTPS external form endpoints.
