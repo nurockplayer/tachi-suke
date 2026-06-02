@@ -316,6 +316,7 @@ Only `status = published` places are publicly listed or rendered as detail pages
 - Related article links are static, same-locale, and non-personalized.
 - Search pages are static, noindex utility pages backed by `/[locale]/search-index.json`, and `/[locale]/search?q=...` can be shared to prefill/filter results.
 - Search indexes include public content only and do not include account placeholders, drafts, or non-published items.
+- Public article translation groups are checked by `pnpm check:content`; current public groups should stay fully localized across `zh-tw`, `en`, `ja`, and `ko` unless a future partial group is explicitly allowlisted.
 - Article category pages are generated from public non-draft articles and are included in the sitemap.
 - Human-readable `/[locale]/site-map` pages list public content only and avoid account placeholder routes.
 - Sitemap `hreflang` alternates must only point to generated public URLs; article alternates are grouped by `translationKey`.
