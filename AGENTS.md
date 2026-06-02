@@ -321,6 +321,12 @@ Phase 1DE expands public HTML shell guards:
 - Treat this as a baseline shell guard, not a full accessibility audit.
 - Do not change runtime SEO generation, routes, UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DE unless the guard exposes a real shell defect.
 
+Phase 1DF expands public HTML discovery link guards:
+
+- `pnpm check:seo` should verify every sitemap-derived public HTML page links the SVG favicon, web manifest, OpenSearch description, global RSS feed, and current-locale RSS feed.
+- Root `/` should use the English fallback locale feed; locale-prefixed paths should use their matching locale feed.
+- Keep this as a static build-output discovery guard; do not change runtime SEO generation, routes, UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DF unless the guard exposes a real discovery defect.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.

@@ -845,6 +845,29 @@ Rules:
 - Do not treat this as a complete accessibility audit.
 - Do not add crawling, browser automation, analytics, route changes, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DE.
 
+## Phase 1DF: Public HTML Discovery Link Guard
+
+Status: implemented.
+
+Goal:
+
+Catch browser/search/RSS discovery regressions on any public indexable HTML page before deployment.
+
+Implemented:
+
+- Added a sitemap-derived discovery link sweep to `tests/seo-output.test.mjs`.
+- `pnpm check:seo` now verifies every sitemap HTML path links the SVG favicon.
+- `pnpm check:seo` verifies every sitemap HTML path links `/site.webmanifest`.
+- `pnpm check:seo` verifies every sitemap HTML path links the OpenSearch description.
+- `pnpm check:seo` verifies every sitemap HTML path links the global RSS feed and the current-locale RSS feed.
+- Root `/` uses the English fallback locale feed, and locale-prefixed paths use their matching locale feed.
+
+Rules:
+
+- Keep this as a static build-output discovery quality gate.
+- Do not scan noindex account/search/404 utility pages through this sitemap-derived guard.
+- Do not add crawling, browser automation, analytics, route changes, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DF.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.

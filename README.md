@@ -96,7 +96,7 @@ Implemented:
 - Structure and conservative internal-link tests in `tests/project-structure.test.mjs`
 - Static submit-place and contact/corrections form contract tests in `tests/form-contract.test.mjs`
 - Build-output static HTML internal link crawler in `tests/static-html-links.test.mjs`
-- Build-output SEO check in `tests/seo-output.test.mjs`, including sitemap-derived canonical, `og:url`, title, description, Open Graph, Twitter, language, viewport, skip-link, and main-landmark sweeps for indexable public HTML pages
+- Build-output SEO check in `tests/seo-output.test.mjs`, including sitemap-derived canonical, `og:url`, title, description, Open Graph, Twitter, language, viewport, skip-link, main-landmark, and discovery-link sweeps for indexable public HTML pages
 - GitHub Actions CI quality gate for pull requests and pushes to `main`
 - Baseline keyboard accessibility hooks: skip link, active nav state, and visible focus styles
 
@@ -235,7 +235,7 @@ Recommended verification order:
 4. `pnpm check:links`
 5. `pnpm check:seo`
 
-`pnpm test` checks source-level structure, content links, and static form contracts. `pnpm check:content` checks content IDs, slugs, dates, review dates, and stored URL fields without fetching the network. `pnpm check:links` scans built `dist/**/*.html`. `pnpm check:seo` checks built `sitemap.xml`, `robots.txt`, `site.webmanifest`, `opensearch.xml`, global RSS feed, locale RSS feeds, Cloudflare headers, discovery cache header contracts, and multilingual section index JSON-LD. Its sitemap and RSS coverage are content-driven, so public article, category, area, mobile plan, published place, published tool, and feed item routes are derived from `src/content` instead of hand-maintained sample path lists. Run `pnpm build` before both build-output checks.
+`pnpm test` checks source-level structure, content links, and static form contracts. `pnpm check:content` checks content IDs, slugs, dates, review dates, and stored URL fields without fetching the network. `pnpm check:links` scans built `dist/**/*.html`. `pnpm check:seo` checks built `sitemap.xml`, `robots.txt`, `site.webmanifest`, `opensearch.xml`, global RSS feed, locale RSS feeds, Cloudflare headers, discovery cache header contracts, per-page discovery links, and multilingual section index JSON-LD. Its sitemap and RSS coverage are content-driven, so public article, category, area, mobile plan, published place, published tool, and feed item routes are derived from `src/content` instead of hand-maintained sample path lists. Run `pnpm build` before both build-output checks.
 
 For deployment, build with the real `SITE_URL`, then run `pnpm check:seo` and `pnpm check:deploy` with the same value. `pnpm check:seo` validates canonicals, feeds, sitemap, structured data, and search indexes against the configured site URL when it is provided. `pnpm check:deploy` fails if `dist` still contains `https://tachi-suke.example.com`, and it requires key public discovery and representative HTML files to reference the configured production URL.
 
