@@ -784,6 +784,26 @@ Rules:
 - Keep this as a static deployment quality gate.
 - Do not change runtime SEO generation, routes, Cloudflare headers, UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DA.
 
+## Phase 1DC: Public HTML Head SEO Guard
+
+Status: implemented.
+
+Goal:
+
+Catch canonical and Open Graph URL regressions on any public indexable HTML page before deployment.
+
+Implemented:
+
+- Added a sitemap-derived sweep to `tests/seo-output.test.mjs`.
+- `pnpm check:seo` now verifies every sitemap HTML path has a built HTML file, a canonical URL, and `og:url`.
+- Canonical and `og:url` must both match the generated absolute page URL and agree with each other.
+- Noindex utility pages such as search, account placeholders, and `404.html` remain outside this guard because they are intentionally excluded from the sitemap.
+
+Rules:
+
+- Keep this as a static build-output SEO quality gate.
+- Do not add crawling, browser automation, analytics, route changes, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DC.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.

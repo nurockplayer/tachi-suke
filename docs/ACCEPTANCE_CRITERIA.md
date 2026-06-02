@@ -279,6 +279,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Open Graph metadata must include `og:url` and `og:site_name = TachiSuke`.
 - Open Graph metadata must include a default `og:image`.
 - Open Graph metadata should include current `og:locale` and supported `og:locale:alternate` values when alternates exist.
+- `pnpm check:seo` should verify every sitemap-derived indexable public HTML page has canonical and `og:url` metadata that both match the generated absolute page URL.
 - Article detail pages should include `article:published_time`, `article:modified_time`, `article:section`, and `article:tag` Open Graph metadata.
 - Twitter metadata should use `summary_large_image`.
 - Pages should link `/site.webmanifest`.

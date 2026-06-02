@@ -96,7 +96,7 @@ Implemented:
 - Structure and conservative internal-link tests in `tests/project-structure.test.mjs`
 - Static submit-place and contact/corrections form contract tests in `tests/form-contract.test.mjs`
 - Build-output static HTML internal link crawler in `tests/static-html-links.test.mjs`
-- Build-output SEO check in `tests/seo-output.test.mjs`
+- Build-output SEO check in `tests/seo-output.test.mjs`, including a sitemap-derived canonical / `og:url` sweep for indexable public HTML pages
 - GitHub Actions CI quality gate for pull requests and pushes to `main`
 - Baseline keyboard accessibility hooks: skip link, active nav state, and visible focus styles
 

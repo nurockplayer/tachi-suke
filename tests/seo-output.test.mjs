@@ -136,6 +136,34 @@ function readHtml(relativePath) {
   return readDist(relativePath);
 }
 
+function isHtmlSitemapPath(pathname) {
+  return pathname === "/" || !/\.[A-Za-z0-9]+$/.test(pathname);
+}
+
+function htmlDistRelativePath(pathname) {
+  if (pathname === "/") return "index.html";
+  return `${pathname.replace(/^\/|\/$/g, "")}/index.html`;
+}
+
+function htmlCanonicalPath(pathname) {
+  return pathname === "/" ? "/" : `${normalizePath(pathname)}/`;
+}
+
+function canonicalHref(html) {
+  return (
+    html.match(/<link\b[^>]*\brel="canonical"[^>]*\bhref="([^"]+)"[^>]*>/)?.[1] ??
+    html.match(/<link\b[^>]*\bhref="([^"]+)"[^>]*\brel="canonical"[^>]*>/)?.[1]
+  );
+}
+
+function metaPropertyContent(html, property) {
+  const propertyPattern = escapeRegExp(property);
+  return (
+    html.match(new RegExp(`<meta\\b[^>]*\\bproperty="${propertyPattern}"[^>]*\\bcontent="([^"]+)"[^>]*>`))?.[1] ??
+    html.match(new RegExp(`<meta\\b[^>]*\\bcontent="([^"]+)"[^>]*\\bproperty="${propertyPattern}"[^>]*>`))?.[1]
+  );
+}
+
 function feedItemLinks(feed) {
   return new Set(
     [...feed.matchAll(/<item>[\s\S]*?<link>(.*?)<\/link>[\s\S]*?<\/item>/g)].map((match) =>
@@ -448,6 +476,25 @@ describe("static SEO output", () => {
       "/ko/account/login"
     ]) {
       assert.equal(paths.has(excludedPath), false, `sitemap should not include ${excludedPath}`);
+    }
+  });
+
+  it("renders canonical and Open Graph URL metadata on every sitemap HTML page", () => {
+    const htmlPaths = sitemapPaths(readDist("sitemap.xml")).filter(isHtmlSitemapPath);
+    assert.ok(htmlPaths.length > 100, "sitemap should expose public HTML pages for the metadata sweep");
+
+    for (const pathname of htmlPaths) {
+      const html = readHtml(htmlDistRelativePath(pathname));
+      const expectedUrl = absoluteUrl(htmlCanonicalPath(pathname));
+      const canonical = canonicalHref(html);
+      const ogUrl = metaPropertyContent(html, "og:url");
+
+      assert.doesNotMatch(html, /name="robots" content="noindex/, `${pathname} is in the sitemap and should stay indexable`);
+      assert.ok(canonical, `${pathname} should include a canonical link`);
+      assert.ok(ogUrl, `${pathname} should include og:url`);
+      assert.equal(canonical, expectedUrl, `${pathname} canonical should match the generated page URL`);
+      assert.equal(ogUrl, expectedUrl, `${pathname} og:url should match the generated page URL`);
+      assert.equal(ogUrl, canonical, `${pathname} canonical and og:url should agree`);
     }
   });
 

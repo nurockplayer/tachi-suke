@@ -300,6 +300,13 @@ Phase 1DB expands RSS feed coverage checks:
 - Global `/feed.xml` should exactly match all public article URLs; locale feeds should exactly match same-locale public article URLs and exclude other locales.
 - Do not change RSS runtime generation, routes, content, schemas, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DB.
 
+Phase 1DC adds a public HTML head metadata guard:
+
+- `pnpm check:seo` should derive indexable public HTML pages from `sitemap.xml`.
+- Every sitemap HTML page should have a canonical URL and `og:url` that match the generated absolute page URL.
+- Noindex utility pages such as search, account placeholders, and `404.html` stay outside this sitemap-derived guard.
+- Do not change runtime SEO generation, routes, UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DC unless the guard exposes a real metadata defect.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.
