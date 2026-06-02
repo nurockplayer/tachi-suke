@@ -868,6 +868,28 @@ Rules:
 - Do not scan noindex account/search/404 utility pages through this sitemap-derived guard.
 - Do not add crawling, browser automation, analytics, route changes, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DF.
 
+## Phase 1DG: Public HTML JSON-LD Guard
+
+Status: implemented.
+
+Goal:
+
+Catch malformed or placeholder-leaking structured data on any public indexable HTML page before deployment.
+
+Implemented:
+
+- Added a sitemap-derived JSON-LD sweep to `tests/seo-output.test.mjs`.
+- `pnpm check:seo` now verifies every sitemap HTML path includes at least one JSON-LD script.
+- Every JSON-LD script on those pages must parse successfully.
+- Parsed JSON-LD values must not include strings exactly equal to `undefined` or `null`.
+
+Rules:
+
+- Keep this as a static build-output structured-data quality gate.
+- The placeholder check is intentionally exact-match only to avoid rejecting normal descriptive copy.
+- Do not scan noindex account/search/404 utility pages through this sitemap-derived guard.
+- Do not add crawling, browser automation, analytics, route changes, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DG.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.
