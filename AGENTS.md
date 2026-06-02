@@ -288,6 +288,12 @@ Phase 1CZ fixes Cloudflare cache header inheritance:
 - `pnpm check:seo` should verify the detach marker and exact cache value for every specific cache block.
 - Do not add Workers, Functions, live crawling, auth, database, forms, or backend behavior in Phase 1CZ.
 
+Phase 1DA expands deployment URL guards:
+
+- `pnpm check:deploy` should require the configured HTTPS `SITE_URL` in public files that must expose absolute production URLs: sitemap, robots, OpenSearch, `llms.txt`, `security.txt`, global/locale RSS feeds, root home, locale homes, and a representative public HTML page.
+- Relative-only deploy artifacts such as `site.webmanifest` and search index JSON should not be forced to contain `SITE_URL`.
+- Do not change runtime SEO generation, routes, Cloudflare headers, UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DA.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.

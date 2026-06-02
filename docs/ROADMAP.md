@@ -765,6 +765,25 @@ Rules:
 - Keep this as a static Cloudflare Pages header configuration fix.
 - Do not add Workers, Functions, live header crawling, route changes, or backend behavior in Phase 1CZ.
 
+## Phase 1DA: Deploy Discovery URL Guard
+
+Status: implemented.
+
+Goal:
+
+Make deployment-only output checks stricter about using the configured production URL on public discovery surfaces.
+
+Implemented:
+
+- Expanded `tests/deploy-output.test.mjs` so `pnpm check:deploy` requires the configured HTTPS `SITE_URL` in sitemap, robots, OpenSearch, `llms.txt`, `security.txt`, global and locale RSS feeds, root home, locale homes, and a representative public HTML page.
+- Kept relative-only artifacts such as `site.webmanifest` and search index JSON out of the absolute URL requirement.
+- Documented the distinction between local `pnpm check:seo` origin inference and deployment-only `SITE_URL` checks.
+
+Rules:
+
+- Keep this as a static deployment quality gate.
+- Do not change runtime SEO generation, routes, Cloudflare headers, UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DA.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.

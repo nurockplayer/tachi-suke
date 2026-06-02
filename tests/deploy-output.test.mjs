@@ -6,6 +6,20 @@ const dist = join(root, "dist");
 const configuredSiteUrl = (process.env.SITE_URL ?? "").trim().replace(/\/$/, "");
 const forbiddenFallbackDomain = "https://tachi-suke.example.com";
 const deployExtensions = new Set([".html", ".xml", ".txt", ".json", ".webmanifest"]);
+const locales = ["zh-tw", "en", "ja", "ko"];
+
+const absoluteUrlRequiredFiles = [
+  "sitemap.xml",
+  "robots.txt",
+  "opensearch.xml",
+  "llms.txt",
+  ".well-known/security.txt",
+  "feed.xml",
+  ...locales.map((locale) => `${locale}/feed.xml`),
+  "index.html",
+  ...locales.map((locale) => `${locale}/index.html`),
+  "en/about/index.html",
+];
 
 function fail(message) {
   console.error(message);
@@ -40,7 +54,7 @@ if (!process.exitCode) {
     fail(`Deploy output still references ${forbiddenFallbackDomain}:\n${fallbackMatches.map((file) => `- ${file}`).join("\n")}`);
   }
 
-  for (const relativePath of ["sitemap.xml", "robots.txt", "opensearch.xml", "feed.xml", "en/about/index.html"]) {
+  for (const relativePath of absoluteUrlRequiredFiles) {
     const filePath = join(dist, relativePath);
     if (!existsSync(filePath)) {
       fail(`dist/${relativePath} should exist before deployment.`);
@@ -55,5 +69,7 @@ if (!process.exitCode) {
 }
 
 if (!process.exitCode) {
-  console.log(`Deploy output uses ${configuredSiteUrl} and does not reference ${forbiddenFallbackDomain}.`);
+  console.log(
+    `Deploy output uses ${configuredSiteUrl} in ${absoluteUrlRequiredFiles.length} required public files and does not reference ${forbiddenFallbackDomain}.`,
+  );
 }
