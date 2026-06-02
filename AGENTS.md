@@ -281,6 +281,13 @@ Phase 1CY expands discovery cache header checks:
 - Checked `_headers` blocks should define exactly one `Cache-Control` line.
 - Do not change Cloudflare runtime behavior, routes, generated HTML, auth, database, forms, deployment configuration, or backend behavior in Phase 1CY.
 
+Phase 1CZ fixes Cloudflare cache header inheritance:
+
+- Specific `_headers` blocks that set their own `Cache-Control` should first detach the inherited global `Cache-Control` rule with `! Cache-Control`.
+- This avoids Cloudflare joining the global HTML revalidation policy with more specific cache policies.
+- `pnpm check:seo` should verify the detach marker and exact cache value for every specific cache block.
+- Do not add Workers, Functions, live crawling, auth, database, forms, or backend behavior in Phase 1CZ.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.

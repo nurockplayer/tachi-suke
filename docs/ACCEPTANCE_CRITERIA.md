@@ -42,6 +42,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - `pnpm check:seo` should verify built `sitemap.xml`, `robots.txt`, `site.webmanifest`, `opensearch.xml`, global RSS feed, locale RSS feeds, Cloudflare `_headers`, and Cloudflare `_redirects` against the same `SITE_URL` used for the build when provided.
 - `pnpm check:seo` should verify one-hour Cloudflare Pages cache rules for all current discovery endpoints: `sitemap.xml`, `robots.txt`, `llms.txt`, `security.txt`, `opensearch.xml`, `site.webmanifest`, the global RSS feed, all locale RSS feeds, and all locale search indexes.
 - Checked Cloudflare `_headers` discovery blocks should define exactly one `Cache-Control` line.
+- Specific Cloudflare `_headers` blocks that set their own `Cache-Control` must detach the inherited global cache header with `! Cache-Control` before setting the specific value.
 - If `SITE_URL` is unset, `pnpm check:seo` should infer the expected origin from the current built sitemap or robots output instead of assuming a different fallback domain.
 - `pnpm check:deploy` should require an HTTPS `SITE_URL`, reject the example fallback domain, scan deployable `dist` text assets, and fail if `https://tachi-suke.example.com` remains in deployment output.
 - Cloudflare Pages `_redirects` should provide temporary English fallbacks for common locale-less public section paths and must not add account placeholder fallbacks.
