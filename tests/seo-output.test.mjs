@@ -438,11 +438,34 @@ function sectionIndexJsonLdCases(expectedSectionCounts) {
 }
 
 function jsonLdObjects(html) {
-  const scripts = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
-  return scripts.flatMap((match) => {
-    const parsed = JSON.parse(match[1]);
+  return jsonLdScripts(html).flatMap((script) => {
+    const parsed = JSON.parse(script);
     return Array.isArray(parsed) ? parsed : [parsed];
   });
+}
+
+function jsonLdScripts(html) {
+  return [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((match) => match[1]);
+}
+
+function assertNoPlaceholderJsonLdValues(value, label) {
+  if (typeof value === "string") {
+    assert.doesNotMatch(value, /^(?:undefined|null)$/i, `${label} should not serialize placeholder string values`);
+    return;
+  }
+
+  if (Array.isArray(value)) {
+    for (const [index, item] of value.entries()) {
+      assertNoPlaceholderJsonLdValues(item, `${label}[${index}]`);
+    }
+    return;
+  }
+
+  if (value && typeof value === "object") {
+    for (const [key, item] of Object.entries(value)) {
+      assertNoPlaceholderJsonLdValues(item, `${label}.${key}`);
+    }
+  }
 }
 
 function hasJsonLdType(objects, type) {
@@ -654,6 +677,24 @@ describe("static SEO output", () => {
         ),
         `${pathname} should link the current-locale RSS feed`
       );
+    }
+  });
+
+  it("renders parseable JSON-LD on every sitemap HTML page", () => {
+    const htmlPaths = sitemapPaths(readDist("sitemap.xml")).filter(isHtmlSitemapPath);
+    assert.ok(htmlPaths.length > 100, "sitemap should expose public HTML pages for the JSON-LD sweep");
+
+    for (const pathname of htmlPaths) {
+      const scripts = jsonLdScripts(readHtml(htmlDistRelativePath(pathname)));
+      assert.ok(scripts.length > 0, `${pathname} should include JSON-LD scripts`);
+
+      for (const [index, script] of scripts.entries()) {
+        let parsed;
+        assert.doesNotThrow(() => {
+          parsed = JSON.parse(script);
+        }, `${pathname} JSON-LD script ${index + 1} should parse`);
+        assertNoPlaceholderJsonLdValues(parsed, `${pathname} JSON-LD script ${index + 1}`);
+      }
     }
   });
 

@@ -327,6 +327,13 @@ Phase 1DF expands public HTML discovery link guards:
 - Root `/` should use the English fallback locale feed; locale-prefixed paths should use their matching locale feed.
 - Keep this as a static build-output discovery guard; do not change runtime SEO generation, routes, UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DF unless the guard exposes a real discovery defect.
 
+Phase 1DG expands public HTML JSON-LD guards:
+
+- `pnpm check:seo` should verify every sitemap-derived public HTML page has at least one JSON-LD script.
+- Every JSON-LD script on those pages should parse successfully.
+- Parsed JSON-LD should not contain string values exactly equal to `undefined` or `null`.
+- Keep this as a static build-output structured-data guard; do not change runtime structured data generation, routes, UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DG unless the guard exposes a real JSON-LD defect.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.
