@@ -936,9 +936,11 @@ describe("static SEO output", () => {
       assert.equal(breadcrumb?.itemListElement?.[1]?.item, expectedCanonicalUrl, `${label} breadcrumb should link to its canonical URL`);
       assert.equal(itemList?.numberOfItems, expectedCount, `${label} ItemList should match visible item count`);
       assert.equal(itemList?.itemListElement?.length, expectedCount, `${label} ItemList entries should match visible item count`);
-      assert.equal(itemList.itemListElement[0]?.["@type"], "ListItem");
-      assert.equal(itemList.itemListElement[0]?.position, 1);
-      assert.match(itemList.itemListElement[0]?.url ?? "", expectedUrlPattern, `${label} ItemList should link to detail pages`);
+      itemList.itemListElement.forEach((item, index) => {
+        assert.equal(item?.["@type"], "ListItem", `${label} ItemList entry ${index + 1} should be a ListItem`);
+        assert.equal(item?.position, index + 1, `${label} ItemList entry ${index + 1} should use a sequential position`);
+        assert.match(item?.url ?? "", expectedUrlPattern, `${label} ItemList entry ${index + 1} should link to a detail page`);
+      });
     }
   });
 
