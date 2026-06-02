@@ -307,6 +307,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Locale homepages should include conservative `WebPage` and start-here `ItemList` JSON-LD backed by rendered homepage copy and links.
 - Article index pages should include conservative `CollectionPage` and `ItemList` JSON-LD backed by rendered same-locale public article lists.
 - Mobile, area, place, and tool index pages should include conservative `CollectionPage` and `ItemList` JSON-LD backed by rendered public cards.
+- `pnpm check:seo` should verify mobile, area, place, and tool index JSON-LD across every supported locale, including language, canonical URL, locale-home breadcrumb, public item count, and detail URL prefixes.
 - Public collection index pages should include conservative `BreadcrumbList` JSON-LD from locale home to the current section.
 - Article detail pages should include `Article` and `BreadcrumbList` JSON-LD.
 - Article category pages should include conservative `WebPage` and `BreadcrumbList` JSON-LD.

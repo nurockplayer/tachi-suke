@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1CW content-driven sitemap checks. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
+This document records the current MVP state after Phase 1CX multilingual section JSON-LD checks. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
 
 ## Completed
 
@@ -108,7 +108,7 @@ This document records the current MVP state after Phase 1CW content-driven sitem
 - Source content health checks in `tests/content-health.test.mjs`, run with `pnpm check:content`, including article metadata, explicit public article translation-group locale policy, stored URL fields, and Markdown/MDX root-relative internal links.
 - Conservative article internal-link checks for locale-prefixed static/generated public routes.
 - Static HTML internal link crawler in `tests/static-html-links.test.mjs`, run after `pnpm build` with `pnpm check:links`.
-- Static SEO output check in `tests/seo-output.test.mjs`, run after `pnpm build` with `pnpm check:seo`; when `SITE_URL` is unset, it infers the expected origin from the current built sitemap or robots output, and sitemap public-content coverage is derived from current content collections.
+- Static SEO output check in `tests/seo-output.test.mjs`, run after `pnpm build` with `pnpm check:seo`; when `SITE_URL` is unset, it infers the expected origin from the current built sitemap or robots output, sitemap public-content coverage is derived from current content collections, and mobile/area/place/tool section JSON-LD is checked across all supported locales.
 - Deployment URL guard in `tests/deploy-output.test.mjs`, run after `SITE_URL=<production-url> pnpm build` with `SITE_URL=<production-url> pnpm check:deploy`.
 - GitHub Actions CI workflow rejects forbidden lockfiles and runs source/content checks, fallback-domain build-output checks, and production `SITE_URL=https://tachi-suke.pages.dev` SEO/deploy output checks.
 - Locale switcher links for detail pages use conservative alternate paths so missing article translations do not create dead links.

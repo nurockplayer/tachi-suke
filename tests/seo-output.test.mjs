@@ -235,6 +235,47 @@ function expectedPublicSitemapPaths() {
   return paths;
 }
 
+function sectionIndexJsonLdCases(expectedSectionCounts) {
+  return locales.flatMap((locale) => [
+    {
+      label: `${locale} mobile`,
+      relativePath: `${locale}/mobile/index.html`,
+      expectedCount: expectedSectionCounts.mobile,
+      expectedUrlPattern: urlPrefixRegExp(`/${locale}/mobile/`),
+      expectedLanguage: htmlLangByLocale[locale],
+      expectedCanonicalUrl: absoluteUrl(`/${locale}/mobile/`),
+      expectedHomeUrl: absoluteUrl(`/${locale}/`)
+    },
+    {
+      label: `${locale} areas`,
+      relativePath: `${locale}/areas/index.html`,
+      expectedCount: expectedSectionCounts.areas,
+      expectedUrlPattern: urlPrefixRegExp(`/${locale}/areas/`),
+      expectedLanguage: htmlLangByLocale[locale],
+      expectedCanonicalUrl: absoluteUrl(`/${locale}/areas/`),
+      expectedHomeUrl: absoluteUrl(`/${locale}/`)
+    },
+    {
+      label: `${locale} places`,
+      relativePath: `${locale}/places/index.html`,
+      expectedCount: expectedSectionCounts.places,
+      expectedUrlPattern: urlPrefixRegExp(`/${locale}/places/`),
+      expectedLanguage: htmlLangByLocale[locale],
+      expectedCanonicalUrl: absoluteUrl(`/${locale}/places/`),
+      expectedHomeUrl: absoluteUrl(`/${locale}/`)
+    },
+    {
+      label: `${locale} tools`,
+      relativePath: `${locale}/tools/index.html`,
+      expectedCount: expectedSectionCounts.tools,
+      expectedUrlPattern: urlPrefixRegExp(`/${locale}/tools/`),
+      expectedLanguage: htmlLangByLocale[locale],
+      expectedCanonicalUrl: absoluteUrl(`/${locale}/tools/`),
+      expectedHomeUrl: absoluteUrl(`/${locale}/`)
+    }
+  ]);
+}
+
 function jsonLdObjects(html) {
   const scripts = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
   return scripts.flatMap((match) => {
@@ -870,23 +911,29 @@ describe("static SEO output", () => {
       tools: listFiles(join(contentRoot, "tools"), [".json"]).map(readJson).filter((tool) => tool.status === "published").length
     };
 
-    for (const [label, relativePath, expectedCount, expectedUrlPattern] of [
-      ["mobile", "en/mobile/index.html", expectedSectionCounts.mobile, urlPrefixRegExp("/en/mobile/")],
-      ["areas", "en/areas/index.html", expectedSectionCounts.areas, urlPrefixRegExp("/en/areas/")],
-      ["places", "en/places/index.html", expectedSectionCounts.places, urlPrefixRegExp("/en/places/")],
-      ["tools", "en/tools/index.html", expectedSectionCounts.tools, urlPrefixRegExp("/en/tools/")]
-    ]) {
+    for (const {
+      label,
+      relativePath,
+      expectedCount,
+      expectedUrlPattern,
+      expectedLanguage,
+      expectedCanonicalUrl,
+      expectedHomeUrl
+    } of sectionIndexJsonLdCases(expectedSectionCounts)) {
       const objects = jsonLdObjects(readHtml(relativePath));
       const collectionPage = objects.find((object) => object["@type"] === "CollectionPage");
       const itemList = objects.find((object) => object["@type"] === "ItemList");
       const breadcrumb = objects.find((object) => object["@type"] === "BreadcrumbList");
 
       assert.ok(collectionPage, `${label} index should include CollectionPage JSON-LD`);
-      assert.equal(collectionPage?.inLanguage, "en", `${label} index should use the page language`);
+      assert.equal(collectionPage?.inLanguage, expectedLanguage, `${label} index should use the page language`);
+      assert.equal(collectionPage?.url, expectedCanonicalUrl, `${label} CollectionPage should use its canonical URL`);
+      assert.equal(collectionPage?.isPartOf?.["@id"], absoluteUrl("/#website"), `${label} CollectionPage should belong to the site WebSite`);
       assert.ok(itemList, `${label} index should include ItemList JSON-LD`);
       assert.ok(breadcrumb, `${label} index should include BreadcrumbList JSON-LD`);
       assert.equal(breadcrumb?.itemListElement?.length, 2, `${label} breadcrumb should include home and current section`);
-      assert.equal(breadcrumb?.itemListElement?.[0]?.item, absoluteUrl("/en/"));
+      assert.equal(breadcrumb?.itemListElement?.[0]?.item, expectedHomeUrl, `${label} breadcrumb should link to its locale home`);
+      assert.equal(breadcrumb?.itemListElement?.[1]?.item, expectedCanonicalUrl, `${label} breadcrumb should link to its canonical URL`);
       assert.equal(itemList?.numberOfItems, expectedCount, `${label} ItemList should match visible item count`);
       assert.equal(itemList?.itemListElement?.length, expectedCount, `${label} ItemList entries should match visible item count`);
       assert.equal(itemList.itemListElement[0]?.["@type"], "ListItem");
