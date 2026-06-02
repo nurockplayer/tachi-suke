@@ -269,6 +269,12 @@ Phase 1CW adds content-driven sitemap checks:
 - The sitemap check should continue excluding account placeholders, search pages, search indexes, drafts, non-published places, and non-published tools.
 - Do not change sitemap generation, routes, auth, database, forms, deployment configuration, or runtime behavior in Phase 1CW.
 
+Phase 1CX expands multilingual section JSON-LD checks:
+
+- `pnpm check:seo` should verify mobile, area, place, and tool index `CollectionPage`, `ItemList`, and `BreadcrumbList` JSON-LD for every supported locale.
+- Section index JSON-LD checks should verify BCP47 `inLanguage`, canonical URL, locale-home breadcrumb, public item count, and detail URL prefixes.
+- Do not change section page output, routes, content, schemas, auth, database, forms, deployment configuration, or backend behavior in Phase 1CX.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.

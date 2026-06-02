@@ -709,6 +709,24 @@ Rules:
 - Do not fetch external URLs or validate live provider data.
 - Do not change sitemap generation, routes, auth, database, forms, deployment configuration, or runtime behavior in Phase 1CW.
 
+## Phase 1CX: Multilingual Section JSON-LD Checks
+
+Status: implemented.
+
+Goal:
+
+Close the English-only regression gap in build-output SEO checks for core section index structured data.
+
+Implemented:
+
+- Expanded `tests/seo-output.test.mjs` so mobile, area, place, and tool index pages are checked across `zh-tw`, `en`, `ja`, and `ko`.
+- Section index checks now verify `CollectionPage`, `ItemList`, and `BreadcrumbList` JSON-LD with locale-aware `inLanguage`, canonical URL, locale-home breadcrumb, public item count, and detail URL prefix assertions.
+
+Rules:
+
+- Keep this as a static build-output quality gate.
+- Do not change section page output, routes, content, schemas, auth, database, forms, deployment configuration, or backend behavior in Phase 1CX.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.
