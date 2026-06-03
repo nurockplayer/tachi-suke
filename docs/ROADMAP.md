@@ -912,6 +912,28 @@ Rules:
 - Keep this as a static build-output utility-page quality gate.
 - Do not change account placeholder behavior, search behavior, routes, visible UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DH.
 
+## Phase 1DI: Public HTML Social Image Guard
+
+Status: implemented.
+
+Goal:
+
+Catch accidental social sharing image metadata regressions across indexable public pages before deployment.
+
+Implemented:
+
+- Added a sitemap-derived social image metadata sweep to `tests/seo-output.test.mjs`.
+- `pnpm check:seo` now verifies every indexable public HTML page has `og:image`, `og:image:alt`, `twitter:image`, and `twitter:card`.
+- `pnpm check:seo` verifies social image URLs use the configured site origin and same-site image assets.
+- `pnpm check:seo` verifies `twitter:image` matches `og:image`.
+- `pnpm check:seo` verifies `twitter:card` stays `summary_large_image`.
+
+Rules:
+
+- Keep this as a static build-output social metadata quality gate.
+- Do not hard-lock the site to one specific default image; future page-specific same-site OG images should remain possible.
+- Do not change runtime SEO generation, routes, visible UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DI unless this guard exposes a real social metadata defect.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.

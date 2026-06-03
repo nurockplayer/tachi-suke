@@ -278,6 +278,8 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Canonical URL should use `SITE_URL` or the configured Astro site fallback.
 - Open Graph metadata must include `og:url` and `og:site_name = TachiSuke`.
 - Open Graph metadata must include a default `og:image`.
+- `pnpm check:seo` should verify every sitemap-derived indexable public HTML page has `og:image`, `og:image:alt`, `twitter:image`, and `twitter:card`.
+- Built social image URLs should use the configured site origin and same-site image assets.
 - Open Graph metadata should include current `og:locale` and supported `og:locale:alternate` values when alternates exist.
 - `pnpm check:seo` should verify every sitemap-derived indexable public HTML page has canonical and `og:url` metadata that both match the generated absolute page URL.
 - `pnpm check:seo` should verify every sitemap-derived indexable public HTML page has non-empty title, meta description, Open Graph title/description, and Twitter title/description metadata, with social title/description aligned to the regular page metadata.
@@ -285,6 +287,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - `pnpm check:seo` should verify every sitemap-derived indexable public HTML page links the SVG favicon, web manifest, OpenSearch description, global RSS feed, and current-locale RSS feed.
 - Article detail pages should include `article:published_time`, `article:modified_time`, `article:section`, and `article:tag` Open Graph metadata.
 - Twitter metadata should use `summary_large_image`.
+- `twitter:image` should stay aligned with `og:image`.
 - Pages should link `/site.webmanifest`.
 - Pages should include browser app metadata: `theme-color`, `application-name`, `apple-mobile-web-app-title`, and `format-detection`.
 - `sitemap.xml` must include public locale roots, section pages, human-readable site map pages, the global RSS feed, locale RSS feeds, non-draft article details, article category pages, published place details, area details, mobile plan details, published tool details, submit-place thanks pages, contact/corrections pages, and launch trust pages.

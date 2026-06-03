@@ -341,6 +341,13 @@ Phase 1DH expands noindex utility page guards:
 - Built search pages should keep `noindex, follow`.
 - Keep this as a static build-output utility-page guard; do not change route structure, visible UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DH unless the guard exposes a real noindex defect.
 
+Phase 1DI expands public HTML social image guards:
+
+- `pnpm check:seo` should verify every sitemap-derived public HTML page has `og:image`, `og:image:alt`, `twitter:image`, and `twitter:card`.
+- Social image URLs should use the configured site origin and same-site image assets.
+- `twitter:image` should stay aligned with `og:image`, and `twitter:card` should remain `summary_large_image`.
+- Keep this as a static build-output social metadata guard; do not change runtime SEO generation, routes, UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DI unless the guard exposes a real social metadata defect.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.
