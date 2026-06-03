@@ -934,6 +934,28 @@ Rules:
 - Do not hard-lock the site to one specific default image; future page-specific same-site OG images should remain possible.
 - Do not change runtime SEO generation, routes, visible UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DI unless this guard exposes a real social metadata defect.
 
+## Phase 1DJ: Public HTML Hreflang Head Guard
+
+Status: implemented.
+
+Goal:
+
+Catch accidental multilingual head alternate regressions before deployment.
+
+Implemented:
+
+- Added a sitemap-derived head `hreflang` metadata sweep to `tests/seo-output.test.mjs`.
+- `pnpm check:seo` now verifies every indexable public HTML page has head `hreflang` links.
+- `pnpm check:seo` verifies head `hreflang` values are supported BCP47 locale values or `x-default`.
+- `pnpm check:seo` verifies head `hreflang` values are not duplicated on a page.
+- `pnpm check:seo` verifies head `hreflang` links use the configured site origin and point only at public sitemap HTML pages without query strings or hashes.
+
+Rules:
+
+- Keep this as a static build-output hreflang metadata quality gate.
+- Do not require every article to have every locale alternate; only validate alternates that the page actually emits.
+- Do not change runtime i18n generation, routes, visible UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DJ unless this guard exposes a real hreflang defect.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.

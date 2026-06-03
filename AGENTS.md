@@ -348,6 +348,12 @@ Phase 1DI expands public HTML social image guards:
 - `twitter:image` should stay aligned with `og:image`, and `twitter:card` should remain `summary_large_image`.
 - Keep this as a static build-output social metadata guard; do not change runtime SEO generation, routes, UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DI unless the guard exposes a real social metadata defect.
 
+Phase 1DJ expands public HTML hreflang head guards:
+
+- `pnpm check:seo` should verify every sitemap-derived public HTML page has head `hreflang` alternates.
+- Head `hreflang` links should use supported locale values or `x-default`, avoid duplicates, use the configured site origin, and point only at public sitemap HTML paths.
+- Keep this as a static build-output hreflang guard; do not change runtime i18n generation, routes, UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DJ unless the guard exposes a real hreflang defect.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.

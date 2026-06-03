@@ -66,6 +66,7 @@ Implemented:
 - SEO-oriented `BaseLayout`
 - Generated `sitemap.xml`, `robots.txt`, and `site.webmanifest`
 - Sitemap includes conservative `hreflang` alternates for shared locale pages and translated article details
+- Build-output hreflang checks ensure public HTML head alternates only point at public sitemap HTML pages
 - Generated `llms.txt` discovery file for AI/search-adjacent tooling, including locale site map links
 - Generated `/.well-known/security.txt` pointing security reports to the public contact route
 - Generated `opensearch.xml` browser search discovery file linked from every public page
