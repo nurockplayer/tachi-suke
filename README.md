@@ -91,6 +91,7 @@ Implemented:
 - Cloudflare Pages `_headers` for conservative security and discovery cache defaults
 - Cloudflare Pages CSP blocks framing/object embeds while allowing current inline JSON-LD/search scripts and HTTPS external form endpoints
 - Cloudflare Pages `_redirects` for locale-less section fallbacks to English and legacy `/security.txt` discovery
+- Build-output redirect checks keep Cloudflare Pages `_redirects` temporary, public-only, and exact
 - Cloudflare Pages `wrangler.toml` deployment metadata
 - Conservative locale switcher behavior for detail pages with missing translations
 - `SITE_URL` environment variable fallback

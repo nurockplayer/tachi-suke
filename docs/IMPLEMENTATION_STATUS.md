@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1DJ public HTML hreflang head guard checks. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
+This document records the current MVP state after Phase 1DK Cloudflare Pages redirect guard checks. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
 
 ## Completed
 
@@ -99,6 +99,7 @@ This document records the current MVP state after Phase 1DJ public HTML hreflang
 - Cloudflare Pages `_headers` with conservative security and discovery cache defaults.
 - Cloudflare Pages CSP header for baseline static-site hardening while preserving current inline JSON-LD/search scripts and HTTPS external form endpoints.
 - Cloudflare Pages `_redirects` with temporary English fallbacks for common locale-less public paths and a legacy `/security.txt` fallback.
+- Build-output Cloudflare Pages `_redirects` checks that keep fallback rules exact, temporary, and public-only.
 - Cloudflare Pages `wrangler.toml` with project name, compatibility date, and `dist` output directory.
 - Deployment guide at `docs/DEPLOYMENT.md`.
 - Baseline keyboard accessibility hooks: skip link, stable main content target, active primary nav state, and visible focus styles.

@@ -354,6 +354,12 @@ Phase 1DJ expands public HTML hreflang head guards:
 - Head `hreflang` links should use supported locale values or `x-default`, avoid duplicates, use the configured site origin, and point only at public sitemap HTML paths.
 - Keep this as a static build-output hreflang guard; do not change runtime i18n generation, routes, UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DJ unless the guard exposes a real hreflang defect.
 
+Phase 1DK expands Cloudflare Pages redirect guards:
+
+- `pnpm check:seo` should verify the built `_redirects` file matches the reviewed Phase 1 temporary fallback contract exactly.
+- Redirect rules should stay `302`, avoid account placeholder routes, avoid redirecting canonical locale-prefixed paths, preserve splats for detail-like fallbacks, and only target English public fallbacks or canonical `/.well-known/security.txt`.
+- Keep this as a static build-output redirect guard; do not change route structure, language detection, visible UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DK unless the guard exposes a real redirect defect.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.
