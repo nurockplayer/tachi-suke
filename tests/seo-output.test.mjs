@@ -608,6 +608,34 @@ describe("static SEO output", () => {
     }
   });
 
+  it("renders social image metadata on every sitemap HTML page", () => {
+    const htmlPaths = sitemapPaths(readDist("sitemap.xml")).filter(isHtmlSitemapPath);
+    assert.ok(htmlPaths.length > 100, "sitemap should expose public HTML pages for the social image metadata sweep");
+
+    for (const pathname of htmlPaths) {
+      const html = readHtml(htmlDistRelativePath(pathname));
+      const ogImage = metaPropertyContent(html, "og:image");
+      const ogImageAlt = metaPropertyContent(html, "og:image:alt");
+      const twitterCard = metaNameContent(html, "twitter:card");
+      const twitterImage = metaNameContent(html, "twitter:image");
+
+      assertPresentText(ogImage, `${pathname} og:image`);
+      assertPresentText(ogImageAlt, `${pathname} og:image:alt`);
+      assertPresentText(twitterCard, `${pathname} twitter:card`);
+      assertPresentText(twitterImage, `${pathname} twitter:image`);
+
+      const parsedOgImage = new URL(ogImage);
+      assert.equal(parsedOgImage.origin, expectedSiteUrl, `${pathname} og:image should use the configured site origin`);
+      assert.match(
+        parsedOgImage.pathname,
+        /^\/images\/.+\.(?:svg|png|jpe?g|webp)$/i,
+        `${pathname} og:image should point at a same-site image asset`
+      );
+      assert.equal(twitterImage, ogImage, `${pathname} twitter:image should match og:image`);
+      assert.equal(twitterCard, "summary_large_image", `${pathname} twitter:card should use a large image summary`);
+    }
+  });
+
   it("renders locale-aware document shell metadata on every sitemap HTML page", () => {
     const htmlPaths = sitemapPaths(readDist("sitemap.xml")).filter(isHtmlSitemapPath);
     assert.ok(htmlPaths.length > 100, "sitemap should expose public HTML pages for the shell metadata sweep");

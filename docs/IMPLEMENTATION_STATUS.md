@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1DH noindex utility page guard checks. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
+This document records the current MVP state after Phase 1DI public HTML social image guard checks. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
 
 ## Completed
 
@@ -60,7 +60,7 @@ This document records the current MVP state after Phase 1DH noindex utility page
 - Article list/detail public filtering by `draft = false`.
 - Article category page public filtering by locale, category, and `draft = false`.
 - SEO base layout with title, description, canonical URL, Open Graph URL, Open Graph site name, locale-aware `html lang`, and conservative `hreflang`.
-- Default Open Graph image, Twitter summary metadata, and manifest link in `BaseLayout`.
+- Default Open Graph image, Twitter summary metadata, manifest link, and sitemap-wide social image metadata checks in `BaseLayout` / `pnpm check:seo`.
 - Open Graph locale and alternate locale metadata in `BaseLayout`.
 - Article Open Graph metadata for public article detail pages.
 - Browser/PWA metadata in `BaseLayout`: `theme-color`, `application-name`, `apple-mobile-web-app-title`, and `format-detection`.

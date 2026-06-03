@@ -74,7 +74,7 @@ Implemented:
 - Content-driven RSS output checks that compare feed item URLs against current non-draft article content
 - XML sitemap section and site-map entries use content-derived `lastmod` dates for public aggregate pages
 - Locale homepage sitemap entries use content-derived `lastmod` dates
-- Default Open Graph image and Twitter summary metadata
+- Default Open Graph image, Twitter summary metadata, and build-output social image metadata checks
 - Open Graph locale metadata for multilingual sharing
 - Article Open Graph metadata for published/modified dates, sections, and tags
 - Article detail pages with semantic published/updated dates and localized freshness/trust notices
