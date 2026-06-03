@@ -38,6 +38,27 @@ const specificCacheHeaderRules = [
   { pathname: "/images/*", value: "public, max-age=604800" },
   ...oneHourDiscoveryCachePaths.map((pathname) => ({ pathname, value: "public, max-age=3600" }))
 ];
+const expectedCloudflareRedirectRules = [
+  ["/articles", "/en/articles"],
+  ["/articles/*", "/en/articles/:splat"],
+  ["/areas", "/en/areas"],
+  ["/areas/*", "/en/areas/:splat"],
+  ["/places", "/en/places"],
+  ["/places/*", "/en/places/:splat"],
+  ["/mobile", "/en/mobile"],
+  ["/mobile/*", "/en/mobile/:splat"],
+  ["/tools", "/en/tools"],
+  ["/tools/*", "/en/tools/:splat"],
+  ["/search", "/en/search"],
+  ["/security.txt", "/.well-known/security.txt"],
+  ["/submit-place", "/en/submit-place"],
+  ["/submit-place/thanks", "/en/submit-place/thanks"],
+  ["/contact", "/en/contact"],
+  ["/contact/thanks", "/en/contact/thanks"],
+  ["/about", "/en/about"],
+  ["/privacy", "/en/privacy"],
+  ["/editorial-policy", "/en/editorial-policy"]
+].map(([from, to]) => ({ from, to, status: "302" }));
 
 function originFromUrl(value) {
   return new URL(value).origin.replace(/\/$/, "");
@@ -108,6 +129,18 @@ function assertDetachedCacheHeaderRule(headers, pathname, expectedValue) {
   assert.ok(block, `_headers should include a rule for ${pathname}`);
   assert.match(block, /^  ! Cache-Control$/m, `_headers should detach inherited Cache-Control before setting ${pathname}`);
   assertCacheHeaderRule(headers, pathname, expectedValue);
+}
+
+function redirectRules(redirects) {
+  return redirects
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => line && !line.startsWith("#"))
+    .map((line) => {
+      const [from, to, status, ...extra] = line.split(/\s+/);
+      assert.deepEqual(extra, [], `_redirects rule should only contain source, target, and status: ${line}`);
+      return { from, to, status };
+    });
 }
 
 function sitemapPaths(xml) {
@@ -558,6 +591,28 @@ describe("static SEO output", () => {
       englishFeed,
       new RegExp(`<atom:link href="${escapeRegExp(absoluteUrl("/en/feed.xml"))}" rel="self" type="application\\/rss\\+xml" \\/>`)
     );
+  });
+
+  it("keeps Cloudflare Pages redirects temporary, public, and exact", () => {
+    const rules = redirectRules(readDist("_redirects"));
+    assert.deepEqual(rules, expectedCloudflareRedirectRules, "_redirects should match the reviewed Phase 1 fallback contract");
+
+    for (const rule of rules) {
+      assert.equal(rule.status, "302", `${rule.from} should stay a temporary redirect`);
+      assert.doesNotMatch(rule.from, /^\/(?:zh-tw|en|ja|ko)(?:\/|$)/, `${rule.from} should not redirect canonical locale-prefixed routes`);
+      assert.doesNotMatch(rule.from, /\/account(?:\/|$)/, `${rule.from} should not expose account placeholder redirects`);
+      assert.doesNotMatch(rule.to, /\/account(?:\/|$)/, `${rule.to} should not target account placeholder routes`);
+
+      if (rule.from === "/security.txt") {
+        assert.equal(rule.to, "/.well-known/security.txt", "/security.txt should point at the canonical well-known security file");
+      } else {
+        assert.match(rule.to, /^\/en(?:\/|$)/, `${rule.from} should fall back to an English public route`);
+      }
+
+      if (rule.from.endsWith("/*")) {
+        assert.ok(rule.to.endsWith("/:splat"), `${rule.from} should preserve detail-like path splats`);
+      }
+    }
   });
 
   it("includes public multilingual content and excludes account placeholders in sitemap", () => {

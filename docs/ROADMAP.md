@@ -956,6 +956,28 @@ Rules:
 - Do not require every article to have every locale alternate; only validate alternates that the page actually emits.
 - Do not change runtime i18n generation, routes, visible UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DJ unless this guard exposes a real hreflang defect.
 
+## Phase 1DK: Cloudflare Redirect Guard
+
+Status: implemented.
+
+Goal:
+
+Catch accidental Cloudflare Pages `_redirects` regressions before deployment.
+
+Implemented:
+
+- Added an exact built `_redirects` contract check to `tests/seo-output.test.mjs`.
+- `pnpm check:seo` now verifies locale-less public fallbacks remain temporary `302` redirects.
+- `pnpm check:seo` verifies canonical locale-prefixed routes and account placeholders are not added to `_redirects`.
+- `pnpm check:seo` verifies public section fallbacks target English routes and detail-like splat fallbacks preserve `:splat`.
+- `pnpm check:seo` verifies `/security.txt` continues to redirect to canonical `/.well-known/security.txt`.
+
+Rules:
+
+- Keep canonical URLs locale-prefixed; locale-less redirects are convenience fallbacks only.
+- Keep `_redirects` static and Cloudflare Pages-compatible.
+- Do not add language detection, account placeholder redirects, route changes, visible UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DK unless this guard exposes a real redirect defect.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.
