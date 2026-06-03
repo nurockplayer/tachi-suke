@@ -176,6 +176,12 @@ function findLink(html, predicate) {
     .find(predicate);
 }
 
+function findLinks(html, predicate) {
+  return [...html.matchAll(/<link\b[^>]*>/g)]
+    .map((match) => linkAttributes(match[0]))
+    .filter(predicate);
+}
+
 function htmlLang(html) {
   return html.match(/<html\b[^>]*\blang="([^"]+)"/)?.[1];
 }
@@ -712,6 +718,38 @@ describe("static SEO output", () => {
         ),
         `${pathname} should link the current-locale RSS feed`
       );
+    }
+  });
+
+  it("renders hreflang links only to public sitemap HTML pages", () => {
+    const sitemapPathSet = new Set(sitemapPaths(readDist("sitemap.xml")));
+    const htmlPaths = [...sitemapPathSet].filter(isHtmlSitemapPath);
+    const supportedHreflangs = new Set([...Object.values(htmlLangByLocale), "x-default"]);
+    assert.ok(htmlPaths.length > 100, "sitemap should expose public HTML pages for the hreflang metadata sweep");
+
+    for (const pathname of htmlPaths) {
+      const html = readHtml(htmlDistRelativePath(pathname));
+      const hreflangLinks = findLinks(html, (link) => link.rel === "alternate" && Boolean(link.hreflang));
+      const seenHreflangs = new Set();
+      assert.ok(hreflangLinks.length > 0, `${pathname} should include hreflang alternates`);
+
+      for (const link of hreflangLinks) {
+        assert.ok(supportedHreflangs.has(link.hreflang), `${pathname} should use a supported hreflang value: ${link.hreflang}`);
+        assert.equal(seenHreflangs.has(link.hreflang), false, `${pathname} should not duplicate hreflang ${link.hreflang}`);
+        seenHreflangs.add(link.hreflang);
+
+        const href = new URL(link.href);
+        const alternatePath = normalizePath(href.pathname);
+        assert.equal(href.origin, expectedSiteUrl, `${pathname} hreflang ${link.hreflang} should use the configured site origin`);
+        assert.equal(href.search, "", `${pathname} hreflang ${link.hreflang} should not include a query string`);
+        assert.equal(href.hash, "", `${pathname} hreflang ${link.hreflang} should not include a hash`);
+        assert.equal(
+          sitemapPathSet.has(alternatePath),
+          true,
+          `${pathname} hreflang ${link.hreflang} should point at a public sitemap path`
+        );
+        assert.equal(isHtmlSitemapPath(alternatePath), true, `${pathname} hreflang ${link.hreflang} should point at HTML`);
+      }
     }
   });
 

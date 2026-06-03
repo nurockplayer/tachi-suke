@@ -283,6 +283,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Open Graph metadata should include current `og:locale` and supported `og:locale:alternate` values when alternates exist.
 - `pnpm check:seo` should verify every sitemap-derived indexable public HTML page has canonical and `og:url` metadata that both match the generated absolute page URL.
 - `pnpm check:seo` should verify every sitemap-derived indexable public HTML page has non-empty title, meta description, Open Graph title/description, and Twitter title/description metadata, with social title/description aligned to the regular page metadata.
+- `pnpm check:seo` should verify every sitemap-derived indexable public HTML page has supported, non-duplicated `hreflang` head links that point only at public sitemap HTML pages.
 - `pnpm check:seo` should verify every sitemap-derived indexable public HTML page has the expected `html lang`, mobile viewport metadata, skip link to `#main-content`, and stable `main#main-content` landmark.
 - `pnpm check:seo` should verify every sitemap-derived indexable public HTML page links the SVG favicon, web manifest, OpenSearch description, global RSS feed, and current-locale RSS feed.
 - Article detail pages should include `article:published_time`, `article:modified_time`, `article:section`, and `article:tag` Open Graph metadata.
