@@ -360,6 +360,12 @@ Phase 1DK expands Cloudflare Pages redirect guards:
 - Redirect rules should stay `302`, avoid account placeholder routes, avoid redirecting canonical locale-prefixed paths, preserve splats for detail-like fallbacks, and only target English public fallbacks or canonical `/.well-known/security.txt`.
 - Keep this as a static build-output redirect guard; do not change route structure, language detection, visible UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DK unless the guard exposes a real redirect defect.
 
+Phase 1DL expands security.txt freshness guards:
+
+- `pnpm check:seo` should verify built `/.well-known/security.txt` emits a parseable canonical UTC `Expires` timestamp.
+- `Expires` should remain at least 30 days in the future and should not drift beyond the one-year editorial policy.
+- Keep this as a static build-output discovery guard; do not change security contact workflow, route structure, visible UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DL unless the guard exposes a real security.txt defect.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.

@@ -265,6 +265,11 @@ function assertPresentText(value, label) {
   assert.doesNotMatch(value, /^(?:undefined|null)$/i, `${label} should not serialize placeholder values`);
 }
 
+function textField(text, fieldName) {
+  const value = text.match(new RegExp(`^${escapeRegExp(fieldName)}:\\s*(.*?)$`, "m"))?.[1];
+  return value ? value.trim() : value;
+}
+
 function feedItemLinks(feed) {
   return new Set(
     [...feed.matchAll(/<item>[\s\S]*?<link>(.*?)<\/link>[\s\S]*?<\/item>/g)].map((match) =>
@@ -560,7 +565,14 @@ describe("static SEO output", () => {
     assert.match(security, new RegExp(`^Contact:\\s*${escapeRegExp(absoluteUrl("/en/contact"))}`, "m"));
     assert.match(security, new RegExp(`^Canonical:\\s*${escapeRegExp(absoluteUrl("/.well-known/security.txt"))}`, "m"));
     assert.match(security, /^Preferred-Languages:\s*en,\s*zh-tw,\s*ja,\s*ko/m);
-    assert.match(security, /^Expires:\s*\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.000Z/m);
+    const securityExpires = textField(security, "Expires");
+    assert.ok(securityExpires, "security.txt should include Expires");
+    assert.match(securityExpires, /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.000Z$/, "security.txt Expires should be canonical UTC ISO");
+    const securityExpiresAt = new Date(securityExpires);
+    assert.equal(securityExpiresAt.toISOString(), securityExpires, "security.txt Expires should parse as the emitted ISO timestamp");
+    const freshnessMs = securityExpiresAt.getTime() - Date.now();
+    assert.ok(freshnessMs > 30 * 24 * 60 * 60 * 1000, "security.txt Expires should remain at least 30 days in the future");
+    assert.ok(freshnessMs < 370 * 24 * 60 * 60 * 1000, "security.txt Expires should not drift beyond the one-year editorial policy");
     assert.match(opensearch, /<OpenSearchDescription[^>]+xmlns="http:\/\/a9\.com\/-\/spec\/opensearch\/1\.1\/">/);
     assert.match(opensearch, /<ShortName>TachiSuke<\/ShortName>/);
     assert.match(
