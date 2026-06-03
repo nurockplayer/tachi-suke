@@ -978,6 +978,27 @@ Rules:
 - Keep `_redirects` static and Cloudflare Pages-compatible.
 - Do not add language detection, account placeholder redirects, route changes, visible UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DK unless this guard exposes a real redirect defect.
 
+## Phase 1DL: Security.txt Freshness Guard
+
+Status: implemented.
+
+Goal:
+
+Catch stale or malformed `/.well-known/security.txt` expiration metadata before deployment.
+
+Implemented:
+
+- Expanded `tests/seo-output.test.mjs` so `pnpm check:seo` parses the built `Expires` field.
+- `pnpm check:seo` now verifies `Expires` is a canonical UTC ISO timestamp.
+- `pnpm check:seo` verifies `Expires` remains at least 30 days in the future.
+- `pnpm check:seo` verifies `Expires` does not drift beyond the one-year editorial policy.
+
+Rules:
+
+- Keep `/.well-known/security.txt` as a static discovery file.
+- Keep security contact routing public and provider-agnostic; do not add private ticket storage or guaranteed response semantics in Phase 1.
+- Do not change route structure, visible UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DL unless this guard exposes a real security.txt defect.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.

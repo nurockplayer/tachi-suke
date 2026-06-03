@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1DK Cloudflare Pages redirect guard checks. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
+This document records the current MVP state after Phase 1DL security.txt freshness guard checks. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
 
 ## Completed
 
@@ -90,6 +90,7 @@ This document records the current MVP state after Phase 1DK Cloudflare Pages red
 - Generated `robots.txt` with sitemap reference and account placeholder disallow rules.
 - Generated `llms.txt` with public discovery links and content caveats.
 - Generated `/.well-known/security.txt` with public contact, policy, canonical, preferred-language, and expiration fields.
+- Build-output `/.well-known/security.txt` freshness checks for parseable UTC `Expires` metadata.
 - Generated `opensearch.xml` for browser/search-adjacent discovery of the static English search route.
 - Generated `site.webmanifest`.
 - Generated global `feed.xml` for non-draft public articles, included in the sitemap with newest-public-article `lastmod`.
