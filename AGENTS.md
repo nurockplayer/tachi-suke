@@ -378,6 +378,12 @@ Phase 1DN expands OpenSearch output guards:
 - The OpenSearch template should use the configured-site English static search fallback at `/en/search?q={searchTerms}`; production/deploy checks must not ship the fallback example domain.
 - OpenSearch discovery must not point at account placeholders, locale search variants, search index JSON, private data, analytics, hosted search, auth, database, Workers, Functions, or backend behavior in Phase 1DN unless separately scoped.
 
+Phase 1DO expands Web Manifest output guards:
+
+- `pnpm check:seo` should verify built `site.webmanifest` matches the reviewed browser app identity contract for TachiSuke.
+- The manifest should keep same-site icon assets, static root start/scope values, standalone display, and reviewed brand colors.
+- Keep this as a static build-output guard; do not add service workers, install prompts, offline caching, push notifications, route changes, auth, database, Workers, Functions, or backend behavior in Phase 1DO.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.

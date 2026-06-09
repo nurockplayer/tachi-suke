@@ -591,10 +591,32 @@ describe("static SEO output", () => {
     }
     assert.doesNotMatch(opensearch, /\/(?:zh-tw|ja|ko)\/search\?q=\{searchTerms\}/, "opensearch.xml should use the stable English search fallback");
     assert.doesNotMatch(opensearch, /\/(?:account|search-index\.json)(?:[/"?]|$)/, "opensearch.xml should not point at private or JSON utility routes");
-    assert.equal(manifest.name, "TachiSuke - Japan Life Assistant");
-    assert.equal(manifest.short_name, "TachiSuke");
-    assert.equal(manifest.start_url, "/");
-    assert.ok(Array.isArray(manifest.icons) && manifest.icons.length > 0, "manifest should include icons");
+    assert.deepEqual(
+      manifest,
+      {
+        name: "TachiSuke - Japan Life Assistant",
+        short_name: "TachiSuke",
+        description: "A multilingual life decision assistant for living in Japan.",
+        start_url: "/",
+        scope: "/",
+        display: "standalone",
+        background_color: "#f8f7f2",
+        theme_color: "#25635c",
+        icons: [
+          {
+            src: "/favicon.svg",
+            sizes: "any",
+            type: "image/svg+xml",
+            purpose: "any maskable"
+          }
+        ]
+      },
+      "site.webmanifest should match the reviewed browser app identity contract"
+    );
+    for (const icon of manifest.icons) {
+      assert.doesNotMatch(icon.src, /^https?:\/\//, "manifest icons should use same-site assets");
+      assert.equal(existsSync(join(dist, icon.src.replace(/^\//, ""))), true, `manifest icon ${icon.src} should exist in dist`);
+    }
     assert.match(headers, /X-Content-Type-Options:\s*nosniff/);
     assert.match(headers, /Content-Security-Policy:\s*default-src 'self'/, "_headers should define a baseline CSP");
     assert.match(headers, /script-src 'self' 'unsafe-inline'/, "CSP should allow current inline JSON-LD/search scripts");
