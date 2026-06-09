@@ -372,6 +372,12 @@ Phase 1DM expands robots.txt directive guards:
 - `robots.txt` should not disallow public locale sections, feeds, search pages, or search indexes unless separately scoped.
 - Keep this as a static build-output robots guard; do not change robots runtime generation, sitemap generation, route structure, visible UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DM unless the guard exposes a real robots defect.
 
+Phase 1DN expands OpenSearch output guards:
+
+- `pnpm check:seo` should verify built `opensearch.xml` matches the reviewed browser search discovery contract exactly.
+- The OpenSearch template should use the configured-site English static search fallback at `/en/search?q={searchTerms}`; production/deploy checks must not ship the fallback example domain.
+- OpenSearch discovery must not point at account placeholders, locale search variants, search index JSON, private data, analytics, hosted search, auth, database, Workers, Functions, or backend behavior in Phase 1DN unless separately scoped.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.

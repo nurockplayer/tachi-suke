@@ -71,6 +71,7 @@ Implemented:
 - Generated `llms.txt` discovery file for AI/search-adjacent tooling, including locale site map links
 - Generated `/.well-known/security.txt` pointing security reports to the public contact route
 - Generated `opensearch.xml` browser search discovery file linked from every public page
+- Build-output OpenSearch checks keep browser search discovery on the reviewed English static search fallback
 - Generated global `feed.xml` for public articles, included in the sitemap with content-aware `lastmod`
 - Generated locale RSS feeds at `/[locale]/feed.xml` for same-locale public articles, included in the sitemap with same-locale `lastmod`
 - Content-driven RSS output checks that compare feed item URLs against current non-draft article content
