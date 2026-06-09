@@ -1041,6 +1041,25 @@ Rules:
 - Keep OpenSearch static, provider-free, and aligned with the existing static search page.
 - Do not add hosted search, search ranking changes, analytics, language detection, account/private search, route changes, auth, database, Workers, Functions, or backend behavior in Phase 1DN unless separately scoped.
 
+## Phase 1DO: Web Manifest Output Guard
+
+Status: implemented.
+
+Goal:
+
+Catch accidental browser app identity regressions before deployment.
+
+Implemented:
+
+- Expanded `tests/seo-output.test.mjs` so `pnpm check:seo` validates the built `site.webmanifest` against the reviewed TachiSuke app identity contract.
+- `pnpm check:seo` now verifies manifest name, short name, description, root start/scope values, standalone display mode, background color, theme color, and icon metadata.
+- `pnpm check:seo` verifies manifest icons stay same-site and exist in the generated `dist` output.
+
+Rules:
+
+- Keep the manifest static, lightweight, and locale-neutral.
+- Do not add service workers, offline caching, install prompts, push notifications, route changes, auth, database, Workers, Functions, or backend behavior in Phase 1DO unless separately scoped.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.
