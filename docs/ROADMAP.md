@@ -1021,6 +1021,26 @@ Rules:
 - Keep account placeholder pages accessible but excluded from indexing through both page-level noindex metadata and robots disallow rules.
 - Do not change robots runtime generation, sitemap generation, route structure, visible UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DM unless this guard exposes a real robots defect.
 
+## Phase 1DN: OpenSearch Output Guard
+
+Status: implemented.
+
+Goal:
+
+Catch accidental browser search discovery regressions before deployment.
+
+Implemented:
+
+- Expanded `tests/seo-output.test.mjs` so `pnpm check:seo` validates the built `opensearch.xml` output exactly.
+- `pnpm check:seo` now verifies the OpenSearch root namespace, short name, description, UTF-8 input encoding, and single HTML search URL contract.
+- `pnpm check:seo` verifies the search template uses the configured production URL and the stable English static search fallback at `/en/search?q={searchTerms}`.
+- Production `SITE_URL` checks verify `opensearch.xml` does not ship the fallback example domain or point at account placeholders, locale search variants, or search index JSON.
+
+Rules:
+
+- Keep OpenSearch static, provider-free, and aligned with the existing static search page.
+- Do not add hosted search, search ranking changes, analytics, language detection, account/private search, route changes, auth, database, Workers, Functions, or backend behavior in Phase 1DN unless separately scoped.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.

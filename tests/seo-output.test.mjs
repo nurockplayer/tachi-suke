@@ -573,12 +573,24 @@ describe("static SEO output", () => {
     const freshnessMs = securityExpiresAt.getTime() - Date.now();
     assert.ok(freshnessMs > 30 * 24 * 60 * 60 * 1000, "security.txt Expires should remain at least 30 days in the future");
     assert.ok(freshnessMs < 370 * 24 * 60 * 60 * 1000, "security.txt Expires should not drift beyond the one-year editorial policy");
-    assert.match(opensearch, /<OpenSearchDescription[^>]+xmlns="http:\/\/a9\.com\/-\/spec\/opensearch\/1\.1\/">/);
-    assert.match(opensearch, /<ShortName>TachiSuke<\/ShortName>/);
-    assert.match(
+    assert.equal(
       opensearch,
-      new RegExp(`<Url type="text\\/html" template="${escapeRegExp(absoluteUrl("/en/search"))}\\?q=\\{searchTerms\\}" \\/>`)
+      `<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>TachiSuke</ShortName>
+  <Description>Search TachiSuke public Japan life guides, places, mobile plans, area guides, and tools.</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Url type="text/html" template="${absoluteUrl("/en/search")}?q={searchTerms}" />
+</OpenSearchDescription>
+`,
+      "opensearch.xml should match the reviewed browser search discovery contract"
     );
+    if (configuredSiteUrl) {
+      assert.notEqual(expectedSiteUrl, fallbackSiteUrl, "configured SITE_URL checks should not use the fallback example domain");
+      assert.doesNotMatch(opensearch, new RegExp(escapeRegExp(fallbackSiteUrl)), "opensearch.xml should not ship the fallback domain");
+    }
+    assert.doesNotMatch(opensearch, /\/(?:zh-tw|ja|ko)\/search\?q=\{searchTerms\}/, "opensearch.xml should use the stable English search fallback");
+    assert.doesNotMatch(opensearch, /\/(?:account|search-index\.json)(?:[/"?]|$)/, "opensearch.xml should not point at private or JSON utility routes");
     assert.equal(manifest.name, "TachiSuke - Japan Life Assistant");
     assert.equal(manifest.short_name, "TachiSuke");
     assert.equal(manifest.start_url, "/");
