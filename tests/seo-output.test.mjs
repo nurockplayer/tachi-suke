@@ -603,6 +603,19 @@ describe("static SEO output", () => {
       englishFeed,
       new RegExp(`<atom:link href="${escapeRegExp(absoluteUrl("/en/feed.xml"))}" rel="self" type="application\\/rss\\+xml" \\/>`)
     );
+
+    assert.deepEqual(
+      robots.trimEnd().split("\n"),
+      [
+        "User-agent: *",
+        "Allow: /",
+        ...locales.map((locale) => `Disallow: /${locale}/account/`),
+        "",
+        `Sitemap: ${absoluteUrl("/sitemap.xml")}`
+      ],
+      "robots.txt should expose public content while disallowing only account placeholders"
+    );
+    assert.doesNotMatch(robots, /^Disallow:\s*\/(?:zh-tw|en|ja|ko)\/(?:articles|areas|places|mobile|tools|search|feed\.xml)/m);
   });
 
   it("keeps Cloudflare Pages redirects temporary, public, and exact", () => {

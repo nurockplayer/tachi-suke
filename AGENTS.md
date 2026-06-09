@@ -366,6 +366,12 @@ Phase 1DL expands security.txt freshness guards:
 - `Expires` should remain at least 30 days in the future and should not drift beyond the one-year editorial policy.
 - Keep this as a static build-output discovery guard; do not change security contact workflow, route structure, visible UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DL unless the guard exposes a real security.txt defect.
 
+Phase 1DM expands robots.txt directive guards:
+
+- `pnpm check:seo` should verify built `robots.txt` has the reviewed exact directive contract: `User-agent: *`, `Allow: /`, `Disallow: /[locale]/account/` for every supported locale, and a configured-site `Sitemap` URL.
+- `robots.txt` should not disallow public locale sections, feeds, search pages, or search indexes unless separately scoped.
+- Keep this as a static build-output robots guard; do not change robots runtime generation, sitemap generation, route structure, visible UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DM unless the guard exposes a real robots defect.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.

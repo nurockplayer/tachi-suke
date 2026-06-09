@@ -999,6 +999,28 @@ Rules:
 - Keep security contact routing public and provider-agnostic; do not add private ticket storage or guaranteed response semantics in Phase 1.
 - Do not change route structure, visible UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DL unless this guard exposes a real security.txt defect.
 
+## Phase 1DM: Robots Directive Guard
+
+Status: implemented.
+
+Goal:
+
+Catch accidental `robots.txt` crawl-policy regressions before deployment.
+
+Implemented:
+
+- Expanded `tests/seo-output.test.mjs` so `pnpm check:seo` validates the built `robots.txt` directive list exactly.
+- `pnpm check:seo` now verifies `robots.txt` keeps `User-agent: *` and `Allow: /`.
+- `pnpm check:seo` verifies account placeholders are disallowed for every supported locale.
+- `pnpm check:seo` verifies the sitemap directive uses the configured production URL.
+- `pnpm check:seo` verifies public locale sections, feeds, search pages, and search indexes are not accidentally disallowed.
+
+Rules:
+
+- Keep public content crawlable in Phase 1.
+- Keep account placeholder pages accessible but excluded from indexing through both page-level noindex metadata and robots disallow rules.
+- Do not change robots runtime generation, sitemap generation, route structure, visible UI, auth, database, forms, Workers, Functions, or backend behavior in Phase 1DM unless this guard exposes a real robots defect.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.

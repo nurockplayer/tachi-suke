@@ -48,6 +48,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - `pnpm check:deploy` should also require the configured `SITE_URL` in public files that should contain production absolute URLs: sitemap, robots, OpenSearch, `llms.txt`, `security.txt`, global and locale RSS feeds, the root homepage, locale homepages, and a representative public HTML page.
 - Relative-only deploy artifacts such as `site.webmanifest` and search index JSON should not be forced to contain `SITE_URL`.
 - Built `/.well-known/security.txt` must emit a parseable canonical UTC `Expires` timestamp that stays at least 30 days in the future and within the one-year editorial freshness policy.
+- Built `robots.txt` must match the reviewed directive contract: allow public crawling, disallow only locale account placeholders, and reference the configured-site sitemap URL.
 - Cloudflare Pages `_redirects` should provide temporary English fallbacks for common locale-less public section paths and must not add account placeholder fallbacks.
 - `pnpm check:seo` should verify the built Cloudflare Pages `_redirects` file matches the reviewed temporary public fallback contract exactly.
 - Cloudflare Pages `_headers` should keep HTML revalidated while applying conservative one-hour cache headers to sitemap, robots, manifest, RSS feeds, `llms.txt`, `security.txt`, `opensearch.xml`, and search indexes.
