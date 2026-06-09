@@ -1,6 +1,6 @@
 # TachiSuke Implementation Status
 
-This document records the current MVP state after Phase 1DL security.txt freshness guard checks. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
+This document records the current MVP state after Phase 1DM robots.txt directive guard checks. It should not be read as a promise that auth, database, database-backed submissions, support storage, saved checklist state, or favorites already work.
 
 ## Completed
 
@@ -88,6 +88,7 @@ This document records the current MVP state after Phase 1DL security.txt freshne
 - Generated `sitemap.xml` for public static routes and content collection detail pages.
 - Sitemap entries include conservative `hreflang` alternates for shared locale pages and translated article detail pages.
 - Generated `robots.txt` with sitemap reference and account placeholder disallow rules.
+- Build-output `robots.txt` directive checks that keep public sections crawlable and account placeholders disallowed.
 - Generated `llms.txt` with public discovery links and content caveats.
 - Generated `/.well-known/security.txt` with public contact, policy, canonical, preferred-language, and expiration fields.
 - Build-output `/.well-known/security.txt` freshness checks for parseable UTC `Expires` metadata.
