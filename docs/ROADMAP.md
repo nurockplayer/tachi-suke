@@ -1060,6 +1060,25 @@ Rules:
 - Keep the manifest static, lightweight, and locale-neutral.
 - Do not add service workers, offline caching, install prompts, push notifications, route changes, auth, database, Workers, Functions, or backend behavior in Phase 1DO unless separately scoped.
 
+## Phase 1DP: RSS Channel Metadata Guard
+
+Status: implemented.
+
+Goal:
+
+Catch accidental RSS feed channel or item metadata regressions before deployment.
+
+Implemented:
+
+- Expanded `tests/seo-output.test.mjs` so `pnpm check:seo` validates global and locale RSS channel metadata.
+- `pnpm check:seo` now verifies RSS XML declaration, reviewed RSS namespaces, channel title, channel link, atom self link, channel description, and parseable `lastBuildDate`.
+- RSS item checks now verify exact public article URL coverage, no duplicate items, permalink-backed GUIDs, parseable `pubDate`, supported `dc:language`, and no account/search/search-index utility routes.
+
+Rules:
+
+- Keep RSS feeds static and article-only.
+- Do not add category feeds, place feeds, tool feeds, mobile plan feeds, area feeds, pagination, runtime feed generation, auth, database, Workers, Functions, or backend behavior in Phase 1DP unless separately scoped.
+
 ## Phase 1BT: Article Freshness and Trust
 
 Status: implemented.
