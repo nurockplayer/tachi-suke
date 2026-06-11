@@ -75,7 +75,7 @@ Implemented:
 - Build-output web manifest checks keep browser app identity, icon assets, start/scope, display mode, and brand colors stable
 - Generated global `feed.xml` for public articles, included in the sitemap with content-aware `lastmod`
 - Generated locale RSS feeds at `/[locale]/feed.xml` for same-locale public articles, included in the sitemap with same-locale `lastmod`
-- Content-driven RSS output checks that compare feed item URLs against current non-draft article content
+- Content-driven RSS output checks that compare feed channel metadata and item URLs against current non-draft article content
 - XML sitemap section and site-map entries use content-derived `lastmod` dates for public aggregate pages
 - Locale homepage sitemap entries use content-derived `lastmod` dates
 - Default Open Graph image, Twitter summary metadata, and build-output social image metadata checks

@@ -51,6 +51,7 @@ This document defines the acceptance criteria for the current static-first MVP.
 - Built `robots.txt` must match the reviewed directive contract: allow public crawling, disallow only locale account placeholders, and reference the configured-site sitemap URL.
 - Built `opensearch.xml` must match the reviewed browser search discovery contract and point only to the configured-site `/en/search?q={searchTerms}` static search fallback.
 - Built `site.webmanifest` must match the reviewed browser app identity contract, use same-site icon assets, and keep static root start/scope values, standalone display, and reviewed brand colors.
+- Built global and locale RSS feeds must keep reviewed channel metadata, atom self links, parseable dates, exact public article item URL coverage, permalink-backed GUIDs, supported item languages, and no utility/account/search-index routes.
 - Cloudflare Pages `_redirects` should provide temporary English fallbacks for common locale-less public section paths and must not add account placeholder fallbacks.
 - `pnpm check:seo` should verify the built Cloudflare Pages `_redirects` file matches the reviewed temporary public fallback contract exactly.
 - Cloudflare Pages `_headers` should keep HTML revalidated while applying conservative one-hour cache headers to sitemap, robots, manifest, RSS feeds, `llms.txt`, `security.txt`, `opensearch.xml`, and search indexes.

@@ -19,6 +19,12 @@ const localeFeedTitles = {
   ja: "TachiSuke 日本語記事",
   ko: "TachiSuke 한국어 글"
 };
+const localeFeedDescriptions = {
+  "zh-tw": "TachiSuke 的繁體中文日本生活指南。",
+  en: "English Japan life guides from TachiSuke.",
+  ja: "TachiSuke の日本語向け日本生活ガイド。",
+  ko: "TachiSuke의 한국어 일본 생활 가이드입니다."
+};
 const searchEntryTypes = ["article", "place", "mobile_plan", "area", "tool"];
 const fallbackSiteUrl = "https://tachi-suke.example.com";
 const configuredSiteUrl = (process.env.SITE_URL ?? "").trim().replace(/\/$/, "");
@@ -278,12 +284,65 @@ function feedItemLinks(feed) {
   );
 }
 
+function feedItems(feed) {
+  return [...feed.matchAll(/<item>[\s\S]*?<\/item>/g)].map((match) => match[0]);
+}
+
+function rssChannelValue(feed, tagName) {
+  return feed.match(new RegExp(`<${tagName}>([\\s\\S]*?)<\\/${tagName}>`))?.[1];
+}
+
+function assertRssChannelMetadata(feed, { path, title, linkPath, description, label }) {
+  assert.match(feed, /^<\?xml version="1\.0" encoding="UTF-8"\?>/, `${label} feed should emit an XML declaration`);
+  assert.match(
+    feed,
+    /<rss version="2\.0" xmlns:atom="http:\/\/www\.w3\.org\/2005\/Atom" xmlns:dc="http:\/\/purl\.org\/dc\/elements\/1\.1\/">/,
+    `${label} feed should keep the reviewed RSS namespaces`
+  );
+  assert.equal(rssChannelValue(feed, "title"), title, `${label} feed should use the reviewed channel title`);
+  assert.equal(rssChannelValue(feed, "link"), absoluteUrl(linkPath), `${label} feed should link to the reviewed channel URL`);
+  assert.match(
+    feed,
+    new RegExp(`<atom:link href="${escapeRegExp(absoluteUrl(path))}" rel="self" type="application\\/rss\\+xml" \\/>`),
+    `${label} feed should expose an atom self link`
+  );
+  assert.equal(rssChannelValue(feed, "description"), description, `${label} feed should use the reviewed channel description`);
+
+  const lastBuildDate = rssChannelValue(feed, "lastBuildDate");
+  assert.ok(lastBuildDate, `${label} feed should include lastBuildDate`);
+  const parsedLastBuildDate = new Date(lastBuildDate);
+  assert.equal(parsedLastBuildDate.toUTCString(), lastBuildDate, `${label} feed lastBuildDate should be parseable RFC 822`);
+  assert.doesNotMatch(feed, />\s*(?:undefined|null)\s*</i, `${label} feed should not serialize placeholder values`);
+  assert.doesNotMatch(feed, /\/(?:account|search-index\.json|search)(?:[/"?]|$)/, `${label} feed should not point at utility routes`);
+}
+
 function assertFeedItemLinks(feed, expectedPaths, label) {
+  assert.equal(feedItems(feed).length, expectedPaths.size, `${label} feed should not duplicate or omit article items`);
   assert.deepEqual(
     [...feedItemLinks(feed)].sort(),
     [...expectedPaths].sort(),
     `${label} feed should include exactly the expected public article URLs`
   );
+}
+
+function assertFeedItemMetadata(feed, label, expectedLanguage) {
+  for (const item of feedItems(feed)) {
+    const link = item.match(/<link>(.*?)<\/link>/)?.[1];
+    const guid = item.match(/<guid isPermaLink="true">(.*?)<\/guid>/)?.[1];
+    const pubDate = item.match(/<pubDate>(.*?)<\/pubDate>/)?.[1];
+    const language = item.match(/<dc:language>(.*?)<\/dc:language>/)?.[1];
+
+    assert.ok(link, `${label} feed item should include link`);
+    assert.equal(guid, link, `${label} feed item guid should match link and stay permalink-backed`);
+    assert.ok(pubDate, `${label} feed item should include pubDate`);
+    assert.equal(new Date(pubDate).toUTCString(), pubDate, `${label} feed item pubDate should be parseable RFC 822`);
+    assert.ok(language, `${label} feed item should include dc:language`);
+    if (expectedLanguage) {
+      assert.equal(language, expectedLanguage, `${label} feed item should use the expected language`);
+    } else {
+      assert.ok(Object.values(htmlLangByLocale).includes(language), `${label} feed item should use a supported language`);
+    }
+  }
 }
 
 function listFiles(dir, extensions) {
@@ -1118,8 +1177,15 @@ describe("static SEO output", () => {
 
   it("generates an RSS feed for public article detail pages", () => {
     const feed = readDist("feed.xml");
-    assert.match(feed, /<rss[^>]+version="2\.0"/, "feed.xml should be an RSS 2.0 feed");
+    assertRssChannelMetadata(feed, {
+      path: "/feed.xml",
+      title: "TachiSuke - Japan Life Assistant",
+      linkPath: "/",
+      description: "A multilingual life decision assistant for living in Japan.",
+      label: "global"
+    });
     assertFeedItemLinks(feed, expectedPublicArticlePaths(), "global");
+    assertFeedItemMetadata(feed, "global");
     assert.doesNotMatch(feed, /draft/i, "feed should not expose draft article data");
   });
 
@@ -1128,9 +1194,16 @@ describe("static SEO output", () => {
 
     for (const locale of locales) {
       const feed = readDist(`${locale}/feed.xml`);
-      assert.match(feed, new RegExp(`<title>${escapeRegExp(localeFeedTitles[locale])}<\\/title>`), `${locale} feed should use the localized feed title`);
+      assertRssChannelMetadata(feed, {
+        path: `/${locale}/feed.xml`,
+        title: localeFeedTitles[locale],
+        linkPath: `/${locale}/`,
+        description: localeFeedDescriptions[locale],
+        label: locale
+      });
       assert.match(feed, new RegExp(`<dc:language>${escapeRegExp(htmlLangByLocale[locale])}<\\/dc:language>`), `${locale} feed items should use localized dc:language metadata`);
       assertFeedItemLinks(feed, pathsByLocale.get(locale), locale);
+      assertFeedItemMetadata(feed, locale, htmlLangByLocale[locale]);
       assert.doesNotMatch(feed, /draft/i, `${locale} feed should not expose draft article data`);
 
       for (const otherLocale of locales.filter((candidate) => candidate !== locale)) {

@@ -384,6 +384,12 @@ Phase 1DO expands Web Manifest output guards:
 - The manifest should keep same-site icon assets, static root start/scope values, standalone display, and reviewed brand colors.
 - Keep this as a static build-output guard; do not add service workers, install prompts, offline caching, push notifications, route changes, auth, database, Workers, Functions, or backend behavior in Phase 1DO.
 
+Phase 1DP expands RSS channel metadata guards:
+
+- `pnpm check:seo` should verify global and locale RSS feeds keep reviewed channel titles, channel links, atom self links, descriptions, parseable `lastBuildDate`, and RSS namespace metadata.
+- RSS item checks should verify public article URL coverage, permalink-backed GUIDs, parseable `pubDate`, supported `dc:language`, no duplicate items, and no utility/account/search-index routes.
+- Keep this as a static build-output RSS guard; do not add feeds for categories, places, tools, mobile plans, areas, pagination, runtime feed generation, auth, database, Workers, Functions, or backend behavior in Phase 1DP.
+
 Phase 1B.5 adds maintainability/detail depth:
 
 - Mobile plan detail pages at `/[locale]/mobile/[slug]`.
